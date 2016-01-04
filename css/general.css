@@ -1,0 +1,209 @@
+/* 
+**  ===========
+**  PlaatEnergy
+**  ===========
+**
+**  Created by wplaat
+**
+**  For more information visit the following website.
+**  Website : www.plaatsoft.nl 
+**
+**  Or send an email to the following address.
+**  Email   : info@plaatsoft.nl
+**
+**  All copyrights reserved (c) 2008-2015 PlaatSoft
+*/
+
+/* Animate everything! (bplaat) */
+* {
+	transition: all 0.2s;
+}
+
+body {		
+  color: #222;
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+}
+
+#chart_div {
+  margin: auto;
+}
+
+.settings,
+.version {
+	font-size: 11px;
+	font-family: monospace;
+	opacity: 0.9;
+}
+
+.normal_link {
+	margin: 0px;
+	padding: 0px;
+	background-color: transparent !important;
+	color: #222;
+}
+.normal_link:hover {
+	text-decoration: underline;
+}
+
+.settings {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+}
+
+.version {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+}
+
+h1 {
+   font-size: 2em;
+   margin: calc(10px + 0.3em) 0px 10px 0px;
+}
+
+h1 img:first-child {
+	transform: translateY(7px);
+	margin-right: 28px;
+}
+h1 img:last-child {
+    transform: translateY(7px);
+	margin-left: 28px;
+}
+
+h2 {
+   font-size: 1.8em;
+   margin: 10px 0px;
+}
+
+h3 {
+   font-size: 1.6em;
+	 margin: 10px 0px;
+}
+
+th {
+   font-size: 1.2em;
+   padding: 10px 0px;
+   font-style: italic;
+}
+
+table {
+   border-collapse: collaps;
+   margin: auto;
+}
+
+tr, td {
+   vertical-align: top;
+}
+
+td > a{
+  display: block;
+  margin: 0px;
+  margin-bottom: 2px;
+}
+td > a:last-child {
+  margin-bottom: 0px;
+}
+
+a {
+  outline: none;
+  background-color: #1E88E5;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 20px;
+  margin: 0px 10px;
+  cursor: pointer;
+}
+
+a:hover {
+  background-color: #1976D2;
+}
+a:active {
+  background-color: #1565C0;
+}
+
+div.nav {
+   margin: 20px;
+}
+
+.copyright {
+   font-size: 0.8em;
+   font-family: monospace;
+   margin: 20px;
+   opacity: 0.9;
+}
+
+div.footer {
+   margin-top: 30px;
+   font-size: 0.8em;
+}
+
+div.subparagraph {
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 5px 0px; 
+}
+
+div.remark {
+  font-size: 1.1em;
+  margin: 10px 0px;
+}
+
+ul {
+ font-size: 1.0em;
+ list-style-position: inside;
+}
+
+.large_text {
+  width: 650px;
+  margin: auto;
+}
+
+/* ================ Cookie Bar (a message that say PlaatEnergy use cookies) ================ */
+.cookie_bar {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	line-height: 40px;
+	color: #fff;
+	z-index: 1000;
+	font-weight: 700;
+}
+.cookie_bar > a {
+	float: right;
+	margin-right: 15px;
+	padding: 0px 13px;
+	text-decoration: none !important;
+	opacity: 0.9;
+	color: #fff;
+}
+.cookie_bar > a:hover {
+	opacity: 1;
+}
+
+/* ================ Checkers (HomePage information labels) ================ */
+.checker {
+	display: inline;
+	padding: 12px 15px;
+	margin: 10px;
+	border-radius: 8px;
+	font-size: 15px;
+	color: #fff;
+
+}
+
+.checker.good {
+   background-color: #4CAF50;
+}
+
+.cookie_bar,
+.checker.bad {
+   background-color: #F44336;
+}
+
+.checker.disabled {
+   background-color: #FF5722;
+}
