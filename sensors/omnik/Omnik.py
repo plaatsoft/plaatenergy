@@ -7,9 +7,9 @@ from time import strftime
 import _mysql
 import syslog
 
-ip           = "0.0.0.0"
+ip           = "192.168.0.201"
 port         = 8899 
-wifi_serial  = 9999999
+wifi_serial  = 1606789503
 
 # Connect the socket to the port where the server is listening
 server_address = ((ip, port))

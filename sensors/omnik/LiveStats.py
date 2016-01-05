@@ -18,9 +18,9 @@ parser.add_option("--csv", "--wsl", help="Output in csv format", action="store_t
 mydir = os.path.dirname(os.path.abspath(__file__))
 
 # Receive data with a socket
-ip              = "0.0.0.0"
+ip              = "192.168.0.201"
 port            = 8899 
-wifi_serial     = 99999999
+wifi_serial     = 1606789503
 
 # Connect the socket to the port where the server is listening
 server_address = ((ip, port))
