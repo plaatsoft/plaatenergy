@@ -45,7 +45,7 @@ $lang['USED_M3']         = 'Used (m&sup3;)';
 $lang['FORECAST_M3']     = 'Forecast (m&sup3;)'; 
 $lang['PRESSURE']        = 'Pressure (hPa)';
 $lang['TEMPERATURE']     = 'Temperature (&deg;C)';
-$lang['HUMINITY']        = 'Huminity (%)';
+$lang['HUMINITY']        = 'Humidity (%)';
 
 /*
 ** ------------------
@@ -90,7 +90,7 @@ $lang['LINK_IN_GAS'] = 'Used Gas';
 
 $lang['LINK_PRESSURE'] = 'Air Pressure';
 $lang['LINK_TEMPERATURE'] = 'Air Temperature';
-$lang['LINK_HUMINITY'] = 'Air Huminity';
+$lang['LINK_HUMINITY'] = 'Air Humidity';
 
 $lang['LINK_RELEASE_NOTES'] = i('align-left') . 'Release Notes';
 $lang['LINK_ABOUT'] = i('users') . 'About';
@@ -162,7 +162,7 @@ $lang['MAX_PEAK_ENERGY'] = 'Maximum peak energy this month is %s Watt.';
 
 $lang['TITLE_DAY_TEMPERATURE'] = 'Weather Station - Air Temperature - %s-%s-%s';
 $lang['TITLE_DAY_PRESSURE'] = 'Weather Station - Air Pressure - %s-%s-%s';
-$lang['TITLE_DAY_HUMINITY'] = 'Weather Station - Air Huminity - %s-%s-%s';
+$lang['TITLE_DAY_HUMINITY'] = 'Weather Station - Air Humidity - %s-%s-%s';
 
 $lang['TITLE_DAY_IN_KWH'] = 'Energy Meter - Used Electricity %s-%s-%s';
 $lang['TITLE_DAY_IN_GAS'] = 'Gas Meter - Used Gas %s-%s-%s';
