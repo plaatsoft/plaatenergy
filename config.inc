@@ -49,7 +49,7 @@ $gas_prognoss = array(0,250/1500,220/1500,180/1500,110/1500,60/1500,40/1500,30/1
 $solar_meter_present = true;
 
 // Solar Meter IP adress 
-$solar_ip = "0.0.0.0";
+$solar_ip = "192.168.0.201";
 
 // Expected solar energy per year (kWh)
 $out_total = 3021;
