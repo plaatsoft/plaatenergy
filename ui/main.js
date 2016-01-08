@@ -1,4 +1,4 @@
-// Main.js file for PlaatSolar
+// Main.js file for PlaatEnergy
 // Copyright (c) 2014 - 2015 PlaatSoft
 
 // ================== Remove function for elements ========================

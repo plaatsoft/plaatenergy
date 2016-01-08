@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
 **  ===========
 **  PlaatEnergy
 **  ===========
@@ -8,7 +8,7 @@
 **  Created by wplaat
 **
 **  For more information visit the following website.
-**  Website : www.plaatsoft.nl 
+**  Website : www.plaatsoft.nl
 **
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
@@ -26,8 +26,6 @@ echo '<img src="./ui/images/icons/32.png">';
 echo t('TITLE').' '.t('VERSION');
 echo '<img src="./ui/images/icons/32.png">';
 echo '</h1>';
-
-echo "<div id='version'></div>";
 
 echo '<table>';
 
@@ -97,7 +95,7 @@ echo '</table>';
 echo '<br/><br/>';
 
 check_energy_meter();
-check_solar_meter($solar_ip); 
+check_solar_meter($solar_ip);
 check_weather_station();
 
 echo '<br/><br/>';

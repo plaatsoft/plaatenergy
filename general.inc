@@ -85,6 +85,7 @@ if (isset($_GET["allow_cookies"])) {
 	}
 }
 
+// The icon function
 function i ($name) { 
 	$icon = '<i class="fa fa-' . $name;
 	if ($name == 'chevron-right') {
@@ -237,7 +238,7 @@ function t() {
  * Add title icon 
  */
 function add_icons ($path = './ui/') {
-    $path = $path . 'images/icons/';
+    $path .= 'images/icons/';
 
     echo '<meta charset="UTF-8">';
 

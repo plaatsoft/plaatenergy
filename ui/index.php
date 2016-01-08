@@ -224,11 +224,10 @@
 			</div>
 		</div>
 		
-		<svg class="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-			<circle cx="32" cy="32" r="29"></circle>
+		<svg class="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+			<circle cx="64" cy="64" r="59"></circle>
 		</svg>
 		
 		<script src="./main.js"></script>
 	</body>
 </html>
-

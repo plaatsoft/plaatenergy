@@ -348,36 +348,7 @@ svg {
   border: 1px solid #999;
 }
 
-@-webkit-keyframes rotate { to { transform: rotate(360deg); } }
-@-moz-keyframes rotate { to { transform: rotate(360deg); } }
-@-o-keyframes rotate { to { transform: rotate(360deg); } }
-@keyframes rotate { to { transform: rotate(360deg); } }
 
-svg.loader {
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	bottom: 5%;
-	margin: auto;
-	width: 64px;
-	height: 64px;
-	
-	-webkit-animation: rotate 1s linear infinite;
-	-moz-animation: rotate 1s linear infinite;
-	-o-animation: rotate 1s linear infinite;
-	animation: rotate 1s linear infinite;
-}
-
-svg.loader > circle {
-	fill: none;
-	stroke: #fff;
-	stroke-width: 6px;
-	stroke-linecap: round;
-	
-	stroke-dasharray: 100;
-	stroke-dashoffset: 50;
-}
 
 .toggle {
 	position: relative;
@@ -438,6 +409,39 @@ input[type="range"] {
 .range_helper.disabled,input:disabled{opacity:0.5}
 
 
+
+/* The rotate animation */
+@-webkit-keyframes rotate { to { transform: rotate(360deg); } }
+@-moz-keyframes rotate { to { transform: rotate(360deg); } }
+@-o-keyframes rotate { to { transform: rotate(360deg); } }
+@keyframes rotate { to { transform: rotate(360deg); } }
+
+
+/* Select and style the svg loader */
+svg.loader {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 5%;
+	width: 64px;
+	height: 64px;
+	margin: auto;
+	
+	-webkit-animation: rotate 1s linear infinite;
+	-moz-animation: rotate 1s linear infinite;
+	-o-animation: rotate 1s linear infinite;
+	animation: rotate 1s linear infinite;
+}
+svg.loader > circle {
+	fill: none;
+	stroke: #fff;
+	stroke-width: 10px;
+	stroke-linecap: round;
+	
+	stroke-dasharray: 200;
+	stroke-dashoffset: 100;
+}
 
 .popup {
 	position: fixed;
@@ -512,3 +516,4 @@ input[type="range"] {
 	left: 48px;
   }
 }
+
