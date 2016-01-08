@@ -24,7 +24,7 @@ $version = "0.5";
 
 // Graphical screen resolution
 $graph_width = "950px";
-$graph_height = "300px";
+$graph_height = "280px";
 
 // Energy use forecast (per month)
 $in_forecast = array(0,100/1040,100/1040,90/1040,90/1040,80/1040,70/1040,70/1040,70/1040,80/1040,90/1040,100/1040,100/1040);
