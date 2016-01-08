@@ -38,7 +38,7 @@ INSERT INTO config2 (`id`, `key`, `value`, `date`, `description`) VALUES (NULL, 
 
 INSERT INTO config2 (`id`, `key`, `value`, `date`, `description`) VALUES (NULL, 'energy_use_forecast', '2899', SYSDATE(), 'Energy use forecast (kWh)');
 INSERT INTO config2 (`id`, `key`, `value`, `date`, `description`) VALUES (NULL, 'energy_delivery_forecast', '3012', SYSDATE(), 'Energy delivery forecast (kWh)');
-INSERT INTO config2 (`id`, `key`, `value`, `date`, `description`) VALUES (NULL, 'gas_use_forecast_m3', '956', SYSDATE(), 'Gas use forecast (m3)');
+INSERT INTO config2 (`id`, `key`, `value`, `date`, `description`) VALUES (NULL, 'gas_use_forecast', '956', SYSDATE(), 'Gas use forecast (m3)');
 
 INSERT INTO config2 (`id`, `key`, `value`, `date`, `description`) VALUES (NULL, 'energy_meter_present', 'true', SYSDATE(), 'Energy meter present');
 INSERT INTO config2 (`id`, `key`, `value`, `date`, `description`) VALUES (NULL, 'solar_meter_present', 'true', SYSDATE(), 'Solar meter present');
