@@ -18,6 +18,7 @@
  
 include "config.inc";
 include "general.inc";
+include "database.inc";
 
 $do=0;
 if (isset($_POST["do"])) {
@@ -41,8 +42,8 @@ $result1 = plaatenergy_db_query($sql1);
 $row1 = plaatenergy_db_fetch_object($result1);
 	
 $prev_etotal=0;
-if ( isset($row1['etotal'])) {
-  $prev_etotal = $row1['etotal'];
+if ( isset($row1->etotal)) {
+  $prev_etotal = $row1->etotal;
 }
 
 $timestamp1 = date("Y-m-d 00:00:00", $next_date);
@@ -54,8 +55,8 @@ $result2 = plaatenergy_db_query($sql2);
 $row2 = plaatenergy_db_fetch_object($result2);
 
 $next_etotal=0;
-if ( isset($row2['etotal'])) {
-  $next_etotal = $row2['etotal'];
+if ( isset($row2->etotal)) {
+  $next_etotal = $row2->etotal;
 }
 
 $etotal=0;
