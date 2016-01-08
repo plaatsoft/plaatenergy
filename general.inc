@@ -169,12 +169,7 @@ function check_energy_meter() {
 	
 		return;
 	}
-	
-   global $servername;
-   global $username;
-   global $password;
-   global $dbname;
-   
+	   
    $sql = 'select dal from energy where timestamp = "'.date("Y-m-d H:i:00").'"';
 	
    $result = plaatenergy_db_query($sql);
@@ -197,15 +192,8 @@ function check_energy_meter() {
 function check_weather_station() {
 
    $weather_station_present = plaatenergy_db_get_config_item('weather_station_present');
-
-   global $servername;
-   global $username;
-   global $password;
-   global $dbname;
-  
-	global $weather_station_present;
-  
-	if ($weather_station_present=="false") {
+    
+   if ($weather_station_present=="false") {
   
 		echo '<div class="checker disabled">';
 		echo t('WEATHER_METER_DISABLED');	
