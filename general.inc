@@ -666,8 +666,8 @@ function release_notes_parameters() {
   }
 
   $next_page=$page+1;
-  if ($next_page>4) {
-    $next_page=4;
+  if ($next_page>$max_page) {
+    $next_page=$max_page;
   }
 }
 
