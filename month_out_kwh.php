@@ -13,20 +13,18 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
 include "config.inc";
 include "general.inc";
+include "database.inc";
 
 month_parameters();
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
-$sql = 'select elektra_prijs FROM config';
-$result = $conn->query($sql);
-$row = $result->fetch_assoc();
-$price = $row['elektra_prijs'];
+$energy_price = plaatenergy_db_get_config_item('energy_price');
 
 $data="";
 $value = 0;
@@ -43,11 +41,11 @@ for($d=1; $d<=31; $d++)
 
         $sql = 'select solar FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
+        $result = plaatenergy_db_query($sql);
+		  $row = plaatenergy_db_fetch_object($result);
 
-        if (isset($row['solar'])) {
-           $value = $row['solar'];
+        if (isset($row->solar)) {
+           $value = $row->solar;
         
            $total += $value;
            $count++;
@@ -62,11 +60,11 @@ for($d=1; $d<=31; $d++)
         if ($type==1) {
            $data .= "['".date("d-m", $time)."',".round($value,2)."]";
         } else { 
-           $data .= "['".date("d-m", $time)."',".round($value*$price,2)."]";
+           $data .= "['".date("d-m", $time)."',".round($value*$energy_price,2)."]";
         }
     }
 }
-$total_price=$total*$price;
+$total_price=$total*$energy_price;
 
 if ($type==1) {
    $json = "[['','".t('DELIVERED_KWH')."'],".$data."]";

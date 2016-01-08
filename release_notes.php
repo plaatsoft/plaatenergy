@@ -13,17 +13,20 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
 include './config.inc';
 include './general.inc';
+include './database.inc';
+
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 general_header();
 
 echo '<h1>Release Notes</h1>';
 
-$max_page = 4;
+$max_page = 5;
 
 $page = $max_page;
 release_notes_parameters();
@@ -91,6 +94,20 @@ if ($page==4) {
   echo '<li>Improve realtime info page. Now page has same dimensions as other pages.</li>';
   echo '<li>Add light and dark css theme (thanks bplaat).</li>';
   echo '<li>Add buttons icons (thanks bplaat).</li>';
+  echo '</ul>';
+  echo '</div>';
+}
+
+if ($page==5) {
+  echo '<div class="subparagraph">Version 0.5 (09-01-2016)</div>';
+  echo '<div class="large_text">';
+  echo '<ul>';
+  echo '<li>Move most of the configuration items from php to database.</li>';
+  echo '<li>Database model is now automaticly patch during version upgrade.</li>';
+  echo '<li>Now realtime outside weather information can be customized (thanks bplaat).</li>';
+  echo '<li>Add page request counter.</li>';
+  echo '<li>Centralize sensor config in one file</li>';
+  echo '</ul>';
   echo '</div>';
 }
 

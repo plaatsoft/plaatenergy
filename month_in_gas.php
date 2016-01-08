@@ -13,20 +13,18 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
 include "config.inc";
 include "general.inc";
+include "database.inc";
 
 month_parameters();
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
-$sql = 'select gas_prijs, start_gas FROM config';
-$result = $conn->query($sql);
-$config = $result->fetch_assoc();
-$price = $config['gas_prijs'];
+$gas_price = plaatenergy_db_get_config_item('gas_price');
 
 $total=0;
 $total_price=0;
@@ -49,15 +47,15 @@ for($d=1; $d<=31; $d++)
 
         $sql = 'select sum(gas) as gas FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
+        $result = plaatenergy_db_query($sql);
+		  $row = plaatenergy_db_fetch_object($result);
 
         $gas_value=0;
 
-        if ( isset($row['gas'])) {
+        if ( isset($row->gas)) {
 
-          if ($row['gas']>0) {
-             $gas_value=$row['gas'];
+          if ($row->gas>0) {
+             $gas_value=$row->gas;
           }
         }
 
@@ -68,10 +66,10 @@ for($d=1; $d<=31; $d++)
         if ($type==1) {
             $data .= round($gas_value,2).']';
         } else { 
-            $data .= round($gas_value*$price,2).']';
+            $data .= round($gas_value*$gas_price,2).']';
         }
         $total += $gas_value;
-        $total_price += $gas_value*$price;
+        $total_price += $gas_value*$gas_price;
     }
 }
 

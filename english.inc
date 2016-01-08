@@ -13,7 +13,7 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
  
 /*
@@ -23,7 +23,6 @@
 */
 
 $lang['TITLE'] = 'PlaatEnergy';
-$lang['VERSION'] = '0.4';
 
 $lang['LINK_COPYRIGHT'] = 'All Copyright Reserved (c) <a class="normal_link" href="http://www.plaatsoft.nl/">PlaatSoft</a> 2008 - ' . date("Y");
 

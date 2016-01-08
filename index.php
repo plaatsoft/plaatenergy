@@ -1,6 +1,6 @@
 <?php
 
-/*
+/* 
 **  ===========
 **  PlaatEnergy
 **  ===========
@@ -8,24 +8,32 @@
 **  Created by wplaat
 **
 **  For more information visit the following website.
-**  Website : www.plaatsoft.nl
+**  Website : www.plaatsoft.nl 
 **
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
-include "./config.inc";
-include "./general.inc";
+include "config.inc";
+include "general.inc";
+include "database.inc";
 
 general_header();
 
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
+plaatenergy_db_check_version($version);
+
+$solar_meter_ip_address = plaatenergy_db_get_config_item('solar_meter_ip_address');
+
 echo '<h1>';
 echo '<img src="./ui/images/icons/32.png">';
-echo t('TITLE').' '.t('VERSION');
+echo t('TITLE').' '.$version;
 echo '<img src="./ui/images/icons/32.png">';
 echo '</h1>';
+
+echo "<div id='version'></div>";
 
 echo '<table>';
 
@@ -95,7 +103,7 @@ echo '</table>';
 echo '<br/><br/>';
 
 check_energy_meter();
-check_solar_meter($solar_ip);
+check_solar_meter($solar_meter_ip_address); 
 check_weather_station();
 
 echo '<br/><br/>';
@@ -103,7 +111,7 @@ echo '<br/><br/>';
 general_copyright();
 
 echo '<script type="text/javascript" src="js/version.js"></script>';
-echo '<script type="text/javascript">check_version("'.t('VERSION').'")</script>';
+echo '<script type="text/javascript">check_version("'.$version.'")</script>';
 general_footer();
 
 ?>

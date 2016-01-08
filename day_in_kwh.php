@@ -13,20 +13,17 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
  
 
 include "config.inc";
 include "general.inc";
+include "database.inc";
 
 day_parameters();
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 $i=0;
 $first = 1;
@@ -47,9 +44,9 @@ if ($type==1) {
 
      $timestamp = date("Y-m-d H:i:s", $current_date+(900*$i));
      $sql = 'select a.dal, a.piek, a.dalterug, a.piekterug, b.etoday FROM energy a left join solar b on a.timestamp=b.timestamp where a.timestamp="'.$timestamp.'" order by a.timestamp';
-     $result = $conn->query($sql);
-     $row = $result->fetch_assoc();
-
+	  $result = plaatenergy_db_query($sql);
+     $row = plaatenergy_db_fetch_object($result);
+	
      if ($timestamp>date("Y-m-d H:i:s")) {
        $solar_value=0;
        $dal_value=0;
@@ -58,21 +55,21 @@ if ($type==1) {
        $piekterug_value=0;
        break;
      }
-     if ( isset($row['dal'])) {
+     if ( isset($row->dal)) {
   
         if ($first==1) {
-           $dal_first=$row['dal'];
-           $piek_first=$row['piek'];
-           $dalterug_first=$row['dalterug'];
-           $piekterug_first=$row['piekterug'];
+           $dal_first=$row->dal;
+           $piek_first=$row->piek;
+           $dalterug_first=$row->dalterug;
+           $piekterug_first=$row->piekterug;
            $first=0;
         }
-        $dal_value= $row['dal']-$dal_first;
-        $piek_value = $row['piek']-$piek_first;
-        $dalterug_value= $row['dalterug']-$dalterug_first;
-        $piekterug_value = $row['piekterug']-$piekterug_first;
-        if ($row['etoday']>0) {
-           $solar_value = $row['etoday']-$dalterug_value-$piekterug_value;
+        $dal_value= $row->dal-$dal_first;
+        $piek_value = $row->piek-$piek_first;
+        $dalterug_value= $row->dalterug-$dalterug_first;
+        $piekterug_value = $row->piekterug-$piekterug_first;
+        if ($row->etoday>0) {
+           $solar_value = $row->etoday-$dalterug_value-$piekterug_value;
         }
      }
      if (strlen($data)>0) {
@@ -93,20 +90,20 @@ if ($type==2) {
   $timestamp1 = date("Y-m-d 00:00:00", $current_date);
   $timestamp2 = date("Y-m-d 23:59:59", $current_date);
 
-  $sql = 'select timestamp, vermogen FROM energy where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp';
-  $result = $conn->query($sql);
-
-  while ($row = $result->fetch_assoc()) {
+   $sql = 'select timestamp, vermogen FROM energy where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp';
+  
+   $result = plaatenergy_db_query($sql);
+   while ( $row = plaatenergy_db_fetch_object($result)) {
 
      $value=0;
-     if ( isset($row['vermogen'])) {
-       $value= $row['vermogen'];
+     if ( isset($row->vermogen)) {
+       $value= $row->vermogen;
      }
   
      if (strlen($data)>0) {
        $data.=',';
      }
-     $data .= "['".substr($row['timestamp'],11,5)."',";
+     $data .= "['".substr($row->timestamp,11,5)."',";
        $data .= round($value,2).']';
   }
   $json = "[".$data."]";

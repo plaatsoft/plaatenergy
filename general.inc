@@ -13,8 +13,27 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
+
+// ----------------------------
+// Application settings
+// ----------------------------
+
+$version = "0.5";
+
+// Graphical screen resolution
+$graph_width = "950px";
+$graph_height = "300px";
+
+// Energy use forecast (per month)
+$in_forecast = array(0,100/1040,100/1040,90/1040,90/1040,80/1040,70/1040,70/1040,70/1040,80/1040,90/1040,100/1040,100/1040);
+
+// Energy delivery forecast (per month)
+$out_forecast = array(0,50/2550,100/2550,210/2550,310/2550,360/2550,360/2550,330/2550,290/2550,240/2550,160/2550,90/2550,50/2550);
+
+// Gas use forecast (per month)
+$gas_forecast = array(0,250/1500,220/1500,180/1500,110/1500,60/1500,40/1500,30/1500,30/1500,50/1500,110/1500,190/1500,230/1500);
 
 $prev_date=0;
 $current_date=0;
@@ -85,7 +104,6 @@ if (isset($_GET["allow_cookies"])) {
 	}
 }
 
-// The icon function
 function i ($name) { 
 	$icon = '<i class="fa fa-' . $name;
 	if ($name == 'chevron-right') {
@@ -111,9 +129,9 @@ switch ($_COOKIE["lang"]) {
  */
 function check_solar_meter($ip) {
 
-   global $solar_meter_present;
+   $solar_meter_present = plaatenergy_db_get_config_item('solar_meter_present');
 
-	if ($solar_meter_present==false) {
+	if ($solar_meter_present=="false") {
   
 		echo '<div class="checker disabled">';
 		echo t('SOLAR_METER_DISABLED');		
@@ -141,20 +159,28 @@ function check_solar_meter($ip) {
  */
 function check_energy_meter() {
   
+   $energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present');
+	
+	if ($energy_meter_present=="false") {
+  
+		echo '<div class="checker disabled">';
+		echo t('ENERGY_METER_DISABLED');		
+		echo '</div>';
+	
+		return;
+	}
+	
    global $servername;
    global $username;
    global $password;
    global $dbname;
    
-   $conn = new mysqli($servername, $username, $password, $dbname);
-  
    $sql = 'select dal from energy where timestamp = "'.date("Y-m-d H:i:00").'"';
-   $result = $conn->query($sql);
-	if ($result) {
-     $row = $result->fetch_assoc();
-   }
+	
+   $result = plaatenergy_db_query($sql);
+   $row = plaatenergy_db_fetch_object($result);
 
-   if (isset($row['dal'])){
+   if (isset($row->dal)){
      echo '<div class="checker good">';
      echo t('ENERGY_METER_CONNECTION_UP');
      echo '</div>';
@@ -170,6 +196,8 @@ function check_energy_meter() {
  */
 function check_weather_station() {
 
+   $weather_station_present = plaatenergy_db_get_config_item('weather_station_present');
+
    global $servername;
    global $username;
    global $password;
@@ -177,7 +205,7 @@ function check_weather_station() {
   
 	global $weather_station_present;
   
-	if ($weather_station_present==false) {
+	if ($weather_station_present=="false") {
   
 		echo '<div class="checker disabled">';
 		echo t('WEATHER_METER_DISABLED');	
@@ -185,17 +213,12 @@ function check_weather_station() {
 	
 		return;
 	}
-
-	$conn = new mysqli($servername, $username, $password, $dbname);  
 	
 	$sql = 'select humidity from weather where timestamp = "'.date("Y-m-d H:i:00").'"';
+   $result = plaatenergy_db_query($sql);
+   $row = plaatenergy_db_fetch_object($result);
 
-	$result = $conn->query($sql);
-	if ($result) {
-	    $row = $result->fetch_assoc();
-   }
-
-	if (isset($row['humidity'])){
+	if (isset($row->humidity)){
 		echo '<div class="checker good">';
 		echo t('WEATHER_METER_CONNECTION_UP');
       echo '</div>';
@@ -238,7 +261,7 @@ function t() {
  * Add title icon 
  */
 function add_icons ($path = './ui/') {
-    $path .= 'images/icons/';
+    $path = $path . 'images/icons/';
 
     echo '<meta charset="UTF-8">';
 
@@ -614,6 +637,11 @@ function general_copyright() {
 function general_footer() {
   echo '</body>';
   echo '</html>';
+  
+  // Increase request counter with one!
+  $counter = plaatenergy_db_get_config_item('request_counter');  
+  plaatenergy_db_set_config_item('request_counter', ++$counter);  
+
 }
 
 /**

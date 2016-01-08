@@ -13,7 +13,7 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
  
 include "config.inc";
@@ -31,13 +31,15 @@ if (isset($_POST["etotal"])) {
 
 day_parameters();
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 $timestamp1 = date("Y-m-d 00:00:00", $prev_date);
 $timestamp2 = date("Y-m-d 23:59:59", $prev_date);
 $sql1 = 'select max(etotal) as etotal FROM solar where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';
-$result1 = $conn->query($sql1);
-$row1 = $result1->fetch_assoc();
+
+$result1 = plaatenergy_db_query($sql1);
+$row1 = plaatenergy_db_fetch_object($result1);
+	
 $prev_etotal=0;
 if ( isset($row1['etotal'])) {
   $prev_etotal = $row1['etotal'];
@@ -47,8 +49,10 @@ $timestamp1 = date("Y-m-d 00:00:00", $next_date);
 $timestamp2 = date("Y-m-d 23:59:59", $next_date+(86400*2));
 
 $sql2 = 'select min(etotal) as etotal FROM solar where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';
-$result2 = $conn->query($sql2);
-$row2 = $result2->fetch_assoc();
+
+$result2 = plaatenergy_db_query($sql2);
+$row2 = plaatenergy_db_fetch_object($result2);
+
 $next_etotal=0;
 if ( isset($row2['etotal'])) {
   $next_etotal = $row2['etotal'];
@@ -98,10 +102,10 @@ echo '</form>';
 
 if ($do==1) {
 
-  $sql1  = 'insert into solar (`id`, `timestamp`, `etoday`, `etotal`) ';
-  $sql1 .= 'values (null, "'.$year.'-'.$month.'-'.$day.' 00:00:00","'.($etotal-$prev_etotal).'","'.$etotal.'")';
+  $sql3  = 'insert into solar (`id`, `timestamp`, `etoday`, `etotal`) ';
+  $sql3 .= 'values (null, "'.$year.'-'.$month.'-'.$day.' 00:00:00","'.($etotal-$prev_etotal).'","'.$etotal.'")';
 
-  $conn->query($sql1);
+  plaatenergy_db_query($sql3);
 
   exec ('/usr/bin/php-cgi -f /var/www/html/solar/process.php type=2');
 

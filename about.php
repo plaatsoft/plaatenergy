@@ -18,6 +18,9 @@
 
 include './config.inc';
 include './general.inc';
+include './database.inc';
+
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 general_header();
 

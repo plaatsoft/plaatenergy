@@ -13,20 +13,19 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
 include "config.inc";
 include "general.inc";
+include "database.inc";
 
 year_parameters();
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
-$sql = 'select gas_prijs,start_gas FROM config';
-$result = $conn->query($sql);
-$config = $result->fetch_assoc();
-$price = $config['gas_prijs'];
+$gas_price = plaatenergy_db_get_config_item('gas_price');
+$gas_use_forecast = plaatenergy_db_get_config_item('gas_use_forecast');
 
 $total=0;
 $total_price=0;
@@ -34,31 +33,31 @@ $count=0;
 $data="";
 
 for($m=1; $m<=12; $m++) {
-    $value=0;
+   $value=0;
 
-    $time=mktime(0, 0, 0, $m, 1, $year);          
-    $timestamp1=date('Y-m-0 00:00:00', $time);
-    $timestamp2=date('Y-m-t 23:59:59', $time);
+   $time=mktime(0, 0, 0, $m, 1, $year);          
+   $timestamp1=date('Y-m-0 00:00:00', $time);
+   $timestamp2=date('Y-m-t 23:59:59', $time);
 
-    $sql = 'select sum(gas) as gas FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+   $sql = 'select sum(gas) as gas FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 
-    $result = $conn->query($sql);
-    $row = $result->fetch_assoc();
-
-    if ( isset($row['gas'])) {
+   $result = plaatenergy_db_query($sql);
+   $row = plaatenergy_db_fetch_object($result);
+	
+    if ( isset($row->gas)) {
 
       $count++;
-      $value=$row['gas'];
+      $value=$row->gas;
    }
 
    if (strlen($data)>0) {
      $data.=',';
    }
-   $price2 = $value * $price;
+   $price2 = $value * $gas_price;
    $data .= "['".date("m-Y", $time)."',";
 
    if ($type==1) {
-      $data .= round($value,2).','.round(($gas_prognoss[$m]*$gas_total),2).']';
+      $data .= round($value,2).','.round(($gas_forecast[$m]*$gas_use_forecast),2).']';
    } else { 
       $data .= round($price2,2).']';
    }

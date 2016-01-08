@@ -13,16 +13,17 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
  
  
 include "config.inc";
 include "general.inc";
+include "database.inc";
 
 day_parameters();
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 $i=0;
 $label="";
@@ -36,16 +37,17 @@ if ($type==1) {
 
      $timestamp = date("Y-m-d H:i:s", $current_date+(900*$i));
      $sql = 'select etoday FROM solar where timestamp="'.$timestamp.'"';
-     $result = $conn->query($sql);
-     $row = $result->fetch_assoc();
+	  
+     $result = plaatenergy_db_query($sql);
+     $row = plaatenergy_db_fetch_object($result);
   
      if ($timestamp>date("Y-m-d H:i:s")) {
        $value=0;
        break;
      }
 
-     if ( isset($row['etoday'])) {
-          $value= $row['etoday'];
+     if ( isset($row->etoday)) {
+          $value= $row->etoday;
      }
   
      if (strlen($data)>0) {
@@ -66,20 +68,20 @@ if ($type==2) {
   $timestamp2 = date("Y-m-d 23:59:59", $current_date);
 
   $sql = 'select timestamp, etoday, pac FROM solar where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp';
-  $result = $conn->query($sql);
+  $result = plaatenergy_db_query($sql);
 
-  while ($row = $result->fetch_assoc()) {
+  while ($row = plaatenergy_db_fetch_object($result)) {
 
    $value=0;
-   if ( isset($row['pac'])) {
-     $value= $row['pac'];
-     $total= $row['etoday'];
+   if ( isset($row->pac)) {
+     $value= $row->pac;
+     $total= $row->etoday;
    }
 
    if (strlen($data)>0) {
      $data.=',';
    }
-   $data .= "['".substr($row['timestamp'],11,5)."',";
+   $data .= "['".substr($row->timestamp,11,5)."',";
    $data .= round($value,2).']';
    $i++;
   }

@@ -13,11 +13,14 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
 include './config.inc';
 include './general.inc';
+include './database.inc';
+
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 general_header();
 

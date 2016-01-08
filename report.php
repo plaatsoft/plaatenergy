@@ -13,11 +13,14 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
 include "config.inc";
 include "general.inc";
+include "database.inc";
+
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 $start="";
 if (isset($_POST["start"])) {
@@ -55,20 +58,18 @@ echo '</form>';
 
 if ($report==1) {
 
-  $conn = new mysqli($servername, $username, $password, $dbname);
-
   $sql = 'select sum(dal) as dal, sum(piek) as piek, sum(dalterug) as dalterug, sum(piekterug) as piekterug, sum(solar) as solar, sum(gas) as gas FROM energy_day where date>="'.$start.'" and date<="'.$end.'"';
 
-  $result = $conn->query($sql);
-  $row = $result->fetch_assoc();
+   $result = plaatenergy_db_query($sql);
+   $row = plaatenergy_db_fetch_object($result);
 
   echo '<br/>';
-  echo 'dal='.round($row['dal'],2).' ';
-  echo 'piek='.round($row['piek'],2).' ';
-  echo 'dalterug='.round($row['dalterug'],2).' ';
-  echo 'piekterug='.round($row['piekterug'],2).' ';
-  echo 'solar='.round($row['solar'],2).' ';
-  echo 'gas='.round($row['gas'],2).' ';
+  echo 'low_used='.round($row->dal,2).' ';
+  echo 'normal_used='.round($row->piek,2).' ';
+  echo 'low_delivered='.round($row->dalterug,2).' ';
+  echo 'normal_delivered='.round($row->piekterug,2).' ';
+  echo 'solar='.round($row->solar,2).' ';
+  echo 'gas='.round($row->gas,2).' ';
 }
 
 general_navigation();

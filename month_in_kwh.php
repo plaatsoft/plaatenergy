@@ -13,23 +13,21 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
 include "config.inc";
 include "general.inc";
+include "database.inc";
 
 month_parameters();
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
-$sql = 'select elektra_prijs, start_dal, start_piek FROM config';
-$result = $conn->query($sql);
-$config = $result->fetch_assoc();
-$price = $config['elektra_prijs'];
+$energy_price = plaatenergy_db_get_config_item('energy_price');
 
-$dal_first=$config['start_dal'];
-$piek_first=$config['start_piek'];
+$dal_first=0;
+$piek_first=0;
 $dalterug_first=0;
 $piekterug_first=0;
 $solar_first=0;
@@ -57,15 +55,15 @@ for($d=1; $d<=31; $d++)
 
         $sql = 'select sum(dal) as dal, sum(piek) as piek, sum(dalterug) as dalterug, sum(piekterug) as piekterug, sum(solar) as solar FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
-
-        if (isset($row['dal'])) {
-          $dal_value= $row['dal'];
-          $piek_value= $row['piek'];
-          $dalterug_value= $row['dalterug'];
-          $piekterug_value= $row['piekterug'];
-          $solar= $row['solar'];
+        $result = plaatenergy_db_query($sql);
+        $row = plaatenergy_db_fetch_object($result);
+	
+        if (isset($row->dal)) {
+          $dal_value= $row->dal;
+          $piek_value= $row->piek;
+          $dalterug_value= $row->dalterug;
+          $piekterug_value= $row->piekterug;
+          $solar= $row->solar;
 
           $verbruikt = $solar-$dalterug_value-$piekterug_value;
           if ($verbruikt<0) {
@@ -81,10 +79,10 @@ for($d=1; $d<=31; $d++)
        if ($type==1) {
           $data .= round($dal_value,2).','.round($piek_value,2).','.round($verbruikt,2).']';
        } else {
-          $data .= round(($dal_value+$piek_value+$solar_value)*$price,2).']';
+          $data .= round(($dal_value+$piek_value+$solar_value)*$energy_price,2).']';
        }
        $total += $dal_value + $piek_value + $verbruikt;
-       $total_price += ($dal_value + $piek_value + $verbruikt)*$price;
+       $total_price += ($dal_value + $piek_value + $verbruikt)*$energy_price;
     }
 }
 

@@ -13,53 +13,19 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
 // Database credentials
-$servername = "127.0.0.1";
-$username = "power";
-$password = "power";
+$dbhost = "127.0.0.1";
 $dbname = "power";
+$dbuser = "power";
+$dbpass = "power";
 
-// Graphical screen resolution
-$graph_width = "950px";
-$graph_height = "300px";
+/* Enable MySQL (else PostgreSQL) */
+define('MYSQL', 1);
 
-// -------------------------------------------------------------
-
-// Enable Energy Meter 
-$energy_meter_present = true;
-
-// Expected energy use per year (kWh)
-$in_total = 2899;
-
-// Energy use prognoss (per month)
-$in_prognoss = array(0,100/1040,100/1040,90/1040,90/1040,80/1040,70/1040,70/1040,70/1040,80/1040,90/1040,100/1040,100/1040);
-
-// Expected gas use per year (m3)
-$gas_total = 956;
-
-// Gas Prognoss (per month)
-$gas_prognoss = array(0,250/1500,220/1500,180/1500,110/1500,60/1500,40/1500,30/1500,30/1500,50/1500,110/1500,190/1500,230/1500);
-
-// -------------------------------------------------------------
-
-// Enable Solar Meter 
-$solar_meter_present = true;
-
-// Solar Meter IP adress 
-$solar_ip = "192.168.0.201";
-
-// Expected solar energy per year (kWh)
-$out_total = 3021;
-
-// Solar Prognoss (per month)
-$out_prognoss = array(0,50/2550,100/2550,210/2550,310/2550,360/2550,360/2550,330/2550,290/2550,240/2550,160/2550,90/2550,50/2550);
-
-// -------------------------------------------------------------
-
-// Enable AstroHat Weather Sensors
-$weather_station_present = true;
+/* Enable debug mode -> If enabled SQL is logged */
+define('DEBUG', 0);
 
 ?>

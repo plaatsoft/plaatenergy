@@ -13,20 +13,19 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
 include "config.inc";
 include "general.inc";
+include "database.inc";
 
 year_parameters();
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
-$sql = 'select elektra_prijs FROM config';
-$result = $conn->query($sql);
-$row = $result->fetch_assoc();
-$price = $row['elektra_prijs'];
+$energy_price = plaatenergy_db_get_config_item('energy_price');
+$energy_delivery_forecast = plaatenergy_db_get_config_item('energy_delivery_forecast');
 
 $total=0;
 $total_price=0;
@@ -41,36 +40,37 @@ for($y=($year-10); $y<=$year; $y++) {
 
    $sql1  = 'select sum(solar) as solar from energy_day ';
 	$sql1 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
-   $result1 = $conn->query($sql1);
-   $row1 = $result1->fetch_assoc();
+	
+   $result1 = plaatenergy_db_query($sql1);
+   $row1 = plaatenergy_db_fetch_object($result1);
 
    $value=0;
-   if ( isset($row1['solar'])) {
+   if ( isset($row1->solar)) {
       $count++;
-      $value=$row1['solar'];
+      $value=$row1->solar;
    }
 
    $sql2  = 'select month(date) as month from energy_day ';
    $sql2 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'" ';
    $sql2 .= 'group by month ';
-   $result2 = $conn->query($sql2);
+   $result2 = plaatenergy_db_query($sql2);
 
-   $prognose_total=0;
-   while ($row2 = $result2->fetch_assoc()) {
-      if (isset($row2['month'])) {
-         $prognose_total += $out_prognoss[$row2['month']];
+   $forecast_total=0;
+   while ($row2 = plaatenergy_db_fetch_object($result2)) {
+      if (isset($row2->month)) {
+         $forecast_total += $out_forecast[$row2->month];
       }
    }
 
    if (strlen($data)>0) {
      $data.=',';
    }
-   $price2 = $value * $price;
+   $price2 = $value * $energy_price;
    $data .= "['".date("Y", $time)."',";
    if ($type==1) {
 
       if ($value>0) {
-     	 $data .= round($value,2).','.round(($prognose_total*$out_total),2).']';
+     	 $data .= round($value,2).','.round(($forecast_total*$energy_delivery_forecast),2).']';
       } else {
      	 $data .= '0,0]';
       }

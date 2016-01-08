@@ -13,26 +13,25 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
 include "config.inc";
 include "general.inc";
+include "database.inc";
 
 year_parameters();
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
-$sql = 'select elektra_prijs,start_dal, start_piek from config';
-$result = $conn->query($sql);
-$config = $result->fetch_assoc();
-$price = $config['elektra_prijs'];
+$energy_price = plaatenergy_db_get_config_item('energy_price');
+$energy_use_forecast = plaatenergy_db_get_config_item('energy_use_forecast');
 
 $total=0;
 $total_price=0;
 $count=0;
 $data="";
-$max_prognose=0;
+$max_forecast=0;
 
 for($y=$year-10; $y<=$year; $y++) {
 
@@ -41,25 +40,27 @@ for($y=$year-10; $y<=$year; $y++) {
    $timestamp2=date('Y-12-t', $time);
 
    $sql1  = 'select sum(dal) as dal, sum(piek) as piek, sum(dalterug) as dalterug, ';
-	$sql1 .= 'sum(piekterug) as piekterug, sum(solar) as solar ';
-	$sql1 .= 'from energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
-   $result1 = $conn->query($sql1);
-   $row1 = $result1->fetch_assoc();
-
+   $sql1 .= 'sum(piekterug) as piekterug, sum(solar) as solar ';
+   $sql1 .= 'from energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+	
+   $result1 = plaatenergy_db_query($sql1);
+   $row1 = plaatenergy_db_fetch_object($result1);
+	 
    $sql2 =  'select month(date) as month from energy_day ';
    $sql2 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'" ';
    $sql2 .= 'group by month ';
-   $result2 = $conn->query($sql2);
+	
+   $result2 = plaatenergy_db_query($sql2);
 
-   $prognose_total=0;
-   while ($row2 = $result2->fetch_assoc()) {
-      if (isset($row2['month'])) {
-         $prognose_total += $in_prognoss[$row2['month']];
+   $forecast_total=0;
+   while ($row2 = plaatenergy_db_fetch_object($result2)) {
+      if (isset($row2->month)) {
+         $forecast_total += $in_forecast[$row2->month];
       }
    }
 
-   if (($prognose_total*$in_total)>$max_prognose) {
-      $max_prognose=$prognose_total*$in_total;
+   if (($forecast_total*$energy_use_forecast)>$max_forecast) {
+      $max_forecast=$forecast_total*$energy_use_forecast;
    }
 
    $dal_value=0;
@@ -69,12 +70,12 @@ for($y=$year-10; $y<=$year; $y++) {
    $solar_value=0;
    $verbruikt=0;
 
-    if (isset($row1['dal'])) {
-      $dal_value= $row1['dal'];
-      $piek_value= $row1['piek'];
-      $dalterug_value= $row1['dalterug'];
-      $piekterug_value= $row1['piekterug'];
-      $solar= $row1['solar'];
+    if (isset($row1->dal)) {
+      $dal_value= $row1->dal;
+      $piek_value= $row1->piek;
+      $dalterug_value= $row1->dalterug;
+      $piekterug_value= $row1->piekterug;
+      $solar= $row1->solar;
 
       $verbruikt = $solar-$dalterug_value-$piekterug_value;
       $count++;
@@ -84,9 +85,9 @@ for($y=$year-10; $y<=$year; $y++) {
      $data.=',';
    }
    $data .= "['".date("Y", $time)."',";
-   $price2 = ($dal_value + $piek_value + $verbruikt)*$price;
+   $price2 = ($dal_value + $piek_value + $verbruikt)*$energy_price;
    if ($type==1) {
-      $data .= round($dal_value,2).','.round($piek_value,2).','.round($verbruikt,2).','.round(($prognose_total*$in_total),2).']';
+      $data .= round($dal_value,2).','.round($piek_value,2).','.round($verbruikt,2).','.round(($forecast_total*$energy_use_forecast),2).']';
    } else { 
       $data .= round($price2,2).']';
    }
@@ -118,7 +119,7 @@ general_header();
           <?php
           if ($type==1) {
              echo "colors: ['#0066cc', '#808080'],";
-             echo "vAxis: { format:'decimal', viewWindow: { min: 0, max: ".round($max_prognose+100)." } }, ";
+             echo "vAxis: { format:'decimal', viewWindow: { min: 0, max: ".round($max_forecast+100)." } }, ";
 
           } else {
              echo "colors: ['#e0440e'],";

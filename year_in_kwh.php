@@ -13,20 +13,19 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
 include "config.inc";
 include "general.inc";
+include "database.inc";
 
 year_parameters();
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
-$sql = 'select elektra_prijs,start_dal, start_piek  FROM config';
-$result = $conn->query($sql);
-$config = $result->fetch_assoc();
-$price = $config['elektra_prijs'];
+$energy_price = plaatenergy_db_get_config_item('energy_price');
+$energy_use_forecast = plaatenergy_db_get_config_item('energy_use_forecast');
 
 $total=0;
 $total_price=0;
@@ -41,8 +40,8 @@ for($m=1; $m<=12; $m++) {
 
    $sql = 'select sum(dal) as dal, sum(piek) as piek, sum(dalterug) as dalterug, sum(piekterug) as piekterug, sum(solar) as solar FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 
-   $result = $conn->query($sql);
-   $row = $result->fetch_assoc();
+   $result = plaatenergy_db_query($sql);
+   $row = plaatenergy_db_fetch_object($result);
 
    $dal_value=0;
    $piek_value=0;
@@ -51,12 +50,12 @@ for($m=1; $m<=12; $m++) {
    $solar_value=0;
    $verbruikt=0;
 
-    if (isset($row['dal'])) {
-      $dal_value= $row['dal'];
-      $piek_value= $row['piek'];
-      $dalterug_value= $row['dalterug'];
-      $piekterug_value= $row['piekterug'];
-      $solar= $row['solar'];
+    if (isset($row->dal)) {
+      $dal_value= $row->dal;
+      $piek_value= $row->piek;
+      $dalterug_value= $row->dalterug;
+      $piekterug_value= $row->piekterug;
+      $solar= $row->solar;
 
       $verbruikt = $solar-$dalterug_value-$piekterug_value;
       $count++;
@@ -66,9 +65,9 @@ for($m=1; $m<=12; $m++) {
      $data.=',';
    }
    $data .= "['".date("m-Y", $time)."',";
-   $price2 = ($dal_value + $piek_value + $verbruikt)*$price;
+   $price2 = ($dal_value + $piek_value + $verbruikt)*$energy_price;
    if ($type==1) {
-      $data .= round($dal_value,2).','.round($piek_value,2).','.round($verbruikt,2).','.round(($in_prognoss[$m]*$in_total),2).']';
+      $data .= round($dal_value,2).','.round($piek_value,2).','.round($verbruikt,2).','.round(($in_forecast[$m]*$energy_use_forecast),2).']';
    } else { 
       $data .= round($price2,2).']';
    }
