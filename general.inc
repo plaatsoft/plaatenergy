@@ -575,6 +575,11 @@ function general_navigation() {
  * General header
  */
 function general_header() {
+
+  global $time_start;
+
+  $time_start = microtime(true);
+
   echo '<!DOCTYPE html>';
   echo '<html>';
   echo '<head>'; 
@@ -624,24 +629,27 @@ function general_header() {
   }
 }
 
-/**
- * Copyright banner
- */
-function general_copyright() {
-	echo '<div class="copyright">' . t('LINK_COPYRIGHT') . '</div>';
-}
 
 /**
  * General footer
  */
 function general_footer() {
-  echo '</body>';
-  echo '</html>';
-  
+
+  global $time_start;
+
   // Increase request counter with one!
   $counter = plaatenergy_db_get_config_item('request_counter');  
   plaatenergy_db_set_config_item('request_counter', ++$counter);  
 
+  $time_end = microtime(true);
+  $time = $time_end - $time_start;
+
+  echo '<div class="copyright">' . t('LINK_COPYRIGHT') . '</br>';
+  echo '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries - '.$counter.' requests]';
+
+  echo '</div>';
+  echo '</body>';
+  echo '</html>';
 }
 
 /**

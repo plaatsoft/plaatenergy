@@ -141,9 +141,7 @@ if ($count>0) {
 }
 
 year_navigation(t('LINK_KWH'));
+general_footer();
 
 ?>
-  </body>
-</html>
-
 

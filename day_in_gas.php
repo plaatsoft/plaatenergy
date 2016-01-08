@@ -93,5 +93,7 @@ echo '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_heigh
 
 text_banner( t('TOTAL_PER_DAY_KWH', $total));
 day_navigation();
+general_footer();
+
 
 ?>

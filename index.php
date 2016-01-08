@@ -108,8 +108,6 @@ check_weather_station();
 
 echo '<br/><br/>';
 
-general_copyright();
-
 echo '<script type="text/javascript" src="js/version.js"></script>';
 echo '<script type="text/javascript">check_version("'.$version.'")</script>';
 general_footer();

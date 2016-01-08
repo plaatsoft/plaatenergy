@@ -40,7 +40,6 @@ echo '</form>';
 echo '<br/>';
 
 general_navigation();
-general_copyright();
 general_footer();
 
 ?>

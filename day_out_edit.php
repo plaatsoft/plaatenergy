@@ -114,7 +114,6 @@ if ($do==1) {
 }
 
 general_navigation();
-general_copyright();
 general_footer();
 
 ?>

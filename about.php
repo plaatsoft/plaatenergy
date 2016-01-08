@@ -34,7 +34,6 @@ echo '<h2>'.t('DISCLAIMER_TITLE').'</h2>';
 echo '<div class="large_text">'.t('DISCLAIMER_CONTENT').'</div>';
 
 general_navigation();
-general_copyright();
 general_footer();
 
 ?>

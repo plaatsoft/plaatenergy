@@ -107,12 +107,12 @@ if ($page==5) {
   echo '<li>Now realtime outside weather information can be customized (thanks bplaat).</li>';
   echo '<li>Add page request counter.</li>';
   echo '<li>Centralize sensor config in one file</li>';
+  echo '<li>Improve footer of all pages.</li>';
   echo '</ul>';
   echo '</div>';
 }
 
 release_notes_navigation();
-general_copyright();
 general_footer();
 
 ?>
