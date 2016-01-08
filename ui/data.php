@@ -1,11 +1,13 @@
 <?php
+
 // Get the data from the database (Willem)
 include "../config.inc";
 include "../general.inc";
+include "../database.inc";
+
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 day_parameters();
-
-$conn = new mysqli($servername, $username, $password, $dbname);
 
 // ---------------------------------------------
 
@@ -13,31 +15,31 @@ $timestamp1 = date("Y-m-d 00:00:00", $current_date);
 $timestamp2 = date("Y-m-d 23:59:59", $current_date);
 
 $sql1 = 'select temperature,pressure,humidity FROM weather where timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'" order by id desc limit 0,1';
+$result1 = plaatenergy_db_query($sql1);
+$row1 = plaatenergy_db_fetch_object($result1);
 
-$result1 = $conn->query($sql1);
-$row1 = $result1->fetch_assoc();
 
 // ---------------------------------------------
 
 $sql2 = 'select vermogen, vermogenterug, gas FROM energy where timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'" order by id desc limit 0,1';
-$result2 = $conn->query($sql2);
-$row2 = $result2->fetch_assoc();
+$result2 = plaatenergy_db_query($sql2);
+$row2 = plaatenergy_db_fetch_object($result2);
 
 // ---------------------------------------------
 
 $timestamp1=date('Y-m-d', $current_date);
 $timestamp2=date('Y-m-d', $current_date);
 
-$sql = 'select dal, piek, dalterug, piekterug, solar, gas FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
-$result = $conn->query($sql);
-$row3 = $result->fetch_assoc();
+$sql3 = 'select dal, piek, dalterug, piekterug, solar, gas FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+$result3 = plaatenergy_db_query($sql3);
+$row3 = plaatenergy_db_fetch_object($result3);
 
-$dal_value= $row3['dal'];
-$piek_value = $row3['piek'];
-$dalterug_value= $row3['dalterug'];
-$piekterug_value = $row3['piekterug'];
-$solar_value = $row3['solar'];
-$gas_value = $row3['gas'];
+$dal_value= $row3->dal;
+$piek_value = $row3->piek;
+$dalterug_value= $row3->dalterug;
+$piekterug_value = $row3->piekterug;
+$solar_value = $row3->solar;
+$gas_value = $row3->gas;
 
 $vandaag_verbruikt = $dal_value + $piek_value + ($solar_value-$dalterug_value-$piekterug_value);
 $vandaag_opgewekt = $solar_value;
@@ -48,13 +50,13 @@ $time=mktime(0, 0, 0, 1, 1, date('Y'));
 $timestamp1=date('Y-1-1', $time);
 $timestamp2=date('Y-12-t', $time);
 
-$sql = 'select sum(dal) as dal, sum(piek) as piek, sum(dalterug) as dalterug, sum(piekterug) as piekterug, sum(solar) as solar, sum(gas) as gas FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
-$result = $conn->query($sql);
-$row5 = $result->fetch_assoc();
+$sql5 = 'select sum(dal) as dal, sum(piek) as piek, sum(dalterug) as dalterug, sum(piekterug) as piekterug, sum(solar) as solar, sum(gas) as gas FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+$result5 = plaatenergy_db_query($sql5);
+$row5 = plaatenergy_db_fetch_object($result5);
 
-$totaal_verbruikt = $row5['dal'] + $row5['piek'] + ($row5['solar']-$row5['dalterug']-$row5['piekterug']);
-$totaal_opgewekt = $row5['solar'];
-$totaal_gas = $row5['gas'];
+$totaal_verbruikt = $row5->dal + $row5->piek + ($row5->solar-$row5->dalterug-$row5->piekterug);
+$totaal_opgewekt = $row5->solar;
+$totaal_gas = $row5->gas;
 
 // ===================================================
 // ==================== JSON ========================= (Bastiaan)
@@ -100,10 +102,10 @@ if ($_GET["q"][1] == "0") {
 }
 
 // Bereken de actuele verbruik in Watt
-if ($row2["vermogen"] > 0) {
-  $json["current_watt"] = "- " . num($row2["vermogen"], 0) . " Watt";
+if ($row2->vermogen > 0) {
+  $json["current_watt"] = "- " . num($row2->vermogen, 0) . " Watt";
 } else {
-  $json["current_watt"] = "+ ". num($row2["vermogenterug"], 0) . " Watt";
+  $json["current_watt"] = "+ ". num($row2->vermogenterug, 0) . " Watt";
 }
 
 // Bereken het dag verbruik in kWh
@@ -128,15 +130,15 @@ if ($_GET["q"][2] == "0") {
 
 // Bereken de temperatuur in graden celcius = 0 / fahrenheit = 1 / kelvin = 2
 if ($_GET["q"][3] == "0") {
-  $json["temperature"] = num($row1["temperature"]) . " &deg;C";
+  $json["temperature"] = num($row1->temperature) . " &deg;C";
 } elseif ($_GET["q"][3] == "1") {
-  $json["temperature"] = num($row1["temperature"] * 9 / 5 + 32) . " &deg;F";
+  $json["temperature"] = num($row1->temperature * 9 / 5 + 32) . " &deg;F";
 } elseif ($_GET["q"][3] == "2") {
-  $json["temperature"] = num($row1["temperature"] + 273.15) . " K";
+  $json["temperature"] = num($row1->temperature + 273.15) . " K";
 }
 
-$json["pressure"] = num($row1["pressure"]) . " hPa";
-$json["humidity"] = num($row1["humidity"]) . " %";
+$json["pressure"] = num($row1->pressure) . " hPa";
+$json["humidity"] = num($row1->humidity) . " %";
 
 // Laad de weer informatie alleen als is aangegeven
 if ($_GET["q"][5] == 1) {
