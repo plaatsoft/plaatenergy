@@ -141,7 +141,7 @@ while ($data1 = plaatenergy_db_fetch_object($result1)) {
      $result4 = plaatenergy_db_query($sql4);
      $data4 = plaatenergy_db_fetch_object($result4);
 
-     if ( isset($data4) ) {
+     if ( isset($data4->id) ) {
 
          $sql3  = 'update energy_day set dal='.$dal_diff.', piek='.$piek_diff.', dalterug='.$dalterug_diff.', piekterug='.$piekterug_diff.',';
          $sql3 .= 'solar='.$solar_diff.', gas='.$gas_diff.' where id='.$data4->id; 

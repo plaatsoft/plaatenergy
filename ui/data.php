@@ -103,15 +103,15 @@ if ($_GET["q"][1] == "0") {
 
 // Bereken de actuele verbruik in Watt
 if ($row2->vermogen > 0) {
-  $json["current_watt"] = "- " . num($row2->vermogen, 0) . " Watt";
+  $json["current_watt"] = "- ".num($row2->vermogen,0)." Watt";
 } else {
-  $json["current_watt"] = "+ ". num($row2->vermogenterug, 0) . " Watt";
+  $json["current_watt"] = "+ ".num($row2->vermogenterug,0)." Watt";
 }
 
 // Bereken het dag verbruik in kWh
 $energy_today = $vandaag_opgewekt - $vandaag_verbruikt;
 if ($energy_today > 0) {
-  $json["energy_today"] = "+ " . num($energy_today) . " kWh";
+  $json["energy_today"] = "+ " .num($energy_today) . " kWh";
 } else {
   $json["energy_today"] = str_replace("-", "- ", num($energy_today)) . " kWh";
 }
