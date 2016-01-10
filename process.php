@@ -39,7 +39,7 @@ $round = 3;
 if ($type==2) {
 
   $sql = 'truncate table energy_day';
-  $result = $conn->query($sql);
+  plaatenergy_db_query($sql);
 
 } else {
 

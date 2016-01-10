@@ -30,13 +30,6 @@ body {
   margin: auto;
 }
 
-.settings,
-.version {
-	font-size: 11px;
-	font-family: monospace;
-	opacity: 0.9;
-}
-
 .normal_link {
 	margin: 0px;
 	padding: 0px;
@@ -47,16 +40,23 @@ body {
 	text-decoration: underline;
 }
 
-.settings {
+.language {
+	position: absolute;
+	top: 15px;
+	left: 15px;
+}
+
+.theme {
 	position: absolute;
 	top: 15px;
 	right: 15px;
 }
 
-.version {
-	position: absolute;
-	top: 15px;
-	left: 15px;
+.theme,
+.language {
+	font-size: 11px;
+	font-family: monospace;
+	opacity: 0.9;
 }
 
 h1 {
@@ -64,23 +64,14 @@ h1 {
    margin: calc(10px + 0.3em) 0px 10px 0px;
 }
 
-h1 img:first-child {
-	transform: translateY(7px);
-	margin-right: 28px;
-}
-h1 img:last-child {
-    transform: translateY(7px);
-	margin-left: 28px;
-}
-
 h2 {
-   font-size: 1.8em;
-   margin: 10px 0px;
+   font-size: 1.4em;
+   margin: 6px 0px;
 }
 
 h3 {
-   font-size: 1.6em;
-	 margin: 10px 0px;
+   font-size: 1.2em;
+	 margin: 4px 0px;
 }
 
 th {
@@ -101,7 +92,7 @@ tr, td {
 td > a{
   display: block;
   margin: 0px;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 td > a:last-child {
   margin-bottom: 0px;
@@ -161,6 +152,23 @@ ul {
   margin: auto;
 }
 
+/* ================ Add to h1 two suns ================ */
+h1::before,
+h1::after {
+	display: inline-block;
+	content: "";
+	width: 24px;
+	height: 24px;
+	background-image: url(../ui/images/icons/24.png);
+	transform: translateY(3px);
+}
+h1::before {
+	margin-right: 24px;
+}
+h1::after {
+	margin-left: 24px;
+}
+
 /* ================ Cookie Bar (a message that say PlaatEnergy use cookies) ================ */
 .cookie_bar {
 	position: fixed;
@@ -175,7 +183,7 @@ ul {
 .cookie_bar > a {
 	float: right;
 	margin-right: 15px;
-	padding: 0px 13px;
+	padding: 13px;
 	text-decoration: none !important;
 	opacity: 0.9;
 	color: #fff;
@@ -207,3 +215,13 @@ ul {
 .checker.disabled {
    background-color: #FF5722;
 }
+
+.checker .fa,
+a .fa {
+	margin-right: 10px;
+}
+a .fa.right {
+	margin-left: 10px;
+	margin-right: 0px;
+}
+

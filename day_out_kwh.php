@@ -16,7 +16,6 @@
 **  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
  
- 
 include "config.inc";
 include "general.inc";
 include "database.inc";
@@ -29,7 +28,7 @@ $i=0;
 $label="";
 $data="";
 $value=0;
-$total=0;
+$total_energy=0;
 
 if ($type==1) {
   $current_date=mktime(0, 0, 0, $month, $day, $year);
@@ -55,7 +54,7 @@ if ($type==1) {
      }
      $data .= "['".date("H:i", $current_date+(900*$i))."',";
      $data .= round($value,2).']';
-     $total = round($value,2);
+     $total_energy = round($value,2);
   
      $i++;
   }
@@ -75,7 +74,7 @@ if ($type==2) {
    $value=0;
    if ( isset($row->pac)) {
      $value= $row->pac;
-     $total= $row->etoday;
+     $total_energy = $row->etoday;
    }
 
    if (strlen($data)>0) {
@@ -93,7 +92,6 @@ general_header();
 if ($type==1) {
 
 ?>
-
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["bar"]});
@@ -147,9 +145,22 @@ if ($type==1) {
 echo '<h1>'.t('TITLE_DAY_OUT_KWH', $day, $month, $year).'</h1>';
 echo '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
 
-text_banner( t('TOTAL_PER_DAY_KWH', $total));
+text_banner( t('TOTAL_PER_DAY_KWH', $total_energy) );
 
-day_navigation($total==0);
+// If zero or one measurements are found. Measurement can be manully adapted.
+$timestamp1 = date("Y-m-d 00:00:00", $current_date);
+$timestamp2 = date("Y-m-d 23:59:59", $current_date);
+$sql = 'select * FROM solar where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';
+$result = plaatenergy_db_query($sql);
+$records = plaatenergy_db_num_rows($result);
+
+if ($records<=1) {
+   $edit=2;
+} else {
+   $edit=0;
+}
+
+day_navigation($edit);
 
 general_footer();
 

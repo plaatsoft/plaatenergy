@@ -24,7 +24,7 @@ plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 general_header();
 
-echo '<h2>'.t('DONATE_TITLE').'</h2>';
+echo '<h1>'.t('DONATE_TITLE').'</h1>';
 echo '<div class="large_text">'.t('DONATE_CONTENT').'</div>';
 
 echo '<br/>';

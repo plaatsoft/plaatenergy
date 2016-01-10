@@ -27,11 +27,7 @@ plaatenergy_db_check_version($version);
 
 $solar_meter_ip_address = plaatenergy_db_get_config_item('solar_meter_ip_address');
 
-echo '<h1>';
-echo '<img src="./ui/images/icons/32.png">';
-echo t('TITLE').' '.$version;
-echo '<img src="./ui/images/icons/32.png">';
-echo '</h1>';
+echo '<h1>' . t('TITLE') . ' ' . $version . '</h1>';
 
 echo "<div id='version'></div>";
 
@@ -110,6 +106,7 @@ echo '<br/><br/>';
 
 echo '<script type="text/javascript" src="js/version.js"></script>';
 echo '<script type="text/javascript">check_version("'.$version.'")</script>';
+
 general_footer();
 
 ?>

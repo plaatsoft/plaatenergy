@@ -474,8 +474,16 @@ function day_navigation($edit=0) {
             break;
   }
 
-  if ($edit==1) {
-    echo '<a href="day_out_edit.php?day='.$day.'&month='.$month.'&year='.$year.'&edit=1">'.t('LINK_EDIT').'</a>';
+  switch ($edit) {
+
+    case 1: echo '<a href="day_in_kwh_edit.php?day='.$day.'&month='.$month.'&year='.$year.'&edit=1">'.t('LINK_EDIT').'</a>';
+            break;
+
+    case 2: echo '<a href="day_out_kwh_edit.php?day='.$day.'&month='.$month.'&year='.$year.'&edit=1">'.t('LINK_EDIT').'</a>';
+            break;
+
+    case 3: echo '<a href="day_in_gas_edit.php?day='.$day.'&month='.$month.'&year='.$year.'&edit=1">'.t('LINK_EDIT').'</a>';
+            break;
   }
     
   echo "</div>";
@@ -578,38 +586,29 @@ function general_header() {
   
   // Load the dark theme css file only if COOKIE theme = dark
   if ($_COOKIE["theme"] == "dark") {
-    echo '<link rel="stylesheet" type="text/css" href="./css/themes/dark.css">';
+    echo '<link rel="stylesheet" type="text/css" href="./css/theme-dark.css">';
   }
   
-  // Load the icons from Font Awesome and a icon helpers if COOKIE icons = on
+  // Load the icons from Font Awesome
   echo '<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">';
-  echo '<link rel="stylesheet" type="text/css" href="./css/icon_helpers.css">';
  
   echo '</head>';
   
   echo '<body>';
   
-  // Language  
-  echo '<div class="version">';
-
+  // Language toggler
   if ($_COOKIE["lang"] == "en") {
-	echo '<a class="normal_link" href="?lang=nl">'.t('DUTCH').'</a>';
+	echo '<a class="language normal_link" href="?lang=nl">'.t('DUTCH').'</a>';
   } elseif ($_COOKIE["lang"] == "nl") {
-	echo '<a class="normal_link" href="?lang=en">'.t('ENGLISH').'</a>';
+	echo '<a class="language normal_link" href="?lang=en">'.t('ENGLISH').'</a>';
   }
-
-  echo '</div>'; 
   
-  // Settings area (right top)
-  echo '<div class="settings">';
-  
+  // Theme toggler
   if ($_COOKIE["theme"] == "light") {
-	echo '<a class="normal_link" href="?theme=dark">' . t("THEME_TO_DARK") . '</a>';
+	echo '<a class="theme normal_link" href="?theme=dark">' . t('THEME_TO_DARK') . '</a>';
   } elseif ($_COOKIE["theme"] == "dark") {
-	echo '<a class="normal_link" href="?theme=light">' . t("THEME_TO_LIGHT") . '</a>';
+	echo '<a class="theme normal_link" href="?theme=light">' . t('THEME_TO_LIGHT') . '</a>';
   }
-
-  echo '</div>';
   
   // Cookie Bar Message (show only if COOKIE allow_cookies = NULL)
   if ($_COOKIE["allow_cookies"] == "no") {
