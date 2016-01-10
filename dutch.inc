@@ -65,8 +65,9 @@ $lang['LINK_M3']         = i('tint') . 'm&sup3;';
 $lang['LINK_WATT']       = i('bolt') . 'Watt'; 
 $lang['LINK_KWH']        = i('bolt') . 'kWh'; 
 $lang['LINK_EURO']       = i('eur') . 'Euro';
-$lang['LINK_INSERT']     = 'Toevoegen'; // } Icon don't work (submit)
-$lang['LINK_EXECUTE']    = 'Uitvoeren'; // }
+$lang['LINK_INSERT']     = 'Toevoegen'; 
+$lang['LINK_UPDATE']     = 'Bijwerken'; 
+$lang['LINK_EXECUTE']    = 'Uitvoeren'; 
  
 /*
 ** ------------------
@@ -175,9 +176,16 @@ $lang['TOTAL_PER_DAY_M3'] = 'Totaal = %s m&sup3;';
 ** ------------------
 */
 
-$lang['TITLE_SOLAR_EDIT'] = 'Solar Meetcorrectie';
+$lang['TITLE_IN_KWH_KWH_EDIT'] = 'Energie Meetcorrectie';
+$lang['TITLE_OUT_KWH_EDIT'] = 'Solar Meetcorrectie';
+$lang['TITLE_IN_GAS_EDIT'] = 'Solar Meetcorrectie';
+
+$lang['LABEL_LOW'] = 'dal meterstand (kWh)';
+$lang['LABEL_NORMAL'] = 'Normaal meterstand (kWh)';
 $lang['LABEL_ETOTAL'] = 'etotal waarde (kWh)';
-$lang['SOLAR_RECORD_INSERTED'] = 'Solar meetcorrectie toegevoegd!';
+
+$lang['RECORD_INSERTED'] = 'Meetcorrectie toegevoegd!';
+$lang['RECORD_UPDATED'] = 'Meetcorrectie bijgewerkt!';
 
 $lang['TITLE_QUERY_REPORT'] = 'Rapportage';
 $lang['LABEL_START_DATE'] = 'Start datum (2015-12-31)';

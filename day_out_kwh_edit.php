@@ -80,7 +80,7 @@ echo "  document.getElementById('etoday').value=(val-start).toFixed(1); ";
 echo '}';
 echo '</script>';
 
-echo' <h1>'.t('TITLE_SOLAR_EDIT').'</h1>';
+echo' <h1>'.t('TITLE_OUT_KWH_EDIT').'</h1>';
 
 echo '<form method="post">';
 echo '<label>'.t('LABEL_ETOTAL').':</label>';
@@ -110,7 +110,7 @@ if ($do==1) {
 
   exec ('/usr/bin/php-cgi -f /var/www/html/solar/process.php type=2');
 
-  echo t('SOLAR_RECORD_INSERTED'); 
+  echo t('RECORD_INSERTED'); 
 }
 
 general_navigation();

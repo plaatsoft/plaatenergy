@@ -66,8 +66,9 @@ $lang['LINK_M3']         = i('tint') . 'm&sup3;';
 $lang['LINK_WATT']       = i('bolt') . 'Watt'; 
 $lang['LINK_KWH']        = i('bolt') . 'kWh'; 
 $lang['LINK_EURO']       = i('eur') . 'Euro';
-$lang['LINK_INSERT']     = 'Insert';  // } Icon don't work (submit)
-$lang['LINK_EXECUTE']    = 'Execute'; // }
+$lang['LINK_INSERT']     = 'Insert';  
+$lang['LINK_UPDATE']     = 'Update';  
+$lang['LINK_EXECUTE']    = 'Execute'; 
  
 /*
 ** ------------------
@@ -176,9 +177,16 @@ $lang['TOTAL_PER_DAY_M3'] = 'Total = %s m&sup3;';
 ** ------------------
 */
 
-$lang['TITLE_SOLAR_EDIT'] = 'Solar Measurement Correction';
-$lang['LABEL_ETOTAL'] = 'etotal value (kWh)';
-$lang['SOLAR_RECORD_INSERTED'] = 'Solar measurement correction inserted!';
+$lang['TITLE_IN_KWH_EDIT'] = 'Energy Measurement Correction';
+$lang['TITLE_IN_M3_EDIT'] = 'Gas Measurement Correction';
+$lang['TITLE_OUT_KWH_EDIT'] = 'Solar Measurement Correction';
+
+$lang['LABEL_LOW'] = 'Low meter value reading (kWh)';
+$lang['LABEL_NORMAL'] = 'Normal meter value reading (kWh)';
+$lang['LABEL_ETOTAL'] = 'Etotal meter reading value (kWh)';
+
+$lang['RECORD_INSERTED'] = 'Measurement correction inserted!';
+$lang['RECORD_UPDATED'] = 'Measurement correction updated!';
 
 $lang['TITLE_QUERY_REPORT'] = 'Query Energy Database';
 $lang['LABEL_START_DATE'] = 'Start date (2015-12-31)';
