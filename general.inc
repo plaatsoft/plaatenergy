@@ -633,7 +633,8 @@ function general_footer() {
   $time = $time_end - $time_start;
 
   echo '<div class="copyright">' . t('LINK_COPYRIGHT') . '</br>';
-  echo '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries - '.$counter.' requests]';
+  //echo '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries - '.$counter.' requests]';
+  echo '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries]';
 
   echo '</div>';
   echo '</body>';

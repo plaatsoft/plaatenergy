@@ -213,18 +213,18 @@ function plaatenergy_db_num_rows($value) {
  * Check db version and upgrade if needed!
  */
 function plaatenergy_db_check_version($current_version) {
-	
+
+   $version = "0.0";
+
    $sql = "select value from config where token='database_version'";
    $result = plaatenergy_db_query($sql);
-   $data = plaatenergy_db_fetch_object($result);
-	
-   $value = "0.0";
-   if ( isset($data->value) ) {
-	$value = $data->value;
+   $row = plaatenergy_db_fetch_object($result);
+   if ( isset($row->value) ) {
+     $version=$row->value;
    }
-	
-   if ($current_version!=$value) {
-	
+
+   while ($current_version!=$version) {
+
       // Mismatch try to upgrade database		
       $filename = 'database/patch-'.$current_version.'.sql';
 		 
