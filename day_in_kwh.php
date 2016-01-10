@@ -42,36 +42,34 @@ $piekterug_value=0;
 $data="";
 $total=0;
 
-if ($type==1) {
+// Get last energy measurement previous day
+$timestamp1 = date("Y-m-d 00:00:00", $prev_date);
+$timestamp2 = date("Y-m-d 23:59:59", $prev_date);
+$sql  = 'select dal, piek, dalterug, piekterug from energy where ';
+$sql .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp desc limit 0,1';
 
-  // Get last energy measurement previous day
-  $timestamp1 = date("Y-m-d 00:00:00", $prev_date);
-  $timestamp2 = date("Y-m-d 23:59:59", $prev_date);
-  $sql  = 'select dal, piek, dalterug, piekterug from energy where ';
-  $sql .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp desc limit 0,1';
+$result = plaatenergy_db_query($sql);
+$row = plaatenergy_db_fetch_object($result);
 
-  $result = plaatenergy_db_query($sql);
-  $row = plaatenergy_db_fetch_object($result);
+if ( isset($row->dal) ) {
+  $dal_prev = $row->dal;
+  $piek_prev = $row->piek;
+  $dalterug_prev = $row->dalterug;
+  $piekterug_prev = $row->piekterug;
+}      
 
-  if ( isset($row->dal) ) {
-    $dal_prev = $row->dal;
-    $piek_prev = $row->piek;
-    $dalterug_prev = $row->dalterug;
-    $piekterug_prev = $row->piekterug;
-  }      
+// Get last solar measurement previous day
+$sql  = 'select etotal from solar where ';
+$sql .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp desc limit 0,1';
 
-  // Get last solar measurement previous day
-  $sql  = 'select etotal from solar where ';
-  $sql .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp desc limit 0,1';
+$result = plaatenergy_db_query($sql);
+$row = plaatenergy_db_fetch_object($result);
 
-  $result = plaatenergy_db_query($sql);
-  $row = plaatenergy_db_fetch_object($result);
+if ( isset($row->etotal) ) {
+  $solar_prev = $row->etotal;
+}
 
-  if ( isset($row->etotal) ) {
-    $solar_prev = $row->etotal;
-  }
-
-  while ($i<96) {
+while ($i<96) {
 
      $timestamp1 = date("Y-m-d H:i:s", $current_date+(900*$i));
      $timestamp2 = date("Y-m-d H:i:s", $current_date+(900*($i+1)));
@@ -130,6 +128,9 @@ if ($type==1) {
         $dalterug_value = 0;
         $piekterug_value = 0;
         $solar_value = 0;
+
+     } else { 
+        $total = round(($dal_value+$piek_value+$solar_value),2);
      }
 
      if (strlen($data)>0) {
@@ -137,21 +138,21 @@ if ($type==1) {
      }
      $data .= "['".date("H:i", $current_date+(900*$i))."',";
      $data .= round($dal_value,2).','.round($piek_value,2).','.round($solar_value,2).']';
-     $total = round(($dal_value+$piek_value+$solar_value),2);
 
      $i++;
-  }
-  
-  $json = "[['','".t('USED_LOW_KWH')."','".t('USED_HIGH_KWH')."','".t('USED_SOLAR_KWH')."'],".$data."]";
 }
+  
+$json = "[['','".t('USED_LOW_KWH')."','".t('USED_HIGH_KWH')."','".t('USED_SOLAR_KWH')."'],".$data."]";
 
 if ($type==2) {
 
-  $data="";
-  $timestamp1 = date("Y-m-d 00:00:00", $current_date);
-  $timestamp2 = date("Y-m-d 23:59:59", $current_date);
+   $timestamp1 = date("Y-m-d 00:00:00", $current_date);
+   $timestamp2 = date("Y-m-d 23:59:59", $current_date);
 
-   $sql = 'select timestamp, vermogen FROM energy where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp';
+   $data="";
+
+   $sql  = 'select timestamp, vermogen FROM energy where ';
+   $sql .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp';
   
    $result = plaatenergy_db_query($sql);
    while ( $row = plaatenergy_db_fetch_object($result)) {

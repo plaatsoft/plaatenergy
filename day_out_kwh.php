@@ -42,7 +42,8 @@ if ($type==1) {
   
      if ($timestamp>date("Y-m-d H:i:s")) {
        $value=0;
-       break;
+     } else {
+        $total_energy = round($value,2);  
      }
 
      if ( isset($row->etoday)) {
@@ -54,7 +55,6 @@ if ($type==1) {
      }
      $data .= "['".date("H:i", $current_date+(900*$i))."',";
      $data .= round($value,2).']';
-     $total_energy = round($value,2);
   
      $i++;
   }

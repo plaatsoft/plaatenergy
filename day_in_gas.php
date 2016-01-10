@@ -40,9 +40,20 @@ while ($i<97) {
    $result = plaatenergy_db_query($sql);
    $row = plaatenergy_db_fetch_object($result);
 
+   if ( isset($row->gas) ) {
+
+        if ($first==1) {
+                $value_first= $row->gas;
+                $first=0;
+        }
+        $value= $row->gas-$value_first;
+   }
+
+   // Measurements in the future are zero.
    if ($timestamp>date("Y-m-d H:i:s")) {
      $value=0;
-     break;
+   } else {
+     $total = round($value,2);
    }
 
    if ( isset($row->gas)) {
@@ -53,12 +64,13 @@ while ($i<97) {
         }
         $value= $row->gas-$value_first;
    }
+
    if (strlen($data)>0) {
      $data.=',';
-   }
+   } 
+
    $data .= "['".date("H:i", $current_date+(900*$i))."',";
    $data .= round($value,2).']';
-   $total = round($value,2);
    $i++;
 }
 
@@ -91,7 +103,7 @@ general_header();
 echo '<h1>'.t('TITLE_DAY_IN_GAS', $day, $month, $year).'</h1>';
 echo '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
 
-text_banner( t('TOTAL_PER_DAY_KWH', $total));
+text_banner( t('TOTAL_PER_DAY_M3', $total));
 day_navigation();
 general_footer();
 
