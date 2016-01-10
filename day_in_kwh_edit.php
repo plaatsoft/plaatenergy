@@ -101,8 +101,11 @@ general_header();
 echo '<script type="text/javascript">';
 echo 'function low(val) { document.getElementById("low").value=val; }';
 echo '</script>';
+echo '<script type="text/javascript">';
+echo 'function normal(val) { document.getElementById("normal").value=val; }';
+echo '</script>';
 
-echo' <h1>'.t('TITLE_IN_KWH_EDIT').'</h1>';
+echo' <h1>'.t('TITLE_IN_KWH_EDIT').' '.$day.'-'.$month.'-'.$year.'</h1>';
 
 echo '<form method="post">';
 
@@ -157,7 +160,7 @@ if ($do==1) {
 
   if ($found==0) {
   
-     $sql4  = 'insert into energy ( timestamp, dal, piek) values ("'.$timestamp.'",'.$low.','.$piek.'")';
+     $sql4  = 'insert into energy ( timestamp, dal, piek) values ("'.$timestamp.'",'.$low.','.$normal.'")';
      echo t('RECORD_INSERTED'); 
 
   } else { 

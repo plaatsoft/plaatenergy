@@ -176,11 +176,11 @@ $lang['TOTAL_PER_DAY_M3'] = 'Totaal = %s m&sup3;';
 ** ------------------
 */
 
-$lang['TITLE_IN_KWH_KWH_EDIT'] = 'Energie Meetcorrectie';
+$lang['TITLE_IN_KWH_EDIT'] = 'Energie Meetcorrectie';
 $lang['TITLE_OUT_KWH_EDIT'] = 'Solar Meetcorrectie';
 $lang['TITLE_IN_GAS_EDIT'] = 'Solar Meetcorrectie';
 
-$lang['LABEL_LOW'] = 'dal meterstand (kWh)';
+$lang['LABEL_LOW'] = 'Dal meterstand (kWh)';
 $lang['LABEL_NORMAL'] = 'Normaal meterstand (kWh)';
 $lang['LABEL_ETOTAL'] = 'etotal waarde (kWh)';
 
