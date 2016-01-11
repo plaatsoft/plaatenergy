@@ -44,7 +44,9 @@ INSERT INTO config2 (`id`, `token`, `value`, `date`, `description`) VALUES (NULL
 INSERT INTO config2 (`id`, `token`, `value`, `date`, `description`) VALUES (NULL, 'solar_meter_present', 'true', SYSDATE(), 'Solar meter present');
 INSERT INTO config2 (`id`, `token`, `value`, `date`, `description`) VALUES (NULL, 'weather_station_present', 'true', SYSDATE(), 'Weather Station present');
 
-INSERT INTO config2 (`id`, `token`, `value`, `date`, `description`) VALUES (NULL, 'solar_meter_ip_address', '192.168.0.201', SYSDATE(), 'Solar meter IP address');
+INSERT INTO config2 (`id`, `token`, `value`, `date`, `description`) VALUES (NULL, 'solar_meter_ip', '127.0.0.1', SYSDATE(), 'Solar meter IP address');
+INSERT INTO config2 (`id`, `token`, `value`, `date`, `description`) VALUES (NULL, 'solar_meter_port', '8899', SYSDATE(), 'Solar meter port number');
+INSERT INTO config2 (`id`, `token`, `value`, `date`, `description`) VALUES (NULL, 'solar_meter_serial', '1606789503', SYSDATE(), 'Solar meter serial number');
 
 INSERT INTO config2 (`id`, `token`, `value`, `date`, `description`) VALUES (NULL, 'request_counter', 1, SYSDATE(), 'Page request counter');
 

@@ -1,30 +1,5 @@
--- phpMyAdmin SQL Dump
--- version 4.2.12deb2+deb8u1
--- http://www.phpmyadmin.net
---
--- Machine: localhost
--- Gegenereerd op: 05 jan 2016 om 18:20
--- Serverversie: 5.5.44-0+deb8u1
--- PHP-versie: 5.6.14-0+deb8u1
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Databank: `power`
---
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `config`
---
 
 CREATE TABLE IF NOT EXISTS `config` (
 `id` int(11) NOT NULL,
@@ -34,13 +9,7 @@ CREATE TABLE IF NOT EXISTS `config` (
   `start_dal` double NOT NULL,
   `start_piek` double NOT NULL,
   `start_gas` double NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `energy`
---
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `energy` (
 `id` int(11) NOT NULL,
@@ -52,13 +21,7 @@ CREATE TABLE IF NOT EXISTS `energy` (
   `vermogen` double NOT NULL,
   `vermogenterug` double NOT NULL,
   `gas` double NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=175230 DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `energy_day`
---
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `energy_day` (
 `id` int(11) NOT NULL,
@@ -69,13 +32,7 @@ CREATE TABLE IF NOT EXISTS `energy_day` (
   `piekterug` double NOT NULL,
   `solar` double NOT NULL,
   `gas` double NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=150 DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `solar`
---
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `solar` (
 `id` int(11) NOT NULL,
@@ -91,26 +48,14 @@ CREATE TABLE IF NOT EXISTS `solar` (
   `etoday` double NOT NULL,
   `etotal` double NOT NULL,
   `temp` double NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=68312 DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `sun`
---
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `sun` (
 `id` int(11) NOT NULL,
   `date` varchar(5) NOT NULL,
   `sunrise` time NOT NULL,
   `sunset` time NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=65 DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Tabelstructuur voor tabel `weather`
---
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `weather` (
 `id` int(11) NOT NULL,
@@ -118,85 +63,43 @@ CREATE TABLE IF NOT EXISTS `weather` (
   `humidity` decimal(5,2) NOT NULL,
   `pressure` decimal(6,2) NOT NULL,
   `temperature` decimal(4,2) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=10232 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
---
--- Indexen voor geëorteerde tabellen
---
-
---
--- Indexen voor tabel `config`
---
 ALTER TABLE `config`
  ADD PRIMARY KEY (`id`);
 
---
--- Indexen voor tabel `energy`
---
 ALTER TABLE `energy`
  ADD PRIMARY KEY (`id`), ADD KEY `timestamp` (`timestamp`);
 
---
--- Indexen voor tabel `energy_day`
---
 ALTER TABLE `energy_day`
  ADD PRIMARY KEY (`id`), ADD KEY `date` (`date`);
 
---
--- Indexen voor tabel `solar`
---
 ALTER TABLE `solar`
  ADD PRIMARY KEY (`id`), ADD KEY `timestamp` (`timestamp`);
 
---
--- Indexen voor tabel `sun`
---
 ALTER TABLE `sun`
  ADD PRIMARY KEY (`id`);
 
---
--- Indexen voor tabel `weather`
---
 ALTER TABLE `weather`
  ADD PRIMARY KEY (`id`), ADD KEY `timestamp` (`timestamp`);
 
---
--- AUTO_INCREMENT voor geëorteerde tabellen
---
-
---
--- AUTO_INCREMENT voor een tabel `config`
---
 ALTER TABLE `config`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT voor een tabel `energy`
---
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
+
 ALTER TABLE `energy`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=175230;
---
--- AUTO_INCREMENT voor een tabel `energy_day`
---
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
+
 ALTER TABLE `energy_day`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=150;
---
--- AUTO_INCREMENT voor een tabel `solar`
---
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
+
 ALTER TABLE `solar`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=68312;
---
--- AUTO_INCREMENT voor een tabel `sun`
---
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
+
 ALTER TABLE `sun`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=65;
---
--- AUTO_INCREMENT voor een tabel `weather`
---
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
+
 ALTER TABLE `weather`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10232;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
 
+INSERT INTO `config` (`id`, `date`, `gas_prijs`, `elektra_prijs`, `start_dal`, `start_piek`, `start_gas`) VALUES (1, SYSDATE(), 0.65, 0.23, 0, 0, 0);
 
-INSERT INTO `config` (`id`, `date`, `gas_prijs`, `elektra_prijs`, `start_dal`, `start_piek`, `start_gas`) VALUES (1, .2015-1-1., 0.65, 0.23, 0, 0, 0);
