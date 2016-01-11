@@ -102,12 +102,11 @@ if ($page==5) {
   echo '<div class="subparagraph">Version 0.5 (09-01-2016)</div>';
   echo '<div class="large_text">';
   echo '<ul>';
-  echo '<li>Move most of the configuration items from php to database.</li>';
   echo '<li>Database model is now automaticly patch during version upgrade.</li>';
+  echo '<li>Move most of the configuration items from php to database.</li>';
   echo '<li>Now realtime outside weather information can be customized (thanks bplaat).</li>';
-  echo '<li>Add page request counter.</li>';
-  echo '<li>Centralize sensor config in one file</li>';
-  echo '<li>Improve footer of all pages.</li>';
+  echo '<li>Improve footer information of all pages.</li>';
+  echo '<li>Now day reports support manual added measements.</li>';
   echo '</ul>';
   echo '</div>';
 }

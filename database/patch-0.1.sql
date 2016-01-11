@@ -198,3 +198,5 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10232;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
+
+INSERT INTO `config` (`id`, `date`, `gas_prijs`, `elektra_prijs`, `start_dal`, `start_piek`, `start_gas`) VALUES (1, .2015-1-1., 0.65, 0.23, 0, 0, 0);

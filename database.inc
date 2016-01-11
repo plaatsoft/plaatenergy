@@ -209,31 +209,65 @@ function plaatenergy_db_num_rows($value) {
 ** ---------------------
 */
 
+// Here's a startsWith function
+function startsWith($haystack, $needle){
+    $length = strlen($needle);
+    return (substr($haystack, 0, $length) === $needle);
+}
+
+function plaatenergy_db_execute_sql_file($version) {
+
+    $filename = 'database/patch-'.$version.'.sql';
+
+    $commands = file_get_contents($filename);
+
+    //delete comments
+    $lines = explode("\n",$commands);
+    $commands = '';
+    foreach($lines as $line){
+        $line = trim($line);
+        if( $line && !startsWith($line,'--') ){
+            $commands .= $line . "\n";
+        }
+    }
+
+    //convert to array
+    $commands = explode(";", $commands);
+
+    //run commands
+    $total = $success = 0;
+    foreach($commands as $command){
+        if(trim($command)){
+            $success += (@plaatenergy_db_query($command)==false ? 0 : 1);
+            $total += 1;
+        }
+    }
+
+    //return number of successful queries and total number of queries found
+    return array(
+        "success" => $success,
+        "total" => $total
+    );
+}
+
 /**
  * Check db version and upgrade if needed!
  */
-function plaatenergy_db_check_version($current_version) {
+function plaatenergy_db_check_version() {
 
-   $version = "0.0";
-
-   $sql = "select value from config where token='database_version'";
+   // Execute SQL base sql script if needed!
+   $sql = "select 1 FROM energy limit 1" ;
    $result = plaatenergy_db_query($sql);
-   $row = plaatenergy_db_fetch_object($result);
-   if ( isset($row->value) ) {
-     $version=$row->value;
+   if (!$result)  {
+      plaatenergy_db_execute_sql_file("0.1");
    }
 
-   while ($current_version!=$version) {
-
-      // Mismatch try to upgrade database		
-      $filename = 'database/patch-'.$current_version.'.sql';
-		 
-      if ($file = fopen( $filename, "r")) {
-		
-	// SQL patch file found, execute it 
-	plaatenergy_db_query(fread($file,filesize($filename)));
-	fclose($file);
-      }
+   // Execute SQL path script v0.5 if needed
+   $sql = 'select value from config where token="database_version"';
+   $result = plaatenergy_db_query($sql);
+   $row = plaatenergy_db_fetch_object($result);
+   if (!isset($row->value))  {
+      plaatenergy_db_execute_sql_file("0.5");
    }
 }
 
