@@ -18,9 +18,9 @@
 
 // Database credentials
 $dbhost = "127.0.0.1";
-$dbname = "energy";
-$dbuser = "energy";
-$dbpass = "energy";
+$dbname = "power";
+$dbuser = "power";
+$dbpass = "power";
 
 /* Enable MySQL (else PostgreSQL) */
 define('MYSQL', 1);
