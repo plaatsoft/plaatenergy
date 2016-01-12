@@ -149,7 +149,7 @@ if ($do==1) {
   }
   
   plaatenergy_db_query($sql4);
-  exec ('/usr/bin/php-cgi -f /var/www/html/plaatenergy/process.php type=2');
+  plaatenergy_process(2);
 }
 
 // -------------------------------------

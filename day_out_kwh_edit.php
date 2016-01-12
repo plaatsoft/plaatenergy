@@ -98,8 +98,7 @@ if ($do==1) {
   $sql3 .= 'values (null, "'.$year.'-'.$month.'-'.$day.' 00:00:00","'.($etotal-$prev_etotal).'","'.$etotal.'")';
 
   plaatenergy_db_query($sql3);
-
-  exec ('/usr/bin/php-cgi -f /var/www/html/plaatenergy/process.php type=2');
+  plaatenergy_process(2);
 
   echo t('RECORD_INSERTED'); 
 }
