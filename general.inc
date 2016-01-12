@@ -138,20 +138,24 @@ function check_solar_meter($ip) {
 		echo '</div>';
 	
 		return;
+	} else {
+		$sql = 'select dal from energy where timestamp = "'.date("Y-m-d H:i:00").'"';	
+		$result = plaatenergy_db_query($sql);
+		$row = plaatenergy_db_fetch_object($result);
+
+		$pingresult = shell_exec("/bin/ping $ip -c 1");
+		$pos = strpos($pingresult,"error");
+
+		if ($pos>0){
+			echo '<div class="checker bad">';
+			echo t('SOLAR_METER_CONNECTION_DOWN');	
+			echo '</div>';
+		} else {
+			echo '<div class="checker good">';
+			echo t('SOLAR_METER_CONNECTION_UP');
+			echo '</div>';
+		}
 	}
-
-  	$pingresult = shell_exec("/bin/ping $ip -c 1");
- 	$pos = strpos($pingresult,"error");
-
-   if ($pos>0){
-		echo '<div class="checker bad">';
-      echo t('SOLAR_METER_CONNECTION_DOWN');	
-      echo '</div>';
-   } else {
-     	echo '<div class="checker good">';
-       echo t('SOLAR_METER_CONNECTION_UP');
-      echo '</div>';
-   }
 }
 
 /**
@@ -163,27 +167,30 @@ function check_energy_meter() {
 	
 	if ($energy_meter_present=="false") {
   
-		echo '<div class="checker disabled">';
-		echo t('ENERGY_METER_DISABLED');		
-		echo '</div>';
-	
-		return;
-	}
-	   
-   $sql = 'select dal from energy where timestamp = "'.date("Y-m-d H:i:00").'"';
-	
-   $result = plaatenergy_db_query($sql);
-   $row = plaatenergy_db_fetch_object($result);
+		$page  = '<div class="checker disabled">';
+		$page .= t('ENERGY_METER_DISABLED');		
+		$page .= '</div>';
 
-   if (isset($row->dal)){
-     echo '<div class="checker good">';
-     echo t('ENERGY_METER_CONNECTION_UP');
-     echo '</div>';
-   } else {
-     echo '<div class="checker bad">';
-     echo t('ENERGY_METER_CONNECTION_DOWN');
-     echo '</div>';
+	} else {
+	   
+		$sql = 'select dal from energy where timestamp = "'.date("Y-m-d H:i:00").'"';	
+		$result = plaatenergy_db_query($sql);
+		$row = plaatenergy_db_fetch_object($result);
+
+		if (isset($row->dal)){
+			$page  = '<div class="checker good">';
+			$page .= t('ENERGY_METER_CONNECTION_UP');
+			$page .= '</div>';
+			
+		} else {
+		
+			$page  = '<div class="checker bad">';
+			$page .= t('ENERGY_METER_CONNECTION_DOWN');
+			$page .= '</div>';
+		}
    }
+	
+	return $page;
 }
 
 /**
@@ -195,26 +202,29 @@ function check_weather_station() {
     
    if ($weather_station_present=="false") {
   
-		echo '<div class="checker disabled">';
-		echo t('WEATHER_METER_DISABLED');	
-		echo '</div>';
+		$page  = '<div class="checker disabled">';
+		$page .= t('WEATHER_METER_DISABLED');	
+		$page .= '</div>';
 	
-		return;
-	}
-	
-	$sql = 'select humidity from weather where timestamp = "'.date("Y-m-d H:i:00").'"';
-   $result = plaatenergy_db_query($sql);
-   $row = plaatenergy_db_fetch_object($result);
-
-	if (isset($row->humidity)){
-		echo '<div class="checker good">';
-		echo t('WEATHER_METER_CONNECTION_UP');
-      echo '</div>';
 	} else {
-		echo '<div class="checker bad">';
-      echo t('WEATHER_METER_CONNECTION_DOWN');
-      echo '</div>';
+	
+		$sql = 'select humidity from weather where timestamp = "'.date("Y-m-d H:i:00").'"';
+		$result = plaatenergy_db_query($sql);
+		$row = plaatenergy_db_fetch_object($result);
+
+		if (isset($row->humidity)){
+			$page  = '<div class="checker good">';
+			$page .= t('WEATHER_METER_CONNECTION_UP');
+			$page .= '</div>';
+			
+		} else {
+		
+			$page  = '<div class="checker bad">';
+			$page .= t('WEATHER_METER_CONNECTION_DOWN');
+			$page .= '</div>';
+		}
 	}
+	return $page;
 }
 
 /**
@@ -251,23 +261,24 @@ function t() {
 function add_icons ($path = './ui/') {
     $path = $path . 'images/icons/';
 
-    echo '<meta charset="UTF-8">';
+   $page = '<meta charset="UTF-8">';
 
-    echo '<link rel="shortcut icon" type="image/png" sizes="16x16" href="' . $path . '16.png">';
-    echo '<link rel="shortcut icon" type="image/png" sizes="24x24" href="' . $path . '24.png">';
-    echo '<link rel="shortcut icon" type="image/png" sizes="32x32" href="' . $path . '32.png">';
-    echo '<link rel="shortcut icon" type="image/png" sizes="48x48" href="' . $path . '48.png">';
-    echo '<link rel="shortcut icon" type="image/png" sizes="64x64" href="' . $path . '64.png">';
-    echo '<link rel="shortcut icon" type="image/png" sizes="128x128" href="' . $path . '128.png">';
-    echo '<link rel="shortcut icon" type="image/png" sizes="256x256" href="' . $path . '256.png">';
-    echo '<link rel="shortcut icon" type="image/png" sizes="512x512" href="' . $path . '512.png">';
+   $page .= '<link rel="shortcut icon" type="image/png" sizes="16x16" href="' . $path . '16.png">';
+   $page .= '<link rel="shortcut icon" type="image/png" sizes="24x24" href="' . $path . '24.png">';
+   $page .= '<link rel="shortcut icon" type="image/png" sizes="32x32" href="' . $path . '32.png">';
+   $page .= '<link rel="shortcut icon" type="image/png" sizes="48x48" href="' . $path . '48.png">';
+   $page .= '<link rel="shortcut icon" type="image/png" sizes="64x64" href="' . $path . '64.png">';
+   $page .= '<link rel="shortcut icon" type="image/png" sizes="128x128" href="' . $path . '128.png">';
+   $page .= '<link rel="shortcut icon" type="image/png" sizes="256x256" href="' . $path . '256.png">';
+   $page .= '<link rel="shortcut icon" type="image/png" sizes="512x512" href="' . $path . '512.png">';
 
-    echo '<link rel="apple-touch-icon" type="image/png" href="' . $path . 'apple-60.png">';
-    echo '<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="' . $path . 'apple-76.png">';
-    echo '<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="' . $path . 'apple-120.png">';
-    echo '<link rel="apple-touch-icon" type="image/png" sizes="152x152" href="' . $path . 'apple-152.png">';
+   $page .= '<link rel="apple-touch-icon" type="image/png" href="' . $path . 'apple-60.png">';
+   $page .= '<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="' . $path . 'apple-76.png">';
+   $page .= '<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="' . $path . 'apple-120.png">';
+   $page .= '<link rel="apple-touch-icon" type="image/png" sizes="152x152" href="' . $path . 'apple-152.png">';
 
-    echo '<title>'.t('TITLE').'</title>';
+   $page .= '<title>'.t('TITLE').'</title>';
+	return $page;
 }
 
 /**
@@ -580,7 +591,7 @@ function general_header() {
   echo '<html>';
   echo '<head>'; 
 
-  add_icons();
+  echo add_icons();
 
   echo '<link href="css/general.css" rel="stylesheet" type="text/css" />';
   
@@ -595,6 +606,7 @@ function general_header() {
   echo '</head>';
   
   echo '<body>';
+  echo '<form id="plaatenergy" method="POST">';  
   
   // Language toggler
   if ($_COOKIE["lang"] == "en") {
@@ -616,7 +628,6 @@ function general_header() {
   }
 }
 
-
 /**
  * General footer
  */
@@ -636,8 +647,33 @@ function general_footer() {
   echo '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries]';
 
   echo '</div>';
+  echo '</form>';
   echo '</body>';
   echo '</html>';
+}
+
+/** 
+ * Zip and uuencode token.
+ */
+function plaatenergy_token($token) {
+   
+	/* Encode token  */
+	$token = base64_encode(gzdeflate($token));
+	
+	return $token;
+}
+
+function plaatenergy_post($label, $default) {
+	
+	$value = $default;
+	
+	if (isset($_POST[$label])) {
+		$value = $_POST[$label];
+		$value = stripslashes($value);
+		$value = htmlspecialchars($value);
+	}
+	
+	return $value;
 }
 
 /**
