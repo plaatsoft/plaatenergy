@@ -18,6 +18,7 @@
 
 include "config.inc";
 include "general.inc";
+include "constants.inc";
 include "database.inc";
 
 /*
@@ -25,18 +26,21 @@ include "database.inc";
 ** POST
 ** ---------------------------------------------------------------- 
 */
+
+$mid = PAGE_HOME;
+
 $token = plaatenergy_post("token", "");
 
 if (strlen($token)>0) {
 	
-	/* Decode token */
-	$token = gzinflate(base64_decode($token));	
-	$tokens = @preg_split("/&/", $token);
+  /* Decode token */
+  $token = gzinflate(base64_decode($token));	
+  $tokens = @preg_split("/&/", $token);
 	
-	foreach ($tokens as $item) {
-		$items = preg_split ("/=/", $item);				
-		$$items[0] = $items[1];	
-	}
+  foreach ($tokens as $item) {
+     $items = preg_split ("/=/", $item);				
+     $$items[0] = $items[1];	
+  }
 }
 
 /*
@@ -48,7 +52,6 @@ if (strlen($token)>0) {
 plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 plaatenergy_db_check_version($version);
 
-$solar_meter_ip_address = plaatenergy_db_get_config_item('solar_meter_ip_address');
 /*
 ** ---------------------------------------------------------------- 
 ** OUTPUT
@@ -57,8 +60,19 @@ $solar_meter_ip_address = plaatenergy_db_get_config_item('solar_meter_ip_address
 
 general_header();
 
-include "home.inc";
-echo home_page();
+switch ($mid) {
+
+  case PAGE_HOME: 
+    include "home.inc";
+    plaatenergy_home();
+    break;
+
+  case PAGE_ABOUT: 
+    include "about.inc";
+    plaatenergy_about();
+    break;
+
+}
 
 general_footer();
 

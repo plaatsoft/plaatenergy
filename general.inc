@@ -124,38 +124,70 @@ switch ($_COOKIE["lang"]) {
          break;
 }
 
+/** 
+ * Zip and uuencode token.
+ */
+function plaatenergy_token($token) {
+   
+	/* Encode token  */
+	$token = base64_encode(gzdeflate($token));
+	
+	return $token;
+}
+
+/**
+ * Create link 
+ */
+function plaatenergy_link($parameters, $label, $id="", $title="") {
+   
+	global $link_counter;
+	
+	$link_counter++;
+	
+	
+	$link  = '<a href="javascript:link(\''.plaatenergy_token($parameters).'\');" class="link" ';			
+	if (strlen($id)!=0) {
+		$link .= ' id="'.strtolower($id).'"';
+	}
+	if (strlen($title)!=0) {
+		$link .= ' title="'.strtolower($title).'"';
+	}
+	$link .= '>'.$label.'</a>';	
+	return $link;
+}
+
 /**
  *  check_solar_meter
  */
-function check_solar_meter($ip) {
+function check_solar_meter() {
 
-   $solar_meter_present = plaatenergy_db_get_config_item('solar_meter_present');
+  $solar_meter_present = plaatenergy_db_get_config_item('solar_meter_present');
 
-	if ($solar_meter_present=="false") {
+  if ($solar_meter_present=="false") {
   
-		echo '<div class="checker disabled">';
-		echo t('SOLAR_METER_DISABLED');		
-		echo '</div>';
+   $page  = '<div class="checker disabled">';
+   $page .= t('SOLAR_METER_DISABLED');		
+   $page .= '</div>';
 	
-		return;
-	} else {
-		$sql = 'select dal from energy where timestamp = "'.date("Y-m-d H:i:00").'"';	
-		$result = plaatenergy_db_query($sql);
-		$row = plaatenergy_db_fetch_object($result);
+  } else {
 
-		$pingresult = shell_exec("/bin/ping $ip -c 1");
-		$pos = strpos($pingresult,"error");
+    $sql = 'select etotal from solar where timestamp = "'.date("Y-m-d H:i:00").'"';	
+    $result = plaatenergy_db_query($sql);
+    $row = plaatenergy_db_fetch_object($result);
 
-		if ($pos>0){
-			echo '<div class="checker bad">';
-			echo t('SOLAR_METER_CONNECTION_DOWN');	
-			echo '</div>';
-		} else {
-			echo '<div class="checker good">';
-			echo t('SOLAR_METER_CONNECTION_UP');
-			echo '</div>';
-		}
-	}
+    if (isset($row->etotal)){
+
+      $page = '<div class="checker bad">';
+      $page .= t('SOLAR_METER_CONNECTION_DOWN');	
+      $page .='</div>';
+
+    } else {
+      $page  = '<div class="checker good">';
+      $page .= t('SOLAR_METER_CONNECTION_UP');
+      $page .='</div>';
+    }
+  }
+  return $page;
 }
 
 /**
@@ -593,6 +625,7 @@ function general_header() {
 
   echo add_icons();
 
+  echo '<script language="JavaScript" src="js/link.js" type="text/javascript"></script>';
   echo '<link href="css/general.css" rel="stylesheet" type="text/css" />';
   
   // Load the dark theme css file only if COOKIE theme = dark
@@ -650,17 +683,6 @@ function general_footer() {
   echo '</form>';
   echo '</body>';
   echo '</html>';
-}
-
-/** 
- * Zip and uuencode token.
- */
-function plaatenergy_token($token) {
-   
-	/* Encode token  */
-	$token = base64_encode(gzdeflate($token));
-	
-	return $token;
 }
 
 function plaatenergy_post($label, $default) {

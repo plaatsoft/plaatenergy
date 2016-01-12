@@ -16,28 +16,15 @@
 **  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
-include "config.inc";
-include "general.inc";
-include "database.inc";
-
-/*
-** ---------------------------------------------------------------- 
-** Database
-** ---------------------------------------------------------------- 
-*/
-
-plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
-plaatenergy_db_check_version($version);
-
-$solar_meter_ip_address = plaatenergy_db_get_config_item('solar_meter_ip_address');
-
 /*
 ** ---------------------------------------------------------------- 
 ** OUTPUT
 ** ---------------------------------------------------------------- 
 */
 
-function home_page() {
+function plaatenergy_home_form() {
+
+  global $version;
 
   $page = '<h1>' . t('TITLE') . ' ' . $version . '</h1>';
 
@@ -90,7 +77,7 @@ function home_page() {
 
   $page .= '<tr>';
   $page .= '<td>';
-  $page .= '<a href="about.php">'.t('LINK_ABOUT').'</a>';
+  $page .= plaatenergy_link('mid='.PAGE_ABOUT, t('LINK_ABOUT'), 'about');
   $page .= '</td>';
   $page .= '<td>';
   $page .= '<a href="donate.php">'.t('LINK_DONATE').'</a>';
@@ -110,9 +97,9 @@ function home_page() {
 
   $page .= '<br/><br/>';
 
-  check_energy_meter();
-  check_solar_meter($solar_meter_ip_address); 
-  check_weather_station();
+  $page .= check_energy_meter();
+  $page .= check_solar_meter(); 
+  $page .= check_weather_station();
 
   $page .= '<br/><br/>';
 
@@ -121,5 +108,34 @@ function home_page() {
 
   return $page;
 }
+
+/*
+** ---------------------
+** HANDLER
+** ---------------------
+*/
+
+/**
+ * Help handler
+ */
+function plaatenergy_home() {
+
+  /* input */
+  global $mid;
+		
+  /* Page handler */
+  switch ($mid) {
+		
+     case PAGE_HOME:
+	echo plaatenergy_home_form();
+        break;
+  }
+}
+
+/*
+** ---------------------
+** THE END
+** ---------------------
+*/
 
 ?>
