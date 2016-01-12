@@ -297,6 +297,10 @@ function plaatenergy_db_set_config_item($token, $value) {
 
 function plaatenergy_process($type=1) {
 
+   global $year;
+   global $month;
+   global $day;
+
    global $prev_year;
    global $prev_month;
    global $prev_day;

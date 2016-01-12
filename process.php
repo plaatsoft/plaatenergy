@@ -26,3 +26,5 @@ plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 plaatenergy_process(); 
 
+?>
+

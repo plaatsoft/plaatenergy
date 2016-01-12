@@ -53,7 +53,7 @@ svg {
 	height: 24px;
 }
 
-[onclick],.toggle>input{cursor:pointer}
+[onclick],.toggle>input,.image-box>input{cursor:pointer}
 
 .tile {
   position: relative;
@@ -332,13 +332,6 @@ svg {
 	width: calc(100% - 22px);
 }
 
-.sidebar > .body > .item > input:not([type="range"]).two {
-	width: calc(50% - 30px);
-}
-.sidebar > .body > .item > input:not([type="range"]).two:last-child {
-	float: right;
-}
-
 .sidebar > .body > .item > input:not([type="range"]):hover,
 .sidebar > .body > .item > select:hover {
   border: 1px solid #aaa;
@@ -517,3 +510,52 @@ svg.loader > circle {
   }
 }
 
+.body > .item::after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+
+.image-box {
+	position: relative;
+	float: left;
+	width: calc(33.33% - 12px);
+	background-color: #ccc;
+	border-radius: 8px;
+	margin: 6px;
+	overflow: hidden;
+}
+.image-box::before{
+	content: "";
+	display: block;
+	padding-top: 100%;
+}
+.image-box > .content {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+
+.image-box > input {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+
+.image-box > svg {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	width: 64px;
+	height: 64px;
+	margin: auto;
+	fill: #fff;
+}
