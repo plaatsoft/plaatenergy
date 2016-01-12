@@ -54,7 +54,7 @@ plaatenergy_db_check_version($version);
 
 /*
 ** ---------------------------------------------------------------- 
-** OUTPUT
+** Main State Machine
 ** ---------------------------------------------------------------- 
 */
 
@@ -72,13 +72,19 @@ switch ($pid) {
     plaatenergy_about();
     break;
 
+  case PAGE_DONATE: 
+    include "donate.inc";
+    plaatenergy_donate();
+    break;
+
   case PAGE_RELEASE_NOTES: 
     include "release_notes.inc";
     plaatenergy_release_notes();
     break;
-
 }
 
 general_footer();
+
+plaatenergy_db_close();
 
 ?>

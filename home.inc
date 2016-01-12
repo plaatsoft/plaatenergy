@@ -77,10 +77,10 @@ function plaatenergy_home_form() {
 
   $page .= '<tr>';
   $page .= '<td>';
-  $page .= plaatenergy_link('pid='.PAGE_ABOUT, t('LINK_ABOUT'), 'about');
+  $page .= plaatenergy_link('pid='.PAGE_ABOUT, t('LINK_ABOUT'));
   $page .= '</td>';
   $page .= '<td>';
-  $page .= '<a href="donate.php">'.t('LINK_DONATE').'</a>';
+  $page .= plaatenergy_link('pid='.PAGE_DONATE, t('LINK_DONATE'));
   $page .= '</td>';
   $page .= '<td>';
   $page .= '<a href="./ui/">'.t('LINK_GUI').'</a>';

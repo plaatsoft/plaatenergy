@@ -23,7 +23,8 @@ function plaatenergy_release_notes_form(){
   global $pid;
   global $id;
   
-  $page = '<h1>Release Notes</h1>';
+  $page  = '<h1>Release Notes</h1>';
+  $page .= '<br/>';
 
   if ($id==5) {
     
@@ -34,7 +35,8 @@ function plaatenergy_release_notes_form(){
     $page .= '<li>Move most of the configuration items from php to database.</li>';
     $page .= '<li>Now realtime outside weather information can be customized (thanks bplaat).</li>';
     $page .= '<li>Improve footer information of all pages.</li>';
-    $page .= '<li>Now day reports support manual added measements.</li>';
+    $page .= '<li>Now day reports support manually measements.</li>';
+    $page .= '<li>Now most of the hyperlinks are javascript base.</li>';
     $page .= '<li>Improve installation. Now only one cron job is needed.</li>';
     $page .= '</ul>';
     $page .= '</div>';
