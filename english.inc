@@ -103,7 +103,7 @@ $lang['ENERGY_METER_CONNECTION_DOWN'] = i('times') . 'Energy meter connection is
 $lang['ENERGY_METER_CONNECTION_UP'] = i('check') . 'Energy meter connection is up';
 
 $lang['SOLAR_METER_DISABLED'] = i('exclamation') . 'Solar meter is disabled';
-$lang['SOLAR_METER_CONNECTION_DOWN'] = i('times') . 'Solar meter connection is down';
+$lang['SOLAR_METER_CONNECTION_DOWN'] = i('times') . 'Solar meter no measurement received';
 $lang['SOLAR_METER_CONNECTION_UP'] = i('check') . 'Solar meter connection is up';
 
 $lang['WEATHER_METER_DISABLED'] = i('exclamation') . 'Weather Station is disabled';

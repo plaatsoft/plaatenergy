@@ -177,13 +177,14 @@ function check_solar_meter() {
 
     if (isset($row->etotal)){
 
-      $page = '<div class="checker bad">';
-      $page .= t('SOLAR_METER_CONNECTION_DOWN');	
+      $page  = '<div class="checker good">';
+      $page .= t('SOLAR_METER_CONNECTION_UP');
       $page .='</div>';
 
     } else {
-      $page  = '<div class="checker good">';
-      $page .= t('SOLAR_METER_CONNECTION_UP');
+
+      $page = '<div class="checker bad">';
+      $page .= t('SOLAR_METER_CONNECTION_DOWN');	
       $page .='</div>';
     }
   }

@@ -98,15 +98,15 @@ $lang['LINK_REPORT'] = i('archive') . 'Rapportage';
 $lang['LINK_GUI'] = i('table') . 'Realtime Info';
 
 $lang['ENERGY_METER_DISABLED'] = i('exclamation') . 'Energie meter niet aanwezig';
-$lang['ENERGY_METER_CONNECTION_DOWN'] = i('times') . 'Energie meter verbinding is uitgevallen';
+$lang['ENERGY_METER_CONNECTION_DOWN'] = i('times') . 'Energie meter verbinding is slecht';
 $lang['ENERGY_METER_CONNECTION_UP'] = i('check') . 'Energie meter verbinding is goed';
 
 $lang['SOLAR_METER_DISABLED'] = i('exclamation') . 'Solar meter niet aanwezig';
-$lang['SOLAR_METER_CONNECTION_DOWN'] = i('times') . 'Solar meter cverbinding is uitgevallen';
+$lang['SOLAR_METER_CONNECTION_DOWN'] = i('times') . 'Solar meter geen meting ontvangen';
 $lang['SOLAR_METER_CONNECTION_UP'] = i('check') . 'Solar meter verbinding is goed';
 
 $lang['WEATHER_METER_DISABLED'] = i('exclamation') . 'Weerstation niet aanwezig';
-$lang['WEATHER_METER_CONNECTION_DOWN'] = i('times') . 'Weerstation verbinding is uitgevallen';
+$lang['WEATHER_METER_CONNECTION_DOWN'] = i('times') . 'Weerstation verbinding is slecht';
 $lang['WEATHER_METER_CONNECTION_UP'] = i('check') . 'Weerstation verbinding is goed';
 
 /*
