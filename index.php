@@ -27,7 +27,7 @@ include "database.inc";
 ** ---------------------------------------------------------------- 
 */
 
-$mid = PAGE_HOME;
+$pid = PAGE_HOME;
 
 $token = plaatenergy_post("token", "");
 
@@ -60,7 +60,7 @@ plaatenergy_db_check_version($version);
 
 general_header();
 
-switch ($mid) {
+switch ($pid) {
 
   case PAGE_HOME: 
     include "home.inc";
@@ -70,6 +70,11 @@ switch ($mid) {
   case PAGE_ABOUT: 
     include "about.inc";
     plaatenergy_about();
+    break;
+
+  case PAGE_RELEASE_NOTES: 
+    include "release_notes.inc";
+    plaatenergy_release_notes();
     break;
 
 }

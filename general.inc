@@ -698,43 +698,4 @@ function plaatenergy_post($label, $default) {
 	return $value;
 }
 
-/**
- * Process release notes navigation
- */
-function release_notes_parameters() { 
-
-  global $max_page;
-  global $prev_page;
-  global $next_page;
-  global $page;
-
-  if (isset($_GET["page"])) {
-     $page = $_GET["page"];
-  } else {
-     $page = $max_page;
-  }
-
-  $prev_page=$page-1;
-  if ($prev_page<1) {
-    $prev_page=1;
-  }
-
-  $next_page=$page+1;
-  if ($next_page>$max_page) {
-    $next_page=$max_page;
-  }
-}
-
-function release_notes_navigation() { 
-
-  global $prev_page;
-  global $next_page;
-
-  echo '<div class="nav">';
-  echo '<a href="?page='.$prev_page.'">'.t('LINK_PREV').'</a>';
-  echo '<a href="index.php">'.t('LINK_HOME').'</a>';
-  echo '<a href="?page='.$next_page.'">'.t('LINK_NEXT').'</a>';
-  echo '</div>';
-}
-
 ?>

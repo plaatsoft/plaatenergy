@@ -77,7 +77,7 @@ function plaatenergy_home_form() {
 
   $page .= '<tr>';
   $page .= '<td>';
-  $page .= plaatenergy_link('mid='.PAGE_ABOUT, t('LINK_ABOUT'), 'about');
+  $page .= plaatenergy_link('pid='.PAGE_ABOUT, t('LINK_ABOUT'), 'about');
   $page .= '</td>';
   $page .= '<td>';
   $page .= '<a href="donate.php">'.t('LINK_DONATE').'</a>';
@@ -86,7 +86,7 @@ function plaatenergy_home_form() {
   $page .= '<a href="./ui/">'.t('LINK_GUI').'</a>';
   $page .= '</td>';
   $page .= '<td>';
-  $page .= '<a href="release_notes.php">'.t('LINK_RELEASE_NOTES').'</a>';
+  $page .= plaatenergy_link('pid='.PAGE_RELEASE_NOTES, t('LINK_RELEASE_NOTES'));
   $page .= '</td>';
   $page .= '<td>';
   $page .= '<a href="report.php">'.t('LINK_REPORT').'</a>';
@@ -121,10 +121,10 @@ function plaatenergy_home_form() {
 function plaatenergy_home() {
 
   /* input */
-  global $mid;
+  global $pid;
 		
   /* Page handler */
-  switch ($mid) {
+  switch ($pid) {
 		
      case PAGE_HOME:
 	echo plaatenergy_home_form();

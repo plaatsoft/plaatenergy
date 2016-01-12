@@ -37,4 +37,7 @@ define('PAGE_YEAR_OUT_KWH',  1014);
 define('PAGE_MONTH_OUT_KWH', 1015);
 define('PAGE_DAY_OUT_KWH',   1016);
 
+define('EVENT_PREV',         2000);
+define('EVENT_NEXT',         2001);
+
 ?>

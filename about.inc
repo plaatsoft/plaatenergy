@@ -29,7 +29,7 @@ function plaatenergy_about_form() {
   $page .= '<div class="large_text">'.t('DISCLAIMER_CONTENT').'</div>';
 
   $page .= '<div class="nav">';
-  $page .= plaatenergy_link('mid='.PAGE_HOME, t('LINK_HOME'), 'home');
+  $page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'), 'home');
   $page .=  '</div>';
 
   return $page;
@@ -47,10 +47,10 @@ function plaatenergy_about_form() {
 function plaatenergy_about() {
 
   /* input */
-  global $mid;
+  global $pid;
 
   /* Page handler */
-  switch ($mid) {
+  switch ($pid) {
 
      case PAGE_ABOUT:
         echo plaatenergy_about_form();
