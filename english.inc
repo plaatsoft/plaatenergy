@@ -206,7 +206,7 @@ $lang['DISCLAIMER_CONTENT'] = 'The program is provided AS IT IS with NO WARRANTY
 DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.<br/>';
 
 $lang['CREDITS_TITLE'] = 'Credits';
-$lang['CREDITS_CONTENT'] = 'The following people helped creating PlaatEnergy:</br/><br/>
+$lang['CREDITS_CONTENT'] = 'The following people helped creating PlaatEnergy:<br/><br/>
 wplaat (Architect / Developer)<br/>
 bplaat (Graphical Designer / Developer)<br/>
 lplaat (Tester)';

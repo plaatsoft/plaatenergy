@@ -675,7 +675,7 @@ function general_footer() {
   $time_end = microtime(true);
   $time = $time_end - $time_start;
 
-  echo '<div class="copyright">' . t('LINK_COPYRIGHT') . '</br>';
+  echo '<div class="copyright">' . t('LINK_COPYRIGHT') . '<br/>';
   //echo '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries - '.$counter.' requests]';
   echo '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries]';
 
