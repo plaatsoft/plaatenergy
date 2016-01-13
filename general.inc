@@ -17,7 +17,7 @@
 */
 
 // ----------------------------
-// Application settings
+// SETTINGS
 // ----------------------------
 
 $version = "0.5";
@@ -124,141 +124,9 @@ switch ($_COOKIE["lang"]) {
          break;
 }
 
-/** 
- * Zip and uuencode token.
- */
-function plaatenergy_token($token) {
-   
-	/* Encode token  */
-	$token = base64_encode(gzdeflate($token));
-	
-	return $token;
-}
-
-/**
- * Create link 
- */
-function plaatenergy_link($parameters, $label, $id="", $title="") {
-   
-	global $link_counter;
-	
-	$link_counter++;
-	
-	
-	$link  = '<a href="javascript:link(\''.plaatenergy_token($parameters).'\');" class="link" ';			
-	if (strlen($id)!=0) {
-		$link .= ' id="'.strtolower($id).'"';
-	}
-	if (strlen($title)!=0) {
-		$link .= ' title="'.strtolower($title).'"';
-	}
-	$link .= '>'.$label.'</a>';	
-	return $link;
-}
-
-/**
- *  check_solar_meter
- */
-function check_solar_meter() {
-
-  $solar_meter_present = plaatenergy_db_get_config_item('solar_meter_present');
-
-  if ($solar_meter_present=="false") {
-  
-   $page  = '<div class="checker disabled">';
-   $page .= t('SOLAR_METER_DISABLED');		
-   $page .= '</div>';
-	
-  } else {
-
-    $sql = 'select etotal from solar where timestamp = "'.date("Y-m-d H:i:00").'"';	
-    $result = plaatenergy_db_query($sql);
-    $row = plaatenergy_db_fetch_object($result);
-
-    if (isset($row->etotal)){
-
-      $page  = '<div class="checker good">';
-      $page .= t('SOLAR_METER_CONNECTION_UP');
-      $page .='</div>';
-
-    } else {
-
-      $page = '<div class="checker bad">';
-      $page .= t('SOLAR_METER_CONNECTION_DOWN');	
-      $page .='</div>';
-    }
-  }
-  return $page;
-}
-
-/**
- *  check_energy_meter
- */
-function check_energy_meter() {
-  
-   $energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present');
-	
-	if ($energy_meter_present=="false") {
-  
-		$page  = '<div class="checker disabled">';
-		$page .= t('ENERGY_METER_DISABLED');		
-		$page .= '</div>';
-
-	} else {
-	   
-		$sql = 'select dal from energy where timestamp = "'.date("Y-m-d H:i:00").'"';	
-		$result = plaatenergy_db_query($sql);
-		$row = plaatenergy_db_fetch_object($result);
-
-		if (isset($row->dal)){
-			$page  = '<div class="checker good">';
-			$page .= t('ENERGY_METER_CONNECTION_UP');
-			$page .= '</div>';
-			
-		} else {
-		
-			$page  = '<div class="checker bad">';
-			$page .= t('ENERGY_METER_CONNECTION_DOWN');
-			$page .= '</div>';
-		}
-   }
-	
-	return $page;
-}
-
-/**
- * check_weather_station
- */
-function check_weather_station() {
-
-   $weather_station_present = plaatenergy_db_get_config_item('weather_station_present');
-    
-   if ($weather_station_present=="false") {
-  
-		$page  = '<div class="checker disabled">';
-		$page .= t('WEATHER_METER_DISABLED');	
-		$page .= '</div>';
-	
-	} else {
-	
-		$sql = 'select humidity from weather where timestamp = "'.date("Y-m-d H:i:00").'"';
-		$result = plaatenergy_db_query($sql);
-		$row = plaatenergy_db_fetch_object($result);
-
-		if (isset($row->humidity)){
-			$page  = '<div class="checker good">';
-			$page .= t('WEATHER_METER_CONNECTION_UP');
-			$page .= '</div>';
-			
-		} else {
-		
-			$page  = '<div class="checker bad">';
-			$page .= t('WEATHER_METER_CONNECTION_DOWN');
-			$page .= '</div>';
-		}
-	}
-	return $page;
-}
+// ----------------------------
+// PAGE LAYOUT
+// ----------------------------
 
 /**
  * Language function 
@@ -313,6 +181,93 @@ function add_icons ($path = './ui/') {
    $page .= '<title>'.t('TITLE').'</title>';
 	return $page;
 }
+
+/**
+ * Text Banner
+ */
+function text_banner($text) { 
+  echo '<div class="remark">' . $text . '</div>';
+}
+
+
+/**
+ * General header
+ */
+function general_header() {
+
+  global $time_start;
+
+  $time_start = microtime(true);
+
+  echo '<!DOCTYPE html>';
+  echo '<html>';
+  echo '<head>'; 
+
+  echo add_icons();
+
+  echo '<script language="JavaScript" src="js/link.js" type="text/javascript"></script>';
+  echo '<link href="css/general.css" rel="stylesheet" type="text/css" />';
+  
+  // Load the dark theme css file only if COOKIE theme = dark
+  if ($_COOKIE["theme"] == "dark") {
+    echo '<link rel="stylesheet" type="text/css" href="./css/theme-dark.css">';
+  }
+  
+  // Load the icons from Font Awesome
+  echo '<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">';
+ 
+  echo '</head>';
+  
+  echo '<body>';
+  echo '<form id="plaatenergy" method="POST">';  
+  
+  // Language toggler
+  if ($_COOKIE["lang"] == "en") {
+	echo '<a class="language normal_link" href="?lang=nl">'.t('DUTCH').'</a>';
+  } elseif ($_COOKIE["lang"] == "nl") {
+	echo '<a class="language normal_link" href="?lang=en">'.t('ENGLISH').'</a>';
+  }
+  
+  // Theme toggler
+  if ($_COOKIE["theme"] == "light") {
+	echo '<a class="theme normal_link" href="?theme=dark">' . t('THEME_TO_DARK') . '</a>';
+  } elseif ($_COOKIE["theme"] == "dark") {
+	echo '<a class="theme normal_link" href="?theme=light">' . t('THEME_TO_LIGHT') . '</a>';
+  }
+  
+  // Cookie Bar Message (show only if COOKIE allow_cookies = NULL)
+  if ($_COOKIE["allow_cookies"] == "no") {
+	echo '<div class="cookie_bar">' . t("COOKIE_BAR") . ' <a class="fa normal_link fa-times" href="?allow_cookies=yes"></a></div>';
+  }
+}
+
+/**
+ * General footer
+ */
+function general_footer() {
+
+  global $time_start;
+
+  // Increase request counter with one!
+  $counter = plaatenergy_db_get_config_item('request_counter');  
+  plaatenergy_db_set_config_item('request_counter', ++$counter);  
+
+  $time_end = microtime(true);
+  $time = $time_end - $time_start;
+
+  echo '<div class="copyright">' . t('LINK_COPYRIGHT') . '<br/>';
+  //echo '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries - '.$counter.' requests]';
+  echo '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries]';
+
+  echo '</div>';
+  echo '</form>';
+  echo '</body>';
+  echo '</html>';
+}
+
+// ----------------------------
+// NAVIGATION
+// ----------------------------
 
 /**
  * Process day parameters 
@@ -506,7 +461,7 @@ function day_navigation($edit=0) {
   echo '<div class="nav">';
 
   echo '<a href="?day='.$prev_day.'&month='.$prev_month.'&year='.$prev_year.'&type='.$type.'">'.t('LINK_PREV_DAY').'</a>';
-  echo '<a href=".">'.t('LINK_HOME').'</a>';
+  echo plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
   echo '<a href="?day='.$next_day.'&month='.$next_month.'&year='.$next_year.'&type='.$type.'">'.t('LINK_NEXT_DAY').'</a>';
 
   switch ($type) {
@@ -520,7 +475,7 @@ function day_navigation($edit=0) {
 
   switch ($edit) {
 
-    case 1: echo '<a href="day_in_kwh_edit.php?day='.$day.'&month='.$month.'&year='.$year.'&edit=1">'.t('LINK_EDIT').'</a>';
+    case 1: echo plaatenergy_link('pid='.PAGE_IN_KWH_EDIT, t('LINK_EDIT'));
             break;
 
     case 2: echo '<a href="day_out_kwh_edit.php?day='.$day.'&month='.$month.'&year='.$year.'&edit=1">'.t('LINK_EDIT').'</a>';
@@ -551,7 +506,7 @@ function month_navigation($default) {
   echo '<div class="nav">';
 
   echo '<a href="?month='.$prev_month.'&year='.$prev_year.'&type='.$type.'">'.t('LINK_PREV_MONTH').'</a>';
-  echo '<a href=".">'.t('LINK_HOME').'</a>';
+  echo plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
   echo '<a href="?month='.$next_month.'&year='.$next_year.'&type='.$type.'">'.t('LINK_NEXT_MONTH').'</a>';
 
   switch ($type) {
@@ -579,7 +534,7 @@ function year_navigation($default) {
   echo '<div class="nav">';
 
   echo '<a href="?year='.$prev_year.'&type='.$type.'">'.t('LINK_PREV_YEAR').'</a>';
-  echo '<a href=".">'.t('LINK_HOME').'</a>';
+  echo plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
   echo '<a href="?year='.$next_year.'&type='.$type.'">'.t('LINK_NEXT_YEAR').'</a>';
  
   switch ($type) {
@@ -594,98 +549,6 @@ function year_navigation($default) {
   echo "</div>";
 }
 
-/**
- * Text Banner
- */
-function text_banner($text) { 
-  echo '<div class="remark">' . $text . '</div>';
-}
-
-/**
- * Main navigation
- */
-function general_navigation() { 
-
-  echo '<div class="nav">';
-  echo '<a href=".">'.t('LINK_HOME').'</a>';
-  echo '</div>';
-}
-
-/**
- * General header
- */
-function general_header() {
-
-  global $time_start;
-
-  $time_start = microtime(true);
-
-  echo '<!DOCTYPE html>';
-  echo '<html>';
-  echo '<head>'; 
-
-  echo add_icons();
-
-  echo '<script language="JavaScript" src="js/link.js" type="text/javascript"></script>';
-  echo '<link href="css/general.css" rel="stylesheet" type="text/css" />';
-  
-  // Load the dark theme css file only if COOKIE theme = dark
-  if ($_COOKIE["theme"] == "dark") {
-    echo '<link rel="stylesheet" type="text/css" href="./css/theme-dark.css">';
-  }
-  
-  // Load the icons from Font Awesome
-  echo '<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">';
- 
-  echo '</head>';
-  
-  echo '<body>';
-  echo '<form id="plaatenergy" method="POST">';  
-  
-  // Language toggler
-  if ($_COOKIE["lang"] == "en") {
-	echo '<a class="language normal_link" href="?lang=nl">'.t('DUTCH').'</a>';
-  } elseif ($_COOKIE["lang"] == "nl") {
-	echo '<a class="language normal_link" href="?lang=en">'.t('ENGLISH').'</a>';
-  }
-  
-  // Theme toggler
-  if ($_COOKIE["theme"] == "light") {
-	echo '<a class="theme normal_link" href="?theme=dark">' . t('THEME_TO_DARK') . '</a>';
-  } elseif ($_COOKIE["theme"] == "dark") {
-	echo '<a class="theme normal_link" href="?theme=light">' . t('THEME_TO_LIGHT') . '</a>';
-  }
-  
-  // Cookie Bar Message (show only if COOKIE allow_cookies = NULL)
-  if ($_COOKIE["allow_cookies"] == "no") {
-	echo '<div class="cookie_bar">' . t("COOKIE_BAR") . ' <a class="fa normal_link fa-times" href="?allow_cookies=yes"></a></div>';
-  }
-}
-
-/**
- * General footer
- */
-function general_footer() {
-
-  global $time_start;
-
-  // Increase request counter with one!
-  $counter = plaatenergy_db_get_config_item('request_counter');  
-  plaatenergy_db_set_config_item('request_counter', ++$counter);  
-
-  $time_end = microtime(true);
-  $time = $time_end - $time_start;
-
-  echo '<div class="copyright">' . t('LINK_COPYRIGHT') . '<br/>';
-  //echo '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries - '.$counter.' requests]';
-  echo '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries]';
-
-  echo '</div>';
-  echo '</form>';
-  echo '</body>';
-  echo '</html>';
-}
-
 function plaatenergy_post($label, $default) {
 	
 	$value = $default;
@@ -698,5 +561,42 @@ function plaatenergy_post($label, $default) {
 	
 	return $value;
 }
+
+/** 
+ * Zip and uuencode token.
+ */
+function plaatenergy_token($token) {
+   
+	/* Encode token  */
+	$token = base64_encode(gzdeflate($token));
+	
+	return $token;
+}
+
+/**
+ * Create link 
+ */
+function plaatenergy_link($parameters, $label, $id="", $title="") {
+   
+	global $link_counter;
+	
+	$link_counter++;
+	
+	
+	$link  = '<a href="javascript:link(\''.plaatenergy_token($parameters).'\');" class="link" ';			
+	if (strlen($id)!=0) {
+		$link .= ' id="'.strtolower($id).'"';
+	}
+	if (strlen($title)!=0) {
+		$link .= ' title="'.strtolower($title).'"';
+	}
+	$link .= '>'.$label.'</a>';	
+	return $link;
+}
+
+// ----------------------------
+// THE END
+// ----------------------------
+
 
 ?>

@@ -297,27 +297,27 @@ function plaatenergy_db_set_config_item($token, $value) {
 
 function plaatenergy_process($type=1) {
 
-   global $year;
-   global $month;
-   global $day;
+  global $year;	
+  global $month;
+  global $day;
 
-   global $prev_year;
-   global $prev_month;
-   global $prev_day;
+  global $prev_year;
+  global $prev_month;
+  global $prev_day;
 
-   $energy_meter_reading_low = plaatenergy_db_get_config_item('energy_meter_reading_low');
-   $energy_meter_reading_normal = plaatenergy_db_get_config_item('energy_meter_reading_normal');
-   $gas_meter_reading = plaatenergy_db_get_config_item('gas_meter_reading');
+  $energy_meter_reading_low = plaatenergy_db_get_config_item('energy_meter_reading_low');
+  $energy_meter_reading_normal = plaatenergy_db_get_config_item('energy_meter_reading_normal');
+  $gas_meter_reading = plaatenergy_db_get_config_item('gas_meter_reading');
 
-   $dal = $energy_meter_reading_low;
-   $piek = $energy_meter_reading_normal;
-   $gas = $gas_meter_reading;
-   $dalterug = 0;
-   $piekterug = 0;
-   $etotal = 0;
-   $round = 3;
+  $dal = $energy_meter_reading_low;
+  $piek = $energy_meter_reading_normal;
+  $gas = $gas_meter_reading;
+  $dalterug = 0;
+  $piekterug = 0;
+  $etotal = 0;
+  $round = 3;
 
-   if ($type==2) {
+  if ($type==2) {
 
     $sql = 'truncate table energy_day';
     plaatenergy_db_query($sql);
@@ -351,7 +351,9 @@ function plaatenergy_process($type=1) {
   }
 
   if ($type==2) {
+	
      $sql1 = 'select cast(timestamp as date) as date from energy group by date';
+		 
   } else {
      $timestamp1 = $year.'-'.$month.'-'.$day.' 00:00:00';
      $timestamp2 = $year.'-'.$month.'-'.$day.' 23:59:59';
@@ -425,49 +427,49 @@ function plaatenergy_process($type=1) {
 
      if ( isset($data4->id) ) {
 
-         $sql3  = 'update energy_day set dal='.$dal_diff.', piek='.$piek_diff.', dalterug='.$dalterug_diff.', piekterug='.$piekterug_diff.',';
-         $sql3 .= 'solar='.$solar_diff.', gas='.$gas_diff.' where id='.$data4->id;
+      $sql3  = 'update energy_day set dal='.$dal_diff.', piek='.$piek_diff.', dalterug='.$dalterug_diff.', piekterug='.$piekterug_diff.',';
+      $sql3 .= 'solar='.$solar_diff.', gas='.$gas_diff.' where id='.$data4->id;
 
      } else {
 
-         $sql3  = 'INSERT INTO energy_day (`id`, `date`, `dal`, `piek`, `dalterug`, `piekterug`, `solar`, `gas`) ';
-         $sql3 .= 'VALUES (NULL, "'.$data1->date.'", "'.$dal_diff.'", "'.$piek_diff.'", "'.$dalterug_diff.'", "';
-         $sql3 .= $piekterug_diff.'", "'.$solar_diff.'","'.$gas_diff.'")';
+      $sql3  = 'INSERT INTO energy_day (`id`, `date`, `dal`, `piek`, `dalterug`, `piekterug`, `solar`, `gas`) ';
+      $sql3 .= 'VALUES (NULL, "'.$data1->date.'", "'.$dal_diff.'", "'.$piek_diff.'", "'.$dalterug_diff.'", "';
+      $sql3 .= $piekterug_diff.'", "'.$solar_diff.'","'.$gas_diff.'")';
      }
+		
+		} else {
 
-  } else {
+			$sql3  = 'INSERT INTO energy_day (`id`, `date`, `dal`, `piek`, `dalterug`, `piekterug`, `solar`, `gas`) ';
+			$sql3 .= 'VALUES (NULL, "'.$data1->date.'", "'.$dal_diff.'", "'.$piek_diff.'", "'.$dalterug_diff.'", "';
+			$sql3 .= $piekterug_diff.'", "'.$solar_diff.'","'.$gas_diff.'")';
+		}
 
-    $sql3  = 'INSERT INTO energy_day (`id`, `date`, `dal`, `piek`, `dalterug`, `piekterug`, `solar`, `gas`) ';
-    $sql3 .= 'VALUES (NULL, "'.$data1->date.'", "'.$dal_diff.'", "'.$piek_diff.'", "'.$dalterug_diff.'", "';
-    $sql3 .= $piekterug_diff.'", "'.$solar_diff.'","'.$gas_diff.'")';
-  }
+		plaatenergy_db_query($sql3);
 
-  plaatenergy_db_query($sql3);
+		if ($data2->dal>0) {
+			$dal = $data2->dal;
+		}
 
-  if ($data2->dal>0) {
-     $dal = $data2->dal;
-  }
+		if ($data2->piek>0) {
+			$piek = $data2->piek;
+		}
 
-  if ($data2->piek>0) {
-     $piek = $data2->piek;
-  }
+		if ($data2->dalterug>0) {
+			$dalterug = $data2->dalterug;
+		}
 
-  if ($data2->dalterug>0) {
-     $dalterug = $data2->dalterug;
-  }
+		if ($data2->piekterug>0) {
+			$piekterug = $data2->piekterug;
+		}
 
-  if ($data2->piekterug>0) {
-     $piekterug = $data2->piekterug;
-  }
+		if ($data2->gas>0) {
+			$gas = $data2->gas;
+		}
 
-  if ($data2->gas>0) {
-     $gas = $data2->gas;
-  }
-
-  if ($data3->etotal>0) {
-     $etotal = $data3->etotal;
-  }
-}
+		if ($data3->etotal>0) {
+			$etotal = $data3->etotal;
+		}
+	}
 }
 
 /*

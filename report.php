@@ -20,59 +20,93 @@ include "config.inc";
 include "general.inc";
 include "database.inc";
 
-plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
+$start = plaatenergy_post("start", "");
+$end = plaatenergy_post("end", "");
 
-$start="";
-if (isset($_POST["start"])) {
-  $start = $_POST["start"];
+functioon plaatenergy_report_event() {
+
+	/* input */
+	global $start;
+	global $end;
+	
+	global $eid;
+	
+	if ($eid==EVENT_EXECUTE) {
+		 
+		$sql  = 'select sum(dal) as dal, sum(piek) as piek, sum(dalterug) as dalterug, sum(piekterug) as piekterug, ';
+		$sql .= 'sum(solar) as solar, sum(gas) as gas FROM energy_day where date>="'.$start.'" and date<="'.$end.'"';
+	
+		$result = plaatenergy_db_query($sql);
+		$row = plaatenergy_db_fetch_object($result);
+	
+		$page  =  '<br/>';
+		$page .=  'low_used='.round($row->dal,2).' ';
+		$page .=  'normal_used='.round($row->piek,2).' ';
+		$page .=  'low_delivered='.round($row->dalterug,2).' ';
+		$page .=  'normal_delivered='.round($row->piekterug,2).' ';
+		$page .=  'solar='.round($row->solar,2).' ';
+		$page .=  'gas='.round($row->gas,2).' ';
+	}
+	
+	return $page;
 }
 
-$end="";
-if (isset($_POST["end"])) {
-  $end = $_POST["end"];
+function plaatenergy_report_page() {
+
+	/* input */
+	global $pid;
+
+	global $start;
+	global $end;
+	
+	$page  =  '<h1>'.t('TITLE_QUERY_REPORT'),'</h1>';
+
+	$page .=  '<label>'.t('LABEL_START_DATE').': </label>';
+	$page .=  '<br/>';
+	$page .=  '<input name="start" type="date" size="10" maxlength="10" value="'.$start.'"/>';
+	$page .=  '<br/>';
+	$page .=  '<br/>';
+	$page .=  '<label>'.t('LABEL_END_DATE').': </label>';
+	$page .=  '<br/>';
+	$page .=  '<input name="end" type="date" size="10" maxlength="10" value="'.$end.'"/>';
+	$page .=  '<br/>';
+	$page .=  '<br/>';
+	
+	$page .=  plaatenergy_report_event();
+	 	
+	$page .= '<div class="nav">';
+	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
+	$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_EXECUTE, t('LINK_EXECUTE'));
+	$page .=  '</div>';
+	
+	return $page;	
+}
+	
+/*
+** ---------------------
+** HANDLER
+** ---------------------
+*/
+
+function plaatenergy_report() {
+
+  /* input */
+  global $pid;
+  
+  /* Page handler */
+  switch ($pid) {
+
+     case PAGE_REPORT:
+        echo plaatenergy_report_page();
+        break;
+  }
 }
 
-$report=0;
-if (isset($_POST["report"])) {
-  $report = $_POST["report"];
-}
+/*
+** ---------------------
+** THE END
+** ---------------------
+*/
 
-general_header();
-
-echo '<h1>'.t('TITLE_QUERY_REPORT'),'</h1>';
-
-echo '<form method="post">';
-echo '<label>'.t('LABEL_START_DATE').': </label>';
-echo '<br/>';
-echo '<input name="start" type="date" size="10" maxlength="10" value="'.$start.'"/>';
-echo '<br/>';
-echo '<br/>';
-echo '<label>'.t('LABEL_END_DATE').': </label>';
-echo '<br/>';
-echo '<input name="end" type="date" size="10" maxlength="10" value="'.$end.'"/>';
-echo '<br/>';
-echo '<br/>';
-echo '<input type="hidden" name="report" value="1" />';
-echo '<input type="submit" value="'.t('LINK_EXECUTE').'" />';
-echo '</form>';
-
-if ($report==1) {
-
-  $sql = 'select sum(dal) as dal, sum(piek) as piek, sum(dalterug) as dalterug, sum(piekterug) as piekterug, sum(solar) as solar, sum(gas) as gas FROM energy_day where date>="'.$start.'" and date<="'.$end.'"';
-
-   $result = plaatenergy_db_query($sql);
-   $row = plaatenergy_db_fetch_object($result);
-
-  echo '<br/>';
-  echo 'low_used='.round($row->dal,2).' ';
-  echo 'normal_used='.round($row->piek,2).' ';
-  echo 'low_delivered='.round($row->dalterug,2).' ';
-  echo 'normal_delivered='.round($row->piekterug,2).' ';
-  echo 'solar='.round($row->solar,2).' ';
-  echo 'gas='.round($row->gas,2).' ';
-}
-
-general_navigation();
-general_footer();
 
 ?>

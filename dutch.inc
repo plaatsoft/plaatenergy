@@ -43,7 +43,7 @@ $lang['USED_M3']         = 'Afgenomen (m&sup3;)';
 $lang['FORECAST_M3']     = 'Prognose(m&sup3;)'; 
 $lang['PRESSURE']        = 'Luchtdruk (hPa)';
 $lang['TEMPERATURE']     = 'Temperatuur (&deg;C)';
-$lang['HUMINITY']        = 'Luchtvochtigheid (%)';
+$lang['HUMIDITY']        = 'Luchtvochtigheid (%)';
 
 /*
 ** ------------------
@@ -89,7 +89,7 @@ $lang['LINK_IN_GAS'] = 'Afgenomen Gas';
 
 $lang['LINK_PRESSURE'] = 'Luchtdruk';
 $lang['LINK_TEMPERATURE'] = 'Lucht Temperatuur';
-$lang['LINK_HUMINITY'] = 'Lucht Vochtigheid';
+$lang['LINK_HUMIDITY'] = 'Lucht Vochtigheid';
 
 $lang['LINK_RELEASE_NOTES'] = i('align-left') . 'Release Notes';
 $lang['LINK_ABOUT'] = i('users') . 'Over';
@@ -161,7 +161,7 @@ $lang['MAX_PEAK_ENERGY'] = 'Maximale piek vermogen deze maand is %s Watt.';
 
 $lang['TITLE_DAY_TEMPERATURE'] = 'Weerstation Meter - Lucht Temperatuur - %s-%s-%s';
 $lang['TITLE_DAY_PRESSURE'] = 'Weerstation Meter - Luchtdruk - %s-%s-%s';
-$lang['TITLE_DAY_HUMINITY'] = 'Weerstation Meter - Lucht Vochtigheid - %s-%s-%s';
+$lang['TITLE_DAY_HUMIDITY'] = 'Weerstation Meter - Lucht Vochtigheid - %s-%s-%s';
 
 $lang['TITLE_DAY_IN_KWH'] = 'Energie Meter - Afgenomen Elektriciteit %s-%s-%s';
 $lang['TITLE_DAY_IN_GAS'] = 'Gas Meter - Afgenomen Gas %s-%s-%s';
@@ -184,8 +184,7 @@ $lang['LABEL_LOW'] = 'Dal meterstand (kWh)';
 $lang['LABEL_NORMAL'] = 'Normaal meterstand (kWh)';
 $lang['LABEL_ETOTAL'] = 'etotal waarde (kWh)';
 
-$lang['RECORD_INSERTED'] = 'Meetcorrectie toegevoegd!';
-$lang['RECORD_UPDATED'] = 'Meetcorrectie bijgewerkt!';
+$lang['RECORD_SAVED'] = 'Meetcorrectie opgeslagen!';
 
 $lang['TITLE_QUERY_REPORT'] = 'Rapportage';
 $lang['LABEL_START_DATE'] = 'Start datum (2015-12-31)';

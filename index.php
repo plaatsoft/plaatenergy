@@ -22,9 +22,9 @@ include "constants.inc";
 include "database.inc";
 
 /*
-** ---------------------------------------------------------------- 
-** POST
-** ---------------------------------------------------------------- 
+** ----------------------
+** Parameters
+** ----------------------
 */
 
 $pid = PAGE_HOME;
@@ -33,7 +33,7 @@ $token = plaatenergy_post("token", "");
 
 if (strlen($token)>0) {
 	
-  /* Decode token */
+  /* Decode token to php parameters */
   $token = gzinflate(base64_decode($token));	
   $tokens = @preg_split("/&/", $token);
 	
@@ -44,47 +44,89 @@ if (strlen($token)>0) {
 }
 
 /*
-** ---------------------------------------------------------------- 
+** -------------------- 
 ** Database
-** ---------------------------------------------------------------- 
+** -------------------- 
 */
 
 plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 plaatenergy_db_check_version($version);
 
 /*
-** ---------------------------------------------------------------- 
+** -------------------
 ** Main State Machine
-** ---------------------------------------------------------------- 
+** -------------------
 */
 
 general_header();
 
 switch ($pid) {
 
-  case PAGE_HOME: 
-    include "home.inc";
-    plaatenergy_home();
-    break;
+	case PAGE_HOME: 
+		include "home.php";
+		plaatenergy_home();
+		break;
 
-  case PAGE_ABOUT: 
-    include "about.inc";
-    plaatenergy_about();
-    break;
+	case PAGE_ABOUT: 
+		include "about.php";
+		plaatenergy_about();
+		break;
 
-  case PAGE_DONATE: 
-    include "donate.inc";
-    plaatenergy_donate();
-    break;
+	case PAGE_DONATE: 
+		include "donate.php";
+		plaatenergy_donate();
+		break;
 
-  case PAGE_RELEASE_NOTES: 
-    include "release_notes.inc";
-    plaatenergy_release_notes();
-    break;
+	case PAGE_RELEASE_NOTES: 
+		include "release_notes.php";
+		plaatenergy_release_notes();
+		break;
+	 
+	case PAGE_REPORT: 
+		include "report.php";
+		plaatenergy_report();
+		break;
+		
+	case PAGE_DAY_IN_KWH_EDIT: 
+		include "day_in_kwh_edit.php";
+		plaatenergy_day_in_edit();
+		break;
+		
+	case PAGE_DAY_OUT_KWH_EDIT: 
+		include "day_out_kwh_edit.php";
+		plaatenergy_day_out_edit();
+		break;
+		
+	case PAGE_DAY_PRESSURE: 
+		include "day_pressure.php";
+		plaatenergy_day_pressure();
+		break;
+		
+	case PAGE_DAY_TEMPERATURE: 
+		include "day_temperature.php";
+		plaatenergy_temperature();
+		break;
+		
+	case PAGE_DAY_HUMIDITY: 
+		include "day_humidity.php";
+		plaatenergy_humidity();
+		break;
+				
+	case PAGE_YEARS_IN_GAS_EURO:
+	case PAGE_YEARS_IN_GAS_M3:
+		include "years_in_gas.php";
+		plaatenergy_years_in_gas();
+		break;
 }
 
 general_footer();
 
 plaatenergy_db_close();
+
+/*
+** -------------------
+** The End
+** -------------------
+*/
 
 ?>

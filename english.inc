@@ -44,7 +44,7 @@ $lang['USED_M3']         = 'Used (m&sup3;)';
 $lang['FORECAST_M3']     = 'Forecast (m&sup3;)'; 
 $lang['PRESSURE']        = 'Pressure (hPa)';
 $lang['TEMPERATURE']     = 'Temperature (&deg;C)';
-$lang['HUMINITY']        = 'Humidity (%)';
+$lang['HUMIDITY']        = 'Humidity (%)';
 
 /*
 ** ------------------
@@ -90,7 +90,7 @@ $lang['LINK_IN_GAS'] = 'Used Gas';
 
 $lang['LINK_PRESSURE'] = 'Air Pressure';
 $lang['LINK_TEMPERATURE'] = 'Air Temperature';
-$lang['LINK_HUMINITY'] = 'Air Humidity';
+$lang['LINK_HUMIDITY'] = 'Air Humidity';
 
 $lang['LINK_RELEASE_NOTES'] = i('align-left') . 'Release Notes';
 $lang['LINK_ABOUT'] = i('users') . 'About';
@@ -162,7 +162,7 @@ $lang['MAX_PEAK_ENERGY'] = 'Maximum peak energy this month is %s Watt.';
 
 $lang['TITLE_DAY_TEMPERATURE'] = 'Weather Station - Air Temperature - %s-%s-%s';
 $lang['TITLE_DAY_PRESSURE'] = 'Weather Station - Air Pressure - %s-%s-%s';
-$lang['TITLE_DAY_HUMINITY'] = 'Weather Station - Air Humidity - %s-%s-%s';
+$lang['TITLE_DAY_HUMIDITY'] = 'Weather Station - Air Humidity - %s-%s-%s';
 
 $lang['TITLE_DAY_IN_KWH'] = 'Energy Meter - Used Electricity %s-%s-%s';
 $lang['TITLE_DAY_IN_GAS'] = 'Gas Meter - Used Gas %s-%s-%s';
@@ -185,8 +185,7 @@ $lang['LABEL_LOW'] = 'Low meter value reading (kWh)';
 $lang['LABEL_NORMAL'] = 'Normal meter value reading (kWh)';
 $lang['LABEL_ETOTAL'] = 'Etotal meter reading value (kWh)';
 
-$lang['RECORD_INSERTED'] = 'Measurement correction inserted!';
-$lang['RECORD_UPDATED'] = 'Measurement correction updated!';
+$lang['RECORD_SAVED'] = 'Measurement correction stored!';
 
 $lang['TITLE_QUERY_REPORT'] = 'Query Energy Database';
 $lang['LABEL_START_DATE'] = 'Start date (2015-12-31)';

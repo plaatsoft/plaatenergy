@@ -15,7 +15,7 @@
 **
 **  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
-
+ 
 /*
 ** ---------------------
 ** PARAMETERS
@@ -30,7 +30,7 @@ day_parameters();
 ** ---------------------
 */
 
-function plaatenergy_day_pressure_page()
+function plaatenergy_day_temperature_page()
 
    // input
 	global $pid;
@@ -52,20 +52,19 @@ function plaatenergy_day_pressure_page()
 	$i=0;
 	$data="";
 	$value=0;
-
+	
 	while ($i<97) {
 
 		$timestamp = date("Y-m-d H:i:s", $current_date+(900*$i));
-		$sql = 'select pressure FROM weather where timestamp="'.$timestamp.'"';
+		$sql = 'select humidity from weather where timestamp="'.$timestamp.'"';
 	
 		$result = plaatenergy_db_query($sql);
 		$row = plaatenergy_db_fetch_object($result);
-
+		
 		if ($timestamp>date("Y-m-d H:i:s")) {
-		   // Measurement in the future is always 0
-			$value = 0;
-		} else if ( isset($row->pressure)) {
-			$value = $row->pressure;
+			$value=0;
+		} else if ( isset($row->humidity)) {
+			$value= $row->humidity;
 		}
 
 		if (strlen($data)>0) {
@@ -73,11 +72,11 @@ function plaatenergy_day_pressure_page()
 		}
 		$data .= "['".date("H:i", $current_date+(900*$i))."',";
 		$data .= round($value,1).']';
-	
+
 		$i++;
 	}
 
-	$json = "[['','".t('PRESSURE')."'],".$data."]";
+	$json = "[['','".t('HUMIDITY')."'],".$data."]";
 
 	$page = '
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -98,10 +97,10 @@ function plaatenergy_day_pressure_page()
         chart.draw(data, google.charts.Bar.convertOptions(options));
       }
     </script>';
-    
-	$page .= '<h1>'.t('TITLE_DAY_PRESSURE', $day, $month, $year).'</h1>';
+	 
+	$page .= '<h1>'.t('TITLE_DAY_HUMIDITY', $day, $month, $year).'</h1>';
 	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
-	
+		
 	$page .= '<div class="nav">';
 	$page .= plaatenergy_link('pid='.$pid.'&day='.$prev_day.'&month='.$prev_month.'&year='.$prev_year.'&eid='.EVENT_PREV,t('LINK_PREV_DAY');
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
@@ -115,29 +114,18 @@ function plaatenergy_day_pressure_page()
 ** ---------------------
 */
 
-function plaatenergy_day_pressure() {
+function plaatenergy_day_humidity() {
 
   /* input */
-  global $eid;
   global $pid;
-  
-  /* Event handler */
-  switch ($eid) {
-  
-		case EVENT_PREV:
-				break;
-				
-		case EVENT_NEXT:
-				break;
-	}
 
-	/* Page handler */
-	switch ($pid) {
+  /* Page handler */
+  switch ($pid) {
 
-		case PAGE_DAY_PRESSURE:
-			echo plaatenergy_day_pressure_page();
-			break;
-	}
+     case PAGE_DAY_HUMIDITY:
+        echo plaatenergy_day_humidity_page();
+        break;
+  }
 }
 
 /*
@@ -147,5 +135,3 @@ function plaatenergy_day_pressure() {
 */
 
 ?>
-
-

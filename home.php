@@ -18,11 +18,121 @@
 
 /*
 ** ---------------------------------------------------------------- 
-** OUTPUT
+** SUPPORT
 ** ---------------------------------------------------------------- 
 */
 
-function plaatenergy_home_form() {
+/**
+ *  check_solar_meter
+ */
+function check_solar_meter() {
+
+  $solar_meter_present = plaatenergy_db_get_config_item('solar_meter_present');
+
+  if ($solar_meter_present=="false") {
+  
+   $page  = '<div class="checker disabled">';
+   $page .= t('SOLAR_METER_DISABLED');		
+   $page .= '</div>';
+	
+  } else {
+
+    $sql = 'select etotal from solar where timestamp = "'.date("Y-m-d H:i:00").'"';	
+    $result = plaatenergy_db_query($sql);
+    $row = plaatenergy_db_fetch_object($result);
+
+    if (isset($row->etotal)){
+
+      $page  = '<div class="checker good">';
+      $page .= t('SOLAR_METER_CONNECTION_UP');
+      $page .='</div>';
+
+    } else {
+
+      $page = '<div class="checker bad">';
+      $page .= t('SOLAR_METER_CONNECTION_DOWN');	
+      $page .='</div>';
+    }
+  }
+  return $page;
+}
+
+/**
+ *  check_energy_meter
+ */
+function check_energy_meter() {
+  
+   $energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present');
+	
+	if ($energy_meter_present=="false") {
+  
+		$page  = '<div class="checker disabled">';
+		$page .= t('ENERGY_METER_DISABLED');		
+		$page .= '</div>';
+
+	} else {
+	   
+		$sql = 'select dal from energy where timestamp = "'.date("Y-m-d H:i:00").'"';	
+		$result = plaatenergy_db_query($sql);
+		$row = plaatenergy_db_fetch_object($result);
+
+		if (isset($row->dal)){
+			$page  = '<div class="checker good">';
+			$page .= t('ENERGY_METER_CONNECTION_UP');
+			$page .= '</div>';
+			
+		} else {
+		
+			$page  = '<div class="checker bad">';
+			$page .= t('ENERGY_METER_CONNECTION_DOWN');
+			$page .= '</div>';
+		}
+   }
+	
+	return $page;
+}
+
+/**
+ * check_weather_station
+ */
+function check_weather_station() {
+
+   $weather_station_present = plaatenergy_db_get_config_item('weather_station_present');
+    
+   if ($weather_station_present=="false") {
+  
+		$page  = '<div class="checker disabled">';
+		$page .= t('WEATHER_METER_DISABLED');	
+		$page .= '</div>';
+	
+	} else {
+	
+		$sql = 'select humidity from weather where timestamp = "'.date("Y-m-d H:i:00").'"';
+		$result = plaatenergy_db_query($sql);
+		$row = plaatenergy_db_fetch_object($result);
+
+		if (isset($row->humidity)){
+			$page  = '<div class="checker good">';
+			$page .= t('WEATHER_METER_CONNECTION_UP');
+			$page .= '</div>';
+			
+		} else {
+		
+			$page  = '<div class="checker bad">';
+			$page .= t('WEATHER_METER_CONNECTION_DOWN');
+			$page .= '</div>';
+		}
+	}
+	return $page;
+}
+
+/*
+** ---------------------------------------------------------------- 
+** PAGE
+** ---------------------------------------------------------------- 
+*/
+
+function plaatenergy_home_page() {
 
   global $version;
 
@@ -45,7 +155,7 @@ function plaatenergy_home_form() {
   $page .= '<td>';
   $page .= '<a href="years_in_kwh.php">'.t('LINK_IN_ENERGY').'</a>';
   $page .= '<a href="years_out_kwh.php">'.t('LINK_OUT_ENERGY').'</a>';
-  $page .= '<a href="years_in_gas.php">'.t('LINK_IN_GAS').'</a>';
+  $page .= plaatenergy_link('pid='.PAGE_YEARS_IN_M3, t('LINK_IN_GAS'));
   $page .= '</td>';
 
   $page .= '<td>';
@@ -68,9 +178,9 @@ function plaatenergy_home_form() {
   $page .= '</td>';
 
   $page .= '<td>';
-  $page .= '<a href="day_pressure.php">'.t('LINK_PRESSURE').'</a>';
-  $page .= '<a href="day_temperature.php">'.t('LINK_TEMPERATURE').'</a>';
-  $page .= '<a href="day_huminity.php">'.t('LINK_HUMINITY').'</a>';
+  $page .= plaatenergy_link('pid='.PAGE_PRESSURE, t('LINK_PRESSURE'));
+  $page .= plaatenergy_link('pid='.PAGE_TEMPERATURE, t('LINK_TEMPERATURE'));
+  $page .= plaatenergy_link('pid='.PAGE_HUMIDITY, t('LINK_HUMIDITY'));
   $page .= '</td>';
 
   $page .= '</tr>';
@@ -89,7 +199,7 @@ function plaatenergy_home_form() {
   $page .= plaatenergy_link('pid='.PAGE_RELEASE_NOTES, t('LINK_RELEASE_NOTES'));
   $page .= '</td>';
   $page .= '<td>';
-  $page .= '<a href="report.php">'.t('LINK_REPORT').'</a>';
+	$page .= plaatenergy_link('pid='.PAGE_REPORT, t('LINK_REPORT'));
   $page .= '</td>';
   $page .= '</tr>';
 
@@ -115,9 +225,6 @@ function plaatenergy_home_form() {
 ** ---------------------
 */
 
-/**
- * Help handler
- */
 function plaatenergy_home() {
 
   /* input */
@@ -127,7 +234,7 @@ function plaatenergy_home() {
   switch ($pid) {
 		
      case PAGE_HOME:
-	echo plaatenergy_home_form();
+			echo plaatenergy_home_page();
         break;
   }
 }

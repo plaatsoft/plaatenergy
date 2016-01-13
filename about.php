@@ -16,7 +16,7 @@
 **  All copyrights reserved (c) 2008-2015 PlaatSoft
 */
 
-function plaatenergy_about_form() {
+function plaatenergy_about_page() {
 
   $page  = '<h1>'.t('ABOUT_TITLE').'</h1>';
   $page .= '<br/>';
@@ -41,9 +41,6 @@ function plaatenergy_about_form() {
 ** ---------------------
 */
 
-/**
- * Help handler
- */
 function plaatenergy_about() {
 
   /* input */
@@ -53,7 +50,7 @@ function plaatenergy_about() {
   switch ($pid) {
 
      case PAGE_ABOUT:
-        echo plaatenergy_about_form();
+        echo plaatenergy_about_page();
         break;
   }
 }

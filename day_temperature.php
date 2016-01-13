@@ -16,52 +16,69 @@
 **  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
-include "config.inc"; 
-include "general.inc"; 
-include "database.inc"; 
+/*
+** ---------------------
+** PARAMETERS
+** ---------------------
+*/
 
 day_parameters();
 
-plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
+/*
+** ---------------------
+** PAGE
+** ---------------------
+*/
 
-$i=0;
-$label="";
-$data="";
-$value=0;
-$type=0;
+function plaatenergy_day_temperature_page()
 
-while ($i<97) {
-
-   $timestamp = date("Y-m-d H:i:s", $current_date+(900*$i));
-   $sql = 'select temperature FROM weather where timestamp="'.$timestamp.'"';
+   // input
+	global $pid;
 	
-   $result = plaatenergy_db_query($sql);
-   $row = plaatenergy_db_fetch_object($result);
+	global $prev_day;
+	global $prev_month;
+	global $prev_year;
+	
+	global $day;
+	global $month;
+	global $year;   
+	
+	global $next_day;
+	global $next_month;
+	global $next_year;
+	
+	$current_date = mktime(0, 0, 0, $month, $day, $year);
+	
+	$i=0;
+	$data="";
+	$value=0;
 
-   if ($timestamp>date("Y-m-d H:i:s")) {
-     $value=0;
-     break;
-   }
+	while ($i<97) {
 
-   if ( isset($row->temperature)) {
-        $value= $row->temperature;
-   }
+		$timestamp = date("Y-m-d H:i:s", $current_date+(900*$i));
+		$sql = 'select temperature FROM weather where timestamp="'.$timestamp.'"';
+	
+		$result = plaatenergy_db_query($sql);
+		$row = plaatenergy_db_fetch_object($result);
+	
+		if ($timestamp>date("Y-m-d H:i:s")) {
+			$value=0;			
+		} else if ( isset($row->temperature)) {
+			$value= $row->temperature;
+		}
 
-   if (strlen($data)>0) {
-     $data.=',';
-   }
-   $data .= "['".date("H:i", $current_date+(900*$i))."',";
-   $data .= round($value,1).']';
+		if (strlen($data)>0) {
+			$data.=',';
+		}
+		$data .= "['".date("H:i", $current_date+(900*$i))."',";
+		$data .= round($value,1).']';
 
-   $i++;
-}
+		$i++;
+	}
 
-$json = "[['','".t('TEMPERATURE')."'],".$data."]";
+	$json = "[['','".t('TEMPERATURE')."'],".$data."]";
 
-general_header();
-
-?>
-
+	$page = '
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["bar"]});
@@ -69,27 +86,52 @@ general_header();
       function drawChart() {
 
         var options = {
-          bars: 'vertical',
+          bars: "vertical",
           bar: {groupWidth: "90%"},
-          legend: { position: 'none' },
-          vAxis: {format: 'decimal', baseline:26},
+          legend: { position: "none" },
+          vAxis: {format: "decimal", baseline:950},
         };
 
-        var data = google.visualization.arrayToDataTable(<?php echo $json?>);
-        var chart = new google.charts.Bar(document.getElementById('chart_div'));
+        var data = google.visualization.arrayToDataTable('.$json.');
+        var chart = new google.charts.Bar(document.getElementById("chart_div"));
         chart.draw(data, google.charts.Bar.convertOptions(options));
       }
-    </script>
-      
-<?php
+    </script>';
      
-echo '<h1>'.t('TITLE_DAY_TEMPERATURE', $day, $month, $year).'</h1>';
-echo '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
+	$page .= '<h1>'.t('TITLE_DAY_TEMPERATURE', $day, $month, $year).'</h1>';
+	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
+	
+	$page .= '<div class="nav">';
+	$page .= plaatenergy_link('pid='.$pid.'&day='.$prev_day.'&month='.$prev_month.'&year='.$prev_year.'&eid='.EVENT_PREV,t('LINK_PREV_DAY');
+	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
+	$page .= plaatenergy_link('pid='.$pid.'&day='.$next_day.'&month='.$next_month.'&year='.$next_year.'&eid='.EVENT_NEXT,t('LINK_NEXT_DAY'));	
+	$page .= '</div>';
+}
 
-day_navigation();
-general_footer();
+/*
+** ---------------------
+** HANDLER
+** ---------------------
+*/
+
+function plaatenergy_day_temperature() {
+
+  /* input */
+  global $pid;
+
+  /* Page handler */
+  switch ($pid) {
+
+     case PAGE_DAY_PRESSURE:
+        echo plaatenergy_day_temperature_page();
+        break;
+  }
+}
+
+/*
+** ---------------------
+** THE END
+** ---------------------
+*/
 
 ?>
-
-
-
