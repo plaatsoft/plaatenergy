@@ -18,7 +18,7 @@
 
 include "config.inc";
 include "general.inc";
-include "constants.inc";
+include "constants.php";
 include "database.inc";
 
 /*
@@ -104,12 +104,12 @@ switch ($pid) {
 		
 	case PAGE_DAY_TEMPERATURE: 
 		include "day_temperature.php";
-		plaatenergy_temperature();
+		plaatenergy_day_temperature();
 		break;
 		
 	case PAGE_DAY_HUMIDITY: 
 		include "day_humidity.php";
-		plaatenergy_humidity();
+		plaatenergy_day_humidity();
 		break;
 				
 	case PAGE_YEARS_IN_GAS_EURO:

@@ -461,7 +461,7 @@ function day_navigation($edit=0) {
   echo '<div class="nav">';
 
   echo '<a href="?day='.$prev_day.'&month='.$prev_month.'&year='.$prev_year.'&type='.$type.'">'.t('LINK_PREV_DAY').'</a>';
-  echo plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
+  echo '<a href=".">'.t('LINK_HOME').'</a>';
   echo '<a href="?day='.$next_day.'&month='.$next_month.'&year='.$next_year.'&type='.$type.'">'.t('LINK_NEXT_DAY').'</a>';
 
   switch ($type) {
@@ -506,7 +506,7 @@ function month_navigation($default) {
   echo '<div class="nav">';
 
   echo '<a href="?month='.$prev_month.'&year='.$prev_year.'&type='.$type.'">'.t('LINK_PREV_MONTH').'</a>';
-  echo plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
+  echo '<a href=".">'.t('LINK_HOME').'</a>';
   echo '<a href="?month='.$next_month.'&year='.$next_year.'&type='.$type.'">'.t('LINK_NEXT_MONTH').'</a>';
 
   switch ($type) {
@@ -534,7 +534,7 @@ function year_navigation($default) {
   echo '<div class="nav">';
 
   echo '<a href="?year='.$prev_year.'&type='.$type.'">'.t('LINK_PREV_YEAR').'</a>';
-  echo plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
+  echo '<a href=".">'.t('LINK_HOME').'</a>';
   echo '<a href="?year='.$next_year.'&type='.$type.'">'.t('LINK_NEXT_YEAR').'</a>';
  
   switch ($type) {

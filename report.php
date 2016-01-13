@@ -16,21 +16,17 @@
 **  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
-include "config.inc";
-include "general.inc";
-include "database.inc";
-
 $start = plaatenergy_post("start", "");
 $end = plaatenergy_post("end", "");
 
-functioon plaatenergy_report_event() {
+function plaatenergy_report_event() {
 
 	/* input */
 	global $start;
 	global $end;
 	
 	global $eid;
-	
+
 	if ($eid==EVENT_EXECUTE) {
 		 
 		$sql  = 'select sum(dal) as dal, sum(piek) as piek, sum(dalterug) as dalterug, sum(piekterug) as piekterug, ';
@@ -39,16 +35,15 @@ functioon plaatenergy_report_event() {
 		$result = plaatenergy_db_query($sql);
 		$row = plaatenergy_db_fetch_object($result);
 	
-		$page  =  '<br/>';
-		$page .=  'low_used='.round($row->dal,2).' ';
+		$page  =  'low_used='.round($row->dal,2).' ';
 		$page .=  'normal_used='.round($row->piek,2).' ';
 		$page .=  'low_delivered='.round($row->dalterug,2).' ';
 		$page .=  'normal_delivered='.round($row->piekterug,2).' ';
 		$page .=  'solar='.round($row->solar,2).' ';
 		$page .=  'gas='.round($row->gas,2).' ';
+
+		return $page;
 	}
-	
-	return $page;
 }
 
 function plaatenergy_report_page() {
@@ -59,7 +54,7 @@ function plaatenergy_report_page() {
 	global $start;
 	global $end;
 	
-	$page  =  '<h1>'.t('TITLE_QUERY_REPORT'),'</h1>';
+	$page  =  '<h1>'.t('TITLE_QUERY_REPORT').'</h1>';
 
 	$page .=  '<label>'.t('LABEL_START_DATE').': </label>';
 	$page .=  '<br/>';

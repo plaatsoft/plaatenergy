@@ -19,6 +19,7 @@
 include "config.inc";
 include "general.inc";
 include "database.inc";
+include "constants.php";
 
 month_parameters();
 

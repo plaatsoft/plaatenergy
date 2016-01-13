@@ -60,7 +60,7 @@ define('PAGE_DAY_IN_GAS_EDIT',       1047);
 
 define('PAGE_DAY_PRESSURE',          1050);
 define('PAGE_DAY_TEMPERATURE',       1051);
-define('PAGE_DAY HUMIDITY',          1052);
+define('PAGE_DAY_HUMIDITY',          1052);
 
 /*
 ** -----------

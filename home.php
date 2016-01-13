@@ -155,7 +155,7 @@ function plaatenergy_home_page() {
   $page .= '<td>';
   $page .= '<a href="years_in_kwh.php">'.t('LINK_IN_ENERGY').'</a>';
   $page .= '<a href="years_out_kwh.php">'.t('LINK_OUT_ENERGY').'</a>';
-  $page .= plaatenergy_link('pid='.PAGE_YEARS_IN_M3, t('LINK_IN_GAS'));
+  $page .= plaatenergy_link('pid='.PAGE_YEARS_IN_GAS_M3, t('LINK_IN_GAS'));
   $page .= '</td>';
 
   $page .= '<td>';
@@ -178,9 +178,9 @@ function plaatenergy_home_page() {
   $page .= '</td>';
 
   $page .= '<td>';
-  $page .= plaatenergy_link('pid='.PAGE_PRESSURE, t('LINK_PRESSURE'));
-  $page .= plaatenergy_link('pid='.PAGE_TEMPERATURE, t('LINK_TEMPERATURE'));
-  $page .= plaatenergy_link('pid='.PAGE_HUMIDITY, t('LINK_HUMIDITY'));
+  $page .= plaatenergy_link('pid='.PAGE_DAY_PRESSURE, t('LINK_PRESSURE'));
+  $page .= plaatenergy_link('pid='.PAGE_DAY_TEMPERATURE, t('LINK_TEMPERATURE'));
+  $page .= plaatenergy_link('pid='.PAGE_DAY_HUMIDITY, t('LINK_HUMIDITY'));
   $page .= '</td>';
 
   $page .= '</tr>';

@@ -30,10 +30,13 @@ day_parameters();
 ** ---------------------
 */
 
-function plaatenergy_day_temperature_page()
+function plaatenergy_day_humidity_page() {
 
    // input
 	global $pid;
+
+        global $graph_width;
+        global $graph_height;
 	
 	global $prev_day;
 	global $prev_month;
@@ -89,7 +92,7 @@ function plaatenergy_day_temperature_page()
           bars: "vertical",
           bar: {groupWidth: "90%"},
           legend: { position: "none" },
-          vAxis: {format: "decimal", baseline:950},
+          vAxis: {format: "decimal", baseline:0},
         };
 
         var data = google.visualization.arrayToDataTable('.$json.');
@@ -102,10 +105,11 @@ function plaatenergy_day_temperature_page()
 	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
 		
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&day='.$prev_day.'&month='.$prev_month.'&year='.$prev_year.'&eid='.EVENT_PREV,t('LINK_PREV_DAY');
+	$page .= plaatenergy_link('pid='.$pid.'&day='.$prev_day.'&month='.$prev_month.'&year='.$prev_year.'&eid='.EVENT_PREV,t('LINK_PREV_DAY'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
 	$page .= plaatenergy_link('pid='.$pid.'&day='.$next_day.'&month='.$next_month.'&year='.$next_year.'&eid='.EVENT_NEXT,t('LINK_NEXT_DAY'));	
 	$page .= '</div>';
+         return $page;
 }
 
 /*
