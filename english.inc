@@ -85,7 +85,7 @@ $lang['OTHER_REPORT'] = 'Other';
 
 $lang['LINK_IN_ENERGY'] = 'Used Electricity';
 $lang['LINK_OUT_ENERGY'] = 'Delivered Electricity';
-$lang['LINK_PEAK_OUT_ENERGY'] = 'Peak Delivered Electricity';
+$lang['LINK_OUT_ENERGY_MAX'] = 'Peak Delivered Electricity';
 $lang['LINK_IN_GAS'] = 'Used Gas';
 
 $lang['LINK_PRESSURE'] = 'Air Pressure';

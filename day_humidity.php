@@ -22,8 +22,8 @@
 ** ---------------------
 */
 
-day_parameters();
-
+$date = plaatenergy_post("date", date('Y-m-d'));
+	  
 /*
 ** ---------------------
 ** PAGE
@@ -35,21 +35,15 @@ function plaatenergy_day_humidity_page() {
    // input
 	global $pid;
 
-        global $graph_width;
-        global $graph_height;
+	global $graph_width;
+	global $graph_height;
 	
-	global $prev_day;
-	global $prev_month;
-	global $prev_year;
+	global $date;  
 	
-	global $day;
-	global $month;
-	global $year;   
+	$prev_date = plaatenergy_prev_day($date);
+	$next_date = plaatenergy_next_day($date);
 	
-	global $next_day;
-	global $next_month;
-	global $next_year;
-	
+	list($year, $month, $day) = explode("-", $date);	
 	$current_date = mktime(0, 0, 0, $month, $day, $year);
 	
 	$i=0;
@@ -105,11 +99,12 @@ function plaatenergy_day_humidity_page() {
 	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
 		
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&day='.$prev_day.'&month='.$prev_month.'&year='.$prev_year.'&eid='.EVENT_PREV,t('LINK_PREV_DAY'));
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.EVENT_PREV,t('LINK_PREV_DAY'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
-	$page .= plaatenergy_link('pid='.$pid.'&day='.$next_day.'&month='.$next_month.'&year='.$next_year.'&eid='.EVENT_NEXT,t('LINK_NEXT_DAY'));	
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.EVENT_NEXT,t('LINK_NEXT_DAY'));	
 	$page .= '</div>';
-         return $page;
+	
+	return $page;
 }
 
 /*

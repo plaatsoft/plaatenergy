@@ -84,7 +84,7 @@ $lang['OTHER_REPORT'] = 'Overige';
 
 $lang['LINK_IN_ENERGY'] = 'Afgenomen Elektriciteit';
 $lang['LINK_OUT_ENERGY'] = 'Geleverde Elektriciteit';
-$lang['LINK_PEAK_OUT_ENERGY'] = 'Geleverde Piek Vermogen';
+$lang['LINK_OUT_ENERGY_MAX'] = 'Geleverde Piek Vermogen';
 $lang['LINK_IN_GAS'] = 'Afgenomen Gas';
 
 $lang['LINK_PRESSURE'] = 'Luchtdruk';

@@ -168,7 +168,7 @@ function plaatenergy_home_page() {
   $page .= '<a href="month_in_kwh.php">'.t('LINK_IN_ENERGY').'</a>';
   $page .= '<a href="month_out_kwh.php">'.t('LINK_OUT_ENERGY').'</a>';
   $page .= '<a href="month_in_gas.php">'.t('LINK_IN_GAS').'</a>';
-  $page .= '<a href="month_out_max.php">'.t('LINK_PEAK_OUT_ENERGY').'</a>';
+  $page .= plaatenergy_link('pid='.PAGE_MONTH_OUT_ENERGY_MAX, t('LINK_OUT_ENERGY_MAX')); 
   $page .= '</td>';
 
   $page .= '<td>';

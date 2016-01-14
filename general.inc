@@ -270,6 +270,161 @@ function general_footer() {
 // ----------------------------
 
 /**
+ * Get previous day
+ */
+function plaatenergy_prev_day($date) {
+
+  list($year, $month, $day) = explode("-", $date);
+
+  $prev_day=$day-1;
+  $prev_month=$month;
+  $prev_year=$year;   
+
+  if ($prev_day<=0) {
+     $prev_month=$month-1;
+     $prev_year=$year;
+     $prev_day=date("t", strtotime($prev_year.'-'.$prev_month.'-1'));
+  }
+
+  if ($prev_month<=0) {
+     $prev_month=12;
+     $prev_year=$year-1;
+     $prev_day=date("t", strtotime($prev_year.'-'.$prev_month.'-1'));
+  }
+  
+  return $prev_year.'-'.$prev_month.'-'.$prev_day; 
+}
+
+/**
+ * Get next day
+ */
+function plaatenergy_next_day($date) {
+
+  list($year, $month, $day) = explode("-", $date);
+
+  $next_day=$day+1;   
+  $next_month=$month;
+  $next_year=$year;   
+  
+  if ($next_day>date("t", strtotime($next_year.'-'.$next_month.'-1'))) {
+     $next_day=1;
+     $next_month=$next_month+1;
+     $next_year=$year;
+  }
+  
+  if ($next_month>12) {
+     $next_day=1;
+     $next_month=1;
+     $next_year=$year+1;
+  }
+  
+  return $next_year.'-'.$next_month.'-'.$next_day; 
+}
+ 
+/**
+* Get previous year 
+*/
+function plaatenergy_prev_month($date) {
+
+	list($year, $month) = explode("-", $date);
+
+	$prev_year=$year;   
+	$prev_month=$month-1;
+	if ($prev_month<=0) {
+		$prev_month=12;
+		$prev_year=$year-1;
+	}
+  
+	return $prev_year.'-'.$prev_month; 
+}
+
+/**
+ * Get next month
+ */
+function plaatenergy_next_month($date) {
+
+	list($year, $month) = explode("-", $date);
+
+	$next_year=$year;   
+	$next_month=$month+1;
+	if ($next_month>12) {
+		$next_month=1;
+		$next_year=$year+1;
+	}
+  
+	return $next_year.'-'.$next_month; 
+}
+
+/**
+ * Get previous year 
+ */
+function plaatenergy_prev_year($year) {
+
+	return $year-1;   
+}
+
+/**
+ * Get next year 
+ */
+function plaatenergy_prev_year($year) {
+
+	return $year+1;  
+}
+
+/**
+ * Process post parameters 
+ */
+function plaatenergy_post($label, $default) {
+	
+	$value = $default;
+	
+	if (isset($_POST[$label])) {
+		$value = $_POST[$label];
+		$value = stripslashes($value);
+		$value = htmlspecialchars($value);
+	}
+	
+	return $value;
+}
+
+/** 
+ * Zip and uuencode token.
+ */
+function plaatenergy_token($token) {
+   
+	/* Encode token  */
+	$token = base64_encode(gzdeflate($token));
+	
+	return $token;
+}
+
+/**
+ * Create link 
+ */
+function plaatenergy_link($parameters, $label, $id="", $title="") {
+   
+	global $link_counter;
+	
+	$link_counter++;
+	
+	
+	$link  = '<a href="javascript:link(\''.plaatenergy_token($parameters).'\');" class="link" ';			
+	if (strlen($id)!=0) {
+		$link .= ' id="'.strtolower($id).'"';
+	}
+	if (strlen($title)!=0) {
+		$link .= ' title="'.strtolower($title).'"';
+	}
+	$link .= '>'.$label.'</a>';	
+	return $link;
+}
+
+
+// ----------------------------
+// TO BE REMOVE SOON
+// ----------------------------
+
+/**
  * Process day parameters 
  */
 function day_parameters() {
@@ -358,6 +513,7 @@ function day_parameters() {
   $current_date=mktime(0, 0, 0, $month, $day, $year);
   $next_date=mktime(0, 0, 0, $next_month, $next_day, $next_year);
 }
+
 
 /**
  * Process month parameters 
@@ -547,51 +703,6 @@ function year_navigation($default) {
   }
 
   echo "</div>";
-}
-
-function plaatenergy_post($label, $default) {
-	
-	$value = $default;
-	
-	if (isset($_POST[$label])) {
-		$value = $_POST[$label];
-		$value = stripslashes($value);
-		$value = htmlspecialchars($value);
-	}
-	
-	return $value;
-}
-
-/** 
- * Zip and uuencode token.
- */
-function plaatenergy_token($token) {
-   
-	/* Encode token  */
-	$token = base64_encode(gzdeflate($token));
-	
-	return $token;
-}
-
-/**
- * Create link 
- */
-function plaatenergy_link($parameters, $label, $id="", $title="") {
-   
-	global $link_counter;
-	
-	$link_counter++;
-	
-	
-	$link  = '<a href="javascript:link(\''.plaatenergy_token($parameters).'\');" class="link" ';			
-	if (strlen($id)!=0) {
-		$link .= ' id="'.strtolower($id).'"';
-	}
-	if (strlen($title)!=0) {
-		$link .= ' title="'.strtolower($title).'"';
-	}
-	$link .= '>'.$label.'</a>';	
-	return $link;
 }
 
 // ----------------------------

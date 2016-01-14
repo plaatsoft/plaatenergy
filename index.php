@@ -117,6 +117,11 @@ switch ($pid) {
 		include "years_in_gas.php";
 		plaatenergy_years_in_gas();
 		break;
+		
+	case PAGE_MONTH_OUT_ENERGY_MAX:
+		include "month_out_max.php";
+		plaatenergy_month_out_energy_max();
+		break;
 }
 
 general_footer();
