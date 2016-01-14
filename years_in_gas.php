@@ -22,8 +22,6 @@
 ** ---------------------
 */
 
-$date = plaatenergy_post("date", date('Y'));
-
 $gas_price = plaatenergy_db_get_config_item('gas_price');
 $gas_use_forecast = plaatenergy_db_get_config_item('gas_use_forecast');
 
@@ -33,7 +31,7 @@ $gas_use_forecast = plaatenergy_db_get_config_item('gas_use_forecast');
 ** ---------------------
 */
 
-function plaatenergy_years_in_gas_euro_page() {
+function plaatenergy_years_in_gas_page() {
 
 	// input	
 	global $date;  
@@ -41,7 +39,10 @@ function plaatenergy_years_in_gas_euro_page() {
 	global $eid;  
 	
 	global $gas_price;
+	global $gas_forecast;
 	global $gas_use_forecast;
+        global $graph_width;
+        global $graph_height;
 	
 	$prev_date = plaatenergy_prev_year($date);
 	$next_date = plaatenergy_next_year($date);
@@ -50,6 +51,7 @@ function plaatenergy_years_in_gas_euro_page() {
 	
 	$total=0;
 	$total_price=0;
+        $price=0;
 	$count=0;
 	$data="";
 	
@@ -81,21 +83,22 @@ function plaatenergy_years_in_gas_euro_page() {
 		while ($row2 = plaatenergy_db_fetch_object($result2)) {
 			if (isset($row2->month)) { 
 				$forecast_total += $gas_forecast[$row2->month];
+	                        $price = $gas_price * $row2->month;
 			}
 		} 
 		
 		if ($eid==EVENT_M3) {
-				if ($value>0) { 
+			if ($value>0) { 
 				$data .= round($value,2).','.round(($forecast_total*$gas_use_forecast),2).']';
 			} else { 
 				$data .= '0,0]';
 			}
 		} else { 
-			$data .= round($price2,2).']';
+			$data .= round($price,2).']';
 		}
 		
 		$total += $value;
-		$total_price += $price2;
+		$total_price += $price;
 	}
 
 	if ($eid==EVENT_M3) {
@@ -118,10 +121,11 @@ function plaatenergy_years_in_gas_euro_page() {
           vAxis: {format: "decimal"},
 			 ';
 				if ($eid==EVENT_EURO) {			 
-					$page .= 'colors: ["#0066cc", "#808080"],';
-				} else {
 					$page .= 'colors: ["#e0440e"],';
-			$page .= '}
+				} else {
+					$page .= 'colors: ["#0066cc", "#808080"],';
+                                }
+			$page .= '}  }
 				
         };
         var data = google.visualization.arrayToDataTable('.$json.');
@@ -138,9 +142,9 @@ function plaatenergy_years_in_gas_euro_page() {
     </script>';
 
 	if ($eid==EVENT_M3) {			
-		echo '<h1>'.t('TITLE_YEARS_IN_M3', ($year-10), $year).'</h1>';	
+		echo '<h1>'.t('TITLE_YEARS_IN_GAS', ($year-10), $year).'</h1>';	
 	} else {
-		echo '<h1>'.t('TITLE_YEARS_IN_EURO', ($year-10), $year).'</h1>';
+		echo '<h1>'.t('TITLE_YEARS_IN_GAS', ($year-10), $year).'</h1>';
 	}
 	
 	echo '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
@@ -164,9 +168,9 @@ function plaatenergy_years_in_gas_euro_page() {
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
 	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.EVENT_NEXT,t('LINK_NEXT_YEAR'));	
 	if ($eid==EVENT_M3) {		
-		$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
+		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
 	} else {
-		$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.EVENT_M3,t('LINK_M3'));		
+		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_M3,t('LINK_M3'));		
 	}
 	$page .= '</div>';
 	   
@@ -179,10 +183,11 @@ function plaatenergy_years_in_gas_euro_page() {
 ** ---------------------
 */
 
-function plaatenergy_years_in_m3() {
+function plaatenergy_years_in_gas() {
 
   /* input */
   global $pid;
+  global $eid;
   
    /* Event handler */
   switch ($eid) {

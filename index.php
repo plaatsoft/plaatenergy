@@ -28,6 +28,7 @@ include "database.inc";
 */
 
 $pid = PAGE_HOME;
+$date = date('Y-m-d');
 
 $token = plaatenergy_post("token", "");
 
@@ -40,6 +41,7 @@ if (strlen($token)>0) {
   foreach ($tokens as $item) {
      $items = preg_split ("/=/", $item);				
      $$items[0] = $items[1];	
+     echo $items[0].'='.$items[1].' ';
   }
 }
 
@@ -112,8 +114,7 @@ switch ($pid) {
 		plaatenergy_day_humidity();
 		break;
 				
-	case PAGE_YEARS_IN_GAS_EURO:
-	case PAGE_YEARS_IN_GAS_M3:
+	case PAGE_YEARS_IN_GAS:
 		include "years_in_gas.php";
 		plaatenergy_years_in_gas();
 		break;

@@ -38,6 +38,7 @@ define('PAGE_YEAR_IN_GAS',        1022);
 
 define('PAGE_MONTH_IN_ENERGY',    1030);
 define('PAGE_MONTH_OUT_ENERGY',   1031);
+define('PAGE_MONTH_OUT_ENERGY_MAX',   1031);
 define('PAGE_MONTH_IN_GAS',       1032);
 
 define('PAGE_DAY_IN_ENERGY',      1040);
@@ -61,9 +62,9 @@ define('EVENT_PREV',                 2000);
 define('EVENT_NEXT',                 2001);
 define('EVENT_EXECUTE',              2002);
 define('EVENT_SAVE',                 2003);
-define('EVENT_EURO',                 2003);
-define('EVENT_KWH',                  2003);
-define('EVENT_M3',                   2003);
+define('EVENT_EURO',                 2004);
+define('EVENT_KWH',                  2005);
+define('EVENT_M3',                   2006);
 
 /*
 ** -----------

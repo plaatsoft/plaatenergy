@@ -366,7 +366,7 @@ function plaatenergy_prev_year($year) {
 /**
  * Get next year 
  */
-function plaatenergy_prev_year($year) {
+function plaatenergy_next_year($year) {
 
 	return $year+1;  
 }

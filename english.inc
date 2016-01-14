@@ -117,7 +117,7 @@ $lang['WEATHER_METER_CONNECTION_UP'] = i('check') . 'Weather Station connection 
 */
 
 $lang['TITLE_YEARS_IN_KWH'] = 'Energy Meter - Used Electricity %s - %s';
-$lang['TITLE_YEARS_IN_M3'] = 'Gas Meter - Used Gas %s - %s';
+$lang['TITLE_YEARS_IN_GAS'] = 'Gas Meter - Used Gas %s - %s';
 $lang['TITLE_YEARS_OUT_KWH'] = 'Solar Meter - Delivered Electricity %s - %s';
 
 $lang['AVERAGE_PER_YEAR_KWH'] = 'Average per year %s kWh [Total = %s kWh]';
