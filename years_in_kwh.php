@@ -39,7 +39,7 @@ function plaatenergy_years_in_energy_page() {
 
 	global $date; 
 	global $energy_price;
-	global $energy_in_forecast;
+	global $in_forecast;
 	global $energy_use_forecast;
 	global $graph_width;
 	global $graph_height;

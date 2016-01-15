@@ -86,6 +86,12 @@ function plaatenergy_years_in_gas_page() {
 	                        $price = $gas_price * $row2->month;
 			}
 		} 
+
+                if (strlen($data)>0) {
+                        $data.=',';
+                }
+                $data .= "['".date("Y", $time)."',";
+
 		
 		if ($eid==EVENT_M3) {
 			if ($value>0) { 
@@ -136,7 +142,7 @@ function plaatenergy_years_in_gas_page() {
 
         function selectHandler(e)     {
            var year = data.getValue(chart.getSelection()[0].row, 0);
-           window.location="year_in_gas.php?year="+year;
+           window.location="year_in_gas.php?year="+$year;
         }
      }
     </script>';

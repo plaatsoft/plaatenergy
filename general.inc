@@ -159,25 +159,34 @@ function t() {
  * Add title icon 
  */
 function add_icons ($path = './ui/') {
-    $path = $path . 'images/icons/';
-
-   $page = '<meta charset="UTF-8">';
-
-   $page .= '<link rel="shortcut icon" type="image/png" sizes="16x16" href="' . $path . '16.png">';
-   $page .= '<link rel="shortcut icon" type="image/png" sizes="24x24" href="' . $path . '24.png">';
-   $page .= '<link rel="shortcut icon" type="image/png" sizes="32x32" href="' . $path . '32.png">';
-   $page .= '<link rel="shortcut icon" type="image/png" sizes="48x48" href="' . $path . '48.png">';
-   $page .= '<link rel="shortcut icon" type="image/png" sizes="64x64" href="' . $path . '64.png">';
-   $page .= '<link rel="shortcut icon" type="image/png" sizes="128x128" href="' . $path . '128.png">';
-   $page .= '<link rel="shortcut icon" type="image/png" sizes="256x256" href="' . $path . '256.png">';
-   $page .= '<link rel="shortcut icon" type="image/png" sizes="512x512" href="' . $path . '512.png">';
-
-   $page .= '<link rel="apple-touch-icon" type="image/png" href="' . $path . 'apple-60.png">';
-   $page .= '<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="' . $path . 'apple-76.png">';
-   $page .= '<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="' . $path . 'apple-120.png">';
-   $page .= '<link rel="apple-touch-icon" type="image/png" sizes="152x152" href="' . $path . 'apple-152.png">';
-
-   $page .= '<title>'.t('TITLE').'</title>';
+	$path = $path . 'images/icons/';
+	
+	// Charset
+	$page = '<meta charset="UTF-8">';
+	
+	// Normal icons
+	$page .= '<link rel="shortcut icon" type="image/png" sizes="16x16" href="' . $path . '16.png">';
+	$page .= '<link rel="shortcut icon" type="image/png" sizes="24x24" href="' . $path . '24.png">';
+	$page .= '<link rel="shortcut icon" type="image/png" sizes="32x32" href="' . $path . '32.png">';
+	$page .= '<link rel="shortcut icon" type="image/png" sizes="48x48" href="' . $path . '48.png">';
+	$page .= '<link rel="shortcut icon" type="image/png" sizes="64x64" href="' . $path . '64.png">';
+	$page .= '<link rel="shortcut icon" type="image/png" sizes="128x128" href="' . $path . '128.png">';
+	$page .= '<link rel="shortcut icon" type="image/png" sizes="256x256" href="' . $path . '256.png">';
+	$page .= '<link rel="shortcut icon" type="image/png" sizes="512x512" href="' . $path . '512.png">';
+	
+	// Apple icons
+	$page .= '<link rel="apple-touch-icon" type="image/png" href="' . $path . 'apple-60.png">';
+	$page .= '<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="' . $path . 'apple-76.png">';
+	$page .= '<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="' . $path . 'apple-120.png">';
+	$page .= '<link rel="apple-touch-icon" type="image/png" sizes="152x152" href="' . $path . 'apple-152.png">';
+	
+	// Web app cable (runs the website as app)
+	$page .= '<meta name="apple-mobile-web-app-capable" content="yes">';
+	$page .= '<meta name="mobile-web-app-capable" content="yes">';
+	
+	// Title
+	$page .= '<title>'.t('TITLE').'</title>';
+	   
 	return $page;
 }
 
