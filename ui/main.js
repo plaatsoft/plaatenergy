@@ -1,24 +1,10 @@
-// Main.js file for PlaatEnergy
-// Copyright (c) 2014 - 2015 PlaatSoft
+// main.js file for PlaatEnergy
+// Copyright (c) 2008 - 2016 PlaatSoft
 
 // ================== Remove function for elements ========================
 HTMLElement.prototype.remove = function () {
 	this.parentNode.removeChild(this);
 };
-
-if (!localStorage.getItem("allow_cookies")) {
-	localStorage.setItem("allow_cookies", "no");
-}
-
-// ============================== Loader ==================================
-setTimeout(function () {
-	document.querySelector(".loader").style.opacity = 0;
-	document.querySelector(".grid").style.opacity = 1;
-	
-	setTimeout(function () {
-		document.querySelector(".loader").remove();
-	}, 300);
-}, Math.floor((Math.random() * 1000) + 500));
 
 // ========================== Language System =============================
 var setLang = function (lang) {
@@ -139,40 +125,54 @@ if (!localStorage.getItem("temperature")) {
 }
 setTemperatureOption();
 
-if (!localStorage.getItem("weather")) {
-	localStorage.setItem("weather", 0);
+// Check weather
+COOKIE.check("w", 0);
+
+if (COOKIE.get("w") == 1) {
+	document.querySelector("#w").checked = true;
 }
 
-if (localStorage.getItem("weather") == 1) {
-	document.querySelector("#weather").checked = true;
+// Check Sunrise
+COOKIE.check("sr", 0);
+
+if (COOKIE.get("sr") == 1) {
+	document.querySelector("#sr").checked = true;
 }
 
-if (!localStorage.getItem("show_sunrise")) {
-	localStorage.setItem("show_sunrise", 0);
-}
-
-if (localStorage.getItem("show_sunrise") == 1) {
-	document.querySelector("#show_sunrise").checked = true;
-}
-
-var check_show_sunrise = function () {
-	if (localStorage.getItem("show_sunrise") == 0) {
-		document.querySelector(".sunrise").style.opacity = 0;
-		document.querySelector(".sunset").style.opacity = 0;
+var check_sr = function () {
+	if (COOKIE.get("sr") == 0) {
+		document.querySelector("#w_sunrise").style.opacity = 0;
+		document.querySelector("#w_sunset").style.opacity = 0;
 	} else {
-		document.querySelector(".sunrise").style.opacity = 1;
-		document.querySelector(".sunset").style.opacity = 1;
+		document.querySelector("#w_sunrise").style.opacity = 1;
+		document.querySelector("#w_sunset").style.opacity = 1;
 	}
 }
 
-check_show_sunrise();
+check_sr();
 
-if (!localStorage.getItem("refresh_toggle")) {
-	localStorage.setItem("refresh_toggle", 1);
+// Check no animation
+COOKIE.check("am", 0);
+
+if (COOKIE.get("am") == 1) {
+	document.querySelector("#am").checked = true;
 }
 
-if (localStorage.getItem("refresh_toggle") == 1) {
-	document.querySelector("#refresh_toggle").checked = true;
+var check_am = function () {
+	if (COOKIE.get("am") == 0) {
+		document.body.classList.remove("nm");
+	} else {
+		document.body.classList.add("nm");
+	}
+}
+
+check_am();
+
+// Check refresh toggle
+COOKIE.check("rt", 1);
+
+if (COOKIE.get("rt") == 1) {
+	document.querySelector("#rt").checked = true;
 }
 
 // ================== Update the tiles information =======================
@@ -182,7 +182,7 @@ var refresh_data = function () {
 	options += localStorage.getItem("gas");
 	options += localStorage.getItem("temperature");
 	options += localStorage.getItem("wind");
-	options += localStorage.getItem("weather");
+	options += COOKIE.get("w");
 	if (localStorage.getItem("lang") == "nl") {
 		options += 0;
 	} else {
@@ -211,7 +211,7 @@ var refresh_data = function () {
 	http.open("GET", "./data.php?q=" + options);
 	http.send();
 	
-	if (localStorage.getItem("refresh_toggle") == 1) {
+	if (COOKIE.get("rt") == 1) {
 		setTimeout(refresh_data, localStorage.getItem("refresh") * 1000);
 	}
 };
@@ -257,7 +257,7 @@ if (!localStorage.getItem("refresh")) {
 	localStorage.setItem("refresh", 1);
 }
 
-range_refresh_dis(document.querySelector("#refresh_toggle"));
+range_refresh_dis(document.querySelector("#rt"));
 
 range.value = localStorage.getItem("refresh");
 set_range_helper();
@@ -286,10 +286,12 @@ var open_sidebar = function (selector) {
 	document.querySelector(selector + ".sidebar").style.left = "0px";
 };
 
+COOKIE.check("ac", 0);
+
 var cookie = document.querySelector("#cookie");
 
 // Show cookie popup
-if (localStorage.getItem("allow_cookies") == "no") {
+if (COOKIE.get("ac") == 0) {
 	setTimeout(function () {
 		shadow.style.visibility = "visible";
 		shadow.style.opacity = 1;
@@ -318,7 +320,7 @@ var close_all_popups = function () {
 	shadow.style.visibility = "hidden";
 	shadow.style.opacity = 0;
 	
-	localStorage.setItem("allow_cookies", "yes");
+	COOKIE.set("ac", 1);
 };
 
 // Function to close all sidebars
@@ -359,22 +361,26 @@ for (var i = 0; i < selectors.length; i++) {
 }
 
 // for toggles
-var toggles = ["weather", "refresh_toggle", "show_sunrise"];
+var toggles = ["w", "rt", "sr", "am"];
 
 for (var i = 0; i < toggles.length; i++) {
 	document.querySelector("#" + toggles[i]).onchange = function () {
 		if (this.checked) {
-			localStorage.setItem(this.id, 1);
+			COOKIE.set(this.id, 1);
 		} else {
-			localStorage.setItem(this.id, 0);
+			COOKIE.set(this.id, 0);
 		}
 		
-		if (this.id == "refresh_toggle") {
+		if (this.id == "rt") {
 			range_refresh_dis(this);
 		}
 		
-		if (this.id == "show_sunrise") {
-			check_show_sunrise();
+		if (this.id == "sr") {
+			check_sr();
+		}
+		
+		if (this.id == "am") {
+			check_am();
 		}
 	};
 }
@@ -382,4 +388,60 @@ for (var i = 0; i < toggles.length; i++) {
 range.oninput = function () {
 	localStorage.setItem("refresh", range.value);
 	set_range_helper();
+};
+
+// ========================== Background loader ===========================
+
+var check_bg = function () {
+	if (COOKIE.get("bg") != "") {
+		document.querySelector(".bg").style.backgroundImage = "url(" + COOKIE.get("bg") + ")";
+		document.querySelector("#bg2").style.backgroundImage = "url(" + COOKIE.get("bg") + ")";
+		
+		if (COOKIE.get("bgn").length > 28) {
+			document.querySelector("#bg_name").innerHTML = COOKIE.get("bgn").substr(0, 27) + "...";
+		} else {
+			document.querySelector("#bg_name").innerHTML = COOKIE.get("bgn");
+		}
+		
+		document.querySelector("#bg1").style.display = "block";
+	} else {
+		document.querySelector(".bg").removeAttribute("style");
+		document.querySelector("#bg2").removeAttribute("style");
+		document.querySelector("#bg_name").innerHTML = "";
+		
+		document.querySelector("#bg1").style.display = "none";
+	}
+};
+
+COOKIE.check("bg", "");
+COOKIE.check("bgn", "");
+check_bg();
+
+var bg_load = document.querySelector("#background-loader");
+
+bg_load.onchange = function (e) {
+	var reader = new FileReader();
+	reader.onload = function(){
+		var dataURL = reader.result;
+		
+		COOKIE.set("bg", dataURL);
+		COOKIE.set("bgn", e.target.files[0].name);
+		
+		check_bg();
+	};
+	reader.readAsDataURL(e.target.files[0]);
+};
+
+var close_bg = function () {
+	COOKIE.set("bg", "");
+	COOKIE.set("bgn", "");
+	
+	check_bg();
+};
+
+var download_bg = function () {
+	var l = document.createElement("a");
+	l.download = COOKIE.get("bgn");
+	l.href = COOKIE.get("bg");
+	l.click();
 };

@@ -23,6 +23,9 @@
   /* Set the font good for all! */
   font-family: "Roboto", sans-serif;
   
+  /* Disebled android blue gluy onclick */
+  -webkit-tap-highlight-color:  rgba(0, 0, 0, 0); 
+  
   /* animate all things */
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
@@ -46,6 +49,36 @@ body {
   cursor: default;
 }
 
+/* no animation */
+body.nm *,
+body.nm *::before,
+body.nm *::after {
+  -webkit-transition: all 0s;
+  -moz-transition: all 0s;
+  -o-transition: all 0s;
+  transition: all 0s;
+}
+
+
+.bg {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  opacity: 0.8;
+}
+
+.link {
+	display: inline;
+}
+.link:hover {
+	text-decoration: underline;
+}
+
 svg {
 	display: inline-block;
 	fill: #222;
@@ -53,7 +86,7 @@ svg {
 	height: 24px;
 }
 
-[onclick],.toggle>input,.image-box>input{cursor:pointer}
+[onclick],.toggle>input,.image-box .page.upload input{cursor:pointer}
 
 .tile {
   position: relative;
@@ -61,13 +94,55 @@ svg {
   height: 110px;
   margin: 15px;
   text-align: center;
+  overflow: hidden;
 }
 
-.grid, .col, .tile {
-  -webkit-transition: all 0s, opacity 0.3s;
-  -moz-transition: all 0s, opacity 0.3s;
-  -o-transition: all 0s, opacity 0.3s;
-  transition: all 0s, opacity 0.3s;
+.tile.live > div {
+  position: absolute;
+  width: 100%;
+  height: 110px;
+}
+
+@keyframes bottom-top {
+	0%, 25% {top:100%}
+	35%, 75% {top:0%}
+	85%, 100% {top:-100%}
+}
+
+.tile.live.bottom-top .a {
+  animation: bottom-top 8s infinite -4s;
+}
+
+.tile.live.bottom-top .b {
+  top: -100%;
+  animation: bottom-top 8s infinite;
+}
+
+@keyframes right-left {
+	0%, 25% {left:100%}
+	35%, 75% {left:0%}
+	85%, 100% {left:-100%}
+}
+
+.tile.live.right-left .a {
+  animation: right-left 12s infinite -8s;
+}
+
+.tile.live.right-left .b {
+  left: 100%;
+  animation: right-left 12s infinite -4s;
+}
+
+.tile.live.right-left .c {
+  left: 100%;
+  animation: right-left 12s infinite;
+}
+
+.grid, .col, .tile, .tile * {
+  -webkit-transition: all 0s;
+  -moz-transition: all 0s;
+  -o-transition: all 0s;
+  transition: all 0s;
 }
 
 .blue{background-color:#2196f3}
@@ -80,16 +155,18 @@ svg {
 .teal{background-color:#009588}
 .orange{background-color:#ff5722}
 .indigo{background-color:#3f51b5}
+.indigo700{background-color:#303F9F}
+.indigo900{background-color:#1A237E}
 .deeppurple{background-color:#673ab7}
 .gray{background-color:#757575}
 
-.tile > .label {
+.tile .label {
   position: absolute;
   bottom: 10px;
   width: 100%;
   font-size: 13px;
 }
-.tile > .text {
+.tile .text {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -103,7 +180,18 @@ svg {
 .sunrise{left:5px}
 .sunset{right:5px}
 
-.tile > svg {
+
+.tile.normal svg {
+  left: 16px;
+  bottom: 12px;
+  margin-left: 0px;
+}
+.tile.normal svg + .text {
+  text-align: left;
+  padding-left: 80px;
+}
+
+.tile svg {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -127,12 +215,6 @@ svg {
   right: 0px;
   bottom: 0px;
   margin: auto;
-  
-  opacity: 0;
-}
-
-.tile.last {
-  margin-bottom: 10px;
 }
 
 .tile.small {
@@ -165,9 +247,16 @@ svg {
 }
 
 @media (min-width: 520px) and (max-width: 1040px) {
-  .grid {
-    width: 520px;
-  }
+	.grid {
+		position: relative;
+		width: 520px;
+		margin: calc((100vw - 520px) / 3) auto;
+	}
+	.grid:after {
+		content: "";
+		clear: both;
+		display: block;
+	}
 }
 
 @media (min-width: 1040px) and (min-height: 560px) {
@@ -192,6 +281,7 @@ svg {
     height: 50%;
   }
   .grid {
+    position: absolute;
     width: calc(100% - 10px);
     height: calc(100% - 10px);
     margin: 5px;
@@ -401,41 +491,6 @@ input[type="range"] {
 
 .range_helper.disabled,input:disabled{opacity:0.5}
 
-
-
-/* The rotate animation */
-@-webkit-keyframes rotate { to { transform: rotate(360deg); } }
-@-moz-keyframes rotate { to { transform: rotate(360deg); } }
-@-o-keyframes rotate { to { transform: rotate(360deg); } }
-@keyframes rotate { to { transform: rotate(360deg); } }
-
-
-/* Select and style the svg loader */
-svg.loader {
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	bottom: 5%;
-	width: 64px;
-	height: 64px;
-	margin: auto;
-	
-	-webkit-animation: rotate 1s linear infinite;
-	-moz-animation: rotate 1s linear infinite;
-	-o-animation: rotate 1s linear infinite;
-	animation: rotate 1s linear infinite;
-}
-svg.loader > circle {
-	fill: none;
-	stroke: #fff;
-	stroke-width: 10px;
-	stroke-linecap: round;
-	
-	stroke-dasharray: 200;
-	stroke-dashoffset: 100;
-}
-
 .popup {
 	position: fixed;
 	top: 0px;
@@ -510,36 +565,34 @@ svg.loader > circle {
   }
 }
 
-.body > .item::after {
-    content: "";
-    clear: both;
-    display: block;
-}
 
 
 .image-box {
 	position: relative;
-	float: left;
-	width: calc(33.33% - 12px);
-	background-color: #ccc;
-	border-radius: 8px;
-	margin: 6px;
+	margin-top: 12px;
+	width: 100%;
+	height: 200px;
 	overflow: hidden;
 }
-.image-box::before{
-	content: "";
-	display: block;
-	padding-top: 100%;
-}
-.image-box > .content {
+
+.image-box .page {
 	position: absolute;
 	top: 0px;
 	left: 0px;
-	right: 0px;
-	bottom: 0px;
+	width: 100%;
+	height: 100%;
 }
 
-.image-box > input {
+.image-box .page.upload {
+	text-align: center;
+	background-color: #e5e5e5;
+}
+.image-box .page.upload svg {
+	margin: 48px 0px 6px;
+	width: 48px;
+	height: 48px;
+}
+.image-box .page.upload input {
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -548,14 +601,40 @@ svg.loader > circle {
 	opacity: 0;
 }
 
-.image-box > svg {
+.image-box .page.image {
+	background-color: #333;
+}
+
+.image-box .page.image #bg2 {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 125%;
+  opacity: 0.8;
+}
+
+.image-box .page.image .close {
 	position: absolute;
 	top: 0px;
-	left: 0px;
+	right: 0px;
+	fill: #fff;
+	padding: 16px;
+}
+.image-box .page.image .download {
+	position: absolute;
 	right: 0px;
 	bottom: 0px;
-	width: 64px;
-	height: 64px;
-	margin: auto;
 	fill: #fff;
+	padding: 16px;
+}
+.image-box .page.image p {
+	position: absolute;
+	top: 16px;
+	left: 16px;
+	color: #fff;
+	line-height: 24px;
 }

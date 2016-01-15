@@ -52,6 +52,8 @@ $lang["en"]["sidebars_settings_wind"] = "Wind speed unit";
 $lang["en"]["sidebars_settings_wind_0"] = "Kilometers per hour (km/h)";
 $lang["en"]["sidebars_settings_wind_1"] = "Meters per second (m/s)";
 $lang["en"]["sidebars_settings_background"] = "Background image";
+$lang["en"]["sidebars_settings_background_upload"] = "Upload an image";
+$lang["en"]["sidebars_settings_anim"] = "Disable animations";
 
 $lang["en"]["popup_cookies_h"] = "Cookies";
 $lang["en"]["popup_cookies_p"] = "We use cookies to save your settings. We don't use cookies to gather information about you.";
@@ -103,6 +105,8 @@ $lang["nl"]["sidebars_settings_wind"] = "Windsnelheid eenheid";
 $lang["nl"]["sidebars_settings_wind_0"] = "Kilometers per uur (km/h)";
 $lang["nl"]["sidebars_settings_wind_1"] = "Meters per seconden (m/s)";
 $lang["nl"]["sidebars_settings_background"] = "Achtergrond plaatje";
+$lang["nl"]["sidebars_settings_background_upload"] = "Upload een plaatje";
+$lang["nl"]["sidebars_settings_anim"] = "Stop animaties";
 
 $lang["nl"]["popup_cookies_h"] = "Cookies";
 $lang["nl"]["popup_cookies_p"] = "Wij gebruiken cookies om jouw instellingen te bewaren. We gebruiken cookies niet om informatie over jouw te verzamelen.";
