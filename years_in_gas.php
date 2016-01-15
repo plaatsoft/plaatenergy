@@ -33,16 +33,16 @@ $gas_use_forecast = plaatenergy_db_get_config_item('gas_use_forecast');
 
 function plaatenergy_years_in_gas_page() {
 
-	// input	
-	global $date;  
+	// input		 
 	global $pid;  
 	global $eid;  
 	
+	global $date; 	
 	global $gas_price;
 	global $gas_forecast;
 	global $gas_use_forecast;
-        global $graph_width;
-        global $graph_height;
+	global $graph_width;
+	global $graph_height;
 	
 	$prev_date = plaatenergy_prev_year($date);
 	$next_date = plaatenergy_next_year($date);
@@ -51,7 +51,7 @@ function plaatenergy_years_in_gas_page() {
 	
 	$total=0;
 	$total_price=0;
-        $price=0;
+	$price=0;
 	$count=0;
 	$data="";
 	
@@ -167,6 +167,7 @@ function plaatenergy_years_in_gas_page() {
 	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.EVENT_PREV,t('LINK_PREV_YEAR'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
 	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.EVENT_NEXT,t('LINK_NEXT_YEAR'));	
+	
 	if ($eid==EVENT_M3) {		
 		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
 	} else {
@@ -192,6 +193,12 @@ function plaatenergy_years_in_gas() {
    /* Event handler */
   switch ($eid) {
   
+  		case EVENT_M3:
+				break;
+				
+		case EVENT_EURO:
+				break;
+				
 		case EVENT_PREV:
 				break;
 				

@@ -33,11 +33,11 @@ function plaatenergy_release_notes_form(){
     $page .= '<ul>';
     $page .= '<li>Database model is now automaticly patch during version upgrade.</li>';
     $page .= '<li>Move most of the configuration items from php to database.</li>';
-    $page .= '<li>Now realtime outside weather information can be customized (thanks bplaat).</li>';
     $page .= '<li>Improve footer information of all pages.</li>';
-    $page .= '<li>Now day reports support manually measements.</li>';
-    $page .= '<li>Now most of the hyperlinks are javascript base.</li>';
+    $page .= '<li>Added support to add manual energy, solar measurments.</li>';
+    $page .= '<li>Refactor navigation. Its now complete javascript base.</li>';
     $page .= '<li>Improve installation. Now only one cron job is needed.</li>';
+	 $page .= '<li>Now realtime page contain more setting features (thanks bplaat).</li>';
     $page .= '</ul>';
     $page .= '</div>';
   }

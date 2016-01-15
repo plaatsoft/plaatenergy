@@ -18,6 +18,14 @@
 
 /*
 ** ---------------------
+** SETTINGS
+** ---------------------
+*/
+
+define('DEBUG', 0);
+
+/*
+** ---------------------
 ** GENERAL
 ** ---------------------
 */
@@ -31,16 +39,9 @@ function plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname) {
 
 	global $output;
 
-	if (MYSQL == 1) {
-	
-		$handle = mysql_connect($dbhost, $dbuser, $dbpass);
-		mysql_select_db($dbname);
+	$handle = mysql_connect($dbhost, $dbuser, $dbpass);
+	mysql_select_db($dbname);
 		
-	} else {
-	
-		$handle = pg_connect('host='.$dbhost.' dbname='.$dbname.' user='.$dbuser.' password='.$dbpass);
-	}
-	
 	if(!$handle) {
 		
 		$message = plaatenergy_db_error();
@@ -56,15 +57,7 @@ function plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname) {
  */
 function plaatenergy_db_close() {
 
-	if (MYSQL == 1) {
-
-		$result = mysql_close();
-
-	} else {
-	
-		$result = pg_close();
-	}
-	
+	$result = mysql_close();
 	return $result;
 }
 
@@ -74,15 +67,7 @@ function plaatenergy_db_close() {
  */
 function plaatenergy_db_error() {
 
-	if (MYSQL == 1) {
-	
-		$error = mysql_error();
-		
-	} else {
-	
-		$error = pg_last_error();
-	}
-	
+	$error = mysql_error();
 	echo $error;
 }
 
@@ -94,7 +79,6 @@ $query_count=0;
 function plaatenergy_db_count() {
 
 	global $query_count;
-
 	return $query_count;
 }
 
@@ -126,20 +110,13 @@ function plaatenergy_db_query($query) {
 	
 	$query_count++;
 
-        if (DEBUG == 1) {
-          echo $query.'<br/>';
-        }
-		
-	if (MYSQL == 1) {
-	
-		$result = mysql_query($query);
-		
-	} else {
-	
-		$query = str_replace('"', '\'', $query); 
-		$result = pg_query($query);
+	if (DEBUG == 1) {
+		echo $query.'<br/>';
 	}
 		
+	$result = mysql_query($query);
+		
+
 	if (!$result) {
 
 		$message = plaatenergy_db_error().' - '.$query;
@@ -155,15 +132,7 @@ function plaatenergy_db_query($query) {
  */
 function plaatenergy_db_fetch_object($result) {
 	
-	if (MYSQL == 1) {
-	
-		$data = @mysql_fetch_object($result);	
-		
-	} else {
-	
-		$data = @pg_fetch_object($result);
-	}
-	
+	$data = @mysql_fetch_object($result);	
 	return $data;
 }
 
@@ -173,15 +142,7 @@ function plaatenergy_db_fetch_object($result) {
  */
 function plaatenergy_db_escape($value) {
 	
-	if (MYSQL == 1) {
-	
-		$value = mysql_real_escape_string($value);
-		
-	} else {
-	
-		$value = pg_escape_string($value);
-	}
-	
+	$value = mysql_real_escape_string($value);	
 	return $value;
 }
 
@@ -191,15 +152,7 @@ function plaatenergy_db_escape($value) {
  */
 function plaatenergy_db_num_rows($value) {
 	
-	if (MYSQL == 1) {
-	
-		$value = mysql_num_rows($value);
-		
-	} else {
-	
-		$value = pg_num_rows($value);
-	}
-	
+	$value = mysql_num_rows($value);
 	return $value;
 }
 

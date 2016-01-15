@@ -55,11 +55,12 @@ function plaatenergy_report_page() {
 	global $end;
 	
 	$page  =  '<h1>'.t('TITLE_QUERY_REPORT').'</h1>';
-
+	
+	$page .=  '<br/>';
 	$page .=  '<label>'.t('LABEL_START_DATE').': </label>';
 	$page .=  '<br/>';
 	$page .=  '<input name="start" type="date" size="10" maxlength="10" value="'.$start.'"/>';
-	$page .=  '<br/>';
+	
 	$page .=  '<br/>';
 	$page .=  '<label>'.t('LABEL_END_DATE').': </label>';
 	$page .=  '<br/>';

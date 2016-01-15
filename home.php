@@ -153,14 +153,14 @@ function plaatenergy_home_page() {
   $page .= '<tr>';
 
   $page .= '<td>';
-  $page .= '<a href="years_in_kwh.php">'.t('LINK_IN_ENERGY').'</a>';
-  $page .= '<a href="years_out_kwh.php">'.t('LINK_OUT_ENERGY').'</a>';
-  $page .= plaatenergy_link('pid='.PAGE_YEARS_IN_GAS, t('LINK_IN_GAS'));
+  $page .= plaatenergy_link('pid='.PAGE_YEARS_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
+  $page .= plaatenergy_link('pid='.PAGE_YEARS_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
+  $page .= plaatenergy_link('pid='.PAGE_YEARS_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
   $page .= '</td>';
 
   $page .= '<td>';
   $page .= '<a href="year_in_kwh.php">'.t('LINK_IN_ENERGY').'</a>';
-  $page .= '<a href="year_out_kwh.php">'.t('LINK_OUT_ENERGY').'</a>';
+  $page .= plaatenergy_link('pid='.PAGE_YEAR_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
   $page .= '<a href="year_in_gas.php">'.t('LINK_IN_GAS').'</a>';
   $page .= '</td>';
 
@@ -213,8 +213,8 @@ function plaatenergy_home_page() {
 
   $page .= '<br/><br/>';
 
-  $page .= '<script type="text/javascript" src="js/version.js"></script>';
-  $page .= '<script type="text/javascript">check_version("'.$version.'")</script>';
+  //$page .= '<script type="text/javascript" src="js/version.js"></script>';
+  //$page .= '<script type="text/javascript">check_version("'.$version.'")</script>';
 
   return $page;
 }

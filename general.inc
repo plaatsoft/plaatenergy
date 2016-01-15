@@ -43,7 +43,6 @@ $day=0;
 $month=0;
 $year=0;   
 $type=0;   
-$zoom=1;
 
 $next_day=0;
 $next_month=0;
@@ -195,10 +194,6 @@ function text_banner($text) {
  */
 function general_header() {
 
-  global $time_start;
-
-  $time_start = microtime(true);
-
   echo '<!DOCTYPE html>';
   echo '<html>';
   echo '<head>'; 
@@ -244,16 +239,7 @@ function general_header() {
 /**
  * General footer
  */
-function general_footer() {
-
-  global $time_start;
-
-  // Increase request counter with one!
-  $counter = plaatenergy_db_get_config_item('request_counter');  
-  plaatenergy_db_set_config_item('request_counter', ++$counter);  
-
-  $time_end = microtime(true);
-  $time = $time_end - $time_start;
+function general_footer($time=0) {
 
   echo '<div class="copyright">' . t('LINK_COPYRIGHT') . '<br/>';
   //echo '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries - '.$counter.' requests]';
@@ -572,7 +558,6 @@ function year_parameters() {
   global $next_year;   
   global $prev_year;   
   global $type;   
-  global $zoom;
 
   if (isset($_GET["type"])) {
      $type = $_GET["type"];
@@ -584,12 +569,6 @@ function year_parameters() {
      $year = $_GET["year"];
   } else {
      $year = date('Y');
-  }
-
-  if (isset($_GET["zoom"])) {
-     $zoom = $_GET["zoom"];
-  } else {
-     $zoom = 1;
   }
 
   $prev_year=$year-1;   
@@ -682,7 +661,6 @@ function month_navigation($default) {
 function year_navigation($default) { 
 
   global $type;   
-  global $zoom;   
   global $prev_year;   
   global $year;   
   global $next_year;   
