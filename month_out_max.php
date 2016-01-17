@@ -84,7 +84,7 @@ function plaatenergy_month_out_energy_max_page() {
 		}
 	}
 
-	$json = "[['','".t('LINK_WATT')."'],".$data."]";
+	$json = "[['','".t('GENERAL_WATT')."'],".$data."]";
 
 	$page = '<script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
@@ -101,7 +101,7 @@ function plaatenergy_month_out_energy_max_page() {
         };
 
         var data = google.visualization.arrayToDataTable('.$json.');
-        var chart = new google.charts.Bar(document.getElementById("chart_div));
+        var chart = new google.charts.Bar(document.getElementById("chart_div"));
         chart.draw(data, google.charts.Bar.convertOptions(options));
       }
     </script>';
@@ -109,12 +109,14 @@ function plaatenergy_month_out_energy_max_page() {
 	$page .= '<h1>'.t('TITLE_MONTH_PEAK_OUT_KWH', $month, $year).'</h1>';
 	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
 
-	text_banner( t('MAX_PEAK_ENERGY', $max));
+	$page .= '<div class="remark">';
+	$page .= t('MAX_PEAK_ENERGY', $max);
+	$page .= '</div>';
 	
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.EVENT_PREV,t('LINK_PREV_MONTH'));
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date, t('LINK_PREV_MONTH'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.EVENT_NEXT,t('LINK_NEXT_MONTH'));	
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date, t('LINK_NEXT_MONTH'));	
 	$page .= '</div>';
 	
 	return $page;
@@ -132,16 +134,6 @@ function plaatenergy_month_out_energy_max() {
   global $eid;
   global $pid;
   
-  /* Event handler */
-  switch ($eid) {
-  
-		case EVENT_PREV:
-				break;
-				
-		case EVENT_NEXT:
-				break;
-	}
-
 	/* Page handler */
 	switch ($pid) {
 

@@ -98,9 +98,9 @@ function plaatenergy_day_humidity_page() {
 	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
 		
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.EVENT_PREV,t('LINK_PREV_DAY'));
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date ,t('LINK_PREV_DAY'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.EVENT_NEXT,t('LINK_NEXT_DAY'));	
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date ,t('LINK_NEXT_DAY'));	
 	$page .= '</div>';
 	
 	return $page;

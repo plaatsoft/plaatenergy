@@ -39,8 +39,8 @@ function plaatenergy_report_event() {
 		$page .=  'normal_used='.round($row->piek,2).' ';
 		$page .=  'low_delivered='.round($row->dalterug,2).' ';
 		$page .=  'normal_delivered='.round($row->piekterug,2).' ';
-		$page .=  'solar='.round($row->solar,2).' ';
-		$page .=  'gas='.round($row->gas,2).' ';
+		$page .=  'solar_delivered='.round($row->solar,2).' ';
+		$page .=  'gas_used='.round($row->gas,2).' ';
 
 		return $page;
 	}
@@ -62,6 +62,8 @@ function plaatenergy_report_page() {
 	$page .=  '<input name="start" type="date" size="10" maxlength="10" value="'.$start.'"/>';
 	
 	$page .=  '<br/>';
+	$page .=  '<br/>';
+	
 	$page .=  '<label>'.t('LABEL_END_DATE').': </label>';
 	$page .=  '<br/>';
 	$page .=  '<input name="end" type="date" size="10" maxlength="10" value="'.$end.'"/>';

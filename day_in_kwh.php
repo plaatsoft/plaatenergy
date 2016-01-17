@@ -22,10 +22,6 @@
 ** ---------------------
 */
 
-$energy_price = plaatenergy_db_get_config_item('energy_price');
-$energy_use_forecast = plaatenergy_db_get_config_item('energy_use_forecast');
-$dal_prev = plaatenergy_db_get_config_item('energy_meter_reading_low');
-$piek_prev = plaatenergy_db_get_config_item('energy_meter_reading_normal');
 
 /*
 ** ---------------------
@@ -41,12 +37,6 @@ function plaatenergy_day_in_energy_page() {
 
 	global $date; 
 	global $in_forecast;
-		
-	global $energy_price;
-	global $energy_use_forecast;
-	global $dal_prev;
-	global $piek_prev;
-	
 	global $graph_width;
 	global $graph_height;
 	
@@ -54,8 +44,13 @@ function plaatenergy_day_in_energy_page() {
 	$next_date = plaatenergy_next_day($date);
 	
 	list($year, $month, $day) = explode("-", $date);	
+	$current_date=mktime(0, 0, 0, $month, $day, $year);  
 	
-	$i=0;
+	$energy_price = plaatenergy_db_get_config_item('energy_price');
+	$energy_use_forecast = plaatenergy_db_get_config_item('energy_use_forecast');
+	
+	$dal_prev = plaatenergy_db_get_config_item('energy_meter_reading_low');
+	$piek_prev = plaatenergy_db_get_config_item('energy_meter_reading_normal');
 	$dalterug_prev = 0;
 	$piekterug_prev = 0;
 	$solar_prev=0;
@@ -66,14 +61,14 @@ function plaatenergy_day_in_energy_page() {
 	$dalterug_value=0;
 	$piekterug_value=0;
 
+	$i=0;
 	$data="";
 	$page = "";
 	$total=0;
 
 	// Get last energy measurement previous day
 	$sql  = 'select dal, piek, dalterug, piekterug from energy where ';
-	$sql .= 'timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" order by timestamp desc limit 0,1';
-	
+	$sql .= 'timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" order by timestamp desc limit 0,1';	
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 
@@ -87,16 +82,13 @@ function plaatenergy_day_in_energy_page() {
 	// Get last solar measurement previous day
 	$sql  = 'select etotal from solar where ';
 	$sql .= 'timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" order by timestamp desc limit 0,1';
-
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 	
 	if ( isset($row->etotal) ) {
 		$solar_prev = $row->etotal;
 	}
-	
-	$current_date=mktime(0, 0, 0, $month, $day, $year);  
-	
+		
 	while ($i<96) {
 
 		$timestamp1 = date("Y-m-d H:i:s", $current_date+(900*$i));
@@ -163,7 +155,7 @@ function plaatenergy_day_in_energy_page() {
 	
 		if (strlen($data)>0) {
 			$data.=',';
-     }
+		}
 		$data .= "['".date("H:i", $current_date+(900*$i))."',";
 		$data .= round($dal_value,2).','.round($piek_value,2).','.round($solar_value,2).']';
 	
@@ -172,7 +164,7 @@ function plaatenergy_day_in_energy_page() {
 	
 	$json = "[['','".t('USED_LOW_KWH')."','".t('USED_HIGH_KWH')."','".t('USED_SOLAR_KWH')."'],".$data."]";
 
-	if ($eid==EVENT_KWH) {
+	if ($eid==EVENT_WATT) {
 	
 		$timestamp1 = date("Y-m-d 00:00:00", $current_date);
 		$timestamp2 = date("Y-m-d 23:59:59", $current_date);
@@ -201,31 +193,10 @@ function plaatenergy_day_in_energy_page() {
 	
 	general_header();
 
-	if ($eid==EVENT_KWH) {
+	if ($eid==EVENT_WATT) {
 	
-		$page .= '<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-			<script type="text/javascript">
-			google.load("visualization", "1", {packages:["bar"]});
-			google.setOnLoadCallback(drawChart);
-			function drawChart() {
-
-			var options = {
-				bars: "vertical",
-				bar: {groupWidth: "90%"},
-				legend: { position: "none" },
-				vAxis: {format: "decimal" },
-				isStacked:true
-			};
-
-			var data = google.visualization.arrayToDataTable('.$json.');
-			var chart = new google.charts.Bar(document.getElementById("chart_div"));
-			chart.draw(data, google.charts.Bar.convertOptions(options));
-		}
-		</script>';
-		
-	} else { 
-	
-		$page .= '<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	$page .= '
+		   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 			<script type="text/javascript">
 			google.load("visualization", "1.1", {packages:["line"]});
 			google.setOnLoadCallback(drawChart);
@@ -249,6 +220,30 @@ function plaatenergy_day_in_energy_page() {
 				chart.draw(data, google.charts.Line.convertOptions(options));
 		}
 		</script>';
+				
+	} else { 
+	
+		$page .= '
+		   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+			<script type="text/javascript">
+			google.load("visualization", "1", {packages:["bar"]});
+			google.setOnLoadCallback(drawChart);
+			function drawChart() {
+
+			var options = {
+				bars: "vertical",
+				bar: {groupWidth: "90%"},
+				legend: { position: "none" },
+				vAxis: {format: "decimal" },
+				isStacked:true
+			};
+
+			var data = google.visualization.arrayToDataTable('.$json.');
+			var chart = new google.charts.Bar(document.getElementById("chart_div"));
+			chart.draw(data, google.charts.Bar.convertOptions(options));
+		}
+		</script>';
+			
 	}
 
 	$page .= '<h1>'.t('TITLE_DAY_IN_KWH', $day, $month, $year).'</h1>';
@@ -260,11 +255,11 @@ function plaatenergy_day_in_energy_page() {
 
 
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.EVENT_PREV,t('LINK_PREV_YEAR'));
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid, t('LINK_PREV_YEAR'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.EVENT_NEXT,t('LINK_NEXT_YEAR'));	
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid, t('LINK_NEXT_YEAR'));	
 	if ($eid==EVENT_KWH) {		
-		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
+		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_WATT,t('LINK_WATT'));	
 	} else {
 		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH,t('LINK_KWH'));		
 	}
@@ -303,12 +298,6 @@ function plaatenergy_day_in_energy() {
 				break;
 				
 		case EVENT_EURO:
-				break;
-				
-		case EVENT_PREV:
-				break;
-				
-		case EVENT_NEXT:
 				break;
 	}
 	

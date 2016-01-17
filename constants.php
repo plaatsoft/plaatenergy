@@ -66,6 +66,7 @@ define('EVENT_SAVE',                2004);
 define('EVENT_EURO',                2005);
 define('EVENT_KWH',                 2006);
 define('EVENT_M3',                  2007);
+define('EVENT_WATT',                2008);
 
 /*
 ** -----------

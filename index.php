@@ -44,7 +44,7 @@ if (strlen($token)>0) {
   foreach ($tokens as $item) {
      $items = preg_split ("/=/", $item);				
      $$items[0] = $items[1];	
-     //echo $items[0].'='.$items[1].' ';
+     //echo $items[0].'='.$items[1].'<br/>';
   }
 }
 
@@ -131,6 +131,11 @@ switch ($pid) {
 	case PAGE_MONTH_IN_ENERGY:
 		include "month_in_kwh.php";
 		plaatenergy_month_in_energy();
+		break;
+		
+	case PAGE_MONTH_OUT_ENERGY:
+		include "month_out_kwh.php";
+		plaatenergy_month_out_energy();
 		break;
 		
 	case PAGE_MONTH_OUT_ENERGY_MAX:

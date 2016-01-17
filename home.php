@@ -173,7 +173,7 @@ function plaatenergy_home_page() {
 
 		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_MONTH_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
-		$page .= '<a href="month_out_kwh.php">'.t('LINK_OUT_ENERGY').'</a>';
+		$page .= plaatenergy_link('pid='.PAGE_MONTH_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
 		$page .= '<a href="month_in_gas.php">'.t('LINK_IN_GAS').'</a>';
 		$page .= plaatenergy_link('pid='.PAGE_MONTH_OUT_ENERGY_MAX, t('LINK_OUT_ENERGY_MAX')); 
 		$page .= '</td>';
@@ -223,8 +223,7 @@ function plaatenergy_home_page() {
 		$page .= '<script type="text/javascript" src="js/version.js"></script>';
 		$page .= '<script type="text/javascript">check_version("'.$version.'")</script>';
 	}
-
-  return $page;
+	return $page;
 }
 
 /*

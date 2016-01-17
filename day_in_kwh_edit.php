@@ -164,7 +164,7 @@ function plaatenergy_day_in_edit_page() {
  
 	$page .= '<div class="nav">';
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'), 'home');
-	$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_SAVE, t('LINK_SAVE'));
+	$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_SAVE.'&date='.$date, t('LINK_SAVE'));
 	$page .= '</div>';
 	
 	return $page;

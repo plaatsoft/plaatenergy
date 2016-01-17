@@ -364,11 +364,14 @@ function plaatenergy_process($type=1) {
       $gas_diff = round($data2->gas-$gas,$round);
     }
 
-    if ($etotal>$data3->etotal) {
-      $solar_diff = round($data3->etotal,$round);
-    } else {
-      $solar_diff = round($data3->etotal-$etotal,$round);
-    }
+	$solar_diff=0;
+   if (isset($data3->etotal)) {
+		if ($etotal>$data3->etotal) {
+			$solar_diff = round($data3->etotal,$round);
+		} else {
+			$solar_diff = round($data3->etotal-$etotal,$round);
+		}
+	}
 
     if ($type!=2) {
 
@@ -418,7 +421,7 @@ function plaatenergy_process($type=1) {
 			$gas = $data2->gas;
 		}
 
-		if ($data3->etotal>0) {
+		if (isset($data3->etotal) && ($data3->etotal>0)) {
 			$etotal = $data3->etotal;
 		}
 	}

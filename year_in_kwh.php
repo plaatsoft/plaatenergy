@@ -22,8 +22,7 @@
 ** ---------------------
 */
 
-$energy_price = plaatenergy_db_get_config_item('energy_price');
-$energy_use_forecast = plaatenergy_db_get_config_item('energy_use_forecast');
+
 
 /*
 ** ---------------------
@@ -38,9 +37,8 @@ function plaatenergy_year_in_energy_page() {
 	global $eid;
 
 	global $date; 
-	global $energy_price;
 	global $in_forecast;
-	global $energy_use_forecast;
+
 	global $graph_width;
 	global $graph_height;
 	
@@ -48,6 +46,9 @@ function plaatenergy_year_in_energy_page() {
 	$next_date = plaatenergy_next_year($date);
 	
 	list($year) = explode("-", $date);	
+
+	$energy_price = plaatenergy_db_get_config_item('energy_price');
+	$energy_use_forecast = plaatenergy_db_get_config_item('energy_use_forecast');
 	
 	$total=0;
 	$total_price=0;
@@ -162,9 +163,9 @@ function plaatenergy_year_in_energy_page() {
 	$page .= '</div>';
 
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.EVENT_PREV,t('LINK_PREV_YEAR'));
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid,t('LINK_PREV_YEAR'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.EVENT_NEXT,t('LINK_NEXT_YEAR'));	
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid,t('LINK_NEXT_YEAR'));	
 	if ($eid==EVENT_KWH) {		
 		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
 	} else {
@@ -194,12 +195,6 @@ function plaatenergy_year_in_energy() {
 				break;
 				
 		case EVENT_EURO:
-				break;
-				
-		case EVENT_PREV:
-				break;
-				
-		case EVENT_NEXT:
 				break;
 	}
 	

@@ -70,6 +70,8 @@ $lang['LINK_UPDATE']     = 'Bijwerken';
 $lang['LINK_EXECUTE']    = 'Uitvoeren'; 
 $lang['LINK_SAVE']       = 'Opslaan'; 
  
+$lang['GENERAL_WATT']    = 'Watt'; 
+ 
 /*
 ** ------------------
 ** HOME

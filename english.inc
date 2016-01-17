@@ -70,6 +70,8 @@ $lang['LINK_UPDATE']     = 'Update';
 $lang['LINK_EXECUTE']    = 'Execute'; 
 $lang['LINK_SAVE']       = 'Save'; 
  
+$lang['GENERAL_WATT']    = 'Watt'; 
+ 
 /*
 ** ------------------
 ** HOME

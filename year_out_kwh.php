@@ -134,7 +134,7 @@ function plaatenergy_year_out_energy_page() {
 
 	$page .= '<div class="remark">';
 	if ($count>0) {
-		if ($eid==KWH) {
+		if ($eid==EVENT_KWH) {
 			$page .= t('AVERAGE_PER_MONTH_KWH', round(($total/$count),2), round($total,2) );
 		} else {
 			$page .= t('AVERAGE_PER_MONTH_EURO', round(($total_price/$count),2), round($total_price,2) );
@@ -145,9 +145,9 @@ function plaatenergy_year_out_energy_page() {
 	$page .= '</div>';
 	
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.EVENT_PREV,t('LINK_PREV_YEAR'));
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid,t('LINK_PREV_YEAR'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.EVENT_NEXT,t('LINK_NEXT_YEAR'));	
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid,t('LINK_NEXT_YEAR'));	
 	if ($eid==EVENT_KWH) {		
 		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
 	} else {
@@ -177,12 +177,6 @@ function plaatenergy_year_out_energy() {
 				break;
 				
 		case EVENT_EURO:
-				break;
-				
-		case EVENT_PREV:
-				break;
-				
-		case EVENT_NEXT:
 				break;
 	}
 	

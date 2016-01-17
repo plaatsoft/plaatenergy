@@ -130,9 +130,8 @@ function plaatenergy_years_in_gas_page() {
 					$page .= 'colors: ["#e0440e"],';
 				} else {
 					$page .= 'colors: ["#0066cc", "#808080"],';
-                                }
-			$page .= '}  }
-				
+				}
+			$page .= '
         };
         var data = google.visualization.arrayToDataTable('.$json.');
         var chart = new google.charts.Bar(document.getElementById("chart_div"));
@@ -170,9 +169,9 @@ function plaatenergy_years_in_gas_page() {
 	echo '</div>';	
 	
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.EVENT_PREV,t('LINK_PREV_YEAR'));
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid,t('LINK_PREV_YEAR'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.EVENT_NEXT,t('LINK_NEXT_YEAR'));	
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid,t('LINK_NEXT_YEAR'));	
 	
 	if ($eid==EVENT_M3) {		
 		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
@@ -203,12 +202,6 @@ function plaatenergy_years_in_gas() {
 				break;
 				
 		case EVENT_EURO:
-				break;
-				
-		case EVENT_PREV:
-				break;
-				
-		case EVENT_NEXT:
 				break;
 	}
 	
