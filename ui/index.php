@@ -281,14 +281,6 @@
 			</div>
 		</div>
 		
-		<style>
-		.updater{position:absolute;right:0px;bottom:0px;width:140px;height:4px;background-color:#fff}
-		.updater>.bar{height:100%}
-		</style>
-		<div class="updater">
-			<div class="bar <?php echo random_color(); ?>" style="width: 75%;"></div>
-		</div>
-		
 		<!-- JAVASCRIPT PART (js folder) -->
 		<script>
 			// The JS config object for JS settings
