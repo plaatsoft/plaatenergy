@@ -58,7 +58,7 @@ function plaatenergy_day_pressure_page() {
 
 		if ($timestamp>date("Y-m-d H:i:s")) {
 		   // Measurement in the future is always 0
-			$value = 0;
+			$value = 950;
 		} else if ( isset($row->pressure)) {
 			$value = $row->pressure;
 		}

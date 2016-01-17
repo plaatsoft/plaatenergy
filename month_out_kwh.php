@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
 **  ===========
 **  PlaatEnergy
 **  ===========
@@ -8,7 +8,7 @@
 **  Created by wplaat
 **
 **  For more information visit the following website.
-**  Website : www.plaatsoft.nl 
+**  Website : www.plaatsoft.nl
 **
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
@@ -28,11 +28,11 @@ function plaatenergy_month_out_energy_page() {
 	global $pid;
 	global $eid;
 
-	global $date; 
+	global $date;
 	global $in_forecast;
 	global $graph_width;
 	global $graph_height;
-		
+
 	$prev_date = plaatenergy_prev_month($date);
 	$next_date = plaatenergy_next_month($date);
 	
@@ -80,13 +80,13 @@ function plaatenergy_month_out_energy_page() {
 		}
 	}
 	$total_price=$total*$energy_price;
-	
+
 	if ($eid==EVENT_KWH) {
 		$json = "[['','".t('DELIVERED_KWH')."'],".$data."]";
-	} else { 
+	} else {
 		$json = "[['','".t('EURO')."'],".$data."]";
 	}
-	
+
 	$page = '
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript">
@@ -100,7 +100,7 @@ function plaatenergy_month_out_energy_page() {
           legend: { position: "none" },
           vAxis: {format: "decimal" },';
 			 
-	if ($eid==EVENT_KWH) {
+	if ($eid==EVENT_EURO) {
 		$page .= "colors: ['#e0440e']";
 	}
 	

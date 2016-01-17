@@ -87,20 +87,6 @@ header("Content-Type: application/json");
 header("Cache-Control: no-cache");
 header("Pragma: no-cache");
 
-// Datum in d:m:Y = 0 / Y:m:d = 1
-if ($_GET["q"][1] == "0") {
-  $json["date"] = date("Y-m-d");
-} elseif ($_GET["q"][1] == "1") {
-  $json["date"] = date("d-m-Y");
-}
-
-// Tijd in H:i:s = 0 / h:i:s A = 1
-if ($_GET["q"][1] == "0") {
-  $json["time"] = date("h:i:s A");
-} elseif ($_GET["q"][1] == "1") {
-  $json["time"] = date("H:i:s");
-}
-
 // Bereken de actuele verbruik in Watt
 if ($row2->vermogen > 0) {
   $json["current_watt"] = "- ".num($row2->vermogen,0)." Watt";
@@ -120,74 +106,25 @@ $json["total_decrease"] = num($totaal_verbruikt) . " kWh";
 $json["total_delivery"] = num($totaal_opgewekt). " kWh";
 
 // Bereken het totale verbruikte gas in m3 = 0 / dm3 = 1
-if ($_GET["q"][2] == "0") {
+if ($_GET["q"][1] == "0") {
   $json["total_gas"] = num($totaal_gas) . " m&sup3;";
   $json["gas_today"] = num($gas_value) . " m&sup3;";
-} elseif ($_GET["q"][2] == "1") {
+} elseif ($_GET["q"][1] == "1") {
   $json["total_gas"] = num($totaal_gas * 1000, 0) . " dm&sup3;";
   $json["gas_today"] = num($gas_value * 1000, 0) . " dm&sup3;";
 }
 
 // Bereken de temperatuur in graden celcius = 0 / fahrenheit = 1 / kelvin = 2
-if ($_GET["q"][3] == "0") {
+if ($_GET["q"][2] == "0") {
   $json["temperature"] = num($row1->temperature) . " &deg;C";
-} elseif ($_GET["q"][3] == "1") {
+} elseif ($_GET["q"][2] == "1") {
   $json["temperature"] = num($row1->temperature * 9 / 5 + 32) . " &deg;F";
-} elseif ($_GET["q"][3] == "2") {
+} elseif ($_GET["q"][2] == "2") {
   $json["temperature"] = num($row1->temperature + 273.15) . " K";
 }
 
 $json["pressure"] = num($row1->pressure) . " hPa";
 $json["humidity"] = num($row1->humidity) . " %";
-
-// Laad de weer informatie alleen als is aangegeven
-if ($_GET["q"][5] == 1) {
-	$w_data = json_decode(file_get_contents("http://api.openweathermap.org/data/2.5/weather?q=Gouda,nl&appid=2de143494c0b295cca9337e1e96b00e0"));
-	
-	if ($_GET["q"][3] == "0") {
-		$json["w_temperature"] = num($w_data->main->temp - 273.15) . " &deg;C";
-	} elseif ($_GET["q"][3] == "1") {
-		$json["w_temperature"] = num(($w_data->main->temp - 273.15) * 9 / 5 + 32) . " &deg;F";
-	} elseif ($_GET["q"][3] == "2") {
-		$json["w_temperature"] = num($w_data->main->temp) . " K";
-	}
-	
-	$json["w_pressure"] = num($w_data->main->pressure) . " hPa";
-	$json["w_humidity"] = num($w_data->main->humidity) . " %";
-	
-	if ($_GET["q"][4] == "0") {
-		$json["w_wind_speed"] = num($w_data->wind->speed * 3.6) . " km&#47;h";
-	} else {
-		$json["w_wind_speed"] = num($w_data->wind->speed) . " m&#47;s";
-	}
-	
-	// Sunset en Sunrise
-	if ($_GET["q"][1] == "0") {
-		$json["w_sunrise"] = date("h:i:s A", $w_data->sys->sunrise);
-		$json["w_sunset"] = date("h:i:s A", $w_data->sys->sunset);
-	} elseif ($_GET["q"][1] == "1") {
-		$json["w_sunrise"] = date("H:i:s", $w_data->sys->sunrise);
-		$json["w_sunset"] = date("H:i:s", $w_data->sys->sunset);
-	}
-} else {
-	// Zeg uit (nl) / off (en)
-	if ($_GET["q"][6] == "0") {
-		$json["w_temperature"] = "UIT";
-		$json["w_pressure"] = "UIT";
-		$json["w_humidity"] = "UIT";
-		$json["w_wind_speed"] = "UIT";
-		$json["w_sunrise"] = "UIT";
-		$json["w_sunset"] = "UIT";
-	} else {
-		$json["w_temperature"] = "OFF";
-		$json["w_pressure"] = "OFF";
-		$json["w_humidity"] = "OFF";
-		$json["w_wind_speed"] = "OFF";
-		$json["w_sunrise"] = "OFF";
-		$json["w_sunset"] = "OFF";
-	}
-}
-
 
 echo json_encode($json);
 

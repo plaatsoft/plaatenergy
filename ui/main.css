@@ -50,9 +50,9 @@ body {
 }
 
 /* no animation */
-body.nm *,
-body.nm *::before,
-body.nm *::after {
+body.noAnimation *,
+body.noAnimation *::before,
+body.noAnimation *::after {
   -webkit-transition: all 0s;
   -moz-transition: all 0s;
   -o-transition: all 0s;
@@ -100,7 +100,7 @@ svg {
 .tile.live > div {
   position: absolute;
   width: 100%;
-  height: 110px;
+  height: 100%;
 }
 
 @keyframes bottom-top {
@@ -118,25 +118,27 @@ svg {
   animation: bottom-top 8s infinite;
 }
 
-@keyframes right-left {
-	0%, 25% {left:100%}
-	35%, 75% {left:0%}
-	85%, 100% {left:-100%}
-}
 
-.tile.live.right-left .a {
-  animation: right-left 12s infinite -8s;
+
+@keyframes right-left {
+	0%, 50% {left:100%}
+	60%, 80% {left:0%}
+	90%, 100% {left:-100%}
 }
 
 .tile.live.right-left .b {
   left: 100%;
-  animation: right-left 12s infinite -4s;
+  animation: right-left 18s infinite -9s;
 }
 
 .tile.live.right-left .c {
   left: 100%;
-  animation: right-left 12s infinite;
+  animation: right-left 18s infinite -6s;
 }
+
+
+
+
 
 .grid, .col, .tile, .tile * {
   -webkit-transition: all 0s;
@@ -160,9 +162,17 @@ svg {
 .deeppurple{background-color:#673ab7}
 .gray{background-color:#757575}
 
+.tile .hn {
+  position: absolute;
+  top: 4px;
+  left: 16px;
+  width: 48px;
+  font-size: 13px;
+}
+
 .tile .label {
   position: absolute;
-  bottom: 10px;
+  bottom: 8px;
   width: 100%;
   font-size: 13px;
 }
@@ -171,8 +181,8 @@ svg {
   top: 0px;
   left: 0px;
   width: 100%;
-  font-size: 26px;
-  line-height: 95px;
+  font-size: 24px;
+  line-height: 100px;
   font-weight: 300;
 }
 
@@ -183,7 +193,6 @@ svg {
 
 .tile.normal svg {
   left: 16px;
-  bottom: 12px;
   margin-left: 0px;
 }
 .tile.normal svg + .text {
@@ -196,7 +205,7 @@ svg {
   top: 0px;
   left: 0px;
   right: 0px;
-  bottom: 15px;
+  bottom: 10px;
   width: 48px;
   height: 48px;
   margin: auto;
