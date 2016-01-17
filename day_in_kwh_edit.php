@@ -25,8 +25,6 @@
 $low = plaatenergy_post("low", 0);
 $normal = plaatenergy_post("normal", 0);
 
-day_parameters();
-
 /*
 ** ---------------------
 ** EVENTS
@@ -38,25 +36,21 @@ function plaatenergy_day_in_edit_save_event() {
    // input
 	global $low;
 	global $normal;
-	
-	$timestamp = date("Y-m-d 00:00:00", $current_date);
+	global $date;
 
 	$sql  = 'select dal as low, piek as normal from energy where ';
-	$sql .= 'timestamp="'.$timestamp.'" order by timestamp asc limit 0,1';
+	$sql .= 'timestamp="'.$date.' 00:00:00" order by timestamp asc limit 0,1';
 
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 	
-	if (isset($row->low)) {
-  
-		$sql4 = 'update energy set dal='.$low.', piek='.$normal.' where timestamp="'.$timestamp.'"';
-		
-	} else {
-	  
-		$sql4  = 'insert into energy ( timestamp, dal, piek) values ("'.$timestamp.'",'.$low.','.$normal.')';
+	if (isset($row->low)) {  
+		$sql = 'update energy set dal='.$low.', piek='.$normal.' where timestamp="'.$date.' 00:00:00"';		
+	} else {	  
+		$sql  = 'insert into energy ( timestamp, dal, piek) values ("'.$date.' 00:00:00",'.$low.','.$normal.')';
    }
  
-	plaatenergy_db_query($sql4);
+	plaatenergy_db_query($sql);
 	plaatenergy_process(2);
 }
 
@@ -69,16 +63,17 @@ function plaatenergy_day_in_edit_save_event() {
 function plaatenergy_day_in_edit_page() {
 
    // input
+   global $pid;
+	global $eid;
+	global $date;
+	
 	global $low;
 	global $normal;
 	
-   global $pid;
-	global $eid;
-   global $current_date;
-	
-	$timestamp = date("Y-m-d 00:00:00", $current_date);
+	list($year, $month, $day) = explode("-", $date);	
+		
 	$sql1  = 'select dal as low, piek as normal FROM energy where ';
-	$sql1 .= 'timestamp<"'.$timestamp.'" order by timestamp desc limit 0,1';
+	$sql1 .= 'timestamp<"'.$date.' 00:00:00" order by timestamp desc limit 0,1';
 
 	$result1 = plaatenergy_db_query($sql1);
 	$row1 = plaatenergy_db_fetch_object($result1);
@@ -92,10 +87,8 @@ function plaatenergy_day_in_edit_page() {
 
 	// -------------------------------------
 
-	$timestamp = date("Y-m-d 00:00:00", $current_date);
-	
 	$sql2  = 'select dal as low, piek as normal from energy where ';
-	$sql2 .= 'timestamp>"'.$timestamp.'" order by timestamp asc limit 0,1';
+	$sql2 .= 'timestamp>"'.$date.' 00:00:00" order by timestamp asc limit 0,1';
 
 	$result2 = plaatenergy_db_query($sql2);
 	$row2 = plaatenergy_db_fetch_object($result2);
@@ -120,10 +113,8 @@ function plaatenergy_day_in_edit_page() {
 
 	// -------------------------------------
 
-	$timestamp = date("Y-m-d 00:00:00", $current_date);
-
 	$sql3  = 'select dal as low, piek as normal from energy where ';
-	$sql3 .= 'timestamp="'.$timestamp.'" order by timestamp asc limit 0,1';
+	$sql3 .= 'timestamp="'.$date.' 00:00:00" order by timestamp asc limit 0,1';
 
 	$result3 = plaatenergy_db_query($sql3);
 	$row3 = plaatenergy_db_fetch_object($result3);
@@ -131,7 +122,7 @@ function plaatenergy_day_in_edit_page() {
 	$found=0;
 	if (isset($row3->low)) {
 		$found=1;
-		if ($do==0) {
+		if ($eid!=EVENT_SAVE) {
 			$low = $row3->low;
 			$normal = $row3->normal;
 		}

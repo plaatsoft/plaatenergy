@@ -44,8 +44,7 @@ function plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname) {
 		
 	if(!$handle) {
 		
-		$message = plaatenergy_db_error();
-				
+		plaatenergy_db_error();
 		return 0;		
 	}
 	return 1;
@@ -68,7 +67,10 @@ function plaatenergy_db_close() {
 function plaatenergy_db_error() {
 
 	$error = mysql_error();
-	echo $error;
+	
+	if (DEBUG == 1) {
+		echo $error.'<br/>';
+	}
 }
 
 /**
@@ -116,11 +118,8 @@ function plaatenergy_db_query($query) {
 		
 	$result = mysql_query($query);
 		
-
 	if (!$result) {
-
-		$message = plaatenergy_db_error().' - '.$query;
-		
+		plaatenergy_db_error();		
 	}
 	
 	return $result;

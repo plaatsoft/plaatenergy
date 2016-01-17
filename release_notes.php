@@ -38,6 +38,7 @@ function plaatenergy_release_notes_form(){
     $page .= '<li>Refactor navigation. Its now complete javascript base.</li>';
     $page .= '<li>Improve installation. Now only one cron job is needed.</li>';
 	 $page .= '<li>Now realtime page contain more setting features (thanks bplaat).</li>';
+	 $page .= '<li>Now nice error is showed when config.inc is missing.</li>';
     $page .= '</ul>';
     $page .= '</div>';
   }

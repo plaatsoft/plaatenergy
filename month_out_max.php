@@ -32,6 +32,11 @@ $date = plaatenergy_post("date", date('Y-m'));
 
 function plaatenergy_month_out_energy_max_page() {
 
+   // input
+	
+	global $pid;
+	global $eid;
+	
 	global $graph_width;
 	global $graph_height;
 	

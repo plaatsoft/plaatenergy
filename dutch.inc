@@ -68,12 +68,17 @@ $lang['LINK_EURO']       = i('eur') . 'Euro';
 $lang['LINK_INSERT']     = 'Toevoegen'; 
 $lang['LINK_UPDATE']     = 'Bijwerken'; 
 $lang['LINK_EXECUTE']    = 'Uitvoeren'; 
+$lang['LINK_SAVE']       = 'Opslaan'; 
  
 /*
 ** ------------------
 ** HOME
 ** ------------------
 */
+
+$lang ['CONGIG_BAD' ] = 'Het volgende bestand "config.inc" mist in de installatie directory.<br/><br/>
+PlaatEnergy werkt niet zonder dit bestand!<br/><br/>
+Hernoem config.inc.sample naar config.inc, zet de database instellingen goed en druk op F5 in je browser!';
 
 $lang['YEARS_REPORT'] = 'Jaren Rapportages';
 $lang['YEAR_REPORT'] = 'Jaar Rapportages';

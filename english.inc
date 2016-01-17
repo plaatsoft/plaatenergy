@@ -33,7 +33,6 @@ $lang['THEME_TO_DARK'] = 'Dark theme';
 $lang['ENGLISH'] = 'English';
 $lang['DUTCH'] = 'Dutch';
 
-
 $lang['EURO']            = 'Euro'; 
 $lang['USED_LOW_KWH']    = 'Low (kWh)'; 
 $lang['USED_HIGH_KWH']   = 'High (kWh)'; 
@@ -69,12 +68,17 @@ $lang['LINK_EURO']       = i('eur') . 'Euro';
 $lang['LINK_INSERT']     = 'Insert';  
 $lang['LINK_UPDATE']     = 'Update';  
 $lang['LINK_EXECUTE']    = 'Execute'; 
+$lang['LINK_SAVE']       = 'Save'; 
  
 /*
 ** ------------------
 ** HOME
 ** ------------------
 */
+
+$lang ['CONGIG_BAD' ] = 'The following file "config.inc" is missing in installation directory.<br/><br/>
+PlaatEnergy can not  work without!<br/><br/>
+Rename config.inc.sample to config.inc, update the database settings en press F5 in your browser!';
 
 $lang['YEARS_REPORT'] = 'Years Reports';
 $lang['YEAR_REPORT'] = 'Year Reports';

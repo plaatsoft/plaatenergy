@@ -18,7 +18,7 @@
 
 $time_start = microtime(true);
   
-include "config.inc";
+@include "config.inc";
 include "general.inc";
 include "constants.php";
 include "database.inc";
@@ -54,8 +54,8 @@ if (strlen($token)>0) {
 ** -------------------- 
 */
 
-plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
-plaatenergy_db_check_version($version);
+@plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
+@plaatenergy_db_check_version($version);
 
 /*
 ** -------------------
@@ -96,6 +96,11 @@ switch ($pid) {
 		
 	// ---------------------------------
 	
+	case PAGE_DAY_IN_ENERGY: 
+		include "day_in_kwh.php";
+		plaatenergy_day_in_energy();
+		break;
+		
 	case PAGE_DAY_IN_KWH_EDIT: 
 		include "day_in_kwh_edit.php";
 		plaatenergy_day_in_edit();
@@ -123,6 +128,11 @@ switch ($pid) {
 	
 	// ---------------------------------
 		
+	case PAGE_MONTH_IN_ENERGY:
+		include "month_in_kwh.php";
+		plaatenergy_month_in_energy();
+		break;
+		
 	case PAGE_MONTH_OUT_ENERGY_MAX:
 		include "month_out_max.php";
 		plaatenergy_month_out_energy_max();
@@ -130,6 +140,11 @@ switch ($pid) {
 	
 	// ---------------------------------
 	
+	case PAGE_YEAR_IN_ENERGY:
+		include "year_in_kwh.php";
+		plaatenergy_year_in_energy();
+		break;
+		
 	case PAGE_YEAR_OUT_ENERGY:
 		include "year_out_kwh.php";
 		plaatenergy_year_out_energy();
