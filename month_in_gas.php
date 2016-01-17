@@ -16,93 +16,102 @@
 **  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
-include "config.inc";
-include "general.inc";
-include "database.inc";
+/*
+** ---------------------
+** PAGES
+** ---------------------
+*/
 
-month_parameters();
+function plaatenergy_month_in_gas_page() {
 
-plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
+	// input
+	global $pid;
+	global $eid;
 
-$gas_price = plaatenergy_db_get_config_item('gas_price');
+	global $date; 
+	global $in_forecast;
+	global $graph_width;
+	global $graph_height;
+		
+	$prev_date = plaatenergy_prev_month($date);
+	$next_date = plaatenergy_next_month($date);
+	
+	list($year, $month) = explode("-", $date);	
+	
+	$gas_price = plaatenergy_db_get_config_item('gas_price');
+	
+	$total=0;
+	$total_price=0;
+	$count=0;
+	$data="";
+	
+	if ( (date('m')==$month) && (date('Y')==$year)) { 
+		$count = date('d');
+	} else {
+		$count = cal_days_in_month(CAL_GREGORIAN, $month, $year); 
+	}
+	
+	for($d=1; $d<=31; $d++)
+	{
+		$time=mktime(12, 0, 0, $month, $d, $year);          
+	
+		if (date('m', $time)==$month) {
+			$timestamp1=date('Y-m-d 00:00:00', $time);
+			$timestamp2=date('Y-m-d 23:59:59', $time);
+	
+			$sql = 'select sum(gas) as gas FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 
-$total=0;
-$total_price=0;
-$count=0;
-$data="";
+			$result = plaatenergy_db_query($sql);
+			$row = plaatenergy_db_fetch_object($result);
 
-if ( (date('m')==$month) && (date('Y')==$year)) { 
-   $count = date('d');
-} else {
-   $count = cal_days_in_month(CAL_GREGORIAN, $month, $year); 
-}
+			$gas_value=0;
 
-for($d=1; $d<=31; $d++)
-{
-    $time=mktime(12, 0, 0, $month, $d, $year);          
+			if ( isset($row->gas)) {	
+				if ($row->gas>0) {
+					$gas_value=$row->gas;
+				}
+			}
 
-    if (date('m', $time)==$month) {
-        $timestamp1=date('Y-m-d 00:00:00', $time);
-        $timestamp2=date('Y-m-d 23:59:59', $time);
+			if (strlen($data)>0) {
+				$data.=',';
+			}
+			$data .= "['".date("d-m", $time)."',";
+			if ($eid=EVENT_M3) {
+				$data .= round($gas_value,2).']';
+			} else { 
+				$data .= round($gas_value*$gas_price,2).']';
+			}
+			$total += $gas_value;
+			$total_price += $gas_value*$gas_price;
+		}
+	}
 
-        $sql = 'select sum(gas) as gas FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+	if ($eid=EVENT_M3) {
+		$json = "[['','".t('USED_M3')."'],".$data."]";
+	} else { 
+		$json = "[['','".t('EURO')."'],".$data."]";
+	}
 
-        $result = plaatenergy_db_query($sql);
-		  $row = plaatenergy_db_fetch_object($result);
-
-        $gas_value=0;
-
-        if ( isset($row->gas)) {
-
-          if ($row->gas>0) {
-             $gas_value=$row->gas;
-          }
-        }
-
-        if (strlen($data)>0) {
-          $data.=',';
-        }
-        $data .= "['".date("d-m", $time)."',";
-        if ($type==1) {
-            $data .= round($gas_value,2).']';
-        } else { 
-            $data .= round($gas_value*$gas_price,2).']';
-        }
-        $total += $gas_value;
-        $total_price += $gas_value*$gas_price;
-    }
-}
-
-if ($type==1) {
-   $json = "[['','".t('USED_M3')."'],".$data."]";
-} else { 
-   $json = "[['','".t('EURO')."'],".$data."]";
-}
-
-general_header();
-
-?>
-
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	$page = '<script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["bar"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
 
        var options = {
-          bars: 'vertical',
+          bars: "vertical",
           bar: {groupWidth: "90%"},
-          legend: { position: 'none' },
-          vAxis: {format: 'decimal'},
-          <?php
-          if ($type==2) {
-             echo "colors: ['#e0440e']";
-          }
-          ?>
-        };
+          legend: { position: "none" },
+          vAxis: {format: "decimal"},';
+   
+	if ($eid==EVENT_EURO) {
+      $page .= "colors: ['#e0440e']";
+   }
+       
+	$page .= '};
 
-        var data = google.visualization.arrayToDataTable(<?php echo $json?>);
-        var chart = new google.charts.Bar(document.getElementById('chart_div'));
+        var data = google.visualization.arrayToDataTable('.$json.');
+        var chart = new google.charts.Bar(document.getElementById("chart_div"));
         chart.draw(data, google.charts.Bar.convertOptions(options));
 
         google.visualization.events.addListener(chart, "select", selectHandler);
@@ -110,33 +119,80 @@ general_header();
         function selectHandler(e)     {
            var date = data.getValue(chart.getSelection()[0].row, 0);
            var day = date.split("-");
-           window.location="day_in_gas.php?day="+day[0]+"&month=<?php echo $month.'&year='.$year;?>"
+           window.location="day_in_gas.php?day="+day[0]+"&month='.$month.'&year='.$year.'"
         }
      }
 
-    </script>
+   </script>';
+	
+	$page .= '<h1>'.t('TITLE_MONTH_IN_GAS', $month, $year).'</h1>';
+	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.'"></div>';
 
-<?php
-
-echo '<h1>'.t('TITLE_MONTH_IN_GAS', $month, $year).'</h1>';
-echo '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.'"></div>';
-
-if ($count>0) {
-
-  if ($type==1) {
-     text_banner(t('AVERAGE_PER_DAY_M3', round(($total/$count),2), round($total,2)));
-  } else {
-     text_banner(t('AVERAGE_PER_DAY_EURO', round(($total_price/$count),2), round($total_price,2)));
-  }
-
-} else {
-  text_banner('&nbsp');
+	$page .= '<div class="remark">';
+	if ($count>0) {
+		if ($eid=EVENT_M3) {
+			$page .= t('AVERAGE_PER_DAY_M3', round(($total/$count),2), round($total,2));
+		} else {
+			$page .= t('AVERAGE_PER_DAY_EURO', round(($total_price/$count),2), round($total_price,2));
+		}
+	} else {
+		$page .= '&nbsp';
+	}
+	$page .= '</div>';
+	
+	$page .= '<div class="nav">';
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid,t('LINK_PREV_YEAR'));
+	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid,t('LINK_NEXT_YEAR'));	
+	
+	if ($eid==EVENT_M3) {		
+		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
+	} else {
+		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH,t('LINK_KWH'));		
+	}
+	$page .= '</div>';
+	
+	return $page;
 }
 
-month_navigation( t('LINK_M3') );
+/*
+** ---------------------
+** HANDLER
+** ---------------------
+*/
 
-general_footer();
+function plaatenergy_month_in_gas() {
+
+  /* input */
+  global $pid;
+  global $eid;
+  
+   /* Event handler */
+  switch ($eid) {
+  
+		case EVENT_M3:
+				break;
+				
+		case EVENT_EURO:
+				break;
+	}
+	
+	/* Page handler */
+	switch ($pid) {
+
+		case PAGE_MONTH_IN_GAS:
+			echo plaatenergy_month_in_gas_page();
+			break;
+	}
+}
+
+/*
+** ---------------------
+** THE END
+** ---------------------
+*/
 
 ?>
+
 
 

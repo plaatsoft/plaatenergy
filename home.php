@@ -168,20 +168,20 @@ function plaatenergy_home_page() {
 		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_YEAR_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
 		$page .= plaatenergy_link('pid='.PAGE_YEAR_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
-		$page .= '<a href="year_in_gas.php">'.t('LINK_IN_GAS').'</a>';
+		$page .= plaatenergy_link('pid='.PAGE_YEAR_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
 		$page .= '</td>';
 
 		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_MONTH_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
 		$page .= plaatenergy_link('pid='.PAGE_MONTH_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
-		$page .= '<a href="month_in_gas.php">'.t('LINK_IN_GAS').'</a>';
+		$page .= plaatenergy_link('pid='.PAGE_MONTH_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
 		$page .= plaatenergy_link('pid='.PAGE_MONTH_OUT_ENERGY_MAX, t('LINK_OUT_ENERGY_MAX')); 
 		$page .= '</td>';
 
 		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_DAY_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
-		$page .= '<a href="day_out_kwh.php">'.t('LINK_OUT_ENERGY').'</a>';
-		$page .= '<a href="day_in_gas.php">'.t('LINK_IN_GAS').'</a>';
+		$page .= plaatenergy_link('pid='.PAGE_DAY_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
+		$page .= plaatenergy_link('pid='.PAGE_DAY_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
 		$page .= '</td>';
 
 		$page .= '<td>';

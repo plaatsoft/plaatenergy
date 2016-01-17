@@ -20,7 +20,6 @@ $time_start = microtime(true);
   
 @include "config.inc";
 include "general.inc";
-include "constants.php";
 include "database.inc";
 
 /*
@@ -46,6 +45,61 @@ if (strlen($token)>0) {
      $$items[0] = $items[1];	
      //echo $items[0].'='.$items[1].'<br/>';
   }
+}
+
+/*
+** ----------------------
+** Cookies
+** ----------------------
+*/
+
+if (!isset($_COOKIE["theme"])) {
+	$_COOKIE["theme"] = "light";
+}
+
+if (!isset($_COOKIE["lang"])) {
+	if (substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) == "nl") {
+		$_COOKIE["lang"] = "nl";
+	} else {
+		$_COOKIE["lang"] = "en";
+	}
+}
+
+if (!isset($_COOKIE["allow_cookies"])) {
+	$_COOKIE["allow_cookies"] = "no";
+}
+
+if (isset($_GET["theme"])) {
+	if ($_GET["theme"] == "light") {
+		set_cookie_and_refresh("theme", "light");
+	} elseif ($_GET["theme"] == "dark") {
+		set_cookie_and_refresh("theme", "dark");
+	}
+}
+
+if (isset($_GET["lang"])) {
+	if ($_GET["lang"] == "nl") {
+		set_cookie_and_refresh("lang", "nl");
+	} elseif ($_GET["lang"] == "en") {
+		set_cookie_and_refresh("lang", "en");
+	}
+}
+
+if (isset($_GET["allow_cookies"])) {
+	if ($_GET["allow_cookies"] == "yes") {
+		set_cookie_and_refresh("allow_cookies", "yes");
+	}
+}
+
+// Load language resource based on browser language setting.
+switch ($_COOKIE["lang"]) {
+	case "nl":
+		include("dutch.inc");
+        break;        
+		
+   default:
+      include("english.inc");
+       break;
 }
 
 /*
@@ -106,11 +160,26 @@ switch ($pid) {
 		plaatenergy_day_in_edit();
 		break;
 		
+	case PAGE_DAY_OUT_ENERGY: 
+		include "day_out_kwh.php";
+		plaatenergy_day_out_energy();
+		break;
+		
 	case PAGE_DAY_OUT_KWH_EDIT: 
 		include "day_out_kwh_edit.php";
 		plaatenergy_day_out_edit();
 		break;
 		
+	case PAGE_DAY_IN_GAS: 
+		include "day_in_gas.php";
+		plaatenergy_day_in_gas();
+		break;
+				
+	case PAGE_DAY_IN_GAS_EDIT: 
+		include "day_in_gas_edit.php";
+		plaatenergy_day_in_gas_edit();
+		break;
+
 	case PAGE_DAY_PRESSURE: 
 		include "day_pressure.php";
 		plaatenergy_day_pressure();
@@ -138,6 +207,11 @@ switch ($pid) {
 		plaatenergy_month_out_energy();
 		break;
 		
+	case PAGE_MONTH_IN_GAS:
+		include "month_in_gas.php";
+		plaatenergy_month_in_gas();
+		break;
+		
 	case PAGE_MONTH_OUT_ENERGY_MAX:
 		include "month_out_max.php";
 		plaatenergy_month_out_energy_max();
@@ -153,6 +227,11 @@ switch ($pid) {
 	case PAGE_YEAR_OUT_ENERGY:
 		include "year_out_kwh.php";
 		plaatenergy_year_out_energy();
+		break;
+		
+	case PAGE_YEAR_IN_GAS:
+		include "year_in_gas.php";
+		plaatenergy_year_in_gas();
 		break;
 		
 	// ---------------------------------

@@ -184,9 +184,10 @@ $lang['TOTAL_PER_DAY_M3'] = 'Total = %s m&sup3;';
 */
 
 $lang['TITLE_IN_KWH_EDIT'] = 'Energy Measurement Correction';
-$lang['TITLE_IN_M3_EDIT'] = 'Gas Measurement Correction';
 $lang['TITLE_OUT_KWH_EDIT'] = 'Solar Measurement Correction';
+$lang['TITLE_IN_GAS_EDIT'] = 'Gas Measurement Correction';
 
+$lang['LABEL_GAS'] = 'Gas meter value reading (m&sup3)';
 $lang['LABEL_LOW'] = 'Low meter value reading (kWh)';
 $lang['LABEL_NORMAL'] = 'Normal meter value reading (kWh)';
 $lang['LABEL_ETOTAL'] = 'Etotal meter reading value (kWh)';

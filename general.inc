@@ -16,9 +16,11 @@
 **  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
-// ----------------------------
-// SETTINGS
-// ----------------------------
+/*
+** -----------
+** CONSTANTS
+** -----------
+*/
 
 $version = "0.5";
 
@@ -35,73 +37,71 @@ $out_forecast = array(0,50/2550,100/2550,210/2550,310/2550,360/2550,360/2550,330
 // Gas use forecast (per month)
 $gas_forecast = array(0,250/1500,220/1500,180/1500,110/1500,60/1500,40/1500,30/1500,30/1500,50/1500,110/1500,190/1500,230/1500);
 
-$prev_date=0;
-$current_date=0;
-$next_date=0;
 
-$day=0;
-$month=0;
-$year=0;   
-$type=0;   
+/*
+** -----------
+** PAGES
+** -----------
+*/
 
-$next_day=0;
-$next_month=0;
-$next_year=0;   
+define('PAGE_HOME',                 100);
+define('PAGE_ABOUT',                101);
+define('PAGE_DONATE',               102);
+define('PAGE_RELEASE_NOTES',        103);
+define('PAGE_REPORT',               104);
 
-$prev_day=0;   
-$prev_month=0;
-$prev_year=0;
+define('PAGE_YEARS_IN_ENERGY',      110);
+define('PAGE_YEARS_OUT_ENERGY',     111);
+define('PAGE_YEARS_IN_GAS',         112);
 
-$day=0;   
-$month=0;
-$year=0;
-$page=1;
+define('PAGE_YEAR_IN_ENERGY',       120);
+define('PAGE_YEAR_OUT_ENERGY',      121);
+define('PAGE_YEAR_IN_GAS',          122);
 
-/**
- *  COOKIES VERY IMPORTANT
- */
+define('PAGE_MONTH_IN_ENERGY',      130);
+define('PAGE_MONTH_OUT_ENERGY',     131);
+define('PAGE_MONTH_OUT_ENERGY_MAX', 132);
+define('PAGE_MONTH_IN_GAS',         133);
+
+define('PAGE_DAY_IN_ENERGY',        140);
+define('PAGE_DAY_OUT_ENERGY',       141);
+define('PAGE_DAY_IN_GAS',           142);
+define('PAGE_DAY_IN_KWH_EDIT',      143);
+define('PAGE_DAY_OUT_KWH_EDIT',     144);
+define('PAGE_DAY_IN_GAS_EDIT',      145);
+
+define('PAGE_DAY_PRESSURE',         150);
+define('PAGE_DAY_TEMPERATURE',      151);
+define('PAGE_DAY_HUMIDITY',         152);
+
+/*
+** -----------
+** EVENTS
+** -----------
+*/
+
+define('EVENT_PROCESS_CURRENT_DAY',   1);
+define('EVENT_PROCESS_ALL_DAYS',      2);
+
+define('EVENT_NONE',                200);
+define('EVENT_PREV',                201);
+define('EVENT_NEXT',                202);
+define('EVENT_EXECUTE',             203);
+define('EVENT_SAVE',                204);
+define('EVENT_EURO',                205);
+define('EVENT_KWH',                 206);
+define('EVENT_M3',                  207);
+define('EVENT_WATT',                208);
+
+// ----------------------------
+// SETTINGS
+// ----------------------------
+
 function set_cookie_and_refresh ($name, $value) {
 	setcookie($name, $value, time() + (86400 * 30), "/");
 	header("Location: " . $_SERVER['PHP_SELF']);
 }
 
-if (!isset($_COOKIE["theme"])) {
-	$_COOKIE["theme"] = "light";
-}
-
-if (!isset($_COOKIE["lang"])) {
-	if (substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) == "nl") {
-		$_COOKIE["lang"] = "nl";
-	} else {
-		$_COOKIE["lang"] = "en";
-	}
-}
-
-if (!isset($_COOKIE["allow_cookies"])) {
-	$_COOKIE["allow_cookies"] = "no";
-}
-
-if (isset($_GET["theme"])) {
-	if ($_GET["theme"] == "light") {
-		set_cookie_and_refresh("theme", "light");
-	} elseif ($_GET["theme"] == "dark") {
-		set_cookie_and_refresh("theme", "dark");
-	}
-}
-
-if (isset($_GET["lang"])) {
-	if ($_GET["lang"] == "nl") {
-		set_cookie_and_refresh("lang", "nl");
-	} elseif ($_GET["lang"] == "en") {
-		set_cookie_and_refresh("lang", "en");
-	}
-}
-
-if (isset($_GET["allow_cookies"])) {
-	if ($_GET["allow_cookies"] == "yes") {
-		set_cookie_and_refresh("allow_cookies", "yes");
-	}
-}
 
 function i ($name) { 
 	$icon = '<i class="fa fa-' . $name;
@@ -112,16 +112,7 @@ function i ($name) {
 	return $icon;
 }
 
-// Load language resource based on browser language setting.
-switch ($_COOKIE["lang"]) {
-    case "nl":
-			include("dutch.inc");
-         break;        
-		
-    default:
-         include("english.inc");
-         break;
-}
+
 
 // ----------------------------
 // PAGE LAYOUT
@@ -158,7 +149,7 @@ function t() {
 /**
  * Add title icon 
  */
-function add_icons ($path = './ui/') {
+function add_icons($path = './ui/') {
 	$path = $path . 'images/icons/';
 	
 	// Charset
@@ -189,14 +180,6 @@ function add_icons ($path = './ui/') {
 	   
 	return $page;
 }
-
-/**
- * Text Banner
- */
-function text_banner($text) { 
-  echo '<div class="remark">' . $text . '</div>';
-}
-
 
 /**
  * General header
@@ -412,284 +395,6 @@ function plaatenergy_link($parameters, $label, $id="", $title="") {
 	}
 	$link .= '>'.$label.'</a>';	
 	return $link;
-}
-
-
-// ----------------------------
-// TO BE REMOVE SOON
-// ----------------------------
-
-/**
- * Process day parameters 
- */
-function day_parameters() {
-
-  global $prev_date;
-  global $current_date;
-  global $next_date;
-
-  global $day;
-  global $month;
-  global $year;   
-  global $type;   
-  global $edit;   
-
-  global $next_day;
-  global $next_month;
-  global $next_year;   
-
-  global $prev_day;   
-  global $prev_month;
-  global $prev_year;
-
-  if (isset($_GET["type"])) {
-     $type = $_GET["type"];
-  } else {
-     $type = 1;
-  }
-
-  if (isset($_GET["edit"])) {
-     $edit = $_GET["edit"];
-  } else {
-     $edit = 0;
-  }
-
-  if (isset($_GET["day"])) {
-     $day = $_GET["day"];
-  } else {
-     $day = date('d');
-  }
-
-  if (isset($_GET["month"])) {
-     $month = $_GET["month"];
-  }   else {
-     $month = date('m');
-  }
-
-  if (isset($_GET["year"])) {
-     $year = $_GET["year"];
-  }   else {
-     $year = date('Y');
-  }
-
-  $prev_day=$day-1;
-  $prev_month=$month;
-  $prev_year=$year;   
-
-  if ($prev_day<=0) {
-     $prev_month=$month-1;
-     $prev_year=$year;
-     $prev_day=date("t", strtotime($prev_year.'-'.$prev_month.'-1'));
-  }
-
-  if ($prev_month<=0) {
-     $prev_month=12;
-     $prev_year=$year-1;
-     $prev_day=date("t", strtotime($prev_year.'-'.$prev_month.'-1'));
-  }
-
-  $next_day=$day+1;   
-  $next_month=$month;
-  $next_year=$year;   
-  
-  if ($next_day>date("t", strtotime($next_year.'-'.$next_month.'-1'))) {
-     $next_day=1;
-     $next_month=$next_month+1;
-     $next_year=$year;
-  }
-  
-  if ($next_month>12) {
-     $next_day=1;
-     $next_month=1;
-     $next_year=$year+1;
-  }
-
-  $prev_date=mktime(0, 0, 0, $prev_month, $prev_day, $prev_year);
-  $current_date=mktime(0, 0, 0, $month, $day, $year);
-  $next_date=mktime(0, 0, 0, $next_month, $next_day, $next_year);
-}
-
-
-/**
- * Process month parameters 
- */
-function month_parameters() { 
-  
-  global $month;
-  global $year;   
-
-  global $next_month;
-  global $next_year;   
-
-  global $prev_month;
-  global $prev_year;   
-  global $type;
-
-  if (isset($_GET["type"])) {
-     $type = $_GET["type"];
-  } else {
-     $type = 1;
-  }
-
-  if (isset($_GET["month"])) {
-   $month = $_GET["month"];
-  } else {
-     $month = date('m');
-  }
-
-  if (isset($_GET["year"])) {
-     $year = $_GET["year"];
-  } else {
-     $year = date('Y');
-  }
-
-  $prev_year=$year;   
-  $prev_month=$month-1;
-  if ($prev_month<=0) {
-     $prev_month=12;
-     $prev_year=$year-1;
-  }
-  
-  $next_year=$year;   
-  $next_month=$month+1;
-  if ($next_month>12) {
-     $next_month=1;
-     $next_year=$year+1;
-  }
-}
-
-/**
- * Process year parameters 
- */
-function year_parameters() { 
-
-  global $year;   
-  global $next_year;   
-  global $prev_year;   
-  global $type;   
-
-  if (isset($_GET["type"])) {
-     $type = $_GET["type"];
-  } else {
-     $type = 1;
-  }
-
-  if (isset($_GET["year"])) {
-     $year = $_GET["year"];
-  } else {
-     $year = date('Y');
-  }
-
-  $prev_year=$year-1;   
-  $next_year=$year+1;   
-}
-
-/**
- * Process day navigation
- */
-function day_navigation($edit=0) { 
-
-  global $type;   
-  global $year;   
-  global $month;   
-  global $day;   
-
-  global $next_day;
-  global $next_month;
-  global $next_year;   
-
-  global $prev_day;   
-  global $prev_month;
-  global $prev_year;   
-
-  echo '<div class="nav">';
-
-  echo '<a href="?day='.$prev_day.'&month='.$prev_month.'&year='.$prev_year.'&type='.$type.'">'.t('LINK_PREV_DAY').'</a>';
-  echo '<a href=".">'.t('LINK_HOME').'</a>';
-  echo '<a href="?day='.$next_day.'&month='.$next_month.'&year='.$next_year.'&type='.$type.'">'.t('LINK_NEXT_DAY').'</a>';
-
-  switch ($type) {
-
-    case 1: echo '<a href="?day='.$day.'&month='.$month.'&year='.$year.'&type=2">'.t('LINK_WATT').'</a>';
-            break;
-
-    case 2: echo '<a href="?day='.$day.'&month='.$month.'&year='.$year.'&type=1">'.t('LINK_KWH').'</a>';
-            break;
-  }
-
-  switch ($edit) {
-
-    case 1: echo plaatenergy_link('pid='.PAGE_IN_KWH_EDIT, t('LINK_EDIT'));
-            break;
-
-    case 2: echo '<a href="day_out_kwh_edit.php?day='.$day.'&month='.$month.'&year='.$year.'&edit=1">'.t('LINK_EDIT').'</a>';
-            break;
-
-    case 3: echo '<a href="day_in_gas_edit.php?day='.$day.'&month='.$month.'&year='.$year.'&edit=1">'.t('LINK_EDIT').'</a>';
-            break;
-  }
-    
-  echo "</div>";
-}
-
-/**
- * Process month navigation
- */
-function month_navigation($default) { 
-
-  global $type;   
-  global $year;   
-  global $month;   
-
-  global $next_month;
-  global $next_year;   
-
-  global $prev_month;
-  global $prev_year;   
-
-  echo '<div class="nav">';
-
-  echo '<a href="?month='.$prev_month.'&year='.$prev_year.'&type='.$type.'">'.t('LINK_PREV_MONTH').'</a>';
-  echo '<a href=".">'.t('LINK_HOME').'</a>';
-  echo '<a href="?month='.$next_month.'&year='.$next_year.'&type='.$type.'">'.t('LINK_NEXT_MONTH').'</a>';
-
-  switch ($type) {
-
-    case 1: echo '<a href="?month='.$month.'&year='.$year.'&type=2">'.t('LINK_EURO').'</a>';
-            break;
-    
-    case 2: echo '<a href="?month='.$month.'&year='.$year.'&type=1">'.$default.'</a>';
-            break;
-  }
-  echo "</div>";
-}
-
-/**
- * Process year navigation
- */
-function year_navigation($default) { 
-
-  global $type;   
-  global $prev_year;   
-  global $year;   
-  global $next_year;   
-
-  echo '<div class="nav">';
-
-  echo '<a href="?year='.$prev_year.'&type='.$type.'">'.t('LINK_PREV_YEAR').'</a>';
-  echo '<a href=".">'.t('LINK_HOME').'</a>';
-  echo '<a href="?year='.$next_year.'&type='.$type.'">'.t('LINK_NEXT_YEAR').'</a>';
- 
-  switch ($type) {
-
-    case 1: echo '<a href="?year='.$year.'&type=2">'.t('LINK_EURO').'</a>';
-            break;
-    
-    case 2: echo '<a href="?year='.$year.'&type=1">'.$default.'</a>';
-            break;
-  }
-
-  echo "</div>";
 }
 
 // ----------------------------

@@ -18,13 +18,6 @@
 
 /*
 ** ---------------------
-** PARAMETERS
-** ---------------------
-*/
-
-
-/*
-** ---------------------
 ** PAGES
 ** ---------------------
 */
@@ -62,11 +55,11 @@ function plaatenergy_day_in_energy_page() {
 	$piekterug_value=0;
 
 	$i=0;
-	$data="";
+	$data = "";
 	$page = "";
-	$total=0;
+	$total = 0;
 
-	// Get last energy measurement previous day
+	// Get last energy measurement 
 	$sql  = 'select dal, piek, dalterug, piekterug from energy where ';
 	$sql .= 'timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" order by timestamp desc limit 0,1';	
 	$result = plaatenergy_db_query($sql);
@@ -79,7 +72,7 @@ function plaatenergy_day_in_energy_page() {
 		$piekterug_prev = $row->piekterug;
 	}      
 
-	// Get last solar measurement previous day
+	// Get last energy measurement 
 	$sql  = 'select etotal from solar where ';
 	$sql .= 'timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" order by timestamp desc limit 0,1';
 	$result = plaatenergy_db_query($sql);
@@ -94,14 +87,12 @@ function plaatenergy_day_in_energy_page() {
 		$timestamp1 = date("Y-m-d H:i:s", $current_date+(900*$i));
 		$timestamp2 = date("Y-m-d H:i:s", $current_date+(900*($i+1)));
 		$sql1  = 'select max(dal) as dal, max(piek) as piek, max(dalterug) as dalterug, max(piekterug) as piekterug from energy where ';
-		$sql1 .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'"';
-	
+		$sql1 .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'"';	
 		$result1 = plaatenergy_db_query($sql1);
 		$row1 = plaatenergy_db_fetch_object($result1);
 	
 		$sql2  = 'select max(etotal) as etotal from solar where ';
-		$sql2 .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'"';
-	
+		$sql2 .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'"';	
 		$result2 = plaatenergy_db_query($sql2);
 		$row2 = plaatenergy_db_fetch_object($result2);
 	

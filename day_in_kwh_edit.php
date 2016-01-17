@@ -51,7 +51,7 @@ function plaatenergy_day_in_edit_save_event() {
    }
  
 	plaatenergy_db_query($sql);
-	plaatenergy_process(2);
+	plaatenergy_process(EVENT_PROCESS_ALL_DAYS);
 }
 
 /*
