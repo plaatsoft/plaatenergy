@@ -76,7 +76,7 @@ function plaatenergy_month_in_gas_page() {
 				$data.=',';
 			}
 			$data .= "['".date("d-m", $time)."',";
-			if ($eid=EVENT_M3) {
+			if ($eid==EVENT_M3) {
 				$data .= round($gas_value,2).']';
 			} else { 
 				$data .= round($gas_value*$gas_price,2).']';
@@ -86,7 +86,7 @@ function plaatenergy_month_in_gas_page() {
 		}
 	}
 
-	if ($eid=EVENT_M3) {
+	if ($eid==EVENT_M3) {
 		$json = "[['','".t('USED_M3')."'],".$data."]";
 	} else { 
 		$json = "[['','".t('EURO')."'],".$data."]";
@@ -105,8 +105,8 @@ function plaatenergy_month_in_gas_page() {
           vAxis: {format: "decimal"},';
    
 	if ($eid==EVENT_EURO) {
-      $page .= "colors: ['#e0440e']";
-   }
+            $page .= "colors: ['#e0440e']";
+         }
        
 	$page .= '};
 
@@ -130,7 +130,7 @@ function plaatenergy_month_in_gas_page() {
 
 	$page .= '<div class="remark">';
 	if ($count>0) {
-		if ($eid=EVENT_M3) {
+		if ($eid==EVENT_M3) {
 			$page .= t('AVERAGE_PER_DAY_M3', round(($total/$count),2), round($total,2));
 		} else {
 			$page .= t('AVERAGE_PER_DAY_EURO', round(($total_price/$count),2), round($total_price,2));
@@ -148,7 +148,7 @@ function plaatenergy_month_in_gas_page() {
 	if ($eid==EVENT_M3) {		
 		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
 	} else {
-		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH,t('LINK_M3'));		
+		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_M3,t('LINK_M3'));		
 	}
 	$page .= '</div>';
 	

@@ -81,7 +81,7 @@ function plaatenergy_month_out_energy_page() {
 			}
 		}
 
-		$json = "[['','".t('LINK_WATT')."'],".$data."]";	
+		$json = "[['','".t('WATT')."'],".$data."]";	
 
 	} else {
 	

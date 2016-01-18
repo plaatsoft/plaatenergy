@@ -34,6 +34,7 @@ $lang['ENGLISH'] = 'Engels';
 $lang['DUTCH'] = 'Nederlands';
 
 $lang['EURO']            = 'Euro'; 
+$lang['WATT']            = 'Watt'; 
 $lang['USED_LOW_KWH']    = 'Dal (kWh)'; 
 $lang['USED_HIGH_KWH']   = 'Hoog (kWh)'; 
 $lang['USED_SOLAR_KWH']  = 'Solar (kWh)'; 

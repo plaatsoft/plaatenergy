@@ -27,8 +27,13 @@ $lang[0]["tiles_current_watt"] = "Electricity now";
 $lang[0]["tiles_total_decrease"] = "Total used electricity";
 $lang[0]["tiles_total_delivery"] = "Total delivered electricity";
 
-$lang[0]["tiles_energy_co2"] = "Energy co&sup2; emission";
+$lang[0]["tiles_energy_co2"] = "Electricity co&sup2; emission";
 $lang[0]["tiles_gas_co2"] = "Gas co&sup2; emission";
+
+$lang[0]["tiles_sunrise"] = "Sunrise";
+$lang[0]["tiles_sunset"] = "Sunset";
+
+$lang[0]["tiles_made"] = "Made by";
 
 $lang[0]["tiles_exit"] = "Exit";
 $lang[0]["tiles_settings"] = "Settings";
@@ -83,8 +88,13 @@ $lang[1]["tiles_current_watt"] = "Elektriciteit nu";
 $lang[1]["tiles_total_decrease"] = "Totaal afname elektriciteit";
 $lang[1]["tiles_total_delivery"] = "Totaal levering elektriciteit";
 
-$lang[1]["tiles_energy_co2"] = "Energy co&sup2; emissie";
+$lang[1]["tiles_energy_co2"] = "Elektriciteit co&sup2; emissie";
 $lang[1]["tiles_gas_co2"] = "Gas co&sup2; emissie";
+
+$lang[1]["tiles_sunrise"] = "Zonsopgang";
+$lang[1]["tiles_sunset"] = "Zonsondergang";
+
+$lang[1]["tiles_made"] = "Gemaakt door";
 
 $lang[1]["tiles_exit"] = "Afsluiten";
 $lang[1]["tiles_settings"] = "Instellingen";
