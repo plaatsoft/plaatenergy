@@ -22,8 +22,10 @@
 ** ---------------------
 */
 
-$low = plaatenergy_post("low", 0);
-$normal = plaatenergy_post("normal", 0);
+$low_used = plaatenergy_post("low_used", 0);
+$normal_used = plaatenergy_post("normal_used", 0);
+$low_delivered = plaatenergy_post("low_delivered", 0);
+$normal_delivered = plaatenergy_post("normal_delivered", 0);
 
 /*
 ** ---------------------
@@ -34,20 +36,26 @@ $normal = plaatenergy_post("normal", 0);
 function plaatenergy_day_in_edit_save_event() {
 
    // input
-	global $low;
-	global $normal;
 	global $date;
 
-	$sql  = 'select dal as low, piek as normal from energy where ';
-	$sql .= 'timestamp="'.$date.' 00:00:00" order by timestamp asc limit 0,1';
+	global $low_used;
+	global $normal_used;
+
+	$sql  = 'select dal as low_used, piek as normal_used, dalterug as low_delivered, piekterug as normal_deliverd ';
+	$sql .= 'from energy where timestamp="'.$date.' 00:00:00" order by timestamp asc limit 0,1';
 
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 	
-	if (isset($row->low)) {  
-		$sql = 'update energy set dal='.$low.', piek='.$normal.' where timestamp="'.$date.' 00:00:00"';		
+	if (isset($row->low_used)) {  
+	
+		$sql  = 'update energy set dal='.$low_used.', piek='.$normal_used.' dalterug='.$low_delivered.' piekterug='.$normal_deliverd.' ';
+		$sql .= 'where timestamp="'.$date.' 00:00:00"';		
+		
 	} else {	  
-		$sql  = 'insert into energy ( timestamp, dal, piek) values ("'.$date.' 00:00:00",'.$low.','.$normal.')';
+	
+		$sql  = 'insert into energy ( timestamp, dal, piek, dalterug, piekterug) values ("'.$date.' 00:00:00",'.$low_used.','.$normal_used.',';
+		$sql .= $low_deliverd.','.$normal_deliverd.')';
    }
  
 	plaatenergy_db_query($sql);
@@ -67,55 +75,77 @@ function plaatenergy_day_in_edit_page() {
 	global $eid;
 	global $date;
 	
-	global $low;
-	global $normal;
+	global $low_used;
+	global $normal_used;
+	global $low_deliverd;
+	global $normal_deliverd;
 	
 	list($year, $month, $day) = explode("-", $date);	
 		
-	$sql1  = 'select dal as low, piek as normal FROM energy where ';
-	$sql1 .= 'timestamp<"'.$date.' 00:00:00" order by timestamp desc limit 0,1';
+	$sql1  = 'select dal as low_used, piek as normal_used, dalterug as low_delivered, piekterug as normal_deliverd ';
+	$sql1 .= 'from energy where timestamp<"'.$date.' 00:00:00" order by timestamp desc limit 0,1';
 
 	$result1 = plaatenergy_db_query($sql1);
 	$row1 = plaatenergy_db_fetch_object($result1);
 	
-	$prev_low=0;
-	$prev_normal=0;
-	if ( isset($row1->low)) {
-		$prev_low = $row1->low;
-		$prev_normal = $row1->normal;
+	$prev_low_used=0;
+	$prev_normal_used=0;
+	$prev_low_delivered=0;
+	$prev_normal_delivered=0;
+	
+	if ( isset($row1->low_used)) {
+		$prev_low_used = $row1->low_used;
+		$prev_normal_used = $row1->normal_used;
+		$prev_low_delivered = $row1->low_delivered;
+		$prev_normal_delivered = $row1->normal_delivered;
 	}
 
 	// -------------------------------------
 
-	$sql2  = 'select dal as low, piek as normal from energy where ';
-	$sql2 .= 'timestamp>"'.$date.' 00:00:00" order by timestamp asc limit 0,1';
+	$sql2  = 'select dal as low_used, piek as normal_used, dalterug as low_delivered, piekterug as normal_deliverd ';
+	$sql2 .= 'from energy where timestamp>"'.$date.' 00:00:00" order by timestamp asc limit 0,1';
 
 	$result2 = plaatenergy_db_query($sql2);
 	$row2 = plaatenergy_db_fetch_object($result2);
 
-	$next_low=999999;
-	$next_normal=999999;
-	if ( isset($row2->low)) {
-		$next_low = $row2->low;
-		$next_normal = $row2->normal;
+	$next_low_used = 999999;
+	$next_normal_used = 999999;
+	next_low_delivered = 999999;
+	$next_normal_delivered = 999999;
+	
+	if ( isset($row2->low_used)) {
+		$next_low_used = $row2->low_used;
+		$next_normal_used = $row2->normal_used;
+		$next_low_delivered = $row2->low_delivered;
+		$next_normal_delivered = $row2->normal_delivered;
 	}
 	
 	// -------------------------------------
 
-	$low=$prev_low+round((($next_low-$prev_low)/2),1);
-	if (isset($_POST["low"])) {
-		$low = $_POST["low"];
+	$low_used = $prev_low_used + round((($next_low_used-$prev_low_used)/2),1);
+	if (isset($_POST["low_used"])) {
+		$low_used = $_POST["low_used"];
 	}
-	$normal=$prev_normal+round((($next_normal-$prev_normal)/2),1);
-	if (isset($_POST["normal"])) {
-		$normal = $_POST["normal"];
+	
+	$normal_used = $prev_normal_used + round((($next_normal_used-$prev_normal_used)/2),1);
+	if (isset($_POST["normal_used"])) {
+		$normal_used = $_POST["normal_used"];
+	}
+	
+	$low_delivered = $prev_low_delivered + round((($next_low_delivered-$prev_low_delivered)/2),1);
+	if (isset($_POST["low_delivered"])) {
+		$low_delivered = $_POST["low_delivered"];
+	}
+	
+	$normal_delivered = $prev_normal_delivered + round((($next_normal_delivered-$prev_normal_delivered)/2),1);
+	if (isset($_POST["normal_delivered"])) {
+		$normal_delivered = $_POST["normal_delivered"];
 	}
 
 	// -------------------------------------
 
-	$sql3  = 'select dal as low, piek as normal from energy where ';
-	$sql3 .= 'timestamp="'.$date.' 00:00:00" order by timestamp asc limit 0,1';
-
+	$sql3  = 'select dal as low_used, piek as normal_used, dalterug as low_delivered, piekterug as normal_deliverd ';
+	$sql3 .= 'from energy where timestamp="'.$date.' 00:00:00" order by timestamp asc limit 0,1';
 	$result3 = plaatenergy_db_query($sql3);
 	$row3 = plaatenergy_db_fetch_object($result3);
 	
@@ -123,8 +153,10 @@ function plaatenergy_day_in_edit_page() {
 	if (isset($row3->low)) {
 		$found=1;
 		if ($eid!=EVENT_SAVE) {
-			$low = $row3->low;
-			$normal = $row3->normal;
+			$low_used = $row3->low_used;
+			$normal_used = $row3->normal_used;
+			$low_delivered = $row3->low_delivered;
+			$normal_delivered = $row3->normal_delivered;
 		}
 	}
 
@@ -133,26 +165,48 @@ function plaatenergy_day_in_edit_page() {
 	$page  = ' <h1>'.t('TITLE_IN_KWH_EDIT').' '.$day.'-'.$month.'-'.$year.'</h1>';
 
 	$page .= '<br/>';
-	$page .= '<label>'.t('LABEL_LOW').':</label>';
+	$page .= '<label>'.t('LABEL_LOW_USED').':</label>';
 	$page .= '<br/>';
 	$page .= '<br/>';
 	$page .= $prev_low.' - ';
-	$page .= '<input type="text" name="low" value="'.$low.'" size="6" />';
+	$page .= '<input type="text" name="low_used" value="'.$low_used.'" size="6" />';
 	$page .= ' - '.$next_low;
 	$page .= '<br/>';
 	
 	// -------------------------------------
 
 	$page .= '<br/>';
-	$page .= '<label>'.t('LABEL_NORMAL').':</label>';
+	$page .= '<label>'.t('LABEL_NORMAL_USED').':</label>';
 	$page .= '<br/>';
 	$page .= '<br/>';
 	$page .= $prev_normal.' - ';
-	$page .= '<input type="text" name="normal" value="'.$normal.'" size="6" />';
+	$page .= '<input type="text" name="normal_used" value="'.$normal_used.'" size="6" />';
 	$page .= ' - '.$next_normal;
 	$page .= '<br/>';
+	
+	// -------------------------------------
+
 	$page .= '<br/>';
-	$page .= '<input type="hidden" name="do" value="1" />';
+	$page .= '<label>'.t('LABEL_LOW_DELIVERED').':</label>';
+	$page .= '<br/>';
+	$page .= '<br/>';
+	$page .= $prev_low_delivered.' - ';
+	$page .= '<input type="text" name="low_delivered" value="'.$low_delivered.'" size="6" />';
+	$page .= ' - '.$next_low_delivered;
+	$page .= '<br/>';
+	
+	// -------------------------------------
+
+	$page .= '<br/>';
+	$page .= '<label>'.t('LABEL_NORMAL_DELIVERED').':</label>';
+	$page .= '<br/>';
+	$page .= '<br/>';
+	$page .= $prev_normal_delivered.' - ';
+	$page .= '<input type="text" name="normal_delivered" value="'.$normal_delivered.'" size="6" />';
+	$page .= ' - '.$next_normal_delivered;
+	$page .= '<br/>';
+	
+	$page .= '<br/>';
 
 	// -------------------------------------
 	
@@ -204,7 +258,5 @@ function plaatenergy_day_in_edit() {
 ** THE END
 ** ---------------------
 */
-
-
 
 ?>

@@ -37,13 +37,14 @@ function check_solar_meter() {
 	
   } else {
 
-    $sql = 'select etotal from solar where timestamp = "'.date("Y-m-d H:i:00").'"';	
-    $result = plaatenergy_db_query($sql);
-    $row = plaatenergy_db_fetch_object($result);
+	$timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
+   $sql = 'select etotal from solar where timestamp >= "'.$timestamp.'"';	
+   $result = plaatenergy_db_query($sql);
+	$count = plaatenergy_db_num_rows($result);
+	
+   if ($count>0){
 
-    if (isset($row->etotal)){
-
-      $page  = '<div class="checker good">';
+		$page  = '<div class="checker good">';
       $page .= t('SOLAR_METER_CONNECTION_UP');
       $page .='</div>';
 
@@ -72,11 +73,13 @@ function check_energy_meter() {
 
 	} else {
 	   
-		$sql = 'select dal from energy where timestamp = "'.date("Y-m-d H:i:00").'"';	
+		$timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
+		$sql = 'select dal from energy where timestamp >= "'.$timestamp.'"';	
 		$result = plaatenergy_db_query($sql);
-		$row = plaatenergy_db_fetch_object($result);
-
-		if (isset($row->dal)){
+		$count = plaatenergy_db_num_rows($result);
+	
+		 if ($count>0){
+		 
 			$page  = '<div class="checker good">';
 			$page .= t('ENERGY_METER_CONNECTION_UP');
 			$page .= '</div>';
@@ -87,8 +90,7 @@ function check_energy_meter() {
 			$page .= t('ENERGY_METER_CONNECTION_DOWN');
 			$page .= '</div>';
 		}
-   }
-	
+   }	
 	return $page;
 }
 
@@ -107,11 +109,13 @@ function check_weather_station() {
 	
 	} else {
 	
-		$sql = 'select humidity from weather where timestamp = "'.date("Y-m-d H:i:00").'"';
+		$timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
+		$sql = 'select humidity from weather where timestamp >= "'.$timestamp.'"';	
 		$result = plaatenergy_db_query($sql);
-		$row = plaatenergy_db_fetch_object($result);
-
-		if (isset($row->humidity)){
+		$count = plaatenergy_db_num_rows($result);
+		
+		if ($count>0){
+		 
 			$page  = '<div class="checker good">';
 			$page .= t('WEATHER_METER_CONNECTION_UP');
 			$page .= '</div>';
@@ -175,7 +179,7 @@ function plaatenergy_home_page() {
 		$page .= plaatenergy_link('pid='.PAGE_MONTH_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
 		$page .= plaatenergy_link('pid='.PAGE_MONTH_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
 		$page .= plaatenergy_link('pid='.PAGE_MONTH_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
-		$page .= plaatenergy_link('pid='.PAGE_MONTH_OUT_ENERGY_MAX, t('LINK_OUT_ENERGY_MAX')); 
+		$page .= plaatenergy_link('pid='.PAGE_SETTING_LIST, t('LINK_SETTINGS')); 
 		$page .= '</td>';
 
 		$page .= '<td>';
@@ -234,16 +238,16 @@ function plaatenergy_home_page() {
 
 function plaatenergy_home() {
 
-  /* input */
-  global $pid;
+	/* input */
+	global $pid;
 		
-  /* Page handler */
-  switch ($pid) {
+	/* Page handler */
+	switch ($pid) {
 		
-     case PAGE_HOME:
+		case PAGE_HOME:
 			echo plaatenergy_home_page();
-        break;
-  }
+			break;
+	}
 }
 
 /*

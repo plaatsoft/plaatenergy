@@ -222,13 +222,27 @@
 					<div id="current_watt_text" class="text"></div>
 					<div id="t_tiles_current_watt" class="label"></div>
 				</div>
-				<div class="tile normal gray" onclick="window.location = '../day_in_gas.php';">
-					<div id="gas_today" class="text"></div>
-					<div id="t_tiles_gas_today" class="label"></div>
+				
+				<div class="tile normal live top-bottom">
+					<div class="a gray" onclick="window.location = '../day_in_gas.php';">
+						<div id="gas_today" class="text"></div>
+						<div id="t_tiles_gas_today" class="label"></div>
+					</div>
+					<div class="b deeppurple" onclick="window.location = '../year_in_gas.php';">
+						<div id="total_gas" class="text"></div>
+						<div id="t_tiles_total_gas" class="label"></div>
+					</div>
 				</div>
-				<div class="tile normal deeppurple" onclick="window.location = '../year_in_gas.php';">
-					<div id="total_gas" class="text"></div>
-					<div id="t_tiles_total_gas" class="label"></div>
+				
+				<div class="tile normal live left-right">
+					<div class="a red" onclick="window.location = '../year_in_kwh.php';">
+						<div id="total_decrease" class="text"></div>
+						<div id="t_tiles_total_decrease" class="label"></div>
+					</div>
+					<div class="b green" onclick="window.location = '../year_out_kwh.php';">
+						<div id="total_delivery" class="text"></div>
+						<div id="t_tiles_total_delivery" class="label"></div>
+					</div>
 				</div>
 			</div>
 			<div class="col">
@@ -248,14 +262,20 @@
 					</svg>
 					<div id="t_tiles_exit" class="label"></div>
 				</div>
-				<div class="tile normal red" onclick="window.location = '../year_in_kwh.php';">
-					<div id="total_decrease" class="text"></div>
-					<div id="t_tiles_total_decrease" class="label"></div>
+				
+				<div class="tile normal"></div>
+				
+				<div class="tile normal live right-left">
+					<div class="a pink">
+						<div id="total_energy_co2" class="text"></div>
+						<div class="label">Energy co2 (test)</div>
+					</div>
+					<div class="b purople">
+						<div id="total_energy_co2" class="text"></div>
+						<div class="label">Energy co2 (test)</div>
+					</div>
 				</div>
-				<div class="tile normal green" onclick="window.location = '../year_out_kwh.php';">
-					<div id="total_delivery" class="text"></div>
-					<div id="t_tiles_total_delivery" class="label"></div>
-				</div>
+				
 			</div>
 			<div class="col">
 				<div class="tile normal brown">

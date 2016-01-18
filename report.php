@@ -16,8 +16,20 @@
 **  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
+/*
+** ---------------------
+** PARAMETERS
+** ---------------------
+*/
+
 $start = plaatenergy_post("start", "");
 $end = plaatenergy_post("end", "");
+
+/*
+** ---------------------
+** EVENTS
+** ---------------------
+*/
 
 function plaatenergy_report_event() {
 
@@ -45,6 +57,12 @@ function plaatenergy_report_event() {
 		return $page;
 	}
 }
+
+/*
+** ---------------------
+** PAGES
+** ---------------------
+*/
 
 function plaatenergy_report_page() {
 

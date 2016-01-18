@@ -103,6 +103,8 @@ svg {
   height: 100%;
 }
 
+
+
 @keyframes bottom-top {
 	0%, 25% {top:100%}
 	35%, 75% {top:0%}
@@ -117,6 +119,40 @@ svg {
   top: -100%;
   animation: bottom-top 8s infinite;
 }
+
+
+@keyframes top-bottom {
+	0%, 25% {bottom:100%}
+	35%, 75% {bottom:0%}
+	85%, 100% {bottom:-100%}
+}
+
+.tile.live.top-bottom .a {
+  animation: top-bottom 8s infinite -4s;
+}
+
+.tile.live.top-bottom .b {
+  bottom: -100%;
+  animation: top-bottom 8s infinite;
+}
+
+
+
+@keyframes left-right {
+	0%, 25% {right:100%}
+	35%, 75% {right:0%}
+	85%, 100% {right:-100%}
+}
+
+.tile.live.left-right .a {
+  animation: left-right 8s infinite -4s;
+}
+
+.tile.live.left-right .b {
+  right: -100%;
+  animation: left-right 8s infinite;
+}
+
 
 
 

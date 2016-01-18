@@ -24,13 +24,14 @@ include "database.inc";
 
 /*
 ** ----------------------
-** Parameters
+** PARAMETERS
 ** ----------------------
 */
 
 $pid = PAGE_HOME;
 $eid = EVENT_NONE;
 $date = date('Y-m-d');
+$limit = 0;
 
 $token = plaatenergy_post("token", "");
 
@@ -49,7 +50,7 @@ if (strlen($token)>0) {
 
 /*
 ** ----------------------
-** Cookies
+** COOKIES
 ** ----------------------
 */
 
@@ -104,7 +105,7 @@ switch ($_COOKIE["lang"]) {
 
 /*
 ** -------------------- 
-** Database
+** DATABASE
 ** -------------------- 
 */
 
@@ -113,7 +114,7 @@ switch ($_COOKIE["lang"]) {
 
 /*
 ** -------------------
-** Main State Machine
+** STATE MACHINE
 ** -------------------
 */
 
@@ -146,6 +147,12 @@ switch ($pid) {
 	case PAGE_REPORT: 
 		include "report.php";
 		plaatenergy_report();
+		break;
+		
+	case PAGE_SETTING_LIST: 
+	case PAGE_SETTING_EDIT: 
+		include "settings.php";
+		plaatenergy_settings();
 		break;
 		
 	// ---------------------------------
@@ -211,12 +218,7 @@ switch ($pid) {
 		include "month_in_gas.php";
 		plaatenergy_month_in_gas();
 		break;
-		
-	case PAGE_MONTH_OUT_ENERGY_MAX:
-		include "month_out_max.php";
-		plaatenergy_month_out_energy_max();
-		break;
-	
+			
 	// ---------------------------------
 	
 	case PAGE_YEAR_IN_ENERGY:
@@ -268,7 +270,7 @@ plaatenergy_db_close();
 
 /*
 ** -------------------
-** The End
+** THE END
 ** -------------------
 */
 

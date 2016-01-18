@@ -69,8 +69,9 @@ $lang['LINK_INSERT']     = 'Toevoegen';
 $lang['LINK_UPDATE']     = 'Bijwerken'; 
 $lang['LINK_EXECUTE']    = 'Uitvoeren'; 
 $lang['LINK_SAVE']       = 'Opslaan'; 
- 
-$lang['GENERAL_WATT']    = 'Watt'; 
+$lang['LINK_CANCEL']     = 'Annuleren'; 
+$lang['LINK_SETTINGS']   = 'Configuratie'; 
+$lang['LINK_MAX']        = 'Piek';
  
 /*
 ** ------------------
@@ -105,15 +106,15 @@ $lang['LINK_REPORT'] = i('archive') . 'Rapportage';
 $lang['LINK_GUI'] = i('table') . 'Realtime Info';
 
 $lang['ENERGY_METER_DISABLED'] = i('exclamation') . 'Energie meter niet aanwezig';
-$lang['ENERGY_METER_CONNECTION_DOWN'] = i('times') . 'Energie meter verbinding is slecht';
+$lang['ENERGY_METER_CONNECTION_DOWN'] = i('times') . 'Geen recente energie meting ontvangen';
 $lang['ENERGY_METER_CONNECTION_UP'] = i('check') . 'Energie meter verbinding is goed';
 
 $lang['SOLAR_METER_DISABLED'] = i('exclamation') . 'Solar meter niet aanwezig';
-$lang['SOLAR_METER_CONNECTION_DOWN'] = i('times') . 'Solar meter geen meting ontvangen';
+$lang['SOLAR_METER_CONNECTION_DOWN'] = i('times') . 'Geen recente solar meting ontvangen';
 $lang['SOLAR_METER_CONNECTION_UP'] = i('check') . 'Solar meter verbinding is goed';
 
 $lang['WEATHER_METER_DISABLED'] = i('exclamation') . 'Weerstation niet aanwezig';
-$lang['WEATHER_METER_CONNECTION_DOWN'] = i('times') . 'Weerstation verbinding is slecht';
+$lang['WEATHER_METER_CONNECTION_DOWN'] = i('times') . 'Geen recente weer meting ontvangen';
 $lang['WEATHER_METER_CONNECTION_UP'] = i('check') . 'Weerstation verbinding is goed';
 
 /*
@@ -187,16 +188,20 @@ $lang['TITLE_IN_KWH_EDIT'] = 'Energie Meetcorrectie';
 $lang['TITLE_OUT_KWH_EDIT'] = 'Solar Meetcorrectie';
 $lang['TITLE_IN_GAS_EDIT'] = 'Gas Meetcorrectie';
 
-$lang['LABEL_LOW'] = 'Energie meter dal meterstand (kWh)';
-$lang['LABEL_NORMAL'] = 'Energie meter normaal meterstand (kWh)';
+$lang['LABEL_LOW_USED'] = 'Energie meter dal meterstand (kWh)';
+$lang['LABEL_NORMAL_USED'] = 'Energie meter normaal meterstand (kWh)';
+$lang['LABEL_LOW_DELIVERED'] = 'Energie meter dal terug  meterstand (kWh)';
+$lang['LABEL_NORMAL_DELIVERED'] = 'Energie meter normaal terug meterstand (kWh)';
+
 $lang['LABEL_ETOTAL'] = 'Etotal waarde (kWh)';
+
 $lang['LABEL_GAS'] = 'Gas meter meterstand (m&sup3)';
 
 $lang['RECORD_SAVED'] = 'Meetcorrectie opgeslagen!';
 
 $lang['TITLE_QUERY_REPORT'] = 'Rapportage';
-$lang['LABEL_START_DATE'] = 'Start datum (2015-12-31)';
-$lang['LABEL_END_DATE'] = 'Eind datum (2015-12-31)';
+$lang['LABEL_START_DATE'] = 'Start datum (format yyyy-mm-dd)';
+$lang['LABEL_END_DATE'] = 'Eind datum (format yyyy-mm-dd)';
 
 /*
 ** ------------------
@@ -229,6 +234,38 @@ auteurs besteed hebben aan de ontwikkeling accepteren wij een donatie.<br/><br/>
  U kunt een donatie online overmaken met een creditcard of PayPal-account.
 Klik hiervoor op het onderstaande logo en voer het bedrag in wat u wil doneren. Uw transactie zal verwerkt worden door PayPal, een vertrouwde naam 
 in de beveiligde online transacties.';
+
+/*
+** ------------------
+** SETTING
+** ------------------
+*/
+
+$lang['SETTING_TITLE'] = 'Configuratie';
+$lang['LABEL_TOKEN'] = 'Item'; 
+$lang['LABEL_VALUE'] = 'Waarde'; 
+$lang['LABEL_DESCRIPTION'] = 'Omschrijving'; 
+
+$lang['database_version'] = 'Huidige database versie';
+$lang['request_counter'] = 'Pagina request counter';
+
+$lang['energy_meter_reading_low'] = 'Energie meter meterstand - low tarief (kwh)';
+$lang['energy_meter_reading_normal'] = 'Energie meter meterstand - normal tarief (kwh)';
+$lang['gas_meter_reading'] = 'Gas meter meterstand (m3)';
+
+$lang['energy_price'] = 'Energie prijs per kwh';
+$lang['gas_price' ] = 'Gas prijs per m3';
+$lang['energy_use_forecast'] = 'Energie verbruik jaar voorspelling (kWh)';
+$lang['energy_delivery_forecast'] = 'Energie teruglevering jaar voorspelling (kWh)';
+$lang['gas_use_forecast'] = 'Gas verbruik jaar voorspelling (m3)';
+
+$lang['energy_meter_present'] = 'Energie meter aanwezig ("true" or "false")';
+$lang['solar_meter_present'] = 'Solar meter aanwezig ("true" or "false")';
+$lang['weather_station_present'] = 'Weerstation aanwezig ("true" or "false")';
+
+$lang['solar_meter_ip' ] = 'Solar meter TCP/IP adres';
+$lang['solar_meter_port'] = 'Solar meter TCP poort nummer';
+$lang['solar_meter_serial_number'] = 'Solar meter serial nummer';
 
 /*
 ** ------------------

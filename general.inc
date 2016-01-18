@@ -44,35 +44,36 @@ $gas_forecast = array(0,250/1500,220/1500,180/1500,110/1500,60/1500,40/1500,30/1
 ** -----------
 */
 
-define('PAGE_HOME',                 100);
-define('PAGE_ABOUT',                101);
-define('PAGE_DONATE',               102);
-define('PAGE_RELEASE_NOTES',        103);
-define('PAGE_REPORT',               104);
+define('PAGE_HOME',                 10);
+define('PAGE_ABOUT',                11);
+define('PAGE_DONATE',               12);
+define('PAGE_RELEASE_NOTES',        13);
+define('PAGE_REPORT',               14);
+define('PAGE_SETTING_LIST',         15);
+define('PAGE_SETTING_EDIT',         16);
 
-define('PAGE_YEARS_IN_ENERGY',      110);
-define('PAGE_YEARS_OUT_ENERGY',     111);
-define('PAGE_YEARS_IN_GAS',         112);
+define('PAGE_YEARS_IN_ENERGY',      20);
+define('PAGE_YEARS_OUT_ENERGY',     21);
+define('PAGE_YEARS_IN_GAS',         22);
 
-define('PAGE_YEAR_IN_ENERGY',       120);
-define('PAGE_YEAR_OUT_ENERGY',      121);
-define('PAGE_YEAR_IN_GAS',          122);
+define('PAGE_YEAR_IN_ENERGY',       30);
+define('PAGE_YEAR_OUT_ENERGY',      31);
+define('PAGE_YEAR_IN_GAS',          32);
 
-define('PAGE_MONTH_IN_ENERGY',      130);
-define('PAGE_MONTH_OUT_ENERGY',     131);
-define('PAGE_MONTH_OUT_ENERGY_MAX', 132);
-define('PAGE_MONTH_IN_GAS',         133);
+define('PAGE_MONTH_IN_ENERGY',      40);
+define('PAGE_MONTH_OUT_ENERGY',     41);
+define('PAGE_MONTH_IN_GAS',         42);
 
-define('PAGE_DAY_IN_ENERGY',        140);
-define('PAGE_DAY_OUT_ENERGY',       141);
-define('PAGE_DAY_IN_GAS',           142);
-define('PAGE_DAY_IN_KWH_EDIT',      143);
-define('PAGE_DAY_OUT_KWH_EDIT',     144);
-define('PAGE_DAY_IN_GAS_EDIT',      145);
+define('PAGE_DAY_IN_ENERGY',        50);
+define('PAGE_DAY_OUT_ENERGY',       51);
+define('PAGE_DAY_IN_GAS',           52);
+define('PAGE_DAY_IN_KWH_EDIT',      53);
+define('PAGE_DAY_OUT_KWH_EDIT',     54);
+define('PAGE_DAY_IN_GAS_EDIT',      55);
 
-define('PAGE_DAY_PRESSURE',         150);
-define('PAGE_DAY_TEMPERATURE',      151);
-define('PAGE_DAY_HUMIDITY',         152);
+define('PAGE_DAY_PRESSURE',         60);
+define('PAGE_DAY_TEMPERATURE',      61);
+define('PAGE_DAY_HUMIDITY',         62);
 
 /*
 ** -----------
@@ -83,40 +84,22 @@ define('PAGE_DAY_HUMIDITY',         152);
 define('EVENT_PROCESS_CURRENT_DAY',   1);
 define('EVENT_PROCESS_ALL_DAYS',      2);
 
-define('EVENT_NONE',                200);
-define('EVENT_PREV',                201);
-define('EVENT_NEXT',                202);
-define('EVENT_EXECUTE',             203);
-define('EVENT_SAVE',                204);
-define('EVENT_EURO',                205);
-define('EVENT_KWH',                 206);
-define('EVENT_M3',                  207);
-define('EVENT_WATT',                208);
+define('EVENT_NONE',                 90);
+define('EVENT_PREV',                 91);
+define('EVENT_NEXT',                 92);
+define('EVENT_EXECUTE',              93);
+define('EVENT_SAVE',                 94);
+define('EVENT_EURO',                 95);
+define('EVENT_KWH',                  96);
+define('EVENT_M3',                   97);
+define('EVENT_WATT',                 98);
+define('EVENT_MAX',                  99);
 
-// ----------------------------
-// SETTINGS
-// ----------------------------
-
-function set_cookie_and_refresh ($name, $value) {
-	setcookie($name, $value, time() + (86400 * 30), "/");
-	header("Location: " . $_SERVER['PHP_SELF']);
-}
-
-
-function i ($name) { 
-	$icon = '<i class="fa fa-' . $name;
-	if ($name == 'chevron-right') {
-		$icon .= ' right';
-	}
-	$icon .= ' fa-fw"></i>';
-	return $icon;
-}
-
-
-
-// ----------------------------
-// PAGE LAYOUT
-// ----------------------------
+/*
+** -----------
+** PAGE
+** -----------
+*/
 
 /**
  * Language function 
@@ -241,6 +224,26 @@ function general_footer($time=0) {
   echo '</form>';
   echo '</body>';
   echo '</html>';
+}
+
+/**
+ * Set cookie
+ */
+function set_cookie_and_refresh ($name, $value) {
+	setcookie($name, $value, time() + (86400 * 30), "/");
+	header("Location: " . $_SERVER['PHP_SELF']);
+}
+
+/**
+ * Set icon to link
+ */
+function i ($name) { 
+	$icon = '<i class="fa fa-' . $name;
+	if ($name == 'chevron-right') {
+		$icon .= ' right';
+	}
+	$icon .= ' fa-fw"></i>';
+	return $icon;
 }
 
 // ----------------------------
@@ -384,7 +387,6 @@ function plaatenergy_link($parameters, $label, $id="", $title="") {
 	global $link_counter;
 	
 	$link_counter++;
-	
 	
 	$link  = '<a href="javascript:link(\''.plaatenergy_token($parameters).'\');" class="link" ';			
 	if (strlen($id)!=0) {

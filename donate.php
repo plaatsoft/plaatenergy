@@ -16,7 +16,13 @@
 **  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
-function plaatenergy_donate_form() {
+/*
+** ---------------------
+** PAGES
+** ---------------------
+*/
+
+function plaatenergy_donate_page() {
 
   $page = '<h1>'.t('DONATE_TITLE').'</h1>';
 
@@ -62,7 +68,7 @@ function plaatenergy_donate() {
   switch ($pid) {
 
      case PAGE_DONATE:
-        echo plaatenergy_donate_form();
+        echo plaatenergy_donate_page();
         break;
   }
 }

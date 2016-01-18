@@ -18,15 +18,6 @@
 
 /*
 ** ---------------------
-** PARAMETERS
-** ---------------------
-*/
-
-$gas_price = plaatenergy_db_get_config_item('gas_price');
-$gas_use_forecast = plaatenergy_db_get_config_item('gas_use_forecast');
-
-/*
-** ---------------------
 ** PAGES
 ** ---------------------
 */
@@ -38,9 +29,8 @@ function plaatenergy_years_in_gas_page() {
 	global $eid;  
 	
 	global $date; 	
-	global $gas_price;
 	global $gas_forecast;
-	global $gas_use_forecast;
+	
 	global $graph_width;
 	global $graph_height;
 	
@@ -49,6 +39,9 @@ function plaatenergy_years_in_gas_page() {
 	
 	list($year) = explode("-", $date);	
 	
+	$gas_price = plaatenergy_db_get_config_item('gas_price');
+	$gas_use_forecast = plaatenergy_db_get_config_item('gas_use_forecast');
+
 	$total=0;
 	$total_price=0;
 	$price=0;

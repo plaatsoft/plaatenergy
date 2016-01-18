@@ -44,49 +44,88 @@ function plaatenergy_month_out_energy_page() {
 	$data="";
 	$value = 0;
 	$total = 0;
-	$total_price = 0;
 	$count = 0;
+	$max = 0;
 	
-	for($d=1; $d<=31; $d++)
-	{
-		$time=mktime(12, 0, 0, $month, $d, $year);          
-		if (date('m', $time)==$month) {
-			$timestamp1=date('Y-m-d 00:00:00', $time);
-			$timestamp2=date('Y-m-d 23:59:59', $time);
+	if ($eid==EVENT_MAX) {
 	
-			$sql = 'select solar FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
-	
-			$result = plaatenergy_db_query($sql);
-			$row = plaatenergy_db_fetch_object($result);
-
-			if (isset($row->solar)) {
-				$value = $row->solar;
-			
-				$total += $value;
-				$count++;
-			} else {
-				$value=0;
-			}
-	
-			if (strlen($data)>0) {
-				$data.=',';
-			}
+		for($d=1; $d<=31; $d++) {
 		
-			if ($eid==EVENT_KWH) {
-				$data .= "['".date("d-m", $time)."',".round($value,2)."]";
-			} else { 
-				$data .= "['".date("d-m", $time)."',".round($value*$energy_price,2)."]";
+			$time=mktime(12, 0, 0, $month, $d, $year);  
+        
+			if (date('m', $time)==$month) {
+				$timestamp1=date('Y-m-d 00:00:00', $time);
+				$timestamp2=date('Y-m-d 23:59:59', $time);
+
+				$sql = 'select max(pac) as pac FROM solar where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';
+
+				$result = plaatenergy_db_query($sql);
+				$row = plaatenergy_db_fetch_object($result);
+		
+				if (isset($row->pac)) {
+					$value = $row->pac;
+				} else {
+					$value=0;
+				}
+	
+				if($value>$max) {
+					$max=$value;
+				}
+	
+				if (strlen($data)>0) {
+					$data.=',';
+				}
+	
+				$data .= "['".date("d-m", $time)."',";
+				$data .= $value."]";
 			}
 		}
-	}
-	$total_price=$total*$energy_price;
 
-	if ($eid==EVENT_KWH) {
-		$json = "[['','".t('DELIVERED_KWH')."'],".$data."]";
+		$json = "[['','".t('LINK_WATT')."'],".$data."]";	
+
 	} else {
-		$json = "[['','".t('EURO')."'],".$data."]";
+	
+		for($d=1; $d<=31; $d++)
+		{
+			$time=mktime(12, 0, 0, $month, $d, $year);          
+			if (date('m', $time)==$month) {
+				$timestamp1=date('Y-m-d 00:00:00', $time);
+				$timestamp2=date('Y-m-d 23:59:59', $time);
+		
+				$sql = 'select solar FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+		
+				$result = plaatenergy_db_query($sql);
+				$row = plaatenergy_db_fetch_object($result);
+	
+				if (isset($row->solar)) {
+					$value = $row->solar;
+				
+					$total += $value;
+					$count++;
+				} else {
+					$value=0;
+				}
+		
+				if (strlen($data)>0) {
+					$data.=',';
+				}
+			
+				if ($eid==EVENT_KWH) {
+					$data .= "['".date("d-m", $time)."',".round($value,2)."]";
+				} else { 
+					$data .= "['".date("d-m", $time)."',".round($value*$energy_price,2)."]";
+				}
+			}
+		}
+		$total= $total * $energy_price;
+		if ($eid==EVENT_KWH) {
+			$json = "[['','".t('DELIVERED_KWH')."'],".$data."]";
+	
+		} else {
+			$json = "[['','".t('EURO')."'],".$data."]";
+		}
 	}
-
+	
 	$page = '
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script type="text/javascript">
@@ -98,7 +137,8 @@ function plaatenergy_month_out_energy_page() {
           bars: "vertical",
           bar: {groupWidth: "90%"},
           legend: { position: "none" },
-          vAxis: {format: "decimal" },';
+          vAxis: {format: "decimal" },
+			 isStacked: false,';
 			 
 	if ($eid==EVENT_EURO) {
 		$page .= "colors: ['#e0440e']";
@@ -125,25 +165,49 @@ function plaatenergy_month_out_energy_page() {
 	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
 
 	$page .= '<div class="remark">';
+
+	$value = 0;	
 	if ($count>0) {
-		if ($eid==EVENT_KWH) {
-			$page .= t('AVERAGE_PER_DAY_KWH', round(($total/$count),2), round($total,2));
-		} else {
-			$page .= t('AVERAGE_PER_DAY_EURO', round(($total_price/$count),2), round($total_price,2));
-		}
-	} else {
-		$page .= '&nbsp;';
+		$value = $total/$count;
+	}
+	
+	switch ($eid) {
+		
+		case EVENT_KWH:
+			$page .= t('AVERAGE_PER_DAY_KWH', round(($value),2), round($total,2));
+			break;
+			
+		case EVENT_MAX:
+			$page .= t('MAX_PEAK_ENERGY', $max);
+			break;
+			
+		case EVENT_EURO:
+			$page .= t('AVERAGE_PER_DAY_EURO', round(($value),2), round($total,2));
+			break;
+				
+		default:
+			$page .= '&nbsp;';
+			break;
 	}
 	$page .= '</div>';
 
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid,t('LINK_PREV_YEAR'));
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid,t('LINK_PREV_MONTH'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid,t('LINK_NEXT_YEAR'));	
-	if ($eid==EVENT_KWH) {		
-		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
-	} else {
-		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH,t('LINK_KWH'));		
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid,t('LINK_NEXT_MONTH'));	
+	
+	switch ($eid) {
+		case EVENT_KWH: 
+				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO, t('LINK_EURO'));	
+				break;
+				
+		case EVENT_EURO: 
+				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_MAX, t('LINK_MAX'));		
+				break;
+				
+		case EVENT_MAX: 
+				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH, t('LINK_KWH'));		
+				break;
 	}
 	$page .= '</div>';
 	
@@ -165,6 +229,9 @@ function plaatenergy_month_out_energy() {
    /* Event handler */
   switch ($eid) {
   
+		case EVENT_MAX:
+				break;
+				
 		case EVENT_KWH:
 				break;
 				

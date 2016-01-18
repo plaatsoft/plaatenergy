@@ -16,6 +16,12 @@
 **  All copyrights reserved (c) 2008-2015 PlaatSoft
 */
 
+/*
+** ---------------------
+** PAGE
+** ---------------------
+*/
+
 function plaatenergy_about_page() {
 
   $page  = '<h1>'.t('ABOUT_TITLE').'</h1>';

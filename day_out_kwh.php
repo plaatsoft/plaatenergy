@@ -40,11 +40,10 @@ function plaatenergy_day_out_energy_page() {
 	$current_date=mktime(0, 0, 0, $month, $day, $year);  
 	
 	$i=0;
-	$label="";
-	$data="";
-	$value=0;
-	$solar_prev=0;
-	$total_energy=0;
+	$data = "";
+	$page = "";
+	$value = 0;	
+	$total = 0;
 	
 	// Get last solar measurement
 	$sql  = 'select etotal from solar where ';
@@ -52,6 +51,7 @@ function plaatenergy_day_out_energy_page() {
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 	
+	$solar_prev=0;
 	if ( isset($row->etotal) ) {
 		$solar_prev = $row->etotal;
 	}
@@ -69,7 +69,7 @@ function plaatenergy_day_out_energy_page() {
 			if ($timestamp>date("Y-m-d H:i:s")) {
 				$value=0;
 			} else {
-				$total_energy = round($value,2);  
+				$total = round($value,2);  
 			}
 
 			if ( isset($row->etotal)) {
@@ -101,7 +101,7 @@ function plaatenergy_day_out_energy_page() {
 			$value=0;
 			if ( isset($row->pac)) {
 				$value= $row->pac;
-				$total_energy = $row->etoday;
+				$total = $row->etoday;
 			}
 
 			if (strlen($data)>0) {
@@ -113,32 +113,9 @@ function plaatenergy_day_out_energy_page() {
 		}
 		$json = "[".$data."]";
 	}
-
-	general_header();
-
-	if ($eid==EVENT_KWH) {
 	
-		$page = '<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-		<script type="text/javascript">
-      google.load("visualization", "1", {packages:["bar"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-
-       var options = {
-          bars: "vertical",
-          bar: {groupWidth: "90%"},
-          legend: { position: "none" },
-          vAxis: {format: "decimal" },
-        };
-
-        var data = google.visualization.arrayToDataTable('.$json.');
-        var chart = new google.charts.Bar(document.getElementById("chart_div"));
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-		</script>';
-    
-	} else { 
-
+	if ($eid==EVENT_WATT) {
+	
 		$page = '<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script type="text/javascript">
       google.load("visualization", "1", {packages:["line"]});
@@ -162,35 +139,60 @@ function plaatenergy_day_out_energy_page() {
          chart.draw(data, google.charts.Line.convertOptions(options));
 		}
 		</script>';
+		
+	} else {
+
+		$page = '<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		<script type="text/javascript">
+      google.load("visualization", "1", {packages:["bar"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+       var options = {
+          bars: "vertical",
+          bar: {groupWidth: "90%"},
+          legend: { position: "none" },
+          vAxis: {format: "decimal" },
+			 isStacked: false
+        };
+
+        var data = google.visualization.arrayToDataTable('.$json.');
+        var chart = new google.charts.Bar(document.getElementById("chart_div"));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+		</script>';
 	}
-	
+    
 	$page .= '<h1>'.t('TITLE_DAY_OUT_KWH', $day, $month, $year).'</h1>';
 	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
 
-	$page .= '<div class="remark">';
-	$page .= t('TOTAL_PER_DAY_KWH', $total_energy);
+	$page .= '<div class="remark">';	
+	$page .= t('TOTAL_PER_DAY_KWH', $total);
 	$page .= '</div>';
 
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid, t('LINK_PREV_YEAR'));
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid, t('LINK_PREV_DAY'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid, t('LINK_NEXT_YEAR'));	
-	if ($eid==EVENT_KWH) {		
-		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_WATT,t('LINK_WATT'));	
-	} else {
-		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH,t('LINK_KWH'));		
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid, t('LINK_NEXT_DAY'));	
+	
+	switch ($eid) {
+		case EVENT_KWH: 
+				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_WATT, t('LINK_WATT'));	
+				break;
+				
+		case EVENT_WATT: 
+				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH, t('LINK_KWH'));			
+				break;
 	}
 	
-	// If zero or one measurements are found. Measurement can be manully adapted.
+	// If zero or one measurements are found. Measurement can be manually adapted.
 	$timestamp1 = date("Y-m-d 00:00:00", $current_date);
 	$timestamp2 = date("Y-m-d 23:59:59", $current_date);
 	$sql = 'select * FROM solar where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';
 	$result = plaatenergy_db_query($sql);
-	$records = plaatenergy_db_num_rows($result);
-	
-	if ($records<=1) {
+	if ( plaatenergy_db_num_rows($result) <= 1 ) {
 		$page .= plaatenergy_link('pid='.PAGE_DAY_OUT_KWH_EDIT.'&date='.$date, t('LINK_EDIT'));			
-	}
+	}	
 	$page .= '</div>';
 		
 	return $page;

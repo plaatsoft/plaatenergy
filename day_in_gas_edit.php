@@ -49,7 +49,7 @@ function plaatenergy_day_in_gas_edit_save_event() {
    }
  
 	plaatenergy_db_query($sql);
-	//plaatenergy_process(EVENT_PROCESS_ALL_DAYS);
+	plaatenergy_process(EVENT_PROCESS_ALL_DAYS);
 }
 
 /*

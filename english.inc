@@ -69,8 +69,9 @@ $lang['LINK_INSERT']     = 'Insert';
 $lang['LINK_UPDATE']     = 'Update';  
 $lang['LINK_EXECUTE']    = 'Execute'; 
 $lang['LINK_SAVE']       = 'Save'; 
- 
-$lang['GENERAL_WATT']    = 'Watt'; 
+$lang['LINK_CANCEL']     = 'Cancel';
+$lang['LINK_SETTINGS']   = 'Settings';  
+$lang['LINK_MAX']        = 'Peak';
  
 /*
 ** ------------------
@@ -105,15 +106,15 @@ $lang['LINK_REPORT'] = i('archive') . 'Query';
 $lang['LINK_GUI'] = i('table') . 'Realtime Info';
 
 $lang['ENERGY_METER_DISABLED'] = i('exclamation') . 'Energy meter is disabled';
-$lang['ENERGY_METER_CONNECTION_DOWN'] = i('times') . 'Energy meter connection is down';
+$lang['ENERGY_METER_CONNECTION_DOWN'] = i('times') . 'No energy data recent received';
 $lang['ENERGY_METER_CONNECTION_UP'] = i('check') . 'Energy meter connection is up';
 
 $lang['SOLAR_METER_DISABLED'] = i('exclamation') . 'Solar meter is disabled';
-$lang['SOLAR_METER_CONNECTION_DOWN'] = i('times') . 'Solar meter no measurement received';
+$lang['SOLAR_METER_CONNECTION_DOWN'] = i('times') . 'No solar data recent received';
 $lang['SOLAR_METER_CONNECTION_UP'] = i('check') . 'Solar meter connection is up';
 
 $lang['WEATHER_METER_DISABLED'] = i('exclamation') . 'Weather Station is disabled';
-$lang['WEATHER_METER_CONNECTION_DOWN'] = i('times') . 'Weather Station connection is down';
+$lang['WEATHER_METER_CONNECTION_DOWN'] = i('times') . 'No weather data recent received';
 $lang['WEATHER_METER_CONNECTION_UP'] = i('check') . 'Weather Station connection is up';
 
 /*
@@ -187,16 +188,20 @@ $lang['TITLE_IN_KWH_EDIT'] = 'Energy Measurement Correction';
 $lang['TITLE_OUT_KWH_EDIT'] = 'Solar Measurement Correction';
 $lang['TITLE_IN_GAS_EDIT'] = 'Gas Measurement Correction';
 
-$lang['LABEL_GAS'] = 'Gas meter value reading (m&sup3)';
-$lang['LABEL_LOW'] = 'Low meter value reading (kWh)';
-$lang['LABEL_NORMAL'] = 'Normal meter value reading (kWh)';
+$lang['LABEL_LOW_USED'] = 'Low used meter value reading (kWh)';
+$lang['LABEL_NORMAL_USED'] = 'Normal used meter value reading (kWh)';
+$lang['LABEL_LOW_DELIVERED'] = 'Low delivered meter value reading (kWh)';
+$lang['LABEL_NORMAL_DELIVERED'] = 'Normal delivered meter value reading (kWh)';
+
 $lang['LABEL_ETOTAL'] = 'Etotal meter reading value (kWh)';
+
+$lang['LABEL_GAS'] = 'Gas meter value reading (m&sup3)';
 
 $lang['RECORD_SAVED'] = 'Measurement correction stored!';
 
 $lang['TITLE_QUERY_REPORT'] = 'Query Energy Database';
-$lang['LABEL_START_DATE'] = 'Start date (2015-12-31)';
-$lang['LABEL_END_DATE'] = 'End date (2015-12-31)';
+$lang['LABEL_START_DATE'] = 'Start date (format yyyy-mm-dd)';
+$lang['LABEL_END_DATE'] = 'End date (format yyyy-mm-dd)';
 
 /*
 ** ------------------
@@ -229,6 +234,39 @@ for the time and resources the author spent developing and supporting it over th
 <br/><br/>
 To make a donation online using your credit card, or PayPal account, click below and enter the amount 
 you would like to contribute. Your credit card will be processed by PayPal, a trusted name in secure online transactions.';
+
+/*
+** ------------------
+** SETTING
+** ------------------
+*/
+
+$lang['SETTING_TITLE'] = 'Settings';
+
+$lang['LABEL_TOKEN'] = 'Key'; 
+$lang['LABEL_VALUE'] = 'Value'; 
+$lang['LABEL_DESCRIPTION'] = 'Description'; 
+
+$lang['database_version'] = 'Current database version';
+$lang['request_counter'] = 'Page request counter';
+
+$lang['energy_meter_reading_low'] = 'Energy meter reading - low tariff (kwh)';
+$lang['energy_meter_reading_normal'] = 'Energy meter reading - normal tariff (kwh)';
+$lang['gas_meter_reading'] = 'Gas meter reading (m3)';
+
+$lang['energy_price'] = 'Energy price per kwh';
+$lang['gas_price' ] = 'Gas price per m3';
+$lang['energy_use_forecast'] = 'Energy use forecast (kWh)';
+$lang['energy_delivery_forecast'] = 'Energy delivery forecast (kWh)';
+$lang['gas_use_forecast'] = 'Gas use forecast (m3)';
+
+$lang['energy_meter_present'] = 'Energy meter present ("true" or "false")';
+$lang['solar_meter_present'] = 'Solar meter present ("true" or "false")';
+$lang['weather_station_present'] = 'Weather Station present ("true" or "false")';
+
+$lang['solar_meter_ip' ] = 'Solar meter TCP/IP address';
+$lang['solar_meter_port'] = 'Solar meter TCP port number';
+$lang['solar_meter_serial_number'] = 'Solar meter serial number';
 
 /*
 ** ------------------
