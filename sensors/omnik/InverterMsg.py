@@ -1,5 +1,22 @@
+#!/usr/bin/python
 
-import struct               # Converting bytes to numbers
+# 
+#  ===========
+#  PlaatEnergy
+#  ===========
+#
+#  Created by wplaat
+#
+#  For more information visit the following website.
+#  Website : www.plaatsoft.nl 
+#
+#  Or send an email to the following address.
+#  Email   : info@plaatsoft.nl
+#
+#  All copyrights reserved (c) 2008-2016 PlaatSoft
+#
+
+import struct 
 
 class InverterMsg:
     'Class for Inverter message'
@@ -68,13 +85,13 @@ class InverterMsg:
         if i not in range(1, 4):
             i=1
         num = 59 + (i-1)*4
-        return int(self.__getShort(num, 1)) # Don't divide
+        return int(self.__getShort(num, 1)) 
     
     def getEToday(self):
-        return self.__getShort(69, 100)     # Devide by 100
+        return self.__getShort(69, 100)    
 
     def getHTotal(self):
-        return int(self.__getLong(75, 1))  # Don't divide
+        return int(self.__getLong(75, 1))  
 
 def generate_string(ser):
     '''
@@ -93,3 +110,9 @@ def generate_string(ser):
     cs = hex(cs_count)[-2:].decode('hex')
     responseString += ''.join(hexlist) + '\x01\x00'+cs+'\x16'
     return responseString
+ 
+#
+# ---------------------
+# THE END
+# ---------------------
+#
