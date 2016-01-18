@@ -44,8 +44,7 @@ ser.rtscts   = 0
 ser.timeout  = 20
 ser.port     = "/dev/ttyUSB0"
 
-
-lines = [line.rstrip('\n') for line in open('../../config.inc')]
+lines = [line.rstrip('\n') for line in open('/var/www/html/plaatenergy/config.inc')]
 for line in lines:
    if line[:1]=='$':
      line = line.replace(' ','');

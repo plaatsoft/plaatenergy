@@ -44,7 +44,7 @@ if ($weather_station_present!="false") {
    exec('sudo python /var/www/html/plaatenergy/sensors/weather/weather.py');
 }
 
-plaatenergy_db_process();
+plaatenergy_db_process(EVENT_PROCESS_TODAY);
 
 /*
 ** ---------------------

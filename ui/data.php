@@ -83,10 +83,10 @@ $total_gas_used = $row5->gas;
 // ---------------------------------------------
 
 // Creating 1 kWh energy results in 0.001 ton CO2 emission.
-$total_energy_co2 = round((($total_energy_delivered - $total_energy_used) / 1000), 2);  
+$total_energy_co2 = round(($total_energy_used - $total_energy_delivered), 2);  
 
 // Burning 1 m3 gas results in 0.00178 ton CO2 emission.
-$total_gas_co2 = round((($row5->gas * 1.78) / 1000), 2);
+$total_gas_co2 = round(($row5->gas * 1.78), 2);
 
 /*
 ** ---------------------
@@ -158,9 +158,18 @@ if ($_GET["q"][2] == "0") {
 $json["pressure"] = num($row1->pressure) . " hPa";
 $json["humidity"] = num($row1->humidity) . " %";
 
-// Calculate actual energy and gas co2 emission this year in ton (1000 kg)
-$json["total_energy_co2"] = $total_energy_co2 . ' ton';  
-$json["total_gas_co2"] = $total_gas_co2. ' ton';  
+// Calculate actual energy and gas co2 emission this year in kg
+if ($total_energy_co2 > 0) {
+  $json["total_energy_co2"] = "+ " .num($total_energy_co2) . " kg";
+} else {
+  $json["total_energy_co2"] = str_replace("-", "- ", num($total_energy_co2)) . " kg";
+}
+
+if ($total_gas_co2 > 0) {
+  $json["total_gas_co2"] = "+ " .num($total_gas_co2) . " kg";
+} else {
+  $json["total_gas_co2"] = str_replace("-", "- ", num($total_gas_co2)) . " kg";
+}
 
 echo json_encode($json);
 

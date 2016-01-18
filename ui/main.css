@@ -137,6 +137,20 @@ svg {
 }
 
 
+@keyframes right-left {
+	0%, 25% {left:100%}
+	35%, 75% {left:0%}
+	85%, 100% {left:-100%}
+}
+
+.tile.live.right-left .a {
+  animation: right-left 8s infinite -4s;
+}
+
+.tile.live.right-left .b {
+  left: -100%;
+  animation: right-left 8s infinite;
+}
 
 @keyframes left-right {
 	0%, 25% {right:100%}
@@ -156,20 +170,20 @@ svg {
 
 
 
-@keyframes right-left {
+@keyframes three {
 	0%, 50% {left:100%}
 	60%, 80% {left:0%}
 	90%, 100% {left:-100%}
 }
 
-.tile.live.right-left .b {
+.tile.live.three .b {
   left: 100%;
-  animation: right-left 18s infinite -9s;
+  animation: three 18s infinite -9s;
 }
 
-.tile.live.right-left .c {
+.tile.live.three .c {
   left: 100%;
-  animation: right-left 18s infinite -6s;
+  animation: three 18s infinite -6s;
 }
 
 
@@ -183,6 +197,8 @@ svg {
   transition: all 0s;
 }
 
+
+/* Color palet from: https://www.google.com/design/spec/style/color.html#color-color-palette */
 .blue{background-color:#2196f3}
 .green{background-color:#4caf50}
 .pink{background-color:#e91e63}
@@ -197,6 +213,8 @@ svg {
 .indigo900{background-color:#1A237E}
 .deeppurple{background-color:#673ab7}
 .gray{background-color:#757575}
+
+
 
 .tile .hn {
   position: absolute;

@@ -11,21 +11,24 @@ header("Pragma: no-cache");
 $lang[0]["tiles_date"] = "Date";
 $lang[0]["tiles_time"] = "Time";
 
-$lang[0]["tiles_temperature"] = "Temperature inside";
+$lang[0]["tiles_temperature"] = "Air Temperature inside";
 $lang[0]["tiles_humidity"] = "Air humidity inside";
-$lang[0]["tiles_pressure"] = "Air peressure inside";
+$lang[0]["tiles_pressure"] = "Air pressure inside";
 
-$lang[0]["tiles_w_temperature"] = "Temperature outside";
+$lang[0]["tiles_w_temperature"] = "Air Temperature outside";
 $lang[0]["tiles_w_humidity"] = "Air humidity outside";
-$lang[0]["tiles_w_pressure"] = "Air peressure outside";
+$lang[0]["tiles_w_pressure"] = "Air pressure outside";
 $lang[0]["tiles_w_wind"] = "Wind speed outside";
 
 $lang[0]["tiles_gas_today"] = "Gas today";
-$lang[0]["tiles_total_gas"] = "Total consumption gas";
+$lang[0]["tiles_total_gas"] = "Total gas consumption";
 $lang[0]["tiles_energy_today"] = "Electricity today";
 $lang[0]["tiles_current_watt"] = "Electricity now";
-$lang[0]["tiles_total_decrease"] = "Total decrease electricity";
-$lang[0]["tiles_total_delivery"] = "Total delivery electricity";
+$lang[0]["tiles_total_decrease"] = "Total used electricity";
+$lang[0]["tiles_total_delivery"] = "Total delivered electricity";
+
+$lang[0]["tiles_energy_co2"] = "Energy co&sup2; emission";
+$lang[0]["tiles_gas_co2"] = "Gas co&sup2; emission";
 
 $lang[0]["tiles_exit"] = "Exit";
 $lang[0]["tiles_settings"] = "Settings";
@@ -79,6 +82,9 @@ $lang[1]["tiles_energy_today"] = "Elektriciteit vandaag";
 $lang[1]["tiles_current_watt"] = "Elektriciteit nu";
 $lang[1]["tiles_total_decrease"] = "Totaal afname elektriciteit";
 $lang[1]["tiles_total_delivery"] = "Totaal levering elektriciteit";
+
+$lang[1]["tiles_energy_co2"] = "Energy co&sup2; emissie";
+$lang[1]["tiles_gas_co2"] = "Gas co&sup2; emissie";
 
 $lang[1]["tiles_exit"] = "Afsluiten";
 $lang[1]["tiles_settings"] = "Instellingen";
