@@ -49,17 +49,6 @@ body {
   cursor: default;
 }
 
-/* no animation */
-body.noAnimation *,
-body.noAnimation *::before,
-body.noAnimation *::after {
-  -webkit-transition: all 0s;
-  -moz-transition: all 0s;
-  -o-transition: all 0s;
-  transition: all 0s;
-}
-
-
 .bg {
   position: fixed;
   top: 0px;

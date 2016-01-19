@@ -84,13 +84,6 @@
 					</div>
 				</div>
 				<div class="item">
-					<div class="header toggle">
-						<span id="t_sidebars_settings_anim"></span>
-						<input id="noAnimation_toggle" type="checkbox">
-						<div class="switch"></div>
-					</div>
-				</div>
-				<div class="item">
 					<div class="header">
 						<span id="t_sidebars_settings_background"></span>
 					</div>
@@ -301,7 +294,11 @@
 			</div>
 		</div>
 		
-		<!-- JAVASCRIPT PART (js folder) -->
+		<!---------------------------------------
+		------ JAVASCRIPT PART (js folder) ------
+		---------------------------------------->
+		
+		<!-- JS config -->
 		<script>
 			// The JS config object for JS settings
 			var config = {
@@ -315,7 +312,6 @@
 					loadWeatherData: 1,   // 0 -> no          | 1 -> yes
 					temperatureFormat: 0, // 0 -> Celcius     | 1 -> Fahrenheit | 2 -> Kelvin
 					showSunrise: 1,       // 0 -> no          | 1 -> yes
-					noAnimation: 0,       // 0 -> no          | 1 -> yes
 					enableRefresh: 1,     // 0 -> no          | 1 -> yes
 					tileUpdateTime: 5     // Globel update time (affected not the time and weather) (in s)
 				},
@@ -327,15 +323,25 @@
 					updateTime: 15000                          // The time the weather information must be reload (in ms)
 				}
 			};
-			
-			// How handle with errors
-			var report_error = function (error) {
-				alert(error);
-				console.error(error);
-			};
 		</script>
+		
+		<!-- Load the JS script files -->
 		<script src="./js/functions.js"></script>
 		<script src="./js/updateWeatherData.js"></script>
-		<script src="./js/main.js"></script>
+		<script src="./js/init.js"></script>
+		
+		<!-- Run the JS with try -->
+		<script>
+			// Try to run the script
+			//try {
+				init();
+			/*}
+			
+			// If an error report
+			catch (error) {
+				alert(error);
+				console.error(error);
+			}*/
+		</script>
 	</body>
 </html>

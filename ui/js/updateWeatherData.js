@@ -31,15 +31,8 @@ var getWeatherData = function () {
 	var weatherRequest = new XMLHttpRequest();
 	
 	weatherRequest.onload = function () {
-		try {
-			var weather = JSON.parse(weatherRequest.responseText);
-			
-			updateWeatherData(weather);
-		}
-		
-		catch (error) {
-			report_error(error);
-		}
+		var weather = JSON.parse(weatherRequest.responseText);
+		updateWeatherData(weather);
 	};
 	
 	weatherRequest.open("GET", "http://api.openweathermap.org/data/2.5/weather?q=" + config.weather.place + "&appid=" + config.weather.appID);
@@ -47,5 +40,3 @@ var getWeatherData = function () {
 	
 	setTimeout(getWeatherData, config.weather.updateTime);
 };
-
-getWeatherData();

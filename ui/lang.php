@@ -61,7 +61,6 @@ $lang[0]["sidebars_settings_wind_0"] = "Kilometers per hour (km/h)";
 $lang[0]["sidebars_settings_wind_1"] = "Meters per second (m/s)";
 $lang[0]["sidebars_settings_background"] = "Background image";
 $lang[0]["sidebars_settings_background_upload"] = "Upload an image";
-$lang[0]["sidebars_settings_anim"] = "Disable animations";
 
 $lang[0]["popup_cookies_h"] = "Cookies";
 $lang[0]["popup_cookies_p"] = "We use cookies to save your settings. We don't use cookies to gather information about you.";
@@ -122,7 +121,6 @@ $lang[1]["sidebars_settings_wind_0"] = "Kilometers per uur (km/h)";
 $lang[1]["sidebars_settings_wind_1"] = "Meters per seconden (m/s)";
 $lang[1]["sidebars_settings_background"] = "Achtergrond plaatje";
 $lang[1]["sidebars_settings_background_upload"] = "Upload een plaatje";
-$lang[1]["sidebars_settings_anim"] = "Stop animaties";
 
 $lang[1]["popup_cookies_h"] = "Cookies";
 $lang[1]["popup_cookies_p"] = "Wij gebruiken cookies om jouw instellingen te bewaren. We gebruiken cookies niet om informatie over jouw te verzamelen.";

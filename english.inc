@@ -66,13 +66,13 @@ $lang['LINK_M3']         = i('tint') . 'm&sup3;';
 $lang['LINK_WATT']       = i('bolt') . 'Watt'; 
 $lang['LINK_KWH']        = i('bolt') . 'kWh'; 
 $lang['LINK_EURO']       = i('eur') . 'Euro';
-$lang['LINK_INSERT']     = 'Insert';  
-$lang['LINK_UPDATE']     = 'Update';  
-$lang['LINK_EXECUTE']    = 'Execute'; 
-$lang['LINK_SAVE']       = 'Save'; 
-$lang['LINK_CANCEL']     = 'Cancel';
-$lang['LINK_SETTINGS']   = 'Settings';  
-$lang['LINK_MAX']        = 'Peak';
+$lang['LINK_INSERT']     = i('plus') . 'Insert';  
+$lang['LINK_UPDATE']     = i('edit') . 'Update';  
+$lang['LINK_EXECUTE']    = i('play') . 'Execute'; 
+$lang['LINK_SAVE']       = i('edit') . 'Save'; 
+$lang['LINK_CANCEL']     = i('times') . 'Cancel';
+$lang['LINK_SETTINGS']   = i('cog') . 'Settings';  
+$lang['LINK_MAX']        = i('bolt') . 'Peak';
  
 /*
 ** ------------------
