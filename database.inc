@@ -276,11 +276,10 @@ function plaatenergy_db_process($type) {
 
   } else {
 
-    $timestamp1 = $prev_year.'-'.$prev_month.'-'.$prev_day.' 00:00:00';
-    $timestamp2 = $prev_year.'-'.$prev_month.'-'.$prev_day.' 23:59:59';
+    $prev_date = plaatenergy_prev_day(date("Y-m-d"));
 
     $sql2  = 'select dal, piek, dalterug, piekterug, gas from energy ';
-    $sql2 .= 'where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" ';
+    $sql2 .= 'where timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" ';
     $sql2 .= 'order by timestamp desc limit 0,1';
 
     $result2 = plaatenergy_db_query($sql2);
@@ -293,7 +292,7 @@ function plaatenergy_db_process($type) {
     $gas = $data2->gas;
 
     $sql3  = 'select etotal from solar ';
-    $sql3 .= 'where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" ';
+    $sql3 .= 'where timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" ';
     $sql3 .= 'order by timestamp desc limit 0,1';
 
     $result3 = plaatenergy_db_query($sql3);

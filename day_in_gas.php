@@ -127,9 +127,9 @@ function plaatenergy_day_in_gas_page() {
 		$page .= plaatenergy_link('pid='.PAGE_DAY_IN_GAS_EDIT.'&date='.$date, t('LINK_EDIT'));			
 	}
 	
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid, t('LINK_PREV_YEAR'));
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid, t('LINK_PREV_DAY'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid, t('LINK_NEXT_YEAR'));	
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid, t('LINK_NEXT_DAY'));	
 	
 	$page .= '</div>';
 	return $page;
