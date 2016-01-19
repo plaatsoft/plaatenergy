@@ -76,7 +76,7 @@ function plaatenergy_years_in_gas_page() {
 		while ($row2 = plaatenergy_db_fetch_object($result2)) {
 			if (isset($row2->month)) { 
 				$forecast_total += $gas_forecast[$row2->month];
-	                        $price = $gas_price * $row2->month;
+	                        $price = $gas_price * $row1->gas;
 			}
 		} 
 
