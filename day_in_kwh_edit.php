@@ -172,7 +172,6 @@ function plaatenergy_day_in_edit_page() {
 	$page .= '<br/>';
 	$page .= '<label>'.t('LABEL_LOW_USED').':</label>';
 	$page .= '<br/>';
-	$page .= '<br/>';
 	$page .= $prev_low_used.' - ';
 	$page .= '<input type="text" name="low_used" value="'.$low_used.'" size="6" />';
 	$page .= ' - '.$next_low_used;
@@ -182,7 +181,6 @@ function plaatenergy_day_in_edit_page() {
 
 	$page .= '<br/>';
 	$page .= '<label>'.t('LABEL_NORMAL_USED').':</label>';
-	$page .= '<br/>';
 	$page .= '<br/>';
 	$page .= $prev_normal_used.' - ';
 	$page .= '<input type="text" name="normal_used" value="'.$normal_used.'" size="6" />';
@@ -194,7 +192,6 @@ function plaatenergy_day_in_edit_page() {
 	$page .= '<br/>';
 	$page .= '<label>'.t('LABEL_LOW_DELIVERED').':</label>';
 	$page .= '<br/>';
-	$page .= '<br/>';
 	$page .= $prev_low_delivered.' - ';
 	$page .= '<input type="text" name="low_delivered" value="'.$low_delivered.'" size="6" />';
 	$page .= ' - '.$next_low_delivered;
@@ -204,7 +201,6 @@ function plaatenergy_day_in_edit_page() {
 
 	$page .= '<br/>';
 	$page .= '<label>'.t('LABEL_NORMAL_DELIVERED').':</label>';
-	$page .= '<br/>';
 	$page .= '<br/>';
 	$page .= $prev_normal_delivered.' - ';
 	$page .= '<input type="text" name="normal_delivered" value="'.$normal_delivered.'" size="6" />';

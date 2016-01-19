@@ -123,7 +123,6 @@ function plaatenergy_day_in_gas_edit_page() {
 	$page .= '<br/>';
 	$page .= '<label>'.t('LABEL_GAS').':</label>';
 	$page .= '<br/>';
-	$page .= '<br/>';
 	$page .= $prev_gas.' - ';
 	$page .= '<input type="text" name="gas" value="'.$gas.'" size="6" />';
 	$page .= ' - '.$next_gas;

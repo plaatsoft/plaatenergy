@@ -128,7 +128,6 @@ function plaatenergy_day_out_edit_page() {
 	$page .=  '<br/>';
 	$page .=  '<label>'.t('LABEL_ETOTAL').':</label>';
 	$page .=  '<br/>';
-	$page .=  '<br/>';
 	$page .=  $prev_etotal.' - ';
 	$page .=  '<input type="text" name="etotal" id="etotal" value="'.$etotal.'" size="7" />';
 	$page .=  ' - '.$next_etotal;
