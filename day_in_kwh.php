@@ -182,8 +182,6 @@ function plaatenergy_day_in_energy_page() {
 	$json = "[".$data."]";
 	}
 	
-	general_header();
-
 	if ($eid==EVENT_WATT) {
 	
 	$page .= '
