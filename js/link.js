@@ -26,12 +26,10 @@ function link(value)
 	form.submit();
 }
 
-function show_confirm(question, token) 
-{ 
-	if (confirm(question)==true) 
-	{
-		link(token); 
-	} 
-}
+/*
+** ---------------------
+** THE END
+** ---------------------
+*/
 
 

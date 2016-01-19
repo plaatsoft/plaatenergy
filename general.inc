@@ -26,7 +26,7 @@ $version = "0.5";
 
 // Graphical screen resolution
 $graph_width = "950px";
-$graph_height = "280px";
+$graph_height = "300px";
 
 // Energy use forecast (per month)
 $in_forecast = array(0,100/1040,100/1040,90/1040,90/1040,80/1040,70/1040,70/1040,70/1040,80/1040,90/1040,100/1040,100/1040);
@@ -81,19 +81,18 @@ define('PAGE_DAY_HUMIDITY',         62);
 ** -----------
 */
 
-define('EVENT_PROCESS_CURRENT_DAY',   1);
-define('EVENT_PROCESS_ALL_DAYS',      2);
-
-define('EVENT_NONE',                 90);
-define('EVENT_PREV',                 91);
-define('EVENT_NEXT',                 92);
-define('EVENT_EXECUTE',              93);
-define('EVENT_SAVE',                 94);
-define('EVENT_EURO',                 95);
-define('EVENT_KWH',                  96);
-define('EVENT_M3',                   97);
-define('EVENT_WATT',                 98);
-define('EVENT_MAX',                  99);
+define('EVENT_NONE',                80);
+define('EVENT_PROCESS_TODAY',   		81);
+define('EVENT_PROCESS_ALL_DAYS',    82);
+define('EVENT_PREV',                83);
+define('EVENT_NEXT',                84);
+define('EVENT_EXECUTE',             85);
+define('EVENT_SAVE',                86);
+define('EVENT_EURO',                87);
+define('EVENT_KWH',                 88);
+define('EVENT_M3',                  89);
+define('EVENT_WATT',                90);
+define('EVENT_MAX',                 91);
 
 /*
 ** -----------
@@ -169,46 +168,62 @@ function add_icons($path = './ui/') {
  */
 function general_header() {
 
-  echo '<!DOCTYPE html>';
-  echo '<html>';
-  echo '<head>'; 
+  // input
+  global $pid;
+  global $eid;
+  global $date;
+    
+  $page  = '<!DOCTYPE html>';
+  $page .= '<html>';
+  $page .= '<head>'; 
 
-  echo add_icons();
+  $page .= add_icons();
 
-  echo '<script language="JavaScript" src="js/link.js" type="text/javascript"></script>';
-  echo '<link href="css/general.css" rel="stylesheet" type="text/css" />';
+  $page .= '<script language="JavaScript" src="js/link.js" type="text/javascript"></script>';
+  $page .= '<link href="css/general.css" rel="stylesheet" type="text/css" />';
   
   // Load the dark theme css file only if COOKIE theme = dark
   if ($_COOKIE["theme"] == "dark") {
-    echo '<link rel="stylesheet" type="text/css" href="./css/theme-dark.css">';
+    $page .= '<link rel="stylesheet" type="text/css" href="./css/theme-dark.css">';
   }
   
   // Load the icons from Font Awesome
-  echo '<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">';
+  $page .= '<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">';
  
-  echo '</head>';
+  $page .= '</head>';
   
-  echo '<body>';
-  echo '<form id="plaatenergy" method="POST">';  
+  $page .= '<body>';
+  $page .= '<form id="plaatenergy" method="POST">';  
   
   // Language toggler
+  
+  /*$page .= '<div class="language normal_link">';
   if ($_COOKIE["lang"] == "en") {
-	echo '<a class="language normal_link" href="?lang=nl">'.t('DUTCH').'</a>';
+		$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&lang=nl', t('DUTCH'));
   } elseif ($_COOKIE["lang"] == "nl") {
-	echo '<a class="language normal_link" href="?lang=en">'.t('ENGLISH').'</a>';
+		$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&lang=en' , t('ENGLISH'));		
+  }
+  $page .= '</div>';*/
+  
+  if ($_COOKIE["lang"] == "en") {
+		$page .= '<a class="language normal_link" href="?lang=nl">'.t('DUTCH').'</a>';
+  } elseif ($_COOKIE["lang"] == "nl") {
+		$page .= '<a class="language normal_link" href="?lang=en">'.t('ENGLISH').'</a>';
   }
   
   // Theme toggler
   if ($_COOKIE["theme"] == "light") {
-	echo '<a class="theme normal_link" href="?theme=dark">' . t('THEME_TO_DARK') . '</a>';
+		$page .= '<a class="theme normal_link" href="?theme=dark">' . t('THEME_TO_DARK') . '</a>';
   } elseif ($_COOKIE["theme"] == "dark") {
-	echo '<a class="theme normal_link" href="?theme=light">' . t('THEME_TO_LIGHT') . '</a>';
+		$page .= '<a class="theme normal_link" href="?theme=light">' . t('THEME_TO_LIGHT') . '</a>';
   }
   
   // Cookie Bar Message (show only if COOKIE allow_cookies = NULL)
   if ($_COOKIE["allow_cookies"] == "no") {
-	echo '<div class="cookie_bar">' . t("COOKIE_BAR") . ' <a class="fa normal_link fa-times" href="?allow_cookies=yes"></a></div>';
+		$page .= '<div class="cookie_bar">' . t("COOKIE_BAR") . ' <a class="fa normal_link fa-times" href="?allow_cookies=yes"></a></div>';
   }
+  
+  return $page;
 }
 
 /**
@@ -216,14 +231,16 @@ function general_header() {
  */
 function general_footer($time=0) {
 
-  echo '<div class="copyright">' . t('LINK_COPYRIGHT') . '<br/>';
-  //echo '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries - '.$counter.' requests]';
-  echo '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries]';
+  $page = '<div class="copyright">' . t('LINK_COPYRIGHT') . '<br/>';
+  //$page .= '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries - '.$counter.' requests]';
+  $page .= '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries]';
 
-  echo '</div>';
-  echo '</form>';
-  echo '</body>';
-  echo '</html>';
+  $page .= '</div>';
+  $page .= '</form>';
+  $page .= '</body>';
+  $page .= '</html>';
+  
+  return $page;
 }
 
 /**
@@ -369,14 +386,19 @@ function plaatenergy_post($label, $default) {
 }
 
 /** 
- * Zip and uuencode token.
+ * Encode link data
  */
-function plaatenergy_token($token) {
-   
-	/* Encode token  */
-	$token = base64_encode(gzdeflate($token));
+function plaatenergy_token_decode($token) {
 	
-	return $token;
+	return htmlspecialchars_decode($token);
+}
+
+/** 
+ * Encode link data
+ */
+function plaatenergy_token_encode($token) {
+   
+	return htmlspecialchars($token);	
 }
 
 /**
@@ -388,7 +410,7 @@ function plaatenergy_link($parameters, $label, $id="", $title="") {
 	
 	$link_counter++;
 	
-	$link  = '<a href="javascript:link(\''.plaatenergy_token($parameters).'\');" class="link" ';			
+	$link  = '<a href="javascript:link(\''.plaatenergy_token_encode($parameters).'\');" class="link" ';			
 	if (strlen($id)!=0) {
 		$link .= ' id="'.strtolower($id).'"';
 	}

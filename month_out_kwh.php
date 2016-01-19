@@ -85,8 +85,8 @@ function plaatenergy_month_out_energy_page() {
 
 	} else {
 	
-		for($d=1; $d<=31; $d++)
-		{
+		for($d=1; $d<=31; $d++) {
+		
 			$time=mktime(12, 0, 0, $month, $d, $year);          
 			if (date('m', $time)==$month) {
 				$timestamp1=date('Y-m-d 00:00:00', $time);
@@ -117,11 +117,12 @@ function plaatenergy_month_out_energy_page() {
 				}
 			}
 		}
-		$total= $total * $energy_price;
+		
 		if ($eid==EVENT_KWH) {
 			$json = "[['','".t('DELIVERED_KWH')."'],".$data."]";
 	
 		} else {
+			$total= $total * $energy_price;
 			$json = "[['','".t('EURO')."'],".$data."]";
 		}
 	}
@@ -156,7 +157,7 @@ function plaatenergy_month_out_energy_page() {
         function selectHandler(e)     {
            var date = data.getValue(chart.getSelection()[0].row, 0);
            var day = date.split("-");
-           window.location="day_out_kwh.php?day="+day[0]+"&month='.$month.'&year='.$year.'"
+			  link("pid='.PAGE_DAY_OUT_ENERGY.'&eid='.$eid.'&date='.$year.'-'.$month.'-"+day[0]);
         }
       }
     </script>';
@@ -243,7 +244,7 @@ function plaatenergy_month_out_energy() {
 	switch ($pid) {
 
 		case PAGE_MONTH_OUT_ENERGY:
-			echo plaatenergy_month_out_energy_page();
+			return plaatenergy_month_out_energy_page();
 			break;
 	}
 }

@@ -56,7 +56,7 @@ function plaatenergy_about() {
   switch ($pid) {
 
      case PAGE_ABOUT:
-        echo plaatenergy_about_page();
+        return plaatenergy_about_page();
         break;
   }
 }

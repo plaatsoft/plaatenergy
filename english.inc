@@ -36,7 +36,7 @@ $lang['DUTCH'] = 'Dutch';
 $lang['EURO']            = 'Euro'; 
 $lang['WATT']            = 'Watt'; 
 $lang['USED_LOW_KWH']    = 'Low (kWh)'; 
-$lang['USED_HIGH_KWH']   = 'High (kWh)'; 
+$lang['USED_HIGH_KWH']   = 'Normal (kWh)'; 
 $lang['USED_SOLAR_KWH']  = 'Solar (kWh)'; 
 $lang['DELIVERED_KWH']   = 'Delivered (kWh)'; 
 $lang['FORECAST_KWH']    = 'Forecast (kWh)'; 
@@ -198,8 +198,6 @@ $lang['LABEL_ETOTAL'] = 'Etotal meter reading value (kWh)';
 
 $lang['LABEL_GAS'] = 'Gas meter value reading (m&sup3)';
 
-$lang['RECORD_SAVED'] = 'Measurement correction stored!';
-
 $lang['TITLE_QUERY_REPORT'] = 'Query Energy Database';
 $lang['LABEL_START_DATE'] = 'Start date (format yyyy-mm-dd)';
 $lang['LABEL_END_DATE'] = 'End date (format yyyy-mm-dd)';
@@ -253,13 +251,13 @@ $lang['request_counter'] = 'Page request counter';
 
 $lang['energy_meter_reading_low'] = 'Energy meter reading - low tariff (kwh)';
 $lang['energy_meter_reading_normal'] = 'Energy meter reading - normal tariff (kwh)';
-$lang['gas_meter_reading'] = 'Gas meter reading (m3)';
+$lang['gas_meter_reading'] = 'Gas meter reading (m&sup3;)';
 
 $lang['energy_price'] = 'Energy price per kwh';
-$lang['gas_price' ] = 'Gas price per m3';
+$lang['gas_price' ] = 'Gas price per m&sup3;';
 $lang['energy_use_forecast'] = 'Energy use forecast (kWh)';
 $lang['energy_delivery_forecast'] = 'Energy delivery forecast (kWh)';
-$lang['gas_use_forecast'] = 'Gas use forecast (m3)';
+$lang['gas_use_forecast'] = 'Gas use forecast (m&sup3;)';
 
 $lang['energy_meter_present'] = 'Energy meter present ("true" or "false")';
 $lang['solar_meter_present'] = 'Solar meter present ("true" or "false")';

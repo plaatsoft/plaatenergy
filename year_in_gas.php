@@ -114,7 +114,7 @@ function plaatenergy_year_in_gas_page() {
         function selectHandler(e)     {
            var date = data.getValue(chart.getSelection()[0].row, 0);
            var month = date.split("-");
-           window.location="month_in_gas.php?month="+month[0]+"&year='.$year.'"
+          link("pid='.PAGE_MONTH_IN_GAS.'&eid='.$eid.'&date='.$year.'-"+month[0]+"-1");
         }
     }
     </script>';
@@ -138,7 +138,7 @@ function plaatenergy_year_in_gas_page() {
 	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid,t('LINK_PREV_YEAR'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
 	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid,t('LINK_NEXT_YEAR'));	
-	if ($eid==EVENT_KWH) {		
+	if ($eid==EVENT_M3) {		
 		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
 	} else {
 		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_M3,t('LINK_KWH'));		
@@ -174,7 +174,7 @@ function plaatenergy_year_in_gas() {
 	switch ($pid) {
 
 		case PAGE_YEAR_IN_GAS:
-			echo plaatenergy_year_in_gas_page();
+			return plaatenergy_year_in_gas_page();
 			break;
 	}
 }

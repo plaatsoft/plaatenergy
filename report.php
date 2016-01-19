@@ -113,7 +113,7 @@ function plaatenergy_report() {
   switch ($pid) {
 
      case PAGE_REPORT:
-        echo plaatenergy_report_page();
+        return plaatenergy_report_page();
         break;
   }
 }

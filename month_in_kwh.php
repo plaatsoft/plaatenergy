@@ -139,7 +139,7 @@ function plaatenergy_month_in_energy_page() {
         function selectHandler(e)     {
            var date = data.getValue(chart.getSelection()[0].row, 0);
            var day = date.split("-");
-           window.location="day_in_kwh.php?day="+day[0]+"&month='.$month.'&year='.$year.'"
+           link("pid='.PAGE_DAY_IN_ENERGY.'&eid='.$eid.'&date='.$year.'-'.$month.'-"+day[0]);
         }
 
       }
@@ -200,7 +200,7 @@ function plaatenergy_month_in_energy() {
 	switch ($pid) {
 
 		case PAGE_MONTH_IN_ENERGY:
-			echo plaatenergy_month_in_energy_page();
+			return plaatenergy_month_in_energy_page();
 			break;
 	}
 }

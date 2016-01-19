@@ -247,7 +247,7 @@ function plaatenergy_db_set_config_item($token, $value) {
    plaatenergy_db_query($sql);
 }
 
-function plaatenergy_process($type=1) {
+function plaatenergy_db_process($type) {
 
   global $year;	
   global $month;
@@ -269,7 +269,7 @@ function plaatenergy_process($type=1) {
   $etotal = 0;
   $round = 3;
 
-  if ($type==2) {
+  if ($type==EVENT_PROCESS_ALL_DAYS) {
 
     $sql = 'truncate table energy_day';
     plaatenergy_db_query($sql);
@@ -302,7 +302,7 @@ function plaatenergy_process($type=1) {
     $etotal = $data3->etotal;
   }
 
-  if ($type==2) {
+  if ($type==EVENT_PROCESS_ALL_DAYS) {
 	
      $sql1 = 'select cast(timestamp as date) as date from energy group by date';
 		 
@@ -373,7 +373,7 @@ function plaatenergy_process($type=1) {
 		}
 	}
 
-    if ($type!=2) {
+    if ($type==EVENT_PROCESS_TODAY) {
 
      $sql4 = 'select id from energy_day where date="'.$data1->date.'"';
 

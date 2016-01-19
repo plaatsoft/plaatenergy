@@ -85,15 +85,21 @@ table {
    margin: auto;
 }
 
-tr, td {
+div.home, tr, td {
    vertical-align: top;
 }
+
+div.setting, tr, td {
+   vertical-align: center;
+}
+
 
 td > a{
   display: block;
   margin: 0px;
   margin-bottom: 3px;
 }
+
 td > a:last-child {
   margin-bottom: 0px;
 }
@@ -111,11 +117,12 @@ a {
 a:hover {
   background-color: #1976D2;
 }
+
 a:active {
   background-color: #1565C0;
 }
 
-div.nav {
+.nav {
    margin: 20px;
 }
 
@@ -126,18 +133,18 @@ div.nav {
    opacity: 0.9;
 }
 
-div.footer {
+.footer {
    margin-top: 30px;
    font-size: 0.8em;
 }
 
-div.subparagraph {
+.subparagraph {
   font-size: 1.2em;
   font-weight: bold;
   padding: 5px 0px; 
 }
 
-div.remark {
+.remark {
   font-size: 1.1em;
   margin: 10px 0px;
 }
@@ -220,6 +227,7 @@ h1::after {
 a .fa {
 	margin-right: 10px;
 }
+
 a .fa.right {
 	margin-left: 10px;
 	margin-right: 0px;

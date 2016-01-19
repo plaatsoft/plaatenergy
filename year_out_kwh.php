@@ -116,7 +116,7 @@ function plaatenergy_year_out_energy_page() {
         function selectHandler(e)     {
            var date = data.getValue(chart.getSelection()[0].row, 0);
            var month = date.split("-");
-           window.location="month_out_kwh.php?month="+month[0]+"&year='.$year.'"
+			  link("pid='.PAGE_MONTH_OUT_ENERGY.'&eid='.$eid.'&date='.$year.'-"+month[0]+"-1");
         }
       }
     </script>';
@@ -176,7 +176,7 @@ function plaatenergy_year_out_energy() {
 	switch ($pid) {
 
 		case PAGE_YEAR_OUT_ENERGY:
-			echo plaatenergy_year_out_energy_page();
+			return plaatenergy_year_out_energy_page();
 			break;
 	}
 }

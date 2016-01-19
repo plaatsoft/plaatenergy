@@ -27,7 +27,7 @@ $value = plaatenergy_post("value", "");
 $sql  = 'select id, token, value from config where readonly=0';
 $result = plaatenergy_db_query($sql);
 $step = 5;
-$max = round((plaatenergy_db_num_rows($result)/$step),0);
+$max = round((plaatenergy_db_num_rows($result)/$step),0)-1;
 	
 /*
 ** ---------------------
@@ -45,7 +45,7 @@ function plaatenergy_setting_save_event() {
 
 	plaatenergy_db_query($sql);
 	
-	plaatenergy_process(EVENT_PROCESS_ALL_DAYS);
+	plaatenergy_db_process(EVENT_PROCESS_ALL_DAYS);
 }
 
 /*
@@ -90,7 +90,7 @@ function plaatenergy_setting_list_page() {
 	global $limit;
 	global $step;
 
-	$sql  = 'select id, token, value from config where readonly=0 order by id limit '.($limit*$step).','.$step;
+	$sql  = 'select id, token, value from config where readonly=0 order by token limit '.($limit*$step).','.$step;
 	$result = plaatenergy_db_query($sql);
 	
 	// -------------------------------------
@@ -99,6 +99,7 @@ function plaatenergy_setting_list_page() {
 
 	$page .= '<br/>';
 	
+	$page .= '<div class="setting">';
 	$page .= '<table>';
 	$page .= '<tr>';
 	$page .= '<th width="200">'.t('LABEL_TOKEN').'</th>';
@@ -115,6 +116,7 @@ function plaatenergy_setting_list_page() {
 		$page .= '</tr>';
 	}
 	$page .= '</table>';
+	$page .= '</div>';
 	
 	// -------------------------------------
  
@@ -165,11 +167,11 @@ function plaatenergy_settings() {
   switch ($pid) {
 
 		case PAGE_SETTING_EDIT:
-			echo plaatenergy_setting_edit_page();
+			return plaatenergy_setting_edit_page();
 			break;
 			
 		case PAGE_SETTING_LIST:
-			echo plaatenergy_setting_list_page();
+			return plaatenergy_setting_list_page();
 			break;
   }
 }

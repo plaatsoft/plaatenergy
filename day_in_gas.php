@@ -54,6 +54,7 @@ function plaatenergy_day_in_gas_page() {
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 
+	$gas_prev=0;
 	if ( isset($row->gas) ) {
 		$gas_prev = $row->gas;
 	}      
@@ -114,9 +115,6 @@ function plaatenergy_day_in_gas_page() {
 	$page .= '</div>';
 	
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid, t('LINK_PREV_YEAR'));
-	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid, t('LINK_NEXT_YEAR'));	
 	
 	// If zero or one measurements are found. Measurement can be manully adapted.	
 	$timestamp1 = date("Y-m-d 00:00:00", $current_date);
@@ -128,6 +126,11 @@ function plaatenergy_day_in_gas_page() {
 	if ($records<=1) {
 		$page .= plaatenergy_link('pid='.PAGE_DAY_IN_GAS_EDIT.'&date='.$date, t('LINK_EDIT'));			
 	}
+	
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid, t('LINK_PREV_YEAR'));
+	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid, t('LINK_NEXT_YEAR'));	
+	
 	$page .= '</div>';
 	return $page;
 }
@@ -146,7 +149,11 @@ function plaatenergy_day_in_gas() {
   
    /* Event handler */
   switch ($eid) {
-  
+     
+		case EVENT_SAVE:
+				plaatenergy_day_in_gas_edit_save_event();
+				break;
+
 		case EVENT_M3:
 				break;
 				
@@ -158,7 +165,7 @@ function plaatenergy_day_in_gas() {
 	switch ($pid) {
 
 		case PAGE_DAY_IN_GAS:
-			echo plaatenergy_day_in_gas_page();
+			return plaatenergy_day_in_gas_page();
 			break;
 	}
 }

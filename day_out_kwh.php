@@ -55,9 +55,35 @@ function plaatenergy_day_out_energy_page() {
 	if ( isset($row->etotal) ) {
 		$solar_prev = $row->etotal;
 	}
-	  	
-	if ($eid==EVENT_KWH) {
+	 
+	if ($eid==EVENT_WATT) {
+
+		$timestamp1 = date("Y-m-d 00:00:00", $current_date);
+		$timestamp2 = date("Y-m-d 23:59:59", $current_date);
 	
+		$sql  = 'select timestamp, etoday, pac FROM solar where timestamp>="'.$timestamp1.'" ';
+		$sql .= 'and timestamp<="'.$timestamp2.'" order by timestamp';
+		$result = plaatenergy_db_query($sql);
+
+		while ($row = plaatenergy_db_fetch_object($result)) {
+
+			$value=0;
+			if ( isset($row->pac)) {
+				$value= $row->pac;
+				$total = $row->etoday;
+			}
+
+			if (strlen($data)>0) {
+				$data.=',';
+			}
+			$data .= "['".substr($row->timestamp,11,5)."',";
+			$data .= round($value,2).']';
+			$i++;
+		}
+		$json = "[".$data."]";
+		
+	} else {
+		
 		$current_date=mktime(0, 0, 0, $month, $day, $year);
 		while ($i<96) {
 	
@@ -87,32 +113,7 @@ function plaatenergy_day_out_energy_page() {
 		$json = "[['','Levering'],".$data."]";
 	}
 
-	if ($eid==EVENT_WATT) {
-
-		$timestamp1 = date("Y-m-d 00:00:00", $current_date);
-		$timestamp2 = date("Y-m-d 23:59:59", $current_date);
 	
-		$sql  = 'select timestamp, etoday, pac FROM solar where timestamp>="'.$timestamp1.'" ';
-		$sql .= 'and timestamp<="'.$timestamp2.'" order by timestamp';
-		$result = plaatenergy_db_query($sql);
-
-		while ($row = plaatenergy_db_fetch_object($result)) {
-
-			$value=0;
-			if ( isset($row->pac)) {
-				$value= $row->pac;
-				$total = $row->etoday;
-			}
-
-			if (strlen($data)>0) {
-				$data.=',';
-			}
-			$data .= "['".substr($row->timestamp,11,5)."',";
-			$data .= round($value,2).']';
-			$i++;
-		}
-		$json = "[".$data."]";
-	}
 	
 	if ($eid==EVENT_WATT) {
 	
@@ -171,6 +172,16 @@ function plaatenergy_day_out_energy_page() {
 	$page .= '</div>';
 
 	$page .= '<div class="nav">';
+
+	// If zero or one measurements are found. Measurement can be manually adapted.
+	$timestamp1 = date("Y-m-d 00:00:00", $current_date);
+	$timestamp2 = date("Y-m-d 23:59:59", $current_date);
+	$sql = 'select * FROM solar where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';
+	$result = plaatenergy_db_query($sql);
+	if ( plaatenergy_db_num_rows($result) <= 1 ) {
+		$page .= plaatenergy_link('pid='.PAGE_DAY_OUT_KWH_EDIT.'&date='.$date, t('LINK_EDIT'));			
+	}	
+	
 	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid, t('LINK_PREV_DAY'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
 	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid, t('LINK_NEXT_DAY'));	
@@ -185,14 +196,6 @@ function plaatenergy_day_out_energy_page() {
 				break;
 	}
 	
-	// If zero or one measurements are found. Measurement can be manually adapted.
-	$timestamp1 = date("Y-m-d 00:00:00", $current_date);
-	$timestamp2 = date("Y-m-d 23:59:59", $current_date);
-	$sql = 'select * FROM solar where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';
-	$result = plaatenergy_db_query($sql);
-	if ( plaatenergy_db_num_rows($result) <= 1 ) {
-		$page .= plaatenergy_link('pid='.PAGE_DAY_OUT_KWH_EDIT.'&date='.$date, t('LINK_EDIT'));			
-	}	
 	$page .= '</div>';
 		
 	return $page;
@@ -213,6 +216,10 @@ function plaatenergy_day_out_energy() {
    /* Event handler */
   switch ($eid) {
   
+     case EVENT_SAVE:
+				plaatenergy_day_out_edit_save_event();
+				break;
+
 		case EVENT_KWH:
 				break;
 				
@@ -224,7 +231,7 @@ function plaatenergy_day_out_energy() {
 	switch ($pid) {
 
 		case PAGE_DAY_OUT_ENERGY:
-			echo plaatenergy_day_out_energy_page();
+			return plaatenergy_day_out_energy_page();
 			break;
 	}
 }

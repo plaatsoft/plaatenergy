@@ -68,7 +68,7 @@ function plaatenergy_donate() {
   switch ($pid) {
 
      case PAGE_DONATE:
-        echo plaatenergy_donate_page();
+        return plaatenergy_donate_page();
         break;
   }
 }

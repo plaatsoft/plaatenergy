@@ -114,7 +114,7 @@ function plaatenergy_day_humidity() {
   switch ($pid) {
 
      case PAGE_DAY_HUMIDITY:
-        echo plaatenergy_day_humidity_page();
+        return plaatenergy_day_humidity_page();
         break;
   }
 }

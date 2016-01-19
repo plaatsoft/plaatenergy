@@ -36,7 +36,7 @@ $lang['DUTCH'] = 'Nederlands';
 $lang['EURO']            = 'Euro'; 
 $lang['WATT']            = 'Watt'; 
 $lang['USED_LOW_KWH']    = 'Dal (kWh)'; 
-$lang['USED_HIGH_KWH']   = 'Hoog (kWh)'; 
+$lang['USED_HIGH_KWH']   = 'Normaal (kWh)'; 
 $lang['USED_SOLAR_KWH']  = 'Solar (kWh)'; 
 $lang['DELIVERED_KWH']   = 'Geleverd (kWh)'; 
 $lang['FORECAST_KWH']    = 'Prognose (kWh)'; 
@@ -198,8 +198,6 @@ $lang['LABEL_ETOTAL'] = 'Etotal waarde (kWh)';
 
 $lang['LABEL_GAS'] = 'Gas meter meterstand (m&sup3)';
 
-$lang['RECORD_SAVED'] = 'Meetcorrectie opgeslagen!';
-
 $lang['TITLE_QUERY_REPORT'] = 'Rapportage';
 $lang['LABEL_START_DATE'] = 'Start datum (format yyyy-mm-dd)';
 $lang['LABEL_END_DATE'] = 'Eind datum (format yyyy-mm-dd)';
@@ -250,15 +248,15 @@ $lang['LABEL_DESCRIPTION'] = 'Omschrijving';
 $lang['database_version'] = 'Huidige database versie';
 $lang['request_counter'] = 'Pagina request counter';
 
-$lang['energy_meter_reading_low'] = 'Energie meter meterstand - low tarief (kwh)';
-$lang['energy_meter_reading_normal'] = 'Energie meter meterstand - normal tarief (kwh)';
-$lang['gas_meter_reading'] = 'Gas meter meterstand (m3)';
+$lang['energy_meter_reading_low'] = 'Energie meter meterstand - laag tarief (kwh)';
+$lang['energy_meter_reading_normal'] = 'Energie meter meterstand - normaal tarief (kwh)';
+$lang['gas_meter_reading'] = 'Gas meter meterstand (m&sup3;)';
 
 $lang['energy_price'] = 'Energie prijs per kwh';
-$lang['gas_price' ] = 'Gas prijs per m3';
-$lang['energy_use_forecast'] = 'Energie verbruik jaar voorspelling (kWh)';
-$lang['energy_delivery_forecast'] = 'Energie teruglevering jaar voorspelling (kWh)';
-$lang['gas_use_forecast'] = 'Gas verbruik jaar voorspelling (m3)';
+$lang['gas_price' ] = 'Gas prijs per m&sup3;';
+$lang['energy_use_forecast'] = 'Jaar voorspelling energie verbruik (kWh)';
+$lang['energy_delivery_forecast'] = 'Jaar voorspelling energie teruglevering (kWh)';
+$lang['gas_use_forecast'] = 'Jaar voorspelling gas verbruik (m&sup3;)';
 
 $lang['energy_meter_present'] = 'Energie meter aanwezig ("true" or "false")';
 $lang['solar_meter_present'] = 'Solar meter aanwezig ("true" or "false")';

@@ -37,19 +37,19 @@ function plaatenergy_release_notes_page(){
 		$page .= '<div class="subparagraph">Version 0.5 (18-01-2016)</div>';
 		$page .= '<div class="large_text">';
 		$page .= '<ul>';
-		$page .= '<li>Move all configuration items to database.</li>';
-		$page .= '<li>Add settings page.</li>';
-		$page .= '<li>Add energy, gas, solar measurments correction page.</li>';
-		$page .= '<li>Improve footer information of all pages.</li>';  
-		$page .= '<li>Refactor navigation. Now its complete javascript base.</li>';
-		$page .= '<li>Improve error handeling. If something goes wrong user is better informed.</li>';
+		$page .= '<li>General: Move all configuration items to database.</li>';
+		$page .= '<li>General: Add settings page.</li>';
+		$page .= '<li>General: Add energy, gas, solar measurement correction page.</li>';
+		$page .= '<li>General: Improve header and footer block of all pages.</li>';  
+		$page .= '<li>General: Improve error handeling. If something goes wrong user is better informed.</li>';
 		$page .= '<li>Realtime Information: Add slider effect to information boxes.</li>';
 		$page .= '<li>Realtime Information: Add sunrise and sunset information box based on location.</li>';
-		$page .= '<li>Realtime Information: Add energy and gas carbon dioxide emission box.</li>';
-		$page .= '<li>Realtime Information: Settings sub page contain now more options.</li>';
-		$page .= '<li>Improve installation: Database is now automaticly created/patched during installation.</li>';	 
-		$page .= '<li>Improve installation: Now only one cron job is needed.</li>';
-		$page .= '<li>Improve installation: Python sensors scripts fetch device settings from database.</li>';
+		$page .= '<li>Realtime Information: Add energy and gas carbon dioxide emission information box.</li>';
+		$page .= '<li>Realtime Information: Setting slider contain now more options.</li>';
+		$page .= '<li>Installation: Database is now automaticly created/patched during installation.</li>';	 
+		$page .= '<li>Installation: Now only one cron job is needed.</li>';
+		$page .= '<li>Installation: Python sensors scripts fetch device settings from database.</li>';
+		$page .= '<li>Installation: When new version is available user is informed.</li>';
 		$page .= '<li>Bugfix: Energy / Weather station meter connection down detection improved.</li>';
 		$page .= '</ul>';
 		$page .= '</div>';
@@ -172,7 +172,7 @@ function plaatenergy_release_notes() {
 	switch ($pid) {
 
 		case PAGE_RELEASE_NOTES:
-			echo plaatenergy_release_notes_page();
+			return plaatenergy_release_notes_page();
 			break;
 	}
 }

@@ -246,15 +246,6 @@ function plaatenergy_day_in_energy_page() {
 
 
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid, t('LINK_PREV_DAY'));
-	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid, t('LINK_NEXT_DAY'));	
-	if ($eid==EVENT_KWH) {		
-		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_WATT,t('LINK_WATT'));	
-	} else {
-		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH,t('LINK_KWH'));		
-	}
-	
 	// If zero or one measurements are found. Measurement can be manully adapted.	
 	$timestamp1 = date("Y-m-d 00:00:00", $current_date);
 	$timestamp2 = date("Y-m-d 23:59:59", $current_date);
@@ -264,6 +255,15 @@ function plaatenergy_day_in_energy_page() {
 		
 	if ($records<=1) {
 		$page .= plaatenergy_link('pid='.PAGE_DAY_IN_KWH_EDIT.'&date='.$date, t('LINK_EDIT'));			
+	}
+	
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid, t('LINK_PREV_DAY'));
+	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid, t('LINK_NEXT_DAY'));	
+	if ($eid==EVENT_KWH) {		
+		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_WATT,t('LINK_WATT'));	
+	} else {
+		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH,t('LINK_KWH'));		
 	}
 	$page .= '</div>';
 		
@@ -285,6 +285,10 @@ function plaatenergy_day_in_energy() {
    /* Event handler */
   switch ($eid) {
   
+      case EVENT_SAVE:
+				plaatenergy_day_in_edit_save_event();
+				break;
+				
 		case EVENT_KWH:
 				break;
 				
@@ -296,7 +300,7 @@ function plaatenergy_day_in_energy() {
 	switch ($pid) {
 
 		case PAGE_DAY_IN_ENERGY:
-			echo plaatenergy_day_in_energy_page();
+			return plaatenergy_day_in_energy_page();
 			break;
 	}
 }

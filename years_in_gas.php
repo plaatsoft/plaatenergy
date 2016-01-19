@@ -134,20 +134,19 @@ function plaatenergy_years_in_gas_page() {
 
         function selectHandler(e)     {
            var year = data.getValue(chart.getSelection()[0].row, 0);
-           window.location="year_in_gas.php?year="+$year;
+			  link("pid='.PAGE_YEAR_IN_GAS.'&eid='.$eid.'&date="+year+"-1-1");
         }
      }
     </script>';
 
 	if ($eid==EVENT_M3) {			
-		echo '<h1>'.t('TITLE_YEARS_IN_GAS', ($year-10), $year).'</h1>';	
+		$page .= '<h1>'.t('TITLE_YEARS_IN_GAS', ($year-10), $year).'</h1>';	
 	} else {
-		echo '<h1>'.t('TITLE_YEARS_IN_GAS', ($year-10), $year).'</h1>';
+		$page .= '<h1>'.t('TITLE_YEARS_IN_GAS', ($year-10), $year).'</h1>';
 	}
 	
-	echo '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
-	
-	echo '<div class="remark">';
+	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';	
+	$page .= '<div class="remark">';
 	
 	if ($count>0) {			 
 		if ($eid==EVENT_M3) {		
@@ -159,7 +158,7 @@ function plaatenergy_years_in_gas_page() {
 	} else {	
 		$page .= '&nbsp;';
 	}
-	echo '</div>';	
+	$page .= '</div>';	
 	
 	$page .= '<div class="nav">';
 	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid,t('LINK_PREV_YEAR'));
@@ -202,7 +201,7 @@ function plaatenergy_years_in_gas() {
 	switch ($pid) {
 
 		case PAGE_YEARS_IN_GAS:
-			echo plaatenergy_years_in_gas_page();
+			return plaatenergy_years_in_gas_page();
 			break;
 	}
 }

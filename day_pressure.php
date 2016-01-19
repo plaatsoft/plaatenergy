@@ -116,7 +116,7 @@ function plaatenergy_day_pressure() {
 	switch ($pid) {
 
 		case PAGE_DAY_PRESSURE:
-			echo plaatenergy_day_pressure_page();
+			return plaatenergy_day_pressure_page();
 			break;
 	}
 }

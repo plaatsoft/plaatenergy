@@ -38,12 +38,28 @@ $sql1 .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'" order by 
 $result1 = plaatenergy_db_query($sql1);
 $row1 = plaatenergy_db_fetch_object($result1);
 
+$temperature = 0;
+$pressure = 0;
+$humidity = 0;	
+if (isset($row1->temperature)) {
+   $temperature = $row1->temperature;
+	$pressure = $row1->pressure;
+	$humidity = $row1->humidity;
+}
+  
 // ---------------------------------------------
 
 $sql2  = 'select vermogen, vermogenterug, gas from energy where ';
 $sql2 .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'" order by id desc limit 0,1';
 $result2 = plaatenergy_db_query($sql2);
 $row2 = plaatenergy_db_fetch_object($result2);
+
+$vermogen = 0;
+$vermogenterug = 0;
+if ( isset($row2->vermogen) ) {
+	$vermogen = $row2->vermogen;
+	$vermogenterug = $row2->vermogenterug;
+}
 
 // ---------------------------------------------
 
@@ -55,15 +71,14 @@ $sql3 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 $result3 = plaatenergy_db_query($sql3);
 $row3 = plaatenergy_db_fetch_object($result3);
 
-$dal_value = $row3->dal;
-$piek_value = $row3->piek;
-$dalterug_value = $row3->dalterug;
-$piekterug_value = $row3->piekterug;
-$solar_value = $row3->solar;
-$gas_value = $row3->gas;
-
-$today_energy_used = $dal_value + $piek_value + ($solar_value - $dalterug_value - $piekterug_value);
-$today_energy_delivered = $solar_value;
+$today_energy_used = 0;
+$today_energy_delivered = 0;
+$today_gas_used = 0;
+if ( isset ($row3->dal)) {
+	$today_energy_used = $row3->dal + $row3->piek + ($row3->solar - $row3->dalterug - $row3->piekterug);
+	$today_energy_delivered = $row3->solar;
+	$today_gas_used = $row3->gas;
+}
 
 // ---------------------------------------------
 
@@ -76,9 +91,14 @@ $sql5 .= 'FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2
 $result5 = plaatenergy_db_query($sql5);
 $row5 = plaatenergy_db_fetch_object($result5);
 
-$total_energy_used = $row5->dal + $row5->piek + ($row5->solar-$row5->dalterug-$row5->piekterug);
-$total_energy_delivered = $row5->solar;
-$total_gas_used = $row5->gas;
+$total_energy_used = 0;
+$total_energy_delivered = 0;
+$total_gas_used = 0;
+if ( isset ($row5->dal)) {
+	$total_energy_used = $row5->dal + $row5->piek + ($row5->solar-$row5->dalterug-$row5->piekterug);
+	$total_energy_delivered = $row5->solar;
+	$total_gas_used = $row5->gas;
+}
 
 // ---------------------------------------------
 
@@ -87,6 +107,9 @@ $total_energy_co2 = round(($total_energy_used - $total_energy_delivered), 2);
 
 // Burning 1 m3 gas results in 0.00178 ton CO2 emission.
 $total_gas_co2 = round(($row5->gas * 1.78), 2);
+
+// Amount of tree needed to offset gas + energy co2 emission
+$total_tree_offset = ($total_energy_co2 + $total_gas_co2) / 200;
 
 /*
 ** ---------------------
@@ -120,10 +143,10 @@ header("Cache-Control: no-cache");
 header("Pragma: no-cache");
 
 // Calculate actual energy in Watt
-if ($row2->vermogen > 0) {
-  $json["current_watt"] = "- ".num($row2->vermogen,0)." Watt";
+if ($vermogen > 0) {
+  $json["current_watt"] = "- ".num($vermogen,0)." Watt";
 } else {
-  $json["current_watt"] = "+ ".num($row2->vermogenterug,0)." Watt";
+  $json["current_watt"] = "+ ".num($vermogenterug,0)." Watt";
 }
 
 // Calculate actuel used energy today in kWh 
@@ -140,23 +163,23 @@ $json["total_delivery"] = num($total_energy_delivered). " kWh";
 // Calculate actual used gas today in m3 = 0 / dm3 = 1
 if ($_GET["q"][1] == "0") {
   $json["total_gas"] = num($total_gas_used) . " m&sup3;";
-  $json["gas_today"] = num($gas_value) . " m&sup3;";
+  $json["gas_today"] = num($today_gas_used) . " m&sup3;";
 } elseif ($_GET["q"][1] == "1") {
   $json["total_gas"] = num($total_gas_used * 1000, 0) . " dm&sup3;";
-  $json["gas_today"] = num($gas_value * 1000, 0) . " dm&sup3;";
+  $json["gas_today"] = num($today_gas_used * 1000, 0) . " dm&sup3;";
 }
 
 // Calculate actual temperature in graden celcius = 0 / fahrenheit = 1 / kelvin = 2
 if ($_GET["q"][2] == "0") {
-  $json["temperature"] = num($row1->temperature) . " &deg;C";
+  $json["temperature"] = num($temperature) . " &deg;C";
 } elseif ($_GET["q"][2] == "1") {
-  $json["temperature"] = num($row1->temperature * 9 / 5 + 32) . " &deg;F";
+  $json["temperature"] = num($temperature * 9 / 5 + 32) . " &deg;F";
 } elseif ($_GET["q"][2] == "2") {
-  $json["temperature"] = num($row1->temperature + 273.15) . " K";
+  $json["temperature"] = num($temperature + 273.15) . " K";
 }
 
-$json["pressure"] = num($row1->pressure) . " hPa";
-$json["humidity"] = num($row1->humidity) . " %";
+$json["pressure"] = num($pressure) . " hPa";
+$json["humidity"] = num($humidity) . " %";
 
 // Calculate actual energy and gas co2 emission this year in kg
 if ($total_energy_co2 > 0) {
@@ -170,6 +193,8 @@ if ($total_gas_co2 > 0) {
 } else {
   $json["total_gas_co2"] = str_replace("-", "- ", num($total_gas_co2)) . " kg";
 }
+
+$json["total_tree_offset"]  = "+ ". num($total_tree_offset);
 
 echo json_encode($json);
 

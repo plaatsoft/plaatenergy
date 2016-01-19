@@ -35,6 +35,7 @@ function plaatenergy_day_out_edit_save_event() {
    // input
 	global $etotal;
 	global $date;
+	global $eid;
 	
 	$sql  = 'select etotal FROM solar where timestamp="'.$date.' 00:00:00"';
 	$result = plaatenergy_db_query($sql);
@@ -49,7 +50,9 @@ function plaatenergy_day_out_edit_save_event() {
 	}
 	
 	plaatenergy_db_query($sql);
-	plaatenergy_process(EVENT_PROCESS_ALL_DAYS);
+	plaatenergy_db_process(EVENT_PROCESS_ALL_DAYS);
+	
+	$eid = EVENT_NONE;
 }
 
 /*
@@ -132,18 +135,12 @@ function plaatenergy_day_out_edit_page() {
 	$page .=  '<br/>';
 	$page .=  '<br/>';
 	$page .=  '<input type="hidden" name="do" value="1" />';
-	
-	// -------------------------------------
-	
-	if ($eid==EVENT_SAVE) {
-		$page .= t('RECORD_SAVED');
-	}
-	
+		
 	// -------------------------------------
  
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'), 'home');
-	$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_SAVE.'&date='.$date, t('LINK_SAVE'));
+	$page .= plaatenergy_link('pid='.PAGE_DAY_OUT_ENERGY.'&date='.$date, t('LINK_CANCEL'));
+	$page .= plaatenergy_link('pid='.PAGE_DAY_OUT_ENERGY.'&eid='.EVENT_SAVE.'&date='.$date, t('LINK_SAVE'));
 	$page .= '</div>';
 	
 	return $page;
@@ -173,7 +170,7 @@ function plaatenergy_day_out_edit() {
   switch ($pid) {
 
      case PAGE_DAY_OUT_KWH_EDIT:
-			echo plaatenergy_day_out_edit_page();
+			return plaatenergy_day_out_edit_page();
 			break;
   }
 }

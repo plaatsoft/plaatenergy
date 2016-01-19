@@ -154,7 +154,7 @@ function plaatenergy_years_in_energy_page() {
 
         function selectHandler(e)     {
            var year = data.getValue(chart.getSelection()[0].row, 0);
-           window.location="year_in_kwh.php?year="+year;
+			  link("pid='.PAGE_YEAR_IN_ENERGY.'&eid='.$eid.'&date="+year+"-1-1");
         }
       }
     </script>';
@@ -214,7 +214,7 @@ function plaatenergy_years_in_energy() {
 	switch ($pid) {
 
 		case PAGE_YEARS_IN_ENERGY:
-			echo plaatenergy_years_in_energy_page();
+			return plaatenergy_years_in_energy_page();
 			break;
 	}
 }

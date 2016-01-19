@@ -38,13 +38,13 @@ $token = plaatenergy_post("token", "");
 if (strlen($token)>0) {
 	
   /* Decode token to php parameters */
-  $token = gzinflate(base64_decode($token));	
+  $token =  plaatenergy_token_decode($token);	  
   $tokens = @preg_split("/&/", $token);
 	
   foreach ($tokens as $item) {
      $items = preg_split ("/=/", $item);				
      $$items[0] = $items[1];	
-     //echo $items[0].'='.$items[1].'<br/>';
+     //echo '>'.$items[0].'='.$items[1].'<br/>';
   }
 }
 
@@ -77,6 +77,14 @@ if (isset($_GET["theme"])) {
 		set_cookie_and_refresh("theme", "dark");
 	}
 }
+
+/*if (isset($lang)) {
+	if ($lang=="nl") {
+		set_cookie_and_refresh("lang", "nl");
+	} else {
+		set_cookie_and_refresh("lang", "en");
+	}
+}*/
 
 if (isset($_GET["lang"])) {
 	if ($_GET["lang"] == "nl") {
@@ -118,7 +126,7 @@ switch ($_COOKIE["lang"]) {
 ** -------------------
 */
 
-general_header();
+$page = "";
 
 switch ($pid) {
 
@@ -126,135 +134,142 @@ switch ($pid) {
 	
 	case PAGE_HOME: 
 		include "home.php";
-		plaatenergy_home();
+		$page = plaatenergy_home();
 		break;
 
 	case PAGE_ABOUT: 
 		include "about.php";
-		plaatenergy_about();
+		$page = plaatenergy_about();
 		break;
 
 	case PAGE_DONATE: 
 		include "donate.php";
-		plaatenergy_donate();
+		$page = plaatenergy_donate();
 		break;
 
 	case PAGE_RELEASE_NOTES: 
 		include "release_notes.php";
-		plaatenergy_release_notes();
+		$page = plaatenergy_release_notes();
 		break;
 	 
 	case PAGE_REPORT: 
 		include "report.php";
-		plaatenergy_report();
+		$page = plaatenergy_report();
 		break;
 		
 	case PAGE_SETTING_LIST: 
 	case PAGE_SETTING_EDIT: 
 		include "settings.php";
-		plaatenergy_settings();
+		$page = plaatenergy_settings();
 		break;
 		
 	// ---------------------------------
 	
 	case PAGE_DAY_IN_ENERGY: 
+		include "day_in_kwh_edit.php";
 		include "day_in_kwh.php";
-		plaatenergy_day_in_energy();
+		$page = plaatenergy_day_in_energy();
 		break;
 		
 	case PAGE_DAY_IN_KWH_EDIT: 
 		include "day_in_kwh_edit.php";
-		plaatenergy_day_in_edit();
+		$page = plaatenergy_day_in_edit();
 		break;
 		
 	case PAGE_DAY_OUT_ENERGY: 
+		include "day_out_kwh_edit.php";
 		include "day_out_kwh.php";
-		plaatenergy_day_out_energy();
+		$page = plaatenergy_day_out_energy();
 		break;
 		
 	case PAGE_DAY_OUT_KWH_EDIT: 
 		include "day_out_kwh_edit.php";
-		plaatenergy_day_out_edit();
+		$page = plaatenergy_day_out_edit();
 		break;
 		
 	case PAGE_DAY_IN_GAS: 
+		include "day_in_gas_edit.php";	
 		include "day_in_gas.php";
-		plaatenergy_day_in_gas();
+		$page = plaatenergy_day_in_gas();
 		break;
 				
 	case PAGE_DAY_IN_GAS_EDIT: 
 		include "day_in_gas_edit.php";
-		plaatenergy_day_in_gas_edit();
+		$page = plaatenergy_day_in_gas_edit();
 		break;
 
 	case PAGE_DAY_PRESSURE: 
 		include "day_pressure.php";
-		plaatenergy_day_pressure();
+		$page = plaatenergy_day_pressure();
 		break;
 		
 	case PAGE_DAY_TEMPERATURE: 
 		include "day_temperature.php";
-		plaatenergy_day_temperature();
+		$page = plaatenergy_day_temperature();
 		break;
 		
 	case PAGE_DAY_HUMIDITY: 
 		include "day_humidity.php";
-		plaatenergy_day_humidity();
+		$page = plaatenergy_day_humidity();
 		break;
 	
 	// ---------------------------------
 		
 	case PAGE_MONTH_IN_ENERGY:
 		include "month_in_kwh.php";
-		plaatenergy_month_in_energy();
+		$page = plaatenergy_month_in_energy();
 		break;
 		
 	case PAGE_MONTH_OUT_ENERGY:
 		include "month_out_kwh.php";
-		plaatenergy_month_out_energy();
+		$page = plaatenergy_month_out_energy();
 		break;
 		
 	case PAGE_MONTH_IN_GAS:
 		include "month_in_gas.php";
-		plaatenergy_month_in_gas();
+		$page = plaatenergy_month_in_gas();
 		break;
 			
 	// ---------------------------------
 	
 	case PAGE_YEAR_IN_ENERGY:
 		include "year_in_kwh.php";
-		plaatenergy_year_in_energy();
+		$page = plaatenergy_year_in_energy();
 		break;
 		
 	case PAGE_YEAR_OUT_ENERGY:
 		include "year_out_kwh.php";
-		plaatenergy_year_out_energy();
+		$page = plaatenergy_year_out_energy();
 		break;
 		
 	case PAGE_YEAR_IN_GAS:
 		include "year_in_gas.php";
-		plaatenergy_year_in_gas();
+		$page = plaatenergy_year_in_gas();
 		break;
 		
 	// ---------------------------------
-	
-	case PAGE_YEARS_IN_GAS:
-		include "years_in_gas.php";
-		plaatenergy_years_in_gas();
-		break;
-		
+
 	case PAGE_YEARS_IN_ENERGY:
 		include "years_in_kwh.php";
-		plaatenergy_years_in_energy();
+		$page = plaatenergy_years_in_energy();
 		break;
 		
 	case PAGE_YEARS_OUT_ENERGY:
 		include "years_out_kwh.php";
-		plaatenergy_years_out_energy();
+		$page = plaatenergy_years_out_energy();
+		break;
+
+	case PAGE_YEARS_IN_GAS:
+		include "years_in_gas.php";
+		$page = plaatenergy_years_in_gas();
 		break;
 		
 	// ---------------------------------
 }
+
+echo general_header();
+
+echo $page;
 
 // Increase request counter with one!
 $counter = plaatenergy_db_get_config_item('request_counter');  
@@ -264,7 +279,7 @@ plaatenergy_db_set_config_item('request_counter', ++$counter);
 $time_end = microtime(true);
 $time = $time_end - $time_start;
   
-general_footer($time);
+echo general_footer($time);
 
 plaatenergy_db_close();
 

@@ -140,9 +140,12 @@ function plaatenergy_home_page() {
 
   global $version;
 
-  $page = '<h1>' . t('TITLE') . ' ' . $version . '</h1>';
-
-  $page .= "<div id='version'></div>";
+	$page = '<h1>';
+	$page .= t('TITLE').' ';
+	$page .= '<div id="version" style="display: inline">';
+	$page .= $version;
+	$page .= "</div>";
+	$page .= '</h1>';
 
 	if ( !file_exists ( "config.inc" )) {
 		$page .= '<br/><br/>';
@@ -151,6 +154,7 @@ function plaatenergy_home_page() {
 		
 	} else {
 
+		$page .= '<div class="home">';
 		$page .= '<table>';
 
 		$page .= '<tr>';
@@ -215,6 +219,7 @@ function plaatenergy_home_page() {
 		$page .= '</tr>';
 
 		$page .= '</table>';
+		$page .= '</div>';
 
 		$page .= '<br/><br/>';
 	
@@ -225,7 +230,6 @@ function plaatenergy_home_page() {
 		$page .= '<br/><br/>';
 
 		$page .= '<script type="text/javascript" src="js/version.js"></script>';
-		$page .= '<script type="text/javascript">check_version("'.$version.'")</script>';
 	}
 	return $page;
 }
@@ -245,7 +249,7 @@ function plaatenergy_home() {
 	switch ($pid) {
 		
 		case PAGE_HOME:
-			echo plaatenergy_home_page();
+			return plaatenergy_home_page();
 			break;
 	}
 }

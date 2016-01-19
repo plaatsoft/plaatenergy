@@ -122,7 +122,7 @@ function plaatenergy_year_in_energy_page() {
 					3: {
 						targetAxisIndex: 1
 					}
-			}
+				}
 			};
 	
 			var data = google.visualization.arrayToDataTable('.$json.');
@@ -134,9 +134,9 @@ function plaatenergy_year_in_energy_page() {
 			function selectHandler(e)     {
 				var date = data.getValue(chart.getSelection()[0].row, 0);
 				var month = date.split("-");
-				window.location="month_in_kwh.php?month="+month[0]+"&year='.$year.'"
+				link("pid='.PAGE_MONTH_IN_ENERGY.'&eid='.$eid.'&date='.$year.'-"+month[0]+"-1");
 			}
-			}
+		}
 		</script>';
 	
 	$page .= '<h1>'.t('TITLE_YEAR_IN_KWH', $year).'</h1>';
@@ -194,7 +194,7 @@ function plaatenergy_year_in_energy() {
 	switch ($pid) {
 
 		case PAGE_YEAR_IN_ENERGY:
-			echo plaatenergy_year_in_energy_page();
+			return plaatenergy_year_in_energy_page();
 			break;
 	}
 }

@@ -114,7 +114,7 @@ function plaatenergy_day_temperature() {
   switch ($pid) {
 
      case PAGE_DAY_TEMPERATURE:
-        echo plaatenergy_day_temperature_page();
+        return plaatenergy_day_temperature_page();
         break;
   }
 }
