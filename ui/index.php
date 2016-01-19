@@ -15,8 +15,11 @@
 		
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<link rel="stylesheet" type="text/css" href="./main.css"/>
+                <script language="JavaScript" src="../js/link.js" type="text/javascript"></script>
 	</head>
 	<body>
+               <form id="plaatenergy" method="POST" action='../.'>
+               
 		<div class="shadow" onclick="close_all_sidebars();"></div>
 		<div class="bg"></div>
 		
@@ -197,11 +200,12 @@
 						<div id="t_tiles_sunset" class="label"></div>
 					</div>
 				</div>
-				<div class="tile normal brown" onclick="window.location = '../day_temperature.php';">
+
+				<div class="tile normal brown" onclick='<?php echo 'link("pid='.PAGE_DAY_TEMPERATURE.'&date='.date('Y-m-d').'");'?>'>
 					<div id="temperature" class="text"></div>
 					<div id="t_tiles_temperature" class="label"></div>
 				</div>
-				<div class="tile normal blue" onclick="window.location = '../day_pressure.php';">
+				<div class="tile normal blue" onclick='<?php echo 'link("pid='.PAGE_DAY_PRESSURE.'&date='.date('Y-m-d').'");'?>'>
 					<div id="pressure" class="text"></div>
 					<div id="t_tiles_pressure" class="label"></div>
 				</div>
@@ -217,29 +221,29 @@
 				</div>
 				
 				<div class="tile normal live top-bottom">
-					<div class="a gray" onclick="window.location = '../day_in_gas.php';">
+				        <div class="a gray" onclick='<?php echo 'link("pid='.PAGE_DAY_IN_GAS.'&date='.date('Y-m-d').'");'?>'>
 						<div id="gas_today" class="text"></div>
 						<div id="t_tiles_gas_today" class="label"></div>
 					</div>
-					<div class="b deeppurple" onclick="window.location = '../year_in_gas.php';">
+				        <div class="b deeppurple" onclick='<?php echo 'link("pid='.PAGE_YEAR_IN_GAS.'&eid='.EVENT_M3.'&date='.date('Y').'");'?>'>
 						<div id="total_gas" class="text"></div>
 						<div id="t_tiles_total_gas" class="label"></div>
 					</div>
 				</div>
 				
 				<div class="tile normal live left-right">
-					<div class="a red" onclick="window.location = '../year_in_kwh.php';">
+				        <div class="a red" onclick='<?php echo 'link("pid='.PAGE_YEAR_IN_ENERGY.'&eid='.EVENT_KWH.'&date='.date('Y').'");'?>'>
 						<div id="total_decrease" class="text"></div>
 						<div id="t_tiles_total_decrease" class="label"></div>
 					</div>
-					<div class="b green" onclick="window.location = '../year_out_kwh.php';">
+				        <div class="b green" onclick='<?php echo 'link("pid='.PAGE_YEAR_OUT_ENERGY.'&eid='.EVENT_KWH.'&date='.date('Y').'");'?>'>
 						<div id="total_delivery" class="text"></div>
 						<div id="t_tiles_total_delivery" class="label"></div>
 					</div>
 				</div>
 			</div>
 			<div class="col">
-				<div class="tile normal purple" onclick="window.location = '../day_huminity.php';">
+				<div class="tile normal purple" onclick='<?php echo 'link("pid='.PAGE_DAY_HUMIDITY.'&date='.date('Y-m-d').'");'?>'>
 					<div id="humidity" class="text"></div>
 					<div id="t_tiles_humidity" class="label"></div>
 				</div>
@@ -256,7 +260,10 @@
 					<div id="t_tiles_exit" class="label"></div>
 				</div>
 				
-				<div class="tile normal"></div>
+				<div class="tile normal teal">
+					<div id="total_tree_offset" class="text"></div>
+					<div id="t_tiles_tree" class="label"></div>
+				</div>
 				
 				<div class="tile normal live right-left">
 					<div class="a deeppurple">
@@ -343,5 +350,6 @@
 				console.error(error);
 			}*/
 		</script>
+        </form>
 	</body>
 </html>

@@ -20,15 +20,16 @@ $lang[0]["tiles_w_humidity"] = "Air humidity outside";
 $lang[0]["tiles_w_pressure"] = "Air pressure outside";
 $lang[0]["tiles_w_wind"] = "Wind speed outside";
 
-$lang[0]["tiles_gas_today"] = "Gas today";
-$lang[0]["tiles_total_gas"] = "Total gas consumption";
+$lang[0]["tiles_gas_today"] = "Gas used today";
+$lang[0]["tiles_total_gas"] = "Gas used annually";
 $lang[0]["tiles_energy_today"] = "Electricity today";
 $lang[0]["tiles_current_watt"] = "Electricity now";
-$lang[0]["tiles_total_decrease"] = "Total used electricity";
-$lang[0]["tiles_total_delivery"] = "Total delivered electricity";
+$lang[0]["tiles_total_decrease"] = "Electricity used annually";
+$lang[0]["tiles_total_delivery"] = "Electricity delivered annually";
 
-$lang[0]["tiles_energy_co2"] = "Electricity co&sup2; emission";
-$lang[0]["tiles_gas_co2"] = "Gas co&sup2; emission";
+$lang[0]["tiles_energy_co2"] = "Electricity CO2 emission annually";
+$lang[0]["tiles_gas_co2"] = "Gas CO2 emission annually";
+$lang[0]["tiles_tree"] = "No. of trees needed to offset CO2";
 
 $lang[0]["tiles_sunrise"] = "Sunrise";
 $lang[0]["tiles_sunset"] = "Sunset";
@@ -81,14 +82,15 @@ $lang[1]["tiles_w_pressure"] = "Luchtdruk buiten";
 $lang[1]["tiles_w_wind"] = "Wind snelheid buiten";
 
 $lang[1]["tiles_gas_today"] = "Gas vandaag";
-$lang[1]["tiles_total_gas"] = "Totaal verbruik gas";
+$lang[1]["tiles_total_gas"] = "Afgenomen gas dit jaar";
 $lang[1]["tiles_energy_today"] = "Elektriciteit vandaag";
 $lang[1]["tiles_current_watt"] = "Elektriciteit nu";
-$lang[1]["tiles_total_decrease"] = "Totaal afname elektriciteit";
-$lang[1]["tiles_total_delivery"] = "Totaal levering elektriciteit";
+$lang[1]["tiles_total_decrease"] = "Afgenomen elektricteit dit jaar";
+$lang[1]["tiles_total_delivery"] = "Geleverde elektriciteit dit jaar";
 
-$lang[1]["tiles_energy_co2"] = "Elektriciteit co&sup2; emissie";
-$lang[1]["tiles_gas_co2"] = "Gas co&sup2; emissie";
+$lang[1]["tiles_energy_co2"] = "Elektriciteit CO2 emissie";
+$lang[1]["tiles_gas_co2"] = "Gas CO2 emissie";
+$lang[1]["tiles_tree"] = "Bomen nodig om CO2 te compenseren";
 
 $lang[1]["tiles_sunrise"] = "Zonsopgang";
 $lang[1]["tiles_sunset"] = "Zonsondergang";

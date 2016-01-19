@@ -194,7 +194,12 @@ if ($total_gas_co2 > 0) {
   $json["total_gas_co2"] = str_replace("-", "- ", num($total_gas_co2)) . " kg";
 }
 
-$json["total_tree_offset"]  = "+ ". num($total_tree_offset);
+// Trees for co2
+if ($total_tree_offset > 0) {
+  $json["total_tree_offset"] = "+ " .num($total_tree_offset);
+} else {
+  $json["total_tree_offset"] = str_replace("-", "- ", num($total_tree_offset));
+}
 
 echo json_encode($json);
 

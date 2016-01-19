@@ -14,11 +14,6 @@
 **  All copyrights reserved (c) 2008-2015 PlaatSoft
 */
 
-/* Animate everything! (bplaat) */
-* {
-	transition: all 0.2s;
-}
-
 body {		
   color: #222;
   text-align: center;
@@ -50,6 +45,10 @@ body {
 	position: absolute;
 	top: 15px;
 	right: 15px;
+}
+
+label {
+	display: block;
 }
 
 .theme,
@@ -85,12 +84,9 @@ table {
    margin: auto;
 }
 
-div.home, tr, td {
+.home tr,
+.home td {
    vertical-align: top;
-}
-
-div.setting, tr, td {
-   vertical-align: center;
 }
 
 
