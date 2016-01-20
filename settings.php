@@ -104,7 +104,7 @@ function plaatenergy_setting_list_page() {
 	$page .= '<tr>';
 	$page .= '<th width="200">'.t('LABEL_TOKEN').'</th>';
 	$page .= '<th width="100">'.t('LABEL_VALUE').'</th>';
-	$page .= '<th width="300">'.t('LABEL_DESCRIPTION').'</th>';
+	$page .= '<th width="325">'.t('LABEL_DESCRIPTION').'</th>';
 	$page .= '</tr>';
 	
 	while ($row = plaatenergy_db_fetch_object($result)) {
