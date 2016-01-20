@@ -16,6 +16,8 @@
 **  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
+$time_start = microtime(true);
+
 include "config.inc";
 include "general.inc";
 include "database.inc";
@@ -30,20 +32,29 @@ plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 $solar_meter_present = plaatenergy_db_get_config_item('solar_meter_present');
 if ($solar_meter_present!="false") {
-   exec('sudo python /var/www/html/plaatenergy/sensors/omnik/Omnik.py &');
+   exec('sudo python /var/www/html/plaatenergy/sensors/omnik/Omnik.py');
 }
 
 $weather_station_present = plaatenergy_db_get_config_item('weather_station_present');
 if ($weather_station_present!="false") {
-   exec('sudo python /var/www/html/plaatenergy/sensors/weather/weather.py &');
+   exec('sudo python /var/www/html/plaatenergy/sensors/weather/weather.py');
 }
 
 $energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present');
 if ($energy_meter_present!="false") {
-   exec('sudo python /var/www/html/plaatenergy/sensors/p1/p1.py &');
+   exec('sudo python /var/www/html/plaatenergy/sensors/p1/p1.py');
 }
 
 plaatenergy_db_process(EVENT_PROCESS_TODAY);
+
+plaatenergy_db_close();
+
+// Calculate to page render time
+$time_end = microtime(true);
+$time = $time_end - $time_start;
+
+echo "cron took ".round($time,2)." secs";
+
 
 /*
 ** ---------------------

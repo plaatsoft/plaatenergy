@@ -306,11 +306,8 @@ function plaatenergy_db_process($type) {
      $sql1 = 'select cast(timestamp as date) as date from energy group by date';
 		 
   } else {
-     $timestamp1 = $year.'-'.$month.'-'.$day.' 00:00:00';
-     $timestamp2 = $year.'-'.$month.'-'.$day.' 23:59:59';
-
      $sql1  = 'select cast(timestamp as date) as date from energy ';
-     $sql1 .= 'where timestamp>"'.$timestamp1.'" and timestamp<"'.$timestamp2.'" limit 0,1';
+     $sql1 .= 'where timestamp>"'.date("Y-m-d").' 00:00:00" and timestamp<"'.date("Y-m-d").' 23:59:59" limit 0,1';
   }
   $result1 = plaatenergy_db_query($sql1);
 
