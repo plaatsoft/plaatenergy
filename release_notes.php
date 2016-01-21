@@ -34,7 +34,7 @@ function plaatenergy_release_notes_page(){
 
   if ($id==5) {
     
-		$page .= '<div class="subparagraph">Version 0.5 (18-01-2016)</div>';
+		$page .= '<div class="subparagraph">Version 0.5 (20-01-2016)</div>';
 		$page .= '<div class="large_text">';
 		$page .= '<ul>';
 		$page .= '<li>General: Move all configuration items to database.</li>';
