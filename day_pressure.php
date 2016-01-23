@@ -56,21 +56,21 @@ function plaatenergy_day_pressure_page() {
 		} else if ( isset($row->pressure)) {
 			$value = $row->pressure;
 			$found = 1;
-		}
 		
-		if ($value>$max) {
+	 	  if ($value>$max) {
 			$max=$value;
-		}
+		  }
 		
-		if ($value<$min) {
+		  if ($value<$min) {
 			$min=$value;
-		}
+		  }
+               }
 		
 		if (strlen($data)>0) {
 			$data.=',';
 		}
 		$data .= "['".date("H:i", $current_date+(900*$i))."',";
-		$data .= round($value,1).']';
+		$data .= round($value,2).']';
 	
 		$i++;
 	}

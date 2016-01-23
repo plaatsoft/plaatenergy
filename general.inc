@@ -429,7 +429,7 @@ function plaatenergy_navigation_day() {
 	global $eid;
 	global $date;
 	
-	$page .= '<div class="nav">';
+	$page = '<div class="nav">';
 	
 	// If zero or one measurements are found. Measurement can be manually adapted.
 	switch ($pid) {
@@ -449,7 +449,7 @@ function plaatenergy_navigation_day() {
 			}
 		
 		case PAGE_DAY_IN_GAS:		
-			$sql = 'select * FROM energy where timestamp>="'.$date.' 00:00:00" and timestamp<="'.$$date.' 23:59:59"';
+			$sql = 'select * FROM energy where timestamp>="'.$date.' 00:00:00" and timestamp<="'.$date.' 23:59:59"';
 			$result = plaatenergy_db_query($sql);
 			if ( plaatenergy_db_num_rows($result) <= 1) {
 				$page .= plaatenergy_link('pid='.PAGE_DAY_IN_GAS_EDIT.'&date='.$date, t('LINK_EDIT'));			
@@ -484,11 +484,11 @@ function plaatenergy_navigation_month() {
 	global $eid;
 	global $date;
 	
-	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid,t('LINK_PREV_MONTH'));
+	$page  = '<div class="nav">';
+	$page .= plaatenergy_link('pid='.$pid.'&date='.plaatenergy_prev_month($date).'&eid='.$eid,t('LINK_PREV_MONTH'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
 	
-	if (plaatenergy_next_month($date) <= date("Y-m")) {		
+	if ($date < date("Y-m")) {		
 		$page .= plaatenergy_link('pid='.$pid.'&date='.plaatenergy_next_month($date), t('LINK_NEXT_MONTH'));	
 	} else {
 		$page .= plaatenergy_link('pid='.$pid.'&date='.$date, t('LINK_NEXT_MONTH'));	
@@ -512,7 +512,7 @@ function plaatenergy_navigation_month() {
 	
 		switch ($eid) {
 
-			case EVENT_EURO) 
+			case EVENT_EURO:
 				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_M3,t('LINK_KWH'));		
 				break;
 				
@@ -552,12 +552,12 @@ function plaatenergy_navigation_year() {
 	global $eid;
 	global $date;
 		
-	$page .= '<div class="nav">';
+	$page  = '<div class="nav">';
 	
 	$page .= plaatenergy_link('pid='.$pid.'&date='.plaatenergy_prev_year($date).'&eid='.$eid,t('LINK_PREV_YEAR'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
 	
-	if (plaatenergy_next_year($date) <= date("Y")) {		
+	if ($date < date("Y")) {		
 		$page .= plaatenergy_link('pid='.$pid.'&date='.plaatenergy_next_year($date).'&eid='.$eid,t('LINK_NEXT_YEAR'));	
 	} else { 
 		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.$eid,t('LINK_NEXT_YEAR'));	
@@ -579,6 +579,8 @@ function plaatenergy_navigation_year() {
 	}
 	
 	$page .= '</div>';	
+
+      return $page;
 }
 
 

@@ -180,6 +180,10 @@ $lang['TITLE_DAY_OUT_KWH'] = 'Solar Meter - Geleverde Elektriciteit %s-%s-%s';
 $lang['TOTAL_PER_DAY_KWH'] = 'Totaal = %s kWh';
 $lang['TOTAL_PER_DAY_M3'] = 'Totaal = %s m&sup3;';
 
+$lang['MIN_MAX_TEMPERATURE'] = 'Minimale temperatuur = %s &deg;C | Maximale temperatuur = %s &deg;C';
+$lang['MIN_MAX_HUMIDITY'] = 'Minimale vochtigheid = %s % | Maximale vochtigheid = %s %';
+$lang['MIN_MAX_PRESSURE'] = 'Minimale luchtdruk = %s hPa  | Maximale luchtdruk = %s hPa';
+
 /*
 ** ------------------
 ** OTHERS

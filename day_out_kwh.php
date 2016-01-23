@@ -32,6 +32,9 @@ function plaatenergy_day_out_energy_page() {
 	global $in_forecast;
 	global $graph_width;
 	global $graph_height;
+
+        $prev_date = plaatenergy_prev_day($date);
+        $next_date = plaatenergy_next_day($date);
 		
 	list($year, $month, $day) = explode("-", $date);	
 	$current_date=mktime(0, 0, 0, $month, $day, $year);  
