@@ -22,7 +22,7 @@
 ** ---------------------
 */
 
-$max=5;
+$max=6;
 
 function plaatenergy_release_notes_page(){
 
@@ -31,6 +31,17 @@ function plaatenergy_release_notes_page(){
   
   $page  = '<h1>Release Notes</h1>';
   $page .= '<br/>';
+  
+   if ($id==6) {
+    
+		$page .= '<div class="subparagraph">Version 0.6 (23-01-2016)</div>';
+		$page .= '<div class="large_text">';
+		$page .= '<ul>';
+		$page .= '<li>General: Added backup feature to setting page.</li>';
+		$page .= '</ul>';
+		$page .= '</div>';
+  }
+  
 
   if ($id==5) {
     

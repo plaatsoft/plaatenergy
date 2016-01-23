@@ -48,6 +48,25 @@ function plaatenergy_setting_save_event() {
 	plaatenergy_db_process(EVENT_PROCESS_ALL_DAYS);
 }
 
+
+function plaatenergy_setting_backup_event() {
+
+	/* input */
+	global $dbuser;
+	global $dbpass;
+	global $dbhost;
+	global $dbname;
+		
+	/* Create new database backup file */
+	$filename = 'backup/plaatenergy-'.date("Ymd").'.sql';
+	
+	$command = 'mysqldump --user='.$dbuser.' --password='.$dbpass.' --host='.$dbhost.' '.$dbname.' > '.$filename;
+	system($command);
+	
+	$command = 'gzip '.$filename;
+	system($command);
+}
+
 /*
 ** ---------------------
 ** PAGE
@@ -124,6 +143,7 @@ function plaatenergy_setting_list_page() {
 	$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_PREV.'&limit='.$limit, t('LINK_PREV'));
    $page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
    $page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_NEXT.'&limit='.$limit, t('LINK_NEXT'));
+	$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_BACKUP, t('LINK_BACKUP'));
 	$page .= '</div>';
 	
 	return $page;
@@ -136,16 +156,16 @@ function plaatenergy_setting_list_page() {
 
 function plaatenergy_settings() {
 
-  /* input */
-  global $pid;
-  global $eid;
+	/* input */
+	global $pid;
+	global $eid;
   
-  global $max;
+	global $max;
   global $limit; 
 
   /* Event handler */
 	switch ($eid) {
-      
+
 		case EVENT_NEXT:
 			if ($limit<$max) {
 				$limit++;
@@ -158,9 +178,13 @@ function plaatenergy_settings() {
 			}
 			break;
 		
-     case EVENT_SAVE:
-        plaatenergy_setting_save_event();
-        break;
+		case EVENT_SAVE:
+			plaatenergy_setting_save_event();
+			break;
+		  
+		case EVENT_BACKUP:
+			plaatenergy_setting_backup_event();
+			break;
    }
 
   /* Page handler */
