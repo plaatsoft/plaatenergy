@@ -160,17 +160,7 @@ function plaatenergy_years_in_gas_page() {
 	}
 	$page .= '</div>';	
 	
-	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid,t('LINK_PREV_YEAR'));
-	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid,t('LINK_NEXT_YEAR'));	
-	
-	if ($eid==EVENT_M3) {		
-		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
-	} else {
-		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_M3,t('LINK_M3'));		
-	}
-	$page .= '</div>';
+	$page .= plaatenergy_navigation_year();
 	   
 	return $page;
 }

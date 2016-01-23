@@ -422,6 +422,166 @@ function plaatenergy_link($parameters, $label, $id="", $title="") {
 	return $link;
 }
 
+function plaatenergy_navigation_day() {
+
+	// input
+	global $pid;
+	global $eid;
+	global $date;
+	
+	$page .= '<div class="nav">';
+	
+	// If zero or one measurements are found. Measurement can be manually adapted.
+	switch ($pid) {
+		case PAGE_DAY_OUT_ENERGY:
+			$sql = 'select * FROM solar where timestamp>="'.$date.' 00:00:00" and timestamp<="'.$date.' 23:59:59"';
+			$result = plaatenergy_db_query($sql);
+			if ( plaatenergy_db_num_rows($result) <= 1 ) {
+				$page .= plaatenergy_link('pid='.PAGE_DAY_OUT_KWH_EDIT.'&date='.$date, t('LINK_EDIT'));			
+			}		
+	
+		case PAGE_DAY_IN_ENERGY:
+			// If zero or one measurements are found. Measurement can be manully adapted.	
+			$sql = 'select * FROM energy where timestamp>="'.$date.' 00:00:00" and timestamp<="'.$date.' 23:59:59"';
+			$result = plaatenergy_db_query($sql);
+			if ( plaatenergy_db_num_rows($result) <= 1 ) {
+				$page .= plaatenergy_link('pid='.PAGE_DAY_IN_KWH_EDIT.'&date='.$date, t('LINK_EDIT'));			
+			}
+		
+		case PAGE_DAY_IN_GAS:		
+			$sql = 'select * FROM energy where timestamp>="'.$date.' 00:00:00" and timestamp<="'.$$date.' 23:59:59"';
+			$result = plaatenergy_db_query($sql);
+			if ( plaatenergy_db_num_rows($result) <= 1) {
+				$page .= plaatenergy_link('pid='.PAGE_DAY_IN_GAS_EDIT.'&date='.$date, t('LINK_EDIT'));			
+			}
+	}
+	
+	$page .= plaatenergy_link('pid='.$pid.'&date='.plaatenergy_prev_day($date), t('LINK_PREV_DAY'));
+	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
+	
+	if ($date<date("Y-m-d")) {		
+		$page .= plaatenergy_link('pid='.$pid.'&date='.plaatenergy_next_day($date), t('LINK_NEXT_DAY'));	
+	} else {
+		$page .= plaatenergy_link('pid='.$pid.'&date='.$date, t('LINK_NEXT_DAY'));	
+	}
+		
+	if ($eid==EVENT_KWH) {		
+		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_WATT,t('LINK_WATT'));	
+	} else if ($eid==EVENT_WATT ) {
+		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH,t('LINK_KWH'));		
+	}
+	
+	$page .= '</div>';
+  
+	return $page;
+}
+
+
+function plaatenergy_navigation_month() {
+
+	// input 
+	global $pid;
+	global $eid;
+	global $date;
+	
+	$page .= '<div class="nav">';
+	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid,t('LINK_PREV_MONTH'));
+	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
+	
+	if (plaatenergy_next_month($date) <= date("Y-m")) {		
+		$page .= plaatenergy_link('pid='.$pid.'&date='.plaatenergy_next_month($date), t('LINK_NEXT_MONTH'));	
+	} else {
+		$page .= plaatenergy_link('pid='.$pid.'&date='.$date, t('LINK_NEXT_MONTH'));	
+	}
+
+	if ($pid==PAGE_MONTH_IN_GAS) {
+	
+		switch ($eid) {
+			
+			case EVENT_EURO: 
+				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_M3,t('LINK_M3'));		
+				break;
+				
+			default:
+				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
+				break;
+		}
+	}
+	
+	if ($pid == PAGE_MONTH_IN_ENERGY) {
+	
+		switch ($eid) {
+
+			case EVENT_EURO) 
+				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_M3,t('LINK_KWH'));		
+				break;
+				
+			default:	
+				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
+				break;
+		}
+	} 
+	
+	if ($pid == PAGE_MONTH_OUT_ENERGY) {
+		switch ($eid) {
+			
+			case EVENT_EURO: 
+				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_MAX, t('LINK_MAX'));		
+				break;
+				
+			case EVENT_MAX: 
+				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH, t('LINK_KWH'));		
+				break;
+				
+			default:	
+				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO, t('LINK_EURO'));	
+				break;
+		}
+	}
+	
+	$page .= '</div>';
+
+	return $page;
+}
+	
+	
+function plaatenergy_navigation_year() {
+
+	// input 
+	global $pid;
+	global $eid;
+	global $date;
+		
+	$page .= '<div class="nav">';
+	
+	$page .= plaatenergy_link('pid='.$pid.'&date='.plaatenergy_prev_year($date).'&eid='.$eid,t('LINK_PREV_YEAR'));
+	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
+	
+	if (plaatenergy_next_year($date) <= date("Y")) {		
+		$page .= plaatenergy_link('pid='.$pid.'&date='.plaatenergy_next_year($date).'&eid='.$eid,t('LINK_NEXT_YEAR'));	
+	} else { 
+		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.$eid,t('LINK_NEXT_YEAR'));	
+	}
+	
+	if (($pid==PAGE_YEAR_IN_GAS) || ($pid==PAGE_YEARS_IN_GAS)) {
+	
+		if ($eid==EVENT_M3) {		
+			$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
+		} else {
+			$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_M3,t('LINK_M3'));		
+		}
+	} else {
+		if ($eid==EVENT_KWH) {		
+			$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
+		} else {
+			$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH,t('LINK_KWH'));		
+		}
+	}
+	
+	$page .= '</div>';	
+}
+
+
 // ----------------------------
 // THE END
 // ----------------------------

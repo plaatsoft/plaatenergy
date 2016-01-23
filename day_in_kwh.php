@@ -242,28 +242,7 @@ function plaatenergy_day_in_energy_page() {
 	$page .= t('TOTAL_PER_DAY_KWH', $total);
 	$page .= '</div>';
 
-
-	$page .= '<div class="nav">';
-	// If zero or one measurements are found. Measurement can be manully adapted.	
-	$timestamp1 = date("Y-m-d 00:00:00", $current_date);
-	$timestamp2 = date("Y-m-d 23:59:59", $current_date);
-	$sql = 'select * FROM energy where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';
-	$result = plaatenergy_db_query($sql);
-	$records = plaatenergy_db_num_rows($result);
-		
-	if ($records<=1) {
-		$page .= plaatenergy_link('pid='.PAGE_DAY_IN_KWH_EDIT.'&date='.$date, t('LINK_EDIT'));			
-	}
-	
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid, t('LINK_PREV_DAY'));
-	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid, t('LINK_NEXT_DAY'));	
-	if ($eid==EVENT_KWH) {		
-		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_WATT,t('LINK_WATT'));	
-	} else {
-		$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH,t('LINK_KWH'));		
-	}
-	$page .= '</div>';
+	$page .= plaatenergy_navigation_day();
 		
 	return $page;
 }

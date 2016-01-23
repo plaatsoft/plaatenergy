@@ -180,6 +180,10 @@ $lang['TITLE_DAY_OUT_KWH'] = 'Solar Meter - Delivered Electricity %s-%s-%s';
 $lang['TOTAL_PER_DAY_KWH'] = 'Total = %s kWh';
 $lang['TOTAL_PER_DAY_M3'] = 'Total = %s m&sup3;';
 
+$lang['MIN_MAX_TEMPERATURE'] = 'Min. temperature = %s &deg;C - Min. temperature = %s &deg;C';
+$lang['MIN_MAX_HUMIDITY'] = 'Min. humidity = %s % - Min. humidity = %s %';
+$lang['MIN_MAX_PRESSURE'] = 'Min. pressure = %s hPa - Min. pressure = %s hPa';
+
 /*
 ** ------------------
 ** OTHERS

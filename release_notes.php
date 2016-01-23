@@ -38,7 +38,9 @@ function plaatenergy_release_notes_page(){
 		$page .= '<div class="large_text">';
 		$page .= '<ul>';
 		$page .= '<li>General: Added database backup feature to setting page.</li>';
+		$page .= '<li>General: Added minimun and maximum day value to weather information pages.</li>';
 		$page .= '<li>Bugfix: Used energy years report show now correct Y axes scale.</li>';
+		$page .= '<li>Bugfix: Selecting day in the future is now not possible anymore!</li>';
 		$page .= '</ul>';
 		$page .= '</div>';
   }

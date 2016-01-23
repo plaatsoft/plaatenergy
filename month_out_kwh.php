@@ -192,25 +192,7 @@ function plaatenergy_month_out_energy_page() {
 	}
 	$page .= '</div>';
 
-	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date.'&eid='.$eid,t('LINK_PREV_MONTH'));
-	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date.'&eid='.$eid,t('LINK_NEXT_MONTH'));	
-	
-	switch ($eid) {
-		case EVENT_KWH: 
-				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO, t('LINK_EURO'));	
-				break;
-				
-		case EVENT_EURO: 
-				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_MAX, t('LINK_MAX'));		
-				break;
-				
-		case EVENT_MAX: 
-				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH, t('LINK_KWH'));		
-				break;
-	}
-	$page .= '</div>';
+	$page .= plaatenergy_navigation_month();
 	
 	return $page;
 }

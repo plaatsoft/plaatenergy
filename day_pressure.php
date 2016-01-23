@@ -32,15 +32,15 @@ function plaatenergy_day_pressure_page() {
 	
 	global $date;  
 	
-	$prev_date = plaatenergy_prev_day($date);
-	$next_date = plaatenergy_next_day($date);
-	
 	list($year, $month, $day) = explode("-", $date);	
 	$current_date = mktime(0, 0, 0, $month, $day, $year);
 	
-	$i=0;
-	$data="";
-	$value=0;
+	$i = 0;
+	$data = "";
+	$value = 0;
+	$min = 2000;
+	$max = 0;
+	$found = 0;
 
 	while ($i<97) {
 
@@ -55,8 +55,17 @@ function plaatenergy_day_pressure_page() {
 			$value = 950;
 		} else if ( isset($row->pressure)) {
 			$value = $row->pressure;
+			$found = 1;
 		}
-
+		
+		if ($value>$max) {
+			$max=$value;
+		}
+		
+		if ($value<$min) {
+			$min=$value;
+		}
+		
 		if (strlen($data)>0) {
 			$data.=',';
 		}
@@ -91,11 +100,15 @@ function plaatenergy_day_pressure_page() {
 	$page .= '<h1>'.t('TITLE_DAY_PRESSURE', $day, $month, $year).'</h1>';
 	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
 	
-	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$prev_date, t('LINK_PREV_DAY'));
-	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
-	$page .= plaatenergy_link('pid='.$pid.'&date='.$next_date, t('LINK_NEXT_DAY'));	
-	$page .= '</div>';
+	$page .= '<div class="remark">';		
+	if ( $found == 1 ) {
+		$page .= t('MIN_MAX_PRESSURE',$min,$max);
+	} else {
+		$page .= '&nbsp;';
+	}
+	$page .- '</div>';
+	
+	$page .= plaatenergy_navigation_day();
 
 	return $page;
 }
