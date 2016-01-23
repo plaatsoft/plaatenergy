@@ -73,6 +73,7 @@ $lang['LINK_SAVE']       = i('edit') . 'Save';
 $lang['LINK_CANCEL']     = i('times') . 'Cancel';
 $lang['LINK_SETTINGS']   = i('cog') . 'Settings';  
 $lang['LINK_MAX']        = i('bolt') . 'Peak';
+$lang['LINK_BACKUP']     = 'Backup';
  
 /*
 ** ------------------

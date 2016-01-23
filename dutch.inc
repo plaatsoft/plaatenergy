@@ -73,6 +73,7 @@ $lang['LINK_SAVE']       = i('edit') . 'Opslaan';
 $lang['LINK_CANCEL']     = i('times') . 'Annuleren'; 
 $lang['LINK_SETTINGS']   = i('cog') . 'Configuratie'; 
 $lang['LINK_MAX']        = i('bolt') . 'Piek';
+$lang['LINK_BACKUP']     = 'Backup';
  
 /*
 ** ------------------

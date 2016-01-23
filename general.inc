@@ -22,7 +22,7 @@
 ** -----------
 */
 
-$version = "0.5";
+$version = "0.6";
 
 // Graphical screen resolution
 $graph_width = "950px";
