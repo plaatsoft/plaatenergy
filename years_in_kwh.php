@@ -133,17 +133,22 @@ function plaatenergy_years_in_energy_page() {
           isStacked:true,';
 			 
 	if ($eid==EVENT_KWH) {
-		$page .= 'colors: ["#0066cc", "#808080"],';
-		$page .= 'vAxis: { format:"decimal", viewWindow: { min: 0, max: ".round($max_forecast+100)." } }, ';
+		$page .= '
+                         colors: ["#0066cc", "#808080"],
+		         vAxis: {   
+                                   format:"decimal", 
+                                   viewWindow: { min: 0, max: "'.round($max_forecast+50).'" },
+                                 },';
 	} else {
 		$page .= 'colors: ["#e0440e"],';
 	}
 		
 	$page .= 'series: {
-            3: {
-                targetAxisIndex: 1
-            }
-          }
+            0: { targetAxisIndex: 0 },
+            1: { targetAxisIndex: 0 },
+            2: { targetAxisIndex: 0 },
+            3: { targetAxisIndex: 1 },
+          },
         };
 
         var data = google.visualization.arrayToDataTable('.$json.');

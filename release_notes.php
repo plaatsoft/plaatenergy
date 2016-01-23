@@ -37,7 +37,8 @@ function plaatenergy_release_notes_page(){
 		$page .= '<div class="subparagraph">Version 0.6 (23-01-2016)</div>';
 		$page .= '<div class="large_text">';
 		$page .= '<ul>';
-		$page .= '<li>General: Added backup feature to setting page.</li>';
+		$page .= '<li>General: Added database backup feature to setting page.</li>';
+		$page .= '<li>Bugfix: Used energy years report show now correct Y axes scale.</li>';
 		$page .= '</ul>';
 		$page .= '</div>';
   }
