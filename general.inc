@@ -438,7 +438,8 @@ function plaatenergy_navigation_day() {
 			$result = plaatenergy_db_query($sql);
 			if ( plaatenergy_db_num_rows($result) <= 1 ) {
 				$page .= plaatenergy_link('pid='.PAGE_DAY_OUT_KWH_EDIT.'&date='.$date, t('LINK_EDIT'));			
-			}		
+			}
+			break;
 	
 		case PAGE_DAY_IN_ENERGY:
 			// If zero or one measurements are found. Measurement can be manully adapted.	
@@ -447,6 +448,7 @@ function plaatenergy_navigation_day() {
 			if ( plaatenergy_db_num_rows($result) <= 1 ) {
 				$page .= plaatenergy_link('pid='.PAGE_DAY_IN_KWH_EDIT.'&date='.$date, t('LINK_EDIT'));			
 			}
+			break;
 		
 		case PAGE_DAY_IN_GAS:		
 			$sql = 'select * FROM energy where timestamp>="'.$date.' 00:00:00" and timestamp<="'.$date.' 23:59:59"';
@@ -454,6 +456,7 @@ function plaatenergy_navigation_day() {
 			if ( plaatenergy_db_num_rows($result) <= 1) {
 				$page .= plaatenergy_link('pid='.PAGE_DAY_IN_GAS_EDIT.'&date='.$date, t('LINK_EDIT'));			
 			}
+			break;
 	}
 	
 	$page .= plaatenergy_link('pid='.$pid.'&date='.plaatenergy_prev_day($date), t('LINK_PREV_DAY'));
