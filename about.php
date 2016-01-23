@@ -28,9 +28,11 @@ function plaatenergy_about_page() {
   $page .= '<br/>';
   $page .= '<div class="large_text">'.t('ABOUT_CONTENT').'</div>';
 
+  $page .= '<br/>';
   $page .= '<h2>'.t('CREDITS_TITLE').'</h2>';
   $page .= '<div class="large_text">'.t('CREDITS_CONTENT').'</div>';
 
+  $page .= '<br/>';
   $page .= '<h2>'.t('DISCLAIMER_TITLE').'</h2>';
   $page .= '<div class="large_text">'.t('DISCLAIMER_CONTENT').'</div>';
 

@@ -325,7 +325,7 @@
 				
 				// Need to get access to the weather data
 				weather: {
-					appID: "2de143494c0b295cca9337e1e96b00e0", // Need to send a request to http://api.openweathermap.org
+					appID: "44db6a862fba0b067b1930da0d769e98", // Need to send a request to http://api.openweathermap.org
 					place: "Gouda,nl",                         // The name of the city where you live
 					updateTime: 15000                          // The time the weather information must be reload (in ms)
 				}
