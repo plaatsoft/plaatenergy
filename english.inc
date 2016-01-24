@@ -92,19 +92,18 @@ $lang['DAY_REPORT'] = 'Day Reports';
 $lang['WEATHER_REPORT'] = 'Weather Reports';
 $lang['OTHER_REPORT'] = 'Other';
 
-$lang['LINK_IN_ENERGY'] = 'Used Electricity';
-$lang['LINK_OUT_ENERGY'] = 'Delivered Electricity';
-$lang['LINK_OUT_ENERGY_MAX'] = 'Peak Delivered Electricity';
-$lang['LINK_IN_GAS'] = 'Used Gas';
+$lang['LINK_IN_ENERGY'] =  i('bar-chart').'Used Electricity';
+$lang['LINK_OUT_ENERGY'] =  i('bar-chart').'Delivered Electricity';
+$lang['LINK_IN_GAS'] =  i('bar-chart').'Used Gas';
 
-$lang['LINK_PRESSURE'] = 'Air Pressure';
-$lang['LINK_TEMPERATURE'] = 'Air Temperature';
-$lang['LINK_HUMIDITY'] = 'Air Humidity';
+$lang['LINK_PRESSURE'] =  i('bar-chart').'Air Pressure';
+$lang['LINK_TEMPERATURE'] =  i('bar-chart').'Air Temperature';
+$lang['LINK_HUMIDITY'] =  i('bar-chart').'Air Humidity';
 
 $lang['LINK_RELEASE_NOTES'] = i('align-left') . 'Release Notes';
-$lang['LINK_ABOUT'] = i('users') . 'About';
+$lang['LINK_ABOUT'] = i('registered') . 'About';
 $lang['LINK_DONATE'] = i('money') . 'Donate';
-$lang['LINK_REPORT'] = i('archive') . 'Query';
+$lang['LINK_REPORT'] = i('rocket') . 'Query';
 $lang['LINK_GUI'] = i('table') . 'Realtime Info';
 
 $lang['ENERGY_METER_DISABLED'] = i('exclamation') . 'Energy meter is disabled';
