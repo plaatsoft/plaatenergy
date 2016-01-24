@@ -89,6 +89,7 @@ function plaatenergy_day_pressure_page() {
           bar: {groupWidth: "90%"},
           legend: { position: "none" },
           vAxis: {format: "decimal", baseline:950},
+          animation: { duration: 3000, easing: "in", startup: true },
         };
 
         var data = google.visualization.arrayToDataTable('.$json.');

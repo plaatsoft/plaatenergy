@@ -29,6 +29,9 @@ function plaatenergy_about_page() {
   $page .= '<div class="large_text">'.t('ABOUT_CONTENT').'</div>';
 
   $page .= '<br/>';
+  $page .= '<img class="image" src="images/logo.jpg" alt="" width="80" height="60">';
+
+  $page .= '<br/>';
   $page .= '<h2>'.t('CREDITS_TITLE').'</h2>';
   $page .= '<div class="large_text">'.t('CREDITS_CONTENT').'</div>';
 

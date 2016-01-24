@@ -68,12 +68,11 @@ function plaatenergy_day_in_gas_page() {
 	
 		if ($timestamp>date("Y-m-d H:i:s")) {
 			$value=0;
-		} else {
-			$total = round($value,2);  
 		}
 
 		if ( isset($row->gas)) {
 			$value= $row->gas - $gas_prev;
+			$total = $value;
 		}
   
 		if (strlen($data)>0) {
@@ -111,7 +110,7 @@ function plaatenergy_day_in_gas_page() {
 	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
 
 	$page .= '<div class="remark">';
-	$page .= t('TOTAL_PER_DAY_M3', $total);
+	$page .= t('TOTAL_PER_DAY_M3', round($total,2));
 	$page .= '</div>';
 		
 	$page .= plaatenergy_navigation_day();
