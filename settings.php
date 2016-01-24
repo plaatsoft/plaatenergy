@@ -61,7 +61,7 @@ function plaatenergy_setting_backup_event() {
 	$filename = 'backup/plaatenergy-'.date("Ymd").'.sql';
 
         /* Remove old file if it exists */
-        unlink($filename.'.gz');
+        @unlink($filename.'.gz');
 
         /* Make mysql backup */	
 	$command = 'mysqldump --user='.$dbuser.' --password='.$dbpass.' --host='.$dbhost.' '.$dbname.' > '.$filename;
