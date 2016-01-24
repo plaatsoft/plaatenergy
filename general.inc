@@ -459,13 +459,13 @@ function plaatenergy_navigation_day() {
 			break;
 	}
 	
-	$page .= plaatenergy_link('pid='.$pid.'&date='.plaatenergy_prev_day($date), t('LINK_PREV_DAY'));
+	$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.plaatenergy_prev_day($date), t('LINK_PREV_DAY'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
 	
 	if ($date<date("Y-m-d")) {		
-		$page .= plaatenergy_link('pid='.$pid.'&date='.plaatenergy_next_day($date), t('LINK_NEXT_DAY'));	
+		$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.plaatenergy_next_day($date), t('LINK_NEXT_DAY'));	
 	} else {
-		$page .= plaatenergy_link('pid='.$pid.'&date='.$date, t('LINK_NEXT_DAY'));	
+		$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.$date, t('LINK_NEXT_DAY'));	
 	}
 		
 	if ($eid==EVENT_KWH) {		
@@ -488,13 +488,13 @@ function plaatenergy_navigation_month() {
 	global $date;
 	
 	$page  = '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&date='.plaatenergy_prev_month($date).'&eid='.$eid,t('LINK_PREV_MONTH'));
+	$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.plaatenergy_prev_month($date).'&eid='.$eid,t('LINK_PREV_MONTH'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
 	
 	if ($date < date("Y-m")) {		
-		$page .= plaatenergy_link('pid='.$pid.'&date='.plaatenergy_next_month($date), t('LINK_NEXT_MONTH'));	
+		$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.plaatenergy_next_month($date), t('LINK_NEXT_MONTH'));	
 	} else {
-		$page .= plaatenergy_link('pid='.$pid.'&date='.$date, t('LINK_NEXT_MONTH'));	
+		$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.$date, t('LINK_NEXT_MONTH'));	
 	}
 
 	if ($pid==PAGE_MONTH_IN_GAS) {
