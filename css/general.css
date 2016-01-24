@@ -229,3 +229,15 @@ a .fa.right {
 	margin-right: 0px;
 }
 
+.image{
+    -moz-animation: spinHorizontal 2s infinite linear;
+    -o-animation: spinHorizontal 2s infinite linear;    
+    -webkit-animation: spinHorizontal 2s infinite linear;
+    animation: spinHorizontal 2s infinite linear;
+}
+
+@keyframes spinHorizontal {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
