@@ -32,6 +32,7 @@ $note[6] = '<div class="subparagraph">Version 0.6 (23-01-2016)</div>
 <ul>
 <li>General: Added database backup feature to setting page.</li>
 <li>General: Added minimun and maximum day value to weather information pages.</li>
+<li>General: Added source code documentation</li>
 <li>Bugfix: Used energy years report show now correct Y axes scale.</li>
 <li>Bugfix: Selecting day in the future is now not possible anymore!</li>
 </ul>
@@ -126,11 +127,12 @@ function plaatenergy_release_notes_page(){
 
   global $pid;
   global $id;
+  global $note;
   
   $page  = '<h1>Release Notes</h1>';
   $page .= '<br/>';
   
-  $page .= note[$id];
+  $page .= $note[$id];
   
   $page .= '<div class="nav">';
   $page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_PREV.'&id='.$id, t('LINK_PREV'));
@@ -157,16 +159,17 @@ function plaatenergy_release_notes() {
 	global $pid;
 	global $eid;
 	global $id;
+	global $note;
 
 	if($id==0) {
-		$id = $note.length();
+		$id = sizeof($note);
 	}
 	
 	/* Event handler */
 	switch ($eid) {
       
 		case EVENT_NEXT:
-			if ($id<$note.length()) {
+			if ($id<sizeof($note)) {
 				$id++;
 			}
 			break;
