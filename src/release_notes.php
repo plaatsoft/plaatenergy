@@ -32,6 +32,7 @@ $note[6] = '<div class="subparagraph">Version 0.6 (23-01-2016)</div>
 <ul>
 <li>General: Added database backup feature to setting page.</li>
 <li>General: Added minimun and maximum day value to weather information pages.</li>
+<li>General: Added sensehat led display now current power usage every minute.</li>
 <li>General: Added source code documentation</li>
 <li>General: Added PlaatSoft Logo to about page</li>
 <li>Bugfix: Used energy years report show now correct Y axes scale.</li>

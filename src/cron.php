@@ -48,6 +48,7 @@ if ($weather_station_present!="false") {
 $energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present');
 if ($energy_meter_present!="false") {
    exec('sudo python /var/www/html/plaatenergy/sensors/p1/p1.py');
+   exec('sudo python /var/www/html/plaatenergy/sensors/display/display.py');
 }
 
 plaatenergy_db_process(EVENT_PROCESS_TODAY);
