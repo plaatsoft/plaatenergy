@@ -27,7 +27,7 @@
 ** ---------------------
 */
 
-$note[6] = '<div class="subparagraph">Version 0.6 (25-01-2016)</div>
+$note[6] = '<div class="subparagraph">Version 0.6 (28-01-2016)</div>
 <div class="large_text">
 <ul>
 <li>General: Added database backup feature to setting page.</li>
