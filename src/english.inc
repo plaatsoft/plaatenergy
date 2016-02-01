@@ -43,7 +43,7 @@ $lang['WATT']            = 'Watt';
 $lang['USED_LOW_KWH']    = 'Low (kWh)'; 
 $lang['USED_HIGH_KWH']   = 'Normal (kWh)'; 
 $lang['USED_SOLAR_KWH']  = 'Solar (kWh)'; 
-$lang['DELIVERED_KWH']   = 'Delivered (kWh)'; 
+$lang['DELIVERED_KWH']   = 'Deliverd (kWh)'; 
 $lang['FORECAST_KWH']    = 'Forecast (kWh)'; 
 $lang['USED_M3']         = 'Used (m&sup3;)'; 
 $lang['FORECAST_M3']     = 'Forecast (m&sup3;)'; 
@@ -98,7 +98,7 @@ $lang['WEATHER_REPORT'] = 'Weather Reports';
 $lang['OTHER_REPORT'] = 'Other';
 
 $lang['LINK_IN_ENERGY'] =  i('bar-chart').'Used Electricity';
-$lang['LINK_OUT_ENERGY'] =  i('bar-chart').'Delivered Electricity';
+$lang['LINK_OUT_ENERGY'] =  i('bar-chart').'Deliverd Electricity';
 $lang['LINK_IN_GAS'] =  i('bar-chart').'Used Gas';
 
 $lang['LINK_PRESSURE'] =  i('bar-chart').'Air Pressure';
@@ -131,7 +131,7 @@ $lang['WEATHER_METER_CONNECTION_UP'] = i('check') . 'Weather Station connection 
 
 $lang['TITLE_YEARS_IN_KWH'] = 'Energy Meter - Used Electricity %s - %s';
 $lang['TITLE_YEARS_IN_GAS'] = 'Gas Meter - Used Gas %s - %s';
-$lang['TITLE_YEARS_OUT_KWH'] = 'Solar Meter - Delivered Electricity %s - %s';
+$lang['TITLE_YEARS_OUT_KWH'] = 'Solar Meter - Deliverd Electricity %s - %s';
 
 $lang['AVERAGE_PER_YEAR_KWH'] = 'Average per year %s kWh [Total = %s kWh]';
 $lang['AVERAGE_PER_YEAR_M3'] = 'Average per year %s m&sup3; [Total = %s m&sup3;]';
@@ -145,7 +145,7 @@ $lang['AVERAGE_PER_YEAR_EURO'] = 'Average per year %s euro [Total = %s euro]';
 
 $lang['TITLE_YEAR_IN_KWH'] = 'Energy Meter - Used Electricity %s';
 $lang['TITLE_YEAR_IN_M3'] = 'Gas Meter - Used Gas %s';
-$lang['TITLE_YEAR_OUT_KWH'] = 'Solar Meter - Delivered Electricity %s';
+$lang['TITLE_YEAR_OUT_KWH'] = 'Solar Meter - Deliverd Electricity %s';
 
 $lang['AVERAGE_PER_MONTH_KWH'] = 'Average per month %s kWh [Total = %s kWh]';
 $lang['AVERAGE_PER_MONTH_M3'] = 'Average per month %s m&sup3; [Total = %s m&sup3;]';
@@ -159,8 +159,8 @@ $lang['AVERAGE_PER_MONTH_EURO'] = 'Average per month %s euro [Total = %s euro]';
 
 $lang['TITLE_MONTH_IN_KWH'] = 'Energy Meter - Used Electricity %s-%s';
 $lang['TITLE_MONTH_IN_GAS'] = 'Gas Meter - Used Gas %s-%s';
-$lang['TITLE_MONTH_OUT_KWH'] = 'Solar Meter - Delivered Electricity %s-%s';
-$lang['TITLE_MONTH_PEAK_OUT_KWH'] = 'Solar Meter - Delivered Peak Electricity %s-%s';
+$lang['TITLE_MONTH_OUT_KWH'] = 'Solar Meter - Deliverd Electricity %s-%s';
+$lang['TITLE_MONTH_PEAK_OUT_KWH'] = 'Solar Meter - Deliverd Peak Electricity %s-%s';
 
 $lang['AVERAGE_PER_DAY_KWH'] = 'Average per day %s kWh [Total = %s kWh]';
 $lang['AVERAGE_PER_DAY_M3'] = 'Average per day %s m&sup3; [Total = %s m&sup3;]';
@@ -179,7 +179,7 @@ $lang['TITLE_DAY_HUMIDITY'] = 'Weather Station - Air Humidity - %s-%s-%s';
 
 $lang['TITLE_DAY_IN_KWH'] = 'Energy Meter - Used Electricity %s-%s-%s';
 $lang['TITLE_DAY_IN_GAS'] = 'Gas Meter - Used Gas %s-%s-%s';
-$lang['TITLE_DAY_OUT_KWH'] = 'Solar Meter - Delivered Electricity %s-%s-%s';
+$lang['TITLE_DAY_OUT_KWH'] = 'Solar Meter - Deliverd Electricity %s-%s-%s';
 
 $lang['TOTAL_PER_DAY_KWH'] = 'Total = %s kWh';
 $lang['TOTAL_PER_DAY_M3'] = 'Total = %s m&sup3;';
@@ -200,8 +200,8 @@ $lang['TITLE_IN_GAS_EDIT'] = 'Gas Measurement Correction';
 
 $lang['LABEL_LOW_USED'] = 'Low used meter value reading (kWh)';
 $lang['LABEL_NORMAL_USED'] = 'Normal used meter value reading (kWh)';
-$lang['LABEL_LOW_DELIVERED'] = 'Low delivered meter value reading (kWh)';
-$lang['LABEL_NORMAL_DELIVERED'] = 'Normal delivered meter value reading (kWh)';
+$lang['LABEL_LOW_DELIVERED'] = 'Low deliverd meter value reading (kWh)';
+$lang['LABEL_NORMAL_DELIVERED'] = 'Normal deliverd meter value reading (kWh)';
 
 $lang['LABEL_ETOTAL'] = 'Etotal meter reading value (kWh)';
 

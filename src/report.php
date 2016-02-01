@@ -54,9 +54,9 @@ function plaatenergy_report_event() {
 	
 		$page  =  'low_used='.round($row->dal,2).' ';
 		$page .=  'normal_used='.round($row->piek,2).' ';
-		$page .=  'low_delivered='.round($row->dalterug,2).' ';
-		$page .=  'normal_delivered='.round($row->piekterug,2).' ';
-		$page .=  'solar_delivered='.round($row->solar,2).' ';
+		$page .=  'low_deliverd='.round($row->dalterug,2).' ';
+		$page .=  'normal_deliverd='.round($row->piekterug,2).' ';
+		$page .=  'solar_deliverd='.round($row->solar,2).' ';
 		$page .=  'gas_used='.round($row->gas,2).' ';
 
 		return $page;
