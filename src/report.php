@@ -18,7 +18,7 @@
 
 /**
  * @file
- * @brief contain customer report
+ * @brief contain customer reports and exports
  */
  
 /*
@@ -36,35 +36,44 @@ $end = plaatenergy_post("end", "");
 ** ---------------------
 */
 
+function plaatenergy_round($number) {
+
+   return number_format((float)$number, 2, '.', '');
+}
+
 function plaatenergy_export_event() {
 
 	/* input */
 	global $start;
 	global $end;
 	
-	$sql  = 'select dal as low_used, piek as normal_used, '; 
+	$sql  = 'select date, dal as low_used, piek as normal_used, '; 
 	$sql .= 'dalterug as low_delivered, piekterug as normal_delivered, ';
 	$sql .= 'solar as solar_delivered, gas as gas_used ';
-	$sql .= 'FROM energy_day where date>="'.$start.'" and date<="'.$end.'"';
-	
+	$sql .= 'FROM energy_day where date>="'.$start.'" and date<="'.$end.'" ';
+	$sql .= 'order by date';
+
 	$result = plaatenergy_db_query($sql);
 	
-	$csv = t('TAG_LOW_USED').',';
-	$csv = t('TAG_NORMAL_USED').',';
-	$csv = t('TAG_LOW_DELIVERED').','; 
-	$csv = t('TAG_NORMAL_DELIVERED').',';
-	$csv = t('TAG_SOLAR_DELIVERED').',';
-	$csv = t('TAG_GAS_USED']).'\r\n';
-	
+	$csv  = '"'.t('TAG_DATE').'";';
+	$csv .= '"'.t('TAG_LOW_USED').'";';
+	$csv .= '"'.t('TAG_NORMAL_USED').'";';
+	$csv .= '"'.t('TAG_SOLAR_USED').'";';
+	$csv .= '"'.t('TAG_LOW_DELIVERED').'";'; 
+	$csv .= '"'.t('TAG_NORMAL_DELIVERED').'";';
+	$csv .= '"'.t('TAG_SOLAR_DELIVERED').'";';
+	$csv .= '"'.t('TAG_GAS_USED')."\"\r\n";
 	
 	while ($row = plaatenergy_db_fetch_object($result)) {
 	
-		$csv .=  'low_used='.round($row->low_used,2).',';
-		$csv .=  'normal_used='.round($row->normal_used,2).',';
-		$csv .=  'low_delivered='.round($row->low_delivered,2).',';
-		$csv .=  'normal_delivered='.round($row->normal_delivered,2).',';
-		$csv .=  'solar_delivered='.round($row->solar_delivered,2).',';
-		$csv .=  'gas_used='.round($row->gas_used,2).'\r\n';
+		$csv .=  '"'.$row->date.'";';
+		$csv .=  plaatenergy_round($row->low_used,2).';';
+		$csv .=  plaatenergy_round($row->normal_used,2).';';
+		$csv .=  plaatenergy_round($row->solar_delivered-$row->low_delivered-$row->normal_delivered,2).';';
+		$csv .=  plaatenergy_round($row->low_delivered,2).';';
+		$csv .=  plaatenergy_round($row->normal_delivered,2).';';
+		$csv .=  plaatenergy_round($row->solar_delivered,2).';';
+		$csv .=  plaatenergy_round($row->gas_used,2)."\r\n";
 	}
 
 	header('Content-Type: application/csv');
@@ -91,12 +100,15 @@ function plaatenergy_report_event() {
 		$result = plaatenergy_db_query($sql);
 		$row = plaatenergy_db_fetch_object($result);
 	
-		$page  =  'low_used='.round($row->dal,2).' ';
-		$page .=  'normal_used='.round($row->piek,2).' ';
-		$page .=  'low_delivered='.round($row->dalterug,2).' ';
-		$page .=  'normal_delivered='.round($row->piekterug,2).' ';
-		$page .=  'solar_delivered='.round($row->solar,2).' ';
-		$page .=  'gas_used='.round($row->gas,2).' ';
+		$page  =  t('TAG_LOW_USED').'='.plaatenergy_round($row->dal,2).' ';
+		$page .=  t('TAG_NORMAL_USED').'='.plaatenergy_round($row->piek,2).' ';
+		$page .=  t('TAG_SOLAR_USED').'='.plaatenergy_round($row->solar-$row->dalterug-$row->piekterug,2).' ';
+		$page .=  '<br/>';
+		$page .=  t('TAG_LOW_DELIVERED').'='.plaatenergy_round($row->dalterug,2).' ';
+		$page .=  t('TAG_NORMAL_DELIVERED').'='.plaatenergy_round($row->piekterug,2).' ';
+		$page .=  t('TAG_SOLAR_DELIVERED').'='.plaatenergy_round($row->solar,2).' ';
+		$page .=  '<br/>';
+		$page .=  t('TAG_GAS_USED').'='.plaatenergy_round($row->gas,2).' ';
 
 		return $page;
 	}
@@ -135,7 +147,7 @@ function plaatenergy_report_page() {
 	$page .=  plaatenergy_report_event();
 	 	
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.PAGE_HOME.'&eid='.EVENT_EXPORT, t('LINK_EXPORT'));
+	$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_EXPORT, t('LINK_EXPORT'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
 	$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_EXECUTE, t('LINK_EXECUTE'));
 	$page .=  '</div>';
@@ -154,13 +166,13 @@ function plaatenergy_report() {
   /* input */
   global $pid;
   global $eid;
-  
+
   /* Page handler */
   switch ($eid) {
 
      case EVENT_EXPORT:
         return plaatenergy_export_event();
-        break;
+        exit;
   }
   
   /* Page handler */

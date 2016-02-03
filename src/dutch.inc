@@ -79,7 +79,7 @@ $lang['LINK_CANCEL']     = i('times') . 'Annuleren';
 $lang['LINK_SETTINGS']   = i('cog') . 'Configuratie'; 
 $lang['LINK_MAX']        = i('bolt') . 'Piek';
 $lang['LINK_BACKUP']     = 'Backup';
-$lang['LINK_EXPORT']     = 'Export';
+$lang['LINK_EXPORT']     = 'Export naar CSV';
  
 /*
 ** ------------------
@@ -284,10 +284,12 @@ $lang['solar_meter_serial_number'] = 'Solar meter serial nummer';
 ** ------------------
 */
 
-$lang['TAG_LOW_USED'] = 'afgenomen_elktra_laag_tarief' ;
-$lang['TAG_NORMAL_USED'] = 'afgenomen_elktra_normaal_tarief';
-$lang['TAG_LOW_DELIVERED'] = 'gelevered_elktra_laag_tarief';
-$lang['TAG_NORMAL_DELIVERED'] = 'gelevered_elktra_normaal_tarief';
+$lang['TAG_DATE'] = 'datum' ;
+$lang['TAG_LOW_USED'] = 'afgenomen_laag' ;
+$lang['TAG_NORMAL_USED'] = 'afgenomen_normaal';
+$lang['TAG_SOLAR_USED'] = 'afgenomen_solar';
+$lang['TAG_LOW_DELIVERED'] = 'geleverd_laag';
+$lang['TAG_NORMAL_DELIVERED'] = 'geleverd_normaal';
 $lang['TAG_SOLAR_DELIVERED'] = 'geleverd_solar';
 $lang['TAG_GAS_USED'] = 'afgenomen_gas';
 
