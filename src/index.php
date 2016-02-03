@@ -272,19 +272,25 @@ switch ($pid) {
 	// ---------------------------------
 }
 
-echo general_header();
 
-echo $page;
+if ($eid != EVENT_EXPORT) {
+	
+	// Normal page
+	echo general_header();
 
-// Increase request counter with one!
-$counter = plaatenergy_db_get_config_item('request_counter');  
-plaatenergy_db_set_config_item('request_counter', ++$counter);  
-  
-// Calculate to page render time 
-$time_end = microtime(true);
-$time = $time_end - $time_start;
-  
-echo general_footer($time);
+	echo $page;
+
+	// Increase request counter with one!
+	$counter = plaatenergy_db_get_config_item('request_counter');  
+	plaatenergy_db_set_config_item('request_counter', ++$counter);  
+	
+	// Calculate to page render time 
+	$time_end = microtime(true);
+	$time = $time_end - $time_start;
+	
+	echo general_footer($time);
+
+}
 
 plaatenergy_db_close();
 

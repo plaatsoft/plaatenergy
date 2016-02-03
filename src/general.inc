@@ -27,7 +27,7 @@
 ** -----------
 */
 
-$version = "0.6";
+$version = "0.7";
 
 // Graphical screen resolution
 $graph_width = "950px";
@@ -99,6 +99,7 @@ define('EVENT_M3',                  89);
 define('EVENT_WATT',                90);
 define('EVENT_MAX',                 91);
 define('EVENT_BACKUP',              92);
+define('EVENT_EXPORT',              93);
 
 /*
 ** -----------

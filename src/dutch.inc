@@ -79,6 +79,7 @@ $lang['LINK_CANCEL']     = i('times') . 'Annuleren';
 $lang['LINK_SETTINGS']   = i('cog') . 'Configuratie'; 
 $lang['LINK_MAX']        = i('bolt') . 'Piek';
 $lang['LINK_BACKUP']     = 'Backup';
+$lang['LINK_EXPORT']     = 'Export';
  
 /*
 ** ------------------
@@ -275,6 +276,20 @@ $lang['weather_station_present'] = 'Weerstation aanwezig ("true" or "false")';
 $lang['solar_meter_ip' ] = 'Solar meter TCP/IP adres';
 $lang['solar_meter_port'] = 'Solar meter TCP poort nummer';
 $lang['solar_meter_serial_number'] = 'Solar meter serial nummer';
+
+
+/*
+** ------------------
+** REPORT
+** ------------------
+*/
+
+$lang['TAG_LOW_USED'] = 'afgenomen_elktra_laag_tarief' ;
+$lang['TAG_NORMAL_USED'] = 'afgenomen_elktra_normaal_tarief';
+$lang['TAG_LOW_DELIVERED'] = 'gelevered_elktra_laag_tarief';
+$lang['TAG_NORMAL_DELIVERED'] = 'gelevered_elktra_normaal_tarief';
+$lang['TAG_SOLAR_DELIVERED'] = 'geleverd_solar';
+$lang['TAG_GAS_USED'] = 'afgenomen_gas';
 
 /*
 ** ------------------

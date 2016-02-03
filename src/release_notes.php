@@ -27,6 +27,14 @@
 ** ---------------------
 */
 
+
+$note[7] = '<div class="subparagraph">Version 0.7 (03-02-2016)</div>
+<div class="large_text">
+<ul>
+<li>General: Added CSV export feature.</li>
+</ul>
+</div>';
+
 $note[6] = '<div class="subparagraph">Version 0.6 (28-01-2016)</div>
 <div class="large_text">
 <ul>

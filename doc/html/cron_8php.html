@@ -19,7 +19,7 @@
   <td id="projectlogo"><img alt="Logo" src="128.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">PlaatEnergy
-   &#160;<span id="projectnumber">v0.6</span>
+   &#160;<span id="projectnumber">v0.7</span>
    </div>
   </td>
  </tr>
@@ -32,8 +32,6 @@
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
@@ -65,9 +63,9 @@ Variables</h2></td></tr>
 <tr class="separator:a44d4a5ef593dd745482e1f2adb2f7774"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd3ed68281bdf5f354790975727f1d94"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cron_8php.html#afd3ed68281bdf5f354790975727f1d94">$solar_meter_present</a> = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('solar_meter_present')</td></tr>
 <tr class="separator:afd3ed68281bdf5f354790975727f1d94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a779c776fdd20b9dde485fa48177bcb74"><td class="memItemLeft" align="right" valign="top"><a class="el" href="main_8js.html#a120c440178b1eb9ca8fec0854692e01e">if</a>($solar_meter_present!=&quot;false&quot;)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cron_8php.html#a779c776fdd20b9dde485fa48177bcb74">$weather_station_present</a> = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('weather_station_present')</td></tr>
+<tr class="memitem:a779c776fdd20b9dde485fa48177bcb74"><td class="memItemLeft" align="right" valign="top">if($solar_meter_present!=&quot;false&quot;)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cron_8php.html#a779c776fdd20b9dde485fa48177bcb74">$weather_station_present</a> = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('weather_station_present')</td></tr>
 <tr class="separator:a779c776fdd20b9dde485fa48177bcb74"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a59a8182f701027076b9aea29d2c5c959"><td class="memItemLeft" align="right" valign="top"><a class="el" href="main_8js.html#a120c440178b1eb9ca8fec0854692e01e">if</a>($weather_station_present!=&quot;false&quot;)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cron_8php.html#a59a8182f701027076b9aea29d2c5c959">$energy_meter_present</a> = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('energy_meter_present')</td></tr>
+<tr class="memitem:a59a8182f701027076b9aea29d2c5c959"><td class="memItemLeft" align="right" valign="top">if($weather_station_present!=&quot;false&quot;)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cron_8php.html#a59a8182f701027076b9aea29d2c5c959">$energy_meter_present</a> = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('energy_meter_present')</td></tr>
 <tr class="separator:a59a8182f701027076b9aea29d2c5c959"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77f9b5c7480ad8fa3231d311d4b6feb3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cron_8php.html#a77f9b5c7480ad8fa3231d311d4b6feb3">$time_end</a> = microtime(true)</td></tr>
 <tr class="separator:a77f9b5c7480ad8fa3231d311d4b6feb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -82,7 +80,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="main_8js.html#a120c440178b1eb9ca8fec0854692e01e">if</a> ($weather_station_present!=&quot;false&quot;) $energy_meter_present = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('energy_meter_present')</td>
+          <td class="memname">if ($weather_station_present!=&quot;false&quot;) $energy_meter_present = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('energy_meter_present')</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -142,7 +140,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="main_8js.html#a120c440178b1eb9ca8fec0854692e01e">if</a> ($solar_meter_present!=&quot;false&quot;) $weather_station_present = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('weather_station_present')</td>
+          <td class="memname">if ($solar_meter_present!=&quot;false&quot;) $weather_station_present = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('weather_station_present')</td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -79,6 +79,7 @@ $lang['LINK_CANCEL']     = i('times') . 'Cancel';
 $lang['LINK_SETTINGS']   = i('cog') . 'Settings';  
 $lang['LINK_MAX']        = i('bolt') . 'Peak';
 $lang['LINK_BACKUP']     = 'Backup';
+$lang['LINK_EXPORT']     = 'Export';
  
 /*
 ** ------------------
@@ -275,6 +276,19 @@ $lang['weather_station_present'] = 'Weather Station present ("true" or "false")'
 $lang['solar_meter_ip' ] = 'Solar meter TCP/IP address';
 $lang['solar_meter_port'] = 'Solar meter TCP port number';
 $lang['solar_meter_serial_number'] = 'Solar meter serial number';
+
+/*
+** ------------------
+** REPORT
+** ------------------
+*/
+
+$lang['TAG_LOW_USED'] = 'low_used' ;
+$lang['TAG_NORMAL_USED'] = 'normal_used';
+$lang['TAG_LOW_DELIVERED'] = 'low_delivered';
+$lang['TAG_NORMAL_DELIVERED'] = 'normal_delivered';
+$lang['TAG_SOLAR_DELIVERED'] = 'solar_delivered';
+$lang['TAG_GAS_USED'] = 'gas_used';
 
 /*
 ** ------------------

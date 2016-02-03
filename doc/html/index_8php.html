@@ -19,7 +19,7 @@
   <td id="projectlogo"><img alt="Logo" src="128.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">PlaatEnergy
-   &#160;<span id="projectnumber">v0.6</span>
+   &#160;<span id="projectnumber">v0.7</span>
    </div>
   </td>
  </tr>
@@ -32,8 +32,6 @@
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
@@ -75,30 +73,10 @@ Variables</h2></td></tr>
 <tr class="separator:a00ae4fcafb1145f5e968bdf920f83e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a44e6760141442bb439b1ab1395d8ff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a0a44e6760141442bb439b1ab1395d8ff">$page</a> = &quot;&quot;</td></tr>
 <tr class="separator:a0a44e6760141442bb439b1ab1395d8ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4bbd1ebac4ed9326c2256ccef1b8e104"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a4bbd1ebac4ed9326c2256ccef1b8e104">switch</a> ($pid)</td></tr>
-<tr class="separator:a4bbd1ebac4ed9326c2256ccef1b8e104"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc0a189fac719187ba2e6f01ca0f2466"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#adc0a189fac719187ba2e6f01ca0f2466">$counter</a> = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('request_counter')</td></tr>
-<tr class="separator:adc0a189fac719187ba2e6f01ca0f2466"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77f9b5c7480ad8fa3231d311d4b6feb3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a77f9b5c7480ad8fa3231d311d4b6feb3">$time_end</a> = microtime(true)</td></tr>
-<tr class="separator:a77f9b5c7480ad8fa3231d311d4b6feb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a78db1a0602e3b6ac1d9a1b5ec103c160"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a78db1a0602e3b6ac1d9a1b5ec103c160">$time</a> = $time_end - $time_start</td></tr>
-<tr class="separator:a78db1a0602e3b6ac1d9a1b5ec103c160"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>contain general page and event handler </p>
 </div><h2 class="groupheader">Variable Documentation</h2>
-<a class="anchor" id="adc0a189fac719187ba2e6f01ca0f2466"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">$counter = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('request_counter')</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a481c918f8d853749e00b5942cabf599a"></a>
 <div class="memitem">
 <div class="memproto">
@@ -159,30 +137,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a78db1a0602e3b6ac1d9a1b5ec103c160"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">$time = $time_end - $time_start</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a77f9b5c7480ad8fa3231d311d4b6feb3"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">$time_end = microtime(true)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="a44d4a5ef593dd745482e1f2adb2f7774"></a>
 <div class="memitem">
 <div class="memproto">
@@ -201,18 +155,6 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">$token = <a class="el" href="general_8inc.html#a3cf0f4e0e488c26a2bb73651bab4471d">plaatenergy_post</a>(&quot;token&quot;, &quot;&quot;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a4bbd1ebac4ed9326c2256ccef1b8e104"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">switch($pid)</td>
         </tr>
       </table>
 </div><div class="memdoc">
