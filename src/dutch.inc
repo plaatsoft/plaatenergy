@@ -210,8 +210,8 @@ $lang['LABEL_ETOTAL'] = 'Etotal waarde (kWh)';
 $lang['LABEL_GAS'] = 'Gas meter meterstand (m&sup3)';
 
 $lang['TITLE_QUERY_REPORT'] = 'Rapportage';
-$lang['LABEL_START_DATE'] = 'Start datum (format yyyy-mm-dd)';
-$lang['LABEL_END_DATE'] = 'Eind datum (format yyyy-mm-dd)';
+$lang['LABEL_START_DATE'] = 'Start datum';
+$lang['LABEL_END_DATE'] = 'Eind datum';
 
 /*
 ** ------------------

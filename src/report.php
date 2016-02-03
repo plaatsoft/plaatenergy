@@ -27,8 +27,8 @@
 ** ---------------------
 */
 
-$start = plaatenergy_post("start", "");
-$end = plaatenergy_post("end", "");
+$start = plaatenergy_post("start", date('Y-m-d'));
+$end = plaatenergy_post("end", date('Y-m-d'));
 
 /*
 ** ---------------------
@@ -38,7 +38,7 @@ $end = plaatenergy_post("end", "");
 
 function plaatenergy_round($number) {
 
-   return number_format((float)$number, 2, '.', '');
+   return number_format((float)$number, 2, ',', '');
 }
 
 function plaatenergy_export_event() {

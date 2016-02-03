@@ -209,8 +209,8 @@ $lang['LABEL_ETOTAL'] = 'Etotal meter reading value (kWh)';
 $lang['LABEL_GAS'] = 'Gas meter value reading (m&sup3)';
 
 $lang['TITLE_QUERY_REPORT'] = 'Query Energy Database';
-$lang['LABEL_START_DATE'] = 'Start date (format yyyy-mm-dd)';
-$lang['LABEL_END_DATE'] = 'End date (format yyyy-mm-dd)';
+$lang['LABEL_START_DATE'] = 'Start date';
+$lang['LABEL_END_DATE'] = 'End date';
 
 /*
 ** ------------------
