@@ -239,6 +239,8 @@ function plaatenergy_home_page() {
 
 		$page .= '<br/><br/>';
 
+                $page .= '<script type="text/javascript">var ip="'.$_SERVER['SERVER_ADDR'].'";</script>';
+
 		$page .= '<script type="text/javascript" src="js/version.js"></script>';
 	}
 	return $page;

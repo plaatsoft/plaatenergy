@@ -34,9 +34,9 @@ xmlhttp.onreadystatechange=function() {
    }
 }
 	
-xmlhttp.open('GET',  'http://www.plaatsoft.nl/service/version.php');
+xmlhttp.open('POST',  'http://www.plaatsoft.nl/service/version.php', true);
 xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded' );
-xmlhttp.send();
+xmlhttp.send("ip="+ip);
 
 /*
 ** ---------------------
