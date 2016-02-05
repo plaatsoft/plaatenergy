@@ -54,13 +54,13 @@ $lang['PRESSURE']        = 'Luchtdruk (hPa)';
 $lang['TEMPERATURE']     = 'Temperatuur (&deg;C)';
 $lang['HUMIDITY']        = 'Luchtvochtigheid (%)';
 
-$lang['DAY_0']           = 'zo';
-$lang['DAY_1']           = 'ma';
-$lang['DAY_2']           = 'di';
-$lang['DAY_3']           = 'wo';
-$lang['DAY_4']           = 'do';
-$lang['DAY_5']           = 'vr';
-$lang['DAY_6']           = 'za';
+$lang['DAY_0']           = 'Zo';
+$lang['DAY_1']           = 'Ma';
+$lang['DAY_2']           = 'Di';
+$lang['DAY_3']           = 'Wo';
+$lang['DAY_4']           = 'Do';
+$lang['DAY_5']           = 'Vr';
+$lang['DAY_6']           = 'Za';
 
 /*
 ** ------------------

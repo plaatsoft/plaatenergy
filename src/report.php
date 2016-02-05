@@ -59,21 +59,21 @@ function plaatenergy_export_event() {
 	$csv .= '"'.t('TAG_LOW_USED').'";';
 	$csv .= '"'.t('TAG_NORMAL_USED').'";';
 	$csv .= '"'.t('TAG_SOLAR_USED').'";';
+	$csv .= '"'.t('TAG_GAS_USED').'";'; 
 	$csv .= '"'.t('TAG_LOW_DELIVERED').'";'; 
 	$csv .= '"'.t('TAG_NORMAL_DELIVERED').'";';
-	$csv .= '"'.t('TAG_SOLAR_DELIVERED').'";';
-	$csv .= '"'.t('TAG_GAS_USED')."\"\r\n";
+	$csv .= '"'.t('TAG_SOLAR_DELIVERED')."\"\r\n";
+
 	
-	while ($row = plaatenergy_db_fetch_object($result)) {
-	
+	while ($row = plaatenergy_db_fetch_object($result)) {	
 		$csv .=  '"'.$row->date.'";';
-		$csv .=  plaatenergy_round($row->low_used,2).';';
-		$csv .=  plaatenergy_round($row->normal_used,2).';';
-		$csv .=  plaatenergy_round($row->solar_delivered-$row->low_delivered-$row->normal_delivered,2).';';
-		$csv .=  plaatenergy_round($row->low_delivered,2).';';
-		$csv .=  plaatenergy_round($row->normal_delivered,2).';';
-		$csv .=  plaatenergy_round($row->solar_delivered,2).';';
-		$csv .=  plaatenergy_round($row->gas_used,2)."\r\n";
+		$csv .=  '"'.plaatenergy_round($row->low_used,2).'";';
+		$csv .=  '"'.plaatenergy_round($row->normal_used,2).'";';
+		$csv .=  '"'.plaatenergy_round($row->solar_delivered-$row->low_delivered-$row->normal_delivered,2).';';
+		$csv .=  '"'.plaatenergy_round($row->gas_used,2).'";';
+		$csv .=  '"'.plaatenergy_round($row->low_delivered,2).'";';
+		$csv .=  '"'.plaatenergy_round($row->normal_delivered,2).'";';
+		$csv .=  '"'.plaatenergy_round($row->solar_delivered,2)."\"\r\n";		
 	}
 
 	header('Content-Type: application/csv');
