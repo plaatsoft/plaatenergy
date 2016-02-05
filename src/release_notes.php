@@ -34,7 +34,7 @@ $note[7] = '<div class="subparagraph">Version 0.7 (05-02-2016)</div>
 <li>General: Added CSV export feature.</li>
 <li>General: Improve query report output.</li>
 <li>General: Add day name to day report title.</li>
-<li>Bugfix: New version check is not working correct.</li>
+<li>Bugfix: New version check is now working correct.</li>
 <li>Bugfix: Month and Day navigation is now working correct.</li>
 </ul>
 </div>';
