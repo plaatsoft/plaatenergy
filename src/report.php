@@ -69,7 +69,7 @@ function plaatenergy_export_event() {
 		$csv .=  '"'.$row->date.'";';
 		$csv .=  '"'.plaatenergy_round($row->low_used,2).'";';
 		$csv .=  '"'.plaatenergy_round($row->normal_used,2).'";';
-		$csv .=  '"'.plaatenergy_round($row->solar_delivered-$row->low_delivered-$row->normal_delivered,2).';';
+		$csv .=  '"'.plaatenergy_round($row->solar_delivered-$row->low_delivered-$row->normal_delivered,2).'";';
 		$csv .=  '"'.plaatenergy_round($row->gas_used,2).'";';
 		$csv .=  '"'.plaatenergy_round($row->low_delivered,2).'";';
 		$csv .=  '"'.plaatenergy_round($row->normal_delivered,2).'";';
