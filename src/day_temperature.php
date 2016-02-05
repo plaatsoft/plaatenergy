@@ -101,7 +101,7 @@ function plaatenergy_day_temperature_page() {
       }
     </script>';
      
-	$page .= '<h1>'.t('TITLE_DAY_TEMPERATURE', $day, $month, $year).'</h1>';
+	$page .= '<h1>'.t('TITLE_DAY_TEMPERATURE', plaatenergy_dayofweek(),$day, $month, $year).'</h1>';
 	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
 	
 	$page .= '<div class="remark">';		

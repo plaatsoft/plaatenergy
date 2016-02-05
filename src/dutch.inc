@@ -40,6 +40,9 @@ $lang['DUTCH'] = 'Nederlands';
 
 $lang['EURO']            = 'Euro'; 
 $lang['WATT']            = 'Watt'; 
+$lang['KWH']             = 'kWh';
+$lang['M3']              = 'm&sup3;';
+
 $lang['USED_LOW_KWH']    = 'Dal (kWh)'; 
 $lang['USED_HIGH_KWH']   = 'Normaal (kWh)'; 
 $lang['USED_SOLAR_KWH']  = 'Solar (kWh)'; 
@@ -50,6 +53,14 @@ $lang['FORECAST_M3']     = 'Prognose(m&sup3;)';
 $lang['PRESSURE']        = 'Luchtdruk (hPa)';
 $lang['TEMPERATURE']     = 'Temperatuur (&deg;C)';
 $lang['HUMIDITY']        = 'Luchtvochtigheid (%)';
+
+$lang['DAY_0']           = 'zo';
+$lang['DAY_1']           = 'ma';
+$lang['DAY_2']           = 'di';
+$lang['DAY_3']           = 'wo';
+$lang['DAY_4']           = 'do';
+$lang['DAY_5']           = 'vr';
+$lang['DAY_6']           = 'za';
 
 /*
 ** ------------------
@@ -175,13 +186,13 @@ $lang['MAX_PEAK_ENERGY'] = 'Maximale piek vermogen deze maand is %s Watt.';
 ** ------------------
 */
 
-$lang['TITLE_DAY_TEMPERATURE'] = 'Weerstation Meter - Lucht Temperatuur - %s-%s-%s';
-$lang['TITLE_DAY_PRESSURE'] = 'Weerstation Meter - Luchtdruk - %s-%s-%s';
-$lang['TITLE_DAY_HUMIDITY'] = 'Weerstation Meter - Lucht Vochtigheid - %s-%s-%s';
+$lang['TITLE_DAY_TEMPERATURE'] = 'Weerstation Meter - Lucht Temperatuur - %s %s-%s-%s';
+$lang['TITLE_DAY_PRESSURE'] = 'Weerstation Meter - Luchtdruk - %s %s-%s-%s';
+$lang['TITLE_DAY_HUMIDITY'] = 'Weerstation Meter - Lucht Vochtigheid - %s %s-%s-%s';
 
-$lang['TITLE_DAY_IN_KWH'] = 'Energie Meter - Afgenomen Elektriciteit %s-%s-%s';
-$lang['TITLE_DAY_IN_GAS'] = 'Gas Meter - Afgenomen Gas %s-%s-%s';
-$lang['TITLE_DAY_OUT_KWH'] = 'Solar Meter - Geleverde Elektriciteit %s-%s-%s';
+$lang['TITLE_DAY_IN_KWH'] = 'Energie Meter - Afgenomen Elektriciteit - %s %s-%s-%s';
+$lang['TITLE_DAY_IN_GAS'] = 'Gas Meter - Afgenomen Gas - %s %s-%s-%s';
+$lang['TITLE_DAY_OUT_KWH'] = 'Solar Meter - Geleverde Elektriciteit - %s %s-%s-%s';
 
 $lang['TOTAL_PER_DAY_KWH'] = 'Totaal = %s kWh';
 $lang['TOTAL_PER_DAY_M3'] = 'Totaal = %s m&sup3;';

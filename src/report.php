@@ -100,15 +100,20 @@ function plaatenergy_report_event() {
 		$result = plaatenergy_db_query($sql);
 		$row = plaatenergy_db_fetch_object($result);
 	
-		$page  =  t('TAG_LOW_USED').'='.plaatenergy_round($row->dal,2).' ';
-		$page .=  t('TAG_NORMAL_USED').'='.plaatenergy_round($row->piek,2).' ';
-		$page .=  t('TAG_SOLAR_USED').'='.plaatenergy_round($row->solar-$row->dalterug-$row->piekterug,2).' ';
+		$page  =  '&Sigma; '.t('TAG_LOW_USED').' = '.plaatenergy_round($row->dal,2).' '.t('KWH');
 		$page .=  '<br/>';
-		$page .=  t('TAG_LOW_DELIVERED').'='.plaatenergy_round($row->dalterug,2).' ';
-		$page .=  t('TAG_NORMAL_DELIVERED').'='.plaatenergy_round($row->piekterug,2).' ';
-		$page .=  t('TAG_SOLAR_DELIVERED').'='.plaatenergy_round($row->solar,2).' ';
+		$page .=  '&Sigma; '.t('TAG_NORMAL_USED').' = '.plaatenergy_round($row->piek,2).' '.t('KWH');
 		$page .=  '<br/>';
-		$page .=  t('TAG_GAS_USED').'='.plaatenergy_round($row->gas,2).' ';
+		$page .=  '&Sigma; '.t('TAG_SOLAR_USED').' = '.plaatenergy_round($row->solar-$row->dalterug-$row->piekterug,2).' '.t('KWH');
+		$page .=  '<br/>';
+		$page .=  '&Sigma; '.t('TAG_GAS_USED').' = '.plaatenergy_round($row->gas,2).' '.t('M3');
+		$page .=  '<br/>';
+		$page .=  '<br/>';
+		$page .=  '&Sigma; '.t('TAG_LOW_DELIVERED').' = '.plaatenergy_round($row->dalterug,2).' '.t('KWH');
+		$page .=  '<br/>';
+		$page .=  '&Sigma; '.t('TAG_NORMAL_DELIVERED').' = '.plaatenergy_round($row->piekterug,2).' '.t('KWH');
+		$page .=  '<br/>';
+		$page .=  '&Sigma; '.t('TAG_SOLAR_DELIVERED').' = '.plaatenergy_round($row->solar,2).' '.t('KWH');
 
 		return $page;
 	}
@@ -132,14 +137,12 @@ function plaatenergy_report_page() {
 	
 	$page .=  '<br/>';
 	$page .=  '<label>'.t('LABEL_START_DATE').': </label>';
-	$page .=  '<br/>';
 	$page .=  '<input name="start" type="date" size="10" maxlength="10" value="'.$start.'"/>';
 	
 	$page .=  '<br/>';
 	$page .=  '<br/>';
 	
 	$page .=  '<label>'.t('LABEL_END_DATE').': </label>';
-	$page .=  '<br/>';
 	$page .=  '<input name="end" type="date" size="10" maxlength="10" value="'.$end.'"/>';
 	$page .=  '<br/>';
 	$page .=  '<br/>';

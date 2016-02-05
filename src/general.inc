@@ -85,7 +85,7 @@ define('PAGE_DAY_HUMIDITY',         62);
 */
 
 define('EVENT_NONE',                80);
-define('EVENT_PROCESS_TODAY',   		81);
+define('EVENT_PROCESS_TODAY',       81);
 define('EVENT_PROCESS_ALL_DAYS',    82);
 define('EVENT_PREV',                83);
 define('EVENT_NEXT',                84);
@@ -104,6 +104,14 @@ define('EVENT_EXPORT',              93);
 ** PAGE
 ** -----------
 */
+
+function plaatenergy_dayofweek() {
+
+    global $date;
+
+    list($year, $month, $day) = explode("-", $date);
+    return t("DAY_".jddayofweek( cal_to_jd(CAL_GREGORIAN, $month, $day, $year))); 
+}
 
 /**
  * Language function 
@@ -467,7 +475,7 @@ function plaatenergy_navigation_day() {
 	$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.plaatenergy_prev_day($date), t('LINK_PREV_DAY'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
 	
-	if ($date<date("Y-m-d")) {		
+	if (strtotime($date)<strtotime(date("Y-m-d"))) {		
 		$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.plaatenergy_next_day($date), t('LINK_NEXT_DAY'));	
 	} else {
 		$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.$date, t('LINK_NEXT_DAY'));	
@@ -496,7 +504,7 @@ function plaatenergy_navigation_month() {
 	$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.plaatenergy_prev_month($date).'&eid='.$eid,t('LINK_PREV_MONTH'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
 	
-	if ($date < date("Y-m")) {		
+	if (strtotime($date) < strtotime(date("Y-m"))) {		
 		$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.plaatenergy_next_month($date), t('LINK_NEXT_MONTH'));	
 	} else {
 		$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.$date, t('LINK_NEXT_MONTH'));	

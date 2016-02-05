@@ -40,6 +40,9 @@ $lang['DUTCH'] = 'Dutch';
 
 $lang['EURO']            = 'Euro'; 
 $lang['WATT']            = 'Watt'; 
+$lang['KWH']             = 'kWh'; 
+$lang['M3']              = 'm&sup3;'; 
+
 $lang['USED_LOW_KWH']    = 'Low (kWh)'; 
 $lang['USED_HIGH_KWH']   = 'Normal (kWh)'; 
 $lang['USED_SOLAR_KWH']  = 'Solar (kWh)'; 
@@ -50,6 +53,14 @@ $lang['FORECAST_M3']     = 'Forecast (m&sup3;)';
 $lang['PRESSURE']        = 'Pressure (hPa)';
 $lang['TEMPERATURE']     = 'Temperature (&deg;C)';
 $lang['HUMIDITY']        = 'Humidity (%)';
+
+$lang['DAY_0']           = 'Sun';
+$lang['DAY_1']           = 'Mon';
+$lang['DAY_2']           = 'Tue';
+$lang['DAY_3']           = 'Wed';
+$lang['DAY_4']           = 'Thu';
+$lang['DAY_5']           = 'Fri';
+$lang['DAY_6']           = 'Sat';
 
 /*
 ** ------------------
@@ -174,13 +185,13 @@ $lang['MAX_PEAK_ENERGY'] = 'Maximum peak energy this month is %s Watt.';
 ** ------------------
 */
 
-$lang['TITLE_DAY_TEMPERATURE'] = 'Weather Station - Air Temperature - %s-%s-%s';
-$lang['TITLE_DAY_PRESSURE'] = 'Weather Station - Air Pressure - %s-%s-%s';
-$lang['TITLE_DAY_HUMIDITY'] = 'Weather Station - Air Humidity - %s-%s-%s';
+$lang['TITLE_DAY_TEMPERATURE'] = 'Weather Station - Air Temperature - %s %s-%s-%s';
+$lang['TITLE_DAY_PRESSURE'] = 'Weather Station - Air Pressure - %s %s-%s-%s';
+$lang['TITLE_DAY_HUMIDITY'] = 'Weather Station - Air Humidity - %s %s-%s-%s';
 
-$lang['TITLE_DAY_IN_KWH'] = 'Energy Meter - Used Electricity %s-%s-%s';
-$lang['TITLE_DAY_IN_GAS'] = 'Gas Meter - Used Gas %s-%s-%s';
-$lang['TITLE_DAY_OUT_KWH'] = 'Solar Meter - Delivered Electricity %s-%s-%s';
+$lang['TITLE_DAY_IN_KWH'] = 'Energy Meter - Used Electricity - %s %s-%s-%s';
+$lang['TITLE_DAY_IN_GAS'] = 'Gas Meter - Used Gas - %s %s-%s-%s';
+$lang['TITLE_DAY_OUT_KWH'] = 'Solar Meter - Delivered Electricity - %s %s-%s-%s';
 
 $lang['TOTAL_PER_DAY_KWH'] = 'Total = %s kWh';
 $lang['TOTAL_PER_DAY_M3'] = 'Total = %s m&sup3;';
