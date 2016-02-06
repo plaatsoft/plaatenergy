@@ -91,6 +91,7 @@ $lang['LINK_SETTINGS']   = i('cog') . 'Configuratie';
 $lang['LINK_MAX']        = i('bolt') . 'Piek';
 $lang['LINK_BACKUP']     = 'Backup';
 $lang['LINK_EXPORT']     = 'Export naar CSV';
+$lang['LINK_SCATTER']    = 'Scatter';
  
 /*
 ** ------------------

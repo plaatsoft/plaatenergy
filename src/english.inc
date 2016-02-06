@@ -91,6 +91,7 @@ $lang['LINK_SETTINGS']   = i('cog') . 'Settings';
 $lang['LINK_MAX']        = i('bolt') . 'Peak';
 $lang['LINK_BACKUP']     = 'Backup';
 $lang['LINK_EXPORT']     = 'Export to CSV';
+$lang['LINK_SCATTER']    = 'Scatter';
  
 /*
 ** ------------------

@@ -111,7 +111,7 @@ function plaatenergy_day_in_gas_page() {
       }
 		</script>';
     
-	$page .= '<h1>'.t('TITLE_DAY_IN_GAS', plaatenergy_dayofweek(), $day, $month, $year).'</h1>';
+	$page .= '<h1>'.t('TITLE_DAY_IN_GAS', plaatenergy_dayofweek($date), $day, $month, $year).'</h1>';
 	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
 
 	$page .= '<div class="remark">';

@@ -51,8 +51,24 @@ function plaatenergy_year_in_energy_page() {
 	$total_price=0;
 	$count=0;
 	$data="";
+
+        if ($eid==EVENT_SCATTER) {
+
+           $sql  = 'select date, dal as low, piek as normal, solar, dalterug, piekterug ';
+	   $sql .= 'from energy_day where date>="'.$year.'-1-1" and date<="'.$year.'-12-31"';
+
+           $result = plaatenergy_db_query($sql);
+           while ($row = plaatenergy_db_fetch_object($result)) {
+	      if (strlen($data)>0) {
+		$data .= ',';
+	      }
+	      $data .= '['.plaatenergy_dayofweek2($row->date).','.($row->low+$row->normal+$row->solar-$row->dalterug-$row->piekterug).']';
+           } 
+           $json = '[["","kWh"],'.$data.']';
+
+        } else {
 	
-	for($m=1; $m<=12; $m++) {
+	   for($m=1; $m<=12; $m++) {
 
 		$time=mktime(0, 0, 0, $m, 1, $year);
 		$timestamp1=date('Y-m-0 00:00:00', $time);
@@ -94,18 +110,42 @@ function plaatenergy_year_in_energy_page() {
 		}
 		$total += $dal_value + $piek_value + $verbruikt;
 		$total_price += $price2;
-	}
+	   }
 	
-	if ($eid==EVENT_KWH) {
+	   if ($eid==EVENT_KWH) {
 		$json = "[['','".t('USED_LOW_KWH')."','".t('USED_HIGH_KWH')."','".t('USED_SOLAR_KWH')."','".t('FORECAST_KWH')."'],".$data."]";
-	} else { 
+	   } else { 
 		$json = "[['','".t('EURO')."'],".$data."]";
-	}
+	   }
+        }
 
-	$page = '
-		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        if ($eid==EVENT_SCATTER) {
+
+        $page = '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"> </script>
 		<script type="text/javascript">
-			google.load("visualization", "1", {packages:["bar"]});
+                        google.charts.load("current", {"packages":["scatter"]});
+                        google.charts.setOnLoadCallback(drawChart);
+
+                        function drawChart() {
+
+
+                        var options = {
+				legend: { position: "none" },
+                                vAxis: { minValue:0 },
+                        };
+
+                        var data = google.visualization.arrayToDataTable('.$json.');
+                        var chart = new google.charts.Scatter(document.getElementById("chart_div"));
+                        chart.draw(data, google.charts.Scatter.convertOptions(options));
+                  }
+		</script>';
+
+        } else {
+
+	  $page = '
+                <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+                <script type="text/javascript">
+                        google.load("visualization", "1", {packages:["bar"]});
 			google.setOnLoadCallback(drawChart);
 			function drawChart() {
 	
@@ -116,14 +156,14 @@ function plaatenergy_year_in_energy_page() {
 				vAxis: {format: "decimal"},
 				isStacked:true,';
 				
-	if ($eid==EVENT_KWH) {
+	  if ($eid==EVENT_KWH) {
 		$page .= "colors: ['#0066cc', '#808080'],";
 		$page .= "vAxis: { format: 'decimal',  viewWindow: { min: 0, max: 300 } }, ";
-	} else {
+	  } else {
 		$page .= "colors: ['#e0440e'],";
-	}
+	  }
 	
-	$page .= 'series: {
+  	  $page .= 'series: {
 					3: {
 						targetAxisIndex: 1
 					}
@@ -143,6 +183,7 @@ function plaatenergy_year_in_energy_page() {
 			}
 		}
 		</script>';
+        }
 	
 	$page .= '<h1>'.t('TITLE_YEAR_IN_KWH', $year).'</h1>';
 	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';

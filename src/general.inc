@@ -98,6 +98,7 @@ define('EVENT_WATT',                90);
 define('EVENT_MAX',                 91);
 define('EVENT_BACKUP',              92);
 define('EVENT_EXPORT',              93);
+define('EVENT_SCATTER',             94);
 
 /*
 ** -----------
@@ -105,11 +106,15 @@ define('EVENT_EXPORT',              93);
 ** -----------
 */
 
-function plaatenergy_dayofweek() {
+function plaatenergy_dayofweek2($value) {
 
-    global $date;
+    list($year, $month, $day) = explode("-", $value);
+    return jddayofweek( cal_to_jd(CAL_GREGORIAN, $month, $day, $year)); 
+}
 
-    list($year, $month, $day) = explode("-", $date);
+function plaatenergy_dayofweek($value) {
+
+    list($year, $month, $day) = explode("-", $value);
     return t("DAY_".jddayofweek( cal_to_jd(CAL_GREGORIAN, $month, $day, $year))); 
 }
 
@@ -589,9 +594,11 @@ function plaatenergy_navigation_year() {
 	} else {
 		if ($eid==EVENT_KWH) {		
 			$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
+		} else if ($eid==EVENT_EURO) {
+			$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_SCATTER,t('LINK_SCATTER'));		
 		} else {
 			$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH,t('LINK_KWH'));		
-		}
+                }
 	}
 	
 	$page .= '</div>';	
