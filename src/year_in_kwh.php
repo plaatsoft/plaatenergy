@@ -61,10 +61,10 @@ function plaatenergy_year_in_energy_page() {
            while ($row = plaatenergy_db_fetch_object($result)) {
 	      if (strlen($data)>0) {
 		$data .= ',';
-	      }
-	      $data .= '['.plaatenergy_dayofweek2($row->date).','.($row->low+$row->normal+$row->solar-$row->dalterug-$row->piekterug).']';
+              }
+	      $data .= '["'.$row->date.'",'.round(($row->low+$row->normal+$row->solar-$row->dalterug-$row->piekterug),2).','.$row->solar.']';
            } 
-           $json = '[["","kWh"],'.$data.']';
+           $json = "[".$data."]";
 
         } else {
 	
@@ -121,24 +121,32 @@ function plaatenergy_year_in_energy_page() {
 
         if ($eid==EVENT_SCATTER) {
 
-        $page = '<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"> </script>
-		<script type="text/javascript">
-                        google.charts.load("current", {"packages":["scatter"]});
-                        google.charts.setOnLoadCallback(drawChart);
+ $page = '
+                   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+                        <script type="text/javascript">
+                        google.load("visualization", "1.1", {packages:["line"]});
+                        google.setOnLoadCallback(drawChart);
 
                         function drawChart() {
 
+                                var data = new google.visualization.DataTable();
+                                data.addColumn("string","'.t('DATE').'.");
+                                data.addColumn("number","'.t('USED_KWH').'.");
+                                data.addColumn("number","'.t('DELIVERED_KWH').'");
+                                data.addRows('.$json.');
 
-                        var options = {
-				legend: { position: "none" },
-                                vAxis: { minValue:0 },
-                        };
+                                var options = {
+                                        legend: { position: "none" },
+                                        pointSize: 2,
+                                        pointShape: "circle",
+                                        vAxis: {format: "decimal", title: ""},
+                                        hAxis: {title: ""},
+                                };
 
-                        var data = google.visualization.arrayToDataTable('.$json.');
-                        var chart = new google.charts.Scatter(document.getElementById("chart_div"));
-                        chart.draw(data, google.charts.Scatter.convertOptions(options));
-                  }
-		</script>';
+                                var chart = new google.charts.Line(document.getElementById("chart_div"));
+                                chart.draw(data, google.charts.Line.convertOptions(options));
+                }
+                </script>';
 
         } else {
 

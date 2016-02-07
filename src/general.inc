@@ -591,11 +591,18 @@ function plaatenergy_navigation_year() {
 		} else {
 			$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_M3,t('LINK_M3'));		
 		}
-	} else {
+	} else if ($pid==PAGE_YEAR_IN_ENERGY) {
+
 		if ($eid==EVENT_KWH) {		
 			$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
 		} else if ($eid==EVENT_EURO) {
 			$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_SCATTER,t('LINK_SCATTER'));		
+		} else {
+			$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH,t('LINK_KWH'));		
+                }
+        } else {
+		if ($eid==EVENT_KWH) {		
+			$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_EURO,t('LINK_EURO'));	
 		} else {
 			$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH,t('LINK_KWH'));		
                 }

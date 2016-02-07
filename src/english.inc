@@ -42,10 +42,12 @@ $lang['EURO']            = 'Euro';
 $lang['WATT']            = 'Watt'; 
 $lang['KWH']             = 'kWh'; 
 $lang['M3']              = 'm&sup3;'; 
+$lang['DATE']            = 'Date'; 
 
 $lang['USED_LOW_KWH']    = 'Low (kWh)'; 
 $lang['USED_HIGH_KWH']   = 'Normal (kWh)'; 
 $lang['USED_SOLAR_KWH']  = 'Solar (kWh)'; 
+$lang['USED_KWH']        = 'Used (kWh)'; 
 $lang['DELIVERED_KWH']   = 'Delivered (kWh)'; 
 $lang['FORECAST_KWH']    = 'Forecast (kWh)'; 
 $lang['USED_M3']         = 'Used (m&sup3;)'; 
