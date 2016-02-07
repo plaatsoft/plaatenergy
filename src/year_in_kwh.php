@@ -130,8 +130,8 @@ function plaatenergy_year_in_energy_page() {
                         function drawChart() {
 
                                 var data = new google.visualization.DataTable();
-                                data.addColumn("string","'.t('DATE').'.");
-                                data.addColumn("number","'.t('USED_KWH').'.");
+                                data.addColumn("string","'.t('DATE').'");
+                                data.addColumn("number","'.t('USED_KWH').'");
                                 data.addColumn("number","'.t('DELIVERED_KWH').'");
                                 data.addRows('.$json.');
 
