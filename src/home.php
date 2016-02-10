@@ -236,6 +236,12 @@ function plaatenergy_home_page() {
 
 		$page .= '<tr>';
 		$page .= '<td>';
+		$page .= '&nbsp;';
+		$page .= '</td>';
+		$page .= '</tr>';
+
+		$page .= '<tr>';
+		$page .= '<td>';
 		$page .= '</td>';
 		$page .= '<td>';
                 if ($weather_station_present=="false") { 
