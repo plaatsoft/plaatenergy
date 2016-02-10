@@ -39,14 +39,10 @@ function check_solar_meter() {
 
   global $solar_meter_present;
 
-  if ($solar_meter_present=="false") {
-  
-   $page  = '<div class="checker disabled">';
-   $page .= t('SOLAR_METER_DISABLED');		
-   $page .= '</div>';
-	
-  } else {
+  $page="";
 
+  if ($solar_meter_present=="true") {
+  
 	$timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
    $sql = 'select etotal from solar where timestamp >= "'.$timestamp.'"';	
    $result = plaatenergy_db_query($sql);
@@ -75,14 +71,9 @@ function check_solar_meter() {
 function check_energy_meter() {
   
    global $energy_meter_present;
-	
-	if ($energy_meter_present=="false") {
-  
-		$page  = '<div class="checker disabled">';
-		$page .= t('ENERGY_METER_DISABLED');		
-		$page .= '</div>';
 
-	} else {
+$page = "";	
+	if ($energy_meter_present=="true") {
 	   
 		$timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
 		$sql = 'select dal from energy where timestamp >= "'.$timestamp.'"';	
@@ -113,14 +104,9 @@ function check_weather_station() {
 
    global $weather_station_present;
     
-   if ($weather_station_present=="false") {
+   $page = "";
+   if ($weather_station_present=="true") {
   
-		$page  = '<div class="checker disabled">';
-		$page .= t('WEATHER_METER_DISABLED');	
-		$page .= '</div>';
-	
-	} else {
-	
 		$timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
 		$sql = 'select humidity from weather where timestamp >= "'.$timestamp.'"';	
 		$result = plaatenergy_db_query($sql);
@@ -155,6 +141,7 @@ function check_weather_station() {
 function plaatenergy_home_page() {
 
        global $weather_station_present;
+       global $solar_meter_present;
 
 	$page = '<h1>';
 	$page .= t('TITLE').' ';
@@ -179,42 +166,69 @@ function plaatenergy_home_page() {
 		$page .= '<th>'.t('MONTH_REPORT').'</th>';
 		$page .= '<th>'.t('DAY_REPORT').'</th>';
 
-                if ($weather_station_present!="false") { 
+                if ($weather_station_present=="true") { 
 		    $page .= '<th>'.t('WEATHER_REPORT').'</th>';
                 }                
 
 		$page .= '</tr>';
 	
 		$page .= '<tr>';
-		
 		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_YEARS_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
-		$page .= plaatenergy_link('pid='.PAGE_YEARS_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
-		$page .= plaatenergy_link('pid='.PAGE_YEARS_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
 		$page .= '</td>';
-		
 		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_YEAR_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
-		$page .= plaatenergy_link('pid='.PAGE_YEAR_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
-		$page .= plaatenergy_link('pid='.PAGE_YEAR_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
 		$page .= '</td>';
-
 		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_MONTH_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
-		$page .= plaatenergy_link('pid='.PAGE_MONTH_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
-		$page .= plaatenergy_link('pid='.PAGE_MONTH_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
 		$page .= '</td>';
-
 		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_DAY_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
-		$page .= plaatenergy_link('pid='.PAGE_DAY_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
-		$page .= plaatenergy_link('pid='.PAGE_DAY_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
 		$page .= '</td>';
-
-                if ($weather_station_present!="false") { 
+                if ($weather_station_present=="true") { 
 		   $page .= '<td>';
 		   $page .= plaatenergy_link('pid='.PAGE_DAY_PRESSURE, t('LINK_PRESSURE'));
+		   $page .= '</td>';
+                }
+		$page .= '</tr>';
+
+                if ($solar_meter_present=="true") { 
+		  $page .= '<tr>';
+   		  $page .= '<td>';
+		  $page .= plaatenergy_link('pid='.PAGE_YEARS_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
+	 	  $page .= '</td>';
+   		  $page .= '<td>';
+		  $page .= plaatenergy_link('pid='.PAGE_YEAR_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
+		  $page .= '</td>';
+		  $page .= '<td>';
+		  $page .= plaatenergy_link('pid='.PAGE_MONTH_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
+		  $page .= '</td>';
+		  $page .= '<td>';
+		  $page .= plaatenergy_link('pid='.PAGE_DAY_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
+		  $page .= '</td>';
+                  if ($weather_station_present=="true") { 
+		   $page .= '<td>';
 		   $page .= plaatenergy_link('pid='.PAGE_DAY_TEMPERATURE, t('LINK_TEMPERATURE'));
+		   $page .= '</td>';
+                  }
+		  $page .= '</tr>';
+                }
+
+		$page .= '<tr>';
+		$page .= '<td>';
+		$page .= plaatenergy_link('pid='.PAGE_YEARS_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
+		$page .= '</td>';
+		$page .= '<td>';
+		$page .= plaatenergy_link('pid='.PAGE_YEAR_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
+		$page .= '</td>';
+		$page .= '<td>';
+		$page .= plaatenergy_link('pid='.PAGE_MONTH_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
+		$page .= '</td>';
+		$page .= '<td>';
+		$page .= plaatenergy_link('pid='.PAGE_DAY_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
+		$page .= '</td>';
+                if ($weather_station_present=="true") { 
+		   $page .= '<td>';
 	   	   $page .= plaatenergy_link('pid='.PAGE_DAY_HUMIDITY, t('LINK_HUMIDITY'));
 		   $page .= '</td>';
                 }
@@ -249,7 +263,7 @@ function plaatenergy_home_page() {
 		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_RELEASE_NOTES, t('LINK_RELEASE_NOTES'));
 		$page .= '</td>';
-                if ($weather_station_present!="false") { 
+                if ($weather_station_present=="true") { 
 		   $page .= '<td>';
 		   $page .= plaatenergy_link('pid='.PAGE_REPORT, t('LINK_REPORT'));
 		   $page .= '</td>';

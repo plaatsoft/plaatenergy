@@ -124,17 +124,14 @@ $lang['LINK_RELEASE_NOTES'] = i('align-left') . 'Release Notes';
 $lang['LINK_ABOUT'] = i('registered') . 'About';
 $lang['LINK_DONATE'] = i('money') . 'Donate';
 $lang['LINK_REPORT'] = i('rocket') . 'Query';
-$lang['LINK_GUI'] = i('table') . 'Realtime Info';
+$lang['LINK_GUI'] = i('table') . 'Realtime Dashboard';
 
-$lang['ENERGY_METER_DISABLED'] = i('exclamation') . 'Energy meter is disabled';
 $lang['ENERGY_METER_CONNECTION_DOWN'] = i('times') . 'No energy data recent received';
 $lang['ENERGY_METER_CONNECTION_UP'] = i('check') . 'Energy meter connection is up';
 
-$lang['SOLAR_METER_DISABLED'] = i('exclamation') . 'Solar meter is disabled';
 $lang['SOLAR_METER_CONNECTION_DOWN'] = i('times') . 'No solar data recent received';
 $lang['SOLAR_METER_CONNECTION_UP'] = i('check') . 'Solar meter connection is up';
 
-$lang['WEATHER_METER_DISABLED'] = i('exclamation') . 'Weather Station is disabled';
 $lang['WEATHER_METER_CONNECTION_DOWN'] = i('times') . 'No weather data recent received';
 $lang['WEATHER_METER_CONNECTION_UP'] = i('check') . 'Weather Station connection is up';
 
@@ -273,19 +270,19 @@ $lang['LABEL_DESCRIPTION'] = 'Description';
 $lang['database_version'] = 'Current database version';
 $lang['request_counter'] = 'Page request counter';
 
-$lang['energy_meter_reading_low'] = 'Energy meter reading - low tariff (kwh)';
-$lang['energy_meter_reading_normal'] = 'Energy meter reading - normal tariff (kwh)';
-$lang['gas_meter_reading'] = 'Gas meter reading (m&sup3;)';
+$lang['energy_meter_reading_low'] = 'Initial energy meter reading - low tariff (kwh)';
+$lang['energy_meter_reading_normal'] = 'Iinitial energy meter reading - normal tariff (kwh)';
+$lang['gas_meter_reading'] = 'Initial gas meter reading (m&sup3;)';
 
 $lang['energy_price'] = 'Energy price per kwh';
 $lang['gas_price' ] = 'Gas price per m&sup3;';
-$lang['energy_use_forecast'] = 'Energy use forecast (kWh)';
-$lang['energy_delivery_forecast'] = 'Energy delivery forecast (kWh)';
-$lang['gas_use_forecast'] = 'Gas use forecast (m&sup3;)';
+$lang['energy_use_forecast'] = 'Energy use annual forecast (kWh)';
+$lang['energy_delivery_forecast'] = 'Energy delivery annual forecast (kWh)';
+$lang['gas_use_forecast'] = 'Gas use annual forecast (m&sup3;)';
 
-$lang['energy_meter_present'] = 'Energy meter present ("true" or "false")';
-$lang['solar_meter_present'] = 'Solar meter present ("true" or "false")';
-$lang['weather_station_present'] = 'Weather Station present ("true" or "false")';
+$lang['energy_meter_present'] = 'Energy meter device present ("true" or "false")';
+$lang['solar_meter_present'] = 'Solar meter device present ("true" or "false")';
+$lang['weather_station_present'] = 'Weather Station device present ("true" or "false")';
 
 $lang['solar_meter_ip' ] = 'Solar meter TCP/IP address';
 $lang['solar_meter_port'] = 'Solar meter TCP port number';

@@ -127,15 +127,12 @@ $lang['LINK_DONATE'] = i('money') . 'Donatie';
 $lang['LINK_REPORT'] = i('archive') . 'Rapportage';
 $lang['LINK_GUI'] = i('table') . 'Realtime Info';
 
-$lang['ENERGY_METER_DISABLED'] = i('exclamation') . 'Energie meter niet aanwezig';
 $lang['ENERGY_METER_CONNECTION_DOWN'] = i('times') . 'Geen recente energie meting ontvangen';
 $lang['ENERGY_METER_CONNECTION_UP'] = i('check') . 'Energie meter verbinding is goed';
 
-$lang['SOLAR_METER_DISABLED'] = i('exclamation') . 'Solar meter niet aanwezig';
 $lang['SOLAR_METER_CONNECTION_DOWN'] = i('times') . 'Geen recente solar meting ontvangen';
 $lang['SOLAR_METER_CONNECTION_UP'] = i('check') . 'Solar meter verbinding is goed';
 
-$lang['WEATHER_METER_DISABLED'] = i('exclamation') . 'Weerstation niet aanwezig';
 $lang['WEATHER_METER_CONNECTION_DOWN'] = i('times') . 'Geen recente weer meting ontvangen';
 $lang['WEATHER_METER_CONNECTION_UP'] = i('check') . 'Weerstation verbinding is goed';
 
