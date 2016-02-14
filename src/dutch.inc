@@ -156,9 +156,9 @@ $lang['AVERAGE_PER_YEAR_EURO'] = 'Gemiddeld per jaar %s euro [Totaal = %s euro]'
 ** ------------------
 */
 
-$lang['TITLE_YEAR_IN_KWH'] = 'Energie Meter - Afgenomen Elektriciteit %s';
-$lang['TITLE_YEAR_IN_M3'] = 'Gas Meter - Afgenomen Gas %s';
-$lang['TITLE_YEAR_OUT_KWH'] = 'Solar Meter - Geleverde Elektriciteit %s';
+$lang['TITLE_YEAR_IN_KWH'] = 'Energie Meter - Afgenomen Elektriciteit - %s';
+$lang['TITLE_YEAR_IN_M3'] = 'Gas Meter - Afgenomen Gas - %s';
+$lang['TITLE_YEAR_OUT_KWH'] = 'Solar Meter - Geleverde Elektriciteit - %s';
 
 $lang['AVERAGE_PER_MONTH_KWH'] = 'Gemiddeld per maand %s kWh [Totaal = %s kWh]';
 $lang['AVERAGE_PER_MONTH_M3'] = 'Gemiddeld per maand %s m&sup3; [Totaal = %s m&sup3;]';

@@ -190,6 +190,7 @@ function general_header() {
   // input
   global $pid;
   global $eid;
+  global $sid;
   global $date;
     
   $page  = '<!DOCTYPE html>';
@@ -210,9 +211,33 @@ function general_header() {
   $page .= '<link rel="stylesheet" type="text/css" href="./css/font-awesome.min.css">';
 
   $slide_show_on = plaatenergy_db_get_config_item('slide_show_on');
-  if ($slide_show_on=="true") {
+  if (($slide_show_on=="true") && ($pid!=PAGE_SETTING_LIST)) {
+
      $slide_show_page_delay = plaatenergy_db_get_config_item('slide_show_page_delay')*1000;
-     $page .= '<script language="JavaScript" type="text/javascript">setTimeout(link,'.$slide_show_page_delay.',\'mid='.PAGE_ABOUT.'\');</script>';
+
+     switch ($sid) {
+   
+          default: $pid = PAGE_YEAR_IN_ENERGY;
+                   $eid = EVENT_KWH;
+                   $sid = 2;
+                   break;
+
+          case 2:  $pid = PAGE_YEAR_OUT_ENERGY;
+                   $eid = EVENT_KWH;
+                   $sid = 3;
+                   break;
+
+          case 3:  $pid = PAGE_YEAR_IN_GAS;
+                   $eid = EVENT_M3;
+                   $sid = 4;
+                   break;
+
+          case 4:  $pid = PAGE_ABOUT;
+                   $eid = EVENT_NONE;
+                   $sid = 5;
+                   break;
+     }
+     $page .= '<script language="JavaScript" type="text/javascript">setTimeout(link,'.$slide_show_page_delay.',\'pid='.$pid.'&eid='.$eid.'&sid='.$sid.'\');</script>';
   }
 
   $page .= '</head>';

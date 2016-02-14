@@ -155,9 +155,9 @@ $lang['AVERAGE_PER_YEAR_EURO'] = 'Average per year %s euro [Total = %s euro]';
 ** ------------------
 */
 
-$lang['TITLE_YEAR_IN_KWH'] = 'Energy Meter - Used Electricity %s';
-$lang['TITLE_YEAR_IN_M3'] = 'Gas Meter - Used Gas %s';
-$lang['TITLE_YEAR_OUT_KWH'] = 'Solar Meter - Delivered Electricity %s';
+$lang['TITLE_YEAR_IN_KWH'] = 'Energy Meter - Used Electricity - %s';
+$lang['TITLE_YEAR_IN_M3'] = 'Gas Meter - Used Gas - %s';
+$lang['TITLE_YEAR_OUT_KWH'] = 'Solar Meter - Delivered Electricity - %s';
 
 $lang['AVERAGE_PER_MONTH_KWH'] = 'Average per month %s kWh [Total = %s kWh]';
 $lang['AVERAGE_PER_MONTH_M3'] = 'Average per month %s m&sup3; [Total = %s m&sup3;]';
@@ -234,7 +234,7 @@ $lang['ABOUT_CONTENT'] = 'PlaatEnergy is created by PlaatSoft.';
 
 $lang['DISCLAIMER_TITLE'] = 'Disclaimer';
 $lang['DISCLAIMER_CONTENT'] = 'The program is provided AS IT IS with NO WARRANTY OF ANY KIND,</br>  
-INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.<br/>';
+INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND<br/> FITNESS FOR A PARTICULAR PURPOSE.<br/>';
 
 $lang['CREDITS_TITLE'] = 'Credits';
 $lang['CREDITS_CONTENT'] = 'The following people helped creating PlaatEnergy:<br/><br/>
