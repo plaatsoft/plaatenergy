@@ -16,14 +16,16 @@
 
 function link(value)
 {
-	var form = document.forms['plaatenergy'];
-	var newInput = document.createElement('input');
-	newInput.setAttribute('type','hidden');
-	newInput.setAttribute('name','token');
-	newInput.setAttribute('value',value);
-	form.appendChild(newInput);		
+        
+  console.log(value);
+  var form = document.forms['plaatenergy'];
+  var newInput = document.createElement('input');
+  newInput.setAttribute('type','hidden');
+  newInput.setAttribute('name','token');
+  newInput.setAttribute('value',value);
+  form.appendChild(newInput);		
 		
-	form.submit();
+  form.submit();
 }
 
 /*

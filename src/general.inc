@@ -209,6 +209,12 @@ function general_header() {
   // Load the icons from Font Awesome
   $page .= '<link rel="stylesheet" type="text/css" href="./css/font-awesome.min.css">';
 
+  $slide_show_on = plaatenergy_db_get_config_item('slide_show_on');
+  if ($slide_show_on=="true") {
+     $slide_show_page_delay = plaatenergy_db_get_config_item('slide_show_page_delay')*1000;
+     $page .= '<script language="JavaScript" type="text/javascript">setTimeout(link,'.$slide_show_page_delay.',\'mid='.PAGE_ABOUT.'\');</script>';
+  }
+
   $page .= '</head>';
   
   $page .= '<body>';

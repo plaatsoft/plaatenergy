@@ -31,7 +31,7 @@ $value = plaatenergy_post("value", "");
 
 $sql  = 'select id, token, value from config where readonly=0';
 $result = plaatenergy_db_query($sql);
-$step = 5;
+$step = 6;
 $max = round((plaatenergy_db_num_rows($result)/$step),0)-1;
 	
 /*

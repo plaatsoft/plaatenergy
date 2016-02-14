@@ -19,4 +19,6 @@ UPDATE config SET value="0.7" WHERE token='database_version';
 INSERT INTO config (`id`, `token`, `value`, `date`, readonly) VALUES (NULL, 'slide_show_on', 'false', SYSDATE(), 0);
 INSERT INTO config (`id`, `token`, `value`, `date`, readonly) VALUES (NULL, 'slide_show_page_delay', '10', SYSDATE(), 0);
 
+ALTER TABLE `config` DROP `description`;
+
 
