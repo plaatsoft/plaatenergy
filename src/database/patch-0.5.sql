@@ -44,7 +44,7 @@ INSERT INTO config2 (`id`, `token`, `value`, `date`, readonly) VALUES (NULL, 'ga
 
 INSERT INTO config2 (`id`, `token`, `value`, `date`, readonly) VALUES (NULL, 'energy_meter_present', 'true', SYSDATE(), 0);
 INSERT INTO config2 (`id`, `token`, `value`, `date`, readonly) VALUES (NULL, 'solar_meter_present', 'true', SYSDATE(),  0);
-INSERT INTO config2 (`id`, `token`, `value`, `date`, readonly) VALUES (NULL, 'weather_station_present', 'true', SYSDATE(), , 0);
+INSERT INTO config2 (`id`, `token`, `value`, `date`, readonly) VALUES (NULL, 'weather_station_present', 'true', SYSDATE(), 0);
 
 INSERT INTO config2 (`id`, `token`, `value`, `date`, readonly) VALUES (NULL, 'solar_meter_ip', '127.0.0.1', SYSDATE(),  0);
 INSERT INTO config2 (`id`, `token`, `value`, `date`, readonly) VALUES (NULL, 'solar_meter_port', '8899', SYSDATE(), 0);
