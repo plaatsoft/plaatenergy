@@ -125,16 +125,16 @@ $lang['LINK_RELEASE_NOTES'] = i('align-left') . 'Release Notes';
 $lang['LINK_ABOUT'] = i('users') . 'Over';
 $lang['LINK_DONATE'] = i('money') . 'Donatie';
 $lang['LINK_REPORT'] = i('archive') . 'Rapportage';
-$lang['LINK_GUI'] = i('table') . 'Realtime Info';
+$lang['LINK_GUI'] = i('table') . 'Realtime Dashboard';
 
-$lang['ENERGY_METER_CONNECTION_DOWN'] = i('times') . 'Geen recente energie meting ontvangen';
-$lang['ENERGY_METER_CONNECTION_UP'] = i('check') . 'Energie meter verbinding is goed';
+$lang['ENERGY_METER_CONNECTION_DOWN'] = i('times') . 'Geen energie meting recentelijk ontvangen';
+$lang['ENERGY_METER_CONNECTION_UP'] = i('check') . 'Energie meter verbinding goed';
 
-$lang['SOLAR_METER_CONNECTION_DOWN'] = i('times') . 'Geen recente solar meting ontvangen';
-$lang['SOLAR_METER_CONNECTION_UP'] = i('check') . 'Solar meter verbinding is goed';
+$lang['SOLAR_METER_CONNECTION_DOWN'] = i('times') . 'Geen solar meting recentelijk ontvangen';
+$lang['SOLAR_METER_CONNECTION_UP'] = i('check') . 'Solar meter verbinding goed';
 
-$lang['WEATHER_METER_CONNECTION_DOWN'] = i('times') . 'Geen recente weer meting ontvangen';
-$lang['WEATHER_METER_CONNECTION_UP'] = i('check') . 'Weerstation verbinding is goed';
+$lang['WEATHER_METER_CONNECTION_DOWN'] = i('times') . 'Geen weer meting recentelijk ontvangen';
+$lang['WEATHER_METER_CONNECTION_UP'] = i('check') . 'Weerstation verbinding goed';
 
 /*
 ** ------------------
@@ -143,7 +143,7 @@ $lang['WEATHER_METER_CONNECTION_UP'] = i('check') . 'Weerstation verbinding is g
 */
 
 $lang['TITLE_YEARS_IN_KWH'] = 'Energie Meter - Afgenomen Elektriciteit %s - %s';
-$lang['TITLE_YEARS_IN_GAS'] = 'Gas Meter - Afgenomen Gas %s - %s';
+$lang['TITLE_YEARS_IN_GAS'] = 'Energie Meter - Afgenomen Gas %s - %s';
 $lang['TITLE_YEARS_OUT_KWH'] = 'Solar Meter - Geleverde Elektriciteit %s - %s';
 
 $lang['AVERAGE_PER_YEAR_KWH'] = 'Gemiddeld per jaar %s kWh [Totaal = %s kWh]';
@@ -157,7 +157,7 @@ $lang['AVERAGE_PER_YEAR_EURO'] = 'Gemiddeld per jaar %s euro [Totaal = %s euro]'
 */
 
 $lang['TITLE_YEAR_IN_KWH'] = 'Energie Meter - Afgenomen Elektriciteit - %s';
-$lang['TITLE_YEAR_IN_M3'] = 'Gas Meter - Afgenomen Gas - %s';
+$lang['TITLE_YEAR_IN_M3'] = 'Energie Meter - Afgenomen Gas - %s';
 $lang['TITLE_YEAR_OUT_KWH'] = 'Solar Meter - Geleverde Elektriciteit - %s';
 
 $lang['AVERAGE_PER_MONTH_KWH'] = 'Gemiddeld per maand %s kWh [Totaal = %s kWh]';
@@ -171,7 +171,7 @@ $lang['AVERAGE_PER_MONTH_EURO'] = 'Gemiddeld per maand %s euro [Totaal = %s euro
 */
 
 $lang['TITLE_MONTH_IN_KWH'] = 'Energie Meter - Afgenomen Elektriciteit %s-%s';
-$lang['TITLE_MONTH_IN_GAS'] = 'Gas Meter - Afgenomen Gas %s-%s';
+$lang['TITLE_MONTH_IN_GAS'] = 'Energie Meter - Afgenomen Gas %s-%s';
 $lang['TITLE_MONTH_OUT_KWH'] = 'Solar Meter - Geleverde Elektriciteit %s-%s';
 $lang['TITLE_MONTH_PEAK_OUT_KWH'] = 'Solar Meter - Geleverde Piek vermogen %s-%s';
 
@@ -191,7 +191,7 @@ $lang['TITLE_DAY_PRESSURE'] = 'Weerstation Meter - Luchtdruk - %s %s-%s-%s';
 $lang['TITLE_DAY_HUMIDITY'] = 'Weerstation Meter - Lucht Vochtigheid - %s %s-%s-%s';
 
 $lang['TITLE_DAY_IN_KWH'] = 'Energie Meter - Afgenomen Elektriciteit - %s %s-%s-%s';
-$lang['TITLE_DAY_IN_GAS'] = 'Gas Meter - Afgenomen Gas - %s %s-%s-%s';
+$lang['TITLE_DAY_IN_GAS'] = 'Energie Meter - Afgenomen Gas - %s %s-%s-%s';
 $lang['TITLE_DAY_OUT_KWH'] = 'Solar Meter - Geleverde Elektriciteit - %s %s-%s-%s';
 
 $lang['TOTAL_PER_DAY_KWH'] = 'Totaal = %s kWh';
@@ -272,9 +272,9 @@ $lang['LABEL_DESCRIPTION'] = 'Omschrijving';
 $lang['database_version'] = 'Huidige database versie';
 $lang['request_counter'] = 'Pagina request counter';
 
-$lang['energy_meter_reading_low'] = 'Energie meter meterstand - laag tarief (kwh)';
-$lang['energy_meter_reading_normal'] = 'Energie meter meterstand - normaal tarief (kwh)';
-$lang['gas_meter_reading'] = 'Gas meter meterstand (m&sup3;)';
+$lang['energy_meter_reading_low'] = 'Start energie meterstand - laag tarief (kwh)';
+$lang['energy_meter_reading_normal'] = 'Start energie meterstand - normaal tarief (kwh)';
+$lang['gas_meter_reading'] = 'Start gas meterstand (m&sup3;)';
 
 $lang['energy_price'] = 'Energie prijs per kwh';
 $lang['gas_price' ] = 'Gas prijs per m&sup3;';
