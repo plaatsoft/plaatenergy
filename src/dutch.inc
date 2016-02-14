@@ -249,11 +249,13 @@ lplaat (Tester)<br/>';
 */
 
 $lang['DONATE_TITLE'] = 'Donate';
-$lang['DONATE_CONTENT'] = 'PlaatEnergy software kan gratis gebruikt worden. Als u uw waardering wil uiten voor de tijd en de middelen die de 
+$lang['DONATE_CONTENT'] = 'PlaatEnergy software kan gratis gebruikt worden.<br/>
+Als u uw waardering wil uiten voor de tijd en de middelen die de <br/>
 auteurs besteed hebben aan de ontwikkeling accepteren wij een donatie.<br/><br/>
 
- U kunt een donatie online overmaken met een creditcard of PayPal-account.
-Klik hiervoor op het onderstaande logo en voer het bedrag in wat u wil doneren. Uw transactie zal verwerkt worden door PayPal, een vertrouwde naam 
+U kunt een donatie online overmaken met een creditcard of PayPal-account.<br/>
+Klik hiervoor op het onderstaande logo en voer het bedrag in wat u wil doneren.<br/>
+Uw transactie zal verwerkt worden door PayPal, een vertrouwde naam<br/>
 in de beveiligde online transacties.';
 
 /*
@@ -287,6 +289,9 @@ $lang['weather_station_present'] = 'Weerstation aanwezig ("true" or "false")';
 $lang['solar_meter_ip' ] = 'Solar meter TCP/IP adres';
 $lang['solar_meter_port'] = 'Solar meter TCP poort nummer';
 $lang['solar_meter_serial_number'] = 'Solar meter serial nummer';
+
+$lang['slide_show_on'] = 'Activeert automatisch slide show als gebruiker inactief is';
+$lang['slide_show_page_delay'] = 'Slide show pagina vertraging (seconden)';
 
 
 /*

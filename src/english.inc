@@ -233,8 +233,8 @@ $lang['ABOUT_TITLE'] = 'About';
 $lang['ABOUT_CONTENT'] = 'PlaatEnergy is created by PlaatSoft.';
 
 $lang['DISCLAIMER_TITLE'] = 'Disclaimer';
-$lang['DISCLAIMER_CONTENT'] = 'The program is provided AS IT IS with NO WARRANTY OF ANY KIND, INCLUDING THE WARRANTY OF 
-DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.<br/>';
+$lang['DISCLAIMER_CONTENT'] = 'The program is provided AS IT IS with NO WARRANTY OF ANY KIND,</br>  
+INCLUDING THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.<br/>';
 
 $lang['CREDITS_TITLE'] = 'Credits';
 $lang['CREDITS_CONTENT'] = 'The following people helped creating PlaatEnergy:<br/><br/>
@@ -249,11 +249,11 @@ lplaat (Tester)';
 */
 
 $lang['DONATE_TITLE'] = 'Donate';
-$lang['DONATE_CONTENT'] = 'PlaatEnergy software may be used free of charge, but if you wish to express your appreciation 
-for the time and resources the author spent developing and supporting it over the years, we do accept and appreciate donations.
+$lang['DONATE_CONTENT'] = 'PlaatEnergy software may be used free of charge, <br/>but if you wish to express your appreciation<br/>
+for the time and resources the author spent developing and supporting <br/>it over the years, we do accept and appreciate donations.
 <br/><br/>
-To make a donation online using your credit card, or PayPal account, click below and enter the amount 
-you would like to contribute. Your credit card will be processed by PayPal, a trusted name in secure online transactions.';
+To make a donation online using your credit card, or PayPal account,<br/>click below and enter the amount 
+you would like to contribute.<br/>Your credit card will be processed by PayPal, a trusted name in secure online transactions.';
 
 /*
 ** ------------------
@@ -287,6 +287,9 @@ $lang['weather_station_present'] = 'Weather Station device present ("true" or "f
 $lang['solar_meter_ip' ] = 'Solar meter TCP/IP address';
 $lang['solar_meter_port'] = 'Solar meter TCP port number';
 $lang['solar_meter_serial_number'] = 'Solar meter serial number';
+
+$lang['slide_show_on'] = 'Activate slide show if user is inactive';
+$lang['slide_show_page_delay'] = 'Slide show page delay (seconds)';
 
 /*
 ** ------------------
