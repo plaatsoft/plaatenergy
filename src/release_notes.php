@@ -35,7 +35,7 @@ $note[7] = '<div class="subparagraph">Version 0.7 (14-02-2016)</div>
 <li>General: Improve query report output.</li>
 <li>General: Add day name to day report title.</li>
 <li>General: Improve main menu for disabled devices.</li>
-<li>General: Added slide show mode. Day reports automatic cycle without human interaction.</li>
+<li>General: Added slide show mode. Year reports automatic cycle without human interaction.</li>
 <li>Bugfix: New version check is now working correct.</li>
 <li>Bugfix: Month and Day navigation is now working correct.</li>
 </ul>
