@@ -34,14 +34,18 @@ function plaatenergy_day_out_energy_page() {
 	global $eid;
 
 	global $date; 
-	global $in_forecast;
+	global $out_forecast;
 	global $graph_width;
 	global $graph_height;
+
+        $energy_delivery_forecast = plaatenergy_db_get_config_item('energy_delivery_forecast');
 
         $prev_date = plaatenergy_prev_day($date);
         $next_date = plaatenergy_next_day($date);
 		
 	list($year, $month, $day) = explode("-", $date);	
+        $day = ltrim($day ,'0');
+        $month = ltrim($month ,'0');
 	$current_date=mktime(0, 0, 0, $month, $day, $year);  
 	
 	$i=0;
@@ -99,12 +103,14 @@ function plaatenergy_day_out_energy_page() {
   
 			if ($timestamp>date("Y-m-d H:i:s")) {
 				$value=0;
-			} else {
-				$total = round($value,2);  
-			}
+			} 
 
 			if ( isset($row->etotal)) {
 				$value= $row->etotal-$solar_prev;
+			}
+
+ 			if ($value>$total) {
+			  $total=$value;
 			}
   
 			if (strlen($data)>0) {
@@ -169,11 +175,14 @@ function plaatenergy_day_out_energy_page() {
 		</script>';
 	}
     
+        $forecast = ($out_forecast[$month] * $energy_delivery_forecast) / cal_days_in_month (CAL_GREGORIAN, $month, $year);
+;
+               
 	$page .= '<h1>'.t('TITLE_DAY_OUT_KWH', plaatenergy_dayofweek($date),$day, $month, $year).'</h1>';
 	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
 
 	$page .= '<div class="remark">';	
-	$page .= t('TOTAL_PER_DAY_KWH', $total);
+	$page .= t('TOTAL_PER_DAY_KWH', round($total,2), round($forecast,2));
 	$page .= '</div>';
 
 	$page .= plaatenergy_navigation_day();

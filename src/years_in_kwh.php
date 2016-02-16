@@ -37,7 +37,7 @@ function plaatenergy_years_in_energy_page() {
 	global $in_forecast;
 	global $graph_width;
 	global $graph_height;
-	
+
 	$prev_date = plaatenergy_prev_year($date);
 	$next_date = plaatenergy_next_year($date);
 	

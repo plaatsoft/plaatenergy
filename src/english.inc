@@ -193,8 +193,8 @@ $lang['TITLE_DAY_IN_KWH'] = 'Energy Meter - Used Electricity - %s %s-%s-%s';
 $lang['TITLE_DAY_IN_GAS'] = 'Gas Meter - Used Gas - %s %s-%s-%s';
 $lang['TITLE_DAY_OUT_KWH'] = 'Solar Meter - Delivered Electricity - %s %s-%s-%s';
 
-$lang['TOTAL_PER_DAY_KWH'] = 'Total = %s kWh';
-$lang['TOTAL_PER_DAY_M3'] = 'Total = %s m&sup3;';
+$lang['TOTAL_PER_DAY_KWH'] = 'Total today = %s kWh [Forecast = %s kWh]';
+$lang['TOTAL_PER_DAY_M3'] = 'Total today = %s m&sup3; [Forecast = %s m&sup3;]';
 
 $lang['MIN_MAX_TEMPERATURE'] = 'Minimum temperature = %s &deg;C | Maximum temperature = %s &deg;C';
 $lang['MIN_MAX_HUMIDITY'] = 'Minimum humidity = %s % | Maximum humidity = %s %';

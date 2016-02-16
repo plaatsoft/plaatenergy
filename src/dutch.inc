@@ -194,8 +194,8 @@ $lang['TITLE_DAY_IN_KWH'] = 'Energie Meter - Afgenomen Elektriciteit - %s %s-%s-
 $lang['TITLE_DAY_IN_GAS'] = 'Energie Meter - Afgenomen Gas - %s %s-%s-%s';
 $lang['TITLE_DAY_OUT_KWH'] = 'Solar Meter - Geleverde Elektriciteit - %s %s-%s-%s';
 
-$lang['TOTAL_PER_DAY_KWH'] = 'Totaal = %s kWh';
-$lang['TOTAL_PER_DAY_M3'] = 'Totaal = %s m&sup3;';
+$lang['TOTAL_PER_DAY_KWH'] = 'Totaal vandaag = %s kWh [Prognose = %s kWh]';
+$lang['TOTAL_PER_DAY_M3'] = 'Totaal vandaag = %s m&sup3; [Prognose = %s m&sup3;]';
 
 $lang['MIN_MAX_TEMPERATURE'] = 'Minimale temperatuur = %s &deg;C | Maximale temperatuur = %s &deg;C';
 $lang['MIN_MAX_HUMIDITY'] = 'Minimale vochtigheid = %s % | Maximale vochtigheid = %s %';

@@ -34,7 +34,7 @@ function plaatenergy_day_in_gas_page() {
 	global $eid;
 
 	global $date; 
-	global $in_forecast;
+	global $gas_forecast;
 	global $graph_width;
 	global $graph_height;
 	
@@ -42,6 +42,9 @@ function plaatenergy_day_in_gas_page() {
 	$next_date = plaatenergy_next_day($date);
 	
 	list($year, $month, $day) = explode("-", $date);	
+        $day = ltrim($day ,'0');
+        $month = ltrim($month ,'0');
+
 	$current_date=mktime(0, 0, 0, $month, $day, $year);  
 	
 	$gas_price = plaatenergy_db_get_config_item('gas_price');
@@ -114,8 +117,10 @@ function plaatenergy_day_in_gas_page() {
 	$page .= '<h1>'.t('TITLE_DAY_IN_GAS', plaatenergy_dayofweek($date), $day, $month, $year).'</h1>';
 	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
 
+        $forecast = ($gas_forecast[$month] * $gas_use_forecast) / cal_days_in_month (CAL_GREGORIAN, $month, $year);
+
 	$page .= '<div class="remark">';
-	$page .= t('TOTAL_PER_DAY_M3', round($total,2));
+	$page .= t('TOTAL_PER_DAY_M3', round($total,2), round($forecast,2));
 	$page .= '</div>';
 		
 	$page .= plaatenergy_navigation_day();
