@@ -36,9 +36,6 @@ function plaatenergy_years_in_gas_page() {
 	global $date; 	
 	global $gas_forecast;
 	
-	global $graph_width;
-	global $graph_height;
-	
 	$prev_date = plaatenergy_prev_year($date);
 	$next_date = plaatenergy_next_year($date);
 	
@@ -150,8 +147,9 @@ function plaatenergy_years_in_gas_page() {
 		$page .= '<h1>'.t('TITLE_YEARS_IN_GAS', ($year-10), $year).'</h1>';
 	}
 	
-	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';	
-	$page .= '<div class="remark">';
+	
+        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_style').'"></div>';
+        $page .= '<div class="remark">';
 	
 	if ($count>0) {			 
 		if ($eid==EVENT_M3) {		

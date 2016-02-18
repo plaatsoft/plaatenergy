@@ -35,8 +35,6 @@ function plaatenergy_month_in_energy_page() {
 
 	global $date; 
 	global $in_forecast;
-	global $graph_width;
-	global $graph_height;
 		
 	$prev_date = plaatenergy_prev_month($date);
 	$next_date = plaatenergy_next_month($date);
@@ -151,7 +149,7 @@ function plaatenergy_month_in_energy_page() {
     </script>';
 
 	$page .= '<h1>'.t('TITLE_MONTH_IN_KWH', $month, $year).'</h1>';
-	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
+        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_style').'"></div>';
 
 	$page .= '<div class="remark">';
 	if ($count>0) {

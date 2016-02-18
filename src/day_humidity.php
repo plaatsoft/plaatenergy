@@ -31,10 +31,6 @@ function plaatenergy_day_humidity_page() {
 
    // input
 	global $pid;
-
-	global $graph_width;
-	global $graph_height;
-	
 	global $date;  
 		
 	list($year, $month, $day) = explode("-", $date);	
@@ -102,7 +98,7 @@ function plaatenergy_day_humidity_page() {
     </script>';
 	 
 	$page .= '<h1>'.t('TITLE_DAY_HUMIDITY', plaatenergy_dayofweek($date), $day, $month, $year).'</h1>';
-	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
+        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_style').'"></div>';
 		
 	$page .= '<div class="remark">';		
 	if ($found == 1) {

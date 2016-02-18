@@ -35,8 +35,6 @@ function plaatenergy_day_out_energy_page() {
 
 	global $date; 
 	global $out_forecast;
-	global $graph_width;
-	global $graph_height;
 
         $energy_delivery_forecast = plaatenergy_db_get_config_item('energy_delivery_forecast');
 
@@ -179,7 +177,7 @@ function plaatenergy_day_out_energy_page() {
 ;
                
 	$page .= '<h1>'.t('TITLE_DAY_OUT_KWH', plaatenergy_dayofweek($date),$day, $month, $year).'</h1>';
-	$page .= '<div id="chart_div" style="width: '.$graph_width.'; height: '.$graph_height.';"></div>';
+        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_style').'"></div>';
 
 	$page .= '<div class="remark">';	
 	$page .= t('TOTAL_PER_DAY_KWH', round($total,2), round($forecast,2));
