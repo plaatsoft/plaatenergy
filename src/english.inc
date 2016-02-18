@@ -290,6 +290,7 @@ $lang['solar_meter_serial_number'] = 'Solar meter serial number';
 
 $lang['slide_show_on'] = 'Activate slide show if user is inactive';
 $lang['slide_show_page_delay'] = 'Slide show page delay (seconds)';
+$lang['chart_legend'] = 'Chart legend [none|top|right]';
 
 /*
 ** ------------------

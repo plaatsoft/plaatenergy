@@ -16,7 +16,8 @@
 **  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
-/**
+/**atenergy_db_get_config_item('energy_price');
+
  * @file
  * @brief contain year in energy report
  */
@@ -136,7 +137,7 @@ function plaatenergy_year_in_energy_page() {
                                 data.addRows('.$json.');
 
                                 var options = {
-                                        legend: { position: "none" },
+                                        legend: { position: "'.plaatenergy_db_get_config_item('chart_legend').'", textStyle: {fontSize: 10} },
                                         pointSize: 2,
                                         pointShape: "circle",
                                         vAxis: {format: "decimal", title: ""},
@@ -160,7 +161,7 @@ function plaatenergy_year_in_energy_page() {
 			var options = {
 				bars: "vertical",
 				bar: {groupWidth: "90%"},
-				legend: { position: "none" },
+                                legend: { position: "'.plaatenergy_db_get_config_item('chart_legend').'", textStyle: {fontSize: 10} },
 				vAxis: {format: "decimal"},
 				isStacked:true,';
 				

@@ -51,7 +51,7 @@ $lang['USED_KWH']        = 'Afgenomen (kWh)';
 $lang['DELIVERED_KWH']   = 'Geleverd (kWh)'; 
 $lang['FORECAST_KWH']    = 'Prognose (kWh)'; 
 $lang['USED_M3']         = 'Afgenomen (m&sup3;)'; 
-$lang['FORECAST_M3']     = 'Prognose(m&sup3;)'; 
+$lang['FORECAST_M3']     = 'Prognose (m&sup3;)'; 
 $lang['PRESSURE']        = 'Luchtdruk (hPa)';
 $lang['TEMPERATURE']     = 'Temperatuur (&deg;C)';
 $lang['HUMIDITY']        = 'Luchtvochtigheid (%)';
@@ -292,7 +292,7 @@ $lang['solar_meter_serial_number'] = 'Solar meter serial nummer';
 
 $lang['slide_show_on'] = 'Activeert automatisch slide show als gebruiker inactief is';
 $lang['slide_show_page_delay'] = 'Slide show pagina vertraging (seconden)';
-
+$lang['chart_legend'] = 'Grafiek legenda options [none|right]';
 
 /*
 ** ------------------

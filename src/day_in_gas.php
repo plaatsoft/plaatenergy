@@ -103,7 +103,7 @@ function plaatenergy_day_in_gas_page() {
 
 			var options = {
 				bar: {groupWidth: "90%"},
-				legend: { position: "none" },
+          legend: { position: "'.plaatenergy_db_get_config_item('chart_legend').'", textStyle: {fontSize: 10} },
 				isStacked: true,
 				vAxis: {format: "decimal"},
 			};

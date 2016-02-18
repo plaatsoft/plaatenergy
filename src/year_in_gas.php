@@ -91,6 +91,7 @@ function plaatenergy_year_in_gas_page() {
 	}
 	
 	$page = '<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["bar"]});
       google.setOnLoadCallback(drawChart);
@@ -99,7 +100,7 @@ function plaatenergy_year_in_gas_page() {
        var options = {
           bars: "vertical",
           bar: {groupWidth: "90%"},
-          legend: { position: "none" },
+          legend: { position: "'.plaatenergy_db_get_config_item('chart_legend').'", textStyle: {fontSize: 10} },
           vAxis: {format: "decimal"}, ';
 			 
 	if ($eid==EVENT_M3) {
@@ -111,6 +112,7 @@ function plaatenergy_year_in_gas_page() {
 	$page .= ' };
 
         var data = google.visualization.arrayToDataTable('.$json.');
+
         var chart = new google.charts.Bar(document.getElementById("chart_div"));
         chart.draw(data, google.charts.Bar.convertOptions(options));
 

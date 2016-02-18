@@ -142,7 +142,7 @@ function plaatenergy_month_out_energy_page() {
        var options = {
           bars: "vertical",
           bar: {groupWidth: "90%"},
-          legend: { position: "none" },
+          legend: { position: "'.plaatenergy_db_get_config_item('chart_legend').'", textStyle: {fontSize: 10} },
           vAxis: {format: "decimal" },
 			 isStacked: false,';
 			 

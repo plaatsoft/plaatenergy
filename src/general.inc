@@ -211,7 +211,7 @@ function general_header() {
   $page .= '<link rel="stylesheet" type="text/css" href="./css/font-awesome.min.css">';
 
   $slide_show_on = plaatenergy_db_get_config_item('slide_show_on');
-  if (($slide_show_on=="true") && ($pid!=PAGE_SETTING_LIST)) {
+  if (($slide_show_on=="true") && ($pid!=PAGE_SETTING_LIST) && ($pid!=PAGE_SETTING_EDIT)) {
 
      $slide_show_page_delay = plaatenergy_db_get_config_item('slide_show_page_delay')*1000;
 

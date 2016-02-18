@@ -92,7 +92,7 @@ function plaatenergy_day_pressure_page() {
         var options = {
           bars: "vertical",
           bar: {groupWidth: "90%"},
-          legend: { position: "none" },
+          legend: { position: "'.plaatenergy_db_get_config_item('chart_legend').'", textStyle: {fontSize: 10} },
           vAxis: {format: "decimal", baseline:950},
           animation: { duration: 3000, easing: "in", startup: true },
         };
