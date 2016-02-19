@@ -194,7 +194,7 @@ function plaatenergy_db_execute_sql_file($version) {
     }
 
     //convert to array
-    $commands = explode(";", $commands);
+    $commands = explode(";\n", $commands);
 
     //run commands
     $total = $success = 0;
