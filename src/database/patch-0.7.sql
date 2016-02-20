@@ -27,6 +27,6 @@ UPDATE config SET options="true,false" WHERE token="energy_meter_present";
 UPDATE config SET options="true,false" WHERE token="solar_meter_present"; 
 UPDATE config SET options="true,false" WHERE token="weather_meter_present"; 
 UPDATE config SET options="true,false" WHERE token="slide_show_on"; 
-UPDATE config SET options="right,none" WHERE token="chart_dimensions"; 
+UPDATE config SET options="right,none" WHERE token="chart_legend"; 
 
 

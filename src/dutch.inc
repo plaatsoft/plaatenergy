@@ -292,7 +292,7 @@ $lang['solar_meter_serial_number'] = 'Solar meter serial nummer';
 
 $lang['slide_show_on'] = 'Activeert automatisch slide show als gebruiker inactief is';
 $lang['slide_show_page_delay'] = 'Slide show pagina vertraging (seconden)';
-$lang['chart_legend'] = 'Grafiek legenda options';
+$lang['chart_legend'] = 'Grafiek legenda option';
 $lang['chart_dimensions'] = 'Grafiek grootte in pixels';
 
 /*

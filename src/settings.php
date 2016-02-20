@@ -46,7 +46,7 @@ function plaatenergy_setting_save_event() {
 	global $id;
 	global $value;
 
-	$sql  = 'update config set value="'.$value.'" where id='.$id;		
+	$sql  = 'update config set value="'.$value.'", date=SYSDATE() where id='.$id;		
 
 	plaatenergy_db_query($sql);
 	
@@ -101,12 +101,16 @@ function plaatenergy_setting_edit_page() {
 	$page .= '<br/>';
 	
 	if (strlen($row->options)>0) {	   
-	    $options = explode(",", $row->options);		
-		$page .= '<select name="value" value="'.$row->value.'">';		
+		$options = explode(",", $row->options);		
+		$page .= '<select name="value" >';		
 		foreach ($options as $option) {
-           $page .= '<option value="'.$option.'">'.$option.'</option>';
+			if ($row->value==$option) {
+				$page .= '<option selected="selected" value="'.$option.'">'.$option.'</option>';
+ 			} else {
+				$page .= '<option value="'.$option.'">'.$option.'</option>';
+			}
 		}
-		$page .= '</select>';
+	$page .= '</select>';
 
     } else {	   
 	   $page .= '<input type="text" name="value" value="'.$row->value.'" size="40" />';
