@@ -102,13 +102,13 @@ while stack_teller < len(stack):
    stack_teller = stack_teller +1
 
 print "==================";
-print "Dal = {0:.2f}".format(dal);
-print "Normal = {0:.2f}".format(piek);
-print "DalTerug = {0:.2f}".format(dalterug);
-print "NormalTerug = {0:.2f}".format(piekterug);
-print "Vermogen = {0:.2f}".format(vermogen);
-print "VermogenTerug = {0:.2f}".format(vermogenterug);
-print "Gas = {0:.2f}".format(gas);
+print "Dal meterstand = {0:.2f}".format(dal);
+print "Normal meterstand = {0:.2f}".format(piek);
+print "DalTerug meterstand = {0:.2f}".format(dalterug);
+print "NormalTerug meterstand = {0:.2f}".format(piekterug);
+print "Vermogen (actueel) = {0:.2f}".format(vermogen);
+print "VermogenTerug (actueel) = {0:.2f}".format(vermogenterug);
+print "Gas meterstand = {0:.2f}".format(gas);
 print "==================";
 
 print 'End analyse';
