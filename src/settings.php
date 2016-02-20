@@ -65,14 +65,14 @@ function plaatenergy_setting_backup_event() {
 	/* Create new database backup file */
 	$filename = 'backup/plaatenergy-'.date("Ymd").'.sql';
 
-        /* Remove old file if it exists */
-        @unlink($filename.'.gz');
+    /* Remove old file if it exists */
+    @unlink($filename.'.gz');
 
         /* Make mysql backup */	
 	$command = 'mysqldump --user='.$dbuser.' --password='.$dbpass.' --host='.$dbhost.' '.$dbname.' > '.$filename;
 	system($command);
 	
-        /* Zip database dump file */	
+    /* Zip database dump file */	
 	$command = 'gzip '.$filename;
 	system($command);
 }
@@ -88,7 +88,7 @@ function plaatenergy_setting_edit_page() {
    // input
    global $id;
 			
-	$sql  = 'select token, value from config where id='.$id;
+	$sql  = 'select token, value, options from config where id='.$id;
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 
@@ -99,7 +99,18 @@ function plaatenergy_setting_edit_page() {
 	$page .= '<br/>';
 	$page .= '<label>'.t($row->token).'</label>';
 	$page .= '<br/>';
-	$page .= '<input type="text" name="value" value="'.$row->value.'" size="40" />';
+	
+	if (strlen($row->options)>0) {	   
+	    $options = explode(",", $row->options);		
+		$page .= '<select name="value" value="'.$row->value.'">';		
+		foreach ($options as $option) {
+           $page .= '<option value="'.$option.'">'.$option.'</option>';
+		}
+		$page .= '</select>';
+
+    } else {	   
+	   $page .= '<input type="text" name="value" value="'.$row->value.'" size="40" />';
+	}
 	$page .= '<br/>';
 
 	// -------------------------------------

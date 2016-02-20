@@ -177,7 +177,7 @@ function plaatenergy_day_out_energy_page() {
 ;
                
 	$page .= '<h1>'.t('TITLE_DAY_OUT_KWH', plaatenergy_dayofweek($date),$day, $month, $year).'</h1>';
-        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_style').'"></div>';
+        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions').'"></div>';
 
 	$page .= '<div class="remark">';	
 	$page .= t('TOTAL_PER_DAY_KWH', round($total,2), round($forecast,2));

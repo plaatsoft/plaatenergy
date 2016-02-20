@@ -99,7 +99,7 @@ function plaatenergy_day_temperature_page() {
     </script>';
      
 	$page .= '<h1>'.t('TITLE_DAY_TEMPERATURE', plaatenergy_dayofweek($date),$day, $month, $year).'</h1>';
-        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_style').'"></div>';
+        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions').'"></div>';
 
 	$page .= '<div class="remark">';		
 	if ($found == 1) {
