@@ -35,8 +35,9 @@ $note[7] = '<div class="subparagraph">Version 0.7 (20-02-2016)</div>
 <li>General: Add day name to day report title.</li>
 <li>General: Improve main menu for disabled devices.</li>
 <li>General: Added slide show mode. Year reports automatic cycle without human interaction.</li>
-<li>General: Added option to chart legend and chart dimenision option.</li>
-<li>General: Setting page support now combbox selection to prevent invalid input.</li>
+<li>General: Added option to enable chart legend.</li>
+<li>General: Added option to set chart dimenision.</li>
+<li>General: Setting page support now combobox selection to prevent invalid input.</li>
 <li>Bugfix: New version check is now working correct.</li>
 <li>Bugfix: Month and Day navigation is now working correct.</li>
 </ul>
