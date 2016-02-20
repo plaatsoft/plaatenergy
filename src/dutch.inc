@@ -282,9 +282,9 @@ $lang['energy_use_forecast'] = 'Jaar voorspelling energie verbruik (kWh)';
 $lang['energy_delivery_forecast'] = 'Jaar voorspelling energie teruglevering (kWh)';
 $lang['gas_use_forecast'] = 'Jaar voorspelling gas verbruik (m&sup3;)';
 
-$lang['energy_meter_present'] = 'Energie meter aanwezig ("true" or "false")';
-$lang['solar_meter_present'] = 'Solar meter aanwezig ("true" or "false")';
-$lang['weather_station_present'] = 'Weerstation aanwezig ("true" or "false")';
+$lang['energy_meter_present'] = 'Energie meter aanwezig';
+$lang['solar_meter_present'] = 'Solar meter aanwezig';
+$lang['weather_station_present'] = 'Weerstation aanwezig';
 
 $lang['solar_meter_ip' ] = 'Solar meter TCP/IP adres';
 $lang['solar_meter_port'] = 'Solar meter TCP poort nummer';
@@ -292,8 +292,8 @@ $lang['solar_meter_serial_number'] = 'Solar meter serial nummer';
 
 $lang['slide_show_on'] = 'Activeert automatisch slide show als gebruiker inactief is';
 $lang['slide_show_page_delay'] = 'Slide show pagina vertraging (seconden)';
-$lang['chart_legend'] = 'Grafiek legenda options [none|right]';
-$lang['chart_style'] = 'Grafiek stijl (bijvoorbeeld grootte)';
+$lang['chart_legend'] = 'Grafiek legenda options';
+$lang['chart_dimensions'] = 'Grafiek grootte in pixels';
 
 /*
 ** ------------------

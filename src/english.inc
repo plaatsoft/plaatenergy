@@ -280,9 +280,9 @@ $lang['energy_use_forecast'] = 'Energy use annual forecast (kWh)';
 $lang['energy_delivery_forecast'] = 'Energy delivery annual forecast (kWh)';
 $lang['gas_use_forecast'] = 'Gas use annual forecast (m&sup3;)';
 
-$lang['energy_meter_present'] = 'Energy meter device present ("true" or "false")';
-$lang['solar_meter_present'] = 'Solar meter device present ("true" or "false")';
-$lang['weather_station_present'] = 'Weather Station device present ("true" or "false")';
+$lang['energy_meter_present'] = 'Energy meter device present';
+$lang['solar_meter_present'] = 'Solar meter device present';
+$lang['weather_station_present'] = 'Weather Station device present';
 
 $lang['solar_meter_ip' ] = 'Solar meter TCP/IP address';
 $lang['solar_meter_port'] = 'Solar meter TCP port number';
@@ -290,8 +290,8 @@ $lang['solar_meter_serial_number'] = 'Solar meter serial number';
 
 $lang['slide_show_on'] = 'Activate slide show if user is inactive';
 $lang['slide_show_page_delay'] = 'Slide show page delay (seconds)';
-$lang['chart_legend'] = 'Chart legend [none|right]';
-$lang['chart_style'] = 'Chart style (for example dimensions)';
+$lang['chart_legend'] = 'Chart legend options';
+$lang['chart_dimensions'] = 'Chart dimensions in pixels';
 
 /*
 ** ------------------
