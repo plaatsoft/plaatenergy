@@ -26,7 +26,6 @@ import time
 import csv 
 import _mysql
 from time import strftime
-from sense_hat import SenseHat
 
 p1_telegram  = False
 p1_timestamp = ""

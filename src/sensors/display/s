@@ -1,1 +1,0 @@
-sudo python display.py
