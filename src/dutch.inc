@@ -276,7 +276,7 @@ $lang['meter_reading_used_low'] = 'Start energie meterstand - afgenomen laag (kw
 $lang['meter_reading_used_normal'] = 'Start energie meterstand - afgenomen normaal (kwh)';
 $lang['meter_reading_delivered_low'] = 'Start energie meterstand - geleverd laag (kwh)';
 $lang['meter_reading_delivered_normal'] = 'Start energie meterstand - geleverd normaal (kwh)';
-$lang['energy_meter_vendor'] = 'Energy meter producent';
+$lang['energy_meter_vendor'] = 'Energie meter producent';
 $lang['meter_reading_used_gas'] = 'Start gas meterstand (m&sup3;)';
 
 $lang['energy_price'] = 'Energie prijs per kwh';
