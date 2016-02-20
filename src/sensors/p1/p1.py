@@ -40,9 +40,9 @@ ser.timeout  = 20
 
 serial_max_lines = 26
 
-# -------------------------------------
-# DO NOT CHANGE ANTHING BELOW THIS LINE
-# -------------------------------------
+# ---------------------------------
+# DO NOT CHANGE ANYTHING BELOW HERE
+# ---------------------------------
 
 p1_telegram  = False
 p1_log       = True

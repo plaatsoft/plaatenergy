@@ -270,9 +270,12 @@ $lang['LABEL_DESCRIPTION'] = 'Description';
 $lang['database_version'] = 'Current database version';
 $lang['request_counter'] = 'Page request counter';
 
-$lang['energy_meter_reading_low'] = 'Initial energy meter reading - low tariff (kwh)';
-$lang['energy_meter_reading_normal'] = 'Iinitial energy meter reading - normal tariff (kwh)';
-$lang['gas_meter_reading'] = 'Initial gas meter reading (m&sup3;)';
+$lang['meter_reading_used_low'] = 'Initial energy meter reading - used low (kwh)';
+$lang['meter_reading_used_normal'] = 'Initial energy meter reading - used normal (kwh)';
+$lang['meter_reading_delivered_low'] = 'Initial energy meter reading - delivered low (kwh)';
+$lang['meter_reading_delivered_normal'] = 'Initial energy meter reading - delivered normal (kwh)';
+$lang['energy_meter_vendor'] = 'Energy meter vendor';
+$lang['meter_reading_used_gas'] = 'Initial gas meter reading (m&sup3;)';
 
 $lang['energy_price'] = 'Energy price per kwh';
 $lang['gas_price' ] = 'Gas price per m&sup3;';

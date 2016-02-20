@@ -294,15 +294,17 @@ function plaatenergy_db_process($type) {
   global $prev_month;
   global $prev_day;
 
-  $energy_meter_reading_low = plaatenergy_db_get_config_item('energy_meter_reading_low');
-  $energy_meter_reading_normal = plaatenergy_db_get_config_item('energy_meter_reading_normal');
-  $gas_meter_reading = plaatenergy_db_get_config_item('gas_meter_reading');
+  $meter_reading_used_low = plaatenergy_db_get_config_item('meter_reading_used_low');
+  $meter_reading_used_normal = plaatenergy_db_get_config_item('meter_reading_used_normal');
+  $meter_reading_delivered_low = plaatenergy_db_get_config_item('meter_reading_delivered_low');
+  $meter_reading_delivered_normal = plaatenergy_db_get_config_item('meter_reading_delivered_normal');
+  $meter_reading_used_gas = plaatenergy_db_get_config_item('meter_reading_gas');
 
-  $dal = $energy_meter_reading_low;
-  $piek = $energy_meter_reading_normal;
-  $gas = $gas_meter_reading;
-  $dalterug = 0;
-  $piekterug = 0;
+  $dal = $meter_reading_used_low;
+  $piek = $meter_reading_used_normal;
+  $gas = $meter_reading_used_gas;
+  $dalterug = $meter_reading_delivered_low;
+  $piekterug = $meter_reading_delivered_normal;
   $etotal = 0;
   $round = 3;
 

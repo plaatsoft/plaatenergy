@@ -50,10 +50,10 @@ function plaatenergy_day_in_energy_page() {
 	$energy_price = plaatenergy_db_get_config_item('energy_price');
 	$energy_use_forecast = plaatenergy_db_get_config_item('energy_use_forecast');
 	
-	$dal_prev = plaatenergy_db_get_config_item('energy_meter_reading_low');
-	$piek_prev = plaatenergy_db_get_config_item('energy_meter_reading_normal');
-	$dalterug_prev = 0;
-	$piekterug_prev = 0;
+	$dal_prev = plaatenergy_db_get_config_item('meter_reading_used_low');
+	$piek_prev = plaatenergy_db_get_config_item('meter_reading_used_normal');
+	$dalterug_prev = plaatenergy_db_get_config_item('meter_reading_delivered_low');
+	$piekterug_prev = plaatenergy_db_get_config_item('meter_reading_delivered_normal');
 	$solar_prev=0;
 	
 	$dal_value=0;

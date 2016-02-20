@@ -38,6 +38,7 @@ $note[7] = '<div class="subparagraph">Version 0.7 (20-02-2016)</div>
 <li>General: Added option to enable chart legend.</li>
 <li>General: Added option to set chart dimenision.</li>
 <li>General: Setting page support now combobox selection to prevent invalid input.</li>
+<li>General: Add support for Kampstrup and landis energy meters.</li>
 <li>Bugfix: New version check is now working correct.</li>
 <li>Bugfix: Month and Day navigation is now working correct.</li>
 </ul>

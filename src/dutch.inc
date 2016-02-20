@@ -272,9 +272,12 @@ $lang['LABEL_DESCRIPTION'] = 'Omschrijving';
 $lang['database_version'] = 'Huidige database versie';
 $lang['request_counter'] = 'Pagina request counter';
 
-$lang['energy_meter_reading_low'] = 'Start energie meterstand - laag tarief (kwh)';
-$lang['energy_meter_reading_normal'] = 'Start energie meterstand - normaal tarief (kwh)';
-$lang['gas_meter_reading'] = 'Start gas meterstand (m&sup3;)';
+$lang['meter_reading_used_low'] = 'Start energie meterstand - afgenomen laag (kwh)';
+$lang['meter_reading_used_normal'] = 'Start energie meterstand - afgenomen normaal (kwh)';
+$lang['meter_reading_delivered_low'] = 'Start energie meterstand - geleverd laag (kwh)';
+$lang['meter_reading_delivered_normal'] = 'Start energie meterstand - geleverd normaal (kwh)';
+$lang['energy_meter_vendor'] = 'Energy meter producent';
+$lang['meter_reading_used_gas'] = 'Start gas meterstand (m&sup3;)';
 
 $lang['energy_price'] = 'Energie prijs per kwh';
 $lang['gas_price' ] = 'Gas prijs per m&sup3;';

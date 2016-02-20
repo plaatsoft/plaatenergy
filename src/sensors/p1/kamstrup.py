@@ -24,64 +24,70 @@ import datetime
 import locale
 import time
 import csv 
+import _mysql
 from time import strftime
 
-#Set COM port config
-ser          = serial.Serial()
-
-# Kamstrup & Landis meter settings
-#ser.baudrate = 9600
-#ser.bytesize = serial.SEVENBITS
-#ser.parity   = serial.PARITY_EVEN
-#ser.stopbits = serial.STOPBITS_ONE
-#ser.xonxoff  = 0
-#ser.rtscts   = 0
-#serial_max_lines = 12 
-
-# Kamstrup & Landis meter settings
-#ser.baudrate = 9600
-#ser.bytesize = serial.SEVENBITS
-#ser.parity   = serial.PARITY_EVEN
-#ser.stopbits = serial.STOPBITS_ONE
-#ser.xonxoff  = 0
-#ser.rtscts   = 0
-#serial_max_lines = 26
-
-# Kaifa meter settings
-ser.baudrate = 115200
-ser.bytesize = serial.EIGHTBITS
-ser.parity   = serial.PARITY_NONE
+ser.baudrate = 9600
+ser.bytesize = serial.SEVENBITS
+ser.parity   = serial.PARITY_EVEN
 ser.stopbits = serial.STOPBITS_ONE
-ser.xonxoff  = 1
+ser.xonxoff  = 0
 ser.rtscts   = 0
-serial_max_lines = 26
 
-ser.timeout  = 20
+serial_max_lines = 12
+
 ser.port     = "/dev/ttyUSB0"
+ser.timeout  = 20
 
 # ---------------------------------
-# DO NOT CHANGE ANYTHING BELOW HERE 
+# DO NOT CHANGE ANYTHING BELOW HERE
 # ---------------------------------
 
 p1_telegram  = False
 p1_log       = True
 
-print 'Start analyse';
-stack=[]
+lines = [line.rstrip('\n') for line in open('/var/www/html/plaatenergy/config.inc')]
+for line in lines:
+   if line[:1]=='$':
+     line = line.replace(' ','');
+     line = line.replace(';','');
+     line = line.replace('$','');
+     line = line.replace('"','');
+     key = line.split('=')
+     if key[0]=='dbhost':
+        dbhost=key[1]
+     if key[0]=='dbname':
+        dbname=key[1]
+     if key[0]=='dbuser':
+        dbuser=key[1]
+     if key[0]=='dbpass':
+        dbpass=key[1]
 
-#Open COM port
-try:
-  ser.open()
-except:
-  sys.exit ("Error during opening serial port. %s"  % ser.name)      
+con = _mysql.connect(dbhost, dbname, dbuser, dbpass)
 
-line = 0 
-while p1_log:
+sql = "select value from config where token='energy_meter_present'"
+con.query(sql)
+result = con.use_result()
+value = result.fetch_row()[0]
+con.close
+
+if value[0] == 'true':
+
+  stack=[]
+
+  #Open COM port
+  try:
+    ser.open()
+  except:
+    sys.exit ("Error during opening serial port %s"  % ser.name)      
+
+  line = 0 
+  while p1_log:
     p1_line = ''
     try:
         p1_raw = ser.readline()
     except:
-        sys.exit ("Fout bij het lezen van poort %s. " % ser.name )
+        sys.exit ("Error reading from serial port %s" % ser.name )
         ser.close()
 
     p1_str  = p1_raw
@@ -92,21 +98,19 @@ while p1_log:
 
     if p1_line[0:1] == "/":
         p1_telegram = True
-        line = 1
     elif line == serial_max_lines:
         if p1_telegram:
-            p1_telegram = False 
             p1_log      = False	
 
-    print (`line`+ '  ' + p1_line)
-try:
-  ser.close()
-except:
-  sys.exit ("Error during closing serial port. %s" % ser.name )      
+  #Close port and show status
+  try:
+    ser.close()
+  except:
+    sys.exit ("Error closing serial port %s" % ser.name )      
 
-stack_teller=0
-gas=0;
-while stack_teller < len(stack):
+  stack_teller=0
+  gas=0
+  while stack_teller < len(stack):
    if stack[stack_teller][0:9] == "1-0:1.8.1":
       dal = float(stack[stack_teller][10:20])
    elif stack[stack_teller][0:9] == "1-0:1.8.2":
@@ -120,23 +124,14 @@ while stack_teller < len(stack):
    elif stack[stack_teller][0:9] == "1-0:2.7.0":
       vermogenterug = int(float(stack[stack_teller][10:16])*1000)
    elif stack[stack_teller][0:10] == "0-1:24.2.1":
-      try:
-         gas = float(stack[stack_teller][26:35])
-      except:
-         print "Geen gas meterstand gevonden" 
+      gas = float(stack[stack_teller][26:35])
    stack_teller = stack_teller +1
 
-print "==================";
-print "Dal meterstand = {0:.3f}".format(dal);
-print "Normal meterstand = {0:.3f}".format(normal);
-print "DalTerug meterstand = {0:.3f}".format(dalterug);
-print "NormalTerug meterstand = {0:.3f}".format(normalterug);
-print "Vermogen (actueel) = {0:.3f}".format(vermogen);
-print "VermogenTerug (actueel) = {0:.3f}".format(vermogenterug);
-print "Gas meterstand = {0:.3f}".format(gas);
-print "==================";
+  con = _mysql.connect(dbhost, dbname, dbuser, dbpass)
 
-print 'End analyse';
+  sql = "insert into energy( timestamp,dal,piek,dalterug,piekterug,vermogen,vermogenterug,gas) values (str_to_date('{0}','%d-%m-%Y %H:%i:%s'),{1},{2},{3},{4},{5},{6},{7})".format( strftime('%d-%m-%Y %H:%M:00', time.localtime()), dal, normal, dalterug, normalterug, vermogen, vermogenterug, gas)
+
+  con.query(sql)
 
 #
 # ---------------------
