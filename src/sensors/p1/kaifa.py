@@ -27,6 +27,35 @@ import csv
 import _mysql
 from time import strftime
 
+# Kaifa with gas meter P1 string
+#
+# 01  /KFM5KAIFA-METER
+# 02
+# 03  1-3:0.2.8(42)
+# 04  0-0:1.0.0(160221094737W)
+# 05  0-0:96.1.1(4530303235313030303331373337343135)
+# 06  1-0:1.8.1(000464.336*kWh)												Totaal verbruik tarief 1 (nacht)
+# 07  1-0:1.8.2(000556.850*kWh)												Totaal verbruik tarief 1 (dag)
+# 08  1-0:2.8.1(000183.181*kWh)												Totaal verbruik tarief 2 (nacht)
+# 09  1-0:2.8.2(000581.870*kWh)												Totaal verbruik tarief 2 (dag)
+# 10  0-0:96.14.0(0001)															Actuele tarief (1)
+# 11  1-0:1.7.0(00.175*kW)
+# 12  1-0:2.7.0(00.000*kW)
+# 13  0-0:96.7.21(00014)
+# 14  0-0:96.7.9(00009)
+# 15  1-0:99.97.0(1)(0-0:96.7.19)(000101000001W)(2147483647*s)
+# 16  1-0:32.32.0(00000)
+# 17  1-0:32.36.0(00000)
+# 18  0-0:96.13.1()
+# 19  0-0:96.13.0()
+# 20  1-0:31.7.0(001*A)
+# 21  1-0:21.7.0(00.162*kW)
+# 22  1-0:22.7.0(00.000*kW)
+# 23  0-1:24.1.0(003)
+# 24  0-1:96.1.0(4730303332353631323335313832373135)
+# 25  0-1:24.2.1(160221090000W)(00295.739*m3)
+# 26  !1102
+
 ser          = serial.Serial()
 ser.baudrate = 115200
 ser.bytesize = serial.EIGHTBITS
@@ -34,8 +63,6 @@ ser.parity   = serial.PARITY_NONE
 ser.stopbits = serial.STOPBITS_ONE
 ser.xonxoff  = 1
 ser.rtscts   = 0
-
-serial_max_lines = 26
 
 ser.port     = "/dev/ttyUSB0"
 ser.timeout  = 20
@@ -99,7 +126,7 @@ if value[0] == 'true':
 
     if p1_line[0:1] == "/":
         p1_telegram = True
-    elif line == serial_max_lines:
+    elif elif p1_line[0:1] == "!":
         if p1_telegram:
             p1_log      = False	
 
@@ -110,7 +137,6 @@ if value[0] == 'true':
     sys.exit ("Error closing serial port %s" % ser.name )      
 
   stack_teller=0
-  gas=0
   while stack_teller < len(stack):
    if stack[stack_teller][0:9] == "1-0:1.8.1":
       dal = float(stack[stack_teller][10:20])

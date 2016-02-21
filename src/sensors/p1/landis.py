@@ -27,14 +27,31 @@ import csv
 import _mysql
 from time import strftime
 
+# Landis gyr E350 without gas meter P1 string
+#
+# 01 /XMX5XMXABCE000059909
+# 02
+# 03 0-0:96.1.1(31333630359995332020302020202020)
+# 04 1-0:1.8.1(00007.310*kWh)
+# 05 1-0:1.8.2(00009.848*kWh)
+# 06 1-0:2.8.1(00000.000*kWh)
+# 07 1-0:2.8.2(00000.000*kWh)
+# 08 0-0:96.14.0(0001)
+# 09 1-0:1.7.0(0000.27*kW)
+# 10 1-0:2.7.0(0000.00*kW)
+# 11 0-0:17.0.0(999*A)
+# 12 0-0:96.3.10(1)
+# 13 0-0:96.13.1()
+# 14 0-0:96.13.0()
+# 15 !
+
+ser          = serial.Serial()
 ser.baudrate = 9600
 ser.bytesize = serial.SEVENBITS
 ser.parity   = serial.PARITY_EVEN
 ser.stopbits = serial.STOPBITS_ONE
 ser.xonxoff  = 0
 ser.rtscts   = 0
-
-serial_max_lines = 15
 
 ser.port     = "/dev/ttyUSB0"
 ser.timeout  = 20
@@ -98,7 +115,7 @@ if value[0] == 'true':
 
     if p1_line[0:1] == "/":
         p1_telegram = True
-    elif line == serial_max_lines:
+    elif p1_line[0:1] == "!":
         if p1_telegram:
             p1_log      = False	
 

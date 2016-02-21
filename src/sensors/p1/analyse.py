@@ -29,24 +29,6 @@ from time import strftime
 #Set COM port config
 ser          = serial.Serial()
 
-# Kamstrup & Landis meter settings
-#ser.baudrate = 9600
-#ser.bytesize = serial.SEVENBITS
-#ser.parity   = serial.PARITY_EVEN
-#ser.stopbits = serial.STOPBITS_ONE
-#ser.xonxoff  = 0
-#ser.rtscts   = 0
-#serial_max_lines = 12 
-
-# Kamstrup & Landis meter settings
-#ser.baudrate = 9600
-#ser.bytesize = serial.SEVENBITS
-#ser.parity   = serial.PARITY_EVEN
-#ser.stopbits = serial.STOPBITS_ONE
-#ser.xonxoff  = 0
-#ser.rtscts   = 0
-#serial_max_lines = 26
-
 # Kaifa meter settings
 ser.baudrate = 115200
 ser.bytesize = serial.EIGHTBITS
@@ -54,7 +36,22 @@ ser.parity   = serial.PARITY_NONE
 ser.stopbits = serial.STOPBITS_ONE
 ser.xonxoff  = 1
 ser.rtscts   = 0
-serial_max_lines = 26
+
+# Kamstrup meter settings
+#ser.baudrate = 9600
+#ser.bytesize = serial.SEVENBITS
+#ser.parity   = serial.PARITY_EVEN
+#ser.stopbits = serial.STOPBITS_ONE
+#ser.xonxoff  = 0
+#ser.rtscts   = 0
+
+# Landis meter settings
+#ser.baudrate = 9600
+#ser.bytesize = serial.SEVENBITS
+#ser.parity   = serial.PARITY_EVEN
+#ser.stopbits = serial.STOPBITS_ONE
+#ser.xonxoff  = 0
+#ser.rtscts   = 0
 
 ser.timeout  = 20
 ser.port     = "/dev/ttyUSB0"
@@ -120,10 +117,7 @@ while stack_teller < len(stack):
    elif stack[stack_teller][0:9] == "1-0:2.7.0":
       vermogenterug = int(float(stack[stack_teller][10:16])*1000)
    elif stack[stack_teller][0:10] == "0-1:24.2.1":
-      try:
-         gas = float(stack[stack_teller][26:35])
-      except:
-         print "Geen gas meterstand gevonden" 
+      gas = float(stack[stack_teller][26:35])
    stack_teller = stack_teller +1
 
 print "==================";
