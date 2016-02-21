@@ -29,25 +29,25 @@ from time import strftime
 
 # Kamstrup with gas meter P1 string
 #
-# 01 /KMP5 ZABF001587315111 								   					 Leverancierscode + Serienummer 
-# 02
-# 03 0-0:96.1.1(205C4D246333034353537383234323121) 						 Serienummer meter in hexadecimale ascii code
-# 04 1-0:1.8.1(00185.000*kWh)														 Totaal verbruik tarief 1 (nacht)
-# 05 1-0:1.8.2(00084.000*kWh)														 Totaal verbruik tarief 2 (dag)
-# 06 1-0:2.8.1(00013.000*kWh)														 Totaal geleverd tarief 1 (nacht)
-# 07 1-0:2.8.2(00019.000*kWh)														 Totaal geleverd tarief 2 (dag)
-# 08 0-0:96.14.0(0001)																 Actuele tarief (1)
-# 09 1-0:1.7.0(0000.98*kW)															 Huidig verbruik
-# 10 1-0:2.7.0(0000.00*kW)															 Huidige teruglevering
-# 11 0-0:17.0.0(999*A)																 Maximum stroom per fase
-# 12 0-0:96.3.10(1)																	 Stand van de schakelaar
-# 13 0-0:96.13.1()																	 Bericht numeriek
-# 14 0-0:96.13.0()																	 Bericht tekst
-# 15 0-1:24.1.0(3)																	 Andere apparaten op de M-Bus
-# 16 0-1:96.1.0(3238313031453631373038389930337131)						 Identificatie van de gasmeter
-# 17 0-1:24.3.0(120517020000)(08)(60)(1)(0-1:24.2.1)(m3)(00124.477)	 Laatste gas meting (17-05-2012 02:00) + Verbruikte gas
-# 18 0-1:24.4.0(1)																	 Stand gasklep?
-# 19 !																					 Afsluit teken
+# /KMP5 ZABF001587315111 								   					 Leverancierscode + Serienummer 
+# 
+# 0-0:96.1.1(205C4D246333034353537383234323121) 						 Serienummer meter in hexadecimale ascii code
+# 1-0:1.8.1(00185.000*kWh)														 Totaal verbruik tarief 1 (nacht)
+# 1-0:1.8.2(00084.000*kWh)														 Totaal verbruik tarief 2 (dag)
+# 1-0:2.8.1(00013.000*kWh)														 Totaal geleverd tarief 1 (nacht)
+# 1-0:2.8.2(00019.000*kWh)														 Totaal geleverd tarief 2 (dag)
+# 0-0:96.14.0(0001)																 Actuele tarief (1)
+# 1-0:1.7.0(0000.98*kW)															 Huidig verbruik
+# 1-0:2.7.0(0000.00*kW)															 Huidige teruglevering
+# 0-0:17.0.0(999*A)																 Maximum stroom per fase
+# 0-0:96.3.10(1)																	 Stand van de schakelaar
+# 0-0:96.13.1()																	 Bericht numeriek
+# 0-0:96.13.0()																	 Bericht tekst
+# 0-1:24.1.0(3)																	 Andere apparaten op de M-Bus
+# 0-1:96.1.0(3238313031453631373038389930337131)						 Identificatie van de gasmeter
+# 0-1:24.3.0(120517020000)(08)(60)(1)(0-1:24.2.1)(m3)(00124.477)	 Laatste gas meting (17-05-2012 02:00) + Verbruikte gas
+# 0-1:24.4.0(1)																	 Stand gasklep?
+# !																					 Afsluit teken
 
 ser          = serial.Serial()
 ser.baudrate = 9600
