@@ -48,13 +48,12 @@ function plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname) {
 	global $output;
 
 	$handle = mysql_connect($dbhost, $dbuser, $dbpass);
-	mysql_select_db($dbname);
-		
 	if(!$handle) {
-		
+
 		plaatenergy_db_error();
 		return false;		
 	}
+	mysql_select_db($dbname);
 	return true;
 }
 
@@ -123,7 +122,7 @@ function plaatenergy_db_query($query) {
 		echo $query.'<br/>';
 	}
 		
-	$result = mysql_query($query);
+	@$result = mysql_query($query);
 		
 	if (!$result) {
 		plaatenergy_db_error();		

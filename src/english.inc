@@ -105,6 +105,8 @@ $lang ['CONGIG_BAD' ] = 'The following file "config.inc" is missing in installat
 PlaatEnergy can not  work without!<br/><br/>
 Rename config.inc.sample to config.inc, update the database settings en press F5 in your browser!';
 
+$lang['DATABASE_CONNECTION_FAILED' ] = 'The connection to the database failed. Please check if config.inc settings are right!';
+
 $lang['YEARS_REPORT'] = 'Years Reports';
 $lang['YEAR_REPORT'] = 'Year Reports';
 $lang['MONTH_REPORT'] = 'Month Reports';

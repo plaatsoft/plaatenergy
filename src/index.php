@@ -83,14 +83,6 @@ if (isset($_GET["theme"])) {
 	}
 }
 
-/*if (isset($lang)) {
-	if ($lang=="nl") {
-		set_cookie_and_refresh("lang", "nl");
-	} else {
-		set_cookie_and_refresh("lang", "en");
-	}
-}*/
-
 if (isset($_GET["lang"])) {
 	if ($_GET["lang"] == "nl") {
 		set_cookie_and_refresh("lang", "nl");
@@ -122,7 +114,23 @@ switch ($_COOKIE["lang"]) {
 ** -------------------- 
 */
 
-@plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
+if ( @plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname) == false) {
+
+	echo general_header();
+
+	echo '<h1>ERROR</h1>';
+	echo '<br/>';
+	echo t('DATABASE_CONNECTION_FAILED');
+	echo '<br/>';
+
+	$time_end = microtime(true);
+	$time = $time_end - $time_start;
+	
+	echo general_footer($time);
+
+        exit;
+}
+
 @plaatenergy_db_check_version($version);
 
 /*
