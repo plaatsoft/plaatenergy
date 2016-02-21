@@ -30,27 +30,28 @@ from time import strftime
 print 'Start file analyse';
 
 stack=[]
-with open("kamstrup.txt") as f:
+with open("kaifa.txt") as f:
    for line in f:
      stack.append(line);
 
 stack_teller=0
+
 while stack_teller < len(stack):
    print stack[stack_teller]
    if stack[stack_teller][0:9] == "1-0:1.8.1":
-      dal = float(stack[stack_teller][10:19])
+      dal = float(stack[stack_teller][10:20])
    elif stack[stack_teller][0:9] == "1-0:1.8.2":
-      normal = float(stack[stack_teller][10:19])
+      normal = float(stack[stack_teller][10:20])
    elif stack[stack_teller][0:9] == "1-0:2.8.1":
-      dalterug = float(stack[stack_teller][10:19])
+      dalterug = float(stack[stack_teller][10:20])
    elif stack[stack_teller][0:9] == "1-0:2.8.2":
-      normalterug = float(stack[stack_teller][10:19])
+      normalterug = float(stack[stack_teller][10:20])
    elif stack[stack_teller][0:9] == "1-0:1.7.0":
-      vermogen = int(float(stack[stack_teller][10:17])*1000)
+      vermogen = int(float(stack[stack_teller][10:16])*1000)
    elif stack[stack_teller][0:9] == "1-0:2.7.0":
-      vermogenterug = int(float(stack[stack_teller][10:17])*1000)
-   elif stack[stack_teller][0:10] == "0-1:24.3.0":
-      gas = float(stack[stack_teller+1][1:10])
+      vermogenterug = int(float(stack[stack_teller][10:16])*1000)
+   elif stack[stack_teller][0:10] == "0-1:24.2.1":
+      gas = float(stack[stack_teller][26:35])
    stack_teller = stack_teller +1
 
 print "==================";

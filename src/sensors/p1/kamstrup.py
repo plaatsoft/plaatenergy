@@ -27,26 +27,6 @@ import csv
 import _mysql
 from time import strftime
 
-# Kamstrup with gas meter P1 string
-#
-# /KMP5 ZABF001587315111 								   					 Leverancierscode + Serienummer 
-# 
-# 0-0:96.1.1(205C4D246333034353537383234323121) 						 Serienummer meter in hexadecimale ascii code
-# 1-0:1.8.1(07707.408*kWh)														 Totaal verbruik tarief 1 (nacht)
-# 1-0:1.8.2(02881.120*kWh)														 Totaal verbruik tarief 2 (dag)
-# 1-0:2.8.1(03152.663*kWh)														 Totaal geleverd tarief 1 (nacht)
-# 1-0:2.8.2(07284.148*kWh)														 Totaal geleverd tarief 2 (dag)
-# 0-0:96.14.0(0001)																 Actuele tarief (1)
-# 1-0:1.7.0(0000.28*kW)															 Huidig verbruik
-# 1-0:2.7.0(0000.00*kW)															 Huidige teruglevering
-# 0-0:96.13.1()																	 Bericht numeriek
-# 0-0:96.13.0()																	 Bericht tekst
-# 0-1:24.1.0(3)																	 Andere apparaten op de M-Bus
-# 0-1:96.1.0(3238313031453631373038389930337131)						 Identificatie van de gasmeter
-# 0-1:24.3.0(160221100000)(00)(60)(1)(0-1:24.2.1)(m3)              Laatste gas meting (22-02-2016 10:00:00)
-# (04186.972)	  																	 Verbruikte gas
-# !																					 Afsluit teken
-
 ser          = serial.Serial()
 ser.baudrate = 9600
 ser.bytesize = serial.SEVENBITS
@@ -128,23 +108,24 @@ if value[0] == 'true':
     sys.exit ("Error closing serial port %s" % ser.name )      
 
   stack_teller=0
-  gas=0
+
   while stack_teller < len(stack):
-   if stack[stack_teller][0:9] == "1-0:1.8.1":
-      dal = float(stack[stack_teller][10:20])
-   elif stack[stack_teller][0:9] == "1-0:1.8.2":
-      normal = float(stack[stack_teller][10:20])
-   elif stack[stack_teller][0:9] == "1-0:2.8.1":
-      dalterug = float(stack[stack_teller][10:20])
-   elif stack[stack_teller][0:9] == "1-0:2.8.2":
-      normalterug = float(stack[stack_teller][10:20])
-   elif stack[stack_teller][0:9] == "1-0:1.7.0":
-      vermogen = int(float(stack[stack_teller][10:16])*1000)
-   elif stack[stack_teller][0:9] == "1-0:2.7.0":
-      vermogenterug = int(float(stack[stack_teller][10:16])*1000)
-   elif stack[stack_teller][0:10] == "0-1:24.2.1":
-      gas = float(stack[stack_teller][26:35])
-   stack_teller = stack_teller +1
+     print stack[stack_teller]
+     if stack[stack_teller][0:9] == "1-0:1.8.1":
+        dal = float(stack[stack_teller][10:19])
+     elif stack[stack_teller][0:9] == "1-0:1.8.2":
+        normal = float(stack[stack_teller][10:19])
+     elif stack[stack_teller][0:9] == "1-0:2.8.1":
+        dalterug = float(stack[stack_teller][10:19])
+     elif stack[stack_teller][0:9] == "1-0:2.8.2":
+        normalterug = float(stack[stack_teller][10:19])
+     elif stack[stack_teller][0:9] == "1-0:1.7.0":
+        vermogen = int(float(stack[stack_teller][10:17])*1000)
+     elif stack[stack_teller][0:9] == "1-0:2.7.0":
+        vermogenterug = int(float(stack[stack_teller][10:17])*1000)
+     elif stack[stack_teller][0:10] == "0-1:24.3.0":
+        gas = float(stack[stack_teller+1][1:10])
+     stack_teller = stack_teller +1
 
   con = _mysql.connect(dbhost, dbname, dbuser, dbpass)
 
@@ -155,5 +136,3 @@ if value[0] == 'true':
 #
 # ---------------------
 # THE END
-# ---------------------
-#

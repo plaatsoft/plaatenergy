@@ -30,11 +30,12 @@ from time import strftime
 print 'Start file analyse';
 
 stack=[]
-with open("kamstrup.txt") as f:
+with open("landis.txt") as f:
    for line in f:
      stack.append(line);
 
 stack_teller=0
+gas=0
 while stack_teller < len(stack):
    print stack[stack_teller]
    if stack[stack_teller][0:9] == "1-0:1.8.1":
