@@ -306,7 +306,7 @@ function plaatenergy_db_process($type) {
   $meter_reading_used_normal = plaatenergy_db_get_config_item('meter_reading_used_normal');
   $meter_reading_delivered_low = plaatenergy_db_get_config_item('meter_reading_delivered_low');
   $meter_reading_delivered_normal = plaatenergy_db_get_config_item('meter_reading_delivered_normal');
-  $meter_reading_used_gas = plaatenergy_db_get_config_item('meter_reading_gas');
+  $meter_reading_used_gas = plaatenergy_db_get_config_item('meter_reading_used_gas');
 
   $dal = $meter_reading_used_low;
   $piek = $meter_reading_used_normal;

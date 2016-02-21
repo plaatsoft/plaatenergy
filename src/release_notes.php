@@ -30,6 +30,7 @@
 $note[8] = '<div class="subparagraph">Version 0.8 (21-02-2016)</div>
 <div class="large_text">
 <ul>
+<li>Bugfix: Used gas years report is now showing correct data.</li>
 <li>Bugfix: Kampstrup and Landis P1 sensor script is now working correct.</li>
 </ul>
 </div>';
