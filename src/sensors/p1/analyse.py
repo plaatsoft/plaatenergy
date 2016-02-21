@@ -90,7 +90,7 @@ while p1_log:
     if p1_line[0:1] == "/":
         p1_telegram = True
         line = 1
-    elif line == serial_max_lines:
+    elif p1_line[0:1] == "!":
         if p1_telegram:
             p1_telegram = False 
             p1_log      = False	

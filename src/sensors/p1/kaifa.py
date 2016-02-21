@@ -34,11 +34,11 @@ from time import strftime
 # 1-3:0.2.8(42)
 # 0-0:1.0.0(160221094737W)
 # 0-0:96.1.1(4530303235313030303331373337343135)
-# 1-0:1.8.1(000464.336*kWh)												Totaal verbruik tarief 1 (nacht)
-# 1-0:1.8.2(000556.850*kWh)												Totaal verbruik tarief 1 (dag)
-# 1-0:2.8.1(000183.181*kWh)												Totaal verbruik tarief 2 (nacht)
-# 1-0:2.8.2(000581.870*kWh)												Totaal verbruik tarief 2 (dag)
-# 0-0:96.14.0(0001)															Actuele tarief (1)
+# 1-0:1.8.1(000464.336*kWh)					Totaal verbruik tarief 1 (nacht)
+# 1-0:1.8.2(000556.850*kWh)					Totaal verbruik tarief 1 (dag)
+# 1-0:2.8.1(000183.181*kWh)					Totaal verbruik tarief 2 (nacht)
+# 1-0:2.8.2(000581.870*kWh)					Totaal verbruik tarief 2 (dag)
+# 0-0:96.14.0(0001)						Actuele tarief (1)
 # 1-0:1.7.0(00.175*kW)
 # 1-0:2.7.0(00.000*kW)
 # 0-0:96.7.21(00014)
@@ -126,7 +126,7 @@ if value[0] == 'true':
 
     if p1_line[0:1] == "/":
         p1_telegram = True
-    elif elif p1_line[0:1] == "!":
+    elif p1_line[0:1] == "!":
         if p1_telegram:
             p1_log      = False	
 
