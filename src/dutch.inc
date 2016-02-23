@@ -94,6 +94,7 @@ $lang['LINK_MAX']        = i('bolt') . 'Piek';
 $lang['LINK_BACKUP']     = 'Backup';
 $lang['LINK_EXPORT']     = 'Export naar CSV';
 $lang['LINK_SCATTER']    = 'Scatter';
+$lang['LINK_LOGIN']      = 'Login';
  
 /*
 ** ------------------
@@ -271,6 +272,9 @@ $lang['LABEL_TOKEN'] = 'Item';
 $lang['LABEL_VALUE'] = 'Waarde'; 
 $lang['LABEL_DESCRIPTION'] = 'Omschrijving'; 
 
+$lang['SETTING_LOGIN_TITLE'] = 'Configuratie wachtwoord';
+
+
 $lang['database_version'] = 'Huidige database versie';
 $lang['request_counter'] = 'Pagina request counter';
 
@@ -299,6 +303,9 @@ $lang['slide_show_on'] = 'Activeert automatisch slide show als gebruiker inactie
 $lang['slide_show_page_delay'] = 'Slide show pagina vertraging (seconden)';
 $lang['chart_legend'] = 'Grafiek legenda option';
 $lang['chart_dimensions'] = 'Grafiek grootte in pixels';
+
+$lang['access_password'] = 'Bescherm toegang met een wachtwoord.';
+$lang['settings_password'] = 'Bescherm configuratie met een wachtwoord.';
 
 /*
 ** ------------------

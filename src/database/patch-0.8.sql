@@ -16,3 +16,6 @@
 
 UPDATE config SET value="0.8" WHERE token='database_version';
 
+INSERT INTO config (`id`, `token`, `value`, `date`, readonly) VALUES (NULL, 'access_password', '', SYSDATE(), 0);
+INSERT INTO config (`id`, `token`, `value`, `date`, readonly) VALUES (NULL, 'settings_password', '', SYSDATE(), 0);
+

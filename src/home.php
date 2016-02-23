@@ -30,6 +30,7 @@
 $solar_meter_present = plaatenergy_db_get_config_item('solar_meter_present');
 $weather_station_present = plaatenergy_db_get_config_item('weather_station_present');
 $energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present');
+$settings_password = plaatenergy_db_get_config_item('settings_password');
 
 /**
  * Check if solar meter is online.
@@ -250,7 +251,12 @@ function plaatenergy_home_page() {
 	        $page .= '</td>';
 		$page .= '</td>';
 		$page .= '<td>';
-		$page .= plaatenergy_link('pid='.PAGE_SETTING_LIST, t('LINK_SETTINGS')); 
+		
+		if (strlen($settings_password)>0) {
+			$page .= plaatenergy_link('pid='.PAGE_SETTING_LOGIN, t('LINK_SETTINGS')); 
+		} else {
+			$page .= plaatenergy_link('pid='.PAGE_SETTING_LIST, t('LINK_SETTINGS')); 
+		}		
 		$page .= '</td>';
 		$page .= '<td>';
 		$page .= '</td>';

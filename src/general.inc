@@ -47,13 +47,15 @@ $gas_forecast = array(0,250/1500,220/1500,180/1500,110/1500,60/1500,40/1500,30/1
 ** -----------
 */
 
-define('PAGE_HOME',                 10);
-define('PAGE_ABOUT',                11);
-define('PAGE_DONATE',               12);
-define('PAGE_RELEASE_NOTES',        13);
-define('PAGE_REPORT',               14);
-define('PAGE_SETTING_LIST',         15);
-define('PAGE_SETTING_EDIT',         16);
+define('PAGE_ACCESS_LOGIN',         10);
+define('PAGE_HOME',                 11);
+define('PAGE_ABOUT',                12);
+define('PAGE_DONATE',               13);
+define('PAGE_RELEASE_NOTES',        14);
+define('PAGE_REPORT',               15);
+define('PAGE_SETTING_LIST',         16);
+define('PAGE_SETTING_EDIT',         17);
+define('PAGE_SETTING_LOGIN',        18);
 
 define('PAGE_YEARS_IN_ENERGY',      20);
 define('PAGE_YEARS_OUT_ENERGY',     21);
@@ -99,6 +101,7 @@ define('EVENT_MAX',                 91);
 define('EVENT_BACKUP',              92);
 define('EVENT_EXPORT',              93);
 define('EVENT_SCATTER',             94);
+define('EVENT_LOGIN',               95);
 
 /*
 ** -----------

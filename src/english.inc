@@ -94,6 +94,7 @@ $lang['LINK_MAX']        = i('bolt') . 'Peak';
 $lang['LINK_BACKUP']     = 'Backup';
 $lang['LINK_EXPORT']     = 'Export to CSV';
 $lang['LINK_SCATTER']    = 'Scatter';
+$lang['LINK_LOGIN']      = 'Login';
  
 /*
 ** ------------------
@@ -269,6 +270,8 @@ $lang['LABEL_TOKEN'] = 'Key';
 $lang['LABEL_VALUE'] = 'Value'; 
 $lang['LABEL_DESCRIPTION'] = 'Description'; 
 
+$lang['SETTING_LOGIN_TITLE'] = 'Setting Password';
+
 $lang['database_version'] = 'Current database version';
 $lang['request_counter'] = 'Page request counter';
 
@@ -297,6 +300,9 @@ $lang['slide_show_on'] = 'Activate slide show if user is inactive';
 $lang['slide_show_page_delay'] = 'Slide show page delay (seconds)';
 $lang['chart_legend'] = 'Chart legend options';
 $lang['chart_dimensions'] = 'Chart dimensions in pixels';
+
+$lang['access_password'] = 'Protect access with a password.';
+$lang['settings_password'] = 'Protect settings with a password.';
 
 /*
 ** ------------------
