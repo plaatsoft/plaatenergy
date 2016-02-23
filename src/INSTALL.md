@@ -15,10 +15,11 @@ mysql -u root -p
 CREATE DATABASE plaatenergy;
 GRANT ALL ON plaatenergy.* TO plaatenergy@`127.0.0.1` IDENTIFIED BY `plaatenergy`;
 FLUSH PRIVILEGES;
+QUIT;
 
 ### Step 3. Get latest official version of PlaatEnergy from GitHub repository:
 cd /var/www/html
-svn checkout https://github.com/wplaat/plaatenergy.git/tags/v0.6 plaatenergy
+svn checkout https://github.com/wplaat/plaatenergy.git/tags/v0.7 plaatenergy
 cd /var/www/plaatenergy
 chmod a+wrx /var/www/html/plaatenergy/backup
 
@@ -34,8 +35,9 @@ Select setting page and customize plaatenergy to your personal needs!
 
 ### Step 7. Installation is now ready
 Now every minute the energy, gas, (optional) solar and (optional) 
-weatherstation data is fetch and processed.
+weather station data is fetch and processed.
 
 If there are any questions please let me known!
 	 
 wplaat
+info@plaatsoft.nl

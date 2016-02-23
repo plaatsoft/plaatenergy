@@ -63,16 +63,18 @@ Variables</h2></td></tr>
 <tr class="separator:a44d4a5ef593dd745482e1f2adb2f7774"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b726f748a2135350f7d86668cc058ee"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a9b726f748a2135350f7d86668cc058ee">$pid</a> = <a class="el" href="general_8inc.html#a7fee747f96fd7a395ae2686012931e27">PAGE_HOME</a></td></tr>
 <tr class="separator:a9b726f748a2135350f7d86668cc058ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af6c2f93502d2687b5cfce165c10ed6ff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#af6c2f93502d2687b5cfce165c10ed6ff">$eid</a> = <a class="el" href="general_8inc.html#a30239ecac213cc9ce4b9f0e500131d9e">EVENT_NONE</a></td></tr>
-<tr class="separator:af6c2f93502d2687b5cfce165c10ed6ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98cf2d4e27bc693b5b2ba9c6c5444a08"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a98cf2d4e27bc693b5b2ba9c6c5444a08">$home_password</a> = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('home_password')</td></tr>
+<tr class="separator:a98cf2d4e27bc693b5b2ba9c6c5444a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afdc9dc87c2c0b51752d80b906b374090"><td class="memItemLeft" align="right" valign="top">if(strlen($home_password)&gt;0)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#afdc9dc87c2c0b51752d80b906b374090">$eid</a> = <a class="el" href="general_8inc.html#a30239ecac213cc9ce4b9f0e500131d9e">EVENT_NONE</a></td></tr>
+<tr class="separator:afdc9dc87c2c0b51752d80b906b374090"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a481c918f8d853749e00b5942cabf599a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a481c918f8d853749e00b5942cabf599a">$date</a> = date('Y-m-d')</td></tr>
 <tr class="separator:a481c918f8d853749e00b5942cabf599a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae05862a0294251c88629b141b5ce329a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#ae05862a0294251c88629b141b5ce329a">$limit</a> = 0</td></tr>
 <tr class="separator:ae05862a0294251c88629b141b5ce329a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00ae4fcafb1145f5e968bdf920f83e2e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a00ae4fcafb1145f5e968bdf920f83e2e">$token</a> = <a class="el" href="general_8inc.html#a3cf0f4e0e488c26a2bb73651bab4471d">plaatenergy_post</a>(&quot;token&quot;, &quot;&quot;)</td></tr>
 <tr class="separator:a00ae4fcafb1145f5e968bdf920f83e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a44e6760141442bb439b1ab1395d8ff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a0a44e6760141442bb439b1ab1395d8ff">$page</a> = &quot;&quot;</td></tr>
-<tr class="separator:a0a44e6760141442bb439b1ab1395d8ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2eb7d10e7f78b75468df4e407bf8abb"><td class="memItemLeft" align="right" valign="top">if(strlen($token)&gt;0)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#af2eb7d10e7f78b75468df4e407bf8abb">$page</a> = &quot;&quot;</td></tr>
+<tr class="separator:af2eb7d10e7f78b75468df4e407bf8abb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>contain general page and event handler </p>
@@ -89,12 +91,24 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="af6c2f93502d2687b5cfce165c10ed6ff"></a>
+<a class="anchor" id="afdc9dc87c2c0b51752d80b906b374090"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">$eid = <a class="el" href="general_8inc.html#a30239ecac213cc9ce4b9f0e500131d9e">EVENT_NONE</a></td>
+          <td class="memname">if (strlen($home_password)&gt;0) $eid = <a class="el" href="general_8inc.html#a30239ecac213cc9ce4b9f0e500131d9e">EVENT_NONE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a98cf2d4e27bc693b5b2ba9c6c5444a08"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$home_password = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('home_password')</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -113,12 +127,12 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a0a44e6760141442bb439b1ab1395d8ff"></a>
+<a class="anchor" id="af2eb7d10e7f78b75468df4e407bf8abb"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">$page = &quot;&quot;</td>
+          <td class="memname">if (strlen($token)&gt;0) $page = &quot;&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
