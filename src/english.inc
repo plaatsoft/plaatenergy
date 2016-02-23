@@ -270,7 +270,7 @@ $lang['LABEL_TOKEN'] = 'Key';
 $lang['LABEL_VALUE'] = 'Value'; 
 $lang['LABEL_DESCRIPTION'] = 'Description'; 
 
-$lang['SETTING_LOGIN_TITLE'] = 'Setting Password';
+$lang['SETTING_LOGIN_TITLE'] = 'Settings Password';
 
 $lang['database_version'] = 'Current database version';
 $lang['request_counter'] = 'Page request counter';

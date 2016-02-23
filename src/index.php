@@ -172,6 +172,7 @@ switch ($pid) {
 		
 	case PAGE_SETTING_LIST: 
 	case PAGE_SETTING_EDIT: 
+	case PAGE_SETTING_LOGIN: 
 		include "settings.php";
 		$page = plaatenergy_settings();
 		break;

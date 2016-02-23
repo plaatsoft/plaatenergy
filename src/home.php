@@ -143,6 +143,7 @@ function plaatenergy_home_page() {
 
        global $weather_station_present;
        global $solar_meter_present;
+       global $settings_password;
 
 	$page = '<h1>';
 	$page .= t('TITLE').' ';

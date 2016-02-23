@@ -41,7 +41,7 @@ $max = round((plaatenergy_db_num_rows($result)/$step)+0.5,0)-1;
 ** ---------------------
 */
 
-function plaatenergy_setting_login_event();
+function plaatenergy_setting_login_event() {
 
 	global $pid;
 	global $password;
@@ -103,30 +103,23 @@ function plaatenergy_setting_login_page() {
    // input
    global $id;
 			
-	$sql  = 'select token, value, options from config where id='.$id;
-	$result = plaatenergy_db_query($sql);
-	$row = plaatenergy_db_fetch_object($result);
+   // -------------------------------------
 
-	// -------------------------------------
+   $page  = ' <h1>'.t('SETTING_LOGIN_TITLE').'</h1>';
 
-	$page  = ' <h1>'.t('SETTING_LOGIN_TITLE').'</h1>';
-
-	$page .= '<br/>';
-	$page .= '<label>'.t($row->token).'</label>';
-	$page .= '<br/>';
+   $page .= '<br/>';
 	
-	$page .= '<input type="text" name="password" size="40" />';
-	}
-	$page .= '<br/>';
+   $page .= '<input type="text" name="password" size="40" />';
+   $page .= '<br/>';
 
-	// -------------------------------------
- 
-	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_CANCEL'));
-	$page .= plaatenergy_link('pid='.PAGE_SETTING_HOME.'&eid='.EVENT_LOGIN.'&id='.$id, t('LINK_LOGIN'));
-	$page .= '</div>';
+   // -------------------------------------
+
+   $page .= '<div class="nav">';
+   $page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_CANCEL'));
+   $page .= plaatenergy_link('pid='.PAGE_SETTING_LIST.'&eid='.EVENT_LOGIN, t('LINK_LOGIN'));
+   $page .= '</div>';
 	
-	return $page;
+   return $page;
 }
 
 function plaatenergy_setting_edit_page() {
