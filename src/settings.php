@@ -107,7 +107,7 @@ function plaatenergy_setting_login_page() {
 
    $page .= '<br/>';
    $page .= '<label>'.t('LABEL_PASSWORD').'</label>';
-   $page .= '<input type="text" name="password" size="20" />';
+   $page .= '<input type="password" name="password" size="20" />';
    $page .= '<br/>';
 
    $page .= '<div class="nav">';
