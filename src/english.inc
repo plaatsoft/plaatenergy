@@ -102,6 +102,8 @@ $lang['LINK_LOGIN']      = 'Login';
 ** ------------------
 */
 
+$lang['HOME_LOGIN_TITLE'] = 'Password';
+
 $lang ['CONGIG_BAD' ] = 'The following file "config.inc" is missing in installation directory.<br/><br/>
 PlaatEnergy can not  work without!<br/><br/>
 Rename config.inc.sample to config.inc, update the database settings en press F5 in your browser!';
@@ -301,8 +303,8 @@ $lang['slide_show_page_delay'] = 'Slide show page delay (seconds)';
 $lang['chart_legend'] = 'Chart legend options';
 $lang['chart_dimensions'] = 'Chart dimensions in pixels';
 
-$lang['access_password'] = 'Protect access with a password.';
-$lang['settings_password'] = 'Protect settings with a password.';
+$lang['home_password'] = 'Protect home page with password.';
+$lang['settings_password'] = 'Protect settings with password.';
 
 /*
 ** ------------------

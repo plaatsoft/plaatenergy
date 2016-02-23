@@ -102,6 +102,8 @@ $lang['LINK_LOGIN']      = 'Login';
 ** ------------------
 */
 
+$lang['HOME_LOGIN_TITLE'] = 'Wachtwoord';
+
 $lang ['CONGIG_BAD' ] = 'Het volgende bestand "config.inc" mist in de installatie directory.<br/><br/>
 PlaatEnergy werkt niet zonder dit bestand!<br/><br/>
 Hernoem config.inc.sample naar config.inc, zet de database instellingen goed en druk op F5 in je browser!';
@@ -304,8 +306,8 @@ $lang['slide_show_page_delay'] = 'Slide show pagina vertraging (seconden)';
 $lang['chart_legend'] = 'Grafiek legenda option';
 $lang['chart_dimensions'] = 'Grafiek grootte in pixels';
 
-$lang['access_password'] = 'Bescherm toegang met een wachtwoord.';
-$lang['settings_password'] = 'Bescherm configuratie met een wachtwoord.';
+$lang['home_password'] = 'Bescherm home pagina met een wachtwoord.';
+$lang['settings_password'] = 'Bescherm configuratie pagina met een wachtwoord.';
 
 /*
 ** ------------------

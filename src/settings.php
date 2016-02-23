@@ -48,10 +48,10 @@ function plaatenergy_setting_login_event() {
 	
 	$settings_password = plaatenergy_db_get_config_item('settings_password');
 	
-	if ($settings_password != $password) {
+	if ($settings_password == $password) {
 	
-		// Wrong password, go back to setting login page
-		$pid = PAGE_SETTING_LOGIN;
+		// Correct password, redirect to setting page
+		$pid = PAGE_SETTING_LIST;
 	}
 }
 	
@@ -103,20 +103,16 @@ function plaatenergy_setting_login_page() {
    // input
    global $id;
 			
-   // -------------------------------------
-
    $page  = ' <h1>'.t('SETTING_LOGIN_TITLE').'</h1>';
 
    $page .= '<br/>';
 	
-   $page .= '<input type="text" name="password" size="40" />';
+   $page .= '<input type="text" name="password" size="20" />';
    $page .= '<br/>';
-
-   // -------------------------------------
 
    $page .= '<div class="nav">';
    $page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_CANCEL'));
-   $page .= plaatenergy_link('pid='.PAGE_SETTING_LIST.'&eid='.EVENT_LOGIN, t('LINK_LOGIN'));
+   $page .= plaatenergy_link('pid='.PAGE_SETTING_LOGIN.'&eid='.EVENT_LOGIN, t('LINK_LOGIN'));
    $page .= '</div>';
 	
    return $page;

@@ -47,7 +47,7 @@ $gas_forecast = array(0,250/1500,220/1500,180/1500,110/1500,60/1500,40/1500,30/1
 ** -----------
 */
 
-define('PAGE_ACCESS_LOGIN',         10);
+define('PAGE_HOME_LOGIN',           10);
 define('PAGE_HOME',                 11);
 define('PAGE_ABOUT',                12);
 define('PAGE_DONATE',               13);

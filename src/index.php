@@ -29,32 +29,6 @@ include "database.inc";
 
 /*
 ** ----------------------
-** PARAMETERS
-** ----------------------
-*/
-
-$pid = PAGE_HOME;
-$eid = EVENT_NONE;
-$date = date('Y-m-d');
-$limit = 0;
-
-$token = plaatenergy_post("token", "");
-
-if (strlen($token)>0) {
-	
-  /* Decode token to php parameters */
-  $token =  plaatenergy_token_decode($token);	  
-  $tokens = @preg_split("/&/", $token);
-	
-  foreach ($tokens as $item) {
-     $items = preg_split ("/=/", $item);				
-     $$items[0] = $items[1];	
-     //echo '>'.$items[0].'='.$items[1].'<br/>';
-  }
-}
-
-/*
-** ----------------------
 ** COOKIES
 ** ----------------------
 */
@@ -134,6 +108,45 @@ if ( @plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname) == false) {
 @plaatenergy_db_check_version($version);
 
 /*
+** --------------------------------------
+** SECURITY (Very basic not really secure)
+** --------------------------------------
+*/
+
+$pid = PAGE_HOME;
+
+$home_password = plaatenergy_db_get_config_item('home_password');
+
+if (strlen($home_password)>0) {
+	$pid = PAGE_HOME_LOGIN;
+}
+
+/*
+** ----------------------
+** PARAMETERS
+** ----------------------
+*/
+
+$eid = EVENT_NONE;
+$date = date('Y-m-d');
+$limit = 0;
+
+$token = plaatenergy_post("token", "");
+
+if (strlen($token)>0) {
+	
+  /* Decode token to php parameters */
+  $token =  plaatenergy_token_decode($token);	  
+  $tokens = @preg_split("/&/", $token);
+	
+  foreach ($tokens as $item) {
+     $items = preg_split ("/=/", $item);				
+     $$items[0] = $items[1];	
+     //echo '>'.$items[0].'='.$items[1].'<br/>';
+  }
+}
+
+/*
 ** -------------------
 ** STATE MACHINE
 ** -------------------
@@ -144,8 +157,9 @@ $page = "";
 switch ($pid) {
 
 	// ---------------------------------
-	
+		
 	case PAGE_HOME: 
+	case PAGE_HOME_LOGIN: 
 		include "home.php";
 		$page = plaatenergy_home();
 		break;
