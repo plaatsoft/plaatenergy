@@ -103,10 +103,10 @@ function plaatenergy_setting_login_page() {
    // input
    global $id;
 			
-   $page  = ' <h1>'.t('SETTING_LOGIN_TITLE').'</h1>';
+   $page  = ' <h1>'.t('SETTING_TITLE').'</h1>';
 
    $page .= '<br/>';
-	
+   $page .= '<label>'.t('LABEL_PASSWORD').'</label>';
    $page .= '<input type="text" name="password" size="20" />';
    $page .= '<br/>';
 

@@ -94,7 +94,7 @@ $lang['LINK_MAX']        = i('bolt') . 'Piek';
 $lang['LINK_BACKUP']     = 'Backup';
 $lang['LINK_EXPORT']     = 'Export naar CSV';
 $lang['LINK_SCATTER']    = 'Scatter';
-$lang['LINK_LOGIN']      = 'Login';
+$lang['LINK_LOGIN']      = i('check').'Login';
  
 /*
 ** ------------------
@@ -102,7 +102,7 @@ $lang['LINK_LOGIN']      = 'Login';
 ** ------------------
 */
 
-$lang['HOME_LOGIN_TITLE'] = 'Wachtwoord';
+$lang['LABEL_PASSWORD'] = 'Wachtwoord';
 
 $lang ['CONGIG_BAD' ] = 'Het volgende bestand "config.inc" mist in de installatie directory.<br/><br/>
 PlaatEnergy werkt niet zonder dit bestand!<br/><br/>
@@ -273,9 +273,6 @@ $lang['SETTING_TITLE'] = 'Configuratie';
 $lang['LABEL_TOKEN'] = 'Item'; 
 $lang['LABEL_VALUE'] = 'Waarde'; 
 $lang['LABEL_DESCRIPTION'] = 'Omschrijving'; 
-
-$lang['SETTING_LOGIN_TITLE'] = 'Configuratie wachtwoord';
-
 
 $lang['database_version'] = 'Huidige database versie';
 $lang['request_counter'] = 'Pagina request counter';

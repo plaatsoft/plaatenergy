@@ -94,7 +94,7 @@ $lang['LINK_MAX']        = i('bolt') . 'Peak';
 $lang['LINK_BACKUP']     = 'Backup';
 $lang['LINK_EXPORT']     = 'Export to CSV';
 $lang['LINK_SCATTER']    = 'Scatter';
-$lang['LINK_LOGIN']      = 'Login';
+$lang['LINK_LOGIN']      = i('check').'Login';
  
 /*
 ** ------------------
@@ -102,7 +102,7 @@ $lang['LINK_LOGIN']      = 'Login';
 ** ------------------
 */
 
-$lang['HOME_LOGIN_TITLE'] = 'Password';
+$lang['LABEL_PASSWORD'] = 'Password';
 
 $lang ['CONGIG_BAD' ] = 'The following file "config.inc" is missing in installation directory.<br/><br/>
 PlaatEnergy can not  work without!<br/><br/>
@@ -272,8 +272,6 @@ $lang['LABEL_TOKEN'] = 'Key';
 $lang['LABEL_VALUE'] = 'Value'; 
 $lang['LABEL_DESCRIPTION'] = 'Description'; 
 
-$lang['SETTING_LOGIN_TITLE'] = 'Settings Password';
-
 $lang['database_version'] = 'Current database version';
 $lang['request_counter'] = 'Page request counter';
 
@@ -304,7 +302,7 @@ $lang['chart_legend'] = 'Chart legend options';
 $lang['chart_dimensions'] = 'Chart dimensions in pixels';
 
 $lang['home_password'] = 'Protect home page with password.';
-$lang['settings_password'] = 'Protect settings with password.';
+$lang['settings_password'] = 'Protect setting page with password.';
 
 /*
 ** ------------------

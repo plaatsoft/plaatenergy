@@ -177,7 +177,7 @@ function plaatenergy_home_login_page() {
    $page .= '</h1>';
 
    $page .= '<br/>';
-   $page .= '<label>'.t('HOME_LOGIN_TITLE').'</label>';
+   $page .= '<label>'.t('LABEL_PASSWORD').'</label>';
    $page .= '<input type="text" name="password" size="20" />';
    $page .= '<br/>';
 
