@@ -30,8 +30,8 @@
 $note[8] = '<div class="subparagraph">Version 0.8 (23-02-2016)</div>
 <div class="large_text">
 <ul>
-<li>General: Added basic access password functionalty.</li>
-<li>General: Added basic setting password functionalty.</li>
+<li>General: Added basic home password feature. Not really secure.</li>
+<li>General: Added basic setting password feature. Not really secure.</li>
 <li>General: If database connection fails, user is informed.</li>
 <li>Bugfix: Used gas years report is now showing correct data.</li>
 <li>Bugfix: Kampstrup and Landis P1 sensor script is now working correct.</li>

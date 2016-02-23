@@ -143,7 +143,7 @@ function check_weather_station() {
 ** ---------------------
 */
 
-function plaatenergy_setting_login_event() {
+function plaatenergy_home_login_event() {
 
 	global $pid;
 	global $password;
@@ -169,17 +169,24 @@ function plaatenergy_home_login_page() {
    // input
    global $id;
 			
-   $page  = ' <h1>'.t('HOME_LOGIN_TITLE').'</h1>';
+   $page = '<h1>';
+   $page .= t('TITLE').' ';
+   $page .= '<div id="version" style="display: inline">';
+   $page .= plaatenergy_db_get_config_item('database_version');
+   $page .= "</div>";
+   $page .= '</h1>';
 
    $page .= '<br/>';
-	
+   $page .= '<label>'.t('HOME_LOGIN_TITLE').'</label>';
    $page .= '<input type="text" name="password" size="20" />';
    $page .= '<br/>';
 
    $page .= '<div class="nav">';
-   $page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_CANCEL'));
    $page .= plaatenergy_link('pid='.PAGE_HOME_LOGIN.'&eid='.EVENT_LOGIN, t('LINK_LOGIN'));
    $page .= '</div>';
+
+   $page .= '<script type="text/javascript">var ip="'.$_SERVER['SERVER_ADDR'].'";</script>';
+   $page .= '<script type="text/javascript" src="js/version.js"></script>';
 	
    return $page;
 }
@@ -281,7 +288,7 @@ function plaatenergy_home_page() {
 		   $page .= '<td>';
 			$page .= plaatenergy_link('pid='.PAGE_DAY_HUMIDITY, t('LINK_HUMIDITY'));
 		   $page .= '</td>';
-		s}
+		}
 		$page .= '</tr>';
 
 		$page .= '<tr>';
@@ -347,7 +354,6 @@ function plaatenergy_home_page() {
 		$page .= '<br/><br/>';
 
 		$page .= '<script type="text/javascript">var ip="'.$_SERVER['SERVER_ADDR'].'";</script>';
-
 		$page .= '<script type="text/javascript" src="js/version.js"></script>';
 	}
 	return $page;
@@ -367,7 +373,7 @@ function plaatenergy_home() {
 
 	/* input */
 	global $pid;
-	global $sid;
+	global $eid;
 	
 	/* Event handler */
 	switch ($eid) {
@@ -380,8 +386,8 @@ function plaatenergy_home() {
 	/* Page handler */
 	switch ($pid) {
 		
-		case PAGE_LOGIN_HOME:
-			return plaatenergy_login_home_page();
+		case PAGE_HOME_LOGIN:
+			return plaatenergy_home_login_page();
 			break;
 			
 		case PAGE_HOME:
