@@ -330,21 +330,23 @@ function plaatenergy_db_process($type) {
 
     $result2 = plaatenergy_db_query($sql2);
     $data2 = plaatenergy_db_fetch_object($result2);
-
-    $dal = $data2->dal;
-    $piek = $data2->piek;
-    $dalterug = $data2->dalterug;
-    $piekterug = $data2->piekterug;
-    $gas = $data2->gas;
+	if (isset($data2->dal)) {
+       $dal = $data2->dal;
+       $piek = $data2->piek;
+       $dalterug = $data2->dalterug;
+       $piekterug = $data2->piekterug;
+       $gas = $data2->gas;
+	}
 
     $sql3  = 'select etotal from solar ';
     $sql3 .= 'where timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" ';
     $sql3 .= 'order by timestamp desc limit 0,1';
-
+    
     $result3 = plaatenergy_db_query($sql3);
     $data3 = plaatenergy_db_fetch_object($result3);
-
-    $etotal = $data3->etotal;
+	if (isset($data3->etotal)) {
+       $etotal = $data3->etotal;
+	}
   }
 
   if ($type==EVENT_PROCESS_ALL_DAYS) {
