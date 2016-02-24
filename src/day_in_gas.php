@@ -47,6 +47,7 @@ function plaatenergy_day_in_gas_page() {
 	
 	$gas_price = plaatenergy_db_get_config_item('gas_price');
 	$gas_use_forecast = plaatenergy_db_get_config_item('gas_use_forecast');
+	$gas_prev = plaatenergy_db_get_config_item('meter_reading_used_gas');
 	
 	$i = 0;
 	$data = "";
@@ -60,7 +61,6 @@ function plaatenergy_day_in_gas_page() {
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 
-	$gas_prev=0;
 	if ( isset($row->gas) ) {
 		$gas_prev = $row->gas;
 	}      
