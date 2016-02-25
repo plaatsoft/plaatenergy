@@ -40,6 +40,7 @@ function plaatenergy_month_in_gas_page() {
 	$next_date = plaatenergy_next_month($date);
 	
 	list($year, $month) = explode("-", $date);	
+        $month = ltrim($month ,'0');
 	
 	$gas_price = plaatenergy_db_get_config_item('gas_price');
 	

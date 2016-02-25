@@ -551,7 +551,7 @@ function plaatenergy_navigation_month() {
 	global $date;
 	
 	$page  = '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.plaatenergy_prev_month($date).'&eid='.$eid,t('LINK_PREV_MONTH'));
+	$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.plaatenergy_prev_month($date),t('LINK_PREV_MONTH'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
 	
 	if (strtotime($date) < strtotime(date("Y-m"))) {		

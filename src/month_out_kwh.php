@@ -40,6 +40,7 @@ function plaatenergy_month_out_energy_page() {
 	$next_date = plaatenergy_next_month($date);
 	
 	list($year, $month) = explode("-", $date);	
+        $month = ltrim($month ,'0');
 	
 	$energy_price = plaatenergy_db_get_config_item('energy_price');
 	$energy_use_forecast = plaatenergy_db_get_config_item('energy_use_forecast');
