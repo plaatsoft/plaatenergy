@@ -146,9 +146,9 @@ $lang['WEATHER_METER_CONNECTION_UP'] = i('check') . 'Weather Station connection 
 ** ------------------
 */
 
-$lang['TITLE_YEARS_IN_KWH'] = 'Energy Meter - Used Electricity %s - %s';
-$lang['TITLE_YEARS_IN_GAS'] = 'Gas Meter - Used Gas %s - %s';
-$lang['TITLE_YEARS_OUT_KWH'] = 'Solar Meter - Delivered Electricity %s - %s';
+$lang['TITLE_YEARS_IN_KWH'] = 'Used Electricity %s - %s';
+$lang['TITLE_YEARS_IN_GAS'] = 'Used Gas %s - %s';
+$lang['TITLE_YEARS_OUT_KWH'] = 'Delivered Electricity %s - %s';
 
 $lang['AVERAGE_PER_YEAR_KWH'] = 'Average per year %s kWh [Total = %s kWh]';
 $lang['AVERAGE_PER_YEAR_M3'] = 'Average per year %s m&sup3; [Total = %s m&sup3;]';
@@ -160,9 +160,9 @@ $lang['AVERAGE_PER_YEAR_EURO'] = 'Average per year %s euro [Total = %s euro]';
 ** ------------------
 */
 
-$lang['TITLE_YEAR_IN_KWH'] = 'Energy Meter - Used Electricity - %s';
-$lang['TITLE_YEAR_IN_M3'] = 'Gas Meter - Used Gas - %s';
-$lang['TITLE_YEAR_OUT_KWH'] = 'Solar Meter - Delivered Electricity - %s';
+$lang['TITLE_YEAR_IN_KWH'] = 'Used Electricity - %s';
+$lang['TITLE_YEAR_IN_M3'] = 'Used Gas - %s';
+$lang['TITLE_YEAR_OUT_KWH'] = 'Delivered Electricity - %s';
 
 $lang['AVERAGE_PER_MONTH_KWH'] = 'Average per month %s kWh [Total = %s kWh]';
 $lang['AVERAGE_PER_MONTH_M3'] = 'Average per month %s m&sup3; [Total = %s m&sup3;]';
@@ -174,10 +174,10 @@ $lang['AVERAGE_PER_MONTH_EURO'] = 'Average per month %s euro [Total = %s euro]';
 ** ------------------
 */
 
-$lang['TITLE_MONTH_IN_KWH'] = 'Energy Meter - Used Electricity %s-%s';
-$lang['TITLE_MONTH_IN_GAS'] = 'Gas Meter - Used Gas %s-%s';
-$lang['TITLE_MONTH_OUT_KWH'] = 'Solar Meter - Delivered Electricity %s-%s';
-$lang['TITLE_MONTH_PEAK_OUT_KWH'] = 'Solar Meter - Delivered Peak Electricity %s-%s';
+$lang['TITLE_MONTH_IN_KWH'] = 'Used Electricity %s-%s';
+$lang['TITLE_MONTH_IN_GAS'] = 'Used Gas %s-%s';
+$lang['TITLE_MONTH_OUT_KWH'] = 'Delivered Electricity %s-%s';
+$lang['TITLE_MONTH_PEAK_OUT_KWH'] = 'Delivered Peak Electricity %s-%s';
 
 $lang['AVERAGE_PER_DAY_KWH'] = 'Average per day %s kWh [Total = %s kWh]';
 $lang['AVERAGE_PER_DAY_M3'] = 'Average per day %s m&sup3; [Total = %s m&sup3;]';
@@ -190,13 +190,13 @@ $lang['MAX_PEAK_ENERGY'] = 'Maximum peak energy this month is %s Watt.';
 ** ------------------
 */
 
-$lang['TITLE_DAY_TEMPERATURE'] = 'Weather Station - Air Temperature - %s %s-%s-%s';
-$lang['TITLE_DAY_PRESSURE'] = 'Weather Station - Air Pressure - %s %s-%s-%s';
-$lang['TITLE_DAY_HUMIDITY'] = 'Weather Station - Air Humidity - %s %s-%s-%s';
+$lang['TITLE_DAY_TEMPERATURE'] = 'Air Temperature - %s %s-%s-%s';
+$lang['TITLE_DAY_PRESSURE'] = 'Air Pressure - %s %s-%s-%s';
+$lang['TITLE_DAY_HUMIDITY'] = 'Air Humidity - %s %s-%s-%s';
 
-$lang['TITLE_DAY_IN_KWH'] = 'Energy Meter - Used Electricity - %s %s-%s-%s';
-$lang['TITLE_DAY_IN_GAS'] = 'Gas Meter - Used Gas - %s %s-%s-%s';
-$lang['TITLE_DAY_OUT_KWH'] = 'Solar Meter - Delivered Electricity - %s %s-%s-%s';
+$lang['TITLE_DAY_IN_KWH'] = 'Used Electricity - %s %s-%s-%s';
+$lang['TITLE_DAY_IN_GAS'] = 'Used Gas - %s %s-%s-%s';
+$lang['TITLE_DAY_OUT_KWH'] = 'Delivered Electricity - %s %s-%s-%s';
 
 $lang['TOTAL_PER_DAY_KWH'] = 'Total today = %s kWh [Forecast = %s kWh]';
 $lang['TOTAL_PER_DAY_M3'] = 'Total today = %s m&sup3; [Forecast = %s m&sup3;]';

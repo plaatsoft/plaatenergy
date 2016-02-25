@@ -147,9 +147,9 @@ $lang['WEATHER_METER_CONNECTION_UP'] = i('check') . 'Weerstation verbinding goed
 ** ------------------
 */
 
-$lang['TITLE_YEARS_IN_KWH'] = 'Energie Meter - Afgenomen Elektriciteit %s - %s';
-$lang['TITLE_YEARS_IN_GAS'] = 'Energie Meter - Afgenomen Gas %s - %s';
-$lang['TITLE_YEARS_OUT_KWH'] = 'Solar Meter - Geleverde Elektriciteit %s - %s';
+$lang['TITLE_YEARS_IN_KWH'] = 'Afgenomen Elektriciteit %s - %s';
+$lang['TITLE_YEARS_IN_GAS'] = 'Afgenomen Gas %s - %s';
+$lang['TITLE_YEARS_OUT_KWH'] = 'Geleverde Elektriciteit %s - %s';
 
 $lang['AVERAGE_PER_YEAR_KWH'] = 'Gemiddeld per jaar %s kWh [Totaal = %s kWh]';
 $lang['AVERAGE_PER_YEAR_M3'] = 'Gemiddeld per jaar %s m&sup3; [Totaal = %s m&sup3;]';
@@ -161,9 +161,9 @@ $lang['AVERAGE_PER_YEAR_EURO'] = 'Gemiddeld per jaar %s euro [Totaal = %s euro]'
 ** ------------------
 */
 
-$lang['TITLE_YEAR_IN_KWH'] = 'Energie Meter - Afgenomen Elektriciteit - %s';
-$lang['TITLE_YEAR_IN_M3'] = 'Energie Meter - Afgenomen Gas - %s';
-$lang['TITLE_YEAR_OUT_KWH'] = 'Solar Meter - Geleverde Elektriciteit - %s';
+$lang['TITLE_YEAR_IN_KWH'] = 'Afgenomen Elektriciteit - %s';
+$lang['TITLE_YEAR_IN_M3'] = 'Afgenomen Gas - %s';
+$lang['TITLE_YEAR_OUT_KWH'] = 'Geleverde Elektriciteit - %s';
 
 $lang['AVERAGE_PER_MONTH_KWH'] = 'Gemiddeld per maand %s kWh [Totaal = %s kWh]';
 $lang['AVERAGE_PER_MONTH_M3'] = 'Gemiddeld per maand %s m&sup3; [Totaal = %s m&sup3;]';
@@ -175,10 +175,10 @@ $lang['AVERAGE_PER_MONTH_EURO'] = 'Gemiddeld per maand %s euro [Totaal = %s euro
 ** ------------------
 */
 
-$lang['TITLE_MONTH_IN_KWH'] = 'Energie Meter - Afgenomen Elektriciteit %s-%s';
-$lang['TITLE_MONTH_IN_GAS'] = 'Energie Meter - Afgenomen Gas %s-%s';
-$lang['TITLE_MONTH_OUT_KWH'] = 'Solar Meter - Geleverde Elektriciteit %s-%s';
-$lang['TITLE_MONTH_PEAK_OUT_KWH'] = 'Solar Meter - Geleverde Piek vermogen %s-%s';
+$lang['TITLE_MONTH_IN_KWH'] = 'Afgenomen Elektriciteit %s-%s';
+$lang['TITLE_MONTH_IN_GAS'] = 'Afgenomen Gas %s-%s';
+$lang['TITLE_MONTH_OUT_KWH'] = 'Geleverde Elektriciteit %s-%s';
+$lang['TITLE_MONTH_PEAK_OUT_KWH'] = 'Geleverde Piek vermogen %s-%s';
 
 $lang['AVERAGE_PER_DAY_KWH'] = 'Gemiddeld per dag %s kWh [Totaal = %s kWh]';
 $lang['AVERAGE_PER_DAY_M3'] = 'Gemiddeld per dag %s m&sup3; [Totaal = %s m&sup3;]';
@@ -191,13 +191,13 @@ $lang['MAX_PEAK_ENERGY'] = 'Maximale piek vermogen deze maand is %s Watt.';
 ** ------------------
 */
 
-$lang['TITLE_DAY_TEMPERATURE'] = 'Weerstation Meter - Lucht Temperatuur - %s %s-%s-%s';
-$lang['TITLE_DAY_PRESSURE'] = 'Weerstation Meter - Luchtdruk - %s %s-%s-%s';
-$lang['TITLE_DAY_HUMIDITY'] = 'Weerstation Meter - Lucht Vochtigheid - %s %s-%s-%s';
+$lang['TITLE_DAY_TEMPERATURE'] = 'Lucht Temperatuur - %s %s-%s-%s';
+$lang['TITLE_DAY_PRESSURE'] = 'Luchtdruk - %s %s-%s-%s';
+$lang['TITLE_DAY_HUMIDITY'] = 'Lucht Vochtigheid - %s %s-%s-%s';
 
-$lang['TITLE_DAY_IN_KWH'] = 'Energie Meter - Afgenomen Elektriciteit - %s %s-%s-%s';
-$lang['TITLE_DAY_IN_GAS'] = 'Energie Meter - Afgenomen Gas - %s %s-%s-%s';
-$lang['TITLE_DAY_OUT_KWH'] = 'Solar Meter - Geleverde Elektriciteit - %s %s-%s-%s';
+$lang['TITLE_DAY_IN_KWH'] = 'Afgenomen Elektriciteit - %s %s-%s-%s';
+$lang['TITLE_DAY_IN_GAS'] = 'Afgenomen Gas - %s %s-%s-%s';
+$lang['TITLE_DAY_OUT_KWH'] = 'Geleverde Elektriciteit - %s %s-%s-%s';
 
 $lang['TOTAL_PER_DAY_KWH'] = 'Totaal vandaag = %s kWh [Prognose = %s kWh]';
 $lang['TOTAL_PER_DAY_M3'] = 'Totaal vandaag = %s m&sup3; [Prognose = %s m&sup3;]';
