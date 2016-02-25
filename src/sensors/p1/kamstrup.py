@@ -33,7 +33,7 @@ ser.bytesize = serial.SEVENBITS
 ser.parity   = serial.PARITY_EVEN
 ser.stopbits = serial.STOPBITS_ONE
 ser.xonxoff  = 0
-ser.rtscts   = 0
+ser.rtscts   = 1
 
 ser.port     = "/dev/ttyUSB0"
 ser.timeout  = 20

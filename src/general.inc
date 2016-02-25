@@ -568,7 +568,7 @@ function plaatenergy_navigation_month() {
 		switch ($eid) {
 
 			case EVENT_EURO:
-				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_M3,t('LINK_KWH'));		
+				$page .= plaatenergy_link('pid='.$pid.'&date='.$date.'&eid='.EVENT_KWH,t('LINK_KWH'));		
 				break;
 				
 			default:	

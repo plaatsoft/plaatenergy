@@ -27,31 +27,13 @@ import csv
 import _mysql
 from time import strftime
 
-# Landis gyr E350 without gas meter P1 string
-#
-# /XMX5XMXABCE000059909
-# 
-# 0-0:96.1.1(31333630359995332020302020202020)
-# 1-0:1.8.1(00007.310*kWh)
-# 1-0:1.8.2(00009.848*kWh)
-# 1-0:2.8.1(00000.000*kWh)
-# 1-0:2.8.2(00000.000*kWh)
-# 0-0:96.14.0(0001)
-# 1-0:1.7.0(0000.27*kW)
-# 1-0:2.7.0(0000.00*kW)
-# 0-0:17.0.0(999*A)
-# 0-0:96.3.10(1)
-# 0-0:96.13.1()
-# 0-0:96.13.0()
-# !
-
 ser          = serial.Serial()
 ser.baudrate = 9600
 ser.bytesize = serial.SEVENBITS
 ser.parity   = serial.PARITY_EVEN
 ser.stopbits = serial.STOPBITS_ONE
 ser.xonxoff  = 0
-ser.rtscts   = 0
+ser.rtscts   = 1
 
 ser.port     = "/dev/ttyUSB0"
 ser.timeout  = 20
