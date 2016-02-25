@@ -27,10 +27,6 @@
 ** -----------
 */
 
-// Graphical screen resolution
-$graph_width = "950px";
-$graph_height = "300px";
-
 // Energy use forecast (per month)
 $in_forecast = array(0,100/1040,100/1040,90/1040,90/1040,80/1040,70/1040,70/1040,70/1040,80/1040,90/1040,100/1040,100/1040);
 
@@ -102,6 +98,8 @@ define('EVENT_BACKUP',              92);
 define('EVENT_EXPORT',              93);
 define('EVENT_SCATTER',             94);
 define('EVENT_LOGIN',               95);
+define('EVENT_SCHEME',              96);
+define('EVENT_LANGUAGE',            97);
 
 /*
 ** -----------
@@ -247,36 +245,26 @@ function general_header() {
   
   $page .= '<body>';
   $page .= '<form id="plaatenergy" method="POST">';  
+    
+   $page .= '<div class="language">';
+   if ($_COOKIE["lang"] == "en") {
+		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_LANGUAGE, t('DUTCH'));
+   } elseif ($_COOKIE["lang"] == "nl") {
+		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_LANGUAGE , t('ENGLISH'));		
+   }
+   $page .= '</div>';
   
-  // Language toggler
   
-  /*$page .= '<div class="language normal_link">';
-  if ($_COOKIE["lang"] == "en") {
-		$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&lang=nl', t('DUTCH'));
-  } elseif ($_COOKIE["lang"] == "nl") {
-		$page .= plaatenergy_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&lang=en' , t('ENGLISH'));		
-  }
-  $page .= '</div>';*/
-  
-  if ($_COOKIE["lang"] == "en") {
-		$page .= '<a class="language normal_link" href="?lang=nl">'.t('DUTCH').'</a>';
-  } elseif ($_COOKIE["lang"] == "nl") {
-		$page .= '<a class="language normal_link" href="?lang=en">'.t('ENGLISH').'</a>';
-  }
-  
-  // Theme toggler
-  if ($_COOKIE["theme"] == "light") {
-		$page .= '<a class="theme normal_link" href="?theme=dark">' . t('THEME_TO_DARK') . '</a>';
-  } elseif ($_COOKIE["theme"] == "dark") {
-		$page .= '<a class="theme normal_link" href="?theme=light">' . t('THEME_TO_LIGHT') . '</a>';
-  }
-  
-  // Cookie Bar Message (show only if COOKIE allow_cookies = NULL)
-  if ($_COOKIE["allow_cookies"] == "no") {
-		$page .= '<div class="cookie_bar">' . t("COOKIE_BAR") . ' <a class="fa normal_link fa-times" href="?allow_cookies=yes"></a></div>';
-  }
-  
-  return $page;
+	$page .= '<div class="theme">';
+   if ($_COOKIE["theme"] == "light") {
+		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_SCHEME, t('THEME_TO_DARK'));
+   } elseif ($_COOKIE["lang"] == "nl") {
+		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_SCHEME, t('THEME_TO_LIGHT'));		
+   }
+   $page .= '</div>';
+	
+   
+	return $page;
 }
 
 /**
@@ -455,7 +443,7 @@ function plaatenergy_token_encode($token) {
 }
 
 /**
- * Create link 
+ * Create button like link 
  */
 function plaatenergy_link($parameters, $label, $id="", $title="") {
    
@@ -464,6 +452,26 @@ function plaatenergy_link($parameters, $label, $id="", $title="") {
 	$link_counter++;
 	
 	$link  = '<a href="javascript:link(\''.plaatenergy_token_encode($parameters).'\');" class="link" ';			
+	if (strlen($id)!=0) {
+		$link .= ' id="'.strtolower($id).'"';
+	}
+	if (strlen($title)!=0) {
+		$link .= ' title="'.strtolower($title).'"';
+	}
+	$link .= '>'.$label.'</a>';	
+	return $link;
+}
+
+/**
+ * Create hyperlink like link 
+ */
+function plaatenergy_normal_link($parameters, $label, $id="", $title="") {
+   
+	global $link_counter;
+	
+	$link_counter++;
+	
+	$link  = '<a href="javascript:link(\''.plaatenergy_token_encode($parameters).'\');" class="normal_link" ';			
 	if (strlen($id)!=0) {
 		$link .= ' id="'.strtolower($id).'"';
 	}

@@ -27,9 +27,10 @@
 ** ---------------------
 */
 
-$note[8] = '<div class="subparagraph">Version 0.8 (23-02-2016)</div>
+$note[8] = '<div class="subparagraph">Version 0.8 (25-02-2016)</div>
 <div class="large_text">
 <ul>
+<li>General: Improve theme and language hyperlink.</li>
 <li>General: Added basic home password feature. Not really secure.</li>
 <li>General: Added basic setting password feature. Not really secure.</li>
 <li>General: If database connection fails, user is informed.</li>

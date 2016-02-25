@@ -182,6 +182,7 @@ h1::after {
 	z-index: 1000;
 	font-weight: 700;
 }
+
 .cookie_bar > a {
 	float: right;
 	margin-right: 15px;
@@ -190,6 +191,7 @@ h1::after {
 	opacity: 0.9;
 	color: #fff;
 }
+
 .cookie_bar > a:hover {
 	opacity: 1;
 }

@@ -26,61 +26,7 @@ $time_start = microtime(true);
 @include "config.inc";
 include "general.inc";
 include "database.inc";
-
-/*
-** ----------------------
-** COOKIES
-** ----------------------
-*/
-
-if (!isset($_COOKIE["theme"])) {
-	$_COOKIE["theme"] = "light";
-}
-
-if (!isset($_COOKIE["lang"])) {
-	if (substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2) == "nl") {
-		$_COOKIE["lang"] = "nl";
-	} else {
-		$_COOKIE["lang"] = "en";
-	}
-}
-
-if (!isset($_COOKIE["allow_cookies"])) {
-	$_COOKIE["allow_cookies"] = "no";
-}
-
-if (isset($_GET["theme"])) {
-	if ($_GET["theme"] == "light") {
-		set_cookie_and_refresh("theme", "light");
-	} elseif ($_GET["theme"] == "dark") {
-		set_cookie_and_refresh("theme", "dark");
-	}
-}
-
-if (isset($_GET["lang"])) {
-	if ($_GET["lang"] == "nl") {
-		set_cookie_and_refresh("lang", "nl");
-	} elseif ($_GET["lang"] == "en") {
-		set_cookie_and_refresh("lang", "en");
-	}
-}
-
-if (isset($_GET["allow_cookies"])) {
-	if ($_GET["allow_cookies"] == "yes") {
-		set_cookie_and_refresh("allow_cookies", "yes");
-	}
-}
-
-// Load language resource based on browser language setting.
-switch ($_COOKIE["lang"]) {
-	case "nl":
-		include("dutch.inc");
-        break;        
-		
-   default:
-      include("english.inc");
-       break;
-}
+include "english.inc";
 
 /*
 ** -------------------- 
@@ -102,7 +48,7 @@ if ( @plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname) == false) {
 	
 	echo general_footer($time);
 
-        exit;
+	exit;
 }
 
 @plaatenergy_db_check_version($version);
@@ -118,6 +64,8 @@ $pid = PAGE_HOME;
 $home_password = plaatenergy_db_get_config_item('home_password');
 
 if (strlen($home_password)>0) {
+   
+	// Redirect if needed
 	$pid = PAGE_HOME_LOGIN;
 }
 
@@ -145,6 +93,79 @@ if (strlen($token)>0) {
      //echo '>'.$items[0].'='.$items[1].'<br/>';
   }
 }
+
+/*
+** -------------------
+** ACTIONS
+** -------------------
+*/
+
+function plaatenergy_scheme_action() {
+
+	$scheme = plaatenergy_db_get_config_item('scheme');
+	
+	$sql  = 'select options from config where token="scheme"';
+	$result = plaatenergy_db_query($sql);
+	$row = plaatenergy_db_fetch_object($result);
+
+	$options = explode(",", $row->options);	
+	foreach ($options as $option) {	
+		if ($option!=$scheme) {
+		
+			$sql  = 'update config set value="'.$option.'", date=SYSDATE() where token="scheme"';		
+			plaatenergy_db_query($sql);
+		}
+	}
+}
+
+function plaatenergy_language_action() {
+
+	$language = plaatenergy_db_get_config_item('language');
+	
+	$sql  = 'select options from config where token="language"';
+	$result = plaatenergy_db_query($sql);
+	$row = plaatenergy_db_fetch_object($result);
+
+	$options = explode(",", $row->options);	
+	foreach ($options as $option) {	
+		if ($option!=$language) {
+		
+			$sql  = 'update config set value="'.$option.'", date=SYSDATE() where token="language"';		
+			plaatenergy_db_query($sql);
+		}
+	}
+}
+
+/*
+** ---------------------
+** SPECIAL EVENT MACHINE
+** ---------------------
+*/
+
+switch ($sid) {
+
+	case EVENT_SCHEME: 
+			plaatenergy_scheme_action();
+			break;
+			
+	case EVENT_LANGUAGE
+			plaatenergy_scheme_language();
+			break;
+}
+
+
+/*
+** -------------------
+** LANGUAGE
+** -------------------
+*/
+
+$language = plaatenergy_db_get_config_item('language');
+
+if ( $language == "nl")
+
+	include("dutch.inc");
+}	
 
 /*
 ** -------------------
