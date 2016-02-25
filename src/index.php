@@ -76,6 +76,7 @@ if (strlen($home_password)>0) {
 */
 
 $eid = EVENT_NONE;
+$sid = EVENT_NONE;
 $date = date('Y-m-d');
 $limit = 0;
 
@@ -102,17 +103,17 @@ if (strlen($token)>0) {
 
 function plaatenergy_scheme_action() {
 
-	$scheme = plaatenergy_db_get_config_item('scheme');
+	$theme = plaatenergy_db_get_config_item('theme');
 	
-	$sql  = 'select options from config where token="scheme"';
+	$sql  = 'select options from config where token="theme"';
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 
 	$options = explode(",", $row->options);	
 	foreach ($options as $option) {	
-		if ($option!=$scheme) {
+		if ($option!=$theme) {
 		
-			$sql  = 'update config set value="'.$option.'", date=SYSDATE() where token="scheme"';		
+			$sql  = 'update config set value="'.$option.'", date=SYSDATE() where token="theme"';		
 			plaatenergy_db_query($sql);
 		}
 	}
@@ -148,8 +149,8 @@ switch ($sid) {
 			plaatenergy_scheme_action();
 			break;
 			
-	case EVENT_LANGUAGE
-			plaatenergy_scheme_language();
+	case EVENT_LANGUAGE:
+			plaatenergy_language_action();
 			break;
 }
 
@@ -162,7 +163,7 @@ switch ($sid) {
 
 $language = plaatenergy_db_get_config_item('language');
 
-if ( $language == "nl")
+if ( $language == "nl") {
 
 	include("dutch.inc");
 }	
