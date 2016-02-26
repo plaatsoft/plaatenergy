@@ -196,6 +196,7 @@ function general_header() {
   global $eid;
   global $sid;
   global $date;
+  global $session;
     
   $page  = '<!DOCTYPE html>';
   $page .= '<html>';
@@ -248,7 +249,9 @@ function general_header() {
   
   $page .= '<body>';
   $page .= '<form id="plaatenergy" method="POST">';  
-    
+  
+  $page .= '<input type="hidden" name="session" value="'.$session.'" />';
+      
    $page .= '<div class="language">';
    if ($lang=="en") {
 		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_LANGUAGE, t('DUTCH'));

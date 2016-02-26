@@ -54,22 +54,6 @@ if ( @plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname) == false) {
 @plaatenergy_db_check_version($version);
 
 /*
-** --------------------------------------
-** SECURITY (Very basic not really secure)
-** --------------------------------------
-*/
-
-$pid = PAGE_HOME;
-
-$home_password = plaatenergy_db_get_config_item('home_password');
-
-if (strlen($home_password)>0) {
-   
-	// Redirect if needed
-	$pid = PAGE_HOME_LOGIN;
-}
-
-/*
 ** ----------------------
 ** PARAMETERS
 ** ----------------------
@@ -77,9 +61,12 @@ if (strlen($home_password)>0) {
 
 $eid = EVENT_NONE;
 $sid = EVENT_NONE;
+$pid = PAGE_HOME;
+
 $date = date('Y-m-d');
 $limit = 0;
 
+$session = plaatenergy_post('session', '');
 $token = plaatenergy_post("token", "");
 
 if (strlen($token)>0) {
@@ -93,6 +80,21 @@ if (strlen($token)>0) {
      $$items[0] = $items[1];	
      //echo '>'.$items[0].'='.$items[1].'<br/>';
   }
+}
+
+/*
+** --------------------------------------
+** SECURITY (Very basic not really secure)
+** --------------------------------------
+*/
+
+$home_password = plaatenergy_db_get_config_item('home_password');
+
+if (strlen($home_password)>0) {
+	if ($session_id!=plaatenergy_db_get_config_item('session_id'))    
+		// User not login, Redirect to login page
+		$pid = PAGE_HOME_LOGIN;
+	}
 }
 
 /*
@@ -111,10 +113,8 @@ function plaatenergy_scheme_action() {
 
 	$options = explode(",", $row->options);	
 	foreach ($options as $option) {	
-		if ($option!=$theme) {
-		
-			$sql  = 'update config set value="'.$option.'", date=SYSDATE() where token="theme"';		
-			plaatenergy_db_query($sql);
+		if ($option!=$theme) {		
+			plaatenergy_db_set_config_item('theme', $option);
 		}
 	}
 }
@@ -130,9 +130,7 @@ function plaatenergy_language_action() {
 	$options = explode(",", $row->options);	
 	foreach ($options as $option) {	
 		if ($option!=$language) {
-		
-			$sql  = 'update config set value="'.$option.'", date=SYSDATE() where token="language"';		
-			plaatenergy_db_query($sql);
+			plaatenergy_db_set_config_item('language', $option);
 		}
 	}
 }

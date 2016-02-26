@@ -27,16 +27,24 @@
 ** ---------------------
 */
 
-$note[8] = '<div class="subparagraph">Version 0.8 (25-02-2016)</div>
+$note[9] = '<div class="subparagraph">Version 0.9 (25-02-2016)</div>
 <div class="large_text">
 <ul>
+<li>General: Added option to select solar meter vendor.</li>
 <li>General: Improve theme and language hyperlink.</li>
-<li>General: Added basic home password feature. Not really secure.</li>
-<li>General: Added basic setting password feature. Not really secure.</li>
+<li>General: Added very basic home password feature.</li>
+<li>General: Added very basic setting password feature.</li>
 <li>General: If database connection fails, user is informed.</li>
+</ul>
+</div>';
+
+$note[8] = '<div class="subparagraph">Version 0.8 (23-02-2016)</div>
+<div class="large_text">
+<ul>
+<li>Hot fix release to help one of the launching customers!</li>
 <li>Bugfix: Fix 3 nasty bugs which only occur the first installed day.</li>
 <li>Bugfix: Used gas years report is now showing correct data.</li>
-<li>Bugfix: Kampstrup and Landis P1 sensor script is now working correct.</li>
+<li>Bugfix: Kampstrup energy sensor script is now working correct.</li>
 </ul>
 </div>';
 
@@ -51,7 +59,8 @@ $note[7] = '<div class="subparagraph">Version 0.7 (20-02-2016)</div>
 <li>General: Added option to enable chart legend.</li>
 <li>General: Added option to set chart dimenision.</li>
 <li>General: Setting page support now combobox to prevent invalid input.</li>
-<li>General: Add support for Kampstrup and Landis energy meters.</li>
+<li>General: Add support for Kampstrup energy meters.</li>
+<li>General: Add support for Landis energy meters.</li>
 <li>Bugfix: New version check is now working correct.</li>
 <li>Bugfix: Month and Day navigation is now working correct.</li>
 </ul>

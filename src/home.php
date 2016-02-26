@@ -30,7 +30,6 @@
 $solar_meter_present = plaatenergy_db_get_config_item('solar_meter_present');
 $weather_station_present = plaatenergy_db_get_config_item('weather_station_present');
 $energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present');
-
 $password = plaatenergy_post("password", "");
 
 /*
@@ -80,7 +79,8 @@ function check_energy_meter() {
   
    global $energy_meter_present;
 
-$page = "";	
+	$page = "";	
+	
 	if ($energy_meter_present=="true") {
 	   
 		$timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
@@ -113,6 +113,7 @@ function check_weather_station() {
    global $weather_station_present;
     
    $page = "";
+	
    if ($weather_station_present=="true") {
   
 		$timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
@@ -146,17 +147,19 @@ function check_weather_station() {
 function plaatenergy_home_login_event() {
 
 	global $pid;
+	global $session;
 	global $password;
 	
 	$home_password = plaatenergy_db_get_config_item('home_password');
 	
 	if ($home_password == $password) {
 	
-		// Correct password, redirect to setting page
+		$session = md5(date('Y-m-d H:i:s')
+		plaatenergy_db_set_config_item('session_id', $session);
+		
 		$pid = PAGE_HOME;
 	}
 }
-
 
 /*
 ** ---------------------------------------------------------------- 

@@ -279,22 +279,24 @@ $lang['meter_reading_used_low'] = 'Initial energy meter reading - used low (kwh)
 $lang['meter_reading_used_normal'] = 'Initial energy meter reading - used normal (kwh)';
 $lang['meter_reading_delivered_low'] = 'Initial energy meter reading - delivered low (kwh)';
 $lang['meter_reading_delivered_normal'] = 'Initial energy meter reading - delivered normal (kwh)';
-$lang['energy_meter_vendor'] = 'Energy meter vendor';
 $lang['meter_reading_used_gas'] = 'Initial gas meter reading (m&sup3;)';
 
-$lang['energy_price'] = 'Energy price per kwh';
 $lang['gas_price' ] = 'Gas price per m&sup3;';
-$lang['energy_use_forecast'] = 'Energy use annual forecast (kWh)';
-$lang['energy_delivery_forecast'] = 'Energy delivery annual forecast (kWh)';
 $lang['gas_use_forecast'] = 'Gas use annual forecast (m&sup3;)';
 
 $lang['energy_meter_present'] = 'Energy meter device present';
-$lang['solar_meter_present'] = 'Solar meter device present';
-$lang['weather_station_present'] = 'Weather Station device present';
+$lang['energy_meter_vendor'] = 'Energy meter vendor';
+$lang['energy_price'] = 'Energy price per kwh';
+$lang['energy_use_forecast'] = 'Energy use annual forecast (kWh)';
+$lang['energy_delivery_forecast'] = 'Energy delivery annual forecast (kWh)';
 
+$lang['solar_meter_present'] = 'Solar meter device present';
+$lang['solar_meter_vendor'] = 'Solar meter vendor';
 $lang['solar_meter_ip' ] = 'Solar meter TCP/IP address';
 $lang['solar_meter_port'] = 'Solar meter TCP port number';
 $lang['solar_meter_serial_number'] = 'Solar meter serial number';
+
+$lang['weather_station_present'] = 'Weather Station device present';
 
 $lang['slide_show_on'] = 'Activate slide show if user is inactive';
 $lang['slide_show_page_delay'] = 'Slide show page delay (seconds)';

@@ -283,7 +283,7 @@ function plaatenergy_db_get_config_item($key) {
  * @param $value Value of key
  */
 function plaatenergy_db_set_config_item($token, $value) {
-   $sql = 'update config set value="'.$value.'" where token="'.$token.'"';
+   $sql = 'update config set value="'.$value.'", date=SYSDATE() where token="'.$token.'"';
    plaatenergy_db_query($sql);
 }
 

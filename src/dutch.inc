@@ -281,25 +281,28 @@ $lang['meter_reading_used_low'] = 'Start energie meterstand - afgenomen laag (kw
 $lang['meter_reading_used_normal'] = 'Start energie meterstand - afgenomen normaal (kwh)';
 $lang['meter_reading_delivered_low'] = 'Start energie meterstand - geleverd laag (kwh)';
 $lang['meter_reading_delivered_normal'] = 'Start energie meterstand - geleverd normaal (kwh)';
-$lang['energy_meter_vendor'] = 'Energie meter producent';
 $lang['meter_reading_used_gas'] = 'Start gas meterstand (m&sup3;)';
 
-$lang['energy_price'] = 'Energie prijs per kwh';
-$lang['gas_price' ] = 'Gas prijs per m&sup3;';
-$lang['energy_use_forecast'] = 'Jaar voorspelling energie verbruik (kWh)';
-$lang['energy_delivery_forecast'] = 'Jaar voorspelling energie teruglevering (kWh)';
 $lang['gas_use_forecast'] = 'Jaar voorspelling gas verbruik (m&sup3;)';
+$lang['gas_price' ] = 'Gas prijs per m&sup3;';
 
 $lang['energy_meter_present'] = 'Energie meter aanwezig';
-$lang['solar_meter_present'] = 'Solar meter aanwezig';
-$lang['weather_station_present'] = 'Weerstation aanwezig';
+$lang['energy_meter_vendor'] = 'Energie meter producent';
+$lang['energy_use_forecast'] = 'Jaar voorspelling energie verbruik (kWh)';
+$lang['energy_delivery_forecast'] = 'Jaar voorspelling energie teruglevering (kWh)';
+$lang['energy_price'] = 'Energie prijs per kwh';
 
+$lang['solar_meter_present'] = 'Solar meter aanwezig';
+$lang['solar_meter_vendor'] = 'Solar meter leverancier';
 $lang['solar_meter_ip' ] = 'Solar meter TCP/IP adres';
 $lang['solar_meter_port'] = 'Solar meter TCP poort nummer';
 $lang['solar_meter_serial_number'] = 'Solar meter serial nummer';
 
+$lang['weather_station_present'] = 'Weerstation aanwezig';
+
 $lang['slide_show_on'] = 'Activeert automatisch slide show als gebruiker inactief is';
 $lang['slide_show_page_delay'] = 'Slide show pagina vertraging (seconden)';
+
 $lang['chart_legend'] = 'Grafiek legenda option';
 $lang['chart_dimensions'] = 'Grafiek grootte in pixels';
 
