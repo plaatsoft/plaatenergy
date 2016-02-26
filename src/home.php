@@ -154,7 +154,7 @@ function plaatenergy_home_login_event() {
 	
 	if ($home_password == $password) {
 	
-		$session = md5(date('Y-m-d H:i:s')
+		$session = md5(date('Y-m-d H:i:s'));
 		plaatenergy_db_set_config_item('session_id', $session);
 		
 		$pid = PAGE_HOME;
@@ -200,8 +200,10 @@ function plaatenergy_home_login_page() {
  */
 function plaatenergy_home_page() {
 
+	// input
 	global $weather_station_present;
 	global $solar_meter_present;
+	global $session;
 	
 	$page = '<h1>';
 	$page .= t('TITLE').' ';
@@ -331,7 +333,7 @@ function plaatenergy_home_page() {
 		$page .= plaatenergy_link('pid='.PAGE_DONATE, t('LINK_DONATE'));
 		$page .= '</td>';
 		$page .= '<td>';
-		$page .= '<a href="./ui/">'.t('LINK_GUI').'</a>';
+		$page .= '<a href="./ui?session='.$session.'">'.t('LINK_GUI').'</a>';
 		$page .= '</td>';
 		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_RELEASE_NOTES, t('LINK_RELEASE_NOTES'));

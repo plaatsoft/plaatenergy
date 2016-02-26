@@ -91,7 +91,7 @@ if (strlen($token)>0) {
 $home_password = plaatenergy_db_get_config_item('home_password');
 
 if (strlen($home_password)>0) {
-	if ($session_id!=plaatenergy_db_get_config_item('session_id'))    
+	if ($session!=plaatenergy_db_get_config_item('session_id')) {
 		// User not login, Redirect to login page
 		$pid = PAGE_HOME_LOGIN;
 	}

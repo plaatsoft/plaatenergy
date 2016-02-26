@@ -416,6 +416,19 @@ function plaatenergy_next_year($year) {
 	return $year+1;  
 }
 
+function plaatenergy_get($label, $default) {
+	
+	$value = $default;
+	
+	if (isset($_GET[$label])) {
+		$value = $_GET[$label];
+		$value = stripslashes($value);
+		$value = htmlspecialchars($value);
+	}
+	
+	return $value;
+}
+
 /**
  * Process post parameters 
  */

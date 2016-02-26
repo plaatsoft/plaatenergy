@@ -1,5 +1,7 @@
 <?php
 	include '../general.inc';
+
+        $session = plaatenergy_get('session', '');
 	
 	function random_color () {
 		$color = ["blue", "green", "pink", "brown", "red", "bluegray", "purple", "teal", "orange", "indigo", "deeppurple", "gray"];
@@ -19,6 +21,9 @@
 	</head>
 	<body>
                <form id="plaatenergy" method="POST" action='../.'>
+
+		<input type="hidden" name="session" value="<?php echo $session?>" />
+
                
 		<div class="shadow" onclick="close_all_sidebars();"></div>
 		<div class="bg"></div>
