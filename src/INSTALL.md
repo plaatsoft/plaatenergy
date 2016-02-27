@@ -8,7 +8,7 @@ sudo apt-get install apache2
 sudo apt-get install php5
 sudo apt-get install python
 sudo apt-get install mysql-server
-sudo apt-get install svn
+sudo apt-get install python-mysqldb
 
 ### Step 2 . Create mysql plaatenergy database
 mysql -u root -p
@@ -17,11 +17,13 @@ GRANT ALL ON plaatenergy.* TO plaatenergy@`127.0.0.1` IDENTIFIED BY `plaatenergy
 FLUSH PRIVILEGES;
 QUIT;
 
-### Step 3. Get latest official version of PlaatEnergy from GitHub repository:
+### Step 3. Download PlaatEnergy from plaatsoft.nl.
+Copy zip file to /tmp
+login on the raspberry with user `pi`
 cd /var/www/html
-svn checkout https://github.com/wplaat/plaatenergy.git/tags/v0.7 plaatenergy
-cd /var/www/plaatenergy
-chmod a+wrx /var/www/html/plaatenergy/backup
+sudo cp /tmp/plaatenergy.zip .
+sudo unzip *.zip
+sudo chmod a+wrx /var/www/html/plaatenergy/backup
 
 ### Step 4. Create config.inc with correct database settings
 cp config.inc.sample config.inc
