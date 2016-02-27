@@ -40,14 +40,15 @@ function plaatenergy_month_out_energy_page() {
 	$next_date = plaatenergy_next_month($date);
 	
 	list($year, $month) = explode("-", $date);	
-        $month = ltrim($month ,'0');
+	$month = ltrim($month ,'0');
 	
 	$energy_price = plaatenergy_db_get_config_item('energy_price');
 	$energy_use_forecast = plaatenergy_db_get_config_item('energy_use_forecast');
+	$solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor');
 	
-	$data="";
+	$data = "";
 	$value = 0;
-	$total = 0;
+	$total_sum = 0;
 	$count = 0;
 	$max = 0;
 	
@@ -60,8 +61,12 @@ function plaatenergy_month_out_energy_page() {
 			if (date('m', $time)==$month) {
 				$timestamp1=date('Y-m-d 00:00:00', $time);
 				$timestamp2=date('Y-m-d 23:59:59', $time);
-
-				$sql = 'select max(pac) as pac FROM solar where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';
+				
+				if ($solar_meter_vendor=='unknown') {
+					$sql = 'select max(vermogenterug) as pac FROM energy where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';
+				} else {
+					$sql = 'select max(pac) as pac FROM solar where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';
+				}
 
 				$result = plaatenergy_db_query($sql);
 				$row = plaatenergy_db_fetch_object($result);
@@ -91,39 +96,58 @@ function plaatenergy_month_out_energy_page() {
 	
 		for($d=1; $d<=31; $d++) {
 		
-			$time=mktime(12, 0, 0, $month, $d, $year);          
+			$time=mktime(12, 0, 0, $month, $d, $year);  
+        
 			if (date('m', $time)==$month) {
 				$timestamp1=date('Y-m-d 00:00:00', $time);
 				$timestamp2=date('Y-m-d 23:59:59', $time);
 		
-				$sql = 'select solar FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
-		
-				$result = plaatenergy_db_query($sql);
-				$row = plaatenergy_db_fetch_object($result);
+				$sql1  = 'select sum(dalterug) as dalterug, sum(piekterug) as piekterug, ';
+				$sql1 .= 'sum(solar) as solar from energy_day ';
+				$sql1 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+
+				$result1 = plaatenergy_db_query($sql1);
+				$row1 = plaatenergy_db_fetch_object($result1);
 	
-				if (isset($row->solar)) {
-					$value = $row->solar;
-				
-					$total += $value;
+				$delivered_low=0;
+				$delivered_normal=0;
+				$delivered_local=0;
+				$total = 0;
+	
+				if ( isset($row1->solar)) {
 					$count++;
-				} else {
-					$value=0;
+					
+					$delivered_low = $row1->dalterug;
+					$delivered_normal = $row1->piekterug;
+					$tmp = $row1->solar - $delivered_low -$delivered_normal;
+					if ($tmp >0 ) {
+						$delivered_local=$tmp;
+					}
+					$total = $delivered_low + $delivered_normal + $delivered_local;
 				}
+				$total_sum += $total;
 		
+						
 				if (strlen($data)>0) {
 					$data.=',';
 				}
 			
-				if ($eid==EVENT_KWH) {
-					$data .= "['".date("d-m", $time)."',".round($value,2)."]";
+				$price2 = $total * $energy_price;
+				$data .= "['".date("d-m", $time)."',"
+				
+				if ($eid==EVENT_KWH) {	
+					$data .= round($delivered_low,2).',';
+					$data .= round($delivered_normal,2).',';
+					$data .= round($delivered_local,2).',';
+					$data .= round($total_forecast,2).']';
 				} else { 
-					$data .= "['".date("d-m", $time)."',".round($value*$energy_price,2)."]";
+					$data .= round($price2,2).']';
 				}
 			}
 		}
 		
 		if ($eid==EVENT_KWH) {
-			$json = "[['','".t('DELIVERED_KWH')."'],".$data."]";
+			$json = "[['','".t('DELIVERED_LOW_KWH')."','".t('DELIVERED_NORMAL_KWH')."','".t('DELIVERED_LOCAL_KWH')."'],".$data."]";
 	
 		} else {
 			$total= $total * $energy_price;
@@ -143,10 +167,10 @@ function plaatenergy_month_out_energy_page() {
           bar: {groupWidth: "90%"},
           legend: { position: "'.plaatenergy_db_get_config_item('chart_legend').'", textStyle: {fontSize: 10} },
           vAxis: {format: "decimal" },
-			 isStacked: false,';
+			 isStacked: true,';
 			 
 	if ($eid==EVENT_EURO) {
-		$page .= "colors: ['#e0440e']";
+		$page .= "colors: ['#e0440e'],";
 	}
 	
 	$page .= '
@@ -173,13 +197,13 @@ function plaatenergy_month_out_energy_page() {
 
 	$value = 0;	
 	if ($count>0) {
-		$value = $total/$count;
+		$value = $total_sum/$count;
 	}
 	
 	switch ($eid) {
 		
 		case EVENT_KWH:
-			$page .= t('AVERAGE_PER_DAY_KWH', round(($value),2), round($total,2));
+			$page .= t('AVERAGE_PER_DAY_KWH', round(($value),2), round($total_sum,2));
 			break;
 			
 		case EVENT_MAX:
@@ -187,7 +211,7 @@ function plaatenergy_month_out_energy_page() {
 			break;
 			
 		case EVENT_EURO:
-			$page .= t('AVERAGE_PER_DAY_EURO', round(($value),2), round($total,2));
+			$page .= t('AVERAGE_PER_DAY_EURO', round(($value),2), round($total_sum,2));
 			break;
 				
 		default:

@@ -40,21 +40,15 @@ function plaatenergy_month_in_energy_page() {
 	$next_date = plaatenergy_next_month($date);
 	
 	list($year, $month) = explode("-", $date);	
-        $month = ltrim($month ,'0');
+	$month = ltrim($month ,'0');
 	
 	$energy_price = plaatenergy_db_get_config_item('energy_price');
 	$energy_use_forecast = plaatenergy_db_get_config_item('energy_use_forecast');
 	
-	$dal_first=0;
-	$piek_first=0;
-	$dalterug_first=0;
-	$piekterug_first=0;
-	$solar_first=0;
-
-	$total=0;
-	$total_price=0;
-	$count=0;
-	$data="";
+	$total = 0;
+	$total_price = 0;
+	$count = 0;
+	$data = "";
 	
 	for($d=1; $d<=31; $d++)
 	{
@@ -65,25 +59,26 @@ function plaatenergy_month_in_energy_page() {
 			$timestamp1=date('Y-m-d 00:00:00', $time);
 			$timestamp2=date('Y-m-d 23:59:59', $time);
 	
-			$dal_value=0;
-			$piek_value=0;
-			$solar_value=0;
-			$dalterug_value=0;
-			$piekterug_value=0;
-			$verbruikt=0;
+			$dal_value = 0;
+			$piek_value = 0;
+			$solar_value = 0;
+			$dalterug_value = 0;
+			$piekterug_value = 0;
+			$verbruikt = 0;
 	
-			$sql = 'select sum(dal) as dal, sum(piek) as piek, sum(dalterug) as dalterug, sum(piekterug) as piekterug, sum(solar) as solar ';
-			$sql .= 'FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+			$sql  = 'select sum(dal) as dal, sum(piek) as piek, sum(dalterug) as dalterug, ';
+			$sql .= 'sum(piekterug) as piekterug, sum(solar) as solar ';
+			$sql .= 'from energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 	
 			$result = plaatenergy_db_query($sql);
 			$row = plaatenergy_db_fetch_object($result);
 	
 			if (isset($row->dal)) {
-				$dal_value= $row->dal;
-				$piek_value= $row->piek;
-				$dalterug_value= $row->dalterug;
-				$piekterug_value= $row->piekterug;
-				$solar= $row->solar;
+				$dal_value = $row->dal;
+				$piek_value = $row->piek;
+				$dalterug_value = $row->dalterug;
+				$piekterug_value = $row->piekterug;
+				$solar = $row->solar;
 	
 				$verbruikt = $solar-$dalterug_value-$piekterug_value;
 				if ($verbruikt<0) {
@@ -125,7 +120,7 @@ function plaatenergy_month_in_energy_page() {
           bar: {groupWidth: "90%"},
           legend: { position: "'.plaatenergy_db_get_config_item('chart_dimensions').'", textStyle: {fontSize: 10} },
           vAxis: {format: "decimal"},
-          stacked:1,';
+          isStacked:true,';
          
 	if ($eid==EVENT_EURO) {
 		$page .= "colors: ['#e0440e'],";

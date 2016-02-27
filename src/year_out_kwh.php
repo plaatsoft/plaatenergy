@@ -79,7 +79,7 @@ function plaatenergy_year_out_energy_page() {
 			}
 			$total = $delivered_low + $delivered_normal + $delivered_local;
 		}
-	        $total_forecast = $out_forecast[$m]*$energy_delivery_forecast;
+		$total_forecast = $out_forecast[$m] * $energy_delivery_forecast;
 
 		if (strlen($data)>0) {
 			$data.=',';
@@ -125,7 +125,7 @@ function plaatenergy_year_out_energy_page() {
           bar: {groupWidth: "90%"},
           legend: { position: "'.plaatenergy_db_get_config_item('chart_legend').'", textStyle: {fontSize: 10} },
           vAxis: {format: "decimal" },
- isStacked:true,';
+			 isStacked:true,';
 			 
 	if ($eid==EVENT_KWH) {
 		$page .= '
@@ -152,10 +152,12 @@ function plaatenergy_year_out_energy_page() {
 
         google.visualization.events.addListener(chart, "select", selectHandler);
 
-        function selectHandler(e)     {
-           var year = data.getValue(chart.getSelection()[0].row, 0);
-			  link("pid='.PAGE_YEAR_OUT_ENERGY.'&eid='.$eid.'&date="+year+"-1-1");
-        }
+
+			function selectHandler(e)     {
+				var date = data.getValue(chart.getSelection()[0].row, 0);
+				var month = date.split("-");
+				link("pid='.PAGE_MONTH_OUT_ENERGY.'&eid='.$eid.'&date='.$year.'-"+month[0]+"-1");
+			}
       }
     </script>';
 
