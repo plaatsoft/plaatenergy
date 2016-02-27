@@ -30,6 +30,7 @@
 $note[9] = '<div class="subparagraph">Version 0.9 (25-02-2016)</div>
 <div class="large_text">
 <ul>
+<li>General: Redesign deliverable charts  (Now they are more flexible).</li>
 <li>General: Added option to select solar meter vendor.</li>
 <li>General: Improve theme and language hyperlink.</li>
 <li>General: Added very basic home password feature.</li>

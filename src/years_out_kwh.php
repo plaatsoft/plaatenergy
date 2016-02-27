@@ -112,6 +112,10 @@ function plaatenergy_years_out_energy_page() {
 		if ($total>$total_max) {
 			$total_max=$total;
 		}
+
+		if ($forecast_total > $total_max) {
+			$total_max=$forecast_total;
+		}
 	}
 
 	if ($eid==EVENT_KWH) {
@@ -139,7 +143,7 @@ function plaatenergy_years_out_energy_page() {
                          colors: ["#0066cc", "#808080"],
 		         vAxis: {   
                                    format:"decimal", 
-                                   viewWindow: { min: 0, max: "'.round($total_max+50).'" },
+                                   viewWindow: { min: 0, max: "'.round($total_max+60).'" },
                                  },';
 	} else {
 		$page .= 'colors: ["#e0440e"],';
