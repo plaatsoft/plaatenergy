@@ -19,7 +19,7 @@
   <td id="projectlogo"><img alt="Logo" src="128.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">PlaatEnergy
-   &#160;<span id="projectnumber">v0.8</span>
+   &#160;<span id="projectnumber">v0.9</span>
    </div>
   </td>
  </tr>
@@ -45,9 +45,9 @@
 <h3>Step 1 - Install following depending thirdparty software packages</h3>
 <p>sudo apt-get install apache2 sudo apt-get install php5 sudo apt-get install python sudo apt-get install mysql-server sudo apt-get install svn</p>
 <h3>Step 2 . Create mysql plaatenergy database</h3>
-<p>mysql -u root -p CREATE DATABASE plaatenergy; GRANT ALL ON plaatenergy.* TO plaatenergy&lt;tt&gt;127.0.0.1 IDENTIFIED BY <code>plaatenergy</code>; FLUSH PRIVILEGES;</p>
+<p>mysql -u root -p CREATE DATABASE plaatenergy; GRANT ALL ON plaatenergy.* TO plaatenergy&lt;tt&gt;127.0.0.1 IDENTIFIED BY <code>plaatenergy</code>; FLUSH PRIVILEGES; QUIT;</p>
 <h3>Step 3. Get latest official version of PlaatEnergy from GitHub repository:</h3>
-<p>cd /var/www/html svn checkout <a href="https://github.com/wplaat/plaatenergy.git/tags/v0.6">https://github.com/wplaat/plaatenergy.git/tags/v0.6</a> plaatenergy cd /var/www/plaatenergy chmod a+wrx /var/www/html/plaatenergy/backup</p>
+<p>cd /var/www/html svn checkout <a href="https://github.com/wplaat/plaatenergy.git/tags/v0.7">https://github.com/wplaat/plaatenergy.git/tags/v0.7</a> plaatenergy cd /var/www/plaatenergy chmod a+wrx /var/www/html/plaatenergy/backup</p>
 <h3>Step 4. Create config.inc with correct database settings</h3>
 <p>cp config.inc.sample config.inc</p>
 <h3>Step 5. Add the following cron job:</h3>
@@ -57,9 +57,9 @@
 <h3>Step 6. Go to <a href="http://">http://</a>[raspberry-ip]/plaatenergy.</h3>
 <p>Select setting page and customize plaatenergy to your personal needs!</p>
 <h3>Step 7. Installation is now ready</h3>
-<p>Now every minute the energy, gas, (optional) solar and (optional) weatherstation data is fetch and processed.</p>
+<p>Now every minute the energy, gas, (optional) solar and (optional) weather station data is fetch and processed.</p>
 <p>If there are any questions please let me known!</p>
-<p>wplaat </p>
+<p>wplaat <a href="#" onclick="location.href='mai'+'lto:'+'inf'+'o@'+'pla'+'at'+'sof'+'t.'+'nl'; return false;">info@<span style="display: none;">.nosp@m.</span>plaa<span style="display: none;">.nosp@m.</span>tsoft<span style="display: none;">.nosp@m.</span>.nl</a> </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -40,25 +40,21 @@ function plaatenergy_years_out_energy_page() {
 	$next_date = plaatenergy_next_year($date);
 	
 	list($year) = explode("-", $date);	
-	
-	$energy_price = plaatenergy_db_get_config_item('energy_price');
-	$energy_use_forecast = plaatenergy_db_get_config_item('energy_use_forecast');
-	
-	
+
 	$energy_price = plaatenergy_db_get_config_item('energy_price');
 	$energy_delivery_forecast = plaatenergy_db_get_config_item('energy_delivery_forecast');
 
 	$total_sum=0;
 	$total_price=0;
-        $total_max=0;
+	$total_max=0;
 	$count=0;
 	$data="";
 	
 	for($y=($year-10); $y<=$year; $y++) {
 	
-		$time=mktime(0, 0, 0, 1, 1, $y);
-		$timestamp1=date('Y-1-1', $time);
-		$timestamp2=date('Y-12-t', $time);
+		$time = mktime(0, 0, 0, 1, 1, $y);
+		$timestamp1 = date('Y-1-1', $time);
+		$timestamp2 = date('Y-12-t', $time);
 	
 		$sql1  = 'select sum(dalterug) as dalterug, sum(piekterug) as piekterug, ';
 		$sql1 .= 'sum(solar) as solar from energy_day ';
@@ -70,7 +66,7 @@ function plaatenergy_years_out_energy_page() {
 		$delivered_low=0;
 		$delivered_normal=0;
 		$delivered_local=0;
-	        $total = 0;
+		$total = 0;
 	
 		if ( isset($row1->solar)) {
 			$count++;
@@ -102,8 +98,7 @@ function plaatenergy_years_out_energy_page() {
 		
 		$price2 = $total * $energy_price;
 		$data .= "['".date("Y", $time)."',";
-		if ($eid==EVENT_KWH) {
-	
+		if ($eid==EVENT_KWH) {	
 			$data .= round($delivered_low,2).',';
 			$data .= round($delivered_normal,2).',';
 			$data .= round($delivered_local,2).',';
