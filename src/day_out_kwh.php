@@ -77,15 +77,81 @@ function plaatenergy_day_out_energy_page() {
 		$etotal_prev = $row->etotal;
 	}
 	 
+	
+	$delivered_low = 0;
+	$delivered_normal = 0;
+	$delivered_local = 0;
+
+	while ($i<96) {
+	 	$timestamp1 = date("Y-m-d H:i:s", $current_date+(900*$i));
+		$timestamp2 = date("Y-m-d H:i:s", $current_date+(900*($i+1)));
+
+		$sql1  = 'select max(dalterug) as dalterug, max(piekterug) as piekterug from energy where ';
+		$sql1 .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'"';	
+		$result1 = plaatenergy_db_query($sql1);
+		$row1 = plaatenergy_db_fetch_object($result1);
+			
+		$timestamp = date("Y-m-d H:i:s", $current_date+(900*$i));
+		$sql2 = 'select max(etotal) as etotal FROM solar where timestamp="'.$timestamp.'"';		
+		$result2 = plaatenergy_db_query($sql2);
+		$row2 = plaatenergy_db_fetch_object($result2);			
+			
+		if ( isset($row1->dalterug)) {
+				
+			if ($row1->dalterug>=$dalterug_prev) {
+				$delivered_low = $row1->dalterug - $dalterug_prev;
+			} else {
+				$delivered_low = $row1->dalterug;
+			}
+						if ($row1->piekterug>=$piekterug_prev) {
+				$delivered_normal = $row1->piekterug - $piekterug_prev;
+			} else {
+				$delivered_normal = $row1->piekterug;
+			}
+		}
+		
+		if ( isset($row2->etotal)) {
+			$delivered_local = $row2->etotal - $etotal_prev - $delivered_low - $delivered_normal;
+			if ($delivered_local<0) {
+				$delivered_local = 0;
+			}
+		}
+		
+		// Data in the future is always 0!	
+		if ($timestamp>date("Y-m-d H:i:s")) {
+			$delivered_low = 0;
+			$delivered_normal = 0;
+			$delivered_local = 0;
+			
+		} else {
+		
+			$total = $delivered_low + $delivered_normal + $delivered_local;
+		}
+		
+		if (strlen($data)>0) {
+			$data.=',';
+		}
+		
+		$data .= "['".date("H:i", $current_date+(900*$i))."',";
+		$data .= round($delivered_low,2).',';
+		$data .= round($delivered_normal,2).',';
+		$data .= round($delivered_local,2).']';
+		$i++;
+	}		
+	$json = "[['','".t('DELIVERED_LOW_KWH')."','".t('DELIVERED_NORMAL_KWH')."','".t('DELIVERED_LOCAL_KWH')."'],".$data."]";
+
+
 	if ($eid==EVENT_WATT) {
 
+		$data="";
+		
 		$timestamp1 = date("Y-m-d 00:00:00", $current_date);
 		$timestamp2 = date("Y-m-d 23:59:59", $current_date);
 	
 		if ($solar_meter_vendor=='unknown') {		
-			$sql  = 'select timestamp, (dalterug + piekterug) as etoday, vermogenterug as pac FROM energy ';
+			$sql  = 'select timestamp, vermogenterug as pac FROM energy ';
 		} else {	
-			$sql  = 'select timestamp, etoday, pac FROM solar ';
+			$sql  = 'select timestamp, pac FROM solar ';
 		}
 		$sql .= 'where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp';
 		
@@ -96,7 +162,6 @@ function plaatenergy_day_out_energy_page() {
 			$value = 0;
 			if ( isset($row->pac)) {
 				$value= $row->pac;
-				$total = $row->etoday;
 			}
 
 			if (strlen($data)>0) {
@@ -108,73 +173,7 @@ function plaatenergy_day_out_energy_page() {
 		}
 		$json = "[".$data."]";
 		
-	} else {
-		
-		$delivered_low = 0;
-		$delivered_normal = 0;
-		$delivered_local = 0;
-
-		while ($i<96) {
-		 	$timestamp1 = date("Y-m-d H:i:s", $current_date+(900*$i));
-			$timestamp2 = date("Y-m-d H:i:s", $current_date+(900*($i+1)));
-
-			$sql1  = 'select max(dalterug) as dalterug, max(piekterug) as piekterug from energy where ';
-			$sql1 .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'"';	
-			$result1 = plaatenergy_db_query($sql1);
-			$row1 = plaatenergy_db_fetch_object($result1);
-			
-			$timestamp = date("Y-m-d H:i:s", $current_date+(900*$i));
-			$sql2 = 'select max(etotal) as etotal FROM solar where timestamp="'.$timestamp.'"';		
-			$result2 = plaatenergy_db_query($sql2);
-			$row2 = plaatenergy_db_fetch_object($result2);			
-			
-			if ( isset($row1->dalterug)) {
-				
-				if ($row1->dalterug>=$dalterug_prev) {
-					$delivered_low = $row1->dalterug - $dalterug_prev;
-				} else {
-					$delivered_low = $row1->dalterug;
-				}
-		
-				if ($row1->piekterug>=$piekterug_prev) {
-					$delivered_normal = $row1->piekterug - $piekterug_prev;
-				} else {
-					$delivered_normal = $row1->piekterug;
-				}
-			}
-			
-			if ( isset($row2->etotal)) {
-				$delivered_local = $row2->etotal - $etotal_prev - $delivered_low - $delivered_normal;
-				if ($delivered_local<0) {
-					$delivered_local = 0;
-				}
-			}
-			
-			// Data in the future is always 0!	
-			if ($timestamp>date("Y-m-d H:i:s")) {
-				$delivered_low = 0;
-				$delivered_normal = 0;
-				$delivered_local = 0;
-				
-			} else {
-			
-				$total = $delivered_low + $delivered_normal + $delivered_local;
-			}
-			
-			if (strlen($data)>0) {
-				$data.=',';
-			}
-			
-			$data .= "['".date("H:i", $current_date+(900*$i))."',";
-			$data .= round($delivered_low,2).',';
-			$data .= round($delivered_normal,2).',';
-			$data .= round($delivered_local,2).']';
-
-			$i++;
-		}		
-		$json = "[['','".t('DELIVERED_LOW_KWH')."','".t('DELIVERED_NORMAL_KWH')."','".t('DELIVERED_LOCAL_KWH')."'],".$data."]";
-	}
-
+	} 
 		
 	if ($eid==EVENT_WATT) {
 	
