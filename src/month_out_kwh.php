@@ -126,20 +126,18 @@ function plaatenergy_month_out_energy_page() {
 					$total = $delivered_low + $delivered_normal + $delivered_local;
 				}
 				$total_sum += $total;
-		
 						
 				if (strlen($data)>0) {
 					$data.=',';
 				}
 			
 				$price2 = $total * $energy_price;
-				$data .= "['".date("d-m", $time)."',"
+				$data .= "['".date("d-m", $time)."',";
 				
 				if ($eid==EVENT_KWH) {	
 					$data .= round($delivered_low,2).',';
 					$data .= round($delivered_normal,2).',';
-					$data .= round($delivered_local,2).',';
-					$data .= round($total_forecast,2).']';
+					$data .= round($delivered_local,2).']';
 				} else { 
 					$data .= round($price2,2).']';
 				}

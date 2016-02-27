@@ -28,6 +28,7 @@
 */
 
 $solar_meter_present = plaatenergy_db_get_config_item('solar_meter_present');
+$solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor');
 $weather_station_present = plaatenergy_db_get_config_item('weather_station_present');
 $energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present');
 $password = plaatenergy_post("password", "");
@@ -45,15 +46,16 @@ $password = plaatenergy_post("password", "");
 function check_solar_meter() {
 
   global $solar_meter_present;
+  global $solar_meter_vendor;
 
   $page="";
 
-  if ($solar_meter_present=="true") {
+  if (($solar_meter_present=="true") && ($solar_meter_vendor!="unknown")) {
   
-	$timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
+   $timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
    $sql = 'select etotal from solar where timestamp >= "'.$timestamp.'"';	
    $result = plaatenergy_db_query($sql);
-	$count = plaatenergy_db_num_rows($result);
+   $count = plaatenergy_db_num_rows($result);
 	
    if ($count>0){
 
