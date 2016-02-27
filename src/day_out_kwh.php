@@ -36,15 +36,17 @@ function plaatenergy_day_out_energy_page() {
 	global $date; 
 	global $out_forecast;
 
-        $energy_delivery_forecast = plaatenergy_db_get_config_item('energy_delivery_forecast');
+	$energy_delivery_forecast = plaatenergy_db_get_config_item('energy_delivery_forecast');
+	$dalterug_prev = plaatenergy_db_get_config_item('meter_reading_delivered_low');
+	$piekterug_prev = plaatenergy_db_get_config_item('meter_reading_delivered_normal');
 
-        $prev_date = plaatenergy_prev_day($date);
-        $next_date = plaatenergy_next_day($date);
+	$prev_date = plaatenergy_prev_day($date);
+	$next_date = plaatenergy_next_day($date);
 		
 	list($year, $month, $day) = explode("-", $date);	
-        $day = ltrim($day ,'0');
-        $month = ltrim($month ,'0');
-	$current_date=mktime(0, 0, 0, $month, $day, $year);  
+	$day = ltrim($day ,'0');
+	$month = ltrim($month ,'0');
+	$current_date = mktime(0, 0, 0, $month, $day, $year);  
 	
 	$i=0;
 	$data = "";
@@ -52,9 +54,21 @@ function plaatenergy_day_out_energy_page() {
 	$value = 0;	
 	$total = 0;
 	
+	// Get last energy measurement 
+	$sql  = 'select dalterug, piekterug from energy where ';
+	$sql .= 'timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" order by timestamp desc limit 0,1';	
+	$result = plaatenergy_db_query($sql);
+	$row = plaatenergy_db_fetch_object($result);
+
+	if ( isset($row->dalterug) ) {
+		$dalterug_prev = $row->dalterug;
+		$piekterug_prev = $row->piekterug;
+	}     
+	
 	// Get last solar measurement
 	$sql  = 'select etotal from solar where ';
-	$sql .= 'timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" order by timestamp desc limit 0,1';
+	$sql .= 'timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" ';
+	$sql .= 'order by timestamp desc limit 0,1';
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 	
@@ -68,13 +82,18 @@ function plaatenergy_day_out_energy_page() {
 		$timestamp1 = date("Y-m-d 00:00:00", $current_date);
 		$timestamp2 = date("Y-m-d 23:59:59", $current_date);
 	
-		$sql  = 'select timestamp, etoday, pac FROM solar where timestamp>="'.$timestamp1.'" ';
-		$sql .= 'and timestamp<="'.$timestamp2.'" order by timestamp';
+		if ($solar_meter_vendor=='unknown') {		
+			$sql  = 'select timestamp, (dalterug + piekterug) as etotal, vermogenterug as pac FROM solar ';
+		} else {	
+			$sql  = 'select timestamp, etoday, pac FROM solar ';
+		}
+		$sql .= 'where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp';
+		
 		$result = plaatenergy_db_query($sql);
 
 		while ($row = plaatenergy_db_fetch_object($result)) {
 
-			$value=0;
+			$value = 0;
 			if ( isset($row->pac)) {
 				$value= $row->pac;
 				$total = $row->etoday;
@@ -91,39 +110,68 @@ function plaatenergy_day_out_energy_page() {
 		
 	} else {
 		
-		$current_date=mktime(0, 0, 0, $month, $day, $year);
 		while ($i<96) {
 	
+			$delivered_local = 0;
+	
+			$sql1  = 'select max(dalterug) as dalterug, max(piekterug) as piekterug from energy where ';
+			$sql1 .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'"';	
+			$result1 = plaatenergy_db_query($sql1);
+			$row1 = plaatenergy_db_fetch_object($result1);
+			
 			$timestamp = date("Y-m-d H:i:s", $current_date+(900*$i));
-			$sql = 'select etotal FROM solar where timestamp="'.$timestamp.'"';		
-			$result = plaatenergy_db_query($sql);
-			$row = plaatenergy_db_fetch_object($result);
-  
+			$sql2 = 'select max(etotal) as etotal FROM solar where timestamp="'.$timestamp.'"';		
+			$result2 = plaatenergy_db_query($sql2);
+			$row2 = plaatenergy_db_fetch_object($result2);			
+			
+			if ( isset($row1->dal)) {
+				
+				if ($row1->dalterug>=$dalterug_prev) {
+					$delivered_low = $row1->dalterug - $dalterug_prev;
+				} else {
+					$delivered_low = $row1->dalterug;
+				}
+		
+				if ($row1->piekterug>=$piekterug_prev) {
+					$delivered_normal = $row1->piekterug - $piekterug_prev;
+				} else {
+					$delivered_normal = $row1->piekterug;
+				}
+			}
+			
+			if ( isset($row2->etotal)) {
+				$delivered_local = $row2->etotal - $solar_prev - $delivered_normal - $$delivered_normal;
+				if ($delivered_local<0) {
+					$delivered_local = 0;
+				}
+			}
+			
+			// Data in the future is always 0!	
 			if ($timestamp>date("Y-m-d H:i:s")) {
-				$value=0;
-			} 
-
-			if ( isset($row->etotal)) {
-				$value= $row->etotal-$solar_prev;
+				$delivered_low = 0;
+				$delivered_normal = 0;
+				$delivered_local = 0;
+				
+			} else {
+			
+				$total = $delivered_low + $delivered_normal + $delivered_local;
 			}
-
- 			if ($value>$total) {
-			  $total=$value;
-			}
-  
+			
 			if (strlen($data)>0) {
 				$data.=',';
 			}
+			
 			$data .= "['".date("H:i", $current_date+(900*$i))."',";
-			$data .= round($value,2).']';
-		
+			$data .= round($delivered_low,2).',';
+			$data .= round($delivered_normal,2).',';
+			$data .= round($delivered_local,2).']';
+
 			$i++;
 		}		
-		$json = '[["","'.t('DELIVERED_KWH').'"],'.$data.']';
+		$json = "[['','".t('DELIVERED_LOW_KWH')."','".t('DELIVERED_NORMAL_KWH')."','".t('DELIVERED_LOCAL_KWH')."'],".$data."]";
 	}
 
-	
-	
+		
 	if ($eid==EVENT_WATT) {
 	
 		$page = '<script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -163,7 +211,7 @@ function plaatenergy_day_out_energy_page() {
           bar: {groupWidth: "90%"},
           legend: { position: "'.plaatenergy_db_get_config_item('chart_legend').'", textStyle: {fontSize: 10} },
           vAxis: {format: "decimal" },
-			 isStacked: false
+			 isStacked: true
         };
 
         var data = google.visualization.arrayToDataTable('.$json.');
@@ -172,12 +220,11 @@ function plaatenergy_day_out_energy_page() {
       }
 		</script>';
 	}
-    
-        $forecast = ($out_forecast[$month] * $energy_delivery_forecast) / cal_days_in_month (CAL_GREGORIAN, $month, $year);
-;
-               
+		
+	$forecast = ($out_forecast[$month] * $energy_delivery_forecast) / cal_days_in_month (CAL_GREGORIAN, $month, $year);
+ 
 	$page .= '<h1>'.t('TITLE_DAY_OUT_KWH', plaatenergy_dayofweek($date),$day, $month, $year).'</h1>';
-        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions').'"></div>';
+	$page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions').'"></div>';
 
 	$page .= '<div class="remark">';	
 	$page .= t('TOTAL_PER_DAY_KWH', round($total,2), round($forecast,2));
@@ -205,12 +252,6 @@ function plaatenergy_day_out_energy() {
   
      case EVENT_SAVE:
 				plaatenergy_day_out_edit_save_event();
-				break;
-
-		case EVENT_KWH:
-				break;
-				
-		case EVENT_EURO:
 				break;
 	}
 	

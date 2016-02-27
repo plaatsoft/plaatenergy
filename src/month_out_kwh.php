@@ -167,7 +167,9 @@ function plaatenergy_month_out_energy_page() {
           vAxis: {format: "decimal" },
 			 isStacked: true,';
 			 
-	if ($eid==EVENT_EURO) {
+	if ($eid==EVENT_KWH) {
+		$page .= 'colors: ["#0066cc", "#808080"],';
+	} else {
 		$page .= "colors: ['#e0440e'],";
 	}
 	
