@@ -83,7 +83,7 @@ function plaatenergy_day_out_energy_page() {
 		$timestamp2 = date("Y-m-d 23:59:59", $current_date);
 	
 		if ($solar_meter_vendor=='unknown') {		
-			$sql  = 'select timestamp, (dalterug + piekterug) as etotal, vermogenterug as pac FROM energy ';
+			$sql  = 'select timestamp, (dalterug + piekterug) as etoday, vermogenterug as pac FROM energy ';
 		} else {	
 			$sql  = 'select timestamp, etoday, pac FROM solar ';
 		}
