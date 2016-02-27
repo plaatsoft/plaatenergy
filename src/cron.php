@@ -37,12 +37,15 @@ plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 $solar_meter_present = plaatenergy_db_get_config_item('solar_meter_present');
 if ($solar_meter_present=="true") {
-   exec('sudo python /var/www/html/plaatenergy/sensors/omnik/Omnik.py');
+	$solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor');
+	if ($solar_meter_vendor!="unknown") {
+		exec('python /var/www/html/plaatenergy/sensors/solar/'.$solar_meter_vendor.'.py');
+	}
 }
 
 $weather_station_present = plaatenergy_db_get_config_item('weather_station_present');
 if ($weather_station_present=="true") {
-   exec('sudo python /var/www/html/plaatenergy/sensors/weather/weather.py');
+   exec('python /var/www/html/plaatenergy/sensors/weather/weather.py');
 }
 
 $energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present');
@@ -52,7 +55,7 @@ if ($energy_meter_present=="true") {
 }
 
 if ($weather_station_present=="true") {
-   exec('sudo python /var/www/html/plaatenergy/sensors/display/display.py');
+   exec('python /var/www/html/plaatenergy/sensors/display/display.py');
 }
 
 plaatenergy_db_process(EVENT_PROCESS_TODAY);

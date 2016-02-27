@@ -59,16 +59,26 @@ function plaatenergy_years_out_energy_page() {
 		$timestamp1=date('Y-1-1', $time);
 		$timestamp2=date('Y-12-t', $time);
 	
-		$sql1  = 'select sum(solar) as solar from energy_day ';
+		$sql1  = 'select sum(dalterug) as dalterug, sum(piekterug) as piekterug, ';
+		$sql1 .= 'sum(solar) as solar from energy_day ';
 		$sql1 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 	
 		$result1 = plaatenergy_db_query($sql1);
 		$row1 = plaatenergy_db_fetch_object($result1);
 
-		$value=0;
+		$delivered_low=0;
+		$delivered_normal=0;
+		$delivered_local=0;
+		
 		if ( isset($row1->solar)) {
 			$count++;
-			$value=$row1->solar;
+			
+			$delivered_low = $row1->dalterug;
+			$delivered_normal = $rows1->piekterug;
+			$tmp = $rows1->solar - $delivered_low -$delivered_normal;
+			if ($tmp >0 ) 
+				$delivered_local=$tmp;
+			}
 		}
 	
 		$sql2  = 'select month(date) as month from energy_day ';
@@ -86,59 +96,74 @@ function plaatenergy_years_out_energy_page() {
 		if (strlen($data)>0) {
 			$data.=',';
 		}
+		
 		$price2 = $value * $energy_price;
 		$data .= "['".date("Y", $time)."',";
 		if ($eid==EVENT_KWH) {
 	
 			if ($value>0) {
-				$data .= round($value,2).','.round(($forecast_total*$energy_delivery_forecast),2).']';
+				$data .= round($delivered_low,2).',';
+				$data .= round($delivered_normal,2).',';
+				$data .= round($delivered_local,2).',';
+				$data .= round(($forecast_total*$energy_delivery_forecast),2).']';
 			} else {
 				$data .= '0,0]';
 			}
 		} else { 
 			$data .= round($price2,2).']';
 		}
-		$total += $value;
+		$total += $delivered_low + $delivered_normal + $delivered_local;
 		$total_price += $price2;
 	}
 
 	if ($eid==EVENT_KWH) {
-		$json = "[['','".t('DELIVERED_KWH')."', '".t('FORECAST_KWH')."'],".$data."]";
+		$json = "[['','".t('DELIVERED_LOW_KWH')."','".t('DELIVERED_NORMAL_KWH')."','".t('DELIVERED_LOCAL_KWH')."','".t('FORECAST_KWH')."'],".$data."]";
 	} else { 
 		$json = "[['','".t('EURO')."'],".$data."]";
 	}
 	
 	$page = '
-	
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["bar"]});
       google.setOnLoadCallback(drawChart);
       function drawChart() {
 
-       var options = {
+      var options = {
           bars: "vertical",
           bar: {groupWidth: "90%"},
           legend: { position: "'.plaatenergy_db_get_config_item('chart_legend').'", textStyle: {fontSize: 10} },
-          vAxis: {format: "decimal"},';
+          vAxis: {format: "decimal"},
+          isStacked:true,';
 			 
 	if ($eid==EVENT_KWH) {
-		$page .= "colors: ['#0066cc', '#808080']";
+		$page .= '
+                         colors: ["#0066cc", "#808080"],
+		         vAxis: {   
+                                   format:"decimal", 
+                                   viewWindow: { min: 0, max: "'.round($max_forecast+50).'" },
+                                 },';
 	} else {
-		$page .= "colors: ['#e0440e']";
-   }
-   
-	$page .= '};
+		$page .= 'colors: ["#e0440e"],';
+	}
+		
+	$page .= 'series: {
+            0: { targetAxisIndex: 0 },
+            1: { targetAxisIndex: 0 },
+            2: { targetAxisIndex: 0 },
+            3: { targetAxisIndex: 1 },
+          },
+        };
 
-      var data = google.visualization.arrayToDataTable('.$json.');
-      var chart = new google.charts.Bar(document.getElementById("chart_div"));
-      chart.draw(data, google.charts.Bar.convertOptions(options));
+        var data = google.visualization.arrayToDataTable('.$json.');
+        var chart = new google.charts.Bar(document.getElementById("chart_div"));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
 
-      google.visualization.events.addListener(chart, "select", selectHandler);
+        google.visualization.events.addListener(chart, "select", selectHandler);
 
-      function selectHandler(e)     {
+        function selectHandler(e)     {
            var year = data.getValue(chart.getSelection()[0].row, 0);
-			  link("pid='.PAGE_YEAR_OUT_ENERGY.'&eid='.$eid.'&date="+year+"-1-1");
+			  link("pid='.PAGE_YEAR_IN_ENERGY.'&eid='.$eid.'&date="+year+"-1-1");
         }
       }
     </script>';

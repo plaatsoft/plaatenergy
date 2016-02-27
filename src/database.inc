@@ -297,10 +297,6 @@ function plaatenergy_db_process($type) {
   global $month;
   global $day;
 
-  global $prev_year;
-  global $prev_month;
-  global $prev_day;
-
   $meter_reading_used_low = plaatenergy_db_get_config_item('meter_reading_used_low');
   $meter_reading_used_normal = plaatenergy_db_get_config_item('meter_reading_used_normal');
   $meter_reading_delivered_low = plaatenergy_db_get_config_item('meter_reading_delivered_low');
@@ -313,6 +309,7 @@ function plaatenergy_db_process($type) {
   $dalterug = $meter_reading_delivered_low;
   $piekterug = $meter_reading_delivered_normal;
   $etotal = 0;
+  
   $round = 3;
 
   if ($type==EVENT_PROCESS_ALL_DAYS) {
