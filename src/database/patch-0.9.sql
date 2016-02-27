@@ -26,3 +26,6 @@ INSERT INTO config (`id`, `token`, `value`, `date`, readonly) VALUES (NULL, 'sol
 UPDATE config SET options="light,dark" WHERE token="theme"; 
 UPDATE config SET options="en,nl" WHERE token="language"; 
 UPDATE config SET options="unknown,omnik" WHERE token="solar_meter_vendor"; 
+
+
+uPDATE config SET token="home_password" WHERE token="access_password"; 

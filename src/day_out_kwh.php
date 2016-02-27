@@ -83,7 +83,7 @@ function plaatenergy_day_out_energy_page() {
 		$timestamp2 = date("Y-m-d 23:59:59", $current_date);
 	
 		if ($solar_meter_vendor=='unknown') {		
-			$sql  = 'select timestamp, (dalterug + piekterug) as etotal, vermogenterug as pac FROM solar ';
+			$sql  = 'select timestamp, (dalterug + piekterug) as etotal, vermogenterug as pac FROM energy ';
 		} else {	
 			$sql  = 'select timestamp, etoday, pac FROM solar ';
 		}
@@ -116,7 +116,7 @@ function plaatenergy_day_out_energy_page() {
 
 		while ($i<96) {
 		 	$timestamp1 = date("Y-m-d H:i:s", $current_date+(900*$i));
-                	$timestamp2 = date("Y-m-d H:i:s", $current_date+(900*($i+1)));
+			$timestamp2 = date("Y-m-d H:i:s", $current_date+(900*($i+1)));
 
 			$sql1  = 'select max(dalterug) as dalterug, max(piekterug) as piekterug from energy where ';
 			$sql1 .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'"';	
