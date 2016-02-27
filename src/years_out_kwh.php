@@ -48,8 +48,9 @@ function plaatenergy_years_out_energy_page() {
 	$energy_price = plaatenergy_db_get_config_item('energy_price');
 	$energy_delivery_forecast = plaatenergy_db_get_config_item('energy_delivery_forecast');
 
-	$total=0;
+	$total_sum=0;
 	$total_price=0;
+        $total_max=0;
 	$count=0;
 	$data="";
 	
@@ -69,16 +70,18 @@ function plaatenergy_years_out_energy_page() {
 		$delivered_low=0;
 		$delivered_normal=0;
 		$delivered_local=0;
-		
+	        $total = 0;
+	
 		if ( isset($row1->solar)) {
 			$count++;
 			
 			$delivered_low = $row1->dalterug;
-			$delivered_normal = $rows1->piekterug;
-			$tmp = $rows1->solar - $delivered_low -$delivered_normal;
-			if ($tmp >0 ) 
+			$delivered_normal = $row1->piekterug;
+			$tmp = $row1->solar - $delivered_low -$delivered_normal;
+			if ($tmp >0 ) {
 				$delivered_local=$tmp;
 			}
+			$total = $delivered_low + $delivered_normal + $delivered_local;
 		}
 	
 		$sql2  = 'select month(date) as month from energy_day ';
@@ -97,23 +100,23 @@ function plaatenergy_years_out_energy_page() {
 			$data.=',';
 		}
 		
-		$price2 = $value * $energy_price;
+		$price2 = $total * $energy_price;
 		$data .= "['".date("Y", $time)."',";
 		if ($eid==EVENT_KWH) {
 	
-			if ($value>0) {
-				$data .= round($delivered_low,2).',';
-				$data .= round($delivered_normal,2).',';
-				$data .= round($delivered_local,2).',';
-				$data .= round(($forecast_total*$energy_delivery_forecast),2).']';
-			} else {
-				$data .= '0,0]';
-			}
+			$data .= round($delivered_low,2).',';
+			$data .= round($delivered_normal,2).',';
+			$data .= round($delivered_local,2).',';
+			$data .= round(($forecast_total*$energy_delivery_forecast),2).']';
 		} else { 
 			$data .= round($price2,2).']';
 		}
-		$total += $delivered_low + $delivered_normal + $delivered_local;
+		$total_sum += $total;
 		$total_price += $price2;
+		
+		if ($total>$total_max) {
+			$total_max=$total;
+		}
 	}
 
 	if ($eid==EVENT_KWH) {
@@ -141,7 +144,7 @@ function plaatenergy_years_out_energy_page() {
                          colors: ["#0066cc", "#808080"],
 		         vAxis: {   
                                    format:"decimal", 
-                                   viewWindow: { min: 0, max: "'.round($max_forecast+50).'" },
+                                   viewWindow: { min: 0, max: "'.round($total_max+50).'" },
                                  },';
 	} else {
 		$page .= 'colors: ["#e0440e"],';
@@ -163,7 +166,7 @@ function plaatenergy_years_out_energy_page() {
 
         function selectHandler(e)     {
            var year = data.getValue(chart.getSelection()[0].row, 0);
-			  link("pid='.PAGE_YEAR_IN_ENERGY.'&eid='.$eid.'&date="+year+"-1-1");
+			  link("pid='.PAGE_YEAR_OUT_ENERGY.'&eid='.$eid.'&date="+year+"-1-1");
         }
       }
     </script>';
@@ -174,7 +177,7 @@ function plaatenergy_years_out_energy_page() {
 	$page .= '<div class="remark">';
 	if ($count>0) {
 			if ($eid==EVENT_KWH) {
-			$page .= t('AVERAGE_PER_YEAR_KWH', round(($total/$count),2), round($total,2));
+			$page .= t('AVERAGE_PER_YEAR_KWH', round(($total_sum/$count),2), round($total_sum,2));
 		} else {
 			$page .= t('AVERAGE_PER_YEAR_EURO', round(($total_price/$count),2), round($total_price,2));
 		}

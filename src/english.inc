@@ -46,7 +46,7 @@ $lang['DATE']            = 'Date';
 
 $lang['USED_LOW_KWH']    = 'Low (kWh)'; 
 $lang['USED_HIGH_KWH']   = 'Normal (kWh)'; 
-$lang['USED_SOLAR_KWH']  = 'Solar (kWh)'; 
+$lang['USED_LOCAL_KWH']  = 'Local (kWh)'; 
 $lang['USED_KWH']        = 'Used (kWh)'; 
 $lang['DELIVERED_LOW_KWH'] = 'Low (kWh)'; 
 $lang['DELIVERED_NORMAL_KWH'] = 'Normal (kWh)'; 

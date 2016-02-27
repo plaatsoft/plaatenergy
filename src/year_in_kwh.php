@@ -111,7 +111,7 @@ function plaatenergy_year_in_energy_page() {
 	   }
 	
 	   if ($eid==EVENT_KWH) {
-		$json = "[['','".t('USED_LOW_KWH')."','".t('USED_HIGH_KWH')."','".t('USED_SOLAR_KWH')."','".t('FORECAST_KWH')."'],".$data."]";
+		$json = "[['','".t('USED_LOW_KWH')."','".t('USED_HIGH_KWH')."','".t('USED_LOCAL_KWH')."','".t('FORECAST_KWH')."'],".$data."]";
 	   } else { 
 		$json = "[['','".t('EURO')."'],".$data."]";
 	   }

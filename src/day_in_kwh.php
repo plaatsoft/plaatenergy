@@ -161,7 +161,7 @@ function plaatenergy_day_in_energy_page() {
 		$i++;
 	}
 	
-	$json = "[['','".t('USED_LOW_KWH')."','".t('USED_HIGH_KWH')."','".t('USED_SOLAR_KWH')."'],".$data."]";
+	$json = "[['','".t('USED_LOW_KWH')."','".t('USED_HIGH_KWH')."','".t('USED_LOCAL_KWH')."'],".$data."]";
 
 	if ($eid==EVENT_WATT) {
 	
