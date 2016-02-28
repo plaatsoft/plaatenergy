@@ -26,12 +26,12 @@ UPDATE config SET options="unknown,omnik" WHERE token="solar_meter_vendor";
 
 CREATE TABLE IF NOT EXISTS `session` (
   `sid` int(11) NOT NULL,
+   `ip` varchar(20) NOT NULL,
   `session_id` varchar(50) NOT NULL,
-  `timestamp` datetime NOT NULL,
-  `ip` varchar(20) NOT NULL,
+  `timestamp` datetime NOT NULL, 
   `requests` INT NOT NULL,
   `language` VARCHAR(10),
-  `scheme` VARCHAR(10)
+  `theme` VARCHAR(10)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 ALTER TABLE `session`
