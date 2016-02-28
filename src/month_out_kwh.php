@@ -42,7 +42,7 @@ function plaatenergy_month_out_energy_page() {
 	list($year, $month) = explode("-", $date);	
 	$month = ltrim($month ,'0');
 	
-	$energy_price = plaatenergy_db_get_config_item('energy_price');
+	$price = plaatenergy_db_get_config_item('energy_price');
 	$energy_use_forecast = plaatenergy_db_get_config_item('energy_use_forecast');
 	$solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor');
 	
@@ -131,7 +131,7 @@ function plaatenergy_month_out_energy_page() {
 					$data.=',';
 				}
 			
-				$price2 = $total * $energy_price;
+				$price2 = $total * $price;
 				$data .= "['".date("d-m", $time)."',";
 				
 				if ($eid==EVENT_KWH) {	
@@ -148,7 +148,7 @@ function plaatenergy_month_out_energy_page() {
 			$json = "[['','".t('DELIVERED_LOW_KWH')."','".t('DELIVERED_NORMAL_KWH')."','".t('DELIVERED_LOCAL_KWH')."'],".$data."]";
 	
 		} else {
-			$total= $total * $energy_price;
+			$total= $total * $price;
 			$json = "[['','".t('EURO')."'],".$data."]";
 		}
 	}
@@ -168,6 +168,8 @@ function plaatenergy_month_out_energy_page() {
 			 isStacked: true,';
 			 
 	if ($eid==EVENT_KWH) {
+		$page .= 'colors: ["#0066cc", "#808080"],';
+	} else if ($eid==EVENT_MAX) {
 		$page .= 'colors: ["#0066cc", "#808080"],';
 	} else {
 		$page .= "colors: ['#e0440e'],";
@@ -211,7 +213,7 @@ function plaatenergy_month_out_energy_page() {
 			break;
 			
 		case EVENT_EURO:
-			$page .= t('AVERAGE_PER_DAY_EURO', round(($value),2), round($total_sum,2));
+			$page .= t('AVERAGE_PER_DAY_EURO', round(($value*$price),2), round($total_sum*$price,2));
 			break;
 				
 		default:
@@ -237,26 +239,13 @@ function plaatenergy_month_out_energy() {
   global $pid;
   global $eid;
   
-   /* Event handler */
-  switch ($eid) {
-  
-		case EVENT_MAX:
-				break;
-				
-		case EVENT_KWH:
-				break;
-				
-		case EVENT_EURO:
-				break;
-	}
-	
-	/* Page handler */
-	switch ($pid) {
-
-		case PAGE_MONTH_OUT_ENERGY:
-			return plaatenergy_month_out_energy_page();
-			break;
-	}
+  /* Page handler */
+ 
+  switch ($pid) {
+     case PAGE_MONTH_OUT_ENERGY:
+	return plaatenergy_month_out_energy_page();
+	break;
+  }
 }
 
 /*

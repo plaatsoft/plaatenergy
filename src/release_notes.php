@@ -27,10 +27,10 @@
 ** ---------------------
 */
 
-$note[9] = '<div class="subparagraph">Version 0.9 (25-02-2016)</div>
+$note[9] = '<div class="subparagraph">Version 0.9 (28-02-2016)</div>
 <div class="large_text">
 <ul>
-<li>General: Redesign deliverable charts  (Now they are more flexible).</li>
+<li>General: Redesign solar deliverable charts (Now they are more flexible).</li>
 <li>General: Added option to select solar meter vendor.</li>
 <li>General: Improve theme and language hyperlink.</li>
 <li>General: Added very basic home password feature.</li>
@@ -137,7 +137,7 @@ $note[2] = '<div class="subparagraph">Version 0.2 (31-10-2015)</div>
 <div class="large_text">
 <ul>
 <li>Created mysql database</li>
-<li>Imported all solar csv data in database</li> 
+<li>Imported CSV solar data files in database</li> 
 <li>Add P1 energy meter python sensor script.</li>
 <li>Add AstroHat weather sensor script.</li>
 <li>Add energy, solar, gas year reports.</li>
@@ -155,7 +155,7 @@ $note[1] = '<div class="subparagraph">Version 0.1 (30-09-2015)</div>
 <li>Add solar year reports.</li>
 <li>Add solar month reports.</li>
 <li>Add solar day reports.</li>
-<li>Store solar in CSV file.</li>
+<li>Store solar data in CSV files.</li>
 </ul>
 </div>';
 		
