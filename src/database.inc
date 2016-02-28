@@ -476,6 +476,33 @@ function plaatenergy_db_process($type) {
 	}
 }
 
+
+function plaatenergy_db_get_session($ip, $new=false) {
+
+   $sql = 'select sid, session_id, requests from session where ip="'.$ip.'"';
+   $result = plaatenergy_db_query($sql);
+   $data = plaatenergy_db_fetch_object($result);
+
+   if ( isset($data->sid) ) {   
+	
+		$session_id = $data->session_id;
+	
+		if ($new==true) {		
+			$session_id = md5(date('Y-m-d H:i:s'));
+		}
+			   
+		$sql = 'update session set timestamp=SYSDATE(), session_id="'.$session_uid.'", requests='.++$request.' where sid="'.$data->sid.'"';
+	   plaatenergy_db_query($sql);
+	  
+   } else {
+
+		$sql = 'insert into session (timestamp, ip, requests, language, theme) value (SYSDATE(), "'.$ip.'", 1, "en", "light")';
+		plaatenergy_db_query($sql);
+	}
+
+   return $session_id;
+}
+
 /*
 ** ---------------------
 ** THE END

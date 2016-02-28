@@ -151,14 +151,13 @@ function plaatenergy_home_login_event() {
 	global $pid;
 	global $session;
 	global $password;
-	
+	global $ip;
+		
 	$home_password = plaatenergy_db_get_config_item('home_password');
 	
 	if ($home_password == $password) {
-	
-		$session = md5(date('Y-m-d H:i:s'));
-		plaatenergy_db_set_config_item('session_id', $session);
-		
+
+		$session = plaatenergy_db_get_session($ip, true)			
 		$pid = PAGE_HOME;
 	}
 }

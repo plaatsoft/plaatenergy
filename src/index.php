@@ -59,6 +59,8 @@ if ( @plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname) == false) {
 ** ----------------------
 */
 
+$ip = $_SERVER['REMOTE_ADDR'];
+
 $eid = EVENT_NONE;
 $sid = EVENT_NONE;
 $pid = PAGE_HOME;
@@ -90,8 +92,11 @@ if (strlen($token)>0) {
 
 $home_password = plaatenergy_db_get_config_item('home_password');
 
+// Create for each visitor an account (without session_id)
+$session_id = plaatenergy_db_get_session($ip);
+
 if (strlen($home_password)>0) {
-	if ($session!=plaatenergy_db_get_config_item('session_id')) {
+	if ($session!=$session_id) {
 		// User not login, Redirect to login page
 		$pid = PAGE_HOME_LOGIN;
 	}
@@ -105,34 +110,38 @@ if (strlen($home_password)>0) {
 
 function plaatenergy_scheme_action() {
 
-	$theme = plaatenergy_db_get_config_item('theme');
-	
-	$sql  = 'select options from config where token="theme"';
+	global $ip;
+		
+	$sql  = 'select theme from session where ip="'.$ip.'"';
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 
-	$options = explode(",", $row->options);	
-	foreach ($options as $option) {	
-		if ($option!=$theme) {		
-			plaatenergy_db_set_config_item('theme', $option);
-		}
+	if ($row->theme=="light") {
+		$theme = "dark"
+	} else {
+		$theme = "light" 
 	}
+	
+	$sql = 'update session set theme="'.$theme.'" where ip="'.$ip.'"';
+	plaatenergy_db_query($sql);
 }
 
 function plaatenergy_language_action() {
-
-	$language = plaatenergy_db_get_config_item('language');
 	
-	$sql  = 'select options from config where token="language"';
+	global $ip;
+	
+	$sql  = 'select language from session where ip="'.$ip.'"';
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 
-	$options = explode(",", $row->options);	
-	foreach ($options as $option) {	
-		if ($option!=$language) {
-			plaatenergy_db_set_config_item('language', $option);
-		}
+	if ($row->language=="en") {
+		$language = "nl"
+	} else {
+		$language = "en" 
 	}
+	
+	$sql = 'update session set language="'.$language.'" where ip="'.$ip.'"';
+	plaatenergy_db_query($sql);
 }
 
 /*
@@ -159,9 +168,11 @@ switch ($sid) {
 ** -------------------
 */
 
-$language = plaatenergy_db_get_config_item('language');
+$sql  = 'select language from session where ip="'.$ip.'"';
+$result = plaatenergy_db_query($sql);
+$row = plaatenergy_db_fetch_object($result);
 
-if ( $language == "nl") {
+if ($row->language=="nl") {
 
 	include("dutch.inc");
 }	
