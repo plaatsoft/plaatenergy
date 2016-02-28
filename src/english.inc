@@ -318,11 +318,16 @@ $lang['settings_password'] = 'Protect setting page with password.';
 $lang['TAG_DATE'] = 'date';
 $lang['TAG_LOW_USED'] = 'low_used' ;
 $lang['TAG_NORMAL_USED'] = 'normal_used';
-$lang['TAG_SOLAR_USED'] = 'solar_used';
+$lang['TAG_LOCAL_USED'] = 'local_used';
+$lang['TAG_TOTAL_USED'] = 'total_used';
+
+$lang['TAG_GAS_USED'] = 'gas_used';
+
 $lang['TAG_LOW_DELIVERED'] = 'low_delivered';
 $lang['TAG_NORMAL_DELIVERED'] = 'normal_delivered';
-$lang['TAG_SOLAR_DELIVERED'] = 'solar_delivered';
-$lang['TAG_GAS_USED'] = 'gas_used';
+$lang['TAG_LOCAL_DELIVERED'] = 'local_delivered';
+$lang['TAG_TOTAL_DELIVERED'] = 'total_delivered';
+
 
 /*
 ** ------------------

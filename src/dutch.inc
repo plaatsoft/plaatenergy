@@ -321,10 +321,14 @@ $lang['settings_password'] = 'Bescherm configuratie pagina met een wachtwoord.';
 $lang['TAG_DATE'] = 'datum' ;
 $lang['TAG_LOW_USED'] = 'afgenomen_laag' ;
 $lang['TAG_NORMAL_USED'] = 'afgenomen_normaal';
-$lang['TAG_SOLAR_USED'] = 'afgenomen_solar';
+$lang['TAG_LOCAL_USED'] = 'afgenomen_lokaal';
+$lang['TAG_TOTAL_USED'] = 'afgenomen_totaal';
+
 $lang['TAG_LOW_DELIVERED'] = 'geleverd_laag';
 $lang['TAG_NORMAL_DELIVERED'] = 'geleverd_normaal';
-$lang['TAG_SOLAR_DELIVERED'] = 'geleverd_solar';
+$lang['TAG_LOCAL_DELIVERED'] = 'geleverd_lokaal';
+$lang['TAG_TOTAL_DELIVERED'] = 'geleverd_totaal';
+
 $lang['TAG_GAS_USED'] = 'afgenomen_gas';
 
 /*

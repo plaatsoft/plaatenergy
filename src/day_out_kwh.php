@@ -91,8 +91,8 @@ function plaatenergy_day_out_energy_page() {
 		$result1 = plaatenergy_db_query($sql1);
 		$row1 = plaatenergy_db_fetch_object($result1);
 			
-		$timestamp = date("Y-m-d H:i:s", $current_date+(900*$i));
-		$sql2 = 'select max(etotal) as etotal FROM solar where timestamp="'.$timestamp.'"';		
+		$sql2  = 'select max(etotal) as etotal FROM solar where ';
+		$sql2 .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'"';	
 		$result2 = plaatenergy_db_query($sql2);
 		$row2 = plaatenergy_db_fetch_object($result2);			
 			
@@ -103,7 +103,7 @@ function plaatenergy_day_out_energy_page() {
 			} else {
 				$delivered_low = $row1->dalterug;
 			}
-						if ($row1->piekterug>=$piekterug_prev) {
+			if ($row1->piekterug>=$piekterug_prev) {
 				$delivered_normal = $row1->piekterug - $piekterug_prev;
 			} else {
 				$delivered_normal = $row1->piekterug;
@@ -118,7 +118,7 @@ function plaatenergy_day_out_energy_page() {
 		}
 		
 		// Data in the future is always 0!	
-		if ($timestamp>date("Y-m-d H:i:s")) {
+		if ($timestamp1>date("Y-m-d H:i:s")) {
 			$delivered_low = 0;
 			$delivered_normal = 0;
 			$delivered_local = 0;
@@ -132,7 +132,7 @@ function plaatenergy_day_out_energy_page() {
 			$data.=',';
 		}
 		
-		$data .= "['".date("H:i", $current_date+(900*$i))."',";
+		$data .= "['".date("H:i", $current_date+(900*($i+1)))."',";
 		$data .= round($delivered_low,2).',';
 		$data .= round($delivered_normal,2).',';
 		$data .= round($delivered_local,2).']';

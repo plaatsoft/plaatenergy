@@ -56,30 +56,47 @@ function plaatenergy_export_event() {
 	$result = plaatenergy_db_query($sql);
 	
 	$csv  = '"'.t('TAG_DATE').'";';
+	
 	$csv .= '"'.t('TAG_LOW_USED').'";';
 	$csv .= '"'.t('TAG_NORMAL_USED').'";';
-	$csv .= '"'.t('TAG_SOLAR_USED').'";';
-	$csv .= '"'.t('TAG_GAS_USED').'";'; 
+	$csv .= '"'.t('TAG_LOCAL_USED').'";';
+	$csv .= '"'.t('TAG_TOTAL_USED').'";';
+		
 	$csv .= '"'.t('TAG_LOW_DELIVERED').'";'; 
 	$csv .= '"'.t('TAG_NORMAL_DELIVERED').'";';
-	$csv .= '"'.t('TAG_SOLAR_DELIVERED')."\"\r\n";
+	$csv .= '"'.t('TAG_LOCAL_DELIVERED').'";';
+	$csv .= '"'.t('TAG_TOTAL_DELIVERED').'";';
+		
+	$csv .= '"'.t('TAG_GAS_USED').'"';
+	$csv .= "\r\n";
 
 	
 	while ($row = plaatenergy_db_fetch_object($result)) {	
-		$csv .=  '"'.$row->date.'";';
-		$csv .=  '"'.plaatenergy_round($row->low_used,2).'";';
-		$csv .=  '"'.plaatenergy_round($row->normal_used,2).'";';
-		
-		$tmp = $row->solar-$row->dalterug-$row->piekterug;
-		if ($tmp<0) {
-			$tmp=0;
+				
+		$local_used = $row->solar_delivered - $row->low_delivered - $row->normal_delivered;
+		if ($local_used<0) {
+			$local_used=0;
 		}
 		
-		$csv .=  '"'.plaatenergy_round($tmp,2).'";';
-		$csv .=  '"'.plaatenergy_round($row->gas_used,2).'";';
+		$total_used = $row->low_used + $row->normal_used + $local_used;		
+		$total_delivered = $local_used + $row->dalterug + $row->piekterug;
+		
+		
+		$csv .=  '"'.$row->date.'";';
+		
+		$csv .=  '"'.plaatenergy_round($row->low_used,2).'";';
+		$csv .=  '"'.plaatenergy_round($row->normal_used,2).'";';		
+		$csv .=  '"'.plaatenergy_round($local_used,2).'";';
+		$csv .=  '"'.plaatenergy_round($total_used,2).'";';
+		
+				
 		$csv .=  '"'.plaatenergy_round($row->low_delivered,2).'";';
 		$csv .=  '"'.plaatenergy_round($row->normal_delivered,2).'";';
-		$csv .=  '"'.plaatenergy_round($row->solar_delivered,2)."\"\r\n";		
+		$csv .=  '"'.plaatenergy_round($local_used,2).'";';
+		$csv .=  '"'.plaatenergy_round($total_delivered,2).'";';
+		
+		$csv .=  '"'.plaatenergy_round($row->gas_used,2).'"';		
+		$csv .= "\r\n";
 	}
 
 	header('Content-Type: application/csv');
@@ -106,25 +123,37 @@ function plaatenergy_report_event() {
 		$result = plaatenergy_db_query($sql);
 		$row = plaatenergy_db_fetch_object($result);
 	
-		$tmp = $row->solar-$row->dalterug-$row->piekterug;
-		if ($tmp<0) {
-			$tmp=0;
+		$local_used = $row->solar-$row->dalterug-$row->piekterug;
+		if ($local_used<0) {
+			$local_used=0;
 		}
 		
+		$total_used = $row->dal + $row->piek + $local_used;
+		$total_delivered = $local_used + $row->dalterug + $row->piekterug;
+				
 		$page  =  '&Sigma; '.t('TAG_LOW_USED').' = '.plaatenergy_round($row->dal,2).' '.t('KWH');
 		$page .=  '<br/>';
 		$page .=  '&Sigma; '.t('TAG_NORMAL_USED').' = '.plaatenergy_round($row->piek,2).' '.t('KWH');
 		$page .=  '<br/>';
-		$page .=  '&Sigma; '.t('TAG_SOLAR_USED').' = '.plaatenergy_round($tmp,2).' '.t('KWH');
-		$page .=  '<br/>';
-		$page .=  '&Sigma; '.t('TAG_GAS_USED').' = '.plaatenergy_round($row->gas,2).' '.t('M3');
+		$page .=  '&Sigma; '.t('TAG_LOCAL_USED').' = '.plaatenergy_round($local_used,2).' '.t('KWH');
+		$page .=  '<br/>';		
+		$page .=  '&Sigma; '.t('TAG_TOTAL_USED').' = '.plaatenergy_round($total_used,2).' '.t('KWH');
+		
 		$page .=  '<br/>';
 		$page .=  '<br/>';
 		$page .=  '&Sigma; '.t('TAG_LOW_DELIVERED').' = '.plaatenergy_round($row->dalterug,2).' '.t('KWH');
 		$page .=  '<br/>';
 		$page .=  '&Sigma; '.t('TAG_NORMAL_DELIVERED').' = '.plaatenergy_round($row->piekterug,2).' '.t('KWH');
+		$page .=  '<br/>';		
+		$page .=  '&Sigma; '.t('TAG_LOCAL_DELIVERED').' = '.plaatenergy_round($local_used,2).' '.t('KWH');
 		$page .=  '<br/>';
-		$page .=  '&Sigma; '.t('TAG_SOLAR_DELIVERED').' = '.plaatenergy_round($row->solar,2).' '.t('KWH');
+		$page .=  '&Sigma; '.t('TAG_TOTAL_DELIVERED').' = '.plaatenergy_round($total_delivered,2).' '.t('KWH');
+		
+		$page .=  '<br/>';
+		$page .=  '<br/>';
+		$page .=  '&Sigma; '.t('TAG_GAS_USED').' = '.plaatenergy_round($row->gas,2).' '.t('M3');
+		$page .=  '<br/>';
+		
 
 		return $page;
 	}

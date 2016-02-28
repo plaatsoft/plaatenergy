@@ -30,6 +30,7 @@
 $note[9] = '<div class="subparagraph">Version 0.9 (28-02-2016)</div>
 <div class="large_text">
 <ul>
+<li>General: Improve customer query report.</li>
 <li>General: Redesign solar deliverable charts (Now they are more flexible).</li>
 <li>General: Added option to select solar meter vendor.</li>
 <li>General: Improve theme and language hyperlink.</li>
