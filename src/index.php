@@ -96,7 +96,7 @@ $home_password = plaatenergy_db_get_config_item('home_password');
 $session_id = plaatenergy_db_get_session($ip);
 
 if (strlen($home_password)>0) {
-	if ($session!=$session_id) {
+	if (strlen($session_id==0) || ($session!=$session_id)) {
 		// User not login, Redirect to login page
 		$pid = PAGE_HOME_LOGIN;
 	}
@@ -117,9 +117,9 @@ function plaatenergy_scheme_action() {
 	$row = plaatenergy_db_fetch_object($result);
 
 	if ($row->theme=="light") {
-		$theme = "dark"
+		$theme = "dark";
 	} else {
-		$theme = "light" 
+		$theme = "light" ;
 	}
 	
 	$sql = 'update session set theme="'.$theme.'" where ip="'.$ip.'"';
@@ -135,9 +135,9 @@ function plaatenergy_language_action() {
 	$row = plaatenergy_db_fetch_object($result);
 
 	if ($row->language=="en") {
-		$language = "nl"
+		$language = "nl";
 	} else {
-		$language = "en" 
+		$language = "en";
 	}
 	
 	$sql = 'update session set language="'.$language.'" where ip="'.$ip.'"';

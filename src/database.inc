@@ -483,15 +483,17 @@ function plaatenergy_db_get_session($ip, $new=false) {
    $result = plaatenergy_db_query($sql);
    $data = plaatenergy_db_fetch_object($result);
 
+   $session_id = "";
    if ( isset($data->sid) ) {   
 	
 		$session_id = $data->session_id;
+		$requests = $data->requests;
 	
 		if ($new==true) {		
 			$session_id = md5(date('Y-m-d H:i:s'));
 		}
 			   
-		$sql = 'update session set timestamp=SYSDATE(), session_id="'.$session_uid.'", requests='.++$request.' where sid="'.$data->sid.'"';
+		$sql = 'update session set timestamp=SYSDATE(), session_id="'.$session_id.'", requests='.++$requests.' where sid="'.$data->sid.'"';
 	   plaatenergy_db_query($sql);
 	  
    } else {

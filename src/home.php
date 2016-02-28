@@ -157,7 +157,7 @@ function plaatenergy_home_login_event() {
 	
 	if ($home_password == $password) {
 
-		$session = plaatenergy_db_get_session($ip, true)			
+		$session = plaatenergy_db_get_session($ip, true);
 		$pid = PAGE_HOME;
 	}
 }

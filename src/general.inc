@@ -188,15 +188,20 @@ function add_icons($path = './ui/') {
  */
 function general_header() {
 
-  $lang = plaatenergy_db_get_config_item('language');
-  $theme = plaatenergy_db_get_config_item('theme');
-
   // input
+  global $ip;
   global $pid;
   global $eid;
   global $sid;
   global $date;
   global $session;
+
+  $sql  = 'select theme,language from session where ip="'.$ip.'"';
+  $result = plaatenergy_db_query($sql);
+  $row = plaatenergy_db_fetch_object($result);
+
+  $lang = $row->language;
+  $theme = $row->theme;
     
   $page  = '<!DOCTYPE html>';
   $page .= '<html>';
