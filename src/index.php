@@ -96,7 +96,7 @@ $home_password = plaatenergy_db_get_config_item('home_password');
 $session_id = plaatenergy_db_get_session($ip);
 
 if (strlen($home_password)>0) {
-	if (strlen($session_id==0) || ($session!=$session_id)) {
+	if ((strlen($session_id)==0) || ($session!=$session_id)) {
 		// User not login, Redirect to login page
 		$pid = PAGE_HOME_LOGIN;
 	}
