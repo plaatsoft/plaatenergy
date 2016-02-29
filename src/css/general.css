@@ -89,7 +89,6 @@ table {
    vertical-align: top;
 }
 
-
 td > a{
   display: block;
   margin: 0px;
@@ -110,11 +109,30 @@ a {
   cursor: pointer;
 }
 
+input[type=submit] {
+  outline: none;
+  background-color: #1E88E5;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 30px;
+  margin: 0px 10px;
+  cursor: pointer;
+  border:none;
+}
+
 a:hover {
   background-color: #1976D2;
 }
 
+input[type=submit]:hover {
+  background-color: #1976D2;
+}
+
 a:active {
+  background-color: #1565C0;
+}
+
+input[type=submit]:active {
   background-color: #1565C0;
 }
 

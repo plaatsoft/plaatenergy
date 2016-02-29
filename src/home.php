@@ -184,11 +184,17 @@ function plaatenergy_home_login_page() {
    $page .= '<label>'.t('LABEL_PASSWORD').'</label>';
    $page .= '<input type="password" name="password" size="20" />';
    $page .= '<br/>';
-
-   $page .= '<div class="nav">';
-   $page .= plaatenergy_link('pid='.PAGE_HOME_LOGIN.'&eid='.EVENT_LOGIN, t('LINK_LOGIN'));
+  
+   $page .= '<div class="nav">';   
+   $page .= '<input type="hidden" name="token" value="pid='.PAGE_HOME_LOGIN.'&eid='.EVENT_LOGIN.'"/>';
+   $page .= '<input type="submit" name="Submit" id="normal_link" value="'.t('LINK_LOGIN').'"/>';
    $page .= '</div>';
-
+		
+	/* Set focus on first input element */
+	$page .= '<script type="text/javascript" language="JavaScript">';
+	$page .= 'document.forms[\'plaatenergy\'].elements[\'password\'].focus();';
+	$page .= '</script>';
+	
    $page .= '<script type="text/javascript">var ip="'.$_SERVER['SERVER_ADDR'].'";</script>';
    $page .= '<script type="text/javascript" src="js/version.js"></script>';
 	

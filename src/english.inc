@@ -97,7 +97,7 @@ $lang['LINK_MAX']        = i('bolt') . 'Peak';
 $lang['LINK_BACKUP']     = 'Backup';
 $lang['LINK_EXPORT']     = 'Export to CSV';
 $lang['LINK_SCATTER']    = 'Scatter';
-$lang['LINK_LOGIN']      = i('check').'Login';
+$lang['LINK_LOGIN']      = 'Login';
  
 /*
 ** ------------------

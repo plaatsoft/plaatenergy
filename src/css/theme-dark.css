@@ -36,12 +36,26 @@ h1::after {
   opacity: 0.8;
 }
 
+input[type=submit] {
+  background-color: #888;
+}
+
 a {
   background-color: #888;
 }
+
+input[type=submit]:hover {
+  background-color: #777;
+}
+
 a:hover {
   background-color: #777;
 }
+
+input[type=submit]:hover:active {
+  background-color: #666;
+}
+
 a:active {
   background-color: #666;
 }
