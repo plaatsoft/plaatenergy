@@ -215,6 +215,11 @@ switch ($pid) {
 		$page = plaatenergy_report();
 		break;
 		
+	case PAGE_REALTIME:
+		include 'ui/index.php';
+		$page = plaatenergy_realtime();
+		break;
+		
 	case PAGE_SETTING_LIST: 
 	case PAGE_SETTING_EDIT: 
 	case PAGE_SETTING_LOGIN: 
@@ -332,7 +337,11 @@ if ($eid != EVENT_EXPORT) {
 	// Normal page
 	echo general_header();
 
+	echo "<!-- content-start -->";
+
 	echo $page;
+	
+	echo "<!-- content-end -->";
 	
 	// Calculate to page render time 
 	$time_end = microtime(true);

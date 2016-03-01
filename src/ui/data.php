@@ -79,8 +79,9 @@ if ( isset ($row3->dal)) {
 	$delivered_low = $row3->dalterug;
 	$delivered_normal = $row3->piekterug;
 	$tmp = $row3->solar - $delivered_low -$delivered_normal;
+	$delivered_local = 0;
 	if ($tmp >0 ) {
-		$delivered_local=$tmp;
+		$delivered_local = $tmp;
 	}
 	$today_energy_delivered = $delivered_low + $delivered_normal + $delivered_local;			
 	$today_energy_used = $row3->dal + $row3->piek + $delivered_local;
@@ -106,8 +107,9 @@ if ( isset ($row5->dal)) {
 	$delivered_low = $row5->dalterug;
 	$delivered_normal = $row5->piekterug;
 	$tmp = $row5->solar - $delivered_low -$delivered_normal;
+	$delivered_local = 0;
 	if ($tmp >0 ) {
-		$delivered_local=$tmp;
+		$delivered_local = $tmp;
 	}	
 	$total_energy_delivered = $delivered_low + $delivered_normal + $delivered_local;		
 	$total_energy_used = $row5->dal + $row5->piek + $delivered_local;

@@ -1,33 +1,30 @@
 <?php
-	include '../general.inc';
 
-        $session = plaatenergy_get('session', '');
+/*
+** ---------------------
+** UTILS
+** ---------------------
+*/
+
 	
-	function random_color () {
-		$color = ["blue", "green", "pink", "brown", "red", "bluegray", "purple", "teal", "orange", "indigo", "deeppurple", "gray"];
-		return $color[rand(0, (count($color) - 1))];
-	}
-?>
-<!DOCTYPE html>
-<html>
-	<head>
-		<?php
-			echo add_icons('./');
-		?>
-		
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-		<link rel="stylesheet" type="text/css" href="./main.css"/>
-                <script language="JavaScript" src="../js/link.js" type="text/javascript"></script>
-	</head>
-	<body>
-               <form id="plaatenergy" method="POST" action='../.'>
+function random_color () {
+	$color = ["blue", "green", "pink", "brown", "red", "bluegray", "purple", "teal", "orange", "indigo", "deeppurple", "gray"];
+	return $color[rand(0, (count($color) - 1))];
+}
 
-		<input type="hidden" name="session" value="<?php echo $session?>" />
+/*
+** ---------------------
+** PAGES
+** ---------------------
+*/
 
-               
-		<div class="shadow" onclick="close_all_sidebars();"></div>
-		<div class="bg"></div>
+
+function plaatenergy_realtime_page() {
+	
+	$page = '<div class="shadow" onclick="close_all_sidebars();"></div>';
+	$page .= '<div class="bg"></div>';
 		
+	$page .= '
 		<div id="cookie" class="popup <?php echo random_color(); ?>">
 			<svg class="close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" onclick="close_all_popups();">
 				<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
@@ -40,8 +37,8 @@
 				<h1 id="t_popup_cookies_h"></h1>
 				<p id="t_popup_cookies_p"></p>
 			</div>
-		</div>
-		
+		</div>';
+	$page .= '
 		<div id="settings" class="sidebar">
 			<div class="header">
 				<div id="t_sidebars_settings_header" class="label"></div>
@@ -49,24 +46,25 @@
 				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" onclick="close_all_sidebars();">
 					<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
 				</svg>
-			</div>
-			<div class="body">
-				<div class="item button" onclick="sidebar_show_body('#more_settings');">
+			</div>';
+	$page .= '<div class="body">
+				<div class="item button" onclick="sidebar_show_body(\'#more_settings\');">
 					<div class="header">
 						<span id="t_sidebars_settings_more"></span>
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 							<path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
 						</svg>
 					</div>
-				</div>
+				</div>';
+	$page .= '
 				<div class="item">
 					<div class="header" id="t_sidebars_settings_language"></div>
 					<select id="lang_selector">
 						<option value="0">English</option>
 						<option value="1">Nederlands</option>
 					</select>
-				</div>
-				<div class="item">
+				</div>';
+	$page .= '<div class="item">
 					<div class="header toggle">
 						<span id="t_sidebars_settings_refresh"></span>
 						<input id="enableRefresh_toggle" type="checkbox">
@@ -76,22 +74,22 @@
 					<input id="refresh" type="range" step="0.1" min="0.1" max="10">
 					<div id="range_max" class="range_helper a"></div>
 					<div id="range_value" class="range_helper"></div>
-				</div>
-				<div class="item">
+				</div>';
+	$page .= '<div class="item">
 					<div class="header toggle">
 						<span id="t_sidebars_settings_weather"></span>
 						<input id="weather_toggle" type="checkbox">
 						<div class="switch"></div>
 					</div>
-				</div>
-				<div class="item">
+				</div>';
+	$page .= '<div class="item">
 					<div class="header toggle">
 						<span id="t_sidebars_settings_sunrise"></span>
 						<input id="sunrise_toggle" type="checkbox">
 						<div class="switch"></div>
 					</div>
-				</div>
-				<div class="item">
+				</div>';
+	$page .= '<div class="item">
 					<div class="header">
 						<span id="t_sidebars_settings_background"></span>
 					</div>
@@ -115,7 +113,8 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>';
+	$page .= '
 			<div id="more_settings" class="body more">
 				<div class="item button" onclick="sidebar_show_body_cancel();">
 					<div class="header">
@@ -162,8 +161,9 @@
 					</select>
 				</div>
 			</div>
-		</div>
-		
+		</div>';
+	
+	$page .= '
 		<div class="grid">
 			<div class="col">
 				<div class="tile normal live bottom-top">
@@ -179,7 +179,7 @@
 							<path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79 1.42-1.41zM4 10.5H1v2h3v-2zm9-9.95h-2V3.5h2V.55zm7.45 3.91l-1.41-1.41-1.79 1.79 1.41 1.41 1.79-1.79zm-3.21 13.7l1.79 1.8 1.41-1.41-1.8-1.79-1.4 1.4zM20 10.5v2h3v-2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 16.95h2V19.5h-2v2.95zm-7.45-3.91l1.41 1.41 1.79-1.8-1.41-1.41-1.79 1.8z"/>
 						</svg>
 						<div class="text">PlaatEnergy</div>
-						<div class="label"><span id="t_tiles_made"></span> <div class="link" onclick="window.open('http://www.plaatsoft.nl');">PlaatSoft</div></div>
+						<div class="label"><span id="t_tiles_made"></span> <div class="link" onclick="window.open(\'http://www.plaatsoft.nl\');">PlaatSoft</div></div>
 					</div>
 				</div>
 				<div class="tile normal live three">
@@ -205,16 +205,17 @@
 						<div id="t_tiles_sunset" class="label"></div>
 					</div>
 				</div>
-
-				<div class="tile normal brown" onclick='<?php echo 'link("pid='.PAGE_DAY_TEMPERATURE.'&date='.date('Y-m-d').'");'?>'>
+				<div class="tile normal brown" onclick=\'link("pid='.PAGE_DAY_TEMPERATURE.'&date='.date('Y-m-d').'")\'>
 					<div id="temperature" class="text"></div>
 					<div id="t_tiles_temperature" class="label"></div>
 				</div>
-				<div class="tile normal blue" onclick='<?php echo 'link("pid='.PAGE_DAY_PRESSURE.'&date='.date('Y-m-d').'");'?>'>
+				<div class="tile normal blue" onclick=\'link("pid='.PAGE_DAY_PRESSURE.'&date='.date('Y-m-d').'")\'>
 					<div id="pressure" class="text"></div>
 					<div id="t_tiles_pressure" class="label"></div>
 				</div>
-			</div>
+			</div>';
+			
+	$page .= '
 			<div class="col">
 				<div id="energy_today" class="tile normal">
 					<div id="energy_today_text" class="text"></div>
@@ -226,39 +227,41 @@
 				</div>
 				
 				<div class="tile normal live top-bottom">
-				        <div class="a gray" onclick='<?php echo 'link("pid='.PAGE_DAY_IN_GAS.'&date='.date('Y-m-d').'");'?>'>
+				        <div class="a gray" onclick=\'link("pid='.PAGE_DAY_IN_GAS.'&date='.date('Y-m-d').'")\'>
 						<div id="gas_today" class="text"></div>
 						<div id="t_tiles_gas_today" class="label"></div>
 					</div>
-				        <div class="b deeppurple" onclick='<?php echo 'link("pid='.PAGE_YEAR_IN_GAS.'&eid='.EVENT_M3.'&date='.date('Y').'");'?>'>
+				        <div class="b deeppurple" onclick=\'link("pid='.PAGE_YEAR_IN_GAS.'&eid='.EVENT_M3.'&date='.date('Y').'")\'>
 						<div id="total_gas" class="text"></div>
 						<div id="t_tiles_total_gas" class="label"></div>
 					</div>
 				</div>
 				
 				<div class="tile normal live left-right">
-				        <div class="a red" onclick='<?php echo 'link("pid='.PAGE_YEAR_IN_ENERGY.'&eid='.EVENT_KWH.'&date='.date('Y').'");'?>'>
+				        <div class="a red" onclick=\'link("pid='.PAGE_YEAR_IN_ENERGY.'&eid='.EVENT_KWH.'&date='.date('Y').'")\'>
 						<div id="total_decrease" class="text"></div>
 						<div id="t_tiles_total_decrease" class="label"></div>
 					</div>
-				        <div class="b green" onclick='<?php echo 'link("pid='.PAGE_YEAR_OUT_ENERGY.'&eid='.EVENT_KWH.'&date='.date('Y').'");'?>'>
+				        <div class="b green" onclick=\'link("pid='.PAGE_YEAR_OUT_ENERGY.'&eid='.EVENT_KWH.'&date='.date('Y').'")\'>
 						<div id="total_delivery" class="text"></div>
 						<div id="t_tiles_total_delivery" class="label"></div>
 					</div>
 				</div>
-			</div>
+			</div>';
+			
+	$page .= '
 			<div class="col">
-				<div class="tile normal purple" onclick='<?php echo 'link("pid='.PAGE_DAY_HUMIDITY.'&date='.date('Y-m-d').'");'?>'>
+				<div class="tile normal purple" onclick=\'link("pid='.PAGE_DAY_HUMIDITY.'&date='.date('Y-m-d').'")\'>
 					<div id="humidity" class="text"></div>
 					<div id="t_tiles_humidity" class="label"></div>
 				</div>
-				<div class="tile small pink" onclick="open_sidebar('#settings');">
+				<div class="tile small pink" onclick="open_sidebar(\'#settings\');">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 						<path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/>
 					</svg>
 					<div id="t_tiles_settings" class="label"></div>
 				</div>
-				<div class="tile small ws bluegray" onclick='<?php echo 'link("pid='.PAGE_HOME.'")'?>;'>
+				<div class="tile small ws bluegray" onclick=\'link("pid='.PAGE_HOME.'")\'>
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
 						<path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
 					</svg>
@@ -281,7 +284,9 @@
 					</div>
 				</div>
 				
-			</div>
+			</div>';
+			
+	$page .= '
 			<div class="col">
 				<div class="tile normal brown">
 					<div class="hn">N</div>
@@ -304,7 +309,9 @@
 					<div id="t_tiles_w_humidity" class="label"></div>
 				</div>
 			</div>
-		</div>
+		</div>';
+		
+	$page .= '
 		
 		<!---------------------------------------
 		------ JAVASCRIPT PART (js folder) ------
@@ -338,9 +345,9 @@
 		</script>
 		
 		<!-- Load the JS script files -->
-		<script src="./js/functions.js"></script>
-		<script src="./js/updateWeatherData.js"></script>
-		<script src="./js/init.js"></script>
+		<script src="ui/js/functions.js"></script>
+		<script src="ui/js/updateWeatherData.js"></script>
+		<script src="ui/js/init.js"></script>
 		
 		<!-- Run the JS with try -->
 		<script>
@@ -357,4 +364,36 @@
 		</script>
         </form>
 	</body>
-</html>
+</html>';
+
+	return $page;
+}
+
+
+/*
+** ---------------------
+** HANDLER
+** ---------------------
+*/
+
+function plaatenergy_realtime() {
+
+   /* input */
+   global $pid;
+  		
+	/* Page handler */
+	switch ($pid) {
+
+		case PAGE_REALTIME:
+		
+			return plaatenergy_realtime_page();
+			break;
+	}
+}
+
+/*
+** ---------------------
+** THE END
+** ---------------------
+*/
+

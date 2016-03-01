@@ -7,7 +7,7 @@ var setLang = function (lang) {
 			document.querySelector("#t_" + key).innerHTML = data[key];
 		}
 	};
-	http.open("GET", "./lang.php?q=" + lang);
+	http.open("GET", "ui/lang.php?q=" + lang);
 	http.send();
 };
 
@@ -307,7 +307,7 @@ var init = function () {
 				}
 			}
 		};
-		http.open("GET", "./data.php?q=" + COOKIE.get("numbers") + COOKIE.get("gas") + COOKIE.get("temperature"));
+		http.open("GET", "ui/data.php?q=" + COOKIE.get("numbers") + COOKIE.get("gas") + COOKIE.get("temperature"));
 		http.send();
 		
 		if (COOKIE.get("enableRefresh") == 1) {

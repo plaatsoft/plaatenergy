@@ -340,7 +340,7 @@ function plaatenergy_home_page() {
 		$page .= plaatenergy_link('pid='.PAGE_DONATE, t('LINK_DONATE'));
 		$page .= '</td>';
 		$page .= '<td>';
-		$page .= '<a href="./ui?session='.$session.'">'.t('LINK_GUI').'</a>';
+		$page .= plaatenergy_link('pid='.PAGE_REALTIME, t('LINK_GUI'));
 		$page .= '</td>';
 		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_RELEASE_NOTES, t('LINK_RELEASE_NOTES'));

@@ -49,9 +49,10 @@ define('PAGE_ABOUT',                12);
 define('PAGE_DONATE',               13);
 define('PAGE_RELEASE_NOTES',        14);
 define('PAGE_REPORT',               15);
-define('PAGE_SETTING_LIST',         16);
-define('PAGE_SETTING_EDIT',         17);
-define('PAGE_SETTING_LOGIN',        18);
+define('PAGE_REALTIME',             16);
+define('PAGE_SETTING_LIST',         17);
+define('PAGE_SETTING_EDIT',         18);
+define('PAGE_SETTING_LOGIN',        19);
 
 define('PAGE_YEARS_IN_ENERGY',      20);
 define('PAGE_YEARS_OUT_ENERGY',     21);
@@ -75,6 +76,7 @@ define('PAGE_DAY_IN_GAS_EDIT',      55);
 define('PAGE_DAY_PRESSURE',         60);
 define('PAGE_DAY_TEMPERATURE',      61);
 define('PAGE_DAY_HUMIDITY',         62);
+;
 
 /*
 ** -----------
@@ -214,14 +216,20 @@ function general_header() {
   
   // Load the dark theme css file only if COOKIE theme = dark
   if ($theme == "dark") {
-    $page .= '<link rel="stylesheet" type="text/css" href="./css/theme-dark.css">';
+    $page .= '<link rel="stylesheet" type="text/css" href="css/theme-dark.css">';
   }
   
   // Load the icons from Font Awesome
-  $page .= '<link rel="stylesheet" type="text/css" href="./css/font-awesome.min.css">';
+  $page .= '<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">';
 
-  $slide_show_on = plaatenergy_db_get_config_item('slide_show_on');
-  if (($slide_show_on=="true") && ($pid!=PAGE_SETTING_LIST) && ($pid!=PAGE_SETTING_EDIT)) {
+
+	if ($pid == PAGE_REALTIME) {
+		$page .= '<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">';
+		$page .= '<link rel="stylesheet" type="text/css" href="ui/main.css"/>';
+	}
+	
+   $slide_show_on = plaatenergy_db_get_config_item('slide_show_on');
+   if (($slide_show_on=="true") && ($pid!=PAGE_SETTING_LIST) && ($pid!=PAGE_SETTING_EDIT)) {
 
      $slide_show_page_delay = plaatenergy_db_get_config_item('slide_show_page_delay')*1000;
 
@@ -256,24 +264,26 @@ function general_header() {
   $page .= '<form id="plaatenergy" method="POST">';  
   
   $page .= '<input type="hidden" name="session" value="'.$session.'" />';
-      
-   $page .= '<div class="language">';
-   if ($lang=="en") {
-		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_LANGUAGE, t('DUTCH'));
-   } else { 
-		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_LANGUAGE , t('ENGLISH'));
-   }
-   $page .= '</div>';
   
-  
-	$page .= '<div class="theme">';
-   if ($theme == "light") {
-	$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_SCHEME, t('THEME_TO_DARK'));
-   } else {
-	$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_SCHEME, t('THEME_TO_LIGHT'));		
-   }
-   $page .= '</div>';
+	if ($pid!=PAGE_REALTIME) {
+    
+		$page .= '<div class="language">';
+		if ($lang=="en") {
+			$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_LANGUAGE, t('DUTCH'));
+		} else { 
+			$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_LANGUAGE , t('ENGLISH'));
+		}
+		$page .= '</div>';
 	
+	
+		$page .= '<div class="theme">';
+		if ($theme == "light") {
+		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_SCHEME, t('THEME_TO_DARK'));
+		} else {
+		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_SCHEME, t('THEME_TO_LIGHT'));		
+		}
+		$page .= '</div>';
+	}
    
 	return $page;
 }
@@ -283,16 +293,22 @@ function general_header() {
  */
 function general_footer($time=0) {
 
-  $page = '<div class="copyright">' . t('LINK_COPYRIGHT') . '<br/>';
-  //$page .= '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries - '.$counter.' requests]';
-  $page .= '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries]';
-
-  $page .= '</div>';
-  $page .= '</form>';
-  $page .= '</body>';
-  $page .= '</html>';
+	global $pid;
+	
+	$page = "";
+	
+	if ($pid!=PAGE_REALTIME) {
+	
+		$page .= '<div class="copyright">' . t('LINK_COPYRIGHT') . '<br/>';
+		$page .= '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries]';
+		$page .= '</div>';
+	}
+	
+	$page .= '</form>';
+	$page .= '</body>';
+	$page .= '</html>';
   
-  return $page;
+	return $page;
 }
 
 /**
