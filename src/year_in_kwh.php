@@ -50,74 +50,78 @@ function plaatenergy_year_in_energy_page() {
 	$count=0;
 	$data="";
 
-        if ($eid==EVENT_SCATTER) {
+		if ($eid==EVENT_SCATTER) {
 
-           $sql  = 'select date, dal as low, piek as normal, solar, dalterug, piekterug ';
-	   $sql .= 'from energy_day where date>="'.$year.'-1-1" and date<="'.$year.'-12-31"';
-
-           $result = plaatenergy_db_query($sql);
-           while ($row = plaatenergy_db_fetch_object($result)) {
-	      if (strlen($data)>0) {
-		$data .= ',';
-              }
-	      $data .= '["'.$row->date.'",'.round(($row->low+$row->normal+$row->solar-$row->dalterug-$row->piekterug),2).','.$row->solar.']';
-           } 
-           $json = "[".$data."]";
-
-        } else {
+			$sql  = 'select date, dal as low, piek as normal, solar, dalterug, piekterug ';
+			$sql .= 'from energy_day where date>="'.$year.'-1-1" and date<="'.$year.'-12-31"';
 	
-	   for($m=1; $m<=12; $m++) {
+			$result = plaatenergy_db_query($sql);
+			while ($row = plaatenergy_db_fetch_object($result)) {
+				if (strlen($data)>0) {
+					$data .= ',';
+				}
+				$data .= '["'.$row->date.'",'.round(($row->low+$row->normal+$row->solar-$row->dalterug-$row->piekterug),2).','.$row->solar.']';
+			} 
+			$json = "[".$data."]";
 
-		$time=mktime(0, 0, 0, $m, 1, $year);
-		$timestamp1=date('Y-m-0 00:00:00', $time);
-		$timestamp2=date('Y-m-t 23:59:59', $time);
-
-		$sql  = 'select sum(dal) as dal, sum(piek) as piek, sum(dalterug) as dalterug, sum(piekterug) as piekterug, sum(solar) as solar ';
-		$sql .= 'FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
-
-		$result = plaatenergy_db_query($sql);
-		$row = plaatenergy_db_fetch_object($result);
+		} else {
 	
-		$dal_value=0;
-		$piek_value=0;
-		$dalterug_value=0;
-		$piekterug_value=0;
-		$solar_value=0;
-		$verbruikt=0;
+			for($m=1; $m<=12; $m++) {
 
-		if (isset($row->dal)) {
-			$dal_value= $row->dal;
-			$piek_value= $row->piek;
-			$dalterug_value= $row->dalterug;
-			$piekterug_value= $row->piekterug;
-			$solar= $row->solar;
+				$time=mktime(0, 0, 0, $m, 1, $year);
+				$timestamp1=date('Y-m-0 00:00:00', $time);
+				$timestamp2=date('Y-m-t 23:59:59', $time);
+		
+				$sql  = 'select sum(dal) as dal, sum(piek) as piek, sum(dalterug) as dalterug, sum(piekterug) as piekterug, sum(solar) as solar ';
+				$sql .= 'FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+
+				$result = plaatenergy_db_query($sql);
+				$row = plaatenergy_db_fetch_object($result);
+		
+				$dal_value=0;
+				$piek_value=0;
+				$dalterug_value=0;
+				$piekterug_value=0;
+				$solar_value=0;
+				$verbruikt=0;
 	
-			$verbruikt = $solar-$dalterug_value-$piekterug_value;
-			$count++;
+				if (isset($row->dal)) {
+					$dal_value = $row->dal;
+					$piek_value = $row->piek;
+					$dalterug_value = $row->dalterug;
+					$piekterug_value = $row->piekterug;
+					$solar = $row->solar;
+	
+					$verbruikt = $solar-$dalterug_value-$piekterug_value;
+					if ($verbruikt<0) {
+						$verbruikt=0;
+					}
+					$count++;
+				}
+	
+				if (strlen($data)>0) {
+					$data.=',';
+				}
+				$data .= "['".date("m-Y", $time)."',";
+				$price2 = ($dal_value + $piek_value + $verbruikt)*$energy_price;
+				
+				if ($eid==EVENT_KWH) {
+					$data .= round($dal_value,2).','.round($piek_value,2).','.round($verbruikt,2).','.round(($in_forecast[$m]*$energy_use_forecast),2).']';
+				} else { 
+					$data .= round($price2,2).']';
+				}
+				$total += $dal_value + $piek_value + $verbruikt;
+				$total_price += $price2;
+			}
+	
+			if ($eid==EVENT_KWH) {
+				$json = "[['','".t('USED_LOW_KWH')."','".t('USED_HIGH_KWH')."','".t('USED_LOCAL_KWH')."','".t('FORECAST_KWH')."'],".$data."]";
+			} else { 
+				$json = "[['','".t('EURO')."'],".$data."]";
+			}		
 		}
-	
-		if (strlen($data)>0) {
-		$data.=',';
-		}
-		$data .= "['".date("m-Y", $time)."',";
-		$price2 = ($dal_value + $piek_value + $verbruikt)*$energy_price;
-		if ($eid==EVENT_KWH) {
-			$data .= round($dal_value,2).','.round($piek_value,2).','.round($verbruikt,2).','.round(($in_forecast[$m]*$energy_use_forecast),2).']';
-		} else { 
-			$data .= round($price2,2).']';
-		}
-		$total += $dal_value + $piek_value + $verbruikt;
-		$total_price += $price2;
-	   }
-	
-	   if ($eid==EVENT_KWH) {
-		$json = "[['','".t('USED_LOW_KWH')."','".t('USED_HIGH_KWH')."','".t('USED_LOCAL_KWH')."','".t('FORECAST_KWH')."'],".$data."]";
-	   } else { 
-		$json = "[['','".t('EURO')."'],".$data."]";
-	   }
-        }
 
-        if ($eid==EVENT_SCATTER) {
+		if ($eid==EVENT_SCATTER) {
 
  $page = '
                    <script type="text/javascript" src="https://www.google.com/jsapi"></script>

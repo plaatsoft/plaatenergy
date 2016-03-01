@@ -75,8 +75,15 @@ $today_energy_used = 0;
 $today_energy_delivered = 0;
 $today_gas_used = 0;
 if ( isset ($row3->dal)) {
-	$today_energy_used = $row3->dal + $row3->piek + ($row3->solar - $row3->dalterug - $row3->piekterug);
-	$today_energy_delivered = $row3->solar;
+
+	$delivered_low = $row3->dalterug;
+	$delivered_normal = $row3->piekterug;
+	$tmp = $row3->solar - $delivered_low -$delivered_normal;
+	if ($tmp >0 ) {
+		$delivered_local=$tmp;
+	}
+	$today_energy_delivered = $delivered_low + $delivered_normal + $delivered_local;			
+	$today_energy_used = $row3->dal + $row3->piek + $delivered_local;
 	$today_gas_used = $row3->gas;
 }
 
@@ -95,8 +102,15 @@ $total_energy_used = 0;
 $total_energy_delivered = 0;
 $total_gas_used = 0;
 if ( isset ($row5->dal)) {
-	$total_energy_used = $row5->dal + $row5->piek + ($row5->solar-$row5->dalterug-$row5->piekterug);
-	$total_energy_delivered = $row5->solar;
+
+	$delivered_low = $row5->dalterug;
+	$delivered_normal = $row5->piekterug;
+	$tmp = $row5->solar - $delivered_low -$delivered_normal;
+	if ($tmp >0 ) {
+		$delivered_local=$tmp;
+	}	
+	$total_energy_delivered = $delivered_low + $delivered_normal + $delivered_local;		
+	$total_energy_used = $row5->dal + $row5->piek + $delivered_local;
 	$total_gas_used = $row5->gas;
 }
 

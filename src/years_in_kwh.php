@@ -95,7 +95,10 @@ function plaatenergy_years_in_energy_page() {
 			$piekterug_value= $row1->piekterug;
 			$solar= $row1->solar;
 	
-			$verbruikt = $solar-$dalterug_value-$piekterug_value;
+			$verbruikt = $solar - $dalterug_value - $piekterug_value;
+			if ($verbruikt < 0) {
+				$verbruikt = 0;
+			}
 			$count++;
 		}
 
