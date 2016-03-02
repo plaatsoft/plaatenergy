@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>PlaatEnergy: src/ui/data.php File Reference</title>
+<title>PlaatEnergy: src/data.php File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -19,7 +19,7 @@
   <td id="projectlogo"><img alt="Logo" src="128.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">PlaatEnergy
-   &#160;<span id="projectnumber">v0.6</span>
+   &#160;<span id="projectnumber">v0.9</span>
    </div>
   </td>
  </tr>
@@ -32,8 +32,6 @@
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
-      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
-      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
@@ -45,7 +43,7 @@
   </div>
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_da5c6b39c0a2f54e57df6799511cd3ab.html">ui</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -55,6 +53,9 @@
 <div class="title">data.php File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>realtime page fetch data script  
+<a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -74,7 +75,7 @@ Variables</h2></td></tr>
 <tr class="separator:a16f9a3e18bcb87465b6799b5e0121089"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff5636a5f8216e0c22399f0c2d78a80d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#aff5636a5f8216e0c22399f0c2d78a80d">$humidity</a> = 0</td></tr>
 <tr class="separator:aff5636a5f8216e0c22399f0c2d78a80d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ad0ffe3fa0755e56a1a6bb40c232b8a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="main_8js.html#a120c440178b1eb9ca8fec0854692e01e">if</a>(isset($row1-&gt;temperature))&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#a1ad0ffe3fa0755e56a1a6bb40c232b8a">$sql2</a> = 'select vermogen, vermogenterug, gas from energy where '</td></tr>
+<tr class="memitem:a1ad0ffe3fa0755e56a1a6bb40c232b8a"><td class="memItemLeft" align="right" valign="top">if(isset($row1-&gt;temperature))&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#a1ad0ffe3fa0755e56a1a6bb40c232b8a">$sql2</a> = 'select vermogen, vermogenterug, gas from energy where '</td></tr>
 <tr class="separator:a1ad0ffe3fa0755e56a1a6bb40c232b8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae734ecc68847d4f436c60c39ec64af11"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#ae734ecc68847d4f436c60c39ec64af11">$result2</a> = <a class="el" href="database_8inc.html#a9d9dcefc9b93dfeaf712bfd5f76949e4">plaatenergy_db_query</a>($sql2)</td></tr>
 <tr class="separator:ae734ecc68847d4f436c60c39ec64af11"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -96,7 +97,7 @@ Variables</h2></td></tr>
 <tr class="separator:ae5e5251b79c47ca9126c3f8eb5e380e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1cec74e128a795f263c8506ff2635d8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#ab1cec74e128a795f263c8506ff2635d8">$today_gas_used</a> = 0</td></tr>
 <tr class="separator:ab1cec74e128a795f263c8506ff2635d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9de39d1098245100aeb59e1d966e065a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="main_8js.html#a120c440178b1eb9ca8fec0854692e01e">if</a>(isset($row3-&gt;dal))&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#a9de39d1098245100aeb59e1d966e065a">$time</a> =mktime(0, 0, 0, 1, 1, date('Y'))</td></tr>
+<tr class="memitem:a9de39d1098245100aeb59e1d966e065a"><td class="memItemLeft" align="right" valign="top">if(isset($row3-&gt;dal))&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#a9de39d1098245100aeb59e1d966e065a">$time</a> =mktime(0, 0, 0, 1, 1, date('Y'))</td></tr>
 <tr class="separator:a9de39d1098245100aeb59e1d966e065a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35ec0d350e4c31896c5b7625916fb947"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#a35ec0d350e4c31896c5b7625916fb947">$sql5</a> = 'select sum(dal) as dal, sum(piek) as piek, sum(dalterug) as dalterug, sum(piekterug) as piekterug, sum(solar) as solar, sum(gas) as gas '</td></tr>
 <tr class="separator:a35ec0d350e4c31896c5b7625916fb947"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -110,13 +111,13 @@ Variables</h2></td></tr>
 <tr class="separator:aa1d63b2c28b1b0dd323d9e0060eb05ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79adc9a8db8368de01318585d5b9e277"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#a79adc9a8db8368de01318585d5b9e277">$total_gas_used</a> = 0</td></tr>
 <tr class="separator:a79adc9a8db8368de01318585d5b9e277"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae56a691e38e5c9b65758763e68c4bffc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="main_8js.html#a120c440178b1eb9ca8fec0854692e01e">if</a>(isset($row5-&gt;dal))&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#ae56a691e38e5c9b65758763e68c4bffc">$total_energy_co2</a> = round(($total_energy_used - $total_energy_delivered), 2)</td></tr>
+<tr class="memitem:ae56a691e38e5c9b65758763e68c4bffc"><td class="memItemLeft" align="right" valign="top">if(isset($row5-&gt;dal))&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#ae56a691e38e5c9b65758763e68c4bffc">$total_energy_co2</a> = round(($total_energy_used - $total_energy_delivered), 2)</td></tr>
 <tr class="separator:ae56a691e38e5c9b65758763e68c4bffc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a175721205eb24a717b8074300bee3657"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#a175721205eb24a717b8074300bee3657">$total_gas_co2</a> = round(($row5-&gt;gas * 1.78), 2)</td></tr>
 <tr class="separator:a175721205eb24a717b8074300bee3657"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0907911ed5c895f6ba4551da664cdd8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#ae0907911ed5c895f6ba4551da664cdd8">$total_tree_offset</a> = ($total_energy_co2 + $total_gas_co2) / 200</td></tr>
 <tr class="separator:ae0907911ed5c895f6ba4551da664cdd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca42bcf91a042261a76ccb121fc76d8e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="main_8js.html#a120c440178b1eb9ca8fec0854692e01e">if</a>($vermogen &gt; 0)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#aca42bcf91a042261a76ccb121fc76d8e">else</a></td></tr>
+<tr class="memitem:aca42bcf91a042261a76ccb121fc76d8e"><td class="memItemLeft" align="right" valign="top">if($vermogen &gt; 0)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#aca42bcf91a042261a76ccb121fc76d8e">else</a></td></tr>
 <tr class="separator:aca42bcf91a042261a76ccb121fc76d8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6877152fd91f8b0c5bcdc017fffdb85d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#a6877152fd91f8b0c5bcdc017fffdb85d">$energy_today</a> = $today_energy_delivered - $today_energy_used</td></tr>
 <tr class="separator:a6877152fd91f8b0c5bcdc017fffdb85d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -124,12 +125,14 @@ Variables</h2></td></tr>
 <tr class="separator:a2d64d400693f62efbd994e7585cc4936"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab783f2870a5e8ff71f8ae512afe4176e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#ab783f2870a5e8ff71f8ae512afe4176e">$json</a> [&quot;total_delivery&quot;] = num($total_energy_delivered). &quot; kWh&quot;</td></tr>
 <tr class="separator:ab783f2870a5e8ff71f8ae512afe4176e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a756b7859b9aae002bdfcd29e6babbd7f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="main_8js.html#a120c440178b1eb9ca8fec0854692e01e">if</a>($_GET[&quot;q&quot;][1]==&quot;0&quot;) elseif($_GET[&quot;q&quot;][1]==&quot;1&quot;) if($_GET[&quot;q&quot;][2]==&quot;0&quot;) elseif($_GET[&quot;q&quot;][2]==&quot;1&quot;) elseif($_GET[&quot;q&quot;][2]==&quot;2&quot;)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#a756b7859b9aae002bdfcd29e6babbd7f">$json</a> [&quot;pressure&quot;] = num($pressure) . &quot; hPa&quot;</td></tr>
+<tr class="memitem:a756b7859b9aae002bdfcd29e6babbd7f"><td class="memItemLeft" align="right" valign="top">if($_GET[&quot;q&quot;][1]==&quot;0&quot;) elseif($_GET[&quot;q&quot;][1]==&quot;1&quot;) if($_GET[&quot;q&quot;][2]==&quot;0&quot;) elseif($_GET[&quot;q&quot;][2]==&quot;1&quot;) elseif($_GET[&quot;q&quot;][2]==&quot;2&quot;)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#a756b7859b9aae002bdfcd29e6babbd7f">$json</a> [&quot;pressure&quot;] = num($pressure) . &quot; hPa&quot;</td></tr>
 <tr class="separator:a756b7859b9aae002bdfcd29e6babbd7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0bf5c5666a76bb346958d15de94260a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#af0bf5c5666a76bb346958d15de94260a">$json</a> [&quot;humidity&quot;] = num($humidity) . &quot; %&quot;</td></tr>
 <tr class="separator:af0bf5c5666a76bb346958d15de94260a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>realtime page fetch data script </p>
+</div><h2 class="groupheader">Variable Documentation</h2>
 <a class="anchor" id="a6877152fd91f8b0c5bcdc017fffdb85d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -183,7 +186,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="main_8js.html#a120c440178b1eb9ca8fec0854692e01e">if</a> ($_GET[&quot;q&quot;][1]==&quot;0&quot;) elseif ($_GET[&quot;q&quot;][1]==&quot;1&quot;) if ($_GET[&quot;q&quot;][2]==&quot;0&quot;) elseif ($_GET[&quot;q&quot;][2]==&quot;1&quot;) elseif ($_GET[&quot;q&quot;][2]==&quot;2&quot;) $json[&quot;pressure&quot;] = num($pressure) . &quot; hPa&quot;</td>
+          <td class="memname">if ($_GET[&quot;q&quot;][1]==&quot;0&quot;) elseif ($_GET[&quot;q&quot;][1]==&quot;1&quot;) if ($_GET[&quot;q&quot;][2]==&quot;0&quot;) elseif ($_GET[&quot;q&quot;][2]==&quot;1&quot;) elseif ($_GET[&quot;q&quot;][2]==&quot;2&quot;) $json[&quot;pressure&quot;] = num($pressure) . &quot; hPa&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -375,7 +378,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="main_8js.html#a120c440178b1eb9ca8fec0854692e01e">if</a> (isset($row3-&gt;dal)) $time =mktime(0, 0, 0, 1, 1, date('Y'))</td>
+          <td class="memname">if (isset($row3-&gt;dal)) $time =mktime(0, 0, 0, 1, 1, date('Y'))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -447,7 +450,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="main_8js.html#a120c440178b1eb9ca8fec0854692e01e">if</a> (isset($row5-&gt;dal)) $total_energy_co2 = round(($total_energy_used - $total_energy_delivered), 2)</td>
+          <td class="memname">if (isset($row5-&gt;dal)) $total_energy_co2 = round(($total_energy_used - $total_energy_delivered), 2)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -543,12 +546,12 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="main_8js.html#a120c440178b1eb9ca8fec0854692e01e">if</a> ($total_tree_offset &gt; 0) else</td>
+          <td class="memname">if ($total_tree_offset &gt; 0) else</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">{</div><div class="line">  <a class="code" href="data_8php.html#a2d64d400693f62efbd994e7585cc4936">$json</a>[<span class="stringliteral">&quot;current_watt&quot;</span>] = <span class="stringliteral">&quot;+ &quot;</span>.num(<a class="code" href="data_8php.html#a6d812819bdd0386a32d6e1f57998d48a">$vermogenterug</a>,0).<span class="stringliteral">&quot; Watt&quot;</span></div><div class="ttc" id="data_8php_html_a6d812819bdd0386a32d6e1f57998d48a"><div class="ttname"><a href="data_8php.html#a6d812819bdd0386a32d6e1f57998d48a">$vermogenterug</a></div><div class="ttdeci">$vermogenterug</div><div class="ttdef"><b>Definition:</b> data.php:58</div></div>
-<div class="ttc" id="data_8php_html_a2d64d400693f62efbd994e7585cc4936"><div class="ttname"><a href="data_8php.html#a2d64d400693f62efbd994e7585cc4936">$json</a></div><div class="ttdeci">$json[&quot;total_decrease&quot;]</div><div class="ttdef"><b>Definition:</b> data.php:160</div></div>
+<b>Initial value:</b><div class="fragment"><div class="line">{</div><div class="line">  <a class="code" href="data_8php.html#a2d64d400693f62efbd994e7585cc4936">$json</a>[<span class="stringliteral">&quot;current_watt&quot;</span>] = <span class="stringliteral">&quot;+ &quot;</span>.num(<a class="code" href="data_8php.html#a6d812819bdd0386a32d6e1f57998d48a">$vermogenterug</a>,0).<span class="stringliteral">&quot; Watt&quot;</span></div><div class="ttc" id="data_8php_html_a6d812819bdd0386a32d6e1f57998d48a"><div class="ttname"><a href="data_8php.html#a6d812819bdd0386a32d6e1f57998d48a">$vermogenterug</a></div><div class="ttdeci">$vermogenterug</div><div class="ttdef"><b>Definition:</b> data.php:63</div></div>
+<div class="ttc" id="data_8php_html_a2d64d400693f62efbd994e7585cc4936"><div class="ttname"><a href="data_8php.html#a2d64d400693f62efbd994e7585cc4936">$json</a></div><div class="ttdeci">$json[&quot;total_decrease&quot;]</div><div class="ttdef"><b>Definition:</b> data.php:181</div></div>
 </div><!-- fragment -->
 </div>
 </div>

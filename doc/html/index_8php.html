@@ -69,6 +69,8 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a44d4a5ef593dd745482e1f2adb2f7774"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a44d4a5ef593dd745482e1f2adb2f7774">$time_start</a> = microtime(true)</td></tr>
 <tr class="separator:a44d4a5ef593dd745482e1f2adb2f7774"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a08c84edd46f257c94cdf8d443cc77d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a9a08c84edd46f257c94cdf8d443cc77d">$ip</a> = $_SERVER['REMOTE_ADDR']</td></tr>
+<tr class="separator:a9a08c84edd46f257c94cdf8d443cc77d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af6c2f93502d2687b5cfce165c10ed6ff"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#af6c2f93502d2687b5cfce165c10ed6ff">$eid</a> = <a class="el" href="general_8inc.html#a30239ecac213cc9ce4b9f0e500131d9e">EVENT_NONE</a></td></tr>
 <tr class="separator:af6c2f93502d2687b5cfce165c10ed6ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b4e4b29ac1d6699dd65f8f0d6fa4133"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a3b4e4b29ac1d6699dd65f8f0d6fa4133">$sid</a> = <a class="el" href="general_8inc.html#a30239ecac213cc9ce4b9f0e500131d9e">EVENT_NONE</a></td></tr>
@@ -85,10 +87,16 @@ Variables</h2></td></tr>
 <tr class="separator:a00ae4fcafb1145f5e968bdf920f83e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4185ada2bf060eb3a94ba14bd649f6bf"><td class="memItemLeft" align="right" valign="top">if(strlen($token)&gt;0)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a4185ada2bf060eb3a94ba14bd649f6bf">$home_password</a> = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('home_password')</td></tr>
 <tr class="separator:a4185ada2bf060eb3a94ba14bd649f6bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb32fa1df74810542d357283d36e40a1"><td class="memItemLeft" align="right" valign="top">switch($sid)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#abb32fa1df74810542d357283d36e40a1">$language</a> = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('language')</td></tr>
-<tr class="separator:abb32fa1df74810542d357283d36e40a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8934bf4a60120ca28c9dec5290bc370"><td class="memItemLeft" align="right" valign="top">if($language==&quot;nl&quot;)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#ad8934bf4a60120ca28c9dec5290bc370">$page</a> = &quot;&quot;</td></tr>
-<tr class="separator:ad8934bf4a60120ca28c9dec5290bc370"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfe3f2ff62fe93eee830f9333cded9cc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#adfe3f2ff62fe93eee830f9333cded9cc">$session_id</a> = <a class="el" href="database_8inc.html#a22dbedbf0150e0dda0f6389bb490a81e">plaatenergy_db_get_session</a>($ip)</td></tr>
+<tr class="separator:adfe3f2ff62fe93eee830f9333cded9cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8b66e762d24436f3132440642bb5952"><td class="memItemLeft" align="right" valign="top">switch($sid)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#ab8b66e762d24436f3132440642bb5952">$sql</a> = 'select language from session where ip=&quot;'.$ip.'&quot;'</td></tr>
+<tr class="separator:ab8b66e762d24436f3132440642bb5952"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a112ef069ddc0454086e3d1e6d8d55d07"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a112ef069ddc0454086e3d1e6d8d55d07">$result</a> = <a class="el" href="database_8inc.html#a9d9dcefc9b93dfeaf712bfd5f76949e4">plaatenergy_db_query</a>($sql)</td></tr>
+<tr class="separator:a112ef069ddc0454086e3d1e6d8d55d07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1d731aa570613e5bcff831bb10e9b87"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#aa1d731aa570613e5bcff831bb10e9b87">$row</a> = <a class="el" href="database_8inc.html#a0964cb581280d88382da7a2f863cc1be">plaatenergy_db_fetch_object</a>($result)</td></tr>
+<tr class="separator:aa1d731aa570613e5bcff831bb10e9b87"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61701b4fc2fa2a27974af8d0fecc2260"><td class="memItemLeft" align="right" valign="top">if($row-&gt;language==&quot;nl&quot;)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a61701b4fc2fa2a27974af8d0fecc2260">$page</a> = &quot;&quot;</td></tr>
+<tr class="separator:a61701b4fc2fa2a27974af8d0fecc2260"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>contain general page and event handler </p>
@@ -160,12 +168,12 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="abb32fa1df74810542d357283d36e40a1"></a>
+<a class="anchor" id="a9a08c84edd46f257c94cdf8d443cc77d"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">switch ($sid) $language = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('language')</td>
+          <td class="memname">$ip = $_SERVER['REMOTE_ADDR']</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -184,12 +192,12 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ad8934bf4a60120ca28c9dec5290bc370"></a>
+<a class="anchor" id="a61701b4fc2fa2a27974af8d0fecc2260"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">if ($language==&quot;nl&quot;) $page = &quot;&quot;</td>
+          <td class="memname">if ($row-&gt;language==&quot;nl&quot;) $page = &quot;&quot;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -208,6 +216,30 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a112ef069ddc0454086e3d1e6d8d55d07"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$result = <a class="el" href="database_8inc.html#a9d9dcefc9b93dfeaf712bfd5f76949e4">plaatenergy_db_query</a>($sql)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="aa1d731aa570613e5bcff831bb10e9b87"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$row = <a class="el" href="database_8inc.html#a0964cb581280d88382da7a2f863cc1be">plaatenergy_db_fetch_object</a>($result)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="abefb3c26429d514777313e9a63d7cbac"></a>
 <div class="memitem">
 <div class="memproto">
@@ -220,12 +252,36 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="adfe3f2ff62fe93eee830f9333cded9cc"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$session_id = <a class="el" href="database_8inc.html#a22dbedbf0150e0dda0f6389bb490a81e">plaatenergy_db_get_session</a>($ip)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a3b4e4b29ac1d6699dd65f8f0d6fa4133"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">$sid = <a class="el" href="general_8inc.html#a30239ecac213cc9ce4b9f0e500131d9e">EVENT_NONE</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab8b66e762d24436f3132440642bb5952"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">switch ($sid) $sql = 'select language from session where ip=&quot;'.$ip.'&quot;'</td>
         </tr>
       </table>
 </div><div class="memdoc">

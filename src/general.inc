@@ -153,27 +153,26 @@ function t() {
 /**
  * Add title icon 
  */
-function add_icons($path = './ui/') {
-	$path = $path . 'images/icons/';
+function add_icons() {
 	
 	// Charset
 	$page = '<meta charset="UTF-8">';
 	
 	// Normal icons
-	$page .= '<link rel="shortcut icon" type="image/png" sizes="16x16" href="' . $path . '16.png">';
-	$page .= '<link rel="shortcut icon" type="image/png" sizes="24x24" href="' . $path . '24.png">';
-	$page .= '<link rel="shortcut icon" type="image/png" sizes="32x32" href="' . $path . '32.png">';
-	$page .= '<link rel="shortcut icon" type="image/png" sizes="48x48" href="' . $path . '48.png">';
-	$page .= '<link rel="shortcut icon" type="image/png" sizes="64x64" href="' . $path . '64.png">';
-	$page .= '<link rel="shortcut icon" type="image/png" sizes="128x128" href="' . $path . '128.png">';
-	$page .= '<link rel="shortcut icon" type="image/png" sizes="256x256" href="' . $path . '256.png">';
-	$page .= '<link rel="shortcut icon" type="image/png" sizes="512x512" href="' . $path . '512.png">';
+	$page .= '<link rel="shortcut icon" type="image/png" sizes="16x16" href="images/16.png">';
+	$page .= '<link rel="shortcut icon" type="image/png" sizes="24x24" href="images/24.png">';
+	$page .= '<link rel="shortcut icon" type="image/png" sizes="32x32" href="images/32.png">';
+	$page .= '<link rel="shortcut icon" type="image/png" sizes="48x48" href="images/48.png">';
+	$page .= '<link rel="shortcut icon" type="image/png" sizes="64x64" href="images/64.png">';
+	$page .= '<link rel="shortcut icon" type="image/png" sizes="128x128" href="images/128.png">';
+	$page .= '<link rel="shortcut icon" type="image/png" sizes="256x256" href="images/256.png">';
+	$page .= '<link rel="shortcut icon" type="image/png" sizes="512x512" href="images/512.png">';
 	
 	// Apple icons
-	$page .= '<link rel="apple-touch-icon" type="image/png" href="' . $path . 'apple-60.png">';
-	$page .= '<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="' . $path . 'apple-76.png">';
-	$page .= '<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="' . $path . 'apple-120.png">';
-	$page .= '<link rel="apple-touch-icon" type="image/png" sizes="152x152" href="' . $path . 'apple-152.png">';
+	$page .= '<link rel="apple-touch-icon" type="image/png" href="images/apple-60.png">';
+	$page .= '<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="images/apple-76.png">';
+	$page .= '<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="images/apple-120.png">';
+	$page .= '<link rel="apple-touch-icon" type="image/png" sizes="152x152" href="images/apple-152.png">';
 	
 	// Web app cable (runs the website as app)
 	$page .= '<meta name="apple-mobile-web-app-capable" content="yes">';
@@ -225,7 +224,7 @@ function general_header() {
 
 	if ($pid == PAGE_REALTIME) {
 		$page .= '<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">';
-		$page .= '<link rel="stylesheet" type="text/css" href="ui/main.css"/>';
+		$page .= '<link rel="stylesheet" type="text/css" href="css/realtime.css"/>';
 	}
 	
    $slide_show_on = plaatenergy_db_get_config_item('slide_show_on');

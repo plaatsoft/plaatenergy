@@ -43,11 +43,11 @@
 <div class="contents">
 <div class="textblock"><p>Login on Raspberry Pi with user pi</p>
 <h3>Step 1 - Install following depending thirdparty software packages</h3>
-<p>sudo apt-get install apache2 sudo apt-get install php5 sudo apt-get install python sudo apt-get install mysql-server sudo apt-get install svn</p>
+<p>sudo apt-get install apache2 sudo apt-get install php5 sudo apt-get install python sudo apt-get install mysql-server sudo apt-get install python-mysqldb</p>
 <h3>Step 2 . Create mysql plaatenergy database</h3>
 <p>mysql -u root -p CREATE DATABASE plaatenergy; GRANT ALL ON plaatenergy.* TO plaatenergy&lt;tt&gt;127.0.0.1 IDENTIFIED BY <code>plaatenergy</code>; FLUSH PRIVILEGES; QUIT;</p>
-<h3>Step 3. Get latest official version of PlaatEnergy from GitHub repository:</h3>
-<p>cd /var/www/html svn checkout <a href="https://github.com/wplaat/plaatenergy.git/tags/v0.7">https://github.com/wplaat/plaatenergy.git/tags/v0.7</a> plaatenergy cd /var/www/plaatenergy chmod a+wrx /var/www/html/plaatenergy/backup</p>
+<h3>Step 3. Download PlaatEnergy from plaatsoft.nl.</h3>
+<p>Copy zip file to /tmp login on the raspberry with user <code>pi</code> cd /var/www/html sudo cp /tmp/plaatenergy.zip . sudo unzip *.zip sudo chmod a+wrx /var/www/html/plaatenergy/backup</p>
 <h3>Step 4. Create config.inc with correct database settings</h3>
 <p>cp config.inc.sample config.inc</p>
 <h3>Step 5. Add the following cron job:</h3>

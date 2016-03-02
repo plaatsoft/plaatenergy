@@ -16,15 +16,20 @@
 **  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
+/**
+ * @file
+ * @brief realtime page fetch data script 
+ */
+ 
 /*
 ** ---------------------
 ** Author: wplaat part
 ** ---------------------
 */
 
-include "../config.inc";
-include "../general.inc";
-include "../database.inc";
+include "config.inc";
+include "general.inc";
+include "database.inc";
 
 plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 

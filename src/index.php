@@ -216,7 +216,7 @@ switch ($pid) {
 		break;
 		
 	case PAGE_REALTIME:
-		include 'ui/index.php';
+		include 'realtime.php';
 		$page = plaatenergy_realtime();
 		break;
 		
