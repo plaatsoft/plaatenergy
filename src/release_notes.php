@@ -27,9 +27,10 @@
 ** ---------------------
 */
 
-$note[9] = '<div class="subparagraph">Version 0.9 (28-02-2016)</div>
+$note[9] = '<div class="subparagraph">Version 0.9 (04-03-2016)</div>
 <div class="large_text">
 <ul>
+<li>General: Added security shield arround WebGUI based on sessionId.</li>
 <li>General: Improve customer query report.</li>
 <li>General: Redesign solar deliverable charts (Now they are more flexible).</li>
 <li>General: Added option to select solar meter vendor.</li>
