@@ -57,18 +57,18 @@ function plaatenergy_years_in_gas_page() {
 		$timestamp1=date('Y-1-1 00:00:00', $time);
 		$timestamp2=date('Y-12-t 23:59:59', $time);
 
-		$sql1  = 'select sum(gas) as gas FROM energy_day ';
+		$sql1  = 'select sum(gas_used) as gas_used FROM energy_summary ';
 		$sql1 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 		
 		$result1 = plaatenergy_db_query($sql1);
 		$row1 = plaatenergy_db_fetch_object($result1);
 	
-		if ( isset($row1->gas)) {
+		if ( isset($row1->gas_used)) {
 			$count++;
-			$value=$row1->gas;
+			$value=$row1->gas_used;
 		}
 
-		$sql2  = 'select month(date) as month from energy_day ';
+		$sql2  = 'select month(date) as month from energy_summary ';
 		$sql2 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'" ';
 		$sql2 .= "group by month ";
 		
@@ -78,7 +78,7 @@ function plaatenergy_years_in_gas_page() {
 		while ($row2 = plaatenergy_db_fetch_object($result2)) {
 			if (isset($row2->month)) { 
 				$forecast_total += $gas_forecast[$row2->month];
-	                        $price = $gas_price * $row1->gas;
+					$price = $gas_price * $row1->gas_used;
 			}
 		} 
 

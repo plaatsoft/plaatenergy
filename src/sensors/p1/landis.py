@@ -111,25 +111,27 @@ if value[0] == 'true':
   gas=0
   while stack_teller < len(stack):
    if stack[stack_teller][0:9] == "1-0:1.8.1":
-      dal = float(stack[stack_teller][10:20])
+      low_used = float(stack[stack_teller][10:20])
    elif stack[stack_teller][0:9] == "1-0:1.8.2":
-      normal = float(stack[stack_teller][10:20])
+      normal_used = float(stack[stack_teller][10:20])
    elif stack[stack_teller][0:9] == "1-0:2.8.1":
-      dalterug = float(stack[stack_teller][10:20])
+      low_delivered = float(stack[stack_teller][10:20])
    elif stack[stack_teller][0:9] == "1-0:2.8.2":
-      normalterug = float(stack[stack_teller][10:20])
+      normal_delivered = float(stack[stack_teller][10:20])
    elif stack[stack_teller][0:9] == "1-0:1.7.0":
-      vermogen = int(float(stack[stack_teller][10:16])*1000)
+      power = int(float(stack[stack_teller][10:16])*1000)
    elif stack[stack_teller][0:9] == "1-0:2.7.0":
-      vermogenterug = int(float(stack[stack_teller][10:16])*1000)
+      power_delivered = int(float(stack[stack_teller][10:16])*1000)
+		if power_delivered > 0:
+		   power = power_delivered * -1		
    elif stack[stack_teller][0:10] == "0-1:24.2.1":
       gas = float(stack[stack_teller][26:35])
-   stack_teller = stack_teller +1
+   stack_teller = stack_teller + 1
 
   con = _mysql.connect(dbhost, dbname, dbuser, dbpass)
 
-  sql = "insert into energy( timestamp,dal,piek,dalterug,piekterug,vermogen,vermogenterug,gas) values (str_to_date('{0}','%d-%m-%Y %H:%i:%s'),{1},{2},{3},{4},{5},{6},{7})".format( strftime('%d-%m-%Y %H:%M:00', time.localtime()), dal, normal, dalterug, normalterug, vermogen, vermogenterug, gas)
-
+  sql = "insert into energy1 ( timestamp, low_used, normal_used, low_delivered, normal_delivered, power, gas) values (str_to_date('{0}','%d-%m-%Y %H:%i:%s'),{1},{2},{3},{4},{5},{6},{7})".format( strftime('%d-%m-%Y %H:%M:00', time.localtime()), low_used, normal_used, low_delivered, normal_delivered, power, gas)
+  
   con.query(sql)
 
 #

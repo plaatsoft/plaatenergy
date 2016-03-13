@@ -49,21 +49,22 @@ function plaatenergy_day_in_edit_save_event() {
 	global $low_delivered;
 	global $normal_delivered;
 
-	$sql  = 'select dal as low_used, piek as normal_used, dalterug as low_delivered, piekterug as normal_deliverd ';
-	$sql .= 'from energy where timestamp="'.$date.' 00:00:00" order by timestamp asc limit 0,1';
+	$sql  = 'select low_used, normal_used, low_delivered, normal_deliverd from energy1 ';
+	$sql .= 'where timestamp="'.$date.' 00:00:00" order by timestamp asc limit 0,1';
 
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 	
 	if (isset($row->low_used)) {  
 	
-		$sql  = 'update energy set dal='.$low_used.', piek='.$normal_used.', dalterug='.$low_delivered.', piekterug='.$normal_delivered.' ';
+		$sql  = 'update energy1 set low_used='.$low_used.', normal_used='.$normal_used.', ';
+		$sql .= 'low_delivered='.$low_delivered.', normal_delivered='.$normal_delivered.' ';
 		$sql .= 'where timestamp="'.$date.' 00:00:00"';		
 		
 	} else {	  
 	
-		$sql  = 'insert into energy ( timestamp, dal, piek, dalterug, piekterug) values ("'.$date.' 00:00:00",'.$low_used.','.$normal_used.',';
-		$sql .= $low_delivered.','.$normal_delivered.')';
+		$sql  = 'insert into energy1 ( timestamp, low_used, normal_used, low_delivered, normal_delivered) values ("';
+		$sql .= $date.' 00:00:00",'.$low_used.','.$normal_used.','.$low_delivered.','.$normal_delivered.')';
    }
  	
 	plaatenergy_db_query($sql);
@@ -92,8 +93,8 @@ function plaatenergy_day_in_edit_page() {
 	
 	list($year, $month, $day) = explode("-", $date);	
 		
-	$sql1  = 'select dal as low_used, piek as normal_used, dalterug as low_delivered, piekterug as normal_delivered ';
-	$sql1 .= 'from energy where timestamp<"'.$date.' 00:00:00" order by timestamp desc limit 0,1';
+	$sql1  = 'select low_used, normal_used, low_delivered, normal_delivered low_used from energy1 ';
+	$sql1 .= 'where timestamp<"'.$date.' 00:00:00" order by timestamp desc limit 0,1';
 
 	$result1 = plaatenergy_db_query($sql1);
 	$row1 = plaatenergy_db_fetch_object($result1);
@@ -112,8 +113,8 @@ function plaatenergy_day_in_edit_page() {
 
 	// -------------------------------------
 
-	$sql2  = 'select dal as low_used, piek as normal_used, dalterug as low_delivered, piekterug as normal_delivered ';
-	$sql2 .= 'from energy where timestamp>"'.$date.' 00:00:00" order by timestamp asc limit 0,1';
+	$sql2  = 'select low_used, normal_used, low_delivered, normal_delivered from energy1 ';
+	$sql2 .= 'where timestamp>"'.$date.' 00:00:00" order by timestamp asc limit 0,1';
 
 	$result2 = plaatenergy_db_query($sql2);
 	$row2 = plaatenergy_db_fetch_object($result2);
@@ -154,8 +155,8 @@ function plaatenergy_day_in_edit_page() {
 
 	// -------------------------------------
 
-	$sql3  = 'select dal as low_used, piek as normal_used, dalterug as low_delivered, piekterug as normal_delivered ';
-	$sql3 .= 'from energy where timestamp="'.$date.' 00:00:00" order by timestamp asc limit 0,1';
+	$sql3  = 'select low_used, normal_used, low_delivered, normal_delivered from energy1 ';
+	$sql3 .= 'where timestamp="'.$date.' 00:00:00" order by timestamp asc limit 0,1';
 	$result3 = plaatenergy_db_query($sql3);
 	$row3 = plaatenergy_db_fetch_object($result3);
 	

@@ -56,8 +56,8 @@ function plaatenergy_years_out_energy_page() {
 		$timestamp1 = date('Y-1-1', $time);
 		$timestamp2 = date('Y-12-t', $time);
 	
-		$sql1  = 'select sum(dalterug) as dalterug, sum(piekterug) as piekterug, ';
-		$sql1 .= 'sum(solar) as solar from energy_day ';
+		$sql1  = 'select sum(low_delivered) as low_delivered, sum(normal_delivered) as normal_delivered, ';
+		$sql1 .= 'sum(solar_delivered) as solar_delivered from energy_day ';
 		$sql1 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 	
 		$result1 = plaatenergy_db_query($sql1);
@@ -71,16 +71,16 @@ function plaatenergy_years_out_energy_page() {
 		if ( isset($row1->solar)) {
 			$count++;
 			
-			$delivered_low = $row1->dalterug;
-			$delivered_normal = $row1->piekterug;
-			$tmp = $row1->solar - $delivered_low -$delivered_normal;
+			$delivered_low = $row1->low_deliverd;
+			$delivered_normal = $row1->normal_delivered;
+			$tmp = $row1->solar_delivered - $delivered_low -$delivered_normal;
 			if ($tmp >0 ) {
 				$delivered_local=$tmp;
 			}
 			$total = $delivered_low + $delivered_normal + $delivered_local;
 		}
 	
-		$sql2  = 'select month(date) as month from energy_day ';
+		$sql2  = 'select month(date) as month from energy_summary ';
 		$sql2 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'" ';
 		$sql2 .= 'group by month ';
 		$result2 = plaatenergy_db_query($sql2);

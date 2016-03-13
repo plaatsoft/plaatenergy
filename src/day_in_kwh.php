@@ -37,10 +37,10 @@ function plaatenergy_day_in_energy_page() {
 	global $in_forecast;
 
 	$energy_use_forecast = plaatenergy_db_get_config_item('energy_use_forecast');
-	$dal_prev = plaatenergy_db_get_config_item('meter_reading_used_low');
-	$piek_prev = plaatenergy_db_get_config_item('meter_reading_used_normal');
-	$dalterug_prev = plaatenergy_db_get_config_item('meter_reading_delivered_low');
-	$piekterug_prev = plaatenergy_db_get_config_item('meter_reading_delivered_normal');
+	$low_used_prev = plaatenergy_db_get_config_item('meter_reading_used_low');
+	$normal_used_prev = plaatenergy_db_get_config_item('meter_reading_used_normal');
+	$low_delivered_prev = plaatenergy_db_get_config_item('meter_reading_delivered_low');
+	$normal_delivered_prev = plaatenergy_db_get_config_item('meter_reading_delivered_normal');
 	
 	$prev_date = plaatenergy_prev_day($date);
 	$next_date = plaatenergy_next_day($date);
@@ -51,11 +51,11 @@ function plaatenergy_day_in_energy_page() {
 	$current_date = mktime(0, 0, 0, $month, $day, $year);  
 	
 		
-	$dal_value=0;
-	$piek_value=0;
-	$solar_value=0;
-	$dalterug_value=0;
-	$piekterug_value=0;
+	$low_used_value = 0;
+	$normal_used_value = 0;
+	$solar_value = 0;
+	$low_delivered_value = 0;
+	$normal_delivered_value = 0;
 
 	$i=0;
 	$data = "";
@@ -63,16 +63,16 @@ function plaatenergy_day_in_energy_page() {
 	$total = 0;
 
 	// Get last energy measurement 
-	$sql  = 'select dal, piek, dalterug, piekterug from energy where ';
+	$sql  = 'select low_used, normal_used, low_delivered, normal_delivered from energy1 where ';
 	$sql .= 'timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" order by timestamp desc limit 0,1';	
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 
 	if ( isset($row->dal) ) {
-		$dal_prev = $row->dal;
-		$piek_prev = $row->piek;
-		$dalterug_prev = $row->dalterug;
-		$piekterug_prev = $row->piekterug;
+		$low_used_prev = $row->low_used;
+		$normal_used_prev = $row->normal_used
+		$low_delivered_prev = $row->low_delivered;
+		$normal_delivered_prev = $row->normal_delivered;
 	}      
 
 	// Get last energy measurement 
@@ -91,7 +91,8 @@ function plaatenergy_day_in_energy_page() {
 		$timestamp1 = date("Y-m-d H:i:s", $current_date+(900*$i));
 		$timestamp2 = date("Y-m-d H:i:s", $current_date+(900*($i+1)));
 		
-		$sql1  = 'select max(dal) as dal, max(piek) as piek, max(dalterug) as dalterug, max(piekterug) as piekterug from energy where ';
+		$sql1  = 'select max(low_used) as low_used, max(normal_used) as normal_used, ';
+		$sql1 .= 'max(low_delivered) as low_delivered, max(normal_delivered) as normal_delivered from energy1 where ';
 		$sql1 .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'"';	
 		$result1 = plaatenergy_db_query($sql1);
 		$row1 = plaatenergy_db_fetch_object($result1);
@@ -103,58 +104,58 @@ function plaatenergy_day_in_energy_page() {
 	
 		if ( isset($row1->dal)) {
 	
-			if ($row1->dal>=$dal_prev) {
-				$dal_value = $row1->dal - $dal_prev;
+			if ($row1->low_used >= $low_used_prev) {
+				$low_used_value = $row1->low_used - $low_used_prev;
 			} else {
-				$dal_value = $row1->dal;
+				$low_used_value = $row1->low_used;
 			}
 	
-			if ($row1->piek>=$piek_prev) {
-				$piek_value = $row1->piek - $piek_prev;
+			if ($row1->normal_used >= $normal_used_prev) {
+				$normal_used_value = $row1->normal_used - $normal_used_prev;
 			} else { 
-				$piek_value = $row1->piek;
+				$normal_used_value = $row1->normal_used;
 			}
 	
-			if ($row1->dalterug>=$dalterug_prev) {
-				$dalterug_value = $row1->dalterug - $dalterug_prev;
+			if ($row1->low_delivered >= $low_delivered_prev) {
+				$low_delivered_value = $row1->low_delivered - $low_delivered_prev;
 			} else {
-				$dalterug_value = $row1->dalterug;
+				$low_delivered_value = $row1->low_delivered;
 			}
 	
-			if ($row1->piekterug>=$piekterug_prev) {
-				$piekterug_value = $row1->piekterug - $piekterug_prev;
+			if ($row1->normal_delivered >= $normal_delivered_prev) {
+				$normal_delivered_value = $row1->normal_delivered - $normal_delivered_prev;
 			} else {
-				$piekterug_value = $row1->piekterug;
+				$normal_delivered_value = $row1->normal_delivered;
 			}
 		}
 	
 		if ( isset($row2->etotal)) {
-			$solar_value = $row2->etotal - $solar_prev - $dalterug_value - $piekterug_value;
-			if ($solar_value<0) 
+			$solar_value = $row2->etotal - $solar_prev - $low_delivered_value - $normal_delivered_value;
+			if ($solar_value < 0) 
 			{
-				$solar_value=0;
+				$solar_value = 0;
 			}
 		}
 
 		// Data in the future is always 0!	
 		if ($timestamp1>date("Y-m-d H:i:s")) {
 	
-			$dal_value = 0;
-			$piek_value = 0;
-			$dalterug_value = 0;
-			$piekterug_value = 0;
+			$low_used_value = 0;
+			$normal_used_value = 0;
+			$low_delivered_value = 0;
+			$normal_delivered_value = 0;
 			$solar_value = 0;
 
 		} else { 
 		
-			$total = $dal_value + $piek_value + $solar_value;
+			$total = $low_used_value + $normal_used_value + $solar_value;
 		}
 	
 		if (strlen($data)>0) {
 			$data.=',';
 		}
 		$data .= "['".date("H:i", $current_date+(900*($i+1)))."',";
-		$data .= round($dal_value,2).','.round($piek_value,2).','.round($solar_value,2).']';
+		$data .= round($low_used_value,2).','.round($normal_used_value,2).','.round($solar_value,2).']';
 	
 		$i++;
 	}
@@ -168,7 +169,7 @@ function plaatenergy_day_in_energy_page() {
 
 		$data="";
 	
-		$sql  = 'select timestamp, vermogen FROM energy where ';
+		$sql  = 'select timestamp, vermogen FROM energy1 where ';
 		$sql .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp';
 	
 		$result = plaatenergy_db_query($sql);

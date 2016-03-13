@@ -30,7 +30,8 @@
 $note[10] = '<div class="subparagraph">Version 1.0 (13-03-2016)</div>
 <div class="large_text">
 <ul>
-<li>General: Add support for two energy and gas meter(s).</li>
+<li>General: Add support for second energy and gas meter.</li>
+<li>General: All entities name in datamodel are now english.</li>
 </ul>
 </div>';
 

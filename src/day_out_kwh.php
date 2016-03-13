@@ -37,8 +37,8 @@ function plaatenergy_day_out_energy_page() {
 	global $out_forecast;
 
 	$energy_delivery_forecast = plaatenergy_db_get_config_item('energy_delivery_forecast');
-	$dalterug_prev = plaatenergy_db_get_config_item('meter_reading_delivered_low');
-	$piekterug_prev = plaatenergy_db_get_config_item('meter_reading_delivered_normal');
+	$low_delivered_value = plaatenergy_db_get_config_item('meter_reading_delivered_low');
+	$normal_delivered_value = plaatenergy_db_get_config_item('meter_reading_delivered_normal');
 	$solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor');
 
 	$prev_date = plaatenergy_prev_day($date);
@@ -56,14 +56,14 @@ function plaatenergy_day_out_energy_page() {
 	$total = 0;
 	
 	// Get last energy measurement 
-	$sql  = 'select max(dalterug) as dalterug, max(piekterug) as piekterug from energy where ';
+	$sql  = 'select max(low_delivered) as low_delivered, max(normal_delivered) as normal_delivered from energy1 where ';
 	$sql .= 'timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59"';	
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 
-	if ( isset($row->dalterug) ) {
-		$dalterug_prev = $row->dalterug;
-		$piekterug_prev = $row->piekterug;
+	if ( isset($row->low_delivered) ) {
+		$low_delivered_value = $row->low_delivered;
+		$normal_delivered_value = $row->normal_delivered;
 	}     
 	
 	// Get last solar measurement
@@ -86,7 +86,7 @@ function plaatenergy_day_out_energy_page() {
 	 	$timestamp1 = date("Y-m-d H:i:s", $current_date+(900*$i));
 		$timestamp2 = date("Y-m-d H:i:s", $current_date+(900*($i+1)));
 
-		$sql1  = 'select max(dalterug) as dalterug, max(piekterug) as piekterug from energy where ';
+		$sql1  = 'select max(low_delivered) as low_delivered, max(normal_delivered) as normal_delivered from energy1 where ';
 		$sql1 .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'"';	
 		$result1 = plaatenergy_db_query($sql1);
 		$row1 = plaatenergy_db_fetch_object($result1);
@@ -96,17 +96,17 @@ function plaatenergy_day_out_energy_page() {
 		$result2 = plaatenergy_db_query($sql2);
 		$row2 = plaatenergy_db_fetch_object($result2);			
 			
-		if ( isset($row1->dalterug)) {
+		if ( isset($row1->low_delivered)) {
 				
-			if ($row1->dalterug>=$dalterug_prev) {
-				$delivered_low = $row1->dalterug - $dalterug_prev;
+			if ($row1->low_delivered>=$low_delivered_value) {
+				$delivered_low = $row1->low_delivered - $low_delivered_value;
 			} else {
-				$delivered_low = $row1->dalterug;
+				$delivered_low = $row1->low_delivered;
 			}
-			if ($row1->piekterug>=$piekterug_prev) {
-				$delivered_normal = $row1->piekterug - $piekterug_prev;
+			if ($row1->normal_delivered>=$normal_delivered_value) {
+				$delivered_normal = $row1->normal_delivered - $normal_delivered_value;
 			} else {
-				$delivered_normal = $row1->piekterug;
+				$delivered_normal = $row1->normal_delivered;
 			}
 		}
 		

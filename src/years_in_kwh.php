@@ -57,14 +57,15 @@ function plaatenergy_years_in_energy_page() {
 		$timestamp1=date('Y-1-1', $time);
 		$timestamp2=date('Y-12-t', $time);
 	
-		$sql1  = 'select sum(dal) as dal, sum(piek) as piek, sum(dalterug) as dalterug, ';
-		$sql1 .= 'sum(piekterug) as piekterug, sum(solar) as solar ';
-		$sql1 .= 'from energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+		$sql1  = 'select sum(low_used) as low_used, sum(normal_used) as normal_used, ';
+		$sql1 .= 'sum(low_delivered) as low_deliverd, sum(normal_delivered) as normal_delivered, ';
+		$sql1 .= 'sum(solar_delivered) as solar_delivered ';
+		$sql1 .= 'from energy_summary where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 	
 		$result1 = plaatenergy_db_query($sql1);
 		$row1 = plaatenergy_db_fetch_object($result1);
 	 
-		$sql2 =  'select month(date) as month from energy_day ';
+		$sql2 =  'select month(date) as month from energy_summary ';
 		$sql2 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'" ';
 		$sql2 .= 'group by month ';
 	
@@ -81,21 +82,21 @@ function plaatenergy_years_in_energy_page() {
 			$max_forecast=$forecast_total*$energy_use_forecast;
 		}
 	
-		$dal_value=0;
-		$piek_value=0;
-		$dalterug_value=0;
-		$piekterug_value=0;
-		$solar_value=0;
-		$verbruikt=0;
+		$low_used_value = 0;
+		$normal_used_value = 0;
+		$low_delivered_value = 0;
+		$normal_delivered_value = 0;
+		$solar_delivered_value = 0;
+		$verbruikt = 0;
 	
-		if (isset($row1->dal)) {
-			$dal_value= $row1->dal;
-			$piek_value= $row1->piek;
-			$dalterug_value= $row1->dalterug;
-			$piekterug_value= $row1->piekterug;
-			$solar= $row1->solar;
+		if (isset($row1->low_used)) {
+			$low_used_value = $row1->low_used;
+			$normal_used_value = $row1->normal_used;
+			$low_delivered_value = $row1->low_delivered;
+			$normal_delivered_value = $row1->normal_delivered;
+			$solar_delivered_value= $row1->solar_delivered;
 	
-			$verbruikt = $solar - $dalterug_value - $piekterug_value;
+			$verbruikt = $solar_delivered_value - $low_delivered_value - $normal_delivered_value;
 			if ($verbruikt < 0) {
 				$verbruikt = 0;
 			}
@@ -106,13 +107,13 @@ function plaatenergy_years_in_energy_page() {
 			$data.=',';
 		}
 		$data .= "['".date("Y", $time)."',";
-		$price2 = ($dal_value + $piek_value + $verbruikt)*$energy_price;
+		$price2 = ($low_used_value + $normal_used_value + $verbruikt)*$energy_price;
 		if ($eid==EVENT_KWH) {
-			$data .= round($dal_value,2).','.round($piek_value,2).','.round($verbruikt,2).','.round(($forecast_total*$energy_use_forecast),2).']';
+			$data .= round($low_used_value,2).','.round($normal_used_value,2).','.round($verbruikt,2).','.round(($forecast_total*$energy_use_forecast),2).']';
 		} else { 
 			$data .= round($price2,2).']';
 		}
-		$total += $dal_value + $piek_value + $verbruikt;
+		$total += $low_used_value + $normal_used_value + $verbruikt;
 		$total_price += $price2;
 	}
 

@@ -42,16 +42,16 @@ function plaatenergy_day_in_gas_edit_save_event() {
 	global $gas;
 	global $date;
 
-	$sql  = 'select dal as low, piek as normal from energy where ';
+	$sql  = 'select gas from energy1 where ';
 	$sql .= 'timestamp="'.$date.' 00:00:00" order by timestamp asc limit 0,1';
 
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 	
-	if (isset($row->low)) {  
-		$sql = 'update energy set gas='.$gas.' where timestamp="'.$date.' 00:00:00"';		
+	if (isset($row->gas)) {  
+		$sql = 'update energy1 set gas='.$gas.' where timestamp="'.$date.' 00:00:00"';		
 	} else {	  
-		$sql  = 'insert into energy ( timestamp, gas) values ("'.$date.' 00:00:00",'.$gas.')';
+		$sql = 'insert into energy1 ( timestamp, gas) values ("'.$date.' 00:00:00",'.$gas.')';
    }
  
 	plaatenergy_db_query($sql);
@@ -77,7 +77,7 @@ function plaatenergy_day_in_gas_edit_page() {
 	
 	list($year, $month, $day) = explode("-", $date);	
 		
-	$sql1  = 'select gas from energy where ';
+	$sql1  = 'select gas from energy1 where ';
 	$sql1 .= 'timestamp<"'.$date.' 00:00:00" order by timestamp desc limit 0,1';
 	$result1 = plaatenergy_db_query($sql1);
 	$row1 = plaatenergy_db_fetch_object($result1);
@@ -89,7 +89,7 @@ function plaatenergy_day_in_gas_edit_page() {
 
 	// -------------------------------------
 
-	$sql2  = 'select gas from energy where ';
+	$sql2  = 'select gas from energy1 where ';
 	$sql2 .= 'timestamp>"'.$date.' 00:00:00" order by timestamp asc limit 0,1';
 	$result2 = plaatenergy_db_query($sql2);
 	$row2 = plaatenergy_db_fetch_object($result2);
@@ -108,7 +108,7 @@ function plaatenergy_day_in_gas_edit_page() {
 
 	// -------------------------------------
 
-	$sql3  = 'select gas from energy where ';
+	$sql3  = 'select gas from energy1 where ';
 	$sql3 .= 'timestamp="'.$date.' 00:00:00" order by timestamp asc limit 0,1';
 	$result3 = plaatenergy_db_query($sql3);
 	$row3 = plaatenergy_db_fetch_object($result3);
