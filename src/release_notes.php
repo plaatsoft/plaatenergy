@@ -27,6 +27,13 @@
 ** ---------------------
 */
 
+$note[10] = '<div class="subparagraph">Version 1.0 (13-03-2016)</div>
+<div class="large_text">
+<ul>
+<li>General: Add support for two energy and gas meter(s).</li>
+</ul>
+</div>';
+
 $note[9] = '<div class="subparagraph">Version 0.9 (04-03-2016)</div>
 <div class="large_text">
 <ul>
