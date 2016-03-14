@@ -54,16 +54,14 @@ if (isset($row1->temperature)) {
   
 // ---------------------------------------------
 
-$sql2  = 'select vermogen, vermogenterug, gas from energy where ';
+$sql2  = 'select power, gas from energy1 where ';
 $sql2 .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'" order by id desc limit 0,1';
 $result2 = plaatenergy_db_query($sql2);
 $row2 = plaatenergy_db_fetch_object($result2);
 
-$vermogen = 0;
-$vermogenterug = 0;
-if ( isset($row2->vermogen) ) {
-	$vermogen = $row2->vermogen;
-	$vermogenterug = $row2->vermogenterug;
+$power = 0;
+if ( isset($row2->power) ) {
+	$power = $row2->power;
 }
 
 // ---------------------------------------------
@@ -71,7 +69,8 @@ if ( isset($row2->vermogen) ) {
 $timestamp1=date('Y-m-d');
 $timestamp2=date('Y-m-d');
 
-$sql3  = 'select dal, piek, dalterug, piekterug, solar, gas from energy_day ';
+$sql3  = 'select low_used, normal_used, low_delivered, normal_delivered, solar_delivered, gas_useds ';
+$sql3 .= 'from energy_summary ';
 $sql3 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 $result3 = plaatenergy_db_query($sql3);
 $row3 = plaatenergy_db_fetch_object($result3);
@@ -79,18 +78,18 @@ $row3 = plaatenergy_db_fetch_object($result3);
 $today_energy_used = 0;
 $today_energy_delivered = 0;
 $today_gas_used = 0;
-if ( isset ($row3->dal)) {
+if ( isset ($row3->low_used)) {
 
-	$delivered_low = $row3->dalterug;
-	$delivered_normal = $row3->piekterug;
-	$tmp = $row3->solar - $delivered_low -$delivered_normal;
+	$delivered_low = $row3->low_delivered;
+	$delivered_normal = $row3->normal_delivered;
+	$tmp = $row3->solar_delivered - $delivered_low - $delivered_normal;
 	$delivered_local = 0;
 	if ($tmp >0 ) {
 		$delivered_local = $tmp;
 	}
 	$today_energy_delivered = $delivered_low + $delivered_normal + $delivered_local;			
-	$today_energy_used = $row3->dal + $row3->piek + $delivered_local;
-	$today_gas_used = $row3->gas;
+	$today_energy_used = $row3->low_used + $row3->normal_delivered + $delivered_local;
+	$today_gas_used = $row3->gas_used;
 }
 
 // ---------------------------------------------
@@ -99,26 +98,28 @@ $time=mktime(0, 0, 0, 1, 1, date('Y'));
 $timestamp1=date('Y-1-1', $time);
 $timestamp2=date('Y-12-t', $time);
 
-$sql5  = 'select sum(dal) as dal, sum(piek) as piek, sum(dalterug) as dalterug, sum(piekterug) as piekterug, sum(solar) as solar, sum(gas) as gas ';
-$sql5 .= 'FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+$sql5  = 'select sum(low_used) as low_used, sum(normal_used) as normal_used, ';
+$sql5 .= 'sum(low_delivered) as low_delivered, sum(normal_delivered) as normal_delivered, ';
+$sql5 .= 'sum(solar_delivered) as solar_delivered, sum(gas_used) as gas_used ';
+$sql5 .= 'FROM energy_summary ';
+$sql5 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 $result5 = plaatenergy_db_query($sql5);
 $row5 = plaatenergy_db_fetch_object($result5);
 
 $total_energy_used = 0;
 $total_energy_delivered = 0;
 $total_gas_used = 0;
-if ( isset ($row5->dal)) {
-
-	$delivered_low = $row5->dalterug;
-	$delivered_normal = $row5->piekterug;
-	$tmp = $row5->solar - $delivered_low -$delivered_normal;
+if ( isset ($row5->low_used)) {
+	$delivered_low = $row5->low_delivered;
+	$delivered_normal = $row5->normal_delivered;
+	$tmp = $row5->solar_delivered - $delivered_low -$delivered_normal;
 	$delivered_local = 0;
 	if ($tmp >0 ) {
 		$delivered_local = $tmp;
 	}	
 	$total_energy_delivered = $delivered_low + $delivered_normal + $delivered_local;		
-	$total_energy_used = $row5->dal + $row5->piek + $delivered_local;
-	$total_gas_used = $row5->gas;
+	$total_energy_used = $row5->low_used + $row5->normal_used + $delivered_local;
+	$total_gas_used = $row5->gas_used;
 }
 
 // ---------------------------------------------
@@ -127,7 +128,7 @@ if ( isset ($row5->dal)) {
 $total_energy_co2 = round(($total_energy_used - $total_energy_delivered), 2);  
 
 // Burning 1 m3 gas results in 0.00178 ton CO2 emission.
-$total_gas_co2 = round(($row5->gas * 1.78), 2);
+$total_gas_co2 = round(($row5->gas_used * 1.78), 2);
 
 // Amount of tree needed to offset gas + energy co2 emission
 $total_tree_offset = ($total_energy_co2 + $total_gas_co2) / 200;
@@ -164,10 +165,10 @@ header("Cache-Control: no-cache");
 header("Pragma: no-cache");
 
 // Calculate actual energy in Watt
-if ($vermogen > 0) {
-  $json["current_watt"] = "- ".num($vermogen,0)." Watt";
+if ($power > 0) {
+  $json["current_watt"] = "- ".num($power,0)." Watt";
 } else {
-  $json["current_watt"] = "+ ".num($vermogenterug,0)." Watt";
+  $json["current_watt"] = "+ ".num(($power*-1),0)." Watt";
 }
 
 // Calculate actuel used energy today in kWh 
