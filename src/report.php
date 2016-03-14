@@ -117,13 +117,13 @@ function plaatenergy_report_event() {
 		 
 		$sql  = 'select sum(low_used) as low_used, sum(normal_used) as normal_used, ';
 		$sql .= 'sum(low_delivered) as low_delivered, sum(normal_delivered) as normal_delivered, ';
-		$sql .= 'sum(solar_delivered) as solar_deliverd, sum(gas_used) as gas_used ';
+		$sql .= 'sum(solar_delivered) as solar_delivered, sum(gas_used) as gas_used ';
 		$sql .= 'FROM energy_summary where date>="'.$start.'" and date<="'.$end.'"';
 			
 		$result = plaatenergy_db_query($sql);
 		$row = plaatenergy_db_fetch_object($result);
 	
-		$local_used = $row->solar_delivered-$row->low_delivered-$row->normal_delivered;
+		$local_used = $row->solar_delivered - $row->low_delivered - $row->normal_delivered;
 		if ($local_used<0) {
 			$local_used=0;
 		}
