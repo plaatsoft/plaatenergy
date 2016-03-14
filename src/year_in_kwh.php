@@ -52,15 +52,15 @@ function plaatenergy_year_in_energy_page() {
 
 		if ($eid==EVENT_SCATTER) {
 
-			$sql  = 'select date, dal as low, piek as normal, solar, dalterug, piekterug ';
-			$sql .= 'from energy_day where date>="'.$year.'-1-1" and date<="'.$year.'-12-31"';
+			$sql  = 'select date, low_used, normal_used, solar_delivered, low_delivered, normal_delivered ';
+			$sql .= 'from energy_summary where date>="'.$year.'-1-1" and date<="'.$year.'-12-31"';
 	
 			$result = plaatenergy_db_query($sql);
 			while ($row = plaatenergy_db_fetch_object($result)) {
 				if (strlen($data)>0) {
 					$data .= ',';
 				}
-				$data .= '["'.$row->date.'",'.round(($row->low+$row->normal+$row->solar-$row->dalterug-$row->piekterug),2).','.$row->solar.']';
+				$data .= '["'.$row->date.'",'.round(($row->low_used+$row->normal_used+$row->solar_delivered-$row->low_delivered-$row->normal_delivered),2).','.$row->solar_delivered.']';
 			} 
 			$json = "[".$data."]";
 
@@ -72,27 +72,28 @@ function plaatenergy_year_in_energy_page() {
 				$timestamp1=date('Y-m-0 00:00:00', $time);
 				$timestamp2=date('Y-m-t 23:59:59', $time);
 		
-				$sql  = 'select sum(dal) as dal, sum(piek) as piek, sum(dalterug) as dalterug, sum(piekterug) as piekterug, sum(solar) as solar ';
-				$sql .= 'FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+				$sql  = 'select sum(low_used) as low_used, sum(normal_used) as normal_used, sum(low_delivered) as ow_delivered, ';
+				$sql .= 'sum(normal_delivered) as normal_delivered, sum(solar_delivered) as solar_delivered ';
+				$sql .= 'FROM energy_summary where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 
 				$result = plaatenergy_db_query($sql);
 				$row = plaatenergy_db_fetch_object($result);
-		
-				$dal_value=0;
-				$piek_value=0;
-				$dalterug_value=0;
-				$piekterug_value=0;
-				$solar_value=0;
+	
+				$low_used_value=0;
+				$normal_used_value=0;
+				$low_delivered_value=0;
+				$normal_delivered_value=0;
+				$solar_delivered_value=0;
 				$verbruikt=0;
 	
 				if (isset($row->dal)) {
-					$dal_value = $row->dal;
-					$piek_value = $row->piek;
-					$dalterug_value = $row->dalterug;
-					$piekterug_value = $row->piekterug;
-					$solar = $row->solar;
+					$low_used_value = $row->low_used;
+					$normal_used_value = $row->normal_used;
+					$low_delivered_value = $row->low_delivered;
+					$normal_delivered_value = $row->normal_delivered;
+					$solar_delivered_value = $row->solar_delivered;
 	
-					$verbruikt = $solar-$dalterug_value-$piekterug_value;
+					$verbruikt = $solar_delivered_value - $low_delivered_value - $normal_delivered_value;
 					if ($verbruikt<0) {
 						$verbruikt=0;
 					}
@@ -103,14 +104,14 @@ function plaatenergy_year_in_energy_page() {
 					$data.=',';
 				}
 				$data .= "['".date("m-Y", $time)."',";
-				$price2 = ($dal_value + $piek_value + $verbruikt)*$energy_price;
+				$price2 = ($low_used_value + $normal_used_value + $verbruikt)*$energy_price;
 				
 				if ($eid==EVENT_KWH) {
-					$data .= round($dal_value,2).','.round($piek_value,2).','.round($verbruikt,2).','.round(($in_forecast[$m]*$energy_use_forecast),2).']';
+					$data .= round($low_used_value,2).','.round($normal_used_value,2).','.round($verbruikt,2).','.round(($in_forecast[$m]*$energy_use_forecast),2).']';
 				} else { 
 					$data .= round($price2,2).']';
 				}
-				$total += $dal_value + $piek_value + $verbruikt;
+				$total += $low_used_value + $normal_used_value + $verbruikt;
 				$total_price += $price2;
 			}
 	

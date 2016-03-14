@@ -56,14 +56,15 @@ function plaatenergy_year_in_gas_page() {
 		$timestamp1=date('Y-m-0 00:00:00', $time);
 		$timestamp2=date('Y-m-t 23:59:59', $time);
 	
-		$sql = 'select sum(gas) as gas FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+		$sql  = 'select sum(gas_used) as gas_used FROM energy_summary where ';
+		$sql .= 'date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 	
 		$result = plaatenergy_db_query($sql);
 		$row = plaatenergy_db_fetch_object($result);
 		
-		if ( isset($row->gas)) {
+		if ( isset($row->gas_used)) {
 			$count++;
-			$value=$row->gas;
+			$value = $row->gas_used;
 		}
 	
 		if (strlen($data)>0) {

@@ -56,8 +56,8 @@ function plaatenergy_year_out_energy_page() {
 		$timestamp1=date('Y-m-0 00:00:00', $time);
 		$timestamp2=date('Y-m-t 23:59:59', $time);
 	
-		$sql1  = 'select sum(dalterug) as dalterug, sum(piekterug) as piekterug, ';
-		$sql1 .= 'sum(solar) as solar from energy_day ';
+		$sql1  = 'select sum(low_delivered) as low_delivered, sum(normal_delivered) as normal_delivered, ';
+		$sql1 .= 'sum(solar_used) as solar_used from energy_summary ';
 		$sql1 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 
 		$result1 = plaatenergy_db_query($sql1);
@@ -68,12 +68,12 @@ function plaatenergy_year_out_energy_page() {
 		$delivered_local=0;
 		$total = 0;
 	
-		if ( isset($row1->solar)) {
+		if ( isset($row1->solar_used)) {
 			$count++;
 			
-			$delivered_low = $row1->dalterug;
-			$delivered_normal = $row1->piekterug;
-			$tmp = $row1->solar - $delivered_low -$delivered_normal;
+			$delivered_low = $row1->low_delivered;
+			$delivered_normal = $row1->normal_delivered;
+			$tmp = $row1->solar_used - $delivered_low -$delivered_normal;
 			if ($tmp >0 ) {
 				$delivered_local=$tmp;
 			}

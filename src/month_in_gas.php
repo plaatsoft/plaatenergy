@@ -40,7 +40,7 @@ function plaatenergy_month_in_gas_page() {
 	$next_date = plaatenergy_next_month($date);
 	
 	list($year, $month) = explode("-", $date);	
-        $month = ltrim($month ,'0');
+	$month = ltrim($month ,'0');
 	
 	$gas_price = plaatenergy_db_get_config_item('gas_price');
 	
@@ -63,17 +63,16 @@ function plaatenergy_month_in_gas_page() {
 			$timestamp1=date('Y-m-d 00:00:00', $time);
 			$timestamp2=date('Y-m-d 23:59:59', $time);
 	
-			$sql = 'select sum(gas) as gas FROM energy_day where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+			$sql  = 'select sum(gas_used) as gas_used FROM energy_summary ';
+			$sql .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 
 			$result = plaatenergy_db_query($sql);
 			$row = plaatenergy_db_fetch_object($result);
 
 			$gas_value=0;
 
-			if ( isset($row->gas)) {	
-				if ($row->gas>0) {
-					$gas_value=$row->gas;
-				}
+			if (isset($row->gas_used) && ($row->gas_used>0)) {
+				$gas_value=$row->gas_used;
 			}
 
 			if (strlen($data)>0) {
