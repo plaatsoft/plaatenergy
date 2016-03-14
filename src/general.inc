@@ -184,6 +184,21 @@ function add_icons() {
 	return $page;
 }
 
+// Load CSS function (by Bastiaan van der Plaat)
+// - Read a CSS file, minifier it and echo it in HTML
+// - So it is mutch faster and up to date every request
+
+function loadCSS($url) {
+	return '<style>' . file_get_contents($url) . '</style>';
+}
+
+// Load JS function (by Bastiaan van der Plaat)
+// - Copy of load CSS but now for JavaScript
+
+function loadJS($url) {
+	return '<script>' . file_get_contents($url) . '</script>';
+}
+
 /**
  * General header
  */
@@ -210,22 +225,24 @@ function general_header() {
 
   $page .= add_icons();
 
-  $page .= '<script language="JavaScript" src="js/link.js" type="text/javascript"></script>';
-  $page .= '<link href="css/general.css" rel="stylesheet" type="text/css" />';
+  $page .= loadJS('js/link.js');
   
-  // Load the dark theme css file only if COOKIE theme = dark
-  if ($theme == "dark") {
-    $page .= '<link rel="stylesheet" type="text/css" href="css/theme-dark.css">';
+  if ($pid != PAGE_REALTIME) {
+    $page .= loadCSS('css/general.css');
   }
   
-  // Load the icons from Font Awesome
-  $page .= '<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">';
-
-
-	if ($pid == PAGE_REALTIME) {
+  // Load the dark css theme if db theme var = dark
+  if ($theme == "dark") {
+	$page .= loadCSS('css/theme-dark.css');
+  }
+  
+    if ($pid == PAGE_REALTIME) {
 		$page .= '<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">';
-		$page .= '<link rel="stylesheet" type="text/css" href="css/realtime.css"/>';
+		$page .= loadCSS('css/realtime.css');
 	}
+  
+  // Load the icons from Font Awesome not with loadCSS because this file never will change and it cant load the font
+  $page .= '<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>';
 	
    $slide_show_on = plaatenergy_db_get_config_item('slide_show_on');
    if (($slide_show_on=="true") && ($pid!=PAGE_SETTING_LIST) && ($pid!=PAGE_SETTING_EDIT)) {
@@ -254,7 +271,7 @@ function general_header() {
                    $sid = 5;
                    break;
      }
-     $page .= '<script language="JavaScript" type="text/javascript">setTimeout(link,'.$slide_show_page_delay.',\'pid='.$pid.'&eid='.$eid.'&sid='.$sid.'\');</script>';
+     $page .= '<script>setTimeout(link,'.$slide_show_page_delay.',\'pid='.$pid.'&eid='.$eid.'&sid='.$sid.'\');</script>';
   }
 
   $page .= '</head>';
@@ -264,25 +281,23 @@ function general_header() {
   
   $page .= '<input type="hidden" name="session" value="'.$session.'" />';
   
-	if ($pid!=PAGE_REALTIME) {
-    
-		$page .= '<div class="language">';
-		if ($lang=="en") {
-			$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_LANGUAGE, t('DUTCH'));
-		} else { 
-			$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_LANGUAGE , t('ENGLISH'));
-		}
-		$page .= '</div>';
-	
-	
-		$page .= '<div class="theme">';
-		if ($theme == "light") {
-		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_SCHEME, t('THEME_TO_DARK'));
-		} else {
-		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_SCHEME, t('THEME_TO_LIGHT'));		
-		}
-		$page .= '</div>';
+  if ($pid != PAGE_REALTIME) {	    
+	$page .= '<div class="language">';
+	if ($lang=="en") {
+		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_LANGUAGE, t('DUTCH'));
+	} else { 
+		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_LANGUAGE , t('ENGLISH'));
 	}
+	$page .= '</div>';
+	
+	$page .= '<div class="theme">';
+	if ($theme == "light") {
+		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_SCHEME, t('THEME_TO_DARK'));
+	} else {
+		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_SCHEME, t('THEME_TO_LIGHT'));		
+	}
+	$page .= '</div>';
+  }
    
 	return $page;
 }
@@ -291,18 +306,16 @@ function general_header() {
  * General footer
  */
 function general_footer($time=0) {
-
 	global $pid;
 	
-	$page = "";
+	$page = '';
 	
-	if ($pid!=PAGE_REALTIME) {
-	
+	if ($pid != PAGE_REALTIME) {
 		$page .= '<div class="copyright">' . t('LINK_COPYRIGHT') . '<br/>';
 		$page .= '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries]';
 		$page .= '</div>';
 	}
-	
+
 	$page .= '</form>';
 	$page .= '</body>';
 	$page .= '</html>';
@@ -703,8 +716,8 @@ function plaatenergy_navigation_year() {
  *   (weather station) and process all data. With a web GUI all data is presented.
  *
  * @section Links
- *   Website: http://www.plaatsoft.nl\n
- *   Code: https://github.com/wplaat/plaatenergy\n
+ *   Website: http://www.plaatsoft.nl
+ *   Code: https://github.com/wplaat/plaatenergy
  *
  * @section Credits
  *   Documentation: wplaat\n

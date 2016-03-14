@@ -63,8 +63,8 @@ function plaatenergy_month_out_energy_page() {
 				$timestamp2=date('Y-m-d 23:59:59', $time);
 				
 				if ($solar_meter_vendor=='unknown') {
-					$sql = 'select max(power) as power FROM energy1 where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" and power<0';
-					
+					$sql = 'select max(power) as power FROM energy1 where ';
+					$sql.= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" and power<0';
 					$result = plaatenergy_db_query($sql);
 					$row = plaatenergy_db_fetch_object($result);
 		
@@ -74,22 +74,11 @@ function plaatenergy_month_out_energy_page() {
 						$value = 0;
 					}
 		
-					if($value>$max) {
-						$max=$value;
-					}
-		
-					if (strlen($data)>0) {
-						$data.=',';
-					}
-		
-					$data .= "['".date("d-m", $time)."',";
-					$data .= $value."]";					
-					
 				} else {
 				
-					$sql = 'select max(pac) as pac FROM solar1 where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';
+					$sql = 'select max(pac) as pac FROM solar where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';
 					
-					result = plaatenergy_db_query($sql);
+					$result = plaatenergy_db_query($sql);
 					$row = plaatenergy_db_fetch_object($result);
 		
 					if (isset($row->pac)) {
@@ -97,18 +86,18 @@ function plaatenergy_month_out_energy_page() {
 					} else {
 						$value=0;
 					}
-		
-					if($value>$max) {
-						$max=$value;
-					}
-		
-					if (strlen($data)>0) {
-						$data.=',';
-					}
-		
-					$data .= "['".date("d-m", $time)."',";
-					$data .= $value."]";			
 				}
+		
+				if($value>$max) {
+					$max=$value;
+				}
+	
+				if (strlen($data)>0) {
+					$data.=',';
+				}
+	
+				$data .= "['".date("d-m", $time)."',";
+				$data .= $value."]";			
 			}
 		}
 
@@ -125,7 +114,7 @@ function plaatenergy_month_out_energy_page() {
 				$timestamp2=date('Y-m-d 23:59:59', $time);
 		
 				$sql1  = 'select sum(low_delivered) as low_delivered, sum(normal_delivered) as normal_delivered, ';
-				$sql1 .= 'sum(solar_deliverd) as solar_delivered from energy_day ';
+				$sql1 .= 'sum(solar_delivered) as solar_delivered from energy_summary ';
 				$sql1 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 
 				$result1 = plaatenergy_db_query($sql1);
@@ -136,11 +125,11 @@ function plaatenergy_month_out_energy_page() {
 				$delivered_local=0;
 				$total = 0;
 	
-				if ( isset($row1->solar)) {
+				if ( isset($row1->solar_delivered)) {
 					$count++;
 					
 					$delivered_low = $row1->low_delivered;
-					$delivered_normal = $row1->normal_deliverd;
+					$delivered_normal = $row1->normal_delivered;
 					$tmp = $row1->solar_delivered - $delivered_low -$delivered_normal;
 					if ($tmp >0 ) {
 						$delivered_local=$tmp;

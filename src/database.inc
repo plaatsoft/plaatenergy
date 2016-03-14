@@ -330,7 +330,7 @@ function plaatenergy_db_process($type) {
 
   if ($type==EVENT_PROCESS_ALL_DAYS) {
 
-    $sql = 'truncate table energy_day';
+    $sql = 'truncate table energy_summary';
     plaatenergy_db_query($sql);
 
   } else {
@@ -415,7 +415,7 @@ function plaatenergy_db_process($type) {
       $normal_delivered_diff = round($data2->normal_delivered-$normal_delivered,$round);
     }
 
-    if ($gas_used>$data2->gas) {
+    if ($gas_used>$data2->gas_used) {
       $gas_used_diff = round($data2->gas_used,$round);
     } else {
       $gas_used_diff = round($data2->gas_used-$gas_used,$round);
@@ -438,8 +438,9 @@ function plaatenergy_db_process($type) {
 
 		if ( isset($data4->id) ) {
 	
-			$sql3  = 'update energy_summary set low_used='.$low_used_diff.', normal_used='.$normal_used_diff.', low_delivered='.$low_delivered_diff.', normal_delivered='.$normal_delivered_diff.',';
-			$sql3 .= 'solar='.$solar_diff.', gas='.$gas_used_diff.' where id='.$data4->id;
+			$sql3  = 'update energy_summary set low_used='.$low_used_diff.', normal_used='.$normal_used_diff.', ';
+			$sql3 .= 'low_delivered='.$low_delivered_diff.', normal_delivered='.$normal_delivered_diff.', ';
+			$sql3 .= 'solar_delivered='.$solar_diff.', gas_used='.$gas_used_diff.' where id='.$data4->id;
 	
 		} else {
 	

@@ -42,16 +42,16 @@ function plaatenergy_day_in_gas_edit_save_event() {
 	global $gas;
 	global $date;
 
-	$sql  = 'select gas from energy1 where ';
+	$sql  = 'select gas_used from energy1 where ';
 	$sql .= 'timestamp="'.$date.' 00:00:00" order by timestamp asc limit 0,1';
 
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 	
-	if (isset($row->gas)) {  
-		$sql = 'update energy1 set gas='.$gas.' where timestamp="'.$date.' 00:00:00"';		
+	if (isset($row->gas_used)) {  
+		$sql = 'update energy1 set gas_used='.$gas.' where timestamp="'.$date.' 00:00:00"';		
 	} else {	  
-		$sql = 'insert into energy1 ( timestamp, gas) values ("'.$date.' 00:00:00",'.$gas.')';
+		$sql = 'insert into energy1 ( timestamp, gas_used) values ("'.$date.' 00:00:00",'.$gas.')';
    }
  
 	plaatenergy_db_query($sql);
@@ -77,26 +77,26 @@ function plaatenergy_day_in_gas_edit_page() {
 	
 	list($year, $month, $day) = explode("-", $date);	
 		
-	$sql1  = 'select gas from energy1 where ';
+	$sql1  = 'select gas_used from energy1 where ';
 	$sql1 .= 'timestamp<"'.$date.' 00:00:00" order by timestamp desc limit 0,1';
 	$result1 = plaatenergy_db_query($sql1);
 	$row1 = plaatenergy_db_fetch_object($result1);
 	
 	$prev_gas=0;
-	if ( isset($row1->gas)) {
-		$prev_gas = $row1->gas;
+	if ( isset($row1->gas_used)) {
+		$prev_gas = $row1->gas_used;
 	}
 
 	// -------------------------------------
 
-	$sql2  = 'select gas from energy1 where ';
+	$sql2  = 'select gas_used from energy1 where ';
 	$sql2 .= 'timestamp>"'.$date.' 00:00:00" order by timestamp asc limit 0,1';
 	$result2 = plaatenergy_db_query($sql2);
 	$row2 = plaatenergy_db_fetch_object($result2);
 
 	$next_gas=999999;
-	if ( isset($row2->gas)) {
-		$next_gas = $row2->gas;
+	if ( isset($row2->gas_used)) {
+		$next_gas = $row2->gas_used;
 	}
 	
 	// -------------------------------------
@@ -108,16 +108,16 @@ function plaatenergy_day_in_gas_edit_page() {
 
 	// -------------------------------------
 
-	$sql3  = 'select gas from energy1 where ';
+	$sql3  = 'select gas_used from energy1 where ';
 	$sql3 .= 'timestamp="'.$date.' 00:00:00" order by timestamp asc limit 0,1';
 	$result3 = plaatenergy_db_query($sql3);
 	$row3 = plaatenergy_db_fetch_object($result3);
 	
 	$found=0;
-	if (isset($row3->gas)) {
+	if (isset($row3->gas_used)) {
 		$found=1;
 		if ($eid!=EVENT_SAVE) {
-			$gas = $row3->gas;
+			$gas = $row3->gas_used;
 		}
 	}
 

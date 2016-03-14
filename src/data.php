@@ -1,5 +1,4 @@
 <?php
-
 /* 
 **  ===========
 **  PlaatEnergy
@@ -54,7 +53,7 @@ if (isset($row1->temperature)) {
   
 // ---------------------------------------------
 
-$sql2  = 'select power, gas from energy1 where ';
+$sql2  = 'select power from energy1 where ';
 $sql2 .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'" order by id desc limit 0,1';
 $result2 = plaatenergy_db_query($sql2);
 $row2 = plaatenergy_db_fetch_object($result2);
@@ -69,7 +68,7 @@ if ( isset($row2->power) ) {
 $timestamp1=date('Y-m-d');
 $timestamp2=date('Y-m-d');
 
-$sql3  = 'select low_used, normal_used, low_delivered, normal_delivered, solar_delivered, gas_useds ';
+$sql3  = 'select low_used, normal_used, low_delivered, normal_delivered, solar_delivered, gas_used ';
 $sql3 .= 'from energy_summary ';
 $sql3 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 $result3 = plaatenergy_db_query($sql3);
@@ -81,14 +80,14 @@ $today_gas_used = 0;
 if ( isset ($row3->low_used)) {
 
 	$delivered_low = $row3->low_delivered;
-	$delivered_normal = $row3->normal_delivered;
+ 	$delivered_normal = $row3->normal_delivered;
 	$tmp = $row3->solar_delivered - $delivered_low - $delivered_normal;
 	$delivered_local = 0;
 	if ($tmp >0 ) {
 		$delivered_local = $tmp;
 	}
 	$today_energy_delivered = $delivered_low + $delivered_normal + $delivered_local;			
-	$today_energy_used = $row3->low_used + $row3->normal_delivered + $delivered_local;
+	$today_energy_used = $row3->low_used + $row3->normal_used + $delivered_local;
 	$today_gas_used = $row3->gas_used;
 }
 
@@ -112,7 +111,7 @@ $total_gas_used = 0;
 if ( isset ($row5->low_used)) {
 	$delivered_low = $row5->low_delivered;
 	$delivered_normal = $row5->normal_delivered;
-	$tmp = $row5->solar_delivered - $delivered_low -$delivered_normal;
+	$tmp = $row5->solar_delivered - $delivered_low - $delivered_normal;
 	$delivered_local = 0;
 	if ($tmp >0 ) {
 		$delivered_local = $tmp;
@@ -139,7 +138,7 @@ $total_tree_offset = ($total_energy_co2 + $total_gas_co2) / 200;
 ** ---------------------
 */
 
-// Function om getallen mooi te maken 1.000,4 = 0 / 1,000.4 = 1
+// Functie om getallen mooi te maken 1.000,4 = 0 / 1,000.4 = 1
 if ($_GET["q"][0] == "0") {
   function num ($number, $d = 1) {
     if ($number != 0) {
@@ -159,10 +158,13 @@ elseif ($_GET["q"][0] == "1") {
   }
 }
 
-// Set HTML header
+// Set HTML headers
 header("Content-Type: application/json");
 header("Cache-Control: no-cache");
 header("Pragma: no-cache");
+
+// Zorg ervoor dat Bastiaans website dit het kan uitlezen
+header("Access-Control-Allow-Origin: http://bastiaan.plaatsoft.nl");
 
 // Calculate actual energy in Watt
 if ($power > 0) {

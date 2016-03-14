@@ -68,9 +68,9 @@ function plaatenergy_day_in_energy_page() {
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 
-	if ( isset($row->dal) ) {
+	if ( isset($row->low_used) ) {
 		$low_used_prev = $row->low_used;
-		$normal_used_prev = $row->normal_used
+		$normal_used_prev = $row->normal_used;
 		$low_delivered_prev = $row->low_delivered;
 		$normal_delivered_prev = $row->normal_delivered;
 	}      
@@ -102,7 +102,7 @@ function plaatenergy_day_in_energy_page() {
 		$result2 = plaatenergy_db_query($sql2);
 		$row2 = plaatenergy_db_fetch_object($result2);
 	
-		if ( isset($row1->dal)) {
+		if ( isset($row1->low_used)) {
 	
 			if ($row1->low_used >= $low_used_prev) {
 				$low_used_value = $row1->low_used - $low_used_prev;
@@ -169,15 +169,15 @@ function plaatenergy_day_in_energy_page() {
 
 		$data="";
 	
-		$sql  = 'select timestamp, vermogen FROM energy1 where ';
+		$sql  = 'select timestamp, power FROM energy1 where ';
 		$sql .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp';
 	
 		$result = plaatenergy_db_query($sql);
 		while ( $row = plaatenergy_db_fetch_object($result)) {
 	
 			$value=0;
-			if ( isset($row->vermogen)) {
-				$value= $row->vermogen;
+			if (isset($row->power) && ($row->power>0)) {
+			     $value= $row->power;
 			}
   
 			if (strlen($data)>0) {

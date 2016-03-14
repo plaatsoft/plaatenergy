@@ -369,22 +369,10 @@ function plaatenergy_realtime_page() {
 		<script src="js/updateWeatherData.js"></script>
 		<script src="js/init.js"></script>
 		
-		<!-- Run the JS with try -->
+		<!-- Run the JS -->
 		<script>
-			// Try to run the script
-			//try {
-				init();
-			/*}
-			
-			// If an error report
-			catch (error) {
-				alert(error);
-				console.error(error);
-			}*/
-		</script>
-        </form>
-	</body>
-</html>';
+		  init();
+		</script>';
 
 	return $page;
 }
@@ -416,4 +404,3 @@ function plaatenergy_realtime() {
 ** THE END
 ** ---------------------
 */
-

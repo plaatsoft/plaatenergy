@@ -58,7 +58,7 @@ function plaatenergy_years_in_energy_page() {
 		$timestamp2=date('Y-12-t', $time);
 	
 		$sql1  = 'select sum(low_used) as low_used, sum(normal_used) as normal_used, ';
-		$sql1 .= 'sum(low_delivered) as low_deliverd, sum(normal_delivered) as normal_delivered, ';
+		$sql1 .= 'sum(low_delivered) as low_delivered, sum(normal_delivered) as normal_delivered, ';
 		$sql1 .= 'sum(solar_delivered) as solar_delivered ';
 		$sql1 .= 'from energy_summary where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 	

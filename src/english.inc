@@ -94,8 +94,8 @@ $lang['LINK_SAVE']       = i('edit') . 'Save';
 $lang['LINK_CANCEL']     = i('times') . 'Cancel';
 $lang['LINK_SETTINGS']   = i('cog') . 'Settings';  
 $lang['LINK_MAX']        = i('bolt') . 'Peak';
-$lang['LINK_BACKUP']     = 'Backup';
-$lang['LINK_EXPORT']     = 'Export to CSV';
+$lang['LINK_BACKUP']     = i('archive') . 'Backup';
+$lang['LINK_EXPORT']     = i('download') . 'Export to CSV';
 $lang['LINK_SCATTER']    = 'Scatter';
 $lang['LINK_LOGIN']      = 'Login';
  
@@ -129,7 +129,7 @@ $lang['LINK_TEMPERATURE'] =  i('bar-chart').'Air Temperature';
 $lang['LINK_HUMIDITY'] =  i('bar-chart').'Air Humidity';
 
 $lang['LINK_RELEASE_NOTES'] = i('align-left') . 'Release Notes';
-$lang['LINK_ABOUT'] = i('registered') . 'About';
+$lang['LINK_ABOUT'] = i('users') . 'About';
 $lang['LINK_DONATE'] = i('money') . 'Donate';
 $lang['LINK_REPORT'] = i('rocket') . 'Query';
 $lang['LINK_GUI'] = i('table') . 'Realtime Dashboard';

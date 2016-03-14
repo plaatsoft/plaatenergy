@@ -14,10 +14,12 @@
 **  All copyrights reserved (c) 2008-2015 PlaatSoft
 */
 
+*{margin:0;padding:0}
+
 body {		
   color: #222;
   text-align: center;
-  font-family: "Arial", sans-serif;
+  font-family: Arial, sans-serif;
   font-size: 14px;
 }
 
@@ -91,15 +93,14 @@ table {
 
 td > a{
   display: block;
-  margin: 0px;
-  margin-bottom: 3px;
+  margin: 1px;
 }
 
 td > a:last-child {
   margin-bottom: 0px;
 }
 
-a {
+a, input[type=submit] {
   outline: none;
   background-color: #1E88E5;
   color: #fff;
@@ -110,29 +111,14 @@ a {
 }
 
 input[type=submit] {
-  outline: none;
-  background-color: #1E88E5;
-  color: #fff;
-  text-decoration: none;
-  padding: 12px 30px;
-  margin: 0px 10px;
-  cursor: pointer;
   border:none;
 }
 
-a:hover {
+a:hover, input[type=submit]:hover {
   background-color: #1976D2;
 }
 
-input[type=submit]:hover {
-  background-color: #1976D2;
-}
-
-a:active {
-  background-color: #1565C0;
-}
-
-input[type=submit]:active {
+a:active, input[type=submit]:active {
   background-color: #1565C0;
 }
 
@@ -164,13 +150,15 @@ input[type=submit]:active {
 }
 
 ul {
- font-size: 1.0em;
- list-style-position: inside;
+  font-size: 1.0em;
+  list-style-position: inside;
 }
 
 .large_text {
-  margin: auto;
+   margin: auto;
 }
+
+h1{margin:15px} 
 
 /* ================ Add to h1 two suns ================ */
 h1::before,
@@ -179,39 +167,14 @@ h1::after {
 	content: "";
 	width: 24px;
 	height: 24px;
-	background-image: url(../ui/images/icons/24.png);
-	transform: translateY(3px);
+	background-image: url(./images/24.png);
+	transform: translateY(2px);
 }
 h1::before {
 	margin-right: 24px;
 }
 h1::after {
 	margin-left: 24px;
-}
-
-/* ================ Cookie Bar (a message that say PlaatEnergy use cookies) ================ */
-.cookie_bar {
-	position: fixed;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-	line-height: 40px;
-	color: #fff;
-	z-index: 1000;
-	font-weight: 700;
-}
-
-.cookie_bar > a {
-	float: right;
-	margin-right: 15px;
-	padding: 13px;
-	text-decoration: none !important;
-	opacity: 0.9;
-	color: #fff;
-}
-
-.cookie_bar > a:hover {
-	opacity: 1;
 }
 
 /* ================ Checkers (HomePage information labels) ================ */
@@ -222,18 +185,14 @@ h1::after {
 	border-radius: 8px;
 	font-size: 15px;
 	color: #fff;
-
 }
 
 .checker.good {
    background-color: #4CAF50;
 }
-
-.cookie_bar,
 .checker.bad {
    background-color: #F44336;
 }
-
 .checker.disabled {
    background-color: #FF5722;
 }
@@ -248,6 +207,7 @@ a .fa.right {
 	margin-right: 0px;
 }
 
+/* ================ Rotate PlaatSoft logo ================ */
 .image{
     -moz-animation: spinHorizontal 2s infinite linear;
     -o-animation: spinHorizontal 2s infinite linear;    

@@ -72,7 +72,7 @@ function plaatenergy_year_in_energy_page() {
 				$timestamp1=date('Y-m-0 00:00:00', $time);
 				$timestamp2=date('Y-m-t 23:59:59', $time);
 		
-				$sql  = 'select sum(low_used) as low_used, sum(normal_used) as normal_used, sum(low_delivered) as ow_delivered, ';
+				$sql  = 'select sum(low_used) as low_used, sum(normal_used) as normal_used, sum(low_delivered) as low_delivered, ';
 				$sql .= 'sum(normal_delivered) as normal_delivered, sum(solar_delivered) as solar_delivered ';
 				$sql .= 'FROM energy_summary where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
 
@@ -86,7 +86,7 @@ function plaatenergy_year_in_energy_page() {
 				$solar_delivered_value=0;
 				$verbruikt=0;
 	
-				if (isset($row->dal)) {
+				if (isset($row->low_used)) {
 					$low_used_value = $row->low_used;
 					$normal_used_value = $row->normal_used;
 					$low_delivered_value = $row->low_delivered;

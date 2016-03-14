@@ -20,7 +20,7 @@
  * @file
  * @brief realtime page language information
  */
- 
+
 // Verander de headers
 header("Content-Type: application/json");
 header("Cache-Control: no-cache");

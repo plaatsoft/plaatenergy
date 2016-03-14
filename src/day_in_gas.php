@@ -56,19 +56,19 @@ function plaatenergy_day_in_gas_page() {
 	$total = 0;
 	
 	// Get last energy measurement 
-	$sql  = 'select gas from energy1 where ';
+	$sql  = 'select gas_used from energy1 where ';
 	$sql .= 'timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" order by timestamp desc limit 0,1';	
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 
-	if ( isset($row->gas) ) {
-		$gas_prev = $row->gas;
+	if ( isset($row->gas_used) ) {
+		$gas_prev = $row->gas_used;
 	}      
 	
 	while ($i<96) {
 
 		$timestamp = date("Y-m-d H:i:s", $current_date+(900*$i));
-		$sql = 'select gas FROM energy1 where timestamp="'.$timestamp.'"';
+		$sql = 'select gas_used FROM energy1 where timestamp="'.$timestamp.'"';
 		$result = plaatenergy_db_query($sql);
 		$row = plaatenergy_db_fetch_object($result);
 	
@@ -76,8 +76,8 @@ function plaatenergy_day_in_gas_page() {
 			$value=0;
 		}
 
-		if ( isset($row->gas)) {
-			$value= $row->gas - $gas_prev;
+		if ( isset($row->gas_used)) {
+			$value= $row->gas_used - $gas_prev;
 			$total = $value;
 		}
   

@@ -94,8 +94,8 @@ $lang['LINK_SAVE']       = i('edit') . 'Opslaan';
 $lang['LINK_CANCEL']     = i('times') . 'Annuleren'; 
 $lang['LINK_SETTINGS']   = i('cog') . 'Configuratie'; 
 $lang['LINK_MAX']        = i('bolt') . 'Piek';
-$lang['LINK_BACKUP']     = 'Backup';
-$lang['LINK_EXPORT']     = 'Export naar CSV';
+$lang['LINK_BACKUP']     = i('archive') . 'Backup';
+$lang['LINK_EXPORT']     = i('download') . 'Export naar CSV';
 $lang['LINK_SCATTER']    = 'Scatter';
 $lang['LINK_LOGIN']      = 'Login';
  
@@ -120,14 +120,14 @@ $lang['DAY_REPORT'] = 'Dag Rapportages';
 $lang['WEATHER_REPORT'] = 'Weer Rapportages';
 $lang['OTHER_REPORT'] = 'Overige';
 
-$lang['LINK_IN_ENERGY'] = 'Afgenomen Elektriciteit';
-$lang['LINK_OUT_ENERGY'] = 'Geleverde Elektriciteit';
-$lang['LINK_OUT_ENERGY_MAX'] = 'Geleverde Piek Vermogen';
-$lang['LINK_IN_GAS'] = 'Afgenomen Gas';
+$lang['LINK_IN_ENERGY'] =  i('bar-chart').'Afgenomen Elektriciteit';
+$lang['LINK_OUT_ENERGY'] =  i('bar-chart').'Geleverde Elektriciteit';
+$lang['LINK_OUT_ENERGY_MAX'] =  i('bar-chart').'Geleverde Piek Vermogen';
+$lang['LINK_IN_GAS'] =  i('bar-chart').'Afgenomen Gas';
 
-$lang['LINK_PRESSURE'] = 'Luchtdruk';
-$lang['LINK_TEMPERATURE'] = 'Lucht Temperatuur';
-$lang['LINK_HUMIDITY'] = 'Lucht Vochtigheid';
+$lang['LINK_PRESSURE'] =  i('bar-chart').'Luchtdruk';
+$lang['LINK_TEMPERATURE'] =  i('bar-chart').'Lucht Temperatuur';
+$lang['LINK_HUMIDITY'] =  i('bar-chart').'Lucht Vochtigheid';
 
 $lang['LINK_RELEASE_NOTES'] = i('align-left') . 'Release Notes';
 $lang['LINK_ABOUT'] = i('users') . 'Over';

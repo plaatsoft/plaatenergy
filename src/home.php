@@ -86,7 +86,7 @@ function check_energy_meter() {
 	if ($energy_meter_present=="true") {
 	   
 		$timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
-		$sql = 'select dal from energy where timestamp >= "'.$timestamp.'"';	
+		$sql = 'select low_used from energy1 where timestamp >= "'.$timestamp.'"';	
 		$result = plaatenergy_db_query($sql);
 		$count = plaatenergy_db_num_rows($result);
 	
@@ -182,18 +182,13 @@ function plaatenergy_home_login_page() {
 
    $page .= '<br/>';
    $page .= '<label>'.t('LABEL_PASSWORD').'</label>';
-   $page .= '<input type="password" name="password" size="20" />';
+   $page .= '<input type="password" name="password" size="20" autofocus/>';
    $page .= '<br/>';
   
    $page .= '<div class="nav">';   
    $page .= '<input type="hidden" name="token" value="pid='.PAGE_HOME_LOGIN.'&eid='.EVENT_LOGIN.'"/>';
    $page .= '<input type="submit" name="Submit" id="normal_link" value="'.t('LINK_LOGIN').'"/>';
    $page .= '</div>';
-		
-	/* Set focus on first input element */
-	$page .= '<script type="text/javascript" language="JavaScript">';
-	$page .= 'document.forms[\'plaatenergy\'].elements[\'password\'].focus();';
-	$page .= '</script>';
 	
    $page .= '<script type="text/javascript">var ip="'.$_SERVER['SERVER_ADDR'].'";</script>';
    $page .= '<script type="text/javascript" src="js/version.js"></script>';

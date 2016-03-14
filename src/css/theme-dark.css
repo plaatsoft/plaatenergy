@@ -23,47 +23,25 @@ body {
 	color: #fff;
 }
 
-h1::before,
-h1::after {
-  opacity: 0.9;
+.copyright, .theme, .language {
+  color: #eee;
 }
 
-.cookie_bar > a,
-.copyright,
-.theme,
-.language {
-  color: #fff;
-  opacity: 0.8;
-}
-
-input[type=submit] {
+a, input[type=submit] {
   background-color: #888;
 }
 
-a {
-  background-color: #888;
-}
-
-input[type=submit]:hover {
+a:hover, input[type=submit]:hover {
   background-color: #777;
 }
 
-a:hover {
-  background-color: #777;
-}
-
-input[type=submit]:hover:active {
-  background-color: #666;
-}
-
-a:active {
+a:active, input[type=submit]:active {
   background-color: #666;
 }
 
 .checker.good {
   background-color: #43A047;
 }
-.cookie_bar,
 .checker.bad {
   background-color: #E53935;
 }
