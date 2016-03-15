@@ -93,7 +93,7 @@ function plaatenergy_day_in_edit_page() {
 	
 	list($year, $month, $day) = explode("-", $date);	
 		
-	$sql1  = 'select low_used, normal_used, low_delivered, normal_delivered low_used from energy1 ';
+	$sql1  = 'select low_used, normal_used, low_delivered, normal_delivered from energy1 ';
 	$sql1 .= 'where timestamp<"'.$date.' 00:00:00" order by timestamp desc limit 0,1';
 
 	$result1 = plaatenergy_db_query($sql1);
