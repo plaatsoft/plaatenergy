@@ -1,3 +1,4 @@
+
 <?php
 
 /*
@@ -357,9 +358,9 @@ function plaatenergy_realtime_page() {
 				
 				// Need to get access to the weather data
 				weather: {
-					appID: "44db6a862fba0b067b1930da0d769e98", // Need to send a request to http://api.openweathermap.org
+					appID: "bbe32669c107fd0db43fa2ea9a6a3385", // Need to send a request to http://api.openweathermap.org
 					place: "Gouda,nl",                         // The name of the city where you live
-					updateTime: 15000                          // The time the weather information must be reload (in ms)
+					updateTime: 60000                          // The time the weather information must be reload (in ms)
 				}
 			};
 		</script>
