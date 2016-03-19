@@ -220,7 +220,7 @@ function plaatenergy_db_execute_sql_file($version) {
 function plaatenergy_db_check_version() {
 
    // Execute SQL base sql script if needed!
-   $sql = "select 1 FROM energy limit 1" ;
+   $sql = "select 1 FROM config limit 1" ;
    $result = plaatenergy_db_query($sql);
    if (!$result)  {
       plaatenergy_db_execute_sql_file("0.1");
