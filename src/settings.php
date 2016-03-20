@@ -62,10 +62,15 @@ function plaatenergy_setting_save_event() {
 	global $value;
 
 	$sql  = 'update config set value="'.$value.'", date=SYSDATE() where id='.$id;		
-
 	plaatenergy_db_query($sql);
 	
-	plaatenergy_db_process(EVENT_PROCESS_ALL_DAYS);
+	$sql  = 'select rebuid from config where id='.$id;		
+	$result = plaatenergy_db_query($sql);
+	$row = plaatenergy_db_fetch_object($result);
+	
+	if ($row->rebuild==1) {
+		plaatenergy_db_process(EVENT_PROCESS_ALL_DAYS);
+	}
 }
 
 

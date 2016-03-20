@@ -35,3 +35,15 @@ ALTER TABLE energy_summary CHANGE `vermogen` `power` DOUBLE NOT NULL;
 ALTER TABLE energy_summary CHANGE `solar` `solar_delivered` DOUBLE NOT NULL;
 ALTER TABLE energy_summary CHANGE `gas` `gas_used` DOUBLE NOT NULL;
 
+ALTER TABLE config ADD rebuild INT NOT NULL AFTER readonly;
+
+UPDATE config SET rebuild=1 WHERE token="meter_reading_used_low";
+UPDATE config SET rebuild=1 WHERE token="meter_reading_used_normal";
+UPDATE config SET rebuild=1 WHERE token="meter_reading_delivered_low";
+UPDATE config SET rebuild=1 WHERE token="meter_reading_delivered_normal";
+UPDATE config SET rebuild=1 WHERE token="meter_reading_used_gas";
+UPDATE config SET rebuild=1 WHERE token="solar_meter_present";
+UPDATE config SET rebuild=1 WHERE token="energy_meter_present";
+
+
+
