@@ -64,7 +64,7 @@ function plaatenergy_setting_save_event() {
 	$sql  = 'update config set value="'.$value.'", date=SYSDATE() where id='.$id;		
 	plaatenergy_db_query($sql);
 	
-	$sql  = 'select rebuid from config where id='.$id;		
+	$sql  = 'select rebuild from config where id='.$id;		
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 	
