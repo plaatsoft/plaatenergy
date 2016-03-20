@@ -45,5 +45,9 @@ UPDATE config SET rebuild=1 WHERE token="meter_reading_used_gas";
 UPDATE config SET rebuild=1 WHERE token="solar_meter_present";
 UPDATE config SET rebuild=1 WHERE token="energy_meter_present";
 
+INSERT INTO config (`id`, `token`, `value`, `date`, readonly, rebuild) VALUES (NULL, 'gas_meter_present', 'true', SYSDATE(), 0, 1);
+UPDATE config SET options="true,false" WHERE token="theme"; 
+
+
 
 

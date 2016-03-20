@@ -31,6 +31,7 @@ $solar_meter_present = plaatenergy_db_get_config_item('solar_meter_present');
 $solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor');
 $weather_station_present = plaatenergy_db_get_config_item('weather_station_present');
 $energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present');
+$gas_meter_present = plaatenergy_db_get_config_item('gas_meter_present');
 $password = plaatenergy_post("password", "");
 
 /*
@@ -202,9 +203,11 @@ function plaatenergy_home_login_page() {
  */
 function plaatenergy_home_page() {
 
-	// input
-	global $weather_station_present;
+	// input	
+	global $energy_meter_present;
 	global $solar_meter_present;
+	global $gas_meter_present;
+	global $weather_station_present;
 	global $session;
 	
 	$page = '<h1>';
@@ -236,25 +239,27 @@ function plaatenergy_home_page() {
 
 		$page .= '</tr>';
 	
-		$page .= '<tr>';
-		$page .= '<td>';
-		$page .= plaatenergy_link('pid='.PAGE_YEARS_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
-		$page .= '</td>';
-		$page .= '<td>';
-		$page .= plaatenergy_link('pid='.PAGE_YEAR_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
-		$page .= '</td>';
-		$page .= '<td>';
-		$page .= plaatenergy_link('pid='.PAGE_MONTH_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
-		$page .= '</td>';
-		$page .= '<td>';
-		$page .= plaatenergy_link('pid='.PAGE_DAY_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
-		$page .= '</td>';
-		if ($weather_station_present=="true") { 
-		   $page .= '<td>';
-		   $page .= plaatenergy_link('pid='.PAGE_DAY_PRESSURE, t('LINK_PRESSURE'));
-		   $page .= '</td>';
+		if ($energy_meter_present=="true") { 	
+			$page .= '<tr>';
+			$page .= '<td>';
+			$page .= plaatenergy_link('pid='.PAGE_YEARS_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
+			$page .= '</td>';
+			$page .= '<td>';
+			$page .= plaatenergy_link('pid='.PAGE_YEAR_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
+			$page .= '</td>';
+			$page .= '<td>';
+			$page .= plaatenergy_link('pid='.PAGE_MONTH_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
+			$page .= '</td>';
+			$page .= '<td>';
+			$page .= plaatenergy_link('pid='.PAGE_DAY_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
+			$page .= '</td>';
+			if ($weather_station_present=="true") { 
+				$page .= '<td>';
+				$page .= plaatenergy_link('pid='.PAGE_DAY_PRESSURE, t('LINK_PRESSURE'));
+				$page .= '</td>';
+			}
+			$page .= '</tr>';
 		}
-		$page .= '</tr>';
 
 		if ($solar_meter_present=="true") { 
 			$page .= '<tr>';
@@ -278,25 +283,27 @@ function plaatenergy_home_page() {
 			$page .= '</tr>';
 		}
 
-		$page .= '<tr>';
-		$page .= '<td>';
-		$page .= plaatenergy_link('pid='.PAGE_YEARS_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
-		$page .= '</td>';
-		$page .= '<td>';
-		$page .= plaatenergy_link('pid='.PAGE_YEAR_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
-		$page .= '</td>';
-		$page .= '<td>';
-		$page .= plaatenergy_link('pid='.PAGE_MONTH_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
-		$page .= '</td>';
-		$page .= '<td>';
-		$page .= plaatenergy_link('pid='.PAGE_DAY_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
-		$page .= '</td>';
-		if ($weather_station_present=="true") { 
-		   $page .= '<td>';
-			$page .= plaatenergy_link('pid='.PAGE_DAY_HUMIDITY, t('LINK_HUMIDITY'));
+		if ($gas_meter_present=="true") { 
+			$page .= '<tr>';
+			$page .= '<td>';
+			$page .= plaatenergy_link('pid='.PAGE_YEARS_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
+			$page .= '</td>';
+			$page .= '<td>';
+			$page .= plaatenergy_link('pid='.PAGE_YEAR_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
+			$page .= '</td>';
+			$page .= '<td>';
+			$page .= plaatenergy_link('pid='.PAGE_MONTH_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
+			$page .= '</td>';
+			$page .= '<td>';
+			$page .= plaatenergy_link('pid='.PAGE_DAY_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
+			$page .= '</td>';
+			if ($weather_station_present=="true") { 
+				$page .= '<td>';
+				$page .= plaatenergy_link('pid='.PAGE_DAY_HUMIDITY, t('LINK_HUMIDITY'));
 		   $page .= '</td>';
+			}
+			$page .= '</tr>';
 		}
-		$page .= '</tr>';
 
 		$page .= '<tr>';
 		$page .= '<td>';

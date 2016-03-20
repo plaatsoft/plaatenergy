@@ -45,17 +45,14 @@ now = datetime.datetime.now();
 con = _mysql.connect(dbhost, dbname, dbuser, dbpass)
 
 try:
-    sql = "select vermogen from energy1 where timestamp='" +now.strftime("%Y-%m-%d %H:%M:00")+"'"
+    sql = "select power from energy1 where timestamp='" +now.strftime("%Y-%m-%d %H:%M:00")+"'"
     con.query(sql)
     result = con.use_result()
     row = result.fetch_row()[0]
-    vermogen = row[0]
-    vermogenterug = row[1]
+    power = row[0]
     con.close
 
-    value = ""
-    if vermogen > 0:
-      value = vermogen + " Watt"  
+    value = vermogen + " Watt"  
 
     sense.set_rotation(180)
     sense.show_message(value, scroll_speed=0.1, text_colour=[255,255,0], back_colour=[0,0,0])

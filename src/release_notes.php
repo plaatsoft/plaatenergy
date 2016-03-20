@@ -27,11 +27,12 @@
 ** ---------------------
 */
 
-$note[10] = '<div class="subparagraph">Version 1.0 (14-03-2016)</div>
+$note[10] = '<div class="subparagraph">Version 1.0 (20-03-2016)</div>
 <div class="large_text">
 <ul>
 <li>General: Refactor database - All entities name are now english.</li>
 <li>General: Rebuild database only when needed if configuration change.<li>
+<li>General: Add configuration option to disable gas meter.<li>
 </ul>
 </div>';
 

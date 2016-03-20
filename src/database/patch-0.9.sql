@@ -40,4 +40,4 @@ ALTER TABLE `session`
 ALTER TABLE `session`
  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT;
  
-DELETE FROM config WHERE token="requests";
+DELETE FROM config WHERE token="request_counter";
