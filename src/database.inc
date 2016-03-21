@@ -380,9 +380,6 @@ function plaatenergy_db_process($type) {
 		$result1 = plaatenergy_db_query($sql1);
 	}
 	
-	
-	
-
 	while ($data1 = plaatenergy_db_fetch_object($result1)) {
 
 		$timestamp1 = $data1->date.' 00:00:00';
@@ -402,34 +399,49 @@ function plaatenergy_db_process($type) {
 		$result3 = plaatenergy_db_query($sql3);
 		$data3 = plaatenergy_db_fetch_object($result3);
 
-		if ($low_used>$data2->low_used) {
-			$low_used_diff = round($data2->low_used,$round);
-		} else {
-			$low_used_diff = round($data2->low_used-$low_used,$round);
+		$low_used_diff = 0;
+		if (isset($data2->low_used)) {
+			if ($low_used>$data2->low_used) {
+				$low_used_diff = round($data2->low_used,$round);
+			} else {
+				$low_used_diff = round($data2->low_used-$low_used,$round);
+			}
 		}
 	
-		if ($normal_used>$data2->normal_used) {
-			$normal_used_diff = round($data2->normal_used,$round);
-		} else {
-			$normal_used_diff = round($data2->normal_used-$normal_used,$round);
+		$normal_used_diff = 0;
+		if (isset($data2->normal_used)) {
+			if ($normal_used>$data2->normal_used) {
+				$normal_used_diff = round($data2->normal_used,$round);
+			} else {
+				$normal_used_diff = round($data2->normal_used-$normal_used,$round);
+			}
 		}
 	
-		if ($low_delivered>$data2->low_delivered) {
-			$low_delivered_diff = round($data2->low_delivered,$round);
-		} else {
-			$low_delivered_diff = round($data2->low_delivered-$low_delivered,$round);
+		$low_delivered_diff = 0;
+		if (isset($data2->low_delivered)) {
+			if ($low_delivered>$data2->low_delivered) {
+				$low_delivered_diff = round($data2->low_delivered,$round);
+			} else {
+				$low_delivered_diff = round($data2->low_delivered-$low_delivered,$round);
+			}
+		}
+			
+		$normal_delivered_diff = 0;
+		if (isset($data2->normal_delivered)) {
+			if ($normal_delivered>$data2->normal_delivered) {
+				$normal_delivered_diff = round($data2->normal_delivered,$round);
+			} else {
+				$normal_delivered_diff = round($data2->normal_delivered-$normal_delivered,$round);
+			}
 		}
 	
-		if ($normal_delivered>$data2->normal_delivered) {
-			$normal_delivered_diff = round($data2->normal_delivered,$round);
-		} else {
-			$normal_delivered_diff = round($data2->normal_delivered-$normal_delivered,$round);
-		}
-	
-		if ($gas_used>$data2->gas_used) {
-			$gas_used_diff = round($data2->gas_used,$round);
-		} else {
-			$gas_used_diff = round($data2->gas_used-$gas_used,$round);
+		$gas_used_diff = 0;
+		if (isset($data2->gas_used)) {
+			if ($gas_used>$data2->gas_used) {
+				$gas_used_diff = round($data2->gas_used,$round);
+			} else {
+				$gas_used_diff = round($data2->gas_used-$gas_used,$round);
+			}
 		}
 	
 		$solar_diff=0;
@@ -460,23 +472,23 @@ function plaatenergy_db_process($type) {
 
 		plaatenergy_db_query($sql3);
 
-		if ($data2->low_used>0) {
+		if (isset($data2->low_used) && ($data2->low_used>0)) {
 			$low_used = $data2->low_used;
 		}
 
-		if ($data2->normal_used>0) {
+		if (isset($data2->normal_used) && ($data2->normal_used>0)) {
 			$normal_used = $data2->normal_used;
 		}
 
-		if ($data2->low_delivered>0) {
+		if (isset($data2->low_deliverd) && ($data2->low_delivered>0)) {
 			$low_delivered = $data2->low_delivered;
 		}
 
-		if ($data2->normal_delivered>0) {
+		if (isset($data2->normal_delivered) && ($data2->normal_delivered>0)) {
 			$normal_delivered = $data2->normal_delivered;
 		}
 
-		if ($data2->gas_used>0) {
+		if (isset($data2->gas_used) && ($data2->gas_used>0)) {
 			$gas_used = $data2->gas_used;
 		}
 
