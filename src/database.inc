@@ -309,135 +309,133 @@ function plaatenergy_db_set_config_item($token, $value) {
  */
 function plaatenergy_db_process($type) {
 
-  global $year;	
-  global $month;
-  global $day;
+	global $year;	
+	global $month;
+	global $day;
 
-  $meter_reading_used_low = plaatenergy_db_get_config_item('meter_reading_used_low');
-  $meter_reading_used_normal = plaatenergy_db_get_config_item('meter_reading_used_normal');
-  $meter_reading_delivered_low = plaatenergy_db_get_config_item('meter_reading_delivered_low');
-  $meter_reading_delivered_normal = plaatenergy_db_get_config_item('meter_reading_delivered_normal');
-  $meter_reading_used_gas = plaatenergy_db_get_config_item('meter_reading_used_gas');
+	$meter_reading_used_low = plaatenergy_db_get_config_item('meter_reading_used_low');
+	$meter_reading_used_normal = plaatenergy_db_get_config_item('meter_reading_used_normal');
+	$meter_reading_delivered_low = plaatenergy_db_get_config_item('meter_reading_delivered_low');
+	$meter_reading_delivered_normal = plaatenergy_db_get_config_item('meter_reading_delivered_normal');
+	$meter_reading_used_gas = plaatenergy_db_get_config_item('meter_reading_used_gas');
 
-  $low_used = $meter_reading_used_low;
-  $normal_used = $meter_reading_used_normal;
-  $gas_used = $meter_reading_used_gas;
-  $low_delivered = $meter_reading_delivered_low;
-  $normal_delivered = $meter_reading_delivered_normal;
-  $etotal = 0;
+	$low_used = $meter_reading_used_low;
+	$normal_used = $meter_reading_used_normal;
+	$gas_used = $meter_reading_used_gas;
+	$low_delivered = $meter_reading_delivered_low;
+	$normal_delivered = $meter_reading_delivered_normal;
+	$etotal = 0;
   
-  $round = 3;
+	$round = 3;
 
-  if ($type==EVENT_PROCESS_ALL_DAYS) {
+	if ($type==EVENT_PROCESS_ALL_DAYS) {
 
-    $sql = 'truncate table energy_summary';
-    plaatenergy_db_query($sql);
+		$sql = 'truncate table energy_summary';
+		plaatenergy_db_query($sql);
 
-  } else {
+	} else {
 
-    $prev_date = plaatenergy_prev_day(date("Y-m-d"));
+		$prev_date = plaatenergy_prev_day(date("Y-m-d"));
 
-    $sql2  = 'select low_used, normal_used, low_delivered, normal_delivered, gas_used from energy1 ';
-    $sql2 .= 'where timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" ';
-    $sql2 .= 'order by timestamp desc limit 0,1';
+		$sql2  = 'select low_used, normal_used, low_delivered, normal_delivered, gas_used from energy1 ';
+		$sql2 .= 'where timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" ';
+		$sql2 .= 'order by timestamp desc limit 0,1';
 
-    $result2 = plaatenergy_db_query($sql2);
-    $data2 = plaatenergy_db_fetch_object($result2);
-	if (isset($data2->low_used)) {
-       $low_used = $data2->low_used;
-       $normal_used = $data2->normal_used;
-       $low_delivered = $data2->low_delivered;
-       $normal_delivered = $data2->normal_delivered;
-       $gas_used = $data2->gas_used;
-	}
+		$result2 = plaatenergy_db_query($sql2);
+		$data2 = plaatenergy_db_fetch_object($result2);
+		if (isset($data2->low_used)) {
+			$low_used = $data2->low_used;
+			$normal_used = $data2->normal_used;
+			$low_delivered = $data2->low_delivered;
+			$normal_delivered = $data2->normal_delivered;
+			$gas_used = $data2->gas_used;
+		}
 
-    $sql3  = 'select etotal from solar ';
-    $sql3 .= 'where timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" ';
-    $sql3 .= 'order by timestamp desc limit 0,1';
+		$sql3  = 'select etotal from solar ';
+		$sql3 .= 'where timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" ';
+		$sql3 .= 'order by timestamp desc limit 0,1';
     
-    $result3 = plaatenergy_db_query($sql3);
-    $data3 = plaatenergy_db_fetch_object($result3);
-	if (isset($data3->etotal)) {
-       $etotal = $data3->etotal;
-	}
-  }
-
-  if ($type==EVENT_PROCESS_ALL_DAYS) {
-	
-     $sql1 = 'select cast(timestamp as date) as date from energy1 group by date';
-		 
-  } else {
-     $sql1  = 'select cast(timestamp as date) as date from energy1 ';
-     $sql1 .= 'where timestamp>"'.date("Y-m-d").' 00:00:00" and timestamp<"'.date("Y-m-d").' 23:59:59" limit 0,1';
-  }
-  $result1 = plaatenergy_db_query($sql1);
-
-  while ($data1 = plaatenergy_db_fetch_object($result1)) {
-
-    $timestamp1 = $data1->date.' 00:00:00';
-    $timestamp2 = $data1->date.' 23:59:59';
-
-    $sql2  = 'select low_used, normal_used, low_delivered, normal_delivered, gas_used  from energy1 ';
-    $sql2 .= 'where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" ';
-    $sql2 .= 'order by timestamp desc limit 0,1';
-
-    $result2 = plaatenergy_db_query($sql2);
-    $data2 = plaatenergy_db_fetch_object($result2);
-
-    $sql3  = 'select etotal from solar ';
-    $sql3 .= 'where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" ';
-    $sql3 .= 'order by timestamp desc limit 0,1';
-
-    $result3 = plaatenergy_db_query($sql3);
-    $data3 = plaatenergy_db_fetch_object($result3);
-
-    if ($low_used>$data2->low_used) {
-      $low_used_diff = round($data2->low_used,$round);
-    } else {
-      $low_used_diff = round($data2->low_used-$low_used,$round);
-    }
-
-    if ($normal_used>$data2->normal_used) {
-      $normal_used_diff = round($data2->normal_used,$round);
-    } else {
-      $normal_used_diff = round($data2->normal_used-$normal_used,$round);
-    }
-
-    if ($low_delivered>$data2->low_delivered) {
-      $low_delivered_diff = round($data2->low_delivered,$round);
-    } else {
-      $low_delivered_diff = round($data2->low_delivered-$low_delivered,$round);
-    }
-
-    if ($normal_delivered>$data2->normal_delivered) {
-      $normal_delivered_diff = round($data2->normal_delivered,$round);
-    } else {
-      $normal_delivered_diff = round($data2->normal_delivered-$normal_delivered,$round);
-    }
-
-    if ($gas_used>$data2->gas_used) {
-      $gas_used_diff = round($data2->gas_used,$round);
-    } else {
-      $gas_used_diff = round($data2->gas_used-$gas_used,$round);
-    }
-
-	$solar_diff=0;
-   if (isset($data3->etotal)) {
-		if ($etotal>$data3->etotal) {
-			$solar_diff = round($data3->etotal,$round);
-		} else {
-			$solar_diff = round($data3->etotal-$etotal,$round);
+		$result3 = plaatenergy_db_query($sql3);
+		$data3 = plaatenergy_db_fetch_object($result3);
+		if (isset($data3->etotal)) {
+			$etotal = $data3->etotal;
 		}
 	}
 
-	if ($type==EVENT_PROCESS_TODAY) {
+	if ($type==EVENT_PROCESS_ALL_DAYS) {
+	
+		$sql1 = 'select cast(timestamp as date) as date from energy1 group by date';
+		 
+	} else {
+		$sql1  = 'select cast(timestamp as date) as date from energy1 ';
+		$sql1 .= 'where timestamp>"'.date("Y-m-d").' 00:00:00" and timestamp<"'.date("Y-m-d").' 23:59:59" limit 0,1';
+	}
+	$result1 = plaatenergy_db_query($sql1);
+
+	while ($data1 = plaatenergy_db_fetch_object($result1)) {
+
+		$timestamp1 = $data1->date.' 00:00:00';
+		$timestamp2 = $data1->date.' 23:59:59';
+
+		$sql2  = 'select low_used, normal_used, low_delivered, normal_delivered, gas_used  from energy1 ';
+		$sql2 .= 'where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" ';
+		$sql2 .= 'order by timestamp desc limit 0,1';
+
+		$result2 = plaatenergy_db_query($sql2);
+		$data2 = plaatenergy_db_fetch_object($result2);
+	
+		$sql3  = 'select etotal from solar ';
+		$sql3 .= 'where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" ';
+		$sql3 .= 'order by timestamp desc limit 0,1';
+	
+		$result3 = plaatenergy_db_query($sql3);
+		$data3 = plaatenergy_db_fetch_object($result3);
+
+		if ($low_used>$data2->low_used) {
+			$low_used_diff = round($data2->low_used,$round);
+		} else {
+			$low_used_diff = round($data2->low_used-$low_used,$round);
+		}
+	
+		if ($normal_used>$data2->normal_used) {
+			$normal_used_diff = round($data2->normal_used,$round);
+		} else {
+			$normal_used_diff = round($data2->normal_used-$normal_used,$round);
+		}
+	
+		if ($low_delivered>$data2->low_delivered) {
+			$low_delivered_diff = round($data2->low_delivered,$round);
+		} else {
+			$low_delivered_diff = round($data2->low_delivered-$low_delivered,$round);
+		}
+	
+		if ($normal_delivered>$data2->normal_delivered) {
+			$normal_delivered_diff = round($data2->normal_delivered,$round);
+		} else {
+			$normal_delivered_diff = round($data2->normal_delivered-$normal_delivered,$round);
+		}
+	
+		if ($gas_used>$data2->gas_used) {
+			$gas_used_diff = round($data2->gas_used,$round);
+		} else {
+			$gas_used_diff = round($data2->gas_used-$gas_used,$round);
+		}
+	
+		$solar_diff=0;
+		if (isset($data3->etotal)) {
+			if ($etotal>$data3->etotal) {
+				$solar_diff = round($data3->etotal,$round);
+			} else {
+				$solar_diff = round($data3->etotal-$etotal,$round);
+			}
+		}
 
 		$sql4 = 'select id from energy_summary where date="'.$data1->date.'"';
 		$result4 = plaatenergy_db_query($sql4);
 		$data4 = plaatenergy_db_fetch_object($result4);
-
-		if ( isset($data4->id) ) {
 	
+		if ( isset($data4->id) ) {
+
 			$sql3  = 'update energy_summary set low_used='.$low_used_diff.', normal_used='.$normal_used_diff.', ';
 			$sql3 .= 'low_delivered='.$low_delivered_diff.', normal_delivered='.$normal_delivered_diff.', ';
 			$sql3 .= 'solar_delivered='.$solar_diff.', gas_used='.$gas_used_diff.' where id='.$data4->id;
@@ -448,15 +446,8 @@ function plaatenergy_db_process($type) {
 			$sql3 .= 'VALUES (NULL, "'.$data1->date.'", "'.$low_used_diff.'", "'.$normal_used_diff.'", "'.$low_delivered_diff.'", "';
 			$sql3 .= $normal_delivered_diff.'", "'.$solar_diff.'","'.$gas_used_diff.'")';
 		}
-		
-	} else {
 
-		$sql3  = 'INSERT INTO energy_summary (`id`, `date`, `low_used`, `normal_used`, `low_delivered`, `normal_delivered`, `solar_delivered`, `gas_used`) ';
-		$sql3 .= 'VALUES (NULL, "'.$data1->date.'", "'.$low_used_diff.'", "'.$normal_used_diff.'", "'.$low_delivered_diff.'", "';
-		$sql3 .= $normal_delivered_diff.'", "'.$solar_diff.'","'.$gas_used_diff.'")';
-	}
-
-	plaatenergy_db_query($sql3);
+		plaatenergy_db_query($sql3);
 
 		if ($data2->low_used>0) {
 			$low_used = $data2->low_used;
