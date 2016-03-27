@@ -76,7 +76,7 @@ function plaatenergy_month_out_energy_page() {
 		
 				} else {
 				
-					$sql = 'select max(pac) as pac FROM solar where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';
+					$sql = 'select max(pac) as pac FROM solar1 where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';
 					
 					$result = plaatenergy_db_query($sql);
 					$row = plaatenergy_db_fetch_object($result);

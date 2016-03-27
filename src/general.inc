@@ -50,32 +50,34 @@ define('PAGE_DONATE',               13);
 define('PAGE_RELEASE_NOTES',        14);
 define('PAGE_REPORT',               15);
 define('PAGE_REALTIME',             16);
-define('PAGE_SETTING_LIST',         17);
-define('PAGE_SETTING_EDIT',         18);
-define('PAGE_SETTING_LOGIN',        19);
 
-define('PAGE_YEARS_IN_ENERGY',      20);
-define('PAGE_YEARS_OUT_ENERGY',     21);
-define('PAGE_YEARS_IN_GAS',         22);
+define('PAGE_SETTING_LOGIN',        20);
+define('PAGE_SETTING_CATEGORY',     21);
+define('PAGE_SETTING_LIST',         22);
+define('PAGE_SETTING_EDIT',         23);
 
-define('PAGE_YEAR_IN_ENERGY',       30);
-define('PAGE_YEAR_OUT_ENERGY',      31);
-define('PAGE_YEAR_IN_GAS',          32);
+define('PAGE_YEARS_IN_ENERGY',      30);
+define('PAGE_YEARS_OUT_ENERGY',     31);
+define('PAGE_YEARS_IN_GAS',         32);
 
-define('PAGE_MONTH_IN_ENERGY',      40);
-define('PAGE_MONTH_OUT_ENERGY',     41);
-define('PAGE_MONTH_IN_GAS',         42);
+define('PAGE_YEAR_IN_ENERGY',       40);
+define('PAGE_YEAR_OUT_ENERGY',      41);
+define('PAGE_YEAR_IN_GAS',          42);
 
-define('PAGE_DAY_IN_ENERGY',        50);
-define('PAGE_DAY_OUT_ENERGY',       51);
-define('PAGE_DAY_IN_GAS',           52);
-define('PAGE_DAY_IN_KWH_EDIT',      53);
-define('PAGE_DAY_OUT_KWH_EDIT',     54);
-define('PAGE_DAY_IN_GAS_EDIT',      55);
+define('PAGE_MONTH_IN_ENERGY',      50);
+define('PAGE_MONTH_OUT_ENERGY',     51);
+define('PAGE_MONTH_IN_GAS',         52);
 
-define('PAGE_DAY_PRESSURE',         60);
-define('PAGE_DAY_TEMPERATURE',      61);
-define('PAGE_DAY_HUMIDITY',         62);
+define('PAGE_DAY_IN_ENERGY',        60);
+define('PAGE_DAY_OUT_ENERGY',       61);
+define('PAGE_DAY_IN_GAS',           62);
+define('PAGE_DAY_IN_KWH_EDIT',      63);
+define('PAGE_DAY_OUT_KWH_EDIT',     64);
+define('PAGE_DAY_IN_GAS_EDIT',      65);
+
+define('PAGE_DAY_PRESSURE',         70);
+define('PAGE_DAY_TEMPERATURE',      71);
+define('PAGE_DAY_HUMIDITY',         72);
 ;
 
 /*
@@ -546,7 +548,7 @@ function plaatenergy_navigation_day() {
 	// If zero or one measurements are found. Measurement can be manually adapted.
 	switch ($pid) {
 		case PAGE_DAY_OUT_ENERGY:
-			$sql = 'select * FROM solar where timestamp>="'.$date.' 00:00:00" and timestamp<="'.$date.' 23:59:59"';
+			$sql = 'select * FROM solar1 where timestamp>="'.$date.' 00:00:00" and timestamp<="'.$date.' 23:59:59"';
 			$result = plaatenergy_db_query($sql);
 			if ( plaatenergy_db_num_rows($result) <= 1 ) {
 				$page .= plaatenergy_link('pid='.PAGE_DAY_OUT_KWH_EDIT.'&date='.$date, t('LINK_EDIT'));			

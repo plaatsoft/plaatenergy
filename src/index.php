@@ -67,6 +67,7 @@ $pid = PAGE_HOME;
 
 $date = date('Y-m-d');
 $limit = 0;
+$cat=0;
 
 $session = plaatenergy_post('session', '');
 $token = plaatenergy_post("token", "");
@@ -223,6 +224,7 @@ switch ($pid) {
 	case PAGE_SETTING_LIST: 
 	case PAGE_SETTING_EDIT: 
 	case PAGE_SETTING_LOGIN: 
+	case PAGE_SETTING_CATEGORY:
 		include "settings.php";
 		$page = plaatenergy_settings();
 		break;

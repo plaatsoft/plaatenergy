@@ -30,10 +30,15 @@
 $value = plaatenergy_post("value", "");
 $password = plaatenergy_post("password", "");
 
-$sql  = 'select id, token, value from config where readonly=0';
+
+$sql  = 'select id from config where category='.$cat.' and readonly=0';
 $result = plaatenergy_db_query($sql);
+$count = plaatenergy_db_num_rows($result);
 $step = 6;
-$max = round((plaatenergy_db_num_rows($result)/$step),0);
+$max = 0;
+if ($count>$step) {
+	$max = 1;
+}
 	
 /*
 ** ---------------------
@@ -51,7 +56,7 @@ function plaatenergy_setting_login_event() {
 	if ($settings_password == $password) {
 	
 		// Correct password, redirect to setting page
-		$pid = PAGE_SETTING_LIST;
+		$pid = PAGE_CATEGORY_LIST;
 	}
 }
 	
@@ -135,14 +140,13 @@ function plaatenergy_setting_edit_page() {
 
    // input
    global $id;
-			
+	global $cat;
+
 	$sql  = 'select token, value, options from config where id='.$id;
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 
-	// -------------------------------------
-
-	$page  = ' <h1>'.t('SETTING_TITLE').'</h1>';
+	$page  = ' <h1>'.t('SETTING_TITLE').' - '.t('CATEGORY'.$cat).'</h1>';
 
 	$page .= '<br/>';
 	$page .= '<label>'.t($row->token).'</label>';
@@ -164,12 +168,10 @@ function plaatenergy_setting_edit_page() {
 	   $page .= '<input type="text" name="value" value="'.$row->value.'" size="40" />';
 	}
 	$page .= '<br/>';
-
-	// -------------------------------------
  
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.PAGE_SETTING_LIST, t('LINK_CANCEL'));
-	$page .= plaatenergy_link('pid='.PAGE_SETTING_LIST.'&eid='.EVENT_SAVE.'&id='.$id, t('LINK_SAVE'));
+	$page .= plaatenergy_link('pid='.PAGE_SETTING_LIST.'&cat='.$cat, t('LINK_CANCEL'));
+	$page .= plaatenergy_link('pid='.PAGE_SETTING_LIST.'&eid='.EVENT_SAVE.'&id='.$id.'&cat='.$cat, t('LINK_SAVE'));
 	$page .= '</div>';
 	
 	return $page;
@@ -179,15 +181,15 @@ function plaatenergy_setting_list_page() {
 
    // input
 	global $pid;
+	global $cat;
 	global $limit;
 	global $step;
+	global $max;
 
-	$sql  = 'select id, token, value from config where readonly=0 order by token limit '.($limit*$step).','.$step;
+	$sql  = 'select id, token, value from config where readonly=0 and category='.$cat.' order by token limit '.($limit*$step).','.$step;
 	$result = plaatenergy_db_query($sql);
 	
-	// -------------------------------------
-
-	$page  = ' <h1>'.t('SETTING_TITLE').'</h1>';
+	$page  = ' <h1>'.t('SETTING_TITLE').' - '.t('CATEGORY'.$cat).'</h1>';
 
 	$page .= '<br/>';
 	
@@ -202,25 +204,62 @@ function plaatenergy_setting_list_page() {
 	while ($row = plaatenergy_db_fetch_object($result)) {
 	
 		$page .= '<tr>';
-		$page .= '<td width="200">'.plaatenergy_link('pid='.PAGE_SETTING_EDIT.'&id='.$row->id, $row->token).'</td>';
+		$page .= '<td width="200">'.plaatenergy_link('pid='.PAGE_SETTING_EDIT.'&id='.$row->id.'&cat='.$cat, $row->token).'</td>';
 		$page .= '<td width="100">'.$row->value.'</td>';
-		$page .= '<td width="300">'.t($row->token).'</td>';
+		$page .= '<td width="325">'.t($row->token).'</td>';
 		$page .= '</tr>';
 	}
 	$page .= '</table>';
 	$page .= '</div>';
-	
-	// -------------------------------------
- 
+	 
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_PREV.'&limit='.$limit, t('LINK_PREV'));
+	if ($max>0) {
+		$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_PREV.'&cat='.$cat.'&limit='.$limit, t('LINK_PREV'));
+	}
+	$page .= plaatenergy_link('pid='.PAGE_SETTING_CATEGORY, t('LINK_BACK'));
+	if ($max>0) {
+		$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_NEXT.'&cat='.$cat.'&limit='.$limit, t('LINK_NEXT'));
+	}
+	$page .= '</div>';
+	
+	return $page;
+}
+
+
+function plaatenergy_setting_category_page() {
+
+   // input
+	global $pid;
+	global $limit;
+	global $step;
+
+	$sql  = 'select category from config group by category order by category';
+	$result = plaatenergy_db_query($sql);
+	
+	$page  = ' <h1>'.t('SETTING_TITLE').'</h1>';
+
+	$page .= '<br/>';
+	
+	$page .= '<div class="setting">';
+	$page .= '<table>';
+	
+	while ($row = plaatenergy_db_fetch_object($result)) {
+	
+		$page .= '<tr>';
+		$page .= '<td width="300">'.plaatenergy_link('pid='.PAGE_SETTING_LIST.'&cat='.$row->category, t('CATEGORY'.$row->category)).'</td>';
+		$page .= '</tr>';
+	}
+	$page .= '</table>';
+	$page .= '</div>';
+	 
+	$page .= '<div class="nav">';
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
-	$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_NEXT.'&limit='.$limit, t('LINK_NEXT'));
 	$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_BACKUP, t('LINK_BACKUP'));
 	$page .= '</div>';
 	
 	return $page;
 }
+
 /*
 ** ---------------------
 ** HANDLER
@@ -232,10 +271,9 @@ function plaatenergy_settings() {
 	/* input */
 	global $pid;
 	global $eid;
-  
 	global $max;
 	global $limit; 
-
+	
   /* Event handler */
 	switch ($eid) {
 
@@ -258,8 +296,7 @@ function plaatenergy_settings() {
 		case EVENT_BACKUP:
 			plaatenergy_setting_backup_event();
 			break;
-			
-			
+						
 		case EVENT_LOGIN:
 			plaatenergy_setting_login_event();
 			break;		
@@ -272,13 +309,18 @@ function plaatenergy_settings() {
 			return plaatenergy_setting_login_page();
 			break;
 			
+		case PAGE_SETTING_CATEGORY:
+			return plaatenergy_setting_category_page();
+			break;
+		
+		case PAGE_SETTING_LIST:
+			return plaatenergy_setting_list_page();
+			break;
+	
 		case PAGE_SETTING_EDIT:
 			return plaatenergy_setting_edit_page();
 			break;
 			
-		case PAGE_SETTING_LIST:
-			return plaatenergy_setting_list_page();
-			break;
   }
 }
 

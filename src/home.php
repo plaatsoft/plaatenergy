@@ -326,7 +326,7 @@ function plaatenergy_home_page() {
 		if (strlen($settings_password)>0) {
 			$page .= plaatenergy_link('pid='.PAGE_SETTING_LOGIN, t('LINK_SETTINGS')); 
 		} else {
-			$page .= plaatenergy_link('pid='.PAGE_SETTING_LIST, t('LINK_SETTINGS')); 
+			$page .= plaatenergy_link('pid='.PAGE_SETTING_CATEGORY, t('LINK_SETTINGS')); 
 		}
 		
 		$page .= '</td>';

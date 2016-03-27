@@ -98,6 +98,7 @@ $lang['LINK_BACKUP']     = i('archive') . 'Backup';
 $lang['LINK_EXPORT']     = i('download') . 'Export naar CSV';
 $lang['LINK_SCATTER']    = 'Scatter';
 $lang['LINK_LOGIN']      = 'Login';
+$lang['LINK_BACK']       = i('home') . 'Terug'; 
  
 /*
 ** ------------------
@@ -312,6 +313,14 @@ $lang['chart_dimensions'] = 'Grafiek grootte in pixels';
 
 $lang['home_password'] = 'Bescherm home pagina met een wachtwoord.';
 $lang['settings_password'] = 'Bescherm configuratie pagina met een wachtwoord.';
+
+$lang['CATEGORY0'] = 'Algemeen'; 
+$lang['CATEGORY11'] = 'Gas Meter'; 
+$lang['CATEGORY21'] = 'Energie Meter'; 
+$lang['CATEGORY31'] = 'Solar Meter 1'; 
+$lang['CATEGORY32'] = 'Solar Meter 2'; 
+$lang['CATEGORY33'] = 'Solar Meter 3'; 
+$lang['CATEGORY41'] = 'Weer Meter'; 
 
 /*
 ** ------------------

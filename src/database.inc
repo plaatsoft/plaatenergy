@@ -288,19 +288,9 @@ function plaatenergy_db_get_config_item($key) {
 
    $value = "";
    if ( isset($data->value) ) {
-	$value = $data->value;
+		$value = $data->value;
    }
    return $value;
-}
-
-/**
- * Store config item if database
- * @param $token Key of setting item
- * @param $value Value of key
- */
-function plaatenergy_db_set_config_item($token, $value) {
-   $sql = 'update config set value="'.$value.'", date=SYSDATE() where token="'.$token.'"';
-   plaatenergy_db_query($sql);
 }
 
 /**
@@ -351,7 +341,7 @@ function plaatenergy_db_process($type) {
 			$gas_used = $data2->gas_used;
 		}
 
-		$sql3  = 'select etotal from solar ';
+		$sql3  = 'select etotal from solar1 ';
 		$sql3 .= 'where timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" ';
 		$sql3 .= 'order by timestamp desc limit 0,1';
     
@@ -369,7 +359,7 @@ function plaatenergy_db_process($type) {
 		$count = plaatenergy_db_num_rows($result1);
 		
 		if ($count==0) {
-			$sql1 = 'select cast(timestamp as date) as date from solar group by date';
+			$sql1 = 'select cast(timestamp as date) as date from solar1 group by date';
 			$result1 = plaatenergy_db_query($sql1);
 		}
 		
@@ -392,7 +382,7 @@ function plaatenergy_db_process($type) {
 		$result2 = plaatenergy_db_query($sql2);
 		$data2 = plaatenergy_db_fetch_object($result2);
 	
-		$sql3  = 'select etotal from solar ';
+		$sql3  = 'select etotal from solar1 ';
 		$sql3 .= 'where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" ';
 		$sql3 .= 'order by timestamp desc limit 0,1';
 	
@@ -465,7 +455,7 @@ function plaatenergy_db_process($type) {
 	
 		} else {
 	
-			$sql3  = 'INSERT INTO energy_summary (`id`, `date`, `low_used`, `normal_used`, `low_delivered`, `normal_delivered`, `solar_delivered`, `gas_used`) ';
+			$sql3  = 'INSERT INTO energy_summary (id, date, low_used, normal_used, low_delivered, normal_delivered, solar_delivered, gas_used) ';
 			$sql3 .= 'VALUES (NULL, "'.$data1->date.'", "'.$low_used_diff.'", "'.$normal_used_diff.'", "'.$low_delivered_diff.'", "';
 			$sql3 .= $normal_delivered_diff.'", "'.$solar_diff.'","'.$gas_used_diff.'")';
 		}

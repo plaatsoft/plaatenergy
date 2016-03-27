@@ -52,7 +52,7 @@ try:
     power = row[0]
     con.close
 
-    value = vermogen + " Watt"  
+    value = power + " Watt"  
 
     sense.set_rotation(180)
     sense.show_message(value, scroll_speed=0.1, text_colour=[255,255,0], back_colour=[0,0,0])

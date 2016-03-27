@@ -42,15 +42,15 @@ function plaatenergy_day_out_edit_save_event() {
 	global $date;
 	global $eid;
 	
-	$sql  = 'select etotal FROM solar where timestamp="'.$date.' 00:00:00"';
+	$sql  = 'select etotal FROM solar1 where timestamp="'.$date.' 00:00:00"';
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 	
 	$prev_etotal=0;
 	if ( isset($row->etotal) ) {
-		$sql = 'update solar set etotal='.$etotal.' where timestamp="'.$date.' 00:00:00"';	
+		$sql = 'update solar1 set etotal='.$etotal.' where timestamp="'.$date.' 00:00:00"';	
 	} else {			
-		$sql  = 'insert into solar (`timestamp`, `etotal`) ';
+		$sql  = 'insert into solar1 (`timestamp`, `etotal`) ';
 		$sql .= 'values ("'.$date.' 00:00:00","'.$etotal.'")';
 	}
 	
@@ -77,7 +77,7 @@ function plaatenergy_day_out_edit_page() {
 	
 	list($year, $month, $day) = explode("-", $date);	
 	
-	$sql1  = 'select etotal FROM solar where ';
+	$sql1  = 'select etotal FROM solar1 where ';
 	$sql1 .= 'timestamp<"'.$date.' 00:00:00" order by timestamp desc limit 0,1';
 	$result1 = plaatenergy_db_query($sql1);
 	$row1 = plaatenergy_db_fetch_object($result1);
@@ -89,7 +89,7 @@ function plaatenergy_day_out_edit_page() {
 
 	// -------------------------------------
 
-	$sql2  = 'select etotal FROM solar where ';
+	$sql2  = 'select etotal FROM solar1 where ';
 	$sql2 .= 'timestamp>"'.$date.' 00:00:00" order by timestamp asc limit 0,1';
 	$result2 = plaatenergy_db_query($sql2);
 	$row2 = plaatenergy_db_fetch_object($result2);
@@ -114,7 +114,7 @@ function plaatenergy_day_out_edit_page() {
 	
 	// -------------------------------------
 
-	$sql3  = 'select etotal FROM solar where ';
+	$sql3  = 'select etotal FROM solar1 where ';
 	$sql3 .= 'timestamp="'.$date.' 00:00:00" order by timestamp asc limit 0,1';
 
 	$result3 = plaatenergy_db_query($sql3);
