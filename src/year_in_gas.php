@@ -41,7 +41,7 @@ function plaatenergy_year_in_gas_page() {
 	
 	list($year) = explode("-", $date);	
 
-	$gas_price = plaatenergy_db_get_config_item('gas_price');
+	$gas_price = plaatenergy_db_get_config_item('gas_price', GAS_METER_1);
 	$gas_use_forecast = plaatenergy_db_get_config_item('gas_use_forecast');
 
 	$total=0;

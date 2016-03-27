@@ -37,9 +37,9 @@ function plaatenergy_day_out_energy_page() {
 	global $out_forecast;
 
 	$energy_delivery_forecast = plaatenergy_db_get_config_item('energy_delivery_forecast');
-	$low_delivered_value = plaatenergy_db_get_config_item('meter_reading_delivered_low');
-	$normal_delivered_value = plaatenergy_db_get_config_item('meter_reading_delivered_normal');
-	$solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor');
+	$low_delivered_value = plaatenergy_db_get_config_item('meter_reading_delivered_low', ENERGY_METER_1);
+	$normal_delivered_value = plaatenergy_db_get_config_item('meter_reading_delivered_normal', ENERGY_METER_1);
+	$solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor', SOLAR_METER_1);
 
 	$prev_date = plaatenergy_prev_day($date);
 	$next_date = plaatenergy_next_day($date);

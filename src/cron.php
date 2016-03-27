@@ -35,22 +35,38 @@ include "database.inc";
 
 plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
-$solar_meter_present = plaatenergy_db_get_config_item('solar_meter_present');
-if ($solar_meter_present=="true") {
-	$solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor');
-	if ($solar_meter_vendor!="unknown") {
-		exec('python /var/www/html/plaatenergy/sensors/solar/'.$solar_meter_vendor.'.py');
+$solar_meter_present1 = plaatenergy_db_get_config_item('solar_meter_present', SOLAR_METER_1);
+if ($solar_meter_present1=="true") {
+	$solar_meter_vendor1 = plaatenergy_db_get_config_item('solar_meter_vendor', SOLAR_METER_1);
+	if ($solar_meter_vendor1!="unknown") {
+		exec('python /var/www/html/plaatenergy/sensors/solar/'.$solar_meter_vendor1.'.py 1 '.SOLAR_METER_1);
 	}
 }
 
-$weather_station_present = plaatenergy_db_get_config_item('weather_station_present');
+$solar_meter_present2 = plaatenergy_db_get_config_item('solar_meter_present', SOLAR_METER_2);
+if ($solar_meter_present2=="true") {
+	$solar_meter_vendor2 = plaatenergy_db_get_config_item('solar_meter_vendor', SOLAR_METER_2);
+	if ($solar_meter_vendor2!="unknown") {
+		exec('python /var/www/html/plaatenergy/sensors/solar/'.$solar_meter_vendor1.'.py 2 '.SOLAR_METER_2);
+	}
+}
+
+$solar_meter_present3 = plaatenergy_db_get_config_item('solar_meter_present', SOLAR_METER_3);
+if ($solar_meter_present3 =="true") {
+	$solar_meter_vendor3 = plaatenergy_db_get_config_item('solar_meter_vendor', SOLAR_METER_3);
+	if ($solar_meter_vendor3!="unknown") {
+		exec('python /var/www/html/plaatenergy/sensors/solar/'.$solar_meter_vendor1.'.py 3 '.SOLAR_METER_3);
+	}
+}
+
+$weather_station_present = plaatenergy_db_get_config_item('weather_station_present', WEATHER_METER_1);
 if ($weather_station_present=="true") {
    exec('sudo python /var/www/html/plaatenergy/sensors/weather/weather.py');
 }
 
-$energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present');
+$energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present', ENERGY_METER_1);
 if ($energy_meter_present=="true") {
-   $energy_meter_vendor = plaatenergy_db_get_config_item('energy_meter_vendor');
+   $energy_meter_vendor = plaatenergy_db_get_config_item('energy_meter_vendor', ENERGY_METER_1);
    exec('python /var/www/html/plaatenergy/sensors/p1/'.$energy_meter_vendor.'.py');
 }
 

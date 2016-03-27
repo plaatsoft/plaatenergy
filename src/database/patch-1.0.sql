@@ -53,7 +53,6 @@ ALTER TABLE solar RENAME TO solar1;
 ALTER TABLE `config` ADD `category` INT NOT NULL AFTER `id`;
 UPDATE config SET category=11 WHERE token="gas_meter_present";
 UPDATE config SET category=11 WHERE token="gas_price";
-UPDATE config SET category=11 WHERE token="gas_use_forecast";
 UPDATE config SET category=11 WHERE token="meter_reading_used_gas";
 
 UPDATE config SET category=21 WHERE token="energy_meter_present";

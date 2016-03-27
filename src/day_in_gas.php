@@ -45,9 +45,9 @@ function plaatenergy_day_in_gas_page() {
 
 	$current_date=mktime(0, 0, 0, $month, $day, $year);  
 	
-	$gas_price = plaatenergy_db_get_config_item('gas_price');
+	$gas_price = plaatenergy_db_get_config_item('gas_price', GAS_METER_1);
 	$gas_use_forecast = plaatenergy_db_get_config_item('gas_use_forecast');
-	$gas_prev = plaatenergy_db_get_config_item('meter_reading_used_gas');
+	$gas_prev = plaatenergy_db_get_config_item('meter_reading_used_gas', GAS_METER_1);
 	
 	$i = 0;
 	$data = "";

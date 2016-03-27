@@ -42,9 +42,9 @@ function plaatenergy_month_out_energy_page() {
 	list($year, $month) = explode("-", $date);	
 	$month = ltrim($month ,'0');
 	
-	$price = plaatenergy_db_get_config_item('energy_price');
+	$price = plaatenergy_db_get_config_item('energy_price', ENERGY_METER_1);
 	$energy_use_forecast = plaatenergy_db_get_config_item('energy_use_forecast');
-	$solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor');
+	$solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor', SOLAR_METER_1);
 	
 	$data = "";
 	$value = 0;

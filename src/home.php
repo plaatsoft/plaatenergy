@@ -27,11 +27,11 @@
 ** ---------------------
 */
 
-$solar_meter_present = plaatenergy_db_get_config_item('solar_meter_present');
-$solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor');
-$weather_station_present = plaatenergy_db_get_config_item('weather_station_present');
-$energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present');
-$gas_meter_present = plaatenergy_db_get_config_item('gas_meter_present');
+$solar_meter_present = plaatenergy_db_get_config_item('solar_meter_present', SOLAR_METER_1);
+$solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor', SOLAR_METER_1);
+$weather_station_present = plaatenergy_db_get_config_item('weather_station_present', WEATHER_METER_1);
+$energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present', ENERGY_METER_1);
+$gas_meter_present = plaatenergy_db_get_config_item('gas_meter_present', GAS_METER_1);
 $password = plaatenergy_post("password", "");
 
 /*

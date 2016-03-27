@@ -107,6 +107,19 @@ define('EVENT_LANGUAGE',            97);
 
 /*
 ** -----------
+** METERS
+** -----------
+*/
+
+define('GAS_METER_1',              11);
+define('ENERGY_METER_1',           21);
+define('SOLAR_METER_1',            31);
+define('SOLAR_METER_2',            32);
+define('SOLAR_METER_3',            33);
+define('WEATHER_METER_1',          41);
+
+/*
+** -----------
 ** PAGE
 ** -----------
 */

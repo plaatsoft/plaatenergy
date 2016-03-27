@@ -280,9 +280,9 @@ function plaatenergy_db_check_version() {
  * @param $key key name of setting stored in database
  * @return $value of key
  */
-function plaatenergy_db_get_config_item($key) {
+function plaatenergy_db_get_config_item($key, $category=0) {
 
-   $sql = 'select value from config where token="'.$key.'" order by date desc limit 0,1';
+   $sql = 'select value from config where token="'.$key.'" and category='.$category;
    $result = plaatenergy_db_query($sql);
    $data = plaatenergy_db_fetch_object($result);
 
@@ -303,11 +303,11 @@ function plaatenergy_db_process($type) {
 	global $month;
 	global $day;
 
-	$meter_reading_used_low = plaatenergy_db_get_config_item('meter_reading_used_low');
-	$meter_reading_used_normal = plaatenergy_db_get_config_item('meter_reading_used_normal');
-	$meter_reading_delivered_low = plaatenergy_db_get_config_item('meter_reading_delivered_low');
-	$meter_reading_delivered_normal = plaatenergy_db_get_config_item('meter_reading_delivered_normal');
-	$meter_reading_used_gas = plaatenergy_db_get_config_item('meter_reading_used_gas');
+	$meter_reading_used_low = plaatenergy_db_get_config_item('meter_reading_used_low', ENERGY_METER_1);
+	$meter_reading_used_normal = plaatenergy_db_get_config_item('meter_reading_used_normal', ENERGY_METER_1);
+	$meter_reading_delivered_low = plaatenergy_db_get_config_item('meter_reading_delivered_low', ENERGY_METER_1);
+	$meter_reading_delivered_normal = plaatenergy_db_get_config_item('meter_reading_delivered_normal', ENERGY_METER_1);
+	$meter_reading_used_gas = plaatenergy_db_get_config_item('meter_reading_used_gas', GAS_METER_1);
 
 	$low_used = $meter_reading_used_low;
 	$normal_used = $meter_reading_used_normal;

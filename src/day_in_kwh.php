@@ -37,10 +37,10 @@ function plaatenergy_day_in_energy_page() {
 	global $in_forecast;
 
 	$energy_use_forecast = plaatenergy_db_get_config_item('energy_use_forecast');
-	$low_used_prev = plaatenergy_db_get_config_item('meter_reading_used_low');
-	$normal_used_prev = plaatenergy_db_get_config_item('meter_reading_used_normal');
-	$low_delivered_prev = plaatenergy_db_get_config_item('meter_reading_delivered_low');
-	$normal_delivered_prev = plaatenergy_db_get_config_item('meter_reading_delivered_normal');
+	$low_used_prev = plaatenergy_db_get_config_item('meter_reading_used_low', ENERGY_METER_1);
+	$normal_used_prev = plaatenergy_db_get_config_item('meter_reading_used_normal', ENERGY_METER_1);
+	$low_delivered_prev = plaatenergy_db_get_config_item('meter_reading_delivered_low', ENERGY_METER_1);
+	$normal_delivered_prev = plaatenergy_db_get_config_item('meter_reading_delivered_normal', ENERGY_METER_1);
 	
 	$prev_date = plaatenergy_prev_day($date);
 	$next_date = plaatenergy_next_day($date);

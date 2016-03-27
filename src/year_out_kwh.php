@@ -41,7 +41,7 @@ function plaatenergy_year_out_energy_page() {
 	
 	list($year) = explode("-", $date);	
 	
-	$energy_price = plaatenergy_db_get_config_item('energy_price');
+	$energy_price = plaatenergy_db_get_config_item('energy_price', ENERGY_METER_1);
 	$energy_delivery_forecast = plaatenergy_db_get_config_item('energy_delivery_forecast');
 	
 	$total_sum = 0;

@@ -42,7 +42,7 @@ function plaatenergy_month_in_gas_page() {
 	list($year, $month) = explode("-", $date);	
 	$month = ltrim($month ,'0');
 	
-	$gas_price = plaatenergy_db_get_config_item('gas_price');
+	$gas_price = plaatenergy_db_get_config_item('gas_price', GAS_METER_1);
 	
 	$total=0;
 	$total_price=0;
