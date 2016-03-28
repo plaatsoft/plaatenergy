@@ -91,7 +91,7 @@ if (strlen($token)>0) {
 ** --------------------------------------
 */
 
-$home_password = plaatenergy_db_get_config_item('home_password');
+$home_password = plaatenergy_db_get_config_item('home_password',SECURITY);
 
 // Create for each visitor an account (without session_id)
 $session_id = plaatenergy_db_get_session($ip);

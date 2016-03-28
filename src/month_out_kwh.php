@@ -174,7 +174,7 @@ function plaatenergy_month_out_energy_page() {
        var options = {
           bars: "vertical",
           bar: {groupWidth: "90%"},
-          legend: { position: "'.plaatenergy_db_get_config_item('chart_legend').'", textStyle: {fontSize: 10} },
+          legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
           vAxis: {format: "decimal" },
 			 isStacked: true,';
 			 
@@ -204,7 +204,7 @@ function plaatenergy_month_out_energy_page() {
     </script>';
 	
 	$page .= '<h1>'.t('TITLE_MONTH_OUT_KWH', $month, $year).'</h1>';
-        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions').'"></div>';
+        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions',LOOK_AND_FEEL).'"></div>';
 
 	$page .= '<div class="remark">';
 

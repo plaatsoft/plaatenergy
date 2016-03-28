@@ -51,12 +51,12 @@ function plaatenergy_setting_login_event() {
 	global $pid;
 	global $password;
 	
-	$settings_password = plaatenergy_db_get_config_item('settings_password');
+	$settings_password = plaatenergy_db_get_config_item('settings_password',SECURITY);
 	
 	if ($settings_password == $password) {
 	
 		// Correct password, redirect to setting page
-		$pid = PAGE_CATEGORY_LIST;
+		$pid = PAGE_SETTING_CATEGORY;
 	}
 }
 	
@@ -243,18 +243,28 @@ function plaatenergy_setting_category_page() {
 	$page .= '<div class="setting">';
 	$page .= '<table>';
 	
+	$count = 0;
 	while ($row = plaatenergy_db_fetch_object($result)) {
 	
-		$page .= '<tr>';
-		$page .= '<td width="300">'.plaatenergy_link('pid='.PAGE_SETTING_LIST.'&cat='.$row->category, t('CATEGORY'.$row->category)).'</td>';
-		$page .= '</tr>';
+		if (($count%3)==0) {
+			$page .= '<tr>';
+		}
+		$page .= '<td width="200">'.plaatenergy_link('pid='.PAGE_SETTING_LIST.'&cat='.$row->category, i('cog').t('CATEGORY'.$row->category)).'</td>';
+		if (($count%3)==3) {
+			$page .= '</tr>';
+		}
+		
+		$count++;
+		
 	}
 	$page .= '</table>';
 	$page .= '</div>';
+	
+	$page .= '<br/>';
 	 
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
 	$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_BACKUP, t('LINK_BACKUP'));
+	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));	
 	$page .= '</div>';
 	
 	return $page;

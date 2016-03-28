@@ -314,13 +314,15 @@ $lang['chart_dimensions'] = 'Grafiek grootte in pixels';
 $lang['home_password'] = 'Bescherm home pagina met een wachtwoord.';
 $lang['settings_password'] = 'Bescherm configuratie pagina met een wachtwoord.';
 
-$lang['CATEGORY0'] = 'Algemeen'; 
+$lang['CATEGORY0'] =  'Voorspelling'; 
 $lang['CATEGORY11'] = 'Gas Meter'; 
 $lang['CATEGORY21'] = 'Energie Meter'; 
 $lang['CATEGORY31'] = 'Solar Meter 1'; 
 $lang['CATEGORY32'] = 'Solar Meter 2'; 
 $lang['CATEGORY33'] = 'Solar Meter 3'; 
 $lang['CATEGORY41'] = 'Weer Meter'; 
+$lang['CATEGORY51'] = 'Beveiliging'; 
+$lang['CATEGORY52'] = 'Layout'; 
 
 /*
 ** ------------------

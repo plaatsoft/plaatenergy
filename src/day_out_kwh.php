@@ -191,7 +191,7 @@ function plaatenergy_day_out_energy_page() {
          data.addRows('.$json.');
 
          var options = {
-          legend: { position: "'.plaatenergy_db_get_config_item('chart_legend').'", textStyle: {fontSize: 10} },
+          legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
            vAxis: {format: "decimal", title:""},
            hAxis: {title:""},
          };
@@ -212,7 +212,7 @@ function plaatenergy_day_out_energy_page() {
        var options = {
           bars: "vertical",
           bar: {groupWidth: "90%"},
-          legend: { position: "'.plaatenergy_db_get_config_item('chart_legend').'", textStyle: {fontSize: 10} },
+          legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
           vAxis: {format: "decimal" },
           isStacked: true,
           colors: ["#0066cc", "#808080"],
@@ -229,7 +229,7 @@ function plaatenergy_day_out_energy_page() {
 	$forecast = ($out_forecast[$month] * $energy_delivery_forecast) / cal_days_in_month (CAL_GREGORIAN, $month, $year);
  
 	$page .= '<h1>'.t('TITLE_DAY_OUT_KWH', plaatenergy_dayofweek($date),$day, $month, $year).'</h1>';
-	$page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions').'"></div>';
+	$page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions',LOOK_AND_FEEL).'"></div>';
 
 	$page .= '<div class="remark">';	
 	$page .= t('TOTAL_PER_DAY_KWH', round($total,2), round($forecast,2));

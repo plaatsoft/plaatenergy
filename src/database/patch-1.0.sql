@@ -71,6 +71,15 @@ UPDATE config SET category=31 WHERE token="solar_meter_serial_number";
 
 UPDATE config SET category=41 WHERE token="weather_station_present";
 
+UPDATE config SET category=51 WHERE token="settings_password";
+UPDATE config SET category=51 WHERE token="home_password";
+
+UPDATE config SET category=52 WHERE token="chart_dimensions";
+UPDATE config SET category=52 WHERE token="chart_legend";
+UPDATE config SET category=52 WHERE token="slide_show_on";
+UPDATE config SET category=52 WHERE token="slide_show_page_delay";
+
+
 INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (32, 'solar_meter_present', 'false', 'true,false', 0, 1);
 INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (32, 'solar_meter_vendor', 'unknown', 'unknown,omnik', 0, 0);
 INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (32, 'solar_meter_port', '', '', 0, 0);

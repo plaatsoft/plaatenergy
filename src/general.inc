@@ -107,16 +107,19 @@ define('EVENT_LANGUAGE',            97);
 
 /*
 ** -----------
-** METERS
+** CATEGORY
 ** -----------
 */
 
+define('FORECAST',                  0);
 define('GAS_METER_1',              11);
 define('ENERGY_METER_1',           21);
 define('SOLAR_METER_1',            31);
 define('SOLAR_METER_2',            32);
 define('SOLAR_METER_3',            33);
 define('WEATHER_METER_1',          41);
+define('SECURITY',                 51);
+define('LOOK_AND_FEEL',            52);
 
 /*
 ** -----------
@@ -199,19 +202,15 @@ function add_icons() {
 	return $page;
 }
 
-// Load CSS function (by Bastiaan van der Plaat)
-// - Read a CSS file, minifier it and echo it in HTML
-// - So it is mutch faster and up to date every request
-
 function loadCSS($url) {
-	return '<style>' . file_get_contents($url) . '</style>';
+	return '<link href="'.$url.'" rel="stylesheet" type="text/css" />';
+	//return '<style>' . file_get_contents($url) . '</style>';
 }
 
-// Load JS function (by Bastiaan van der Plaat)
-// - Copy of load CSS but now for JavaScript
 
 function loadJS($url) {
-	return '<script>' . file_get_contents($url) . '</script>';
+	return '<script language="JavaScript" src="'.$url.'" type="text/javascript"></script>';	
+	//return '<script>' . file_get_contents($url) . '</script>';
 }
 
 /**
@@ -259,10 +258,10 @@ function general_header() {
   // Load the icons from Font Awesome not with loadCSS because this file never will change and it cant load the font
   $page .= '<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>';
 	
-   $slide_show_on = plaatenergy_db_get_config_item('slide_show_on');
+   $slide_show_on = plaatenergy_db_get_config_item('slide_show_on', LOOK_AND_FEEL);
    if (($slide_show_on=="true") && ($pid!=PAGE_SETTING_LIST) && ($pid!=PAGE_SETTING_EDIT)) {
 
-     $slide_show_page_delay = plaatenergy_db_get_config_item('slide_show_page_delay')*1000;
+     $slide_show_page_delay = plaatenergy_db_get_config_item('slide_show_page_delay', LOOK_AND_FEEL)*1000;
 
      switch ($sid) {
    

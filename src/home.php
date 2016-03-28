@@ -54,7 +54,7 @@ function check_solar_meter() {
   if (($solar_meter_present=="true") && ($solar_meter_vendor!="unknown")) {
   
    $timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
-   $sql = 'select etotal from solar where timestamp >= "'.$timestamp.'"';	
+   $sql = 'select etotal from solar1 where timestamp >= "'.$timestamp.'"';	
    $result = plaatenergy_db_query($sql);
    $count = plaatenergy_db_num_rows($result);
 	
@@ -154,7 +154,7 @@ function plaatenergy_home_login_event() {
 	global $password;
 	global $ip;
 		
-	$home_password = plaatenergy_db_get_config_item('home_password');
+	$home_password = plaatenergy_db_get_config_item('home_password',SECURITY);
 	
 	if ($home_password == $password) {
 
@@ -322,7 +322,7 @@ function plaatenergy_home_page() {
 		$page .= '</td>';
 		$page .= '<td>';
 		
-		$settings_password = plaatenergy_db_get_config_item('settings_password');		
+		$settings_password = plaatenergy_db_get_config_item('settings_password',SECURITY);		
 		if (strlen($settings_password)>0) {
 			$page .= plaatenergy_link('pid='.PAGE_SETTING_LOGIN, t('LINK_SETTINGS')); 
 		} else {

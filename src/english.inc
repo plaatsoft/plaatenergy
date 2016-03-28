@@ -311,13 +311,15 @@ $lang['chart_dimensions'] = 'Chart dimensions in pixels';
 $lang['home_password'] = 'Protect home page with password.';
 $lang['settings_password'] = 'Protect setting page with password.';
 
-$lang['CATEGORY0'] = 'General'; 
+$lang['CATEGORY0'] =  'Forecast'; 
 $lang['CATEGORY11'] = 'Gas Meter'; 
 $lang['CATEGORY21'] = 'Energy Meter'; 
 $lang['CATEGORY31'] = 'Solar Meter 1'; 
 $lang['CATEGORY32'] = 'Solar Meter 2'; 
 $lang['CATEGORY33'] = 'Solar Meter 3'; 
 $lang['CATEGORY41'] = 'Weather Meter'; 
+$lang['CATEGORY51'] = 'Security'; 
+$lang['CATEGORY52'] = 'Look and Feel'; 
 
 /*
 ** ------------------

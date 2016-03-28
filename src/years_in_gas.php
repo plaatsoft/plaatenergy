@@ -118,7 +118,7 @@ function plaatenergy_years_in_gas_page() {
        var options = {
           bars: "vertical",
           bar: {groupWidth: "90%"},
-          legend: { position: "'.plaatenergy_db_get_config_item('chart_legend').'", textStyle: {fontSize: 10} },
+          legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
           vAxis: {format: "decimal"},
 			 ';
 				if ($eid==EVENT_EURO) {			 
@@ -148,7 +148,7 @@ function plaatenergy_years_in_gas_page() {
 	}
 	
 	
-        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions').'"></div>';
+        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions',LOOK_AND_FEEL).'"></div>';
         $page .= '<div class="remark">';
 	
 	if ($count>0) {			 

@@ -88,7 +88,7 @@ function plaatenergy_day_pressure_page() {
         var options = {
           bars: "vertical",
           bar: {groupWidth: "90%"},
-          legend: { position: "'.plaatenergy_db_get_config_item('chart_legend').'", textStyle: {fontSize: 10} },
+          legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
           vAxis: {format: "decimal", baseline:950},
           animation: { duration: 3000, easing: "in", startup: true },
         };
@@ -100,7 +100,7 @@ function plaatenergy_day_pressure_page() {
     </script>';
     
 	$page .= '<h1>'.t('TITLE_DAY_PRESSURE', plaatenergy_dayofweek($date), $day, $month, $year).'</h1>';
-        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions').'"></div>';
+        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions',LOOK_AND_FEEL).'"></div>';
 	
 	$page .= '<div class="remark">';		
 	if ( $found == 1 ) {
