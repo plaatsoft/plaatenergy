@@ -281,10 +281,10 @@ $lang['LABEL_DESCRIPTION'] = 'Omschrijving';
 $lang['database_version'] = 'Huidige database versie';
 $lang['request_counter'] = 'Pagina request counter';
 
-$lang['meter_reading_used_low'] = 'Start energie meterstand - afgenomen laag (kwh)';
-$lang['meter_reading_used_normal'] = 'Start energie meterstand - afgenomen normaal (kwh)';
-$lang['meter_reading_delivered_low'] = 'Start energie meterstand - geleverd laag (kwh)';
-$lang['meter_reading_delivered_normal'] = 'Start energie meterstand - geleverd normaal (kwh)';
+$lang['meter_reading_used_low'] = 'Start meterstand - afgenomen laag (kwh)';
+$lang['meter_reading_used_normal'] = 'Start meterstand - afgenomen normaal (kwh)';
+$lang['meter_reading_delivered_low'] = 'Start meterstand - geleverd laag (kwh)';
+$lang['meter_reading_delivered_normal'] = 'Start meterstand - geleverd normaal (kwh)';
 $lang['meter_reading_used_gas'] = 'Start gas meterstand (m&sup3;)';
 
 $lang['energy_meter_present'] = 'Energie meter aanwezig';
@@ -298,6 +298,7 @@ $lang['solar_meter_vendor'] = 'Solar meter leverancier';
 $lang['solar_meter_ip' ] = 'Solar meter TCP/IP adres';
 $lang['solar_meter_port'] = 'Solar meter TCP poort nummer';
 $lang['solar_meter_serial_number'] = 'Solar meter serial nummer';
+$lang['solar_initial_meter_reading'] = 'Start solar meterstand (kWh)';
 
 $lang['gas_meter_present' ] = 'Gas meter aanwezig';
 $lang['gas_use_forecast'] = 'Jaar voorspelling gas verbruik (m&sup3;)';

@@ -37,9 +37,13 @@ function plaatenergy_day_out_energy_page() {
 	global $out_forecast;
 
 	$energy_delivery_forecast = plaatenergy_db_get_config_item('energy_delivery_forecast');
+	
 	$low_delivered_value = plaatenergy_db_get_config_item('meter_reading_delivered_low', ENERGY_METER_1);
 	$normal_delivered_value = plaatenergy_db_get_config_item('meter_reading_delivered_normal', ENERGY_METER_1);
-	$solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor', SOLAR_METER_1);
+	$solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor', SOLAR_METER_1);	
+	$solar_delivered_1 = plaatenergy_db_get_config_item('solar_initial_meter_reading', SOLAR_METER_1);
+	$solar_delivered_2 = plaatenergy_db_get_config_item('solar_initial_meter_reading', SOLAR_METER_2);
+	$solar_delivered_3 = plaatenergy_db_get_config_item('solar_initial_meter_reading', SOLAR_METER_3);
 
 	$prev_date = plaatenergy_prev_day($date);
 	$next_date = plaatenergy_next_day($date);
@@ -72,17 +76,34 @@ function plaatenergy_day_out_energy_page() {
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 	
-	$etotal_prev=0;
 	if ( isset($row->etotal) ) {
-		$etotal_prev = $row->etotal;
+		$solar_delivered_1 = $row->etotal;
+	}
+	
+	$sql  = 'select max(etotal) as etotal from solar2 where ';
+	$sql .= 'timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" ';
+	$result = plaatenergy_db_query($sql);
+	$row = plaatenergy_db_fetch_object($result);
+	
+	if ( isset($row->etotal) ) {
+		$solar_delivered_2 = $row->etotal;
 	}
 	 
+	$sql  = 'select max(etotal) as etotal from solar3 where ';
+	$sql .= 'timestamp>="'.$prev_date.' 00:00:00" and timestamp<="'.$prev_date.' 23:59:59" ';
+	$result = plaatenergy_db_query($sql);
+	$row = plaatenergy_db_fetch_object($result);
+	
+	if ( isset($row->etotal) ) {
+		$solar_delivered_3 = $row->etotal;
+	}
 	
 	$delivered_low = 0;
 	$delivered_normal = 0;
 	$delivered_local = 0;
 
 	while ($i<96) {
+	
 	 	$timestamp1 = date("Y-m-d H:i:s", $current_date+(900*$i));
 		$timestamp2 = date("Y-m-d H:i:s", $current_date+(900*($i+1)));
 
@@ -91,11 +112,6 @@ function plaatenergy_day_out_energy_page() {
 		$result1 = plaatenergy_db_query($sql1);
 		$row1 = plaatenergy_db_fetch_object($result1);
 			
-		$sql2  = 'select max(etotal) as etotal FROM solar1 where ';
-		$sql2 .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'"';	
-		$result2 = plaatenergy_db_query($sql2);
-		$row2 = plaatenergy_db_fetch_object($result2);			
-			
 		if ( isset($row1->low_delivered)) {
 				
 			if ($row1->low_delivered>=$low_delivered_value) {
@@ -103,6 +119,7 @@ function plaatenergy_day_out_energy_page() {
 			} else {
 				$delivered_low = $row1->low_delivered;
 			}
+			
 			if ($row1->normal_delivered>=$normal_delivered_value) {
 				$delivered_normal = $row1->normal_delivered - $normal_delivered_value;
 			} else {
@@ -110,8 +127,51 @@ function plaatenergy_day_out_energy_page() {
 			}
 		}
 		
-		if ( isset($row2->etotal)) {
-			$delivered_local = $row2->etotal - $etotal_prev - $delivered_low - $delivered_normal;
+		$sql3a  = 'select max(etotal) as etotal FROM solar1 where ';
+		$sql3a .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'"';	
+		$result3a = plaatenergy_db_query($sql3a);
+		$row3a = plaatenergy_db_fetch_object($result3a);
+
+		$solar_diff_1 = 0;
+		if (isset($row3a->etotal)) {
+			if ($row3a->etotal >= $solar_delivered_1 ) {
+				$solar_diff_1 = $row3a->etotal - $solar_delivered_1;
+			} else {			
+				$solar_diff_1 = $row3a->etotal;			
+			}
+		}
+					
+		$sql3b  = 'select max(etotal) as etotal FROM solar2 where ';
+		$sql3b .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'"';	
+		$result3b = plaatenergy_db_query($sql3b);
+		$row3b = plaatenergy_db_fetch_object($result3b);	
+		
+		$solar_diff_2 = 0;
+		if (isset($row3b->etotal)) {
+			if ($row3b->etotal >= $solar_delivered_2 ) {
+				$solar_diff_2 = $row3b->etotal - $solar_delivered_2;
+			} else {			
+				$solar_diff_2 = $row3b->etotal;			
+			}
+		}
+
+		$sql3c  = 'select max(etotal) as etotal FROM solar3 where ';
+		$sql3c .= 'timestamp>="'.$timestamp1.'" and timestamp<"'.$timestamp2.'"';	
+		$result3c = plaatenergy_db_query($sql3c);
+		$row3c = plaatenergy_db_fetch_object($result3c);	
+		
+		$solar_diff_3 = 0;
+		if (isset($row3c->etotal)) {
+			if ($row3c->etotal >= $solar_delivered_3 ) {
+				$solar_diff_3 = $row3c->etotal - $solar_delivered_3;
+			} else {			
+				$solar_diff_3 = $row3c->etotal;			
+			}
+		}
+				
+		if (isset($row3a->etotal) || isset($row3b->etotal) || isset($row3c->etotal)) {
+		
+			$delivered_local = $solar_diff_1 + $solar_diff_2 + $solar_diff_3 - $delivered_low - $delivered_normal;
 			if ($delivered_local<0) {
 				$delivered_local = 0;
 			}
@@ -149,30 +209,49 @@ function plaatenergy_day_out_energy_page() {
 		$timestamp2 = date("Y-m-d 23:59:59", $current_date);
 	
 		if ($solar_meter_vendor=='unknown') {		
-			$sql  = 'select timestamp, vermogenterug as pac FROM energy ';
+			$sql  = 'select timestamp, power as pac FROM energy1 ';
+			$sql .= 'where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp';
+						
+			$result = plaatenergy_db_query($sql);
+
+			while ($row = plaatenergy_db_fetch_object($result)) {
+
+				$value = 0;
+				if ( isset($row->pac)) {
+					$value= $row->pac;
+				}
+	
+				if (strlen($data)>0) {
+					$data.=',';
+				}
+				$data .= "['".substr($row->timestamp,11,5)."',";
+				$data .= round($value,2).']';
+			}
+			
 		} else {	
-			$sql  = 'select timestamp, pac from solar1 ';
-		}
-		$sql .= 'where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp';
 		
-		$result = plaatenergy_db_query($sql);
+			$sql  = 'select p1.timestamp, p1.pac as pac1, ifnull(p2.pac,0) as pac2, ifnull(p3.pac,0) as pac3 ';
+			$sql .= 'from solar1 p1 left join solar2 p2 on p1.timestamp=p2.timestamp left join solar3 p3 on ';
+			$sql .= 'p1.timestamp=p3.timestamp ';
+			$sql .= 'where p1.timestamp>="'.$timestamp1.'" and p1.timestamp<="'.$timestamp2.'" order by p1.timestamp';
+	
+			$result = plaatenergy_db_query($sql);
+		
+			while ($row = plaatenergy_db_fetch_object($result)) {
 
-		while ($row = plaatenergy_db_fetch_object($result)) {
-
-			$value = 0;
-			if ( isset($row->pac)) {
-				$value= $row->pac;
+				$value = 0;
+				if ( isset($row->pac1)) {
+					$value= $row->pac1 + $row->pac2 + $row->pac3;
+				}
+	
+				if (strlen($data)>0) {
+					$data.=',';
+				}
+				$data .= "['".substr($row->timestamp,11,5)."',";
+				$data .= round($value,2).']';
 			}
-
-			if (strlen($data)>0) {
-				$data.=',';
-			}
-			$data .= "['".substr($row->timestamp,11,5)."',";
-			$data .= round($value,2).']';
-			$i++;
 		}
 		$json = "[".$data."]";
-		
 	} 
 		
 	if ($eid==EVENT_WATT) {

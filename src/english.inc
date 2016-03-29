@@ -296,6 +296,7 @@ $lang['solar_meter_vendor'] = 'Solar meter vendor';
 $lang['solar_meter_ip' ] = 'Solar meter TCP/IP address';
 $lang['solar_meter_port'] = 'Solar meter TCP port number';
 $lang['solar_meter_serial_number'] = 'Solar meter serial number';
+$lang['solar_initial_meter_reading'] = 'Solar initial meter reading (kWh)';
 
 $lang['gas_meter_present' ] = 'Gas meter present';
 $lang['gas_price' ] = 'Gas price per m&sup3;';

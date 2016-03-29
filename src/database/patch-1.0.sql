@@ -79,7 +79,6 @@ UPDATE config SET category=52 WHERE token="chart_legend";
 UPDATE config SET category=52 WHERE token="slide_show_on";
 UPDATE config SET category=52 WHERE token="slide_show_page_delay";
 
-
 INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (32, 'solar_meter_present', 'false', 'true,false', 0, 1);
 INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (32, 'solar_meter_vendor', 'unknown', 'unknown,omnik', 0, 0);
 INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (32, 'solar_meter_port', '', '', 0, 0);
@@ -110,14 +109,13 @@ CREATE TABLE IF NOT EXISTS `solar2` (
   `etoday` double NOT NULL,
   `etotal` double NOT NULL,
   `temp` double NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 ALTER TABLE `solar2`
  ADD PRIMARY KEY (`id`), ADD KEY `timestamp` (`timestamp`);
 
 ALTER TABLE `solar2`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
-
 
 CREATE TABLE IF NOT EXISTS `solar3` (
 `id` int(11) NOT NULL,
@@ -133,13 +131,18 @@ CREATE TABLE IF NOT EXISTS `solar3` (
   `etoday` double NOT NULL,
   `etotal` double NOT NULL,
   `temp` double NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 ALTER TABLE `solar3`
  ADD PRIMARY KEY (`id`), ADD KEY `timestamp` (`timestamp`);
 
 ALTER TABLE `solar3`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1;
+
+INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (31, 'solar_initial_meter_reading', '0', '', 0, 1);
+INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (32, 'solar_initial_meter_reading', '0', '', 0, 1);
+INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (33, 'solar_initial_meter_reading', '0', '', 0, 1);
+
 
 
 
