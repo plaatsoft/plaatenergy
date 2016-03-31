@@ -43,10 +43,10 @@ function plaatenergy_system_page() {
     
 	$solar_meter_present_1 = plaatenergy_db_get_config_item('solar_meter_present', SOLAR_METER_1);
 	$solar_meter_present_2 = plaatenergy_db_get_config_item('solar_meter_present', SOLAR_METER_2);
-	$solar_meter_present_3 = plaatenergy_db_get_config_item('solar_meter_present', SOLAR_METER_3);
-	
+	$solar_meter_present_3 = plaatenergy_db_get_config_item('solar_meter_present', SOLAR_METER_3);	
 	$energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present', ENERGY_METER_1);
 	$gas_meter_present = plaatenergy_db_get_config_item('gas_meter_present', GAS_METER_1);
+	$weather_station_present = plaatenergy_db_get_config_item('weather_station_present', WEATHER_METER_1);
 	
 	$sql1  = 'select pac from solar1 where timestamp="'.$timestamp.'"';
 	$result1 = plaatenergy_db_query($sql1);
@@ -96,15 +96,28 @@ function plaatenergy_system_page() {
 	$result5 = plaatenergy_db_query($sql5);
 	$data5 = plaatenergy_db_fetch_object($result5);
 	
+	$sql6  = 'select humidity, pressure, temperature from weather where timestamp="'.$timestamp.'"';
+	$result6 = plaatenergy_db_query($sql6);
+	$data6 = plaatenergy_db_fetch_object($result6);
+	
+	$humidity = 0;
+	$pressure = 0;
+	$temperature = 0;
+	if (isset($data6->temperature)) {
+		$humidity = $data6->humidity;
+		$pressure = $data6->pressure;
+		$temperature = $data6->temperature;
+	}
+	
+		
 	$page  = '<h1>'.t('SYSTEM_TITLE').'</h1>';
-
+	
 	$page .= '<table>';
-
 	$page .= '<tr>';
 	
 	if ($solar_meter_present_1=="true") {
 		$page .= '<td>';
-		$page .= '<img src="images/solarpanel-'.$theme.'.png" height="120" width="150">';
+		$page .= '<img src="images/solarpanel-'.$theme.'.png" height="80" width="120">';
 		$page .= '<br/>';
 		$page .= $pac1.' '.t('WATT');
 		$page .= '</td>';
@@ -112,7 +125,7 @@ function plaatenergy_system_page() {
 	
 	if ($solar_meter_present_2=="true") {
 		$page .= '<td>';
-		$page .= '<img src="images/solarpanel-'.$theme.'.png" height="120" width="150">';
+		$page .= '<img src="images/solarpanel-'.$theme.'.png" height="80" width="120">';
 		$page .= '<br/>';
 		$page .= $pac2.' '.t('WATT');
 		$page .= '</td>';
@@ -120,7 +133,7 @@ function plaatenergy_system_page() {
 	
 	if ($solar_meter_present_3=="true") {
 		$page .= '<td>';
-		$page .= '<img src="images/solarpanel-'.$theme.'.png" height="120" width="150">';
+		$page .= '<img src="images/solarpanel-'.$theme.'.png" height="80" width="120">';
 		$page .= '<br/>';
 		$page .= $pac3.' '.t('WATT');
 		$page .= '</td>';		
@@ -130,7 +143,6 @@ function plaatenergy_system_page() {
 	$page .= '</table>';
 	
 	$page .= '<br/>';	
-	$page .= '<br/>';	
 	
 	$page .= '<table>';	
 	$page .= '<tr>';	
@@ -138,7 +150,7 @@ function plaatenergy_system_page() {
 	if ($gas_meter_present =="true") {
 	
 		$page .= '<td>';
-		$page .= '<img src="images/gas-'.$theme.'.png" height="120" width="120">';
+		$page .= '<img src="images/gas-'.$theme.'.png" height="80" width="90">';
 		$page .= '<br/>';		
 		$page .= round($data5->gas_used,2).' '.t('M3');
 		$page .= '</td>';
@@ -147,21 +159,50 @@ function plaatenergy_system_page() {
 	if ($energy_meter_present =="true") {
 	
 		$page .= '<td>';
-		$page .= '<img src="images/lamp-'.$theme.'.png" height="120" width="120">';
+		$page .= '<img src="images/lamp-'.$theme.'.png" height="80" width="90">';
 		$page .= '<br/>';		
 		$page .= $used.' '.t('WATT');
 		$page .= '</td>';
 	}
 	
 	$page .= '<td>';
-	$page .= '<img src="images/powerline-'.$theme.'.png" height="120" width="120">';
+	$page .= '<img src="images/powerline-'.$theme.'.png" height="80" width="90">';
 	$page .= '<br/>';
 	$page .= $delivered.' '.t('WATT');
 	$page .= '</td>';
 
 	$page .= '</tr>';	
 	$page .= '</table>';
+	
+	if ($weather_station_present =="true") {
+	
+		$page .= '<br/>';
 		
+		$page .= '<table>';	
+		$page .= '<tr>';	
+
+		$page .= '<td>';
+		$page .= '<img src="images/temperature-'.$theme.'.png" height="80" width="90">';
+		$page .= '<br/>';		
+		$page .= round($temperature,2).' &deg;C';
+		$page .= '</td>';
+	
+		$page .= '<td>';
+		$page .= '<img src="images/humidity-'.$theme.'.png" height="80" width="90">';
+		$page .= '<br/>';		
+		$page .= round($humidity,2).' %';
+		$page .= '</td>';
+		
+		$page .= '<td>';
+		$page .= '<img src="images/pressure-'.$theme.'.png" height="80" width="90">';
+		$page .= '<br/>';
+		$page .= round($pressure,2).' hPa';
+		$page .= '</td>';
+	
+		$page .= '</tr>';	
+		$page .= '</table>';
+	}
+	
 	$page .= '<br/>';
 
 	$page .= '<div class="nav">';
