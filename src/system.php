@@ -50,7 +50,7 @@ function plaatenergy_system_page() {
 	$weather_station_present = plaatenergy_db_get_config_item('weather_station_present', WEATHER_METER_1);
 	
 	$sql1  = 'select pac from solar1 where ';
-	$sql1 .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp limit 0,1';
+	$sql1 .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp desc limit 0,1';
 	$result1 = plaatenergy_db_query($sql1);
 	$data1 = plaatenergy_db_fetch_object($result1);
 		
@@ -60,7 +60,7 @@ function plaatenergy_system_page() {
 	}
 		
 	$sql2  = 'select pac from solar2 where ';
-	$sql2 .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp limit 0,1';
+	$sql2 .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp desc limit 0,1';
 	$result2 = plaatenergy_db_query($sql2);
 	$data2 = plaatenergy_db_fetch_object($result2);
 	
@@ -70,7 +70,7 @@ function plaatenergy_system_page() {
 	}
 	
 	$sql3  = 'select pac from solar3 where ';
-	$sql3 .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp limit 0,1';
+	$sql3 .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp desc limit 0,1';
 	$result3 = plaatenergy_db_query($sql3);
 	$data3 = plaatenergy_db_fetch_object($result3);
 	
@@ -82,7 +82,7 @@ function plaatenergy_system_page() {
 	$pac = $pac1 + $pac2 + $pac3;
 			
 	$sql4  = 'select power, gas_used from energy1 where ';
-	$sql4 .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp limit 0,1';
+	$sql4 .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp desc limit 0,1';
 	$result4 = plaatenergy_db_query($sql4);
 	$data4 = plaatenergy_db_fetch_object($result4);
 	$power = 0;
@@ -102,7 +102,7 @@ function plaatenergy_system_page() {
 	$data5 = plaatenergy_db_fetch_object($result5);
 	
 	$sql6  = 'select humidity, pressure, temperature from weather where ';
-	$sql6 .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp limit 0,1';
+	$sql6 .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp desc limit 0,1';
 	$result6 = plaatenergy_db_query($sql6);
 	$data6 = plaatenergy_db_fetch_object($result6);
 	
