@@ -19,7 +19,7 @@
   <td id="projectlogo"><img alt="Logo" src="128.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">PlaatEnergy
-   &#160;<span id="projectnumber">v0.9</span>
+   &#160;<span id="projectnumber">v1.0</span>
    </div>
   </td>
  </tr>
@@ -81,11 +81,13 @@ Variables</h2></td></tr>
 <tr class="separator:a481c918f8d853749e00b5942cabf599a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae05862a0294251c88629b141b5ce329a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#ae05862a0294251c88629b141b5ce329a">$limit</a> = 0</td></tr>
 <tr class="separator:ae05862a0294251c88629b141b5ce329a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e05c34c5aba2b3a1fcaadefe6f172eb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a9e05c34c5aba2b3a1fcaadefe6f172eb">$cat</a> =0</td></tr>
+<tr class="separator:a9e05c34c5aba2b3a1fcaadefe6f172eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abefb3c26429d514777313e9a63d7cbac"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#abefb3c26429d514777313e9a63d7cbac">$session</a> = <a class="el" href="general_8inc.html#a3cf0f4e0e488c26a2bb73651bab4471d">plaatenergy_post</a>('session', '')</td></tr>
 <tr class="separator:abefb3c26429d514777313e9a63d7cbac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00ae4fcafb1145f5e968bdf920f83e2e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a00ae4fcafb1145f5e968bdf920f83e2e">$token</a> = <a class="el" href="general_8inc.html#a3cf0f4e0e488c26a2bb73651bab4471d">plaatenergy_post</a>(&quot;token&quot;, &quot;&quot;)</td></tr>
 <tr class="separator:a00ae4fcafb1145f5e968bdf920f83e2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4185ada2bf060eb3a94ba14bd649f6bf"><td class="memItemLeft" align="right" valign="top">if(strlen($token)&gt;0)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a4185ada2bf060eb3a94ba14bd649f6bf">$home_password</a> = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('home_password')</td></tr>
+<tr class="memitem:a4185ada2bf060eb3a94ba14bd649f6bf"><td class="memItemLeft" align="right" valign="top">if(strlen($token)&gt;0)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#a4185ada2bf060eb3a94ba14bd649f6bf">$home_password</a> = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('home_password',<a class="el" href="general_8inc.html#a7c174bc2d25fa13f8aa7a043a2111859">SECURITY</a>)</td></tr>
 <tr class="separator:a4185ada2bf060eb3a94ba14bd649f6bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adfe3f2ff62fe93eee830f9333cded9cc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="index_8php.html#adfe3f2ff62fe93eee830f9333cded9cc">$session_id</a> = <a class="el" href="database_8inc.html#a22dbedbf0150e0dda0f6389bb490a81e">plaatenergy_db_get_session</a>($ip)</td></tr>
 <tr class="separator:adfe3f2ff62fe93eee830f9333cded9cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -132,6 +134,18 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a class="anchor" id="a9e05c34c5aba2b3a1fcaadefe6f172eb"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$cat =0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a481c918f8d853749e00b5942cabf599a"></a>
 <div class="memitem">
 <div class="memproto">
@@ -161,7 +175,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">if (strlen($token)&gt;0) $home_password = <a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a>('home_password')</td>
+          <td class="memname">if (strlen($token)&gt;0) $home_password = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('home_password',<a class="el" href="general_8inc.html#a7c174bc2d25fa13f8aa7a043a2111859">SECURITY</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">

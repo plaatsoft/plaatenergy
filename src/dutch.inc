@@ -21,6 +21,7 @@
  * @brief contain dutch translation
  */
  
+ 
 /*
 ** ------------------
 ** GENERAL
@@ -99,6 +100,7 @@ $lang['LINK_EXPORT']     = i('download') . 'Export naar CSV';
 $lang['LINK_SCATTER']    = 'Scatter';
 $lang['LINK_LOGIN']      = 'Login';
 $lang['LINK_BACK']       = i('home') . 'Terug'; 
+$lang['LINK_SYSTEM'] 	 = i('fort-awesome') .'Systeem';
  
 /*
 ** ------------------
@@ -343,6 +345,14 @@ $lang['TAG_LOCAL_DELIVERED'] = 'geleverd_lokaal';
 $lang['TAG_TOTAL_DELIVERED'] = 'geleverd_totaal';
 
 $lang['TAG_GAS_USED'] = 'afgenomen_gas';
+
+/*
+** ------------------
+** SYSTEM
+** ------------------
+*/
+
+$lang['SYSTEM_TITLE'] = 'Systeem Overzicht';
 
 /*
 ** ------------------

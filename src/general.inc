@@ -21,6 +21,7 @@
  * @brief contain general logic
  */
  
+ 
 /*
 ** -----------
 ** CONSTANTS
@@ -50,6 +51,7 @@ define('PAGE_DONATE',               13);
 define('PAGE_RELEASE_NOTES',        14);
 define('PAGE_REPORT',               15);
 define('PAGE_REALTIME',             16);
+define('PAGE_SYSTEM',               17);
 
 define('PAGE_SETTING_LOGIN',        20);
 define('PAGE_SETTING_CATEGORY',     21);
@@ -78,7 +80,6 @@ define('PAGE_DAY_IN_GAS_EDIT',      65);
 define('PAGE_DAY_PRESSURE',         70);
 define('PAGE_DAY_TEMPERATURE',      71);
 define('PAGE_DAY_HUMIDITY',         72);
-;
 
 /*
 ** -----------

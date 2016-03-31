@@ -34,6 +34,7 @@ include "english.inc";
 ** -------------------- 
 */
 
+
 if ( @plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname) == false) {
 
 	echo general_header();
@@ -331,6 +332,12 @@ switch ($pid) {
 		break;
 		
 	// ---------------------------------
+	
+	case PAGE_SYSTEM:
+		include "system.php";
+		$page = plaatenergy_system();
+		break;
+		
 }
 
 

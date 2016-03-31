@@ -19,7 +19,7 @@
   <td id="projectlogo"><img alt="Logo" src="128.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">PlaatEnergy
-   &#160;<span id="projectnumber">v0.9</span>
+   &#160;<span id="projectnumber">v1.0</span>
    </div>
   </td>
  </tr>
@@ -94,12 +94,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a841e20c7dfb415ea6fa4ef53474d54a0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="database_8inc.html#a841e20c7dfb415ea6fa4ef53474d54a0">plaatenergy_db_check_version</a> ()</td></tr>
 <tr class="memdesc:a841e20c7dfb415ea6fa4ef53474d54a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check db version and upgrade if needed!  <a href="#a841e20c7dfb415ea6fa4ef53474d54a0">More...</a><br /></td></tr>
 <tr class="separator:a841e20c7dfb415ea6fa4ef53474d54a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e58557a74b7a7b32cb9e97ba7cadc18"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="database_8inc.html#a2e58557a74b7a7b32cb9e97ba7cadc18">plaatenergy_db_get_config_item</a> ($key)</td></tr>
-<tr class="memdesc:a2e58557a74b7a7b32cb9e97ba7cadc18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetch config item from database.  <a href="#a2e58557a74b7a7b32cb9e97ba7cadc18">More...</a><br /></td></tr>
-<tr class="separator:a2e58557a74b7a7b32cb9e97ba7cadc18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64bbd40293cb3eb89050a55c285cbe49"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="database_8inc.html#a64bbd40293cb3eb89050a55c285cbe49">plaatenergy_db_set_config_item</a> ($token, $value)</td></tr>
-<tr class="memdesc:a64bbd40293cb3eb89050a55c285cbe49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Store config item if database.  <a href="#a64bbd40293cb3eb89050a55c285cbe49">More...</a><br /></td></tr>
-<tr class="separator:a64bbd40293cb3eb89050a55c285cbe49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5592b9046f90c8f38100f90d9fc84e11"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a> ($key, $category=0)</td></tr>
+<tr class="memdesc:a5592b9046f90c8f38100f90d9fc84e11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetch config item from database.  <a href="#a5592b9046f90c8f38100f90d9fc84e11">More...</a><br /></td></tr>
+<tr class="separator:a5592b9046f90c8f38100f90d9fc84e11"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae2be8adbdb7bd8ae87c864a93aa425b3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="database_8inc.html#ae2be8adbdb7bd8ae87c864a93aa425b3">plaatenergy_db_process</a> ($type)</td></tr>
 <tr class="memdesc:ae2be8adbdb7bd8ae87c864a93aa425b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Process raw data in database.  <a href="#ae2be8adbdb7bd8ae87c864a93aa425b3">More...</a><br /></td></tr>
 <tr class="separator:ae2be8adbdb7bd8ae87c864a93aa425b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -297,7 +294,7 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a2e58557a74b7a7b32cb9e97ba7cadc18"></a>
+<a class="anchor" id="a5592b9046f90c8f38100f90d9fc84e11"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -305,8 +302,18 @@ Variables</h2></td></tr>
           <td class="memname">plaatenergy_db_get_config_item </td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>$key</em></td><td>)</td>
+          <td class="paramname"><em>$key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$category</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -431,41 +438,6 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Database result </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a64bbd40293cb3eb89050a55c285cbe49"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">plaatenergy_db_set_config_item </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>$token</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>$value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Store config item if database. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">$token</td><td>Key of setting item </td></tr>
-    <tr><td class="paramname">$value</td><td>Value of key </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>

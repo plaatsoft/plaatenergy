@@ -21,6 +21,7 @@
  * @brief contain english translation
  */
  
+ 
 /*
 ** ------------------
 ** GENERAL
@@ -99,6 +100,7 @@ $lang['LINK_EXPORT']     = i('download') . 'Export to CSV';
 $lang['LINK_SCATTER']    = 'Scatter';
 $lang['LINK_LOGIN']      = 'Login';
 $lang['LINK_BACK']       = i('home') . 'Back'; 
+$lang['LINK_SYSTEM'] 	 = i('fort-awesome') .'System';
  
 /*
 ** ------------------
@@ -340,6 +342,14 @@ $lang['TAG_LOW_DELIVERED'] = 'low_delivered';
 $lang['TAG_NORMAL_DELIVERED'] = 'normal_delivered';
 $lang['TAG_LOCAL_DELIVERED'] = 'local_delivered';
 $lang['TAG_TOTAL_DELIVERED'] = 'total_delivered';
+
+/*
+** ------------------
+** SYSTEM
+** ------------------
+*/
+
+$lang['SYSTEM_TITLE'] = 'System Overview';
 
 
 /*

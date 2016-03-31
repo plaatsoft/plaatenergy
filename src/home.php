@@ -21,6 +21,7 @@
  * @brief contain home page
  */
  
+ 
 /*
 ** ---------------------
 ** PARAMETERS
@@ -351,6 +352,24 @@ function plaatenergy_home_page() {
 		if ($weather_station_present=="true") { 
 			$page .= '<td>';
 			$page .= plaatenergy_link('pid='.PAGE_REPORT, t('LINK_REPORT'));
+			$page .= '</td>';
+		}
+		
+		$page .= '</tr>';
+		
+		$page .= '<tr>';
+		$page .= '<td>';
+		$page .= '</td>';
+		$page .= '<td>';
+		$page .= '</td>';
+		$page .= '<td>';
+		$page .= plaatenergy_link('pid='.PAGE_SYSTEM, t('LINK_SYSTEM'));
+		$page .= '</td>';
+		$page .= '<td>';
+		$page .= '</td>';
+		
+		if ($weather_station_present=="true") { 
+			$page .= '<td>';
 			$page .= '</td>';
 		}
 		

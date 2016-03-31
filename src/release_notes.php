@@ -16,6 +16,7 @@
 **  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
+
 /**
  * @file
  * @brief contain release notes
@@ -27,9 +28,10 @@
 ** ---------------------
 */
 
-$note[10] = '<div class="subparagraph">Version 1.0 (29-03-2016)</div>
+$note[10] = '<div class="subparagraph">Version 1.0 (31-03-2016)</div>
 <div class="large_text">
 <ul>
+<li>General: Add system overview page.</li>
 <li>General: Add support for maximum 3 solar converter meters.</li>
 <li>General: Improve settings page - added setting categories.</li>
 <li>General: Add support for Hosola Bright Solar converter meter.</li>
