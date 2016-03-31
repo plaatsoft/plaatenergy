@@ -40,12 +40,13 @@ function plaatenergy_system_page() {
 	$theme = $row->theme;
     
 	$timestamp = date("Y-m-d H:i:00");
-
+    
 	$solar_meter_present_1 = plaatenergy_db_get_config_item('solar_meter_present', SOLAR_METER_1);
 	$solar_meter_present_2 = plaatenergy_db_get_config_item('solar_meter_present', SOLAR_METER_2);
 	$solar_meter_present_3 = plaatenergy_db_get_config_item('solar_meter_present', SOLAR_METER_3);
 	
 	$energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present', ENERGY_METER_1);
+	$gas_meter_present = plaatenergy_db_get_config_item('gas_meter_present', GAS_METER_1);
 	
 	$sql1  = 'select pac from solar1 where timestamp="'.$timestamp.'"';
 	$result1 = plaatenergy_db_query($sql1);
@@ -75,9 +76,8 @@ function plaatenergy_system_page() {
 	}
 	
 	$pac = $pac1 + $pac2 + $pac3;
-	
-	
-	$sql4  = 'select power from energy1 where timestamp="'.$timestamp.'"';
+			
+	$sql4  = 'select power, gas_used from energy1 where timestamp="'.$timestamp.'"';
 	$result4 = plaatenergy_db_query($sql4);
 	$data4 = plaatenergy_db_fetch_object($result4);
 	$power = 0;
@@ -92,6 +92,10 @@ function plaatenergy_system_page() {
 		
 	$delivered = $pac - $used;
 	
+	$sql5  = 'select gas_used from energy_summary where date="'.date("Y-m-d").'"';
+	$result5 = plaatenergy_db_query($sql5);
+	$data5 = plaatenergy_db_fetch_object($result5);
+	
 	$page  = '<h1>'.t('SYSTEM_TITLE').'</h1>';
 
 	$page .= '<table>';
@@ -102,7 +106,7 @@ function plaatenergy_system_page() {
 		$page .= '<td>';
 		$page .= '<img src="images/solarpanel-'.$theme.'.png" height="120" width="150">';
 		$page .= '<br/>';
-		$page .= $pac1.' Watt';
+		$page .= $pac1.' '.t('WATT');
 		$page .= '</td>';
 	}
 	
@@ -110,7 +114,7 @@ function plaatenergy_system_page() {
 		$page .= '<td>';
 		$page .= '<img src="images/solarpanel-'.$theme.'.png" height="120" width="150">';
 		$page .= '<br/>';
-		$page .= $pac2.' Watt';
+		$page .= $pac2.' '.t('WATT');
 		$page .= '</td>';
 	}
 	
@@ -118,7 +122,7 @@ function plaatenergy_system_page() {
 		$page .= '<td>';
 		$page .= '<img src="images/solarpanel-'.$theme.'.png" height="120" width="150">';
 		$page .= '<br/>';
-		$page .= $pac3.' Watt';
+		$page .= $pac3.' '.t('WATT');
 		$page .= '</td>';		
 	}
 	
@@ -130,20 +134,29 @@ function plaatenergy_system_page() {
 	
 	$page .= '<table>';	
 	$page .= '<tr>';	
-		
+	
+	if ($gas_meter_present =="true") {
+	
+		$page .= '<td>';
+		$page .= '<img src="images/gas-'.$theme.'.png" height="120" width="120">';
+		$page .= '<br/>';		
+		$page .= round($data5->gas_used,2).' '.t('M3');
+		$page .= '</td>';
+	}
+	
 	if ($energy_meter_present =="true") {
 	
 		$page .= '<td>';
 		$page .= '<img src="images/lamp-'.$theme.'.png" height="120" width="120">';
 		$page .= '<br/>';		
-		$page .= $used.' Watt';
+		$page .= $used.' '.t('WATT');
 		$page .= '</td>';
 	}
 	
 	$page .= '<td>';
 	$page .= '<img src="images/powerline-'.$theme.'.png" height="120" width="120">';
 	$page .= '<br/>';
-	$page .= $delivered.' Watt';
+	$page .= $delivered.' '.t('WATT');
 	$page .= '</td>';
 
 	$page .= '</tr>';	
