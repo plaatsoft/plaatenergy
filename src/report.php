@@ -190,7 +190,6 @@ function plaatenergy_report_page() {
 	$page .=  plaatenergy_report_event();
 	 	
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_EXPORT, t('LINK_EXPORT'));
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
 	$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_EXECUTE, t('LINK_EXECUTE'));
 	$page .=  '</div>';

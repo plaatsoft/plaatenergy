@@ -110,7 +110,7 @@ $lang['LINK_HUMIDITY']      = i('bar-chart').'Air Humidity';
 $lang['LINK_RELEASE_NOTES'] = i('align-left') . 'Release Notes';
 $lang['LINK_ABOUT']         = i('users') . 'About';
 $lang['LINK_DONATE']        = i('money') . 'Donate';
-$lang['LINK_REPORT']        = i('rocket') . 'Query';
+$lang['LINK_REPORT']        = i('rocket') . 'Custom Query';
 $lang['LINK_GUI']           = i('table') . 'Realtime Dashboard';
 $lang['LINK_SYSTEM'] 	    = i('fort-awesome') .'System Overview';
 $lang['LINK_IMPORT_EXPORT'] = i('download') .'Import / Export Data'; 
@@ -231,7 +231,7 @@ $lang['LABEL_ETOTAL'] = 'Etotal meter reading value (kWh)';
 
 $lang['LABEL_GAS'] = 'Gas meter value reading (m&sup3)';
 
-$lang['TITLE_QUERY_REPORT'] = 'Query Energy Database';
+$lang['TITLE_QUERY_REPORT'] = 'Custom Query';
 $lang['LABEL_START_DATE'] = 'Start date';
 $lang['LABEL_END_DATE'] = 'End date';
 
@@ -351,6 +351,14 @@ $lang['TAG_TOTAL_DELIVERED'] = 'total_delivered';
 */
 
 $lang['SYSTEM_TITLE'] = 'System Overview';
+
+/*
+** ------------------
+** EXPORT / IMPORT
+** ------------------
+*/
+
+$lang['TITLE_EXPORT_IMPORT'] ='Export / Import';
 
 
 /*

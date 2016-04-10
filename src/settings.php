@@ -78,30 +78,6 @@ function plaatenergy_setting_save_event() {
 	}
 }
 
-
-function plaatenergy_setting_backup_event() {
-
-	/* input */
-	global $dbuser;
-	global $dbpass;
-	global $dbhost;
-	global $dbname;
-		
-	/* Create new database backup file */
-	$filename = 'backup/plaatenergy-'.date("Ymd").'.sql';
-
-    /* Remove old file if it exists */
-    @unlink($filename.'.gz');
-
-        /* Make mysql backup */	
-	$command = 'mysqldump --user='.$dbuser.' --password='.$dbpass.' --host='.$dbhost.' '.$dbname.' > '.$filename;
-	system($command);
-	
-    /* Zip database dump file */	
-	$command = 'gzip '.$filename;
-	system($command);
-}
-
 /*
 ** ---------------------
 ** PAGE
@@ -263,7 +239,7 @@ function plaatenergy_setting_category_page() {
 	$page .= '<br/>';
 	 
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_BACKUP, t('LINK_BACKUP'));
+
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));	
 	$page .= '</div>';
 	
@@ -303,10 +279,6 @@ function plaatenergy_settings() {
 			plaatenergy_setting_save_event();
 			break;
 		  
-		case EVENT_BACKUP:
-			plaatenergy_setting_backup_event();
-			break;
-						
 		case EVENT_LOGIN:
 			plaatenergy_setting_login_event();
 			break;		

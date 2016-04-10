@@ -230,6 +230,16 @@ switch ($pid) {
 		$page = plaatenergy_settings();
 		break;
 		
+	case PAGE_SYSTEM:
+		include "system.php";
+		$page = plaatenergy_system();
+		break;
+		
+	case PAGE_EXPORT_IMPORT:
+		include "export.php";
+		$page = plaatenergy_export();
+		break;
+		
 	// ---------------------------------
 	
 	case PAGE_DAY_IN_ENERGY: 
@@ -332,12 +342,7 @@ switch ($pid) {
 		break;
 		
 	// ---------------------------------
-	
-	case PAGE_SYSTEM:
-		include "system.php";
-		$page = plaatenergy_system();
-		break;
-		
+
 }
 
 

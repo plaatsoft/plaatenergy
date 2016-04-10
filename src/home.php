@@ -338,7 +338,7 @@ function plaatenergy_home_page() {
 
 		$page .= '<tr>';
 		$page .= '<td>';
-		$page .= plaatenergy_link('pid='.PAGE_CSV, t('LINK_IMPORT_EXPORT'));
+		$page .= plaatenergy_link('pid='.PAGE_EXPORT_IMPORT, t('LINK_IMPORT_EXPORT'));
 		$page .= '</td>';
 		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_DONATE, t('LINK_DONATE'));

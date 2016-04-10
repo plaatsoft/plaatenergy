@@ -356,6 +356,14 @@ $lang['SYSTEM_TITLE'] = 'Systeem Overzicht';
 
 /*
 ** ------------------
+** EXPORT / IMPORT
+** ------------------
+*/
+
+$lang['TITLE_EXPORT_IMPORT'] ='Export / Import';
+
+/*
+** ------------------
 ** THE END
 ** ------------------
 */

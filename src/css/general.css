@@ -158,6 +158,17 @@ ul {
    margin: auto;
 }
 
+fieldset { 
+   display: block;
+   margin-left: 35%;
+   margin-right: 35%;
+   padding-top: 0.75em;
+   padding-bottom: 0.75em;
+   padding-left: 0.75em;
+   padding-right: 0.75em;
+}
+
+
 h1{margin:15px} 
 
 /* ================ Add to h1 two suns ================ */
@@ -167,7 +178,7 @@ h1::after {
 	content: "";
 	width: 24px;
 	height: 24px;
-	background-image: url(./images/24.png);
+	background-image: url(../images/24.png);
 	transform: translateY(2px);
 }
 h1::before {

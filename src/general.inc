@@ -52,7 +52,7 @@ define('PAGE_RELEASE_NOTES',        14);
 define('PAGE_REPORT',               15);
 define('PAGE_REALTIME',             16);
 define('PAGE_SYSTEM',               17);
-define('PAGE_CSV',                  18);
+define('PAGE_EXPORT_IMPORT',        18);
 
 define('PAGE_SETTING_LOGIN',        20);
 define('PAGE_SETTING_CATEGORY',     21);
