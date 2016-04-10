@@ -216,7 +216,7 @@ function plaatenergy_system_page() {
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'), 'home');
 	$page .=  '</div>';
 	
-	$page .= '<script>setTimeout(link,5000,\'pid='.$pid.'\');</script>';
+	$page .= '<script>setTimeout(link,10000,\'pid='.$pid.'\');</script>';
 	
 	
 	return $page;

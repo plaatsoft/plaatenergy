@@ -74,34 +74,47 @@ $lang['DAY_6']           = 'Za';
 ** ------------------
 */
 
-$lang['LINK_HOME']       = i('home') . 'Hoofdmenu'; 
-$lang['LINK_PREV']       = i('chevron-left') . 'Vorige'; 
-$lang['LINK_NEXT']       = 'Volgende' . i('chevron-right');
-$lang['LINK_PREV_YEAR']  = i('chevron-left') . 'Vorig Jaar'; 
-$lang['LINK_PREV_MONTH'] = i('chevron-left') . 'Vorige Maand'; 
-$lang['LINK_PREV_DAY']   = i('chevron-left') . 'Vorige Dag'; 
-$lang['LINK_NEXT_YEAR']  = 'Volgend Jaar' . i('chevron-right'); 
-$lang['LINK_NEXT_MONTH'] = 'Volgende Maand' . i('chevron-right'); 
-$lang['LINK_NEXT_DAY']   = 'Volgende Dag' . i('chevron-right'); 
-$lang['LINK_EDIT']       = i('edit') . 'Aanpassen'; 
-$lang['LINK_M3']         = i('tint') . 'm&sup3;'; 
-$lang['LINK_WATT']       = i('bolt') . 'Watt'; 
-$lang['LINK_KWH']        = i('bolt') . 'kWh'; 
-$lang['LINK_EURO']       = i('eur') . 'Euro';
-$lang['LINK_INSERT']     = i('plus') . 'Toevoegen'; 
-$lang['LINK_UPDATE']     = i('edit') . 'Bijwerken'; 
-$lang['LINK_EXECUTE']    = i('play') . 'Uitvoeren'; 
-$lang['LINK_SAVE']       = i('edit') . 'Opslaan'; 
-$lang['LINK_CANCEL']     = i('times') . 'Annuleren'; 
-$lang['LINK_SETTINGS']   = i('cog') . 'Configuratie'; 
-$lang['LINK_MAX']        = i('bolt') . 'Piek';
-$lang['LINK_BACKUP']     = i('archive') . 'Backup';
-$lang['LINK_EXPORT']     = i('download') . 'Export naar CSV';
-$lang['LINK_SCATTER']    = 'Scatter';
-$lang['LINK_LOGIN']      = 'Login';
-$lang['LINK_BACK']       = i('home') . 'Terug'; 
-$lang['LINK_SYSTEM'] 	 = i('fort-awesome') .'Systeem';
- 
+$lang['LINK_HOME']           = i('home') . 'Hoofdmenu'; 
+$lang['LINK_PREV']           = i('chevron-left') . 'Vorige'; 
+$lang['LINK_NEXT']           = 'Volgende' . i('chevron-right');
+$lang['LINK_PREV_YEAR']      = i('chevron-left') . 'Vorig Jaar'; 
+$lang['LINK_PREV_MONTH']     = i('chevron-left') . 'Vorige Maand'; 
+$lang['LINK_PREV_DAY']       = i('chevron-left') . 'Vorige Dag'; 
+$lang['LINK_NEXT_YEAR']      = 'Volgend Jaar' . i('chevron-right'); 
+$lang['LINK_NEXT_MONTH']     = 'Volgende Maand' . i('chevron-right'); 
+$lang['LINK_NEXT_DAY']       = 'Volgende Dag' . i('chevron-right'); 
+$lang['LINK_EDIT']           = i('edit') . 'Aanpassen'; 
+$lang['LINK_M3']             = i('tint') . 'm&sup3;'; 
+$lang['LINK_WATT']           = i('bolt') . 'Watt'; 
+$lang['LINK_KWH']            = i('bolt') . 'kWh'; 
+$lang['LINK_EURO']           = i('eur') . 'Euro';
+$lang['LINK_INSERT']         = i('plus') . 'Toevoegen'; 
+$lang['LINK_UPDATE']         = i('edit') . 'Bijwerken'; 
+$lang['LINK_EXECUTE']        = i('play') . 'Uitvoeren'; 
+$lang['LINK_SAVE']           = i('edit') . 'Opslaan'; 
+$lang['LINK_CANCEL']         = i('times') . 'Annuleren'; 
+$lang['LINK_SETTINGS']       = i('cog') . 'Configuratie'; 
+$lang['LINK_MAX']            = i('bolt') . 'Piek';
+$lang['LINK_BACKUP']         = i('archive') . 'Backup';
+$lang['LINK_EXPORT']         = i('download') . 'Export naar CSV';
+$lang['LINK_SCATTER']        = 'Scatter';
+$lang['LINK_LOGIN']          = 'Login';
+$lang['LINK_BACK']           = i('home') . 'Terug'; 
+$lang['LINK_IN_ENERGY']      = i('bar-chart').'Afgenomen Elektriciteit';
+$lang['LINK_OUT_ENERGY']     = i('bar-chart').'Geleverde Elektriciteit';
+$lang['LINK_OUT_ENERGY_MAX'] = i('bar-chart').'Geleverde Piek Vermogen';
+$lang['LINK_IN_GAS']         = i('bar-chart').'Afgenomen Gas';
+$lang['LINK_PRESSURE']       = i('bar-chart').'Luchtdruk';
+$lang['LINK_TEMPERATURE']    = i('bar-chart').'Lucht Temperatuur';
+$lang['LINK_HUMIDITY']       = i('bar-chart').'Lucht Vochtigheid';
+$lang['LINK_SYSTEM'] 	     = i('fort-awesome') .'Systeem Overzicht';
+$lang['LINK_RELEASE_NOTES']  = i('align-left') . 'Release Notes';
+$lang['LINK_ABOUT']          = i('users') . 'Over';
+$lang['LINK_DONATE']         = i('money') . 'Donatie';
+$lang['LINK_REPORT']         = i('archive') . 'Rapportage';
+$lang['LINK_GUI']            = i('table') . 'Realtime Dashboard';
+$lang['LINK_IMPORT_EXPORT']  = i('download') .'Import & Export Data'; 
+
 /*
 ** ------------------
 ** HOME
@@ -123,20 +136,7 @@ $lang['DAY_REPORT'] = 'Dag Rapportages';
 $lang['WEATHER_REPORT'] = 'Weer Rapportages';
 $lang['OTHER_REPORT'] = 'Overige';
 
-$lang['LINK_IN_ENERGY'] =  i('bar-chart').'Afgenomen Elektriciteit';
-$lang['LINK_OUT_ENERGY'] =  i('bar-chart').'Geleverde Elektriciteit';
-$lang['LINK_OUT_ENERGY_MAX'] =  i('bar-chart').'Geleverde Piek Vermogen';
-$lang['LINK_IN_GAS'] =  i('bar-chart').'Afgenomen Gas';
 
-$lang['LINK_PRESSURE'] =  i('bar-chart').'Luchtdruk';
-$lang['LINK_TEMPERATURE'] =  i('bar-chart').'Lucht Temperatuur';
-$lang['LINK_HUMIDITY'] =  i('bar-chart').'Lucht Vochtigheid';
-
-$lang['LINK_RELEASE_NOTES'] = i('align-left') . 'Release Notes';
-$lang['LINK_ABOUT'] = i('users') . 'Over';
-$lang['LINK_DONATE'] = i('money') . 'Donatie';
-$lang['LINK_REPORT'] = i('archive') . 'Rapportage';
-$lang['LINK_GUI'] = i('table') . 'Realtime Dashboard';
 
 $lang['ENERGY_METER_CONNECTION_DOWN'] = i('times') . 'Geen energie meting recentelijk ontvangen';
 $lang['ENERGY_METER_CONNECTION_UP'] = i('check') . 'Energie meter verbinding goed';

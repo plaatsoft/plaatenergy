@@ -256,7 +256,8 @@ function plaatenergy_day_out_energy_page() {
 		
 	if ($eid==EVENT_WATT) {
 	
-		$page = '<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+		$page = '
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 		<script type="text/javascript">
       google.load("visualization", "1", {packages:["line"]});
       google.setOnLoadCallback(drawChart);
@@ -266,7 +267,6 @@ function plaatenergy_day_out_energy_page() {
          var data = new google.visualization.DataTable();
          data.addColumn("string", "Time");
          data.addColumn("number", "Watt");
-
          data.addRows('.$json.');
 
          var options = {

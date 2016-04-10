@@ -194,7 +194,7 @@ function plaatenergy_day_in_energy_page() {
 		$page .= '
 		   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 			<script type="text/javascript">
-			google.load("visualization", "1.1", {packages:["line"]});
+			google.load("visualization", "1", {packages:["line"]});
 			google.setOnLoadCallback(drawChart);
 
 			function drawChart() {
@@ -206,8 +206,6 @@ function plaatenergy_day_in_energy_page() {
 
 				var options = {
 					legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
-					pointSize: 2,
-					pointShape: "circle",
 					vAxis: {format: "decimal", title: ""},
 					hAxis: {title: ""},
 				};

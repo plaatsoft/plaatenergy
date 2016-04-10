@@ -100,7 +100,20 @@ $lang['LINK_EXPORT']     = i('download') . 'Export to CSV';
 $lang['LINK_SCATTER']    = 'Scatter';
 $lang['LINK_LOGIN']      = 'Login';
 $lang['LINK_BACK']       = i('home') . 'Back'; 
-$lang['LINK_SYSTEM'] 	 = i('fort-awesome') .'System';
+
+$lang['LINK_IN_ENERGY']     = i('bar-chart').'Used Electricity';
+$lang['LINK_OUT_ENERGY']    = i('bar-chart').'Delivered Electricity';
+$lang['LINK_IN_GAS']        = i('bar-chart').'Used Gas';
+$lang['LINK_PRESSURE']      = i('bar-chart').'Air Pressure';
+$lang['LINK_TEMPERATURE']   = i('bar-chart').'Air Temperature';
+$lang['LINK_HUMIDITY']      = i('bar-chart').'Air Humidity';
+$lang['LINK_RELEASE_NOTES'] = i('align-left') . 'Release Notes';
+$lang['LINK_ABOUT']         = i('users') . 'About';
+$lang['LINK_DONATE']        = i('money') . 'Donate';
+$lang['LINK_REPORT']        = i('rocket') . 'Query';
+$lang['LINK_GUI']           = i('table') . 'Realtime Dashboard';
+$lang['LINK_SYSTEM'] 	    = i('fort-awesome') .'System Overview';
+$lang['LINK_IMPORT_EXPORT'] = i('download') .'Import / Export Data'; 
  
 /*
 ** ------------------
@@ -123,19 +136,7 @@ $lang['DAY_REPORT'] = 'Day Reports';
 $lang['WEATHER_REPORT'] = 'Weather Reports';
 $lang['OTHER_REPORT'] = 'Other';
 
-$lang['LINK_IN_ENERGY'] =  i('bar-chart').'Used Electricity';
-$lang['LINK_OUT_ENERGY'] =  i('bar-chart').'Delivered Electricity';
-$lang['LINK_IN_GAS'] =  i('bar-chart').'Used Gas';
 
-$lang['LINK_PRESSURE'] =  i('bar-chart').'Air Pressure';
-$lang['LINK_TEMPERATURE'] =  i('bar-chart').'Air Temperature';
-$lang['LINK_HUMIDITY'] =  i('bar-chart').'Air Humidity';
-
-$lang['LINK_RELEASE_NOTES'] = i('align-left') . 'Release Notes';
-$lang['LINK_ABOUT'] = i('users') . 'About';
-$lang['LINK_DONATE'] = i('money') . 'Donate';
-$lang['LINK_REPORT'] = i('rocket') . 'Query';
-$lang['LINK_GUI'] = i('table') . 'Realtime Dashboard';
 
 $lang['ENERGY_METER_CONNECTION_DOWN'] = i('times') . 'No energy data recent received';
 $lang['ENERGY_METER_CONNECTION_UP'] = i('check') . 'Energy meter connection is up';

@@ -28,9 +28,10 @@
 ** ---------------------
 */
 
-$note[10] = '<div class="subparagraph">Version 1.0 (31-03-2016)</div>
+$note[10] = '<div class="subparagraph">Version 1.0 (10-04-2016)</div>
 <div class="large_text">
 <ul>
+<li>General: Add import / export data page.</li>
 <li>General: Add system overview page.</li>
 <li>General: Add support for maximum 3 solar converter meters.</li>
 <li>General: Improve settings page - added setting categories.</li>

@@ -305,74 +305,65 @@ function plaatenergy_home_page() {
 			}
 			$page .= '</tr>';
 		}
+		
+		$page .= '</table>';
 
+		$page .= '<table>';
+		$page .= '<tr>';
+		$page .= '<th width="25%"></th>';
+		$page .= '<th width="25%"></th>';
+		$page .= '<th width="25%"></th>';
+		$page .= '<th width="25%"></th>';
+		$page .= '</tr>';
+		
 		$page .= '<tr>';
 		$page .= '<td>';
 		$page .= '&nbsp;';
-		$page .= '</td>';
-		$page .= '</tr>';
-
-		$page .= '<tr>';
+		$page .= '</td>';				
 		$page .= '<td>';
-		$page .= '</td>';
+		$page .= plaatenergy_link('pid='.PAGE_REPORT, t('LINK_REPORT'));
+		$page .= '</td>';		
 		$page .= '<td>';
-		if ($weather_station_present=="false") { 
-		   $page .= plaatenergy_link('pid='.PAGE_REPORT, t('LINK_REPORT'));
-		}
-		$page .= '</td>';
-		$page .= '</td>';
-		$page .= '<td>';
-		
 		$settings_password = plaatenergy_db_get_config_item('settings_password',SECURITY);		
 		if (strlen($settings_password)>0) {
 			$page .= plaatenergy_link('pid='.PAGE_SETTING_LOGIN, t('LINK_SETTINGS')); 
 		} else {
 			$page .= plaatenergy_link('pid='.PAGE_SETTING_CATEGORY, t('LINK_SETTINGS')); 
 		}
-		
-		$page .= '</td>';
+		$page .= '</td>';		
 		$page .= '<td>';
-		$page .= '</td>';
+		$page .= '&nbsp;';
+		$page .= '</td>';		
 		$page .= '</tr>';
 
 		$page .= '<tr>';
 		$page .= '<td>';
-		$page .= plaatenergy_link('pid='.PAGE_ABOUT, t('LINK_ABOUT'));
+		$page .= plaatenergy_link('pid='.PAGE_CSV, t('LINK_IMPORT_EXPORT'));
 		$page .= '</td>';
 		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_DONATE, t('LINK_DONATE'));
 		$page .= '</td>';
 		$page .= '<td>';
-		$page .= plaatenergy_link('pid='.PAGE_REALTIME, t('LINK_GUI'));
+		$page .= plaatenergy_link('pid='.PAGE_ABOUT, t('LINK_ABOUT'));				
 		$page .= '</td>';
 		$page .= '<td>';
-		$page .= plaatenergy_link('pid='.PAGE_RELEASE_NOTES, t('LINK_RELEASE_NOTES'));
+		$page .= plaatenergy_link('pid='.PAGE_RELEASE_NOTES, t('LINK_RELEASE_NOTES'));		
 		$page .= '</td>';
-		
-		if ($weather_station_present=="true") { 
-			$page .= '<td>';
-			$page .= plaatenergy_link('pid='.PAGE_REPORT, t('LINK_REPORT'));
-			$page .= '</td>';
-		}
-		
 		$page .= '</tr>';
 		
 		$page .= '<tr>';
 		$page .= '<td>';
+		$page .= '&nbsp;';
 		$page .= '</td>';
 		$page .= '<td>';
+		$page .= plaatenergy_link('pid='.PAGE_REALTIME, t('LINK_GUI'));
 		$page .= '</td>';
 		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_SYSTEM, t('LINK_SYSTEM'));
 		$page .= '</td>';
 		$page .= '<td>';
+		$page .= '&nbsp;';
 		$page .= '</td>';
-		
-		if ($weather_station_present=="true") { 
-			$page .= '<td>';
-			$page .= '</td>';
-		}
-		
 		$page .= '</tr>';
 
 		$page .= '</table>';

@@ -130,7 +130,7 @@ $total_energy_co2 = round(($total_energy_used - $total_energy_delivered), 2);
 $total_gas_co2 = round(($data5->gas_used * 1.78), 2);
 
 // Amount of tree needed to offset gas + energy co2 emission
-$total_tree_offset = ($total_energy_co2 + $total_gas_co2) / 200;
+$total_tree_offset = round((($total_energy_co2 + $total_gas_co2) / 200),2);
 
 /*
 ** ---------------------
