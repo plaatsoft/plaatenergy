@@ -239,10 +239,6 @@
 				{
 					$this->databuffer	=	'';									// init databuffer;
 					$this->databuffer	=	@fread($this->socket, 128);				// (binary) read data buffer (expected 99 bytes), do not use fgets()
-					
-					
-				    $this->databuffer = base64_decode("aHNBsBV3jCQVd4wkgQETSDcwMTVEWFhYWAAAAAAAAACxC70KgQAAAAMABAAAAAkAAAAACRQAAAAAE4oAowAAAAAAAAAAAAMAAABLAAAAFwABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVjEuMTBWMS4xMJE==");
-
 
 					if ($this->databuffer!==false)
 					{
