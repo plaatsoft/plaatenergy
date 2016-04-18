@@ -30,7 +30,7 @@
 		public 	$serialnumber		=	0;		// inverter serialnumber of wifi card
 		public	$PV;							// PV structure create from databuffer
 		public	$socket				=	'';		// socket handler
-
+		
 		function hex2str($hex)							// convert readable hexstring to chracter string i.e. "41424344" => "ABCD"
 		{
 			$string='';									// init
@@ -118,47 +118,13 @@
 			
 			return true;		
 		}
-		
-		public function displaybuffer()								// for debugging : create html formatted table that display the databuffer in str and hex format by offset, 
-		{
-			$this->clearError(__METHOD__);
-			
-			$html	=	"<style>td {border:1px black solid;width:30px;padding:5px;text-align:left}</style><table style='border:1px black solid;border-collapse:collapse'>";
-			$html	.=	"<tr><td colspan=33 style='text-align:center;font-size:16pt'>Databuffer returned from Inverter at ".$this->PV['Datum']."</td></tr>";
-			$html	.=	"<tr><td colspan=33 style='text-align:center;font-size:12pt'><pre>".$this->databuffer."</pre></td></tr>";
-			$html	.=	"<tr><td colspan=33 style='text-align:center;font-size:12pt'><pre>".$this->str2hex($this->databuffer)."</pre></td></tr>";
-			$html	.=	"<tr><td>&nbsp;</td>";
-			$c	= 	$this->bytesreceived/16;						// calculate 16 bytes parts
-			$c	=	ceil($c);									// ceil it
-			
-			for ($i=0;$i<16;$i++)
-			{
-				$html	.=	"<td>$i</td><td>&nbsp;</td>";			// create header block
-			}
-			
-			$html	.=	"</tr>";
-			for ($i=0;$i<$c;$i++)									// for each byte in databuffer calculate offset and convert to str and hex
-			{
-				$z=$i*16;
-				$html	.=	"<tr><td>$z</td>";					// create row
-				$j=0;
-				for ($j=0;$j<16;$j++)								// create cells
-				{
-					$k=$i*16+$j;
-					$html	.=	"<td>".$this->str2hex(substr($this->databuffer,$k,1))."</td><td>".substr($this->databuffer,$k,1)."</td>";
-				}
-				$html	.=	"</tr>";
-			}
-			$html	.=	"</table>";
-			return $html;										// return result		
-		}
-		
+				
 		private function data()
 		{
 			$this->clearError(__METHOD__);
 			
 			$this->PV['Datum'] = date('Y-m-d H:i:s');					// set timestamp, Year, Month, Day, Hour
-			$this->PV['Inverter'] = substr($this->databuffer,15,16);		// get inverterID
+			$this->PV['Inverter'] = substr($this->databuffer,15,10);		// get inverterID
 			
 			if ($this->inverterID!='' and $this->PV['Inverter']!=$this->inverterID)
 			{
@@ -168,34 +134,64 @@
 				return false;
 			}
 			
+      /*["field" => "header", "offset" => 0, "length" => 4, "devider" => 1],
+      ["field" => "generated_id_1", "offset" => 4, "length" => 4, "devider" => 1],
+      ["field" => "generated_id_2", "offset" => 8, "length" => 4, "devider" => 1],
+      ["field" => "unk_1", "offset" => 12, "length" => 4, "devider" => 1],
+      ["field" => "inverter_id", "offset" => 15, "length" => 16, "devider" => 1],
+      ["field" => "temperature", "offset" => 31, "length" => 2, "devider" => 10],
+      ["field" => "vpv1", "offset" => 33, "length" => 2, "devider" => 10],
+      ["field" => "vpv2", "offset" => 35, "length" => 2, "devider" => 10],
+      ["field" => "vpv3", "offset" => 37, "length" => 2, "devider" => 10],
+      ["field" => "ipv1", "offset" => 39, "length" => 2, "devider" => 10],
+      ["field" => "ipv2", "offset" => 41, "length" => 2, "devider" => 10],
+      ["field" => "ipv3", "offset" => 43, "length" => 2, "devider" => 10],
+      ["field" => "iac1", "offset" => 45, "length" => 2, "devider" => 10],
+      ["field" => "iac2", "offset" => 47, "length" => 2, "devider" => 10],
+      ["field" => "iac3", "offset" => 49, "length" => 2, "devider" => 10],
+      ["field" => "vac1", "offset" => 51, "length" => 2, "devider" => 10],
+      ["field" => "vac2", "offset" => 53, "length" => 2, "devider" => 10],
+      ["field" => "vac3", "offset" => 55, "length" => 2, "devider" => 10],
+      ["field" => "fac1", "offset" => 57, "length" => 2, "devider" => 100],
+      ["field" => "pac1", "offset" => 59, "length" => 2, "devider" => 1],
+      ["field" => "fac2", "offset" => 62, "length" => 2, "devider" => 100],
+      ["field" => "pac2", "offset" => 63, "length" => 2, "devider" => 1],
+      ["field" => "fac3", "offset" => 65, "length" => 2, "devider" => 100],
+      ["field" => "pac3", "offset" => 67, "length" => 2, "devider" => 1],
+      ["field" => "etoday", "offset" => 69, "length" => 2, "devider" => 100],
+      ["field" => "etotal", "offset" => 71, "length" => 4, "devider" => 10],
+      ["field" => "htotal", "offset" => 75, "length" => 4, "devider" => 1],
+      ["field" => "unk_2", "offset" => 79, "length" => 20, "devider" => 1],*/
+  
+  
 			$this->getShort('temperature',31,10);					// get Temperature
-			$this->getShort('vpv',33,10,3);							// get Input Volt
-			$this->getShort('ipv',39,10,3);							// get Input Ampere
-			$this->getShort('iac',45,10,3);							// get Output Ampere	
-			$this->getShort('vac',51,10,3);							// get Output Volt	
-			$this->getShort('fac',57,100,3);						// get Output Frequence
-			$this->getShort('pac',59,1,3);							// get Power
-			$this->getShort('etoday',69,100);						// get eToday in Watt
-			$this->getLong('etotal',71,10);						    // get eTotal in kWh
-			$this->getLong('htotal',75,1);							// get hTotal hours since last reset
+			$this->getShort('vdc',33,10,3);							// get VPV
+			$this->getShort('idc',39,10,3);							// get IPV
+			$this->getShort('iac',45,10,3);							// get Ampere	
+			$this->getShort('vac',51,10,3);							// get Volt Ampere	
+			$this->getShort('fac',57,100,0);							// get ...
+			$this->getShort('pac',59,1,0);							// get  current Power
+			$this->getShort('etoday',69,100);						// get EToday in Watt
+			$this->getLong('etotal',71,10);						// get ETotal in kW
+			$this->getLong('htotal',75,1);						// get Total hours since last reset
 			$this->JSON = json_encode($this->PV);					// create JSON string for later (ie. javascript)
 			return true;
 		}
 					
-		private function getLong($type='totalkWh',$start=71,$divider=10)		// get Long 
+		private function getLong($type='totalkWh',$start=71,$divider=10)				// get Long 
 		{
 			$this->clearError(__METHOD__);
-			$t=floatval($this->str2dec(substr($this->databuffer,$start,4)));	// convert 4 bytes to decimal
+			$t=floatval($this->str2dec(substr($this->databuffer,$start,4)));				// convert 4 bytes to decimal
 			$this->PV["$type"] =$t/$divider;									// return value/divder
 			return;		
 		}
 		
-		private function getShort($type='pac',$start=59,$divider=10,$iterate=0)	// return (optionally repeating) values
+		private function getShort($type='pac',$start=59,$divider=10,$iterate=0)			// return (optionally repeating) values
 		{
 			$this->clearError(__METHOD__);
 			if ($iterate==0)													// 0 = no repeat, return one value
 			{
-				$t=floatval($this->str2dec(substr($this->databuffer,$start,2)));	// convert to decimal 2 bytes
+				$t=floatval($this->str2dec(substr($this->databuffer,$start,2)));				// convert to decimal 2 bytes
 				$this->PV["$type"] = ($t==65535) ? 0 : $t/$divider;					// if 0xFFFF return 0 else value/divder		
 			}
 			else
@@ -243,6 +239,11 @@
 				{
 					$this->databuffer	=	'';									// init databuffer;
 					$this->databuffer	=	@fread($this->socket, 128);				// (binary) read data buffer (expected 99 bytes), do not use fgets()
+					
+					
+				    $this->databuffer = base64_decode("aHNBsBV3jCQVd4wkgQETSDcwMTVEWFhYWAAAAAAAAACxC70KgQAAAAMABAAAAAkAAAAACRQAAAAAE4oAowAAAAAAAAAAAAMAAABLAAAAFwABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVjEuMTBWMS4xMJE==");
+
+
 					if ($this->databuffer!==false)
 					{
 						$this->bytesreceived=strlen($this->databuffer);				// get bytes received length
