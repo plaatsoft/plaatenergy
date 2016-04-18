@@ -113,7 +113,7 @@ $lang['LINK_DONATE']        = i('money') . 'Donate';
 $lang['LINK_REPORT']        = i('rocket') . 'Custom Query';
 $lang['LINK_GUI']           = i('table') . 'Realtime Dashboard';
 $lang['LINK_SYSTEM'] 	    = i('fort-awesome') .'System Overview';
-$lang['LINK_IMPORT_EXPORT'] = i('download') .'Import / Export Data'; 
+$lang['LINK_IMPORT_EXPORT'] = i('download') .'Export Data'; 
  
 /*
 ** ------------------
@@ -358,7 +358,7 @@ $lang['SYSTEM_TITLE'] = 'System Overview';
 ** ------------------
 */
 
-$lang['TITLE_EXPORT_IMPORT'] ='Export / Import';
+$lang['TITLE_EXPORT_IMPORT'] ='Export Data';
 
 
 /*

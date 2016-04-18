@@ -113,7 +113,7 @@ $lang['LINK_ABOUT']          = i('users') . 'Over';
 $lang['LINK_DONATE']         = i('money') . 'Donatie';
 $lang['LINK_REPORT']         = i('archive') . 'Rapportage';
 $lang['LINK_GUI']            = i('table') . 'Realtime Dashboard';
-$lang['LINK_IMPORT_EXPORT']  = i('download') .'Import & Export Data'; 
+$lang['LINK_IMPORT_EXPORT']  = i('download') .'Export Data'; 
 
 /*
 ** ------------------
@@ -360,7 +360,7 @@ $lang['SYSTEM_TITLE'] = 'Systeem Overzicht';
 ** ------------------
 */
 
-$lang['TITLE_EXPORT_IMPORT'] ='Export / Import';
+$lang['TITLE_EXPORT_IMPORT'] ='Export Data';
 
 /*
 ** ------------------
