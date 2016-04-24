@@ -113,7 +113,7 @@ Variables</h2></td></tr>
 <tr class="separator:a9d3300e29b133c0c293af32e563b141d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a175721205eb24a717b8074300bee3657"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#a175721205eb24a717b8074300bee3657">$total_gas_co2</a> = round(($data5-&gt;gas_used * 1.78), 2)</td></tr>
 <tr class="separator:a175721205eb24a717b8074300bee3657"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0907911ed5c895f6ba4551da664cdd8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#ae0907911ed5c895f6ba4551da664cdd8">$total_tree_offset</a> = ($total_energy_co2 + $total_gas_co2) / 200</td></tr>
+<tr class="memitem:ae0907911ed5c895f6ba4551da664cdd8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#ae0907911ed5c895f6ba4551da664cdd8">$total_tree_offset</a> = round((($total_energy_co2 + $total_gas_co2) / 200),2)</td></tr>
 <tr class="separator:ae0907911ed5c895f6ba4551da664cdd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca42bcf91a042261a76ccb121fc76d8e"><td class="memItemLeft" align="right" valign="top">if($power &gt; 0)&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="data_8php.html#aca42bcf91a042261a76ccb121fc76d8e">else</a></td></tr>
 <tr class="separator:aca42bcf91a042261a76ccb121fc76d8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -520,7 +520,7 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">$total_tree_offset = ($total_energy_co2 + $total_gas_co2) / 200</td>
+          <td class="memname">$total_tree_offset = round((($total_energy_co2 + $total_gas_co2) / 200),2)</td>
         </tr>
       </table>
 </div><div class="memdoc">

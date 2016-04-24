@@ -37,8 +37,9 @@ $note[10] = '<div class="subparagraph">Version 1.0 (24-04-2016)</div>
 <li>General: Added export data page.</li>
 <li>General: Added system overview page.</li>
 <li>General: Added setting categories.</li>
-<li>General: Added setting option to set initial solar meter reading.</li>
+<li>General: Added setting option to set initial solar converter reading.</li>
 <li>General: Added setting option to disable gas meter.</li>
+<li>General: Solar converter sensor scripts are now PHP based.</li>
 <li>General: Refactor database model - All entity names are now english.</li>
 </ul>
 </div>';

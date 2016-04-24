@@ -41,7 +41,6 @@ if ($solar_meter_present1=="true") {
 	if ($solar_meter_vendor1!="unknown") {
 	
 		exec('php /var/www/html/plaatenergy/sensors/solar/'.$solar_meter_vendor1.'.php 1 '.SOLAR_METER_1);
-		//exec('python /var/www/html/plaatenergy/sensors/solar/'.$solar_meter_vendor1.'.py 1 '.SOLAR_METER_1);
 	}
 }
 
@@ -50,8 +49,7 @@ if ($solar_meter_present2=="true") {
 	$solar_meter_vendor2 = plaatenergy_db_get_config_item('solar_meter_vendor', SOLAR_METER_2);
 	if ($solar_meter_vendor2!="unknown") {
 	
-		exec('php /var/www/html/plaatenergy/sensors/solar/'.$solar_meter_vendor1.'.php 2 '.SOLAR_METER_2);
-		//exec('python /var/www/html/plaatenergy/sensors/solar/'.$solar_meter_vendor1.'.py 2 '.SOLAR_METER_2);
+		exec('php /var/www/html/plaatenergy/sensors/solar/'.$solar_meter_vendor2.'.php 2 '.SOLAR_METER_2);
 	}
 }
 
@@ -59,8 +57,7 @@ $solar_meter_present3 = plaatenergy_db_get_config_item('solar_meter_present', SO
 if ($solar_meter_present3 =="true") {
 	$solar_meter_vendor3 = plaatenergy_db_get_config_item('solar_meter_vendor', SOLAR_METER_3);
 	if ($solar_meter_vendor3!="unknown") {
-		exec('php /var/www/html/plaatenergy/sensors/solar/'.$solar_meter_vendor1.'.php 3 '.SOLAR_METER_3);
-		//exec('python /var/www/html/plaatenergy/sensors/solar/'.$solar_meter_vendor1.'.py 3 '.SOLAR_METER_3);
+		exec('php /var/www/html/plaatenergy/sensors/solar/'.$solar_meter_vendor3.'.php 3 '.SOLAR_METER_3);
 	}
 }
 
