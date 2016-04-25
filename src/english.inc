@@ -30,7 +30,7 @@
 
 $lang['TITLE'] = 'PlaatEnergy';
 
-$lang['LINK_COPYRIGHT'] = 'All Copyright Reserved &copy; <a class="normal_link" href="http://www.plaatsoft.nl/">PlaatSoft</a> 2008 - ' . date("Y");
+$lang['LINK_COPYRIGHT'] = '<a class="normal_link" href="http://www.plaatsoft.nl/">PlaatSoft</a> 2008-'.date("Y").' - All Copyright Reserved ';
 
 $lang['COOKIE_BAR'] = 'PlaatEnergy uses cookies to save your settings';
 
@@ -311,6 +311,7 @@ $lang['slide_show_on'] = 'Activate slide show if user is inactive';
 $lang['slide_show_page_delay'] = 'Slide show page delay (seconds)';
 $lang['chart_legend'] = 'Chart legend options';
 $lang['chart_dimensions'] = 'Chart dimensions in pixels';
+$lang['system_name'] = 'System name';
 
 $lang['home_password'] = 'Protect home page with password.';
 $lang['settings_password'] = 'Protect setting page with password.';

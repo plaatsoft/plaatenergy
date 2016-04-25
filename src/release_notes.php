@@ -28,6 +28,13 @@
 ** ---------------------
 */
 
+$note[11] = '<div class="subparagraph">Version 1.1 (25-04-2016)</div>
+<div class="large_text">
+<ul>
+<li>General: Add optional system name to configuration.</li>
+</ul>
+</div>';
+
 $note[10] = '<div class="subparagraph">Version 1.0 (24-04-2016)</div>
 <div class="large_text">
 <ul>

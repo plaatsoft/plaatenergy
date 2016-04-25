@@ -33,6 +33,9 @@ $solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor', SOLAR
 $weather_station_present = plaatenergy_db_get_config_item('weather_station_present', WEATHER_METER_1);
 $energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present', ENERGY_METER_1);
 $gas_meter_present = plaatenergy_db_get_config_item('gas_meter_present', GAS_METER_1);
+$system_name = plaatenergy_db_get_config_item('system_name', LOOK_AND_FEEL);
+
+
 $password = plaatenergy_post("password", "");
 
 /*
@@ -209,13 +212,22 @@ function plaatenergy_home_page() {
 	global $solar_meter_present;
 	global $gas_meter_present;
 	global $weather_station_present;
+	global $system_name;
 	global $session;
 	
 	$page = '<h1>';
-	$page .= t('TITLE').' ';
-	$page .= '<div id="version" style="display: inline">';
+		
+	
+   $page .= t('TITLE');
+	
+	$page .= ' <div id="version" style="display: inline">';
 	$page .= plaatenergy_db_get_config_item('database_version');
 	$page .= "</div>";
+	
+	if (strlen($system_name)>0) {
+		$page .= ' ('.$system_name.') ';
+	} 	
+	
 	$page .= '</h1>';
 
 	if ( !file_exists ( "config.inc" )) {

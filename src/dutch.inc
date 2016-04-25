@@ -30,7 +30,7 @@
 
 $lang['TITLE'] = 'PlaatEnergy';
 
-$lang['LINK_COPYRIGHT'] = 'All Copyright Reserved &copy; <a class="normal_link" href="http://www.plaatsoft.nl/">PlaatSoft</a> 2008 - ' . date("Y");
+$lang['LINK_COPYRIGHT'] = '<a class="normal_link" href="http://www.plaatsoft.nl/">PlaatSoft</a> 2008-'.date("Y").' - All Copyright Reserved ';
 
 $lang['COOKIE_BAR'] = 'PlaatEnergy gebruikt cookies om jouw instellingen te bewaren';
 
@@ -308,11 +308,11 @@ $lang['gas_price' ] = 'Gas prijs per m&sup3;';
 
 $lang['weather_station_present'] = 'Weerstation aanwezig';
 
-$lang['slide_show_on'] = 'Activeert automatisch slide show als gebruiker inactief is';
-$lang['slide_show_page_delay'] = 'Slide show pagina vertraging (seconden)';
-
 $lang['chart_legend'] = 'Grafiek legenda option';
 $lang['chart_dimensions'] = 'Grafiek grootte in pixels';
+$lang['slide_show_on'] = 'Activeert automatisch slide show als gebruiker inactief is';
+$lang['slide_show_page_delay'] = 'Slide show pagina vertraging (seconden)';
+$lang['system_name'] = 'Systeem naam';
 
 $lang['home_password'] = 'Bescherm home pagina met een wachtwoord.';
 $lang['settings_password'] = 'Bescherm configuratie pagina met een wachtwoord.';

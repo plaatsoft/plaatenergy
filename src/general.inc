@@ -327,7 +327,7 @@ function general_footer($time=0) {
 	$page = '';
 	
 	if ($pid != PAGE_REALTIME) {
-		$page .= '<div class="copyright">' . t('LINK_COPYRIGHT') . '<br/>';
+		$page .= '<div class="copyright">'.t('LINK_COPYRIGHT') .' - '.t('TITLE').'<br/>';
 		$page .= '['.round($time*1000).' ms - '.plaatenergy_db_count().' queries]';
 		$page .= '</div>';
 	}
