@@ -392,8 +392,15 @@ function plaatenergy_db_process($type) {
 	
 		$sql1  = 'select cast(timestamp as date) as date from energy1 ';
 		$sql1 .= 'where timestamp>"'.date("Y-m-d").' 00:00:00" and timestamp<"'.date("Y-m-d").' 23:59:59" limit 0,1';
-		
 		$result1 = plaatenergy_db_query($sql1);
+		$count = plaatenergy_db_num_rows($result1);
+	
+		if ($count==0) {
+
+			$sql1  = 'select cast(timestamp as date) as date from solar1 ';
+			$sql1 .= 'where timestamp>"'.date("Y-m-d").' 00:00:00" and timestamp<"'.date("Y-m-d").' 23:59:59" limit 0,1';
+			$result1 = plaatenergy_db_query($sql1);
+		}
 	}
 	
 	while ($data1 = plaatenergy_db_fetch_object($result1)) {
