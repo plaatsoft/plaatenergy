@@ -136,13 +136,17 @@ $lang['DAY_REPORT'] = 'Day Reports';
 $lang['WEATHER_REPORT'] = 'Weather Reports';
 $lang['OTHER_REPORT'] = 'Other';
 
+$lang['ENERGY_METER_1_CONNECTION_DOWN'] = i('times') . 'Energy meter';
+$lang['ENERGY_METER_1_CONNECTION_UP'] = i('check') . 'Energy meter';
 
+$lang['SOLAR_METER_1_CONNECTION_DOWN'] = i('times') . 'Solar Convertor 1';
+$lang['SOLAR_METER_1_CONNECTION_UP'] = i('check') . 'Solar Convertor 1';
 
-$lang['ENERGY_METER_CONNECTION_DOWN'] = i('times') . 'No energy data recent received';
-$lang['ENERGY_METER_CONNECTION_UP'] = i('check') . 'Energy meter connection is up';
+$lang['SOLAR_METER_2_CONNECTION_DOWN'] = i('times') . 'Solar Convertor 2';
+$lang['SOLAR_METER_2_CONNECTION_UP'] = i('check') . 'Solar Convertor 2';
 
-$lang['SOLAR_METER_CONNECTION_DOWN'] = i('times') . 'No solar data recent received';
-$lang['SOLAR_METER_CONNECTION_UP'] = i('check') . 'Solar meter connection is up';
+$lang['SOLAR_METER_3_CONNECTION_DOWN'] = i('times') . 'Solar Convertor 3';
+$lang['SOLAR_METER_3_CONNECTION_UP'] = i('check') . 'Solar Convertor 3';
 
 $lang['WEATHER_METER_CONNECTION_DOWN'] = i('times') . 'No weather data recent received';
 $lang['WEATHER_METER_CONNECTION_UP'] = i('check') . 'Weather Station connection is up';

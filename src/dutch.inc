@@ -138,14 +138,20 @@ $lang['OTHER_REPORT'] = 'Overige';
 
 
 
-$lang['ENERGY_METER_CONNECTION_DOWN'] = i('times') . 'Geen energie meting recentelijk ontvangen';
-$lang['ENERGY_METER_CONNECTION_UP'] = i('check') . 'Energie meter verbinding goed';
+$lang['ENERGY_METER_1_CONNECTION_DOWN'] = i('times') . 'Energie meter';
+$lang['ENERGY_METER_1_CONNECTION_UP'] = i('check') . 'Energie meter';
 
-$lang['SOLAR_METER_CONNECTION_DOWN'] = i('times') . 'Geen solar meting recentelijk ontvangen';
-$lang['SOLAR_METER_CONNECTION_UP'] = i('check') . 'Solar meter verbinding goed';
+$lang['SOLAR_METER_1_CONNECTION_DOWN'] = i('times') . 'Solar Converter 1';
+$lang['SOLAR_METER_1_CONNECTION_UP'] = i('check') . 'Solar Converter 1';
 
-$lang['WEATHER_METER_CONNECTION_DOWN'] = i('times') . 'Geen weer meting recentelijk ontvangen';
-$lang['WEATHER_METER_CONNECTION_UP'] = i('check') . 'Weerstation verbinding goed';
+$lang['SOLAR_METER_2_CONNECTION_DOWN'] = i('times') . 'Solar Converter 2';
+$lang['SOLAR_METER_2_CONNECTION_UP'] = i('check') . 'Solar Converter 2';
+
+$lang['SOLAR_METER_3_CONNECTION_DOWN'] = i('times') . 'Solar Converter 3';
+$lang['SOLAR_METER_3_CONNECTION_UP'] = i('check') . 'Solar Converter 3';
+
+$lang['WEATHER_METER_CONNECTION_DOWN'] = i('times') . 'Weerstation';
+$lang['WEATHER_METER_CONNECTION_UP'] = i('check') . 'Weerstation';
 
 /*
 ** ------------------

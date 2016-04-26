@@ -29,7 +29,6 @@
 */
 
 $solar_meter_present = plaatenergy_db_get_config_item('solar_meter_present', SOLAR_METER_1);
-$solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor', SOLAR_METER_1);
 $weather_station_present = plaatenergy_db_get_config_item('weather_station_present', WEATHER_METER_1);
 $energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present', ENERGY_METER_1);
 $gas_meter_present = plaatenergy_db_get_config_item('gas_meter_present', GAS_METER_1);
@@ -48,41 +47,52 @@ $password = plaatenergy_post("password", "");
  * Check if solar meter is online.
  * @return HTML block with actual status of solar meter.
  */
-function check_solar_meter() {
+function check_solar_meter($index) {
 
-  global $solar_meter_present;
-  global $solar_meter_vendor;
-
-  $page="";
-
-  if (($solar_meter_present=="true") && ($solar_meter_vendor!="unknown")) {
-  
-   $timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
-   $sql = 'select etotal from solar1 where timestamp >= "'.$timestamp.'"';	
-   $result = plaatenergy_db_query($sql);
-   $count = plaatenergy_db_num_rows($result);
+	$nr = SOLAR_METER_1;
 	
-   if ($count>0){
+	switch ($index) {
+	
+		case 2 : $nr = SOLAR_METER_2;
+				   break;
+		
+		case 3 : $nr = SOLAR_METER_3;
+				   break;
+	}
 
-		$page  = '<div class="checker good">';
-      $page .= t('SOLAR_METER_CONNECTION_UP');
-      $page .='</div>';
+	$solar_meter_present = plaatenergy_db_get_config_item('solar_meter_present', $nr);
+	$solar_meter_vendor = plaatenergy_db_get_config_item('solar_meter_vendor', $nr);
 
-    } else {
+	$page="";
 
-      $page = '<div class="checker bad">';
-      $page .= t('SOLAR_METER_CONNECTION_DOWN');	
-      $page .='</div>';
-    }
-  }
-  return $page;
+	if (($solar_meter_present=="true") && ($solar_meter_vendor!="unknown")) {
+  
+		$timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
+		$sql = 'select etotal from solar'+$index+' where timestamp >= "'.$timestamp.'"';	
+		$result = plaatenergy_db_query($sql);
+		$count = plaatenergy_db_num_rows($result);
+	
+		if ($count>0){
+
+			$page  = '<div class="checker good">';
+			$page .= t('SOLAR_METER_'.$index.'_CONNECTION_UP');
+			$page .='</div>';
+
+		} else {
+
+			$page = '<div class="checker bad">';
+			$page .= t('SOLAR_METER__'.$index.'_CONNECTION_DOWN');	
+			$page .='</div>';
+		}
+	}
+	return $page;
 }
 
 /**
- * Check if energy meter is online.
- * @return HTML block with actual status of energy meter.
+ * Check if energy converter is online.
+ * @return HTML block with actual status of solar converter.
  */
-function check_energy_meter() {
+function check_energy_converter($index) {
   
    global $energy_meter_present;
 
@@ -91,20 +101,20 @@ function check_energy_meter() {
 	if ($energy_meter_present=="true") {
 	   
 		$timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
-		$sql = 'select low_used from energy1 where timestamp >= "'.$timestamp.'"';	
+		$sql = 'select low_used from energy'+$index+' where timestamp >= "'.$timestamp.'"';	
 		$result = plaatenergy_db_query($sql);
 		$count = plaatenergy_db_num_rows($result);
 	
 		 if ($count>0){
 		 
 			$page  = '<div class="checker good">';
-			$page .= t('ENERGY_METER_CONNECTION_UP');
+			$page .= t('ENERGY_METER__'.$index.'_CONNECTION_UP');
 			$page .= '</div>';
 			
 		} else {
 		
 			$page  = '<div class="checker bad">';
-			$page .= t('ENERGY_METER_CONNECTION_DOWN');
+			$page .= t('ENERGY_METER__'.$index.'_CONNECTION_DOWN');
 			$page .= '</div>';
 		}
    }	
@@ -383,8 +393,10 @@ function plaatenergy_home_page() {
 
 		$page .= '<br/><br/>';
 	
-		$page .= check_energy_meter();
-		$page .= check_solar_meter(); 
+		$page .= check_energy_meter(1);
+		$page .= check_solar_converter(1); 
+		$page .= check_solar_converter(2);
+		$page .= check_solar_converter(3);
 		$page .= check_weather_station();
 
 		$page .= '<br/><br/>';
