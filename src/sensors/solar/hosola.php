@@ -42,7 +42,7 @@ if ($inverter->read()==false) {
 
 	$timestamp = date('Y-m-d H:i:00');
 	
-	if (isset($data->pac1) && ($data->pac1>0)) 
+	if (isset($data->pac) && ($data->pac>0)) 
 	{
 		$sql1 = 'select id from solar'.$index.' where timestamp="'.$timestamp.'"';
 		$result1 = plaatenergy_db_query($sql1);
@@ -53,15 +53,15 @@ if ($inverter->read()==false) {
 			$sql  = 'update solar'.$index.' set temp='.$data->temperature.', vdc1='.$data->vdc1.', ';
 			$sql .= 'vdc2='.$data->vdc2.', idc1='.$data->idc1.', ';
 			$sql .= 'idc2='.$data->idc2.', iac='.$data->iac1.', ';
-			$sql .= 'vac='.$data->vac2.', fac='.$data->fac1.', ';
-			$sql .= 'pac='.$data->pac1.', etoday='.$data->etoday.', ';
+			$sql .= 'vac='.$data->vac2.', fac='.$data->fac.', ';
+			$sql .= 'pac='.$data->pac.', etoday='.$data->etoday.', ';
 			$sql .= 'etotal='.$data->etotal.' where id='.$data1->id;
 			
 		} else {
 			
 			$sql  = 'insert into solar'.$index.' ( timestamp, temp,vdc1,vdc2,idc1,idc2,iac,vac,fac,pac,etoday,etotal) ';
 			$sql .= 'values ("'.$timestamp.'",'.$data->temperature.','.$data->vdc1.','.$data->vdc2.','.$data->idc1.','.
-			$data->idc2.','.$data->iac1.','.$data->vac1.','.$data->fac1.','.$data->pac1.','.$data->etoday.','.$data->etotal.')';
+			$data->idc2.','.$data->iac1.','.$data->vac1.','.$data->fac.','.$data->pac.','.$data->etoday.','.$data->etotal.')';
 		}
 			
 		plaatenergy_db_query($sql);
