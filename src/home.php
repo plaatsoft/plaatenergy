@@ -47,7 +47,7 @@ $password = plaatenergy_post("password", "");
  * Check if solar meter is online.
  * @return HTML block with actual status of solar meter.
  */
-function check_solar_meter($index) {
+function check_solar_converter($index) {
 
 	$nr = SOLAR_METER_1;
 	
@@ -68,7 +68,7 @@ function check_solar_meter($index) {
 	if (($solar_meter_present=="true") && ($solar_meter_vendor!="unknown")) {
   
 		$timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
-		$sql = 'select etotal from solar'+$index+' where timestamp >= "'.$timestamp.'"';	
+		$sql = 'select etotal from solar'.$index.' where timestamp >= "'.$timestamp.'"';	
 		$result = plaatenergy_db_query($sql);
 		$count = plaatenergy_db_num_rows($result);
 	
@@ -81,7 +81,7 @@ function check_solar_meter($index) {
 		} else {
 
 			$page = '<div class="checker bad">';
-			$page .= t('SOLAR_METER__'.$index.'_CONNECTION_DOWN');	
+			$page .= t('SOLAR_METER_'.$index.'_CONNECTION_DOWN');	
 			$page .='</div>';
 		}
 	}
@@ -92,7 +92,7 @@ function check_solar_meter($index) {
  * Check if energy converter is online.
  * @return HTML block with actual status of solar converter.
  */
-function check_energy_converter($index) {
+function check_energy_meter($index) {
   
    global $energy_meter_present;
 
@@ -101,20 +101,20 @@ function check_energy_converter($index) {
 	if ($energy_meter_present=="true") {
 	   
 		$timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
-		$sql = 'select low_used from energy'+$index+' where timestamp >= "'.$timestamp.'"';	
+		$sql = 'select low_used from energy'.$index.' where timestamp >= "'.$timestamp.'"';	
 		$result = plaatenergy_db_query($sql);
 		$count = plaatenergy_db_num_rows($result);
 	
 		 if ($count>0){
 		 
 			$page  = '<div class="checker good">';
-			$page .= t('ENERGY_METER__'.$index.'_CONNECTION_UP');
+			$page .= t('ENERGY_METER_'.$index.'_CONNECTION_UP');
 			$page .= '</div>';
 			
 		} else {
 		
 			$page  = '<div class="checker bad">';
-			$page .= t('ENERGY_METER__'.$index.'_CONNECTION_DOWN');
+			$page .= t('ENERGY_METER_'.$index.'_CONNECTION_DOWN');
 			$page .= '</div>';
 		}
    }	

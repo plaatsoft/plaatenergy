@@ -148,8 +148,8 @@ $lang['SOLAR_METER_2_CONNECTION_UP'] = i('check') . 'Solar Convertor 2';
 $lang['SOLAR_METER_3_CONNECTION_DOWN'] = i('times') . 'Solar Convertor 3';
 $lang['SOLAR_METER_3_CONNECTION_UP'] = i('check') . 'Solar Convertor 3';
 
-$lang['WEATHER_METER_CONNECTION_DOWN'] = i('times') . 'No weather data recent received';
-$lang['WEATHER_METER_CONNECTION_UP'] = i('check') . 'Weather Station connection is up';
+$lang['WEATHER_METER_CONNECTION_DOWN'] = i('times') . 'Weather Station';
+$lang['WEATHER_METER_CONNECTION_UP'] = i('check') . 'Weather Station';
 
 /*
 ** ------------------
