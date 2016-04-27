@@ -30,12 +30,12 @@
 $note[11] = '<div class="subparagraph">Version 1.1 (27-04-2016)</div>
 <div class="large_text">
 <ul>
-<li>General: Add temperator sensor script base on onboard pi sensor.</li>
-<li>General: Show status of all enabled solar converters on home page.</li>
-<li>General: Add optional system name to configuration.</li>
-<li>Bugfix: Delivered electricity year report scale is now working fine.</li>
+<li>General: Added weather station script base on onboard pi sensor.</li>
+<li>General: Show status of all enabled solar converters at home page.</li>
+<li>General: Added system name feature to configuration.</li>
+<li>Improve delivered electricity year report scale calculationn.</li>
 <li>Bugfix: Data capture is now working correct in hosola solar converter sensor script.</li>
-<li>Bugfix: If only solar converter is configured. Aggregration is now working fine.</li>
+<li>Bugfix: If only one solar converter is configured. Data processing is now working fine.</li>
 </ul>
 </div>';
 
