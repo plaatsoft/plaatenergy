@@ -16,10 +16,9 @@
 **  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
-
-// 31 Solar Converter 1
-// 32 Solar Converter 2
-// 33 Solar Converter 3
+// instance=31 [Solar Converter 1]
+// instance=32 [Solar Converter 2]
+// instance=33 [Solar Converter 3]
 
 include '/var/www/html/plaatenergy/config.inc';
 include '/var/www/html/plaatenergy/database.inc';
@@ -27,8 +26,6 @@ include '/var/www/html/plaatenergy/general.inc';
 include 'inverter_hosola.php';
 
 $instance = $argv[1];
-
-plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 $ip = plaatenergy_db_get_config_item('solar_meter_ip', $instance);
 $port = plaatenergy_db_get_config_item('solar_meter_port', $instance);

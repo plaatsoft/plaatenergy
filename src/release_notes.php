@@ -33,9 +33,9 @@ $note[11] = '<div class="subparagraph">Version 1.1 (27-04-2016)</div>
 <li>General: Added weather station script base on onboard pi sensor.</li>
 <li>General: Show status of all enabled solar converters at home page.</li>
 <li>General: Added system name feature to configuration.</li>
-<li>Improve delivered electricity year report scale calculationn.</li>
+<li>Improve delivered electricity year report scale calculation.</li>
 <li>Bugfix: Data capture is now working correct in hosola solar converter sensor script.</li>
-<li>Bugfix: If only one solar converter is configured. Data processing is now working fine.</li>
+<li>Bugfix: If only solar converters are configured then data processing is now working fine.</li>
 </ul>
 </div>';
 
