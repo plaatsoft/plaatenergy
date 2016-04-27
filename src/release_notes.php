@@ -31,7 +31,7 @@
 $note[11] = '<div class="subparagraph">Version 1.1 (27-04-2016)</div>
 <div class="large_text">
 <ul>
-<li>General: Show status of all active solar converter on home page.</li>
+<li>General: Show status of all enabled solar converters on home page.</li>
 <li>General: Add optional system name to configuration.</li>
 <li>Bugfix: Delivered electricity year report scale is now working fine.</li>
 <li>Bugfix: Data convertion is now working correct in hosola sensor script</li>

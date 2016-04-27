@@ -298,12 +298,12 @@ $lang['energy_price'] = 'Energy price per kwh';
 $lang['energy_use_forecast'] = 'Energy use annual forecast (kWh)';
 $lang['energy_delivery_forecast'] = 'Energy delivery annual forecast (kWh)';
 
-$lang['solar_meter_present'] = 'Solar meter present';
-$lang['solar_meter_vendor'] = 'Solar meter vendor';
-$lang['solar_meter_ip' ] = 'Solar meter TCP/IP address';
-$lang['solar_meter_port'] = 'Solar meter TCP port number';
-$lang['solar_meter_serial_number'] = 'Solar meter serial number';
-$lang['solar_initial_meter_reading'] = 'Solar initial meter reading (kWh)';
+$lang['solar_meter_present'] = 'Solar converter present';
+$lang['solar_meter_vendor'] = 'Solar converter vendor';
+$lang['solar_meter_ip' ] = 'Solar converter TCP/IP address';
+$lang['solar_meter_port'] = 'Solar converter TCP port number';
+$lang['solar_meter_serial_number'] = 'Solar converter serial number';
+$lang['solar_initial_meter_reading'] = 'Solar converter initial meter reading (kWh)';
 
 $lang['gas_meter_present' ] = 'Gas meter present';
 $lang['gas_price' ] = 'Gas price per m&sup3;';
@@ -317,15 +317,15 @@ $lang['chart_legend'] = 'Chart legend options';
 $lang['chart_dimensions'] = 'Chart dimensions in pixels';
 $lang['system_name'] = 'System name';
 
-$lang['home_password'] = 'Protect home page with password.';
-$lang['settings_password'] = 'Protect setting page with password.';
+$lang['home_password'] = 'Protect application with a password.';
+$lang['settings_password'] = 'Protect settings with a password.';
 
 $lang['CATEGORY0'] =  'Forecast'; 
 $lang['CATEGORY11'] = 'Gas Meter'; 
 $lang['CATEGORY21'] = 'Energy Meter'; 
-$lang['CATEGORY31'] = 'Solar Meter 1'; 
-$lang['CATEGORY32'] = 'Solar Meter 2'; 
-$lang['CATEGORY33'] = 'Solar Meter 3'; 
+$lang['CATEGORY31'] = 'Solar Converter 1'; 
+$lang['CATEGORY32'] = 'Solar Converter 2'; 
+$lang['CATEGORY33'] = 'Solar Converter 3'; 
 $lang['CATEGORY41'] = 'Weather Meter'; 
 $lang['CATEGORY51'] = 'Security'; 
 $lang['CATEGORY52'] = 'Look and Feel'; 
