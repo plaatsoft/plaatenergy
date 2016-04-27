@@ -63,7 +63,8 @@ if ($solar_meter_present3 =="true") {
 
 $weather_station_present = plaatenergy_db_get_config_item('weather_station_present', WEATHER_METER_1);
 if ($weather_station_present=="true") {
-   exec('sudo python /var/www/html/plaatenergy/sensors/weather/weather.py');
+   $weather_station_vendor = plaatenergy_db_get_config_item('weather_station_vendor', WEATHER_METER_1);
+   exec('sudo python /var/www/html/plaatenergy/sensors/weather/'.$weather_station_vendor.'.py');
 }
 
 $energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present', ENERGY_METER_1);

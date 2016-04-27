@@ -309,7 +309,8 @@ $lang['gas_meter_present' ] = 'Gas meter present';
 $lang['gas_price' ] = 'Gas price per m&sup3;';
 $lang['gas_use_forecast'] = 'Gas use annual forecast (m&sup3;)';
 
-$lang['weather_station_present'] = 'Weather Station present';
+$lang['weather_station_present'] = 'Weather station present';
+$lang['weather_station_vendor'] = 'Weather station vendor';
 
 $lang['slide_show_on'] = 'Activate slide show if user is inactive';
 $lang['slide_show_page_delay'] = 'Slide show page delay (seconds)';

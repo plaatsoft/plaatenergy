@@ -313,6 +313,7 @@ $lang['gas_use_forecast'] = 'Jaar voorspelling gas verbruik (m&sup3;)';
 $lang['gas_price' ] = 'Gas prijs per m&sup3;';
 
 $lang['weather_station_present'] = 'Weerstation aanwezig';
+$lang['weather_station_vendor'] = 'Weerstation producent';
 
 $lang['chart_legend'] = 'Grafiek legenda option';
 $lang['chart_dimensions'] = 'Grafiek grootte in pixels';
