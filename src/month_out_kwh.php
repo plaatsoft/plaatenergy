@@ -76,16 +76,34 @@ function plaatenergy_month_out_energy_page() {
 		
 				} else {
 				
-					$sql = 'select max(pac) as pac FROM solar1 where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';
-					
-					$result = plaatenergy_db_query($sql);
-					$row = plaatenergy_db_fetch_object($result);
+					$sql1 = 'select max(pac) as pac FROM solar1 where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';					
+					$result1 = plaatenergy_db_query($sql1);
+					$row1 = plaatenergy_db_fetch_object($result1);
 		
-					if (isset($row->pac)) {
-						$value = $row->pac;
-					} else {
-						$value=0;
-					}
+					$value1 = 0;
+					if (isset($row1->pac)) {
+						$value1 = $row1->pac;
+					} 
+					
+					$sql2 = 'select max(pac) as pac FROM solar2 where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';					
+					$result2 = plaatenergy_db_query($sql2);
+					$row2 = plaatenergy_db_fetch_object($result2);
+		
+					$value2 = 0;
+					if (isset($row2->pac)) {
+						$value2 = $row2->pac;
+					} 
+					
+					$sql3 = 'select max(pac) as pac FROM solar3 where timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'"';					
+					$result3 = plaatenergy_db_query($sql3);
+					$row3 = plaatenergy_db_fetch_object($result3);
+		
+					$value3 = 0;
+					if (isset($row3->pac)) {
+						$value3 = $row3->pac;
+					} 
+					
+					$value = $value1 + $value2 + $value3;
 				}
 		
 				if($value>$max) {
