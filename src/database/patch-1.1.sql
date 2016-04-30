@@ -19,6 +19,11 @@ UPDATE config SET value="1.1" WHERE token='database_version';
 INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (52, 'system_name', '', '', 0, 0);
 INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (41, 'weather_station_vendor', 'pi', 'pi,sensehat', 0, 0);
 
+INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (31, 'solar_description', '', '', 0, 0);
+INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (32, 'solar_description', '', '', 0, 0);
+INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (33, 'solar_description', '', '', 0, 0);
+
+
 
 
 
