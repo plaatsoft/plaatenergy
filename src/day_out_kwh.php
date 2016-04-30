@@ -102,6 +102,10 @@ function plaatenergy_day_out_energy_page() {
 	$delivered_normal = 0;
 	$delivered_local = 0;
 
+	$solar_diff_1 = 0;
+	$solar_diff_2 = 0;
+	$solar_diff_3 = 0;
+		
 	while ($i<96) {
 	
 	 	$timestamp1 = date("Y-m-d H:i:s", $current_date+(900*$i));
@@ -132,7 +136,6 @@ function plaatenergy_day_out_energy_page() {
 		$result3a = plaatenergy_db_query($sql3a);
 		$row3a = plaatenergy_db_fetch_object($result3a);
 
-		$solar_diff_1 = 0;
 		if (isset($row3a->etotal)) {
 			if ($row3a->etotal >= $solar_delivered_1 ) {
 				$solar_diff_1 = $row3a->etotal - $solar_delivered_1;
@@ -146,7 +149,6 @@ function plaatenergy_day_out_energy_page() {
 		$result3b = plaatenergy_db_query($sql3b);
 		$row3b = plaatenergy_db_fetch_object($result3b);	
 		
-		$solar_diff_2 = 0;
 		if (isset($row3b->etotal)) {
 			if ($row3b->etotal >= $solar_delivered_2 ) {
 				$solar_diff_2 = $row3b->etotal - $solar_delivered_2;
@@ -160,7 +162,6 @@ function plaatenergy_day_out_energy_page() {
 		$result3c = plaatenergy_db_query($sql3c);
 		$row3c = plaatenergy_db_fetch_object($result3c);	
 		
-		$solar_diff_3 = 0;
 		if (isset($row3c->etotal)) {
 			if ($row3c->etotal >= $solar_delivered_3 ) {
 				$solar_diff_3 = $row3c->etotal - $solar_delivered_3;
