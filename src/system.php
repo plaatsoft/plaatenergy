@@ -194,17 +194,22 @@ function plaatenergy_system_page() {
 		$page .= round($temperature,2).' &deg;C';
 		$page .= '</td>';
 	
-		$page .= '<td>';
-		$page .= '<img src="images/humidity-'.$theme.'.png" height="80" width="90">';
-		$page .= '<br/>';		
-		$page .= round($humidity,2).' %';
-		$page .= '</td>';
+		if ($humidity>0) {
+	
+			$page .= '<td>';
+			$page .= '<img src="images/humidity-'.$theme.'.png" height="80" width="90">';
+			$page .= '<br/>';		
+			$page .= round($humidity,2).' %';
+			$page .= '</td>';
+		}
 		
-		$page .= '<td>';
-		$page .= '<img src="images/pressure-'.$theme.'.png" height="80" width="90">';
-		$page .= '<br/>';
-		$page .= round($pressure,2).' hPa';
-		$page .= '</td>';
+		if ($pressure>0) {
+			$page .= '<td>';
+			$page .= '<img src="images/pressure-'.$theme.'.png" height="80" width="90">';
+			$page .= '<br/>';
+			$page .= round($pressure,2).' hPa';
+			$page .= '</td>';
+		}
 	
 		$page .= '</tr>';	
 		$page .= '</table>';
