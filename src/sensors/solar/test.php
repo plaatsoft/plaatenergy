@@ -25,13 +25,20 @@ include '/var/www/html/plaatenergy/database.inc';
 include '/var/www/html/plaatenergy/general.inc';
 include 'inverter_hosola.php';
 
-$instance = $argv[1];
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
+$instance = $argv[1];
 $ip = plaatenergy_db_get_config_item('solar_meter_ip', $instance);
 $port = plaatenergy_db_get_config_item('solar_meter_port', $instance);
 $sn = plaatenergy_db_get_config_item('solar_meter_serial_number', $instance);
 
-echo $ip;
+echo "instance=".$instance."\r\n";				
+echo "ip=".$ip."\r\n";				
+echo "port=".$port."\r\n";
+echo "sn=".$sn."\r\n";
+
+echo "\r\n";
+echo "Start connection to Solar Converter\r\n";
 
 $inverter = new Inverter($ip,$port,$sn);				
 if ($inverter->read()==false) {
@@ -44,4 +51,8 @@ if ($inverter->read()==false) {
 
  	var_dump($data);	
 }
+
+echo "\r\n";
+echo "Test Ended\r\n";
+echo "\r\n";
 ?>
