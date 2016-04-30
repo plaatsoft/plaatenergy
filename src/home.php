@@ -67,7 +67,7 @@ function check_solar_converter($index) {
 
 	if (($solar_meter_present=="true") && ($solar_meter_vendor!="unknown")) {
   
-		$timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
+		$timestamp = date("Y-m-d H:i:s", strtotime("-3 minutes"));
 		$sql = 'select etotal from solar'.$index.' where timestamp >= "'.$timestamp.'"';	
 		$result = plaatenergy_db_query($sql);
 		$count = plaatenergy_db_num_rows($result);
@@ -100,7 +100,7 @@ function check_energy_meter($index) {
 	
 	if ($energy_meter_present=="true") {
 	   
-		$timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
+		$timestamp = date("Y-m-d H:i:s", strtotime("-3 minutes"));
 		$sql = 'select low_used from energy'.$index.' where timestamp >= "'.$timestamp.'"';	
 		$result = plaatenergy_db_query($sql);
 		$count = plaatenergy_db_num_rows($result);
@@ -133,7 +133,7 @@ function check_weather_station() {
 	
    if ($weather_station_present=="true") {
   
-		$timestamp = date("Y-m-d H:i:s", strtotime("-30 minutes"));
+		$timestamp = date("Y-m-d H:i:s", strtotime("-3 minutes"));
 		$sql = 'select humidity from weather where timestamp >= "'.$timestamp.'"';	
 		$result = plaatenergy_db_query($sql);
 		$count = plaatenergy_db_num_rows($result);
