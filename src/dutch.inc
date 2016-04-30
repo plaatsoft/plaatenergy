@@ -301,6 +301,7 @@ $lang['energy_use_forecast'] = 'Jaar voorspelling energie verbruik (kWh)';
 $lang['energy_delivery_forecast'] = 'Jaar voorspelling energie teruglevering (kWh)';
 $lang['energy_price'] = 'Energie prijs per kwh';
 
+$lang['solar_description'] = 'Solar converter beschrijving';
 $lang['solar_meter_present'] = 'Solar converter aanwezig';
 $lang['solar_meter_vendor'] = 'Solar converter leverancier';
 $lang['solar_meter_ip' ] = 'Solar converter TCP/IP adres';

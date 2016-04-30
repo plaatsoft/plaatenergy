@@ -298,6 +298,7 @@ $lang['energy_price'] = 'Energy price per kwh';
 $lang['energy_use_forecast'] = 'Energy use annual forecast (kWh)';
 $lang['energy_delivery_forecast'] = 'Energy delivery annual forecast (kWh)';
 
+$lang['solar_description'] = 'Solar description (comments field)';
 $lang['solar_meter_present'] = 'Solar converter present';
 $lang['solar_meter_vendor'] = 'Solar converter vendor';
 $lang['solar_meter_ip' ] = 'Solar converter TCP/IP address';
