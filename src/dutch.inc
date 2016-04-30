@@ -289,17 +289,21 @@ $lang['LABEL_DESCRIPTION'] = 'Omschrijving';
 $lang['database_version'] = 'Huidige database versie';
 $lang['request_counter'] = 'Pagina request counter';
 
-$lang['meter_reading_used_low'] = 'Start meterstand - afgenomen laag (kwh)';
-$lang['meter_reading_used_normal'] = 'Start meterstand - afgenomen normaal (kwh)';
-$lang['meter_reading_delivered_low'] = 'Start meterstand - geleverd laag (kwh)';
-$lang['meter_reading_delivered_normal'] = 'Start meterstand - geleverd normaal (kwh)';
+$lang['energy_delivery_forecast'] = 'Jaar prognose energie levering (kWh)';
+$lang['energy_use_forecast'] = 'Jaar prognose energie verbruik (kWh)';
+$lang['gas_use_forecast'] = 'Jaar prognose gas verbruik (m&sup3;)';
+
+$lang['gas_meter_present' ] = 'Gas meter aanwezig';
+$lang['gas_price' ] = 'Gas prijs per m&sup3;';
 $lang['meter_reading_used_gas'] = 'Gas meter start meterstand (m&sup3;)';
 
 $lang['energy_meter_present'] = 'Energie meter aanwezig';
 $lang['energy_meter_vendor'] = 'Energie meter producent';
-$lang['energy_use_forecast'] = 'Jaar voorspelling energie verbruik (kWh)';
-$lang['energy_delivery_forecast'] = 'Jaar voorspelling energie teruglevering (kWh)';
 $lang['energy_price'] = 'Energie prijs per kwh';
+$lang['meter_reading_used_low'] = 'Start meterstand - afgenomen laag (kwh)';
+$lang['meter_reading_used_normal'] = 'Start meterstand - afgenomen normaal (kwh)';
+$lang['meter_reading_delivered_low'] = 'Start meterstand - geleverd laag (kwh)';
+$lang['meter_reading_delivered_normal'] = 'Start meterstand - geleverd normaal (kwh)';
 
 $lang['solar_description'] = 'Solar converter beschrijving';
 $lang['solar_meter_present'] = 'Solar converter aanwezig';
@@ -309,12 +313,11 @@ $lang['solar_meter_port'] = 'Solar converter TCP poort nummer';
 $lang['solar_meter_serial_number'] = 'Solar converter serial nummer';
 $lang['solar_initial_meter_reading'] = 'Solar converter start meterstand (kWh)';
 
-$lang['gas_meter_present' ] = 'Gas meter aanwezig';
-$lang['gas_use_forecast'] = 'Jaar voorspelling gas verbruik (m&sup3;)';
-$lang['gas_price' ] = 'Gas prijs per m&sup3;';
-
 $lang['weather_station_present'] = 'Weerstation aanwezig';
 $lang['weather_station_vendor'] = 'Weerstation producent';
+
+$lang['home_password'] = 'Bescherm toegang met een wachtwoord.';
+$lang['settings_password'] = 'Bescherm configuratie met een wachtwoord.';
 
 $lang['chart_legend'] = 'Grafiek legenda option';
 $lang['chart_dimensions'] = 'Grafiek grootte in pixels';
@@ -322,16 +325,13 @@ $lang['slide_show_on'] = 'Activeert automatisch slide show als gebruiker inactie
 $lang['slide_show_page_delay'] = 'Slide show pagina vertraging (seconden)';
 $lang['system_name'] = 'Systeem naam';
 
-$lang['home_password'] = 'Bescherm toegang met een wachtwoord.';
-$lang['settings_password'] = 'Bescherm configuratie met een wachtwoord.';
-
-$lang['CATEGORY0'] =  'Voorspelling'; 
+$lang['CATEGORY0'] =  'Prognose'; 
 $lang['CATEGORY11'] = 'Gas Meter'; 
 $lang['CATEGORY21'] = 'Energie Meter'; 
 $lang['CATEGORY31'] = 'Solar Converter 1'; 
 $lang['CATEGORY32'] = 'Solar Converter 2'; 
 $lang['CATEGORY33'] = 'Solar Converter 3'; 
-$lang['CATEGORY41'] = 'Weer Meter'; 
+$lang['CATEGORY41'] = 'Weerstation'; 
 $lang['CATEGORY51'] = 'Beveiliging'; 
 $lang['CATEGORY52'] = 'Layout'; 
 
