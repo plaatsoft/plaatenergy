@@ -96,7 +96,7 @@ function plaatenergy_month_in_energy_page() {
 			if ($eid==EVENT_KWH) {
 				$data .= round($low_used_value,2).','.round($normal_used_value,2).','.round($verbruikt,2).']';
 			} else {
-				$data .= round(($low_used_value+$normal_used_value+$solar_delivered_value_value)*$energy_price,2).']';
+				$data .= round(($low_used_value+$normal_used_value+$solar_delivered_value)*$energy_price,2).']';
 			}
 			$total += $low_used_value + $normal_used_value + $verbruikt;
 			$total_price += ($low_used_value + $normal_used_value + $verbruikt)*$energy_price;
