@@ -61,7 +61,7 @@ function plaatenergy_month_in_energy_page() {
 	
 			$low_used_value = 0;
 			$normal_used_value = 0;
-			$solar_delivered_value_value = 0;
+			$solar_delivered_value = 0;
 			$low_delivered_value = 0;
 			$normal_delivered_value = 0;
 			$verbruikt = 0;
