@@ -233,7 +233,7 @@ $lang['LABEL_NORMAL_USED'] = 'Energie meter normaal meterstand (kWh)';
 $lang['LABEL_LOW_DELIVERED'] = 'Energie meter dal terug  meterstand (kWh)';
 $lang['LABEL_NORMAL_DELIVERED'] = 'Energie meter normaal terug meterstand (kWh)';
 
-$lang['LABEL_ETOTAL'] = 'Etotal waarde (kWh)';
+$lang['LABEL_ETOTAL'] = 'Etotal solar converter %s meterstand (kWh)';
 
 $lang['LABEL_GAS'] = 'Gas meter meterstand (m&sup3)';
 

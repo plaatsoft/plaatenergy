@@ -233,7 +233,7 @@ $lang['LABEL_NORMAL_USED'] = 'Normal used meter value reading (kWh)';
 $lang['LABEL_LOW_DELIVERED'] = 'Low delivered meter value reading (kWh)';
 $lang['LABEL_NORMAL_DELIVERED'] = 'Normal delivered meter value reading (kWh)';
 
-$lang['LABEL_ETOTAL'] = 'Etotal meter reading value (kWh)';
+$lang['LABEL_ETOTAL'] = 'Etotal solar converter %s meter reading value (kWh)';
 
 $lang['LABEL_GAS'] = 'Gas meter value reading (m&sup3)';
 
