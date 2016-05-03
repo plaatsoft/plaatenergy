@@ -208,6 +208,10 @@ function plaatenergy_day_in_energy_page() {
 					legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
 					vAxis: {format: "decimal", title: ""},
 					hAxis: {title: ""},
+					backgroundColor: "transparent",
+					chartArea: {
+						backgroundColor: "transparent"
+					}
 				};
 
 				var chart = new google.charts.Line(document.getElementById("chart_div"));
@@ -229,7 +233,11 @@ function plaatenergy_day_in_energy_page() {
 				bar: {groupWidth: "90%"},
 				legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
 				vAxis: {format: "decimal" },
-				isStacked: true
+				isStacked: true,
+				backgroundColor: "transparent",
+				chartArea: {
+					backgroundColor: "transparent"
+				}
 			};
 
 			var data = google.visualization.arrayToDataTable('.$json.');

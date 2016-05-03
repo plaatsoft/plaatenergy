@@ -231,11 +231,11 @@ function plaatenergy_day_out_energy_page() {
 			
 		} else {	
 		
-			$sql  = 'select p1.timestamp, p1.pac as pac1, ifnull(p2.pac,0) as pac2, ifnull(p3.pac,0) as pac3 ';
-			$sql .= 'from solar1 p1 left join solar2 p2 on p1.timestamp=p2.timestamp left join solar3 p3 on ';
-			$sql .= 'p1.timestamp=p3.timestamp ';
+			$sql  = 'select ifnull(p1.timestamp, p2.timestamp) as timestamp, ifnull(p1.pac,0) as pac1, ifnull(p2.pac,0) as pac2, ifnull(p3.pac,0) as pac3 ';
+			$sql .= 'from solar1 p1 inner join solar2 p2 on p1.timestamp=p2.timestamp inner join solar3 p3 on ';
+			$sql .= 'p2.timestamp=p3.timestamp ';
 			$sql .= 'where p1.timestamp>="'.$timestamp1.'" and p1.timestamp<="'.$timestamp2.'" order by p1.timestamp';
-	
+		
 			$result = plaatenergy_db_query($sql);
 		
 			while ($row = plaatenergy_db_fetch_object($result)) {
@@ -254,7 +254,7 @@ function plaatenergy_day_out_energy_page() {
 		}
 		$json = "[".$data."]";
 	} 
-		
+
 	if ($eid==EVENT_WATT) {
 	
 		$page = '
@@ -274,6 +274,10 @@ function plaatenergy_day_out_energy_page() {
           legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
            vAxis: {format: "decimal", title:""},
            hAxis: {title:""},
+			  backgroundColor: "transparent",
+			  chartArea: {
+              backgroundColor: "transparent"
+           }
          };
 
          var chart = new google.charts.Line(document.getElementById("chart_div"));
@@ -296,7 +300,10 @@ function plaatenergy_day_out_energy_page() {
           vAxis: {format: "decimal" },
           isStacked: true,
           colors: ["#0066cc", "#808080"],
-
+			 backgroundColor: "transparent",
+			 chartArea: {
+            backgroundColor: "transparent"
+          }
         };
 
         var data = google.visualization.arrayToDataTable('.$json.');
@@ -307,7 +314,7 @@ function plaatenergy_day_out_energy_page() {
 	}
 		
 	$forecast = ($out_forecast[$month] * $energy_delivery_forecast) / cal_days_in_month (CAL_GREGORIAN, $month, $year);
- 
+
 	$page .= '<h1>'.t('TITLE_DAY_OUT_KWH', plaatenergy_dayofweek($date),$day, $month, $year).'</h1>';
 	$page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions',LOOK_AND_FEEL).'"></div>';
 

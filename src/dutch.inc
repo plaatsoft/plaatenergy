@@ -136,7 +136,7 @@ $lang['DAY_REPORT'] = 'Dag Rapportages';
 $lang['WEATHER_REPORT'] = 'Weer Rapportages';
 $lang['OTHER_REPORT'] = 'Overige';
 
-
+$lang['NO_MEASUREMENT_ERROR'] = 'Geen meting ontvangen recentelijk!';
 
 $lang['ENERGY_METER_1_CONNECTION_DOWN'] = i('times') . 'Energie meter';
 $lang['ENERGY_METER_1_CONNECTION_UP'] = i('check') . 'Energie meter';

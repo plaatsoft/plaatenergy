@@ -80,7 +80,7 @@ function check_solar_converter($index) {
 
 		} else {
 
-			$page = '<div class="checker bad">';
+			$page = '<div class="checker bad" title="'.t('NO_MEASUREMENT_ERROR').'">';
 			$page .= t('SOLAR_METER_'.$index.'_CONNECTION_DOWN');	
 			$page .='</div>';
 		}
@@ -113,7 +113,7 @@ function check_energy_meter($index) {
 			
 		} else {
 		
-			$page  = '<div class="checker bad">';
+			$page = '<div class="checker bad" title="'.t('NO_MEASUREMENT_ERROR').'">';
 			$page .= t('ENERGY_METER_'.$index.'_CONNECTION_DOWN');
 			$page .= '</div>';
 		}
@@ -146,7 +146,7 @@ function check_weather_station() {
 			
 		} else {
 		
-			$page  = '<div class="checker bad">';
+			$page = '<div class="checker bad" title="'.t('NO_MEASUREMENT_ERROR').'">';
 			$page .= t('WEATHER_METER_CONNECTION_DOWN');
 			$page .= '</div>';
 		}

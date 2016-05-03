@@ -101,9 +101,13 @@ function plaatenergy_day_in_gas_page() {
 
 			var options = {
 				bar: {groupWidth: "90%"},
-          legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
+            legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
 				isStacked: true,
 				vAxis: {format: "decimal"},
+				backgroundColor: "transparent",
+			   chartArea: {
+              backgroundColor: "transparent"
+            }
 			};
 
 			var data = google.visualization.arrayToDataTable('.$json.');

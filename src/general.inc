@@ -197,6 +197,9 @@ function add_icons() {
 	// Web app cable (runs the website as app)
 	$page .= '<meta name="apple-mobile-web-app-capable" content="yes">';
 	$page .= '<meta name="mobile-web-app-capable" content="yes">';
+
+	// Workarround to get transparant Google Charts
+	//$page .= '<style>rect{fill:none;}</style>'; 
 	
 	// Title
 	$page .= '<title>'.t('TITLE').'</title>';

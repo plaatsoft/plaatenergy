@@ -91,6 +91,10 @@ function plaatenergy_day_pressure_page() {
           legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
           vAxis: {format: "decimal", baseline:950},
           animation: { duration: 3000, easing: "in", startup: true },
+			 backgroundColor: "transparent",
+			 chartArea: {
+            backgroundColor: "transparent"
+          }
         };
 
         var data = google.visualization.arrayToDataTable('.$json.');

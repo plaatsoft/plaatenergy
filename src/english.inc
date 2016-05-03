@@ -136,6 +136,8 @@ $lang['DAY_REPORT'] = 'Day Reports';
 $lang['WEATHER_REPORT'] = 'Weather Reports';
 $lang['OTHER_REPORT'] = 'Other';
 
+$lang['NO_MEASUREMENT_ERROR'] = 'No measurement received lately!';
+
 $lang['ENERGY_METER_1_CONNECTION_DOWN'] = i('times') . 'Energy meter';
 $lang['ENERGY_METER_1_CONNECTION_UP'] = i('check') . 'Energy meter';
 

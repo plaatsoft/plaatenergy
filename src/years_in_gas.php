@@ -120,6 +120,10 @@ function plaatenergy_years_in_gas_page() {
           bar: {groupWidth: "90%"},
           legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
           vAxis: {format: "decimal"},
+			 backgroundColor: "transparent",
+			 chartArea: {
+            backgroundColor: "transparent"
+          },
 			 ';
 				if ($eid==EVENT_EURO) {			 
 					$page .= 'colors: ["#e0440e"],';

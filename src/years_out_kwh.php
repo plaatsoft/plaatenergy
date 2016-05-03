@@ -137,7 +137,11 @@ function plaatenergy_years_out_energy_page() {
           bar: {groupWidth: "90%"},
           legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
           vAxis: {format: "decimal"},
-          isStacked:true,';
+          isStacked:true,
+			 backgroundColor: "transparent",
+			 chartArea: {
+            backgroundColor: "transparent"
+          },';
 			 
 	if ($eid==EVENT_KWH) {
 		$page .= '
