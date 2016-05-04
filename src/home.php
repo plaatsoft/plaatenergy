@@ -34,7 +34,6 @@ $energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present', E
 $gas_meter_present = plaatenergy_db_get_config_item('gas_meter_present', GAS_METER_1);
 $system_name = plaatenergy_db_get_config_item('system_name', LOOK_AND_FEEL);
 
-
 $password = plaatenergy_post("password", "");
 
 /*

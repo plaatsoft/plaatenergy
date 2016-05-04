@@ -74,33 +74,32 @@ $lang['DAY_6']           = 'Sat';
 ** ------------------
 */
 
-$lang['LINK_HOME']       = i('home') . 'Home'; 
-$lang['LINK_PREV']       = i('chevron-left') . 'Previous'; 
-$lang['LINK_NEXT']       = 'Next' . i('chevron-right'); 
-$lang['LINK_PREV_YEAR']  = i('chevron-left') . 'Previous Year'; 
-$lang['LINK_PREV_MONTH'] = i('chevron-left') . 'Previous Month'; 
-$lang['LINK_PREV_DAY']   = i('chevron-left') . 'Previous Day'; 
-$lang['LINK_NEXT_YEAR']  = 'Next Year' . i('chevron-right'); 
-$lang['LINK_NEXT_MONTH'] = 'Next Month' . i('chevron-right'); 
-$lang['LINK_NEXT_DAY']   = 'Next Day' . i('chevron-right'); 
-$lang['LINK_EDIT']       = i('edit') . 'Edit'; 
-$lang['LINK_M3']         = i('tint') . 'm&sup3;'; 
-$lang['LINK_WATT']       = i('bolt') . 'Watt'; 
-$lang['LINK_KWH']        = i('bolt') . 'kWh'; 
-$lang['LINK_EURO']       = i('eur') . 'Euro';
-$lang['LINK_INSERT']     = i('plus') . 'Insert';  
-$lang['LINK_UPDATE']     = i('edit') . 'Update';  
-$lang['LINK_EXECUTE']    = i('play') . 'Execute'; 
-$lang['LINK_SAVE']       = i('edit') . 'Save'; 
-$lang['LINK_CANCEL']     = i('times') . 'Cancel';
-$lang['LINK_SETTINGS']   = i('cog') . 'Settings';  
-$lang['LINK_MAX']        = i('bolt') . 'Peak';
-$lang['LINK_BACKUP']     = i('archive') . 'Backup';
-$lang['LINK_EXPORT']     = i('download') . 'Export to CSV';
-$lang['LINK_SCATTER']    = 'Scatter';
-$lang['LINK_LOGIN']      = 'Login';
-$lang['LINK_BACK']       = i('home') . 'Back'; 
-
+$lang['LINK_HOME']          = i('home') . 'Home'; 
+$lang['LINK_PREV']          = i('chevron-left') . 'Previous'; 
+$lang['LINK_NEXT']          = 'Next' . i('chevron-right'); 
+$lang['LINK_PREV_YEAR']     = i('chevron-left') . 'Previous Year'; 
+$lang['LINK_PREV_MONTH']    = i('chevron-left') . 'Previous Month'; 
+$lang['LINK_PREV_DAY']      = i('chevron-left') . 'Previous Day'; 
+$lang['LINK_NEXT_YEAR']     = 'Next Year' . i('chevron-right'); 
+$lang['LINK_NEXT_MONTH']    = 'Next Month' . i('chevron-right'); 
+$lang['LINK_NEXT_DAY']      = 'Next Day' . i('chevron-right'); 
+$lang['LINK_EDIT']          = i('edit') . 'Edit'; 
+$lang['LINK_M3']            = i('tint') . 'm&sup3;'; 
+$lang['LINK_WATT']          = i('bolt') . 'Watt'; 
+$lang['LINK_KWH']           = i('bolt') . 'kWh'; 
+$lang['LINK_EURO']          = i('eur') . 'Euro';
+$lang['LINK_INSERT']        = i('plus') . 'Insert';  
+$lang['LINK_UPDATE']        = i('edit') . 'Update';  
+$lang['LINK_EXECUTE']       = i('play') . 'Execute'; 
+$lang['LINK_SAVE']          = i('edit') . 'Save'; 
+$lang['LINK_CANCEL']        = i('times') . 'Cancel';
+$lang['LINK_SETTINGS']      = i('cog') . 'Settings';  
+$lang['LINK_MAX']           = i('bolt') . 'Peak';
+$lang['LINK_BACKUP']        = i('archive') . 'Export to SQL';
+$lang['LINK_EXPORT']        = i('download') . 'Export to CSV';
+$lang['LINK_SCATTER']       = 'Scatter';
+$lang['LINK_LOGIN']         = 'Login';
+$lang['LINK_BACK']          = i('home') . 'Back'; 
 $lang['LINK_IN_ENERGY']     = i('bar-chart').'Used Electricity';
 $lang['LINK_OUT_ENERGY']    = i('bar-chart').'Delivered Electricity';
 $lang['LINK_IN_GAS']        = i('bar-chart').'Used Gas';
@@ -114,6 +113,7 @@ $lang['LINK_REPORT']        = i('rocket') . 'Custom Query';
 $lang['LINK_GUI']           = i('table') . 'Realtime Dashboard';
 $lang['LINK_SYSTEM'] 	    = i('fort-awesome') .'System Overview';
 $lang['LINK_IMPORT_EXPORT'] = i('download') .'Export Data'; 
+$lang['LINK_DELETE']        = 'Delete'; 
  
 /*
 ** ------------------

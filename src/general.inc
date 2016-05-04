@@ -20,24 +20,16 @@
  * @file
  * @brief contain general logic
  */
- 
- 
+
 /*
 ** -----------
-** CONSTANTS
+** DIRECTORY
 ** -----------
 */
 
-// Energy use forecast (per month)
-$in_forecast = array(0,100/1040,100/1040,90/1040,90/1040,80/1040,70/1040,70/1040,70/1040,80/1040,90/1040,100/1040,100/1040);
-
-// Energy delivery forecast (per month)
-$out_forecast = array(0,50/2550,100/2550,210/2550,310/2550,360/2550,360/2550,330/2550,290/2550,240/2550,160/2550,90/2550,50/2550);
-
-// Gas use forecast (per month)
-$gas_forecast = array(0,250/1500,220/1500,180/1500,110/1500,60/1500,40/1500,30/1500,30/1500,50/1500,110/1500,190/1500,230/1500);
-
-
+// Installation path
+define('BASE_DIR', '/var/www/html/plaatenergy');
+ 
 /*
 ** -----------
 ** PAGES
@@ -106,6 +98,7 @@ define('EVENT_SCATTER',             94);
 define('EVENT_LOGIN',               95);
 define('EVENT_SCHEME',              96);
 define('EVENT_LANGUAGE',            97);
+define('EVENT_DELETE',              98);
 
 /*
 ** -----------
@@ -122,6 +115,21 @@ define('SOLAR_METER_3',            33);
 define('WEATHER_METER_1',          41);
 define('SECURITY',                 51);
 define('LOOK_AND_FEEL',            52);
+
+/*
+** -----------
+** CONSTANTS
+** -----------
+*/
+
+// Energy use forecast (per month)
+$in_forecast = array(0,100/1040,100/1040,90/1040,90/1040,80/1040,70/1040,70/1040,70/1040,80/1040,90/1040,100/1040,100/1040);
+
+// Energy delivery forecast (per month)
+$out_forecast = array(0,50/2550,100/2550,210/2550,310/2550,360/2550,360/2550,330/2550,290/2550,240/2550,160/2550,90/2550,50/2550);
+
+// Gas use forecast (per month)
+$gas_forecast = array(0,250/1500,220/1500,180/1500,110/1500,60/1500,40/1500,30/1500,30/1500,50/1500,110/1500,190/1500,230/1500);
 
 /*
 ** -----------

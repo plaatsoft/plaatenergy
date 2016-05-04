@@ -27,13 +27,15 @@
 ** ---------------------
 */
 
-$note[11] = '<div class="subparagraph">Version 1.1 (03-05-2016)</div>
+$note[11] = '<div class="subparagraph">Version 1.1 (04-05-2016)</div>
 <div class="large_text">
 <ul>
+<li>General: Improve export to SQL feature. Now export file can be downloaded and delete afterwards.</li>
 <li>General: Added weather station script base on onboard pi sensor.</li>
 <li>General: Show status of all enabled solar converters at home page.</li>
 <li>General: Added system name field to configuration.</li>
 <li>General: Added solar description field to configuration.</li>
+<li>General: Solar measument adaption now support 3 solar converters</li>
 <li>Bugfix: Google Chart background set explicient to transparent.</li>
 <li>Bugfix: Delivered electricity year report scale is now correct calculated.</li>
 <li>Bugfix: Monthly max power chart is now working correct with 3 solar converters active.</li>

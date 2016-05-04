@@ -111,9 +111,15 @@ function plaatenergy_backup_event() {
 	global $dbpass;
 	global $dbhost;
 	global $dbname;
-		
+	
+	$filename = plaatenergy_db_get_config_item('system_name', LOOK_AND_FEEL);
+	if (strlen($filename)==0) {
+		$filename=t('TITLE');
+	}
+	$filename = strtolower($filename);
+	
 	/* Create new database backup file */
-	$filename = 'backup/plaatenergy-'.date("Ymd").'.sql';
+	$filename = 'backup/'.$filename.'-'.date("Ymd").'.sql';
 
     /* Remove old file if it exists */
     @unlink($filename.'.gz');
@@ -126,7 +132,15 @@ function plaatenergy_backup_event() {
 	$command = 'gzip '.$filename;
 	system($command);
 }
+
+function plaatenergy_delete_file_event() {
+
+	/* input */
+	global $filename;
 	
+	unlink (BASE_DIR.'/backup/'.$filename);
+}
+
 	/*
 ** ---------------------
 ** PAGES
@@ -171,7 +185,31 @@ function plaatenergy_export_import_page() {
 	$page .= '<fieldset>';
 	
 	$page .= '<div class="nav">';
+	
+	$tmp = '';
+	$dh  = opendir(BASE_DIR.'/backup');
+	while (false !== ($filename = readdir($dh))) {
+	
+		if (($filename!='.') && ($filename!='..') && ($filename!='.htaccess')) {
+			$tmp .= '<tr>';
+			$tmp .= '<td><a href="backup/'.$filename.'">'.$filename.'</a></td>';
+			$tmp .= '<td>&nbsp;</td>';
+			$tmp .= '<td>'.plaatenergy_link('pid='.$pid.'&eid='.EVENT_DELETE.'&filename='.$filename, t('LINK_DELETE')).'</td>';
+			$tmp .= '</tr>';
+		}
+	}	
+	
+	if (strlen($tmp)>0) {
+		
+		$page .= '<table>';
+		$page .= $tmp;
+		$page .= '</table>';
+		$page .= '<br/>';
+		$page .= '<br/>';
+	}
+	
 	$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_BACKUP, t('LINK_BACKUP'));
+	$page .= '<br/>';
 	$page .=  '</div>';
 	
 	$page .= '</fieldset>';
@@ -184,7 +222,6 @@ function plaatenergy_export_import_page() {
 	
 	return $page;	
 }
-	
 	
 /*
 ** ---------------------
@@ -204,6 +241,10 @@ function plaatenergy_export() {
 		case EVENT_EXPORT:
         return plaatenergy_export_event();
         exit;
+		  
+		case EVENT_DELETE:
+			plaatenergy_delete_file_event();
+			break;
 		  
 		case EVENT_BACKUP:
 			plaatenergy_backup_event();

@@ -95,7 +95,7 @@ $lang['LINK_SAVE']           = i('edit') . 'Opslaan';
 $lang['LINK_CANCEL']         = i('times') . 'Annuleren'; 
 $lang['LINK_SETTINGS']       = i('cog') . 'Configuratie'; 
 $lang['LINK_MAX']            = i('bolt') . 'Piek';
-$lang['LINK_BACKUP']         = i('archive') . 'Backup';
+$lang['LINK_BACKUP']         = i('archive') . 'Export naar SQL';
 $lang['LINK_EXPORT']         = i('download') . 'Export naar CSV';
 $lang['LINK_SCATTER']        = 'Scatter';
 $lang['LINK_LOGIN']          = 'Login';
@@ -114,6 +114,7 @@ $lang['LINK_DONATE']         = i('money') . 'Donatie';
 $lang['LINK_REPORT']         = i('archive') . 'Rapportage';
 $lang['LINK_GUI']            = i('table') . 'Realtime Dashboard';
 $lang['LINK_IMPORT_EXPORT']  = i('download') .'Export Data'; 
+$lang['LINK_DELETE']         = 'Verwijderen'; 
 
 /*
 ** ------------------
