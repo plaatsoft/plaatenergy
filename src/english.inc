@@ -39,26 +39,28 @@ $lang['THEME_TO_DARK'] = 'Dark theme';
 $lang['ENGLISH'] = 'English';
 $lang['DUTCH'] = 'Dutch';
 
-$lang['EURO']            = 'Euro'; 
-$lang['WATT']            = 'Watt'; 
-$lang['KWH']             = 'kWh'; 
-$lang['M3']              = 'm&sup3;'; 
-$lang['DATE']            = 'Date'; 
+$lang['EURO']                 = 'Euro'; 
+$lang['WATT']                 = 'Watt'; 
+$lang['KW']                   = 'kW'; 
+$lang['KWH']                  = 'kWh';
+$lang['MWH']                  = 'MWh';  
+$lang['M3']                   = 'm&sup3;'; 
+$lang['DATE']                 = 'Date'; 
 
-$lang['USED_LOW_KWH']    = 'Low (kWh)'; 
-$lang['USED_HIGH_KWH']   = 'Normal (kWh)'; 
-$lang['USED_LOCAL_KWH']  = 'Local (kWh)'; 
-$lang['USED_KWH']        = 'Used (kWh)'; 
-$lang['DELIVERED_LOW_KWH'] = 'Low (kWh)'; 
+$lang['USED_LOW_KWH']         = 'Low (kWh)'; 
+$lang['USED_HIGH_KWH']        = 'Normal (kWh)'; 
+$lang['USED_LOCAL_KWH']       = 'Local (kWh)'; 
+$lang['USED_KWH']             = 'Used (kWh)'; 
+$lang['DELIVERED_LOW_KWH']    = 'Low (kWh)'; 
 $lang['DELIVERED_NORMAL_KWH'] = 'Normal (kWh)'; 
-$lang['DELIVERED_LOCAL_KWH'] = 'Local (kWh)'; 
-$lang['DELIVERED_KWH']   = 'Delivered (kWh)'; 
-$lang['FORECAST_KWH']    = 'Forecast (kWh)'; 
-$lang['USED_M3']         = 'Used (m&sup3;)'; 
-$lang['FORECAST_M3']     = 'Forecast (m&sup3;)'; 
-$lang['PRESSURE']        = 'Pressure (hPa)';
-$lang['TEMPERATURE']     = 'Temperature (&deg;C)';
-$lang['HUMIDITY']        = 'Humidity (%)';
+$lang['DELIVERED_LOCAL_KWH']  = 'Local (kWh)'; 
+$lang['DELIVERED_KWH']        = 'Delivered (kWh)'; 
+$lang['FORECAST_KWH']         = 'Forecast (kWh)'; 
+$lang['USED_M3']              = 'Used (m&sup3;)'; 
+$lang['FORECAST_M3']          = 'Forecast (m&sup3;)'; 
+$lang['PRESSURE']             = 'Pressure (hPa)';
+$lang['TEMPERATURE']          = 'Temperature (&deg;C)';
+$lang['HUMIDITY']             = 'Humidity (%)';
 
 $lang['DAY_0']           = 'Sun';
 $lang['DAY_1']           = 'Mon';
@@ -195,7 +197,7 @@ $lang['TITLE_MONTH_PEAK_OUT_KWH'] = 'Delivered Peak Electricity %s-%s';
 $lang['AVERAGE_PER_DAY_KWH'] = 'Average per day %s kWh [Total = %s kWh]';
 $lang['AVERAGE_PER_DAY_M3'] = 'Average per day %s m&sup3; [Total = %s m&sup3;]';
 $lang['AVERAGE_PER_DAY_EURO'] = 'Average per day %s euro [Total = %s euro]';
-$lang['MAX_PEAK_ENERGY'] = 'Maximum peak energy this month is %s Watt.';
+$lang['MAX_PEAK_ENERGY'] = 'Maximum peak energy this month is %s.';
 
 /*
 ** ------------------

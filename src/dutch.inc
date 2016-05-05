@@ -41,7 +41,9 @@ $lang['DUTCH'] = 'Nederlands';
 
 $lang['EURO']                = 'Euro'; 
 $lang['WATT']                = 'Watt'; 
+$lang['KW']                  = 'kW'; 
 $lang['KWH']                 = 'kWh';
+$lang['MWH']                 = 'MWh'; 
 $lang['M3']                  = 'm&sup3;';
 $lang['DATE']                = 'Datum';
 
@@ -196,7 +198,7 @@ $lang['TITLE_MONTH_PEAK_OUT_KWH'] = 'Geleverde Piek vermogen %s-%s';
 $lang['AVERAGE_PER_DAY_KWH'] = 'Gemiddeld per dag %s kWh [Totaal = %s kWh]';
 $lang['AVERAGE_PER_DAY_M3'] = 'Gemiddeld per dag %s m&sup3; [Totaal = %s m&sup3;]';
 $lang['AVERAGE_PER_DAY_EURO'] = 'Gemiddeld per dag %s euro [Totaal = %s euro]';
-$lang['MAX_PEAK_ENERGY'] = 'Maximale piek vermogen deze maand is %s Watt.';
+$lang['MAX_PEAK_ENERGY'] = 'Maximale piek vermogen deze maand is %s.';
 
 /*
 ** ------------------

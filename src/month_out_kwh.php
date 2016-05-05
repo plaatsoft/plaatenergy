@@ -187,9 +187,10 @@ function plaatenergy_month_out_energy_page() {
 	<script type="text/javascript">
       google.load("visualization", "1", {packages:["bar"]});
       google.setOnLoadCallback(drawChart);
+		
       function drawChart() {
 
-       var options = {
+		var options = {
           bars: "vertical",
           bar: {groupWidth: "90%"},
           legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
@@ -211,13 +212,18 @@ function plaatenergy_month_out_energy_page() {
 	$page .= '
         };
 
-        var data = google.visualization.arrayToDataTable('.$json.');
-        var chart = new google.charts.Bar(document.getElementById("chart_div"));
-        chart.draw(data, google.charts.Bar.convertOptions(options));
+         var data = google.visualization.arrayToDataTable('.$json.');
+		   var formatter = new google.visualization.NumberFormat(
+				{ negativeColor: "red", negativeParens: true, decimalSymbol: ",", groupingSymbol: ".", fractionDigits:0}
+			);
+		   formatter.format(data, 1);
+			
+         var chart = new google.charts.Bar(document.getElementById("chart_div"));
+         chart.draw(data, google.charts.Bar.convertOptions(options));
 
-        google.visualization.events.addListener(chart, "select", selectHandler);
+         google.visualization.events.addListener(chart, "select", selectHandler);
 
-        function selectHandler(e)     {
+         function selectHandler(e)     {
            var date = data.getValue(chart.getSelection()[0].row, 0);
            var day = date.split("-");
 			  link("pid='.PAGE_DAY_OUT_ENERGY.'&eid='.$eid.'&date='.$year.'-'.$month.'-"+day[0]);
@@ -242,7 +248,7 @@ function plaatenergy_month_out_energy_page() {
 			break;
 			
 		case EVENT_MAX:
-			$page .= t('MAX_PEAK_ENERGY', $max);
+			$page .= t('MAX_PEAK_ENERGY', plaatenergy_format_watt($max));
 			break;
 			
 		case EVENT_EURO:

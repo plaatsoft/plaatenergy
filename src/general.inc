@@ -137,6 +137,16 @@ $gas_forecast = array(0,250/1500,220/1500,180/1500,110/1500,60/1500,40/1500,30/1
 ** -----------
 */
 
+function plaatenergy_format_watt($value) {
+	
+	if (($value / 1000) > 0.0) {
+		$value = $value / 1000;
+		return number_format($value,2,',','.').' '.t('KW');
+	} else { 
+		return number_format($value,2,',','.').' '.t('WATT');
+	}
+}
+
 function plaatenergy_dayofweek2($value) {
 
     list($year, $month, $day) = explode("-", $value);
