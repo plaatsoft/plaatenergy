@@ -186,13 +186,17 @@ function plaatenergy_home_login_page() {
 
    // input
    global $id;
+	global $system_name;
 			
-   $page = '<h1>';
-   $page .= t('TITLE').' ';
-   $page .= '<div id="version" style="display: inline">';
-   $page .= plaatenergy_db_get_config_item('database_version');
-   $page .= "</div>";
-   $page .= '</h1>';
+	$page = '<h1>';
+   $page .= t('TITLE');
+	$page .= ' <div id="version" style="display: inline">';
+	$page .= plaatenergy_db_get_config_item('database_version');
+	$page .= "</div>";
+	if (strlen($system_name)>0) {
+		$page .= ' ('.$system_name.') ';
+	} 	
+	$page .= '</h1>';
 
    $page .= '<br/>';
    $page .= '<label>'.t('LABEL_PASSWORD').'</label>';
@@ -204,7 +208,7 @@ function plaatenergy_home_login_page() {
    $page .= '<input type="submit" name="Submit" id="normal_link" value="'.t('LINK_LOGIN').'"/>';
    $page .= '</div>';
 	
-   $page .= '<script type="text/javascript">var ip="'.$_SERVER['SERVER_ADDR'].'";</script>';
+   $page .= '<script type="text/javascript">var ip="'.$_SERVER['SERVER_ADDR'].'";var system_name="'.$system_name.'";</script>';
    $page .= '<script type="text/javascript" src="js/version.js"></script>';
 	
    return $page;
@@ -225,18 +229,13 @@ function plaatenergy_home_page() {
 	global $session;
 	
 	$page = '<h1>';
-		
-	
    $page .= t('TITLE');
-	
 	$page .= ' <div id="version" style="display: inline">';
 	$page .= plaatenergy_db_get_config_item('database_version');
 	$page .= "</div>";
-	
 	if (strlen($system_name)>0) {
 		$page .= ' ('.$system_name.') ';
 	} 	
-	
 	$page .= '</h1>';
 
 	if ( !file_exists ( "config.inc" )) {
@@ -400,7 +399,7 @@ function plaatenergy_home_page() {
 
 		$page .= '<br/><br/>';
 
-		$page .= '<script type="text/javascript">var ip="'.$_SERVER['SERVER_ADDR'].'";</script>';
+		$page .= '<script type="text/javascript">var ip="'.$_SERVER['SERVER_ADDR'].'";var system_name="'.$system_name.'";</script>';
 		$page .= '<script type="text/javascript" src="js/version.js"></script>';
 	}
 	return $page;

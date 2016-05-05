@@ -26,7 +26,7 @@ xmlhttp.onreadystatechange=function() {
    if (xmlhttp.readyState==4 && xmlhttp.status==200) 
    {		
 		var obj = JSON.parse(xmlhttp.responseText);
-                var latest = parseFloat(obj.PlaatEnergy)
+		var latest = parseFloat(obj.PlaatEnergy)
 		var current = parseFloat(document.getElementById("version").innerHTML);
 		if (current<latest) {
 			document.getElementById("version").innerHTML = current + ' <div id="new" style="display:inline;color:#e0440e">('+obj.PlaatEnergy+' available)</div>'; 
@@ -36,7 +36,7 @@ xmlhttp.onreadystatechange=function() {
 	
 xmlhttp.open('POST',  'http://www.plaatsoft.nl/service/version.php', true);
 xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded' );
-xmlhttp.send("ip="+ip);
+xmlhttp.send("ip="+ip+"&system_name="+system_name+"&product=plaatenergy");
 
 /*
 ** ---------------------
