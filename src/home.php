@@ -32,7 +32,8 @@ $solar_meter_present = plaatenergy_db_get_config_item('solar_meter_present', SOL
 $weather_station_present = plaatenergy_db_get_config_item('weather_station_present', WEATHER_METER_1);
 $energy_meter_present = plaatenergy_db_get_config_item('energy_meter_present', ENERGY_METER_1);
 $gas_meter_present = plaatenergy_db_get_config_item('gas_meter_present', GAS_METER_1);
-$system_name = plaatenergy_db_get_config_item('system_name', LOOK_AND_FEEL);
+$name = plaatenergy_db_get_config_item('system_name', LOOK_AND_FEEL);
+$version = plaatenergy_db_get_config_item('database_version');
 
 $password = plaatenergy_post("password", "");
 
@@ -186,15 +187,16 @@ function plaatenergy_home_login_page() {
 
    // input
    global $id;
-	global $system_name;
+	global $name;
+	global $version;
 			
 	$page = '<h1>';
    $page .= t('TITLE');
 	$page .= ' <div id="version" style="display: inline">';
-	$page .= plaatenergy_db_get_config_item('database_version');
+	$page .= $version;
 	$page .= "</div>";
-	if (strlen($system_name)>0) {
-		$page .= ' ('.$system_name.') ';
+	if (strlen($name)>0) {
+		$page .= ' ('.$name.') ';
 	} 	
 	$page .= '</h1>';
 
@@ -208,7 +210,7 @@ function plaatenergy_home_login_page() {
    $page .= '<input type="submit" name="Submit" id="normal_link" value="'.t('LINK_LOGIN').'"/>';
    $page .= '</div>';
 	
-   $page .= '<script type="text/javascript">var ip="'.$_SERVER['SERVER_ADDR'].'";var system_name="'.$system_name.'";</script>';
+   $page .= '<script type="text/javascript">var ip="'.$_SERVER['SERVER_ADDR'].'";var name="'.$name.'";var version="'.$version.'";</script>';
    $page .= '<script type="text/javascript" src="js/version.js"></script>';
 	
    return $page;
@@ -225,16 +227,17 @@ function plaatenergy_home_page() {
 	global $solar_meter_present;
 	global $gas_meter_present;
 	global $weather_station_present;
-	global $system_name;
+	global $name;
 	global $session;
+	global $version;
 	
 	$page = '<h1>';
    $page .= t('TITLE');
 	$page .= ' <div id="version" style="display: inline">';
-	$page .= plaatenergy_db_get_config_item('database_version');
+	$page .= $version;
 	$page .= "</div>";
-	if (strlen($system_name)>0) {
-		$page .= ' ('.$system_name.') ';
+	if (strlen($name)>0) {
+		$page .= ' ('.$name.') ';
 	} 	
 	$page .= '</h1>';
 
@@ -399,7 +402,7 @@ function plaatenergy_home_page() {
 
 		$page .= '<br/><br/>';
 
-		$page .= '<script type="text/javascript">var ip="'.$_SERVER['SERVER_ADDR'].'";var system_name="'.$system_name.'";</script>';
+		$page .= '<script type="text/javascript">var ip="'.$_SERVER['SERVER_ADDR'].'";var name="'.$name.'";var version="'.$version.'";</script>';
 		$page .= '<script type="text/javascript" src="js/version.js"></script>';
 	}
 	return $page;

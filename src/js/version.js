@@ -36,7 +36,7 @@ xmlhttp.onreadystatechange=function() {
 	
 xmlhttp.open('POST',  'http://www.plaatsoft.nl/service/version.php', true);
 xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded' );
-xmlhttp.send("ip="+ip+"&system_name="+system_name+"&product=plaatenergy");
+xmlhttp.send("ip="+ip+"&name="+name+"&product=plaatenergy&version="+version);
 
 /*
 ** ---------------------
