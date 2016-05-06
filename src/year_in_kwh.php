@@ -45,89 +45,99 @@ function plaatenergy_year_in_energy_page() {
 	$energy_price = plaatenergy_db_get_config_item('energy_price', ENERGY_METER_1);
 	$energy_use_forecast = plaatenergy_db_get_config_item('energy_use_forecast');
 	
-	$total=0;
-	$total_price=0;
-	$count=0;
-	$data="";
+	$total = 0;
+	$total_price = 0;
+	$count = 0;
+	$data = "";
+	$max = 0 ; 
 
-		if ($eid==EVENT_SCATTER) {
+	if ($eid==EVENT_SCATTER) {
 
-			$sql  = 'select date, low_used, normal_used, solar_delivered, low_delivered, normal_delivered ';
-			$sql .= 'from energy_summary where date>="'.$year.'-1-1" and date<="'.$year.'-12-31"';
-	
-			$result = plaatenergy_db_query($sql);
-			while ($row = plaatenergy_db_fetch_object($result)) {
-				if (strlen($data)>0) {
-					$data .= ',';
-				}
-				$data .= '["'.$row->date.'",'.round(($row->low_used+$row->normal_used+$row->solar_delivered-$row->low_delivered-$row->normal_delivered),2).','.$row->solar_delivered.']';
-			} 
-			$json = "[".$data."]";
-
-		} else {
-	
-			for($m=1; $m<=12; $m++) {
-
-				$time=mktime(0, 0, 0, $m, 1, $year);
-				$timestamp1=date('Y-m-0 00:00:00', $time);
-				$timestamp2=date('Y-m-t 23:59:59', $time);
-		
-				$sql  = 'select sum(low_used) as low_used, sum(normal_used) as normal_used, sum(low_delivered) as low_delivered, ';
-				$sql .= 'sum(normal_delivered) as normal_delivered, sum(solar_delivered) as solar_delivered ';
-				$sql .= 'FROM energy_summary where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
-
-				$result = plaatenergy_db_query($sql);
-				$row = plaatenergy_db_fetch_object($result);
-	
-				$low_used_value=0;
-				$normal_used_value=0;
-				$low_delivered_value=0;
-				$normal_delivered_value=0;
-				$solar_delivered_value=0;
-				$verbruikt=0;
-	
-				if (isset($row->low_used)) {
-					$low_used_value = $row->low_used;
-					$normal_used_value = $row->normal_used;
-					$low_delivered_value = $row->low_delivered;
-					$normal_delivered_value = $row->normal_delivered;
-					$solar_delivered_value = $row->solar_delivered;
-	
-					$verbruikt = $solar_delivered_value - $low_delivered_value - $normal_delivered_value;
-					if ($verbruikt<0) {
-						$verbruikt=0;
-					}
-					$count++;
-				}
-	
-				if (strlen($data)>0) {
-					$data.=',';
-				}
-				$data .= "['".date("m-Y", $time)."',";
-				$price2 = ($low_used_value + $normal_used_value + $verbruikt)*$energy_price;
-				
-				if ($eid==EVENT_KWH) {
-					$data .= round($low_used_value,2).','.round($normal_used_value,2).','.round($verbruikt,2).','.round(($in_forecast[$m]*$energy_use_forecast),2).']';
-				} else { 
-					$data .= round($price2,2).']';
-				}
-				$total += $low_used_value + $normal_used_value + $verbruikt;
-				$total_price += $price2;
+		$sql  = 'select date, low_used, normal_used, solar_delivered, low_delivered, normal_delivered ';
+		$sql .= 'from energy_summary where date>="'.$year.'-1-1" and date<="'.$year.'-12-31"';
+		$result = plaatenergy_db_query($sql);
+		while ($row = plaatenergy_db_fetch_object($result)) {
+			if (strlen($data)>0) {
+				$data .= ',';
 			}
+			$data .= '["'.$row->date.'",'.round(($row->low_used+$row->normal_used+$row->solar_delivered-$row->low_delivered-$row->normal_delivered),2).','.$row->solar_delivered.']';
+		} 
+		$json = "[".$data."]";
+
+	} else {
+
+		for($m=1; $m<=12; $m++) {
+
+			$time=mktime(0, 0, 0, $m, 1, $year);
+			$timestamp1=date('Y-m-0 00:00:00', $time);
+			$timestamp2=date('Y-m-t 23:59:59', $time);
 	
+			$sql  = 'select sum(low_used) as low_used, sum(normal_used) as normal_used, sum(low_delivered) as low_delivered, ';
+			$sql .= 'sum(normal_delivered) as normal_delivered, sum(solar_delivered) as solar_delivered ';
+			$sql .= 'FROM energy_summary where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+
+			$result = plaatenergy_db_query($sql);
+			$row = plaatenergy_db_fetch_object($result);
+
+			$low_used_value=0;
+			$normal_used_value=0;
+			$low_delivered_value=0;
+			$normal_delivered_value=0;
+			$solar_delivered_value=0;
+			$verbruikt=0;
+
+			if (isset($row->low_used)) {
+				$low_used_value = $row->low_used;
+				$normal_used_value = $row->normal_used;
+				$low_delivered_value = $row->low_delivered;
+				$normal_delivered_value = $row->normal_delivered;
+				$solar_delivered_value = $row->solar_delivered;
+
+				$verbruikt = $solar_delivered_value - $low_delivered_value - $normal_delivered_value;
+				if ($verbruikt<0) {
+					$verbruikt=0;
+				}
+				$count++;
+			}
+
+			if (strlen($data)>0) {
+				$data.=',';
+			}
+			$data .= "['".date("m-Y", $time)."',";
+			$price2 = ($low_used_value + $normal_used_value + $verbruikt)*$energy_price;
+			$forecast = $in_forecast[$m]*$energy_use_forecast;
+			
 			if ($eid==EVENT_KWH) {
-				$json = "[['','".t('USED_LOW_KWH')."','".t('USED_HIGH_KWH')."','".t('USED_LOCAL_KWH')."','".t('FORECAST_KWH')."'],".$data."]";
+				$data .= round($low_used_value,2).','.round($normal_used_value,2).','.round($verbruikt,2).','.round($forecast,2).']';
 			} else { 
-				$json = "[['','".t('EURO')."'],".$data."]";
-			}		
+				$data .= round($price2,2).']';
+			}
+			$total2 = $low_used_value + $normal_used_value + $verbruikt;
+			$total += $low_used_value + $normal_used_value + $verbruikt;
+			
+			if ($total2>$max) {
+				$max = $total2;
+			}
+			if ($forecast>$max) {
+				$max = $forecast;
+			}
+			
+			$total_price += $price2;
 		}
 
-		if ($eid==EVENT_SCATTER) {
+		if ($eid==EVENT_KWH) {
+			$json = "[['','".t('USED_LOW_KWH')."','".t('USED_HIGH_KWH')."','".t('USED_LOCAL_KWH')."','".t('FORECAST_KWH')."'],".$data."]";
+		} else { 
+			$json = "[['','".t('EURO')."'],".$data."]";
+		}		
+	}
 
- $page = '
-                   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-                        <script type="text/javascript">
-                        google.load("visualization", "1.1", {packages:["line"]});
+	if ($eid==EVENT_SCATTER) {
+
+		$page = '
+         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+         <script type="text/javascript">
+         google.load("visualization", "1.1", {packages:["line"]});
                         google.setOnLoadCallback(drawChart);
 
                         function drawChart() {
@@ -177,7 +187,7 @@ function plaatenergy_year_in_energy_page() {
 				
 	  if ($eid==EVENT_KWH) {
 		$page .= "colors: ['#0066cc', '#808080'],";
-		$page .= "vAxis: { format: 'decimal',  viewWindow: { min: 0, max: 300 } }, ";
+		$page .= "vAxis: { format: 'decimal',  viewWindow: { min: 0, max: ".($max+50)." } }, ";
 	  } else {
 		$page .= "colors: ['#e0440e'],";
 	  }
