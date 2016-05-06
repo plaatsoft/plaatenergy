@@ -119,7 +119,7 @@ function plaatenergy_backup_event() {
 	$filename = strtolower($filename);
 	
 	/* Create new database backup file */
-	$filename = 'backup/'.$filename.'-'.date("Ymd").'.sql';
+	$filename = BASE_DIR.'/backup/'.$filename.'-'.date("Ymd").'.sql';
 
     /* Remove old file if it exists */
     @unlink($filename.'.gz');
