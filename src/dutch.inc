@@ -181,6 +181,7 @@ $lang['TITLE_YEAR_IN_M3'] = 'Afgenomen Gas - %s';
 $lang['TITLE_YEAR_OUT_KWH'] = 'Geleverde Elektriciteit - %s';
 
 $lang['AVERAGE_PER_MONTH_KWH'] = 'Gemiddeld per maand %s kWh [Totaal = %s kWh]';
+$lang['AVERAGE_PER_MONTH_OUT_KWH'] = 'Gemiddeld per maand %s kWh [Totaal = %s kWh | Efficientie = %s kWh/kWp/dag]';
 $lang['AVERAGE_PER_MONTH_M3'] = 'Gemiddeld per maand %s m&sup3; [Totaal = %s m&sup3;]';
 $lang['AVERAGE_PER_MONTH_EURO'] = 'Gemiddeld per maand %s euro [Totaal = %s euro]';
 
@@ -315,6 +316,7 @@ $lang['solar_meter_ip' ] = 'Solar converter TCP/IP adres';
 $lang['solar_meter_port'] = 'Solar converter TCP poort nummer';
 $lang['solar_meter_serial_number'] = 'Solar converter serial nummer';
 $lang['solar_initial_meter_reading'] = 'Solar converter start meterstand (kWh)';
+$lang['solar_peak_power'] = 'Solar converter piek vermogen (Wp)';
 
 $lang['weather_station_present'] = 'Weerstation aanwezig';
 $lang['weather_station_vendor'] = 'Weerstation producent';

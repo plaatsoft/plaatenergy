@@ -34,7 +34,7 @@ $password = plaatenergy_post("password", "");
 $sql  = 'select id from config where category='.$cat.' and readonly=0';
 $result = plaatenergy_db_query($sql);
 $count = plaatenergy_db_num_rows($result);
-$step = 7;
+$step = 8;
 $max = 0;
 if ($count>$step) {
 	$max = 1;

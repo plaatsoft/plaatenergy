@@ -23,6 +23,10 @@ INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (
 INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (32, 'solar_description', '', '', 0, 0);
 INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (33, 'solar_description', '', '', 0, 0);
 
+INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (31, 'solar_peak_power', '0', '', 0, 0);
+INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (32, 'solar_peak_power', '0', '', 0, 0);
+INSERT INTO config (category, token, value, options, readonly, rebuild) VALUES (33, 'solar_peak_power', '0', '', 0, 0);
+
 
 
 

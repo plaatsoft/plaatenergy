@@ -180,6 +180,7 @@ $lang['TITLE_YEAR_IN_M3'] = 'Used Gas - %s';
 $lang['TITLE_YEAR_OUT_KWH'] = 'Delivered Electricity - %s';
 
 $lang['AVERAGE_PER_MONTH_KWH'] = 'Average per month %s kWh [Total = %s kWh]';
+$lang['AVERAGE_PER_MONTH_OUT_KWH'] = 'Average per month %s kWh [Total = %s kWh | Efficiency = %s kWh/kWp/day]';
 $lang['AVERAGE_PER_MONTH_M3'] = 'Average per month %s m&sup3; [Total = %s m&sup3;]';
 $lang['AVERAGE_PER_MONTH_EURO'] = 'Average per month %s euro [Total = %s euro]';
 
@@ -309,6 +310,7 @@ $lang['solar_meter_ip' ] = 'Solar converter TCP/IP address';
 $lang['solar_meter_port'] = 'Solar converter TCP port number';
 $lang['solar_meter_serial_number'] = 'Solar converter serial number';
 $lang['solar_initial_meter_reading'] = 'Solar converter initial meter reading (kWh)';
+$lang['solar_peak_power'] = 'Solar converter peak power (Wp)';
 
 $lang['gas_meter_present' ] = 'Gas meter present';
 $lang['gas_price' ] = 'Gas price per m&sup3;';

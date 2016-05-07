@@ -166,12 +166,33 @@ function plaatenergy_year_out_energy_page() {
     </script>';
 
 	$page .= '<h1>'.t('TITLE_YEAR_OUT_KWH', $year).'</h1>';
-        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions',LOOK_AND_FEEL).'"></div>';
+	$page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions',LOOK_AND_FEEL).'"></div>';
 
 	$page .= '<div class="remark">';
 	if ($count>0) {
 		if ($eid==EVENT_KWH) {
-			$page .= t('AVERAGE_PER_MONTH_KWH', round(($total_sum/$count),2), round($total_sum,2) );
+			
+			$sql  = 'select count(date) as days from energy_summary where date>="'.$year.'-1-1" and date<="'.$year.'-12-31"';
+			$result = plaatenergy_db_query($sql);
+			$row = plaatenergy_db_fetch_object($result);
+						
+			$days = 0;
+			if (isset($row->days)) {
+				$days = $row->days;
+			}
+					
+			$solar_peak_power1 = plaatenergy_db_get_config_item('solar_peak_power', SOLAR_METER_1);
+			$solar_peak_power2 = plaatenergy_db_get_config_item('solar_peak_power', SOLAR_METER_2);
+			$solar_peak_power3 = plaatenergy_db_get_config_item('solar_peak_power', SOLAR_METER_3);
+			$solar_peak_power = ($solar_peak_power1 + $solar_peak_power2 + $solar_peak_power3) / 1000;
+			
+			$efficiency = 0;			
+			if (($solar_peak_power>0) && ($days>0)) {
+				$efficiency = ($total_sum / $solar_peak_power / $days);
+			}
+
+			$page .= t('AVERAGE_PER_MONTH_OUT_KWH', round(($total_sum/$count),2), round($total_sum,2),  round($efficiency,2));
+			
 		} else {
 			$page .= t('AVERAGE_PER_MONTH_EURO', round(($total_price/$count),2), round($total_price,2) );
 		}
