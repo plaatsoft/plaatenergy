@@ -49,34 +49,40 @@ function plaatenergy_system_page() {
 	$gas_meter_present = plaatenergy_db_get_config_item('gas_meter_present', GAS_METER_1);
 	$weather_station_present = plaatenergy_db_get_config_item('weather_station_present', WEATHER_METER_1);
 	
-	$sql1  = 'select pac from solar1 where ';
+	$sql1  = 'select pac, etoday from solar1 where ';
 	$sql1 .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp desc limit 0,1';
 	$result1 = plaatenergy_db_query($sql1);
 	$data1 = plaatenergy_db_fetch_object($result1);
 		
 	$pac1 = 0;
+	$etoday1 = 0;
 	if ( isset($data1->pac) ) {
 		$pac1 = $data1->pac;
+		$etoday1 = $data1->etoday;
 	}
 		
-	$sql2  = 'select pac from solar2 where ';
+	$sql2  = 'select pac, etoday from solar2 where ';
 	$sql2 .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp desc limit 0,1';
 	$result2 = plaatenergy_db_query($sql2);
 	$data2 = plaatenergy_db_fetch_object($result2);
 	
 	$pac2 = 0;
+	$etoday2 = 0;
 	if ( isset($data2->pac) ) {
 		$pac2 = $data2->pac;
+		$etoday2 = $data2->etoday;
 	}
 	
-	$sql3  = 'select pac from solar3 where ';
+	$sql3  = 'select pac, etoday from solar3 where ';
 	$sql3 .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp desc limit 0,1';
 	$result3 = plaatenergy_db_query($sql3);
 	$data3 = plaatenergy_db_fetch_object($result3);
 	
 	$pac3 = 0;
+	$etoday3 = 0;
 	if ( isset($data3->pac) ) {
 		$pac3 = $data3->pac;
+		$etoday3 = $data3->etoday;
 	}
 	
 	$pac = $pac1 + $pac2 + $pac3;
@@ -126,7 +132,7 @@ function plaatenergy_system_page() {
 		$page .= '<td>';
 		$page .= '<img src="images/solarpanel-'.$theme.'.png" height="80" width="120">';
 		$page .= '<br/>';
-		$page .= $pac1.' '.t('WATT');
+		$page .= $pac1.' '.t('WATT').'<br/>'.$etoday1.' '.t('KWH');
 		$page .= '</td>';
 	}
 	
@@ -134,7 +140,7 @@ function plaatenergy_system_page() {
 		$page .= '<td>';
 		$page .= '<img src="images/solarpanel-'.$theme.'.png" height="80" width="120">';
 		$page .= '<br/>';
-		$page .= $pac2.' '.t('WATT');
+		$page .= $pac2.' '.t('WATT').'<br/>'.$etoday2.' '.t('KWH');;
 		$page .= '</td>';
 	}
 	
@@ -142,7 +148,7 @@ function plaatenergy_system_page() {
 		$page .= '<td>';
 		$page .= '<img src="images/solarpanel-'.$theme.'.png" height="80" width="120">';
 		$page .= '<br/>';
-		$page .= $pac3.' '.t('WATT');
+		$page .= $pac3.' '.t('WATT').'<br/>'.$etoday3.' '.t('KWH');;
 		$page .= '</td>';		
 	}
 	
