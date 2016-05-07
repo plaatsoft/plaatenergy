@@ -232,8 +232,8 @@ function plaatenergy_day_out_energy_page() {
 		} else {	
 		
 			$sql  = 'select ifnull(p1.timestamp, p2.timestamp) as timestamp, ifnull(p1.pac,0) as pac1, ifnull(p2.pac,0) as pac2, ifnull(p3.pac,0) as pac3 ';
-			$sql .= 'from solar1 p1 inner join solar2 p2 on p1.timestamp=p2.timestamp inner join solar3 p3 on ';
-			$sql .= 'p2.timestamp=p3.timestamp ';
+			$sql .= 'from solar1 p1 left join solar2 p2 on p1.timestamp=p2.timestamp left join solar3 p3 on ';
+			$sql .= 'p1.timestamp=p3.timestamp ';
 			$sql .= 'where p1.timestamp>="'.$timestamp1.'" and p1.timestamp<="'.$timestamp2.'" order by p1.timestamp';
 		
 			$result = plaatenergy_db_query($sql);
