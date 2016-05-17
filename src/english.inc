@@ -116,6 +116,7 @@ $lang['LINK_GUI']           = i('table') . 'Realtime Dashboard';
 $lang['LINK_SYSTEM'] 	    = i('fort-awesome') .'System Overview';
 $lang['LINK_IMPORT_EXPORT'] = i('download') .'Export Data'; 
 $lang['LINK_DELETE']        = 'Delete'; 
+$lang['LINK_WEBCAM']        = 'Webcam'; 
  
 /*
 ** ------------------
@@ -328,6 +329,12 @@ $lang['system_name'] = 'System name';
 $lang['home_password'] = 'Protect application with a password.';
 $lang['settings_password'] = 'Protect settings with a password.';
 
+$lang['webcam_name'] = 'Webcam name';
+$lang['webcam_description'] = 'Webcam description';
+$lang['webcam_resolution'] = 'Webcam Resolution';
+$lang['webcam_present'] = 'Webcam present';
+
+
 $lang['CATEGORY0'] =  'Forecast'; 
 $lang['CATEGORY11'] = 'Gas Meter'; 
 $lang['CATEGORY21'] = 'Energy Meter'; 
@@ -337,6 +344,7 @@ $lang['CATEGORY33'] = 'Solar Converter 3';
 $lang['CATEGORY41'] = 'Weather Meter'; 
 $lang['CATEGORY51'] = 'Security'; 
 $lang['CATEGORY52'] = 'Look and Feel'; 
+$lang['CATEGORY61'] = 'Webcam'; 
 
 /*
 ** ------------------
@@ -373,6 +381,14 @@ $lang['SYSTEM_TITLE'] = 'System Overview';
 
 $lang['TITLE_EXPORT_IMPORT'] ='Export Data';
 
+
+/*
+** ------------------
+** WEBCAM
+** ------------------
+*/
+
+$lang['TITLE_WEBCAM'] ='Webcam';
 
 /*
 ** ------------------

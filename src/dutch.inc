@@ -117,6 +117,7 @@ $lang['LINK_REPORT']         = i('archive') . 'Rapportage';
 $lang['LINK_GUI']            = i('table') . 'Realtime Dashboard';
 $lang['LINK_IMPORT_EXPORT']  = i('download') .'Export Data'; 
 $lang['LINK_DELETE']         = 'Verwijderen'; 
+$lang['LINK_WEBCAM']         = 'Webcam'; 
 
 /*
 ** ------------------
@@ -321,14 +322,19 @@ $lang['solar_peak_power'] = 'Solar converter piek vermogen (Wp)';
 $lang['weather_station_present'] = 'Weerstation aanwezig';
 $lang['weather_station_vendor'] = 'Weerstation producent';
 
-$lang['home_password'] = 'Bescherm toegang met een wachtwoord.';
-$lang['settings_password'] = 'Bescherm configuratie met een wachtwoord.';
-
 $lang['chart_legend'] = 'Grafiek legenda option';
 $lang['chart_dimensions'] = 'Grafiek grootte in pixels';
 $lang['slide_show_on'] = 'Activeert automatisch slide show als gebruiker inactief is';
 $lang['slide_show_page_delay'] = 'Slide show pagina vertraging (seconden)';
 $lang['system_name'] = 'Systeem naam';
+
+$lang['home_password'] = 'Bescherm toegang met een wachtwoord.';
+$lang['settings_password'] = 'Bescherm configuratie met een wachtwoord.';
+
+$lang['webcam_name'] = 'Webcam naam';
+$lang['webcam_description'] = 'Webcam omschrijving';
+$lang['webcam_resolution'] = 'Webcam resolutie';
+$lang['webcam_present'] = 'Webcam aanwezig';
 
 $lang['CATEGORY0'] =  'Prognose'; 
 $lang['CATEGORY11'] = 'Gas Meter'; 
@@ -338,7 +344,8 @@ $lang['CATEGORY32'] = 'Solar Converter 2';
 $lang['CATEGORY33'] = 'Solar Converter 3'; 
 $lang['CATEGORY41'] = 'Weerstation'; 
 $lang['CATEGORY51'] = 'Beveiliging'; 
-$lang['CATEGORY52'] = 'Layout'; 
+$lang['CATEGORY52'] = 'Layout';
+$lang['CATEGORY61'] = 'Webcam'; 
 
 /*
 ** ------------------
@@ -374,6 +381,14 @@ $lang['SYSTEM_TITLE'] = 'Systeem Overzicht';
 */
 
 $lang['TITLE_EXPORT_IMPORT'] ='Export Data';
+
+/*
+** ------------------
+** WEBCAM
+** ------------------
+*/
+
+$lang['TITLE_WEBCAM'] ='Webcam';
 
 /*
 ** ------------------

@@ -26,6 +26,12 @@
 ** NOTES
 ** ---------------------
 */
+$note[12] = '<div class="subparagraph">Version 1.2 (17-05-2016)</div>
+<div class="large_text">
+<ul>
+<li>General: Added web cam modele</li>
+</ul>
+</div>';
 
 $note[11] = '<div class="subparagraph">Version 1.1 (07-05-2016)</div>
 <div class="large_text">

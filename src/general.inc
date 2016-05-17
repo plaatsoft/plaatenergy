@@ -74,6 +74,8 @@ define('PAGE_DAY_PRESSURE',         70);
 define('PAGE_DAY_TEMPERATURE',      71);
 define('PAGE_DAY_HUMIDITY',         72);
 
+define('PAGE_WEBCAM',               80);
+
 /*
 ** -----------
 ** EVENTS
@@ -115,6 +117,7 @@ define('SOLAR_METER_3',            33);
 define('WEATHER_METER_1',          41);
 define('SECURITY',                 51);
 define('LOOK_AND_FEEL',            52);
+define('WEBCAM',                   61);
 
 /*
 ** -----------

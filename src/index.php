@@ -201,6 +201,11 @@ switch ($pid) {
 		include "about.php";
 		$page = plaatenergy_about();
 		break;
+		
+	case PAGE_WEBCAM: 
+		include "webcam.php";
+		$page = plaatenergy_webcam();
+		break;
 
 	case PAGE_DONATE: 
 		include "donate.php";

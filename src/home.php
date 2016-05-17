@@ -385,7 +385,7 @@ function plaatenergy_home_page() {
 		$page .= plaatenergy_link('pid='.PAGE_SYSTEM, t('LINK_SYSTEM'));
 		$page .= '</td>';
 		$page .= '<td>';
-		$page .= '&nbsp;';
+		$page .= plaatenergy_link('pid='.PAGE_WEBCAM, t('LINK_WEBCAM'));
 		$page .= '</td>';
 		$page .= '</tr>';
 
