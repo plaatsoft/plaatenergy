@@ -117,7 +117,7 @@ $lang['LINK_REPORT']         = i('archive') . 'Rapportage';
 $lang['LINK_GUI']            = i('table') . 'Realtime Dashboard';
 $lang['LINK_IMPORT_EXPORT']  = i('download') .'Export Data'; 
 $lang['LINK_DELETE']         = 'Verwijderen'; 
-$lang['LINK_WEBCAM']         = 'Webcam'; 
+$lang['LINK_WEBCAM']         = 'Webcams'; 
 
 /*
 ** ------------------
@@ -388,7 +388,7 @@ $lang['TITLE_EXPORT_IMPORT'] ='Export Data';
 ** ------------------
 */
 
-$lang['TITLE_WEBCAM'] ='Webcam 1';
+$lang['TITLE_WEBCAM'] ='Webcams';
 
 /*
 ** ------------------

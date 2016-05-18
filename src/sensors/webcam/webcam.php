@@ -37,7 +37,7 @@ while (true) {
 	exec ($command);
 
 	// sleep 1 second
-	sleep(1);
+	sleep(0.5);
 }
 
 ?>

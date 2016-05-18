@@ -29,7 +29,7 @@
 $note[12] = '<div class="subparagraph">Version 1.2 (17-05-2016)</div>
 <div class="large_text">
 <ul>
-<li>General: Added web cam modele</li>
+<li>General: Added webcam module.</li>
 </ul>
 </div>';
 

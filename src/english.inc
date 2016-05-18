@@ -116,7 +116,7 @@ $lang['LINK_GUI']           = i('table') . 'Realtime Dashboard';
 $lang['LINK_SYSTEM'] 	    = i('fort-awesome') .'System Overview';
 $lang['LINK_IMPORT_EXPORT'] = i('download') .'Export Data'; 
 $lang['LINK_DELETE']        = 'Delete'; 
-$lang['LINK_WEBCAM']        = 'Webcam'; 
+$lang['LINK_WEBCAM']        = 'Webcams'; 
  
 /*
 ** ------------------
@@ -387,7 +387,7 @@ $lang['TITLE_EXPORT_IMPORT'] ='Export Data';
 ** ------------------
 */
 
-$lang['TITLE_WEBCAM'] ='Webcam 1';
+$lang['TITLE_WEBCAM'] ='Webcams';
 
 /*
 ** ------------------
