@@ -334,7 +334,6 @@ $lang['webcam_description'] = 'Webcam description';
 $lang['webcam_resolution'] = 'Webcam Resolution';
 $lang['webcam_present'] = 'Webcam present';
 
-
 $lang['CATEGORY0'] =  'Forecast'; 
 $lang['CATEGORY11'] = 'Gas Meter'; 
 $lang['CATEGORY21'] = 'Energy Meter'; 
@@ -344,7 +343,7 @@ $lang['CATEGORY33'] = 'Solar Converter 3';
 $lang['CATEGORY41'] = 'Weather Meter'; 
 $lang['CATEGORY51'] = 'Security'; 
 $lang['CATEGORY52'] = 'Look and Feel'; 
-$lang['CATEGORY61'] = 'Webcam'; 
+$lang['CATEGORY61'] = 'Webcam 1'; 
 
 /*
 ** ------------------
@@ -388,7 +387,7 @@ $lang['TITLE_EXPORT_IMPORT'] ='Export Data';
 ** ------------------
 */
 
-$lang['TITLE_WEBCAM'] ='Webcam';
+$lang['TITLE_WEBCAM'] ='Webcam 1';
 
 /*
 ** ------------------

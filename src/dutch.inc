@@ -345,7 +345,7 @@ $lang['CATEGORY33'] = 'Solar Converter 3';
 $lang['CATEGORY41'] = 'Weerstation'; 
 $lang['CATEGORY51'] = 'Beveiliging'; 
 $lang['CATEGORY52'] = 'Layout';
-$lang['CATEGORY61'] = 'Webcam'; 
+$lang['CATEGORY61'] = 'Webcam 1'; 
 
 /*
 ** ------------------
@@ -388,7 +388,7 @@ $lang['TITLE_EXPORT_IMPORT'] ='Export Data';
 ** ------------------
 */
 
-$lang['TITLE_WEBCAM'] ='Webcam';
+$lang['TITLE_WEBCAM'] ='Webcam 1';
 
 /*
 ** ------------------

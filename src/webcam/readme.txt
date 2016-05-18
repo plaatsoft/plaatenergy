@@ -1,1 +1,0 @@
-This is the webcam directory. Do not delete.
