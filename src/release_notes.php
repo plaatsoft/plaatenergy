@@ -26,10 +26,10 @@
 ** NOTES
 ** ---------------------
 */
-$note[12] = '<div class="subparagraph">Version 1.2 (17-05-2016)</div>
+$note[12] = '<div class="subparagraph">Version 1.2 (19-05-2016)</div>
 <div class="large_text">
 <ul>
-<li>General: Added webcam module.</li>
+<li>General: Added support for 3 webcams.</li>
 </ul>
 </div>';
 

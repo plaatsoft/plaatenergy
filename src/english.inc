@@ -333,6 +333,7 @@ $lang['webcam_name'] = 'Webcam name';
 $lang['webcam_description'] = 'Webcam description';
 $lang['webcam_resolution'] = 'Webcam Resolution';
 $lang['webcam_present'] = 'Webcam present';
+$lang['webcam_device'] = 'Webcam device mapping';
 
 $lang['CATEGORY0'] =  'Forecast'; 
 $lang['CATEGORY11'] = 'Gas Meter'; 
@@ -344,6 +345,8 @@ $lang['CATEGORY41'] = 'Weather Meter';
 $lang['CATEGORY51'] = 'Security'; 
 $lang['CATEGORY52'] = 'Look and Feel'; 
 $lang['CATEGORY61'] = 'Webcam 1'; 
+$lang['CATEGORY62'] = 'Webcam 2'; 
+$lang['CATEGORY63'] = 'Webcam 3'; 
 
 /*
 ** ------------------

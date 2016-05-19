@@ -335,6 +335,7 @@ $lang['webcam_name'] = 'Webcam naam';
 $lang['webcam_description'] = 'Webcam omschrijving';
 $lang['webcam_resolution'] = 'Webcam resolutie';
 $lang['webcam_present'] = 'Webcam aanwezig';
+$lang['webcam_device'] = 'Webcam device mapping';
 
 $lang['CATEGORY0'] =  'Prognose'; 
 $lang['CATEGORY11'] = 'Gas Meter'; 
@@ -346,6 +347,8 @@ $lang['CATEGORY41'] = 'Weerstation';
 $lang['CATEGORY51'] = 'Beveiliging'; 
 $lang['CATEGORY52'] = 'Layout';
 $lang['CATEGORY61'] = 'Webcam 1'; 
+$lang['CATEGORY62'] = 'Webcam 2'; 
+$lang['CATEGORY63'] = 'Webcam 3'; 
 
 /*
 ** ------------------
