@@ -30,7 +30,6 @@
 $value = plaatenergy_post("value", "");
 $password = plaatenergy_post("password", "");
 
-
 $sql  = 'select id from config where category='.$cat.' and readonly=0';
 $result = plaatenergy_db_query($sql);
 $count = plaatenergy_db_num_rows($result);
@@ -53,7 +52,7 @@ function plaatenergy_setting_login_event() {
 	
 	$settings_password = plaatenergy_db_get_config_item('settings_password',SECURITY);
 	
-	if ($settings_password == $password) {
+	if ((strlen($settings_password)==0) || ($settings_password==md5($password))) {
 	
 		// Correct password, redirect to setting page
 		$pid = PAGE_SETTING_CATEGORY;
@@ -66,6 +65,14 @@ function plaatenergy_setting_save_event() {
 	global $id;
 	global $value;
 
+	$sql  = 'select encrypt from config where id='.$id;
+	$result = plaatenergy_db_query($sql);
+	$row = plaatenergy_db_fetch_object($result);
+	
+	if (($row->encrypt==1) && (strlen($value)>0)) {
+		$value = md5($value);
+	}
+		
 	$sql  = 'update config set value="'.$value.'", date=SYSDATE() where id='.$id;		
 	plaatenergy_db_query($sql);
 	
@@ -118,7 +125,7 @@ function plaatenergy_setting_edit_page() {
    global $id;
 	global $cat;
 
-	$sql  = 'select token, value, options from config where id='.$id;
+	$sql  = 'select token, value, options, encrypt from config where id='.$id;
 	$result = plaatenergy_db_query($sql);
 	$row = plaatenergy_db_fetch_object($result);
 
@@ -138,10 +145,13 @@ function plaatenergy_setting_edit_page() {
 				$page .= '<option value="'.$option.'">'.$option.'</option>';
 			}
 		}
-	$page .= '</select>';
-
+		$page .= '</select>';
     } else {	   
-	   $page .= '<input type="text" name="value" value="'.$row->value.'" size="40" />';
+		if ($row->encrypt==1) { 
+			$page .= '<input type="text" name="value" value="" size="40" />';
+		} else {
+		   $page .= '<input type="text" name="value" value="'.$row->value.'" size="40" />';
+		}
 	}
 	$page .= '<br/>';
  
@@ -162,7 +172,7 @@ function plaatenergy_setting_list_page() {
 	global $step;
 	global $max;
 
-	$sql  = 'select id, token, value from config where readonly=0 and category='.$cat.' order by token limit '.($limit*$step).','.$step;
+	$sql  = 'select id, token, value, encrypt from config where readonly=0 and category='.$cat.' order by token limit '.($limit*$step).','.$step;
 	$result = plaatenergy_db_query($sql);
 	
 	$page  = ' <h1>'.t('SETTING_TITLE').' - '.t('CATEGORY'.$cat).'</h1>';
@@ -172,17 +182,23 @@ function plaatenergy_setting_list_page() {
 	$page .= '<div class="setting">';
 	$page .= '<table>';
 	$page .= '<tr>';
-	$page .= '<th width="200">'.t('LABEL_TOKEN').'</th>';
-	$page .= '<th width="100">'.t('LABEL_VALUE').'</th>';
-	$page .= '<th width="325">'.t('LABEL_DESCRIPTION').'</th>';
+	$page .= '<th width="175">'.t('LABEL_TOKEN').'</th>';
+	$page .= '<th width="150">'.t('LABEL_VALUE').'</th>';
+	$page .= '<th width="300">'.t('LABEL_DESCRIPTION').'</th>';
 	$page .= '</tr>';
 	
 	while ($row = plaatenergy_db_fetch_object($result)) {
 	
 		$page .= '<tr>';
-		$page .= '<td width="200">'.plaatenergy_link('pid='.PAGE_SETTING_EDIT.'&id='.$row->id.'&cat='.$cat, $row->token).'</td>';
-		$page .= '<td width="100">'.$row->value.'</td>';
-		$page .= '<td width="325">'.t($row->token).'</td>';
+		$page .= '<td width="175">'.plaatenergy_link('pid='.PAGE_SETTING_EDIT.'&id='.$row->id.'&cat='.$cat, $row->token).'</td>';
+		$page .= '<td width="150">';		
+		if ((strlen($row->value)>0) && ($row->encrypt==1)) {
+			$page .= '*************';
+		} else {
+			$page .= $row->value;
+		}
+		$page .= '</td>';
+		$page .= '<td width="300">'.t($row->token).'</td>';
 		$page .= '</tr>';
 	}
 	$page .= '</table>';
@@ -212,7 +228,7 @@ function plaatenergy_setting_category_page() {
 	$sql  = 'select category from config group by category order by category';
 	$result = plaatenergy_db_query($sql);
 	
-	$page  = ' <h1>'.t('SETTING_TITLE').'</h1>';
+	$page  = '<h1>'.t('SETTING_TITLE').'</h1>';
 
 	$page .= '<br/>';
 	

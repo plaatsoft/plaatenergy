@@ -35,6 +35,7 @@ $gas_meter_present = plaatenergy_db_get_config_item('gas_meter_present', GAS_MET
 $name = plaatenergy_db_get_config_item('system_name', LOOK_AND_FEEL);
 $version = plaatenergy_db_get_config_item('database_version');
 $webcam_present = plaatenergy_db_get_config_item('webcam_present', WEBCAM_1);
+$hue_present = plaatenergy_db_get_config_item('hue_present', HUE_1);
 
 $password = plaatenergy_post("password", "");
 
@@ -171,8 +172,8 @@ function plaatenergy_home_login_event() {
 		
 	$home_password = plaatenergy_db_get_config_item('home_password',SECURITY);
 	
-	if ($home_password == $password) {
-
+	if ($home_password==md5($password)) {
+	
 		$session = plaatenergy_db_get_session($ip, true);
 		$pid = PAGE_HOME;
 	}
@@ -229,6 +230,7 @@ function plaatenergy_home_page() {
 	global $gas_meter_present;
 	global $weather_station_present;
 	global $webcam_present;
+	global $hue_present;
 	global $name;
 	global $session;
 	global $version;
@@ -378,7 +380,11 @@ function plaatenergy_home_page() {
 		
 		$page .= '<tr>';
 		$page .= '<td>';
-		$page .= '&nbsp;';
+		if ($hue_present=="true") {
+			$page .= plaatenergy_link('pid='.PAGE_HUE, t('LINK_HUE'));
+		} else {
+			$page .=  '&nbsp;';
+		};
 		$page .= '</td>';
 		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_REALTIME, t('LINK_GUI'));

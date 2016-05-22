@@ -26,10 +26,12 @@
 ** NOTES
 ** ---------------------
 */
-$note[12] = '<div class="subparagraph">Version 1.2 (19-05-2016)</div>
+$note[12] = '<div class="subparagraph">Version 1.2 (22-05-2016)</div>
 <div class="large_text">
 <ul>
-<li>General: Added support for 3 webcams.</li>
+<li>General: Add basic support for two webcams.</li>
+<li>General: Add basic support for Philips HUE lighting system.</li>
+<li>General: Passwords are now encrypted stored in database.</li>
 </ul>
 </div>';
 

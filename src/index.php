@@ -206,6 +206,11 @@ switch ($pid) {
 		include "webcam.php";
 		$page = plaatenergy_webcam();
 		break;
+		
+	case PAGE_HUE: 
+		include "hue.php";
+		$page = plaatenergy_hue();
+		break;
 
 	case PAGE_DONATE: 
 		include "donate.php";

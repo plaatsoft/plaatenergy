@@ -76,6 +76,8 @@ define('PAGE_DAY_HUMIDITY',         72);
 
 define('PAGE_WEBCAM',               80);
 
+define('PAGE_HUE',                  90);
+
 /*
 ** -----------
 ** EVENTS
@@ -119,7 +121,7 @@ define('SECURITY',                 51);
 define('LOOK_AND_FEEL',            52);
 define('WEBCAM_1',                 61);
 define('WEBCAM_2',                 62);
-define('WEBCAM_3',                 63);
+define('HUE_1',                    71);
 
 /*
 ** -----------

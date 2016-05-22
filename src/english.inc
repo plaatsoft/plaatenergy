@@ -116,7 +116,8 @@ $lang['LINK_GUI']           = i('table') . 'Realtime Dashboard';
 $lang['LINK_SYSTEM'] 	    = i('fort-awesome') .'System Overview';
 $lang['LINK_IMPORT_EXPORT'] = i('download') .'Export Data'; 
 $lang['LINK_DELETE']        = 'Delete'; 
-$lang['LINK_WEBCAM']        = 'Webcams'; 
+$lang['LINK_WEBCAM']         = i('camera') . 'Webcams'; 
+$lang['LINK_HUE']            = i('lightbulb-o') . 'HUE';
  
 /*
 ** ------------------
@@ -335,6 +336,11 @@ $lang['webcam_resolution'] = 'Webcam Resolution';
 $lang['webcam_present'] = 'Webcam present';
 $lang['webcam_device'] = 'Webcam device mapping';
 
+$lang['hue_description'] = 'Philips HUE description';
+$lang['hue_ip_address'] = 'Philips HUE IP address of bridge';
+$lang['hue_key'] = 'Philips HUE access key';
+$lang['hue_present'] = 'Philips HUE present';
+
 $lang['CATEGORY0'] =  'Forecast'; 
 $lang['CATEGORY11'] = 'Gas Meter'; 
 $lang['CATEGORY21'] = 'Energy Meter'; 
@@ -346,7 +352,7 @@ $lang['CATEGORY51'] = 'Security';
 $lang['CATEGORY52'] = 'Look and Feel'; 
 $lang['CATEGORY61'] = 'Webcam 1'; 
 $lang['CATEGORY62'] = 'Webcam 2'; 
-$lang['CATEGORY63'] = 'Webcam 3'; 
+$lang['CATEGORY71'] = 'Philips HUE'; 
 
 /*
 ** ------------------
@@ -383,7 +389,6 @@ $lang['SYSTEM_TITLE'] = 'System Overview';
 
 $lang['TITLE_EXPORT_IMPORT'] ='Export Data';
 
-
 /*
 ** ------------------
 ** WEBCAM
@@ -391,6 +396,14 @@ $lang['TITLE_EXPORT_IMPORT'] ='Export Data';
 */
 
 $lang['TITLE_WEBCAM'] ='Webcams';
+
+/*
+** ------------------
+** HUE
+** ------------------
+*/
+
+$lang['TITLE_HUE'] ='Philips HUE System';
 
 /*
 ** ------------------
