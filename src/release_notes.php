@@ -30,6 +30,7 @@ $note[12] = '<div class="subparagraph">Version 1.2 (22-05-2016)</div>
 <div class="large_text">
 <ul>
 <li>General: Add basic support for two webcams.</li>
+<li>General: Add option to make picture of webcam.</li>
 <li>General: Add basic support for Philips HUE lighting system.</li>
 <li>General: Passwords are now encrypted stored in database.</li>
 </ul>

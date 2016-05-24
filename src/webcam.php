@@ -23,6 +23,47 @@
 
 /*
 ** ---------------------
+** EVENT
+** ---------------------
+*/
+
+function plaatenergy_create_path($path) {
+    if (is_dir($path)) return true;
+    $prev_path = substr($path, 0, strrpos($path, '/', -2) + 1 );
+    $return = plaatenergy_create_path($prev_path);
+    return ($return && is_writable($prev_path)) ? mkdir($path) : false;
+}
+
+function plaatenergy_action_picture() {
+	
+	$device1 = plaatenergy_db_get_config_item('webcam_present', WEBCAM_1);
+	
+	$path = 'webcam/picture/'.date('Y-m-d');		
+	plaatenergy_create_path($path);
+	
+	if ($device1=="true" ) {
+		$source = 'webcam/image1.jpg';
+		$destination = $path.'/image1-'.date("His").'.jpg';
+	
+		if (!copy($source, $destination)) {
+			echo "failed to copy $file...\n";
+		}
+	}
+	
+	$device2 = plaatenergy_db_get_config_item('webcam_present', WEBCAM_2);
+	
+	if ($device2=="true" ) {
+		$source = 'webcam/image2.jpg';
+		$destination = $path.'/image2-'.date("His").'.jpg';
+	
+		if (!copy($source, $destination)) {
+			echo "failed to copy $file...\n";
+		}
+	}
+}
+
+/*
+** ---------------------
 ** PAGE
 ** ---------------------
 */
@@ -33,6 +74,7 @@
  */
 function plaatenergy_webcam_page() {
 
+	// input
 	global $pid;
 	
 	$device1 = plaatenergy_db_get_config_item('webcam_present', WEBCAM_1);
@@ -54,7 +96,9 @@ function plaatenergy_webcam_page() {
 	}
 	
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'), 'home');
+	$page .= '<a href="webcam/picture">'.t('LINK_ARCHIVE').'</a>';
+	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
+	$page .= plaatenergy_link('pid='.$pid.'&eid='.EVENT_PICTURE, t('LINK_PICTURE'));
 	$page .=  '</div>';
 	
 	return $page;
@@ -72,16 +116,24 @@ function plaatenergy_webcam_page() {
  */
 function plaatenergy_webcam() {
 
-  /* input */
-  global $pid;
+	/* input */
+	global $pid;
+	global $eid;
 
-  /* Page handler */
-  switch ($pid) {
+	switch ($eid) {
+  
+		case EVENT_PICTURE:
+			plaatenergy_action_picture();
+			break;
+	}
 
-     case PAGE_WEBCAM:
-        return plaatenergy_webcam_page();
-        break;
-  }
+	/* Page handler */
+	switch ($pid) {
+
+		case PAGE_WEBCAM:
+			return plaatenergy_webcam_page();
+			break;
+	}
 }
 
 /*

@@ -20,8 +20,7 @@
  * @file
  * @brief contain english translation
  */
- 
- 
+  
 /*
 ** ------------------
 ** GENERAL
@@ -29,11 +28,8 @@
 */
 
 $lang['TITLE'] = 'PlaatEnergy';
-
 $lang['LINK_COPYRIGHT'] = '<a class="normal_link" href="http://www.plaatsoft.nl/">PlaatSoft</a> 2008-'.date("Y").' - All Copyright Reserved ';
-
 $lang['COOKIE_BAR'] = 'PlaatEnergy uses cookies to save your settings';
-
 $lang['THEME_TO_LIGHT'] = 'Light theme';
 $lang['THEME_TO_DARK'] = 'Dark theme';
 $lang['ENGLISH'] = 'English';
@@ -116,8 +112,10 @@ $lang['LINK_GUI']           = i('table') . 'Realtime Dashboard';
 $lang['LINK_SYSTEM'] 	    = i('fort-awesome') .'System Overview';
 $lang['LINK_IMPORT_EXPORT'] = i('download') .'Export Data'; 
 $lang['LINK_DELETE']        = 'Delete'; 
-$lang['LINK_WEBCAM']         = i('camera') . 'Webcams'; 
-$lang['LINK_HUE']            = i('lightbulb-o') . 'HUE';
+$lang['LINK_WEBCAM']        = i('camera') . 'Webcams'; 
+$lang['LINK_HUE']           = i('lightbulb-o') . 'HUE';
+$lang['LINK_PICTURE']       = i('camera') . 'Picture'; 
+$lang['LINK_ARCHIVE']        = i('folder-open') . 'Archive'; 
  
 /*
 ** ------------------

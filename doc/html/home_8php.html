@@ -16,10 +16,10 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
-  <td id="projectlogo"><img alt="Logo" src="128.png"/></td>
+  <td id="projectlogo"><img alt="Logo" src="apple-120.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">PlaatEnergy
-   &#160;<span id="projectnumber">v1.0</span>
+   &#160;<span id="projectnumber">v1.2</span>
    </div>
   </td>
  </tr>
@@ -60,12 +60,12 @@
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a2a0d74d333ea29cb6d2985dd027f4b75"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#a2a0d74d333ea29cb6d2985dd027f4b75">check_solar_meter</a> ()</td></tr>
-<tr class="memdesc:a2a0d74d333ea29cb6d2985dd027f4b75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if solar meter is online.  <a href="#a2a0d74d333ea29cb6d2985dd027f4b75">More...</a><br /></td></tr>
-<tr class="separator:a2a0d74d333ea29cb6d2985dd027f4b75"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2853c9902d1bb268857c6bc6099332d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#af2853c9902d1bb268857c6bc6099332d">check_energy_meter</a> ()</td></tr>
-<tr class="memdesc:af2853c9902d1bb268857c6bc6099332d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if energy meter is online.  <a href="#af2853c9902d1bb268857c6bc6099332d">More...</a><br /></td></tr>
-<tr class="separator:af2853c9902d1bb268857c6bc6099332d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedb3b917c6c3ebdf79e3fe7c842b8268"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#aedb3b917c6c3ebdf79e3fe7c842b8268">check_solar_converter</a> ($index)</td></tr>
+<tr class="memdesc:aedb3b917c6c3ebdf79e3fe7c842b8268"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if solar meter is online.  <a href="#aedb3b917c6c3ebdf79e3fe7c842b8268">More...</a><br /></td></tr>
+<tr class="separator:aedb3b917c6c3ebdf79e3fe7c842b8268"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d625d9079621cb780e6c8ecb47703d8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#a3d625d9079621cb780e6c8ecb47703d8">check_energy_meter</a> ($index)</td></tr>
+<tr class="memdesc:a3d625d9079621cb780e6c8ecb47703d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if energy converter is online.  <a href="#a3d625d9079621cb780e6c8ecb47703d8">More...</a><br /></td></tr>
+<tr class="separator:a3d625d9079621cb780e6c8ecb47703d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fe826599989200ea67d114aac252214"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#a4fe826599989200ea67d114aac252214">check_weather_station</a> ()</td></tr>
 <tr class="memdesc:a4fe826599989200ea67d114aac252214"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if weather station is online.  <a href="#a4fe826599989200ea67d114aac252214">More...</a><br /></td></tr>
 <tr class="separator:a4fe826599989200ea67d114aac252214"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -84,46 +84,54 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:afd3ed68281bdf5f354790975727f1d94"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#afd3ed68281bdf5f354790975727f1d94">$solar_meter_present</a> = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('solar_meter_present', <a class="el" href="general_8inc.html#a5b5e5a5c50ddf1932142000cc5c96d37">SOLAR_METER_1</a>)</td></tr>
 <tr class="separator:afd3ed68281bdf5f354790975727f1d94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b6c8edad042fa7b5c6fba83ed71262b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#a6b6c8edad042fa7b5c6fba83ed71262b">$solar_meter_vendor</a> = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('solar_meter_vendor', <a class="el" href="general_8inc.html#a5b5e5a5c50ddf1932142000cc5c96d37">SOLAR_METER_1</a>)</td></tr>
-<tr class="separator:a6b6c8edad042fa7b5c6fba83ed71262b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3149330a668d2ab64fd7e69ac0729ce5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#a3149330a668d2ab64fd7e69ac0729ce5">$weather_station_present</a> = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('weather_station_present', <a class="el" href="general_8inc.html#a2ea5575383e6ecb9e8ef7ee907228453">WEATHER_METER_1</a>)</td></tr>
 <tr class="separator:a3149330a668d2ab64fd7e69ac0729ce5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f4e3e3c39ea806e52527994f0ccc653"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#a7f4e3e3c39ea806e52527994f0ccc653">$energy_meter_present</a> = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('energy_meter_present', <a class="el" href="general_8inc.html#adfe15043278b9e23219f1e9488523e48">ENERGY_METER_1</a>)</td></tr>
 <tr class="separator:a7f4e3e3c39ea806e52527994f0ccc653"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a846d075e4acfe34a86714e882a7e0bb7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#a846d075e4acfe34a86714e882a7e0bb7">$gas_meter_present</a> = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('gas_meter_present', <a class="el" href="general_8inc.html#a339967b16abc8a2958c2a9f4bcb20e6c">GAS_METER_1</a>)</td></tr>
 <tr class="separator:a846d075e4acfe34a86714e882a7e0bb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2fc40d43824ea3e1ce5d86dee0d763b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#ab2fc40d43824ea3e1ce5d86dee0d763b">$name</a> = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('system_name', <a class="el" href="general_8inc.html#a6fa0271ee3d4a9202f610bb5078f9887">LOOK_AND_FEEL</a>)</td></tr>
+<tr class="separator:ab2fc40d43824ea3e1ce5d86dee0d763b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17c8948c68aa44fa9961ae169b6a8961"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#a17c8948c68aa44fa9961ae169b6a8961">$version</a> = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('database_version')</td></tr>
+<tr class="separator:a17c8948c68aa44fa9961ae169b6a8961"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72574c562671707916f36dff194f334b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#a72574c562671707916f36dff194f334b">$webcam_present</a> = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('webcam_present', <a class="el" href="general_8inc.html#a0f27977b1aeea7bf93346cf39f1e7c33">WEBCAM_1</a>)</td></tr>
+<tr class="separator:a72574c562671707916f36dff194f334b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a577c2992041e09e488ff05af1d954850"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#a577c2992041e09e488ff05af1d954850">$hue_present</a> = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('hue_present', <a class="el" href="general_8inc.html#a065659f8cb8c0de6849a0065a2bbe369">HUE_1</a>)</td></tr>
+<tr class="separator:a577c2992041e09e488ff05af1d954850"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a607686ef9f99ea7c42f4f3dd3dbb2b0d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#a607686ef9f99ea7c42f4f3dd3dbb2b0d">$password</a> = <a class="el" href="general_8inc.html#a3cf0f4e0e488c26a2bb73651bab4471d">plaatenergy_post</a>(&quot;password&quot;, &quot;&quot;)</td></tr>
 <tr class="separator:a607686ef9f99ea7c42f4f3dd3dbb2b0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>contain home page </p>
 </div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="af2853c9902d1bb268857c6bc6099332d"></a>
+<a class="anchor" id="a3d625d9079621cb780e6c8ecb47703d8"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">check_energy_meter </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$index</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Check if energy meter is online. </p>
-<dl class="section return"><dt>Returns</dt><dd>HTML block with actual status of energy meter. </dd></dl>
+<p>Check if energy converter is online. </p>
+<dl class="section return"><dt>Returns</dt><dd>HTML block with actual status of solar converter. </dd></dl>
 
 </div>
 </div>
-<a class="anchor" id="a2a0d74d333ea29cb6d2985dd027f4b75"></a>
+<a class="anchor" id="aedb3b917c6c3ebdf79e3fe7c842b8268"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">check_solar_meter </td>
+          <td class="memname">check_solar_converter </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$index</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -243,6 +251,30 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a577c2992041e09e488ff05af1d954850"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$hue_present = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('hue_present', <a class="el" href="general_8inc.html#a065659f8cb8c0de6849a0065a2bbe369">HUE_1</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ab2fc40d43824ea3e1ce5d86dee0d763b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$name = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('system_name', <a class="el" href="general_8inc.html#a6fa0271ee3d4a9202f610bb5078f9887">LOOK_AND_FEEL</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a607686ef9f99ea7c42f4f3dd3dbb2b0d"></a>
 <div class="memitem">
 <div class="memproto">
@@ -267,12 +299,12 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a6b6c8edad042fa7b5c6fba83ed71262b"></a>
+<a class="anchor" id="a17c8948c68aa44fa9961ae169b6a8961"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">$solar_meter_vendor = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('solar_meter_vendor', <a class="el" href="general_8inc.html#a5b5e5a5c50ddf1932142000cc5c96d37">SOLAR_METER_1</a>)</td>
+          <td class="memname">$version = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('database_version')</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -285,6 +317,18 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">$weather_station_present = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('weather_station_present', <a class="el" href="general_8inc.html#a2ea5575383e6ecb9e8ef7ee907228453">WEATHER_METER_1</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a72574c562671707916f36dff194f334b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$webcam_present = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('webcam_present', <a class="el" href="general_8inc.html#a0f27977b1aeea7bf93346cf39f1e7c33">WEBCAM_1</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">

@@ -103,6 +103,7 @@ define('EVENT_LOGIN',               95);
 define('EVENT_SCHEME',              96);
 define('EVENT_LANGUAGE',            97);
 define('EVENT_DELETE',              98);
+define('EVENT_PICTURE',             99);
 
 /*
 ** -----------
