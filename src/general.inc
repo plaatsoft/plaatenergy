@@ -75,6 +75,8 @@ define('PAGE_DAY_TEMPERATURE',      71);
 define('PAGE_DAY_HUMIDITY',         72);
 
 define('PAGE_WEBCAM',               80);
+define('PAGE_ARCHIVE',              81);
+define('PAGE_IMAGE_VIEWER',         82);
 
 define('PAGE_HUE',                  90);
 
@@ -84,26 +86,29 @@ define('PAGE_HUE',                  90);
 ** -----------
 */
 
-define('EVENT_NONE',                80);
-define('EVENT_PROCESS_TODAY',       81);
-define('EVENT_PROCESS_ALL_DAYS',    82);
-define('EVENT_PREV',                83);
-define('EVENT_NEXT',                84);
-define('EVENT_EXECUTE',             85);
-define('EVENT_SAVE',                86);
-define('EVENT_EURO',                87);
-define('EVENT_KWH',                 88);
-define('EVENT_M3',                  89);
-define('EVENT_WATT',                90);
-define('EVENT_MAX',                 91);
-define('EVENT_BACKUP',              92);
-define('EVENT_EXPORT',              93);
-define('EVENT_SCATTER',             94);
-define('EVENT_LOGIN',               95);
-define('EVENT_SCHEME',              96);
-define('EVENT_LANGUAGE',            97);
-define('EVENT_DELETE',              98);
-define('EVENT_PICTURE',             99);
+define('EVENT_NONE',                10);
+define('EVENT_PROCESS_TODAY',       11);
+define('EVENT_PROCESS_ALL_DAYS',    12);
+define('EVENT_PREV',                13);
+define('EVENT_NEXT',                14);
+define('EVENT_EXECUTE',             15);
+define('EVENT_SAVE',                16);
+define('EVENT_EURO',                17);
+define('EVENT_KWH',                 18);
+define('EVENT_M3',                  19);
+define('EVENT_WATT',                20);
+define('EVENT_MAX',                 21);
+define('EVENT_BACKUP',              22);
+define('EVENT_EXPORT',              23);
+define('EVENT_SCATTER',             24);
+define('EVENT_LOGIN',               25);
+define('EVENT_SCHEME',              26);
+define('EVENT_LANGUAGE',            27);
+define('EVENT_DELETE',              28);
+define('EVENT_PICTURE',             29);
+define('EVENT_VIEW',                30);
+define('EVENT_PLAY',                31);
+define('EVENT_STOP',                32);
 
 /*
 ** -----------

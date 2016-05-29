@@ -115,7 +115,9 @@ $lang['LINK_DELETE']        = 'Delete';
 $lang['LINK_WEBCAM']        = i('camera') . 'Webcams'; 
 $lang['LINK_HUE']           = i('lightbulb-o') . 'HUE';
 $lang['LINK_PICTURE']       = i('camera') . 'Picture'; 
-$lang['LINK_ARCHIVE']        = i('folder-open') . 'Archive'; 
+$lang['LINK_ARCHIVE']       = i('folder-open') . 'Archive'; 
+$lang['LINK_PLAY']          = i('play') . 'Play'; 
+$lang['LINK_STOP']          = i('stop') . 'Stop'; 
  
 /*
 ** ------------------
@@ -394,6 +396,8 @@ $lang['TITLE_EXPORT_IMPORT'] ='Export Data';
 */
 
 $lang['TITLE_WEBCAM'] ='Webcams';
+$lang['TITLE_ARCHIVE' ] = 'Archive';
+
 
 /*
 ** ------------------

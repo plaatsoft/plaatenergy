@@ -202,6 +202,8 @@ switch ($pid) {
 		$page = plaatenergy_about();
 		break;
 		
+	case PAGE_IMAGE_VIEWER: 
+	case PAGE_ARCHIVE: 
 	case PAGE_WEBCAM: 
 		include "webcam.php";
 		$page = plaatenergy_webcam();
