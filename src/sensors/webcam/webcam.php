@@ -34,7 +34,7 @@ $index = $argv[1];
 plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 $width=320;
-$height=240;
+$height=225;  /* remove last 15 pixel lines because of footer */
 $segment=5;
 $offset=$segment/2;
 $detect_level=15;
@@ -50,13 +50,14 @@ function getColor($img, $x, $y) {
 }
 
 function plaatenergy_make_picture() {
-	
+
 	$path = BASE_DIR.'/webcam/picture/'.date('Y-m-d');		
 	plaatenergy_create_path($path);
 	
 	$source = BASE_DIR.'/webcam/image1.jpg';
 
         $now = DateTime::createFromFormat('U.u', microtime(true));
+        $now->setTimezone(new DateTimeZone('Europe/Amsterdam'));	
 	$destination = $path.'/image1-'.$now->format("His.u").'.jpg';
 	
 	if (!copy($source, $destination)) {
