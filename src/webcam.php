@@ -27,13 +27,6 @@
 ** ---------------------
 */
 
-function plaatenergy_create_path($path) {
-    if (is_dir($path)) return true;
-    $prev_path = substr($path, 0, strrpos($path, '/', -2) + 1 );
-    $return = plaatenergy_create_path($prev_path);
-    return ($return && is_writable($prev_path)) ? mkdir($path) : false;
-}
-
 function plaatenergy_action_picture() {
 	
 	$device1 = plaatenergy_db_get_config_item('webcam_present', WEBCAM_1);

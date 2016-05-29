@@ -752,6 +752,13 @@ function plaatenergy_navigation_year() {
       return $page;
 }
 
+function plaatenergy_create_path($path) {
+    if (is_dir($path)) return true;
+    $prev_path = substr($path, 0, strrpos($path, '/', -2) + 1 );
+    $return = plaatenergy_create_path($prev_path);
+    return ($return && is_writable($prev_path)) ? mkdir($path) : false;
+}
+
 /** 
  * @mainpage PlaatEnergy Documentation
  *   Welcome to the PlaatEnergy documentation.
