@@ -269,6 +269,7 @@ var bg_functions = function () {
 
 // ================================ Init ==================================
 var init = function () {
+
 	
 	
 	// Change the background by an image

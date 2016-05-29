@@ -38,7 +38,7 @@ $height=240;
 $segment=10;
 $offset=$segment/2;
 $detect_level=15;
-$detect_areas=25;
+$detect_areas=20;
 $im2 = '';
 
 function getColor($img, $x, $y) {

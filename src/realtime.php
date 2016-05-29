@@ -1,4 +1,3 @@
-
 <?php
 
 /*
@@ -38,7 +37,6 @@ function random_color () {
 ** PAGES
 ** ---------------------
 */
-
 
 function plaatenergy_realtime_page() {
 	
