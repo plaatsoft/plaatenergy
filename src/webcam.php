@@ -79,13 +79,13 @@ function plaatenergy_webcam_page() {
   
 	if ($device1=="true" ) {
 		$page .= '<img class="image" src="webcam/image1.jpg" alt="" id="webcam1" width="480" height="360" >';
-		$page .= '<script>window.setInterval(function() { document.getElementById("webcam1").src = "webcam/image1.jpg?random="+new Date().getTime(); }, 500);</script>';
+		$page .= '<script>window.setInterval(function() { document.getElementById("webcam1").src = "webcam/image3.jpg?random="+new Date().getTime(); }, 500);</script>';
 	}
 	
 	if ($device2=="true" ) {
 		$page .= '&nbsp;';
 		$page .= '<img class="image" src="webcam/image2.jpg" alt="" id="webcam2" width="480" height="360" >';
-		$page .= '<script>window.setInterval(function() { document.getElementById("webcam2").src = "webcam/image2.jpg?random="+new Date().getTime(); }, 500);</script>';
+		$page .= '<script>window.setInterval(function() { document.getElementById("webcam2").src = "webcam/image4.jpg?random="+new Date().getTime(); }, 500);</script>';
 	}
 	
 	$page .= '<div class="nav">';

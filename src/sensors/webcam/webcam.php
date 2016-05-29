@@ -35,10 +35,10 @@ plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 $width=320;
 $height=240;
-$segment=10;
+$segment=5;
 $offset=$segment/2;
 $detect_level=15;
-$detect_areas=20;
+$detect_areas=40;
 $im2 = '';
 
 function getColor($img, $x, $y) {
@@ -55,7 +55,9 @@ function plaatenergy_make_picture() {
 	plaatenergy_create_path($path);
 	
 	$source = BASE_DIR.'/webcam/image1.jpg';
-	$destination = $path.'/image1-'.date("His").'.jpg';
+
+        $now = DateTime::createFromFormat('U.u', microtime(true));
+	$destination = $path.'/image1-'.$now->format("His.u").'.jpg';
 	
 	if (!copy($source, $destination)) {
 		echo "failed to copy $file...\n";
@@ -73,16 +75,20 @@ function plaatenergy_motion() {
    global $detect_level;
    global $detect_areas;
 
-	$im1 = imagecreatefromjpeg(BASE_DIR.'/webcam/image'.$index.'.jpg');
-	if(!$im1) return;
+   $input = BASE_DIR.'/webcam/image'.$index.'.jpg';
+   $output = BASE_DIR.'/webcam/image'.($index+2).'.jpg';
+
+   $im1 = imagecreatefromjpeg($input);
+   if(!$im1) return;
 	
-	if(!$im2) {
-		$im2 = $im1;
-		return;
-	}
+   $color = imagecolorallocate($im1, 255, 0, 0);
+   if(!$im2) {
+     $im2 = $im1;
+     return;
+   }
 	
-	$detection=0;
-	for ($x=0;$x<($width/$segment);$x++) {
+   $detection=0;
+   for ($x=0;$x<($width/$segment);$x++) {
 		for ($y=0;$y<($height/$segment);$y++) {
 			list($x1, $y1, $r1, $g1, $b1) = getColor($im1, ($x*$segment)+$offset, ($y*$segment)+$offset);
 			list($x2, $y2, $r2, $g2, $b2) = getColor($im2, ($x*$segment)+$offset, ($y*$segment)+$offset);
@@ -100,7 +106,7 @@ function plaatenergy_motion() {
 	
 			if  ($motion==1) {
 				$detection++;
-				//imagerectangle( $im1, $x*$segment , $y*$segment , ($x+1)*$segment , ($y+1)*$segment , $color);
+				imagerectangle( $im1, $x*$segment , $y*$segment , ($x+1)*$segment , ($y+1)*$segment , $color);
 			}
 		}
 	}
@@ -108,7 +114,9 @@ function plaatenergy_motion() {
 	echo $detection.' ';
 
         $im2=$im1;
-	
+
+	imagejpeg($im1, $output);	
+
 	if ($detection>$detect_areas) {
 		plaatenergy_make_picture();
 	}
@@ -134,7 +142,7 @@ while (true) {
 	$resolution = plaatenergy_db_get_config_item('webcam_resolution', $instance);
 	$device = plaatenergy_db_get_config_item('webcam_device', $instance);
 	 
-	$command = 'fswebcam -q --device '.$device.' --timestamp "%Y-%m-%d %H:%M:%S" -r '.$resolution. ' --title '.$name.' -S 2 '.BASE_DIR.'/webcam/image'.$index.'.jpg';
+	$command = 'fswebcam -q --device '.$device.' --timestamp "%Y-%m-%d %H:%M:%S" -r '.$resolution. ' --title '.$name.' -S 1 '.BASE_DIR.'/webcam/image'.$index.'.jpg';
 	exec ($command);
 	
 	plaatenergy_motion();
@@ -142,7 +150,7 @@ while (true) {
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
 
-	echo "Process time $time seconds\n";
+	echo 'Process time '.round($time,2)." seconds\n";
 }
 
 ?>
