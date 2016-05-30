@@ -14,10 +14,7 @@
 **  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
-function link(value)
-{
-        
-  console.log(value);
+function link(value) {
   var form = document.forms['plaatenergy'];
   var newInput = document.createElement('input');
   newInput.setAttribute('type','hidden');

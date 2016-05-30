@@ -108,7 +108,11 @@ define('EVENT_DELETE',              28);
 define('EVENT_PICTURE',             29);
 define('EVENT_VIEW',                30);
 define('EVENT_PLAY',                31);
-define('EVENT_STOP',                32);
+define('EVENT_NEXT_FAST',           32);
+define('EVENT_PREV_FAST',           33);
+define('EVENT_STOP',                34);
+define('EVENT_BEGIN',               36);
+define('EVENT_END',                 35);
 
 /*
 ** -----------
@@ -279,20 +283,19 @@ function general_header() {
   
   if ($pid != PAGE_REALTIME) {
     $page .= loadCSS('css/general.css');
-  }
-  
-  // Load the dark css theme if db theme var = dark
-  if ($theme == "dark") {
+
+    // Load the icons from Font Awesome not with loadCSS because this file never will change and it cant load the font
+    $page .= '<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>';
+
+    // Load the dark css theme if db theme var = dark
+    if ($theme == "dark") {
 	$page .= loadCSS('css/theme-dark.css');
+    }
   }
   
     if ($pid == PAGE_REALTIME) {
 		$page .= '<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">';
-		$page .= loadCSS('css/realtime.css');
 	}
-  
-  // Load the icons from Font Awesome not with loadCSS because this file never will change and it cant load the font
-  $page .= '<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>';
 	
    $slide_show_on = plaatenergy_db_get_config_item('slide_show_on', LOOK_AND_FEEL);
    if (($slide_show_on=="true") && ($pid!=PAGE_SETTING_LIST) && ($pid!=PAGE_SETTING_EDIT)) {
@@ -761,7 +764,8 @@ function plaatenergy_create_path($path) {
     if (is_dir($path)) return true;
     $prev_path = substr($path, 0, strrpos($path, '/', -2) + 1 );
     $return = plaatenergy_create_path($prev_path);
-    return ($return && is_writable($prev_path)) ? mkdir($path) : false;
+    umask(0);
+    return ($return && is_writable($prev_path)) ? mkdir($path, 0777) : false;
 }
 
 /** 

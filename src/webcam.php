@@ -107,7 +107,7 @@ function plaatenergy_image_viewer_page() {
 
 	foreach ($files as $file) {
 			
-		if (($file!='.') && ($file!='..') && ($file!='.htaccess') && ($file!='index.php')  && ($file!='readme.txt')) {
+		if (($file!='.') && ($file!='..')) {
 	
 			if ($id == $nr++) {
 		
@@ -119,17 +119,21 @@ function plaatenergy_image_viewer_page() {
 	}	
 	
 	$page .= '<div class="nav">';
-	$page .= plaatenergy_link('pid='.$pid.'&id='.$id.'&directory='.$directory.'&eid='.EVENT_PREV, t('LINK_PREV'));
+	$page .= plaatenergy_link('pid='.$pid.'&id=1&directory='.$directory.'&eid='.EVENT_BEGIN, t('LINK_BEGIN'));
+	$page .= plaatenergy_link('pid='.$pid.'&id='.$id.'&directory='.$directory.'&eid='.EVENT_PREV_FAST, t('LINK_PREV_FAST'));
+	$page .= plaatenergy_link('pid='.$pid.'&id='.$id.'&directory='.$directory.'&eid='.EVENT_PREV, t('LINK_PREV_STEP'));
 	$page .= plaatenergy_link('pid='.$pid.'&id='.$id.'&directory='.$directory.'&eid='.EVENT_DELETE, t('LINK_DELETE'));
-	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
+	$page .= plaatenergy_link('pid='.PAGE_ARCHIVE, t('LINK_BACK'));
 	
-	if ($eid==EVENT_PLAY) {
-		$page .= plaatenergy_link('pid='.$pid.'&id='.$id.'&directory='.$directory.'&eid='.EVENT_STOP, t('LINK_STOP'));
+	/*if ($eid==EVENT_PLAY) {
+	   $page .= plaatenergy_link('pid='.$pid.'&id='.$id.'&directory='.$directory.'&eid='.EVENT_STOP, t('LINK_STOP'));
 	} else {
-		$page .= plaatenergy_link('pid='.$pid.'&id='.$id.'&directory='.$directory.'&eid='.EVENT_PLAY, t('LINK_PLAY'));
-	} 
+	   $page .= plaatenergy_link('pid='.$pid.'&id='.$id.'&directory='.$directory.'&eid='.EVENT_PLAY, t('LINK_PLAY'));
+	} */
 		
-	$page .= plaatenergy_link('pid='.$pid.'&id='.$id.'&directory='.$directory.'&eid='.EVENT_NEXT, t('LINK_NEXT'));	
+	$page .= plaatenergy_link('pid='.$pid.'&id='.$id.'&directory='.$directory.'&eid='.EVENT_NEXT, t('LINK_NEXT_STEP'));	
+	$page .= plaatenergy_link('pid='.$pid.'&id='.$id.'&directory='.$directory.'&eid='.EVENT_NEXT_FAST, t('LINK_NEXT_FAST'));
+	$page .= plaatenergy_link('pid='.$pid.'&directory='.$directory.'&eid='.EVENT_END, t('LINK_END'));
 	$page .=  '</div>';
 	
 	if ($eid==EVENT_PLAY) {
@@ -163,7 +167,6 @@ function plaatenergy_archive_page() {
 		$page .= '<table>';
 		$page .= $tmp;
 		$page .= '</table>';
-		$page .= '<br/>';
 		$page .= '<br/>';
 	}
 	
@@ -227,8 +230,19 @@ function plaatenergy_webcam() {
 	global $pid;
 	global $eid;
 	global $id;
+	global $directory;
 
 	switch ($eid) {
+
+		case EVENT_END:
+	            $id=0;
+	            $files = scandir(BASE_DIR.'/webcam/picture/'.$directory);
+	            foreach ($files as $file) {
+		       if (($file!='.') && ($file!='..')) {
+			 $id++;
+		       }
+	            };
+		    break;
 	
 		case EVENT_DELETE:
 			plaatenergy_picture_delete_event();
@@ -237,11 +251,22 @@ function plaatenergy_webcam() {
 		case EVENT_NEXT:
 			$id++;
 			break;
+
+		case EVENT_NEXT_FAST:
+			$id=$id+20;
+			break;
+
+		case EVENT_PREV_FAST:
+			$id=$id-20;
+			if ($id<1) {
+			   $id=1;
+			}
+			break;
   
   		case EVENT_PREV:
 			$id--;
 			if ($id<1) {
-				$id=1;
+			   $id=1;
 			}
 			break;
 			

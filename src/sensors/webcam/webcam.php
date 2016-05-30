@@ -38,7 +38,7 @@ $height=225;  /* remove last 15 pixel lines because of footer */
 $segment=5;
 $offset=$segment/2;
 $detect_level=15;
-$detect_areas=40;
+$detect_areas=25;
 $im2 = '';
 
 function getColor($img, $x, $y) {
@@ -89,24 +89,20 @@ function plaatenergy_motion() {
    }
 	
    $detection=0;
+
    for ($x=0;$x<($width/$segment);$x++) {
 		for ($y=0;$y<($height/$segment);$y++) {
 			list($x1, $y1, $r1, $g1, $b1) = getColor($im1, ($x*$segment)+$offset, ($y*$segment)+$offset);
 			list($x2, $y2, $r2, $g2, $b2) = getColor($im2, ($x*$segment)+$offset, ($y*$segment)+$offset);
 
-			$motion=0;
-			if (abs($r1-$r2)>$detect_level) {
-				$motion=1;
-			}
-			if (abs($g1-$g2)>$detect_level) {
-				$motion=1;
-			}
-			if (abs($b1-$b2)>$detect_level) {
-				$motion=1;
-			}
-	
-			if  ($motion==1) {
-				$detection++;
+			if ((abs($r1-$r2)>$detect_level) || (abs($g1-$g2)>$detect_level) || (abs($b1-$b2)>$detect_level)) { 
+
+				// dirty hack to filter out threes part of my webcami view
+				if ((($y*$segment)<90) && (($x*$segment)<160)) {
+					// filter out tree section
+				} else {
+					$detection++;
+				}
 				imagerectangle( $im1, $x*$segment , $y*$segment , ($x+1)*$segment , ($y+1)*$segment , $color);
 			}
 		}

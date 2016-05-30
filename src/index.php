@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
 **  ===========
 **  PlaatEnergy
 **  ===========
@@ -8,7 +8,7 @@
 **  Created by wplaat
 **
 **  For more information visit the following website.
-**  Website : www.plaatsoft.nl 
+**  Website : www.plaatsoft.nl
 **
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
@@ -20,18 +20,18 @@
  * @file
  * @brief contain general page and event handler
  */
- 
+
 $time_start = microtime(true);
-  
+
 @include "config.inc";
 include "general.inc";
 include "database.inc";
 include "english.inc";
 
 /*
-** -------------------- 
+** --------------------
 ** DATABASE
-** -------------------- 
+** --------------------
 */
 
 
@@ -229,11 +229,6 @@ switch ($pid) {
 		$page = plaatenergy_report();
 		break;
 		
-	case PAGE_REALTIME:
-		include "realtime.php";
-		$page = plaatenergy_realtime();
-		break;
-		
 	case PAGE_SETTING_LIST: 
 	case PAGE_SETTING_EDIT: 
 	case PAGE_SETTING_LOGIN: 
@@ -365,8 +360,12 @@ if ($eid != EVENT_EXPORT) {
 
 	echo "<!-- content-start -->";
 
-	echo $page;
-	
+        if ($pid == PAGE_REALTIME) {
+          include "realtime.php";
+        } else {
+	  echo $page;
+        }
+
 	echo "<!-- content-end -->";
 	
 	// Calculate to page render time 

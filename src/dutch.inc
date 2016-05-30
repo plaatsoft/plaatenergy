@@ -117,8 +117,15 @@ $lang['LINK_WEBCAM']         = i('camera') . 'Webcams';
 $lang['LINK_HUE']            = i('lightbulb-o') . 'HUE';
 $lang['LINK_PICTURE']        = i('camera') . 'Foto'; 
 $lang['LINK_ARCHIVE']        = i('folder-open') . 'Archief'; 
-$lang['LINK_PLAY']           = i('play') . 'Play'; 
-$lang['LINK_STOP']           = i('stop') . 'Stop'; 
+$lang['LINK_PLAY']          = i('play');
+$lang['LINK_STOP']          = i('stop');
+$lang['LINK_NEXT_STEP']     = i('step-forward');
+$lang['LINK_PREV_STEP']     = i('step-backward');
+$lang['LINK_NEXT_FAST']     = i('forward');
+$lang['LINK_PREV_FAST']     = i('backward');
+$lang['LINK_END']           = i('fast-forward');
+$lang['LINK_BEGIN']         = i('fast-backward');
+
 
 /*
 ** ------------------
