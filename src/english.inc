@@ -72,7 +72,7 @@ $lang['DAY_6']           = 'Sat';
 ** ------------------
 */
 
-$lang['LINK_HOME']          = i('home') . 'Home'; 
+$lang['LINK_HOME']           = i('home'). 'Home'; 
 $lang['LINK_PREV']          = i('chevron-left') . 'Previous'; 
 $lang['LINK_NEXT']          = 'Next' . i('chevron-right'); 
 $lang['LINK_PREV_YEAR']     = i('chevron-left') . 'Previous Year'; 
@@ -111,11 +111,12 @@ $lang['LINK_REPORT']        = i('rocket') . 'Custom Query';
 $lang['LINK_GUI']           = i('table') . 'Realtime Dashboard';
 $lang['LINK_SYSTEM'] 	    = i('fort-awesome') .'System Overview';
 $lang['LINK_IMPORT_EXPORT'] = i('download') .'Export Data'; 
-$lang['LINK_DELETE']        = 'Delete'; 
+$lang['LINK_DELETE']        = i('remove').'Delete'; 
 $lang['LINK_WEBCAM']        = i('camera') . 'Webcams'; 
 $lang['LINK_HUE']           = i('lightbulb-o') . 'HUE';
 $lang['LINK_PICTURE']       = i('camera') . 'Picture'; 
 $lang['LINK_ARCHIVE']       = i('folder-open') . 'Archive'; 
+$lang['LINK_REMOVE']        = i('remove'); 
 $lang['LINK_PLAY']          = i('play'); 
 $lang['LINK_STOP']          = i('stop'); 
 $lang['LINK_NEXT_STEP']     = i('step-forward'); 

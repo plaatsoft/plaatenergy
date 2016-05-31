@@ -550,19 +550,18 @@ function plaatenergy_token_encode($token) {
 /**
  * Create button like link 
  */
-function plaatenergy_link($parameters, $label, $id="", $title="") {
+function plaatenergy_link($parameters, $label, $title="") {
    
 	global $link_counter;
 	
 	$link_counter++;
 	
 	$link  = '<a href="javascript:link(\''.plaatenergy_token_encode($parameters).'\');" class="link" ';			
-	if (strlen($id)!=0) {
-		$link .= ' id="'.strtolower($id).'"';
-	}
+	
 	if (strlen($title)!=0) {
 		$link .= ' title="'.strtolower($title).'"';
 	}
+	
 	$link .= '>'.$label.'</a>';	
 	return $link;
 }

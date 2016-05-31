@@ -49,7 +49,7 @@ function plaatenergy_about_page() {
   $page .= '<div class="large_text">'.t('DISCLAIMER_CONTENT').'</div>';
 
   $page .= '<div class="nav">';
-  $page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'), 'home');
+  $page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
   $page .=  '</div>';
 
   return $page;

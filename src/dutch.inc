@@ -112,19 +112,20 @@ $lang['LINK_DONATE']         = i('money') . 'Donatie';
 $lang['LINK_REPORT']         = i('archive') . 'Rapportage';
 $lang['LINK_GUI']            = i('table') . 'Realtime Dashboard';
 $lang['LINK_IMPORT_EXPORT']  = i('download') .'Export Data'; 
-$lang['LINK_DELETE']         = 'Verwijderen'; 
+$lang['LINK_DELETE']         = i('remove').'Verwijderen'; 
 $lang['LINK_WEBCAM']         = i('camera') . 'Webcams'; 
 $lang['LINK_HUE']            = i('lightbulb-o') . 'HUE';
 $lang['LINK_PICTURE']        = i('camera') . 'Foto'; 
 $lang['LINK_ARCHIVE']        = i('folder-open') . 'Archief'; 
-$lang['LINK_PLAY']          = i('play');
-$lang['LINK_STOP']          = i('stop');
-$lang['LINK_NEXT_STEP']     = i('step-forward');
-$lang['LINK_PREV_STEP']     = i('step-backward');
-$lang['LINK_NEXT_FAST']     = i('forward');
-$lang['LINK_PREV_FAST']     = i('backward');
-$lang['LINK_END']           = i('fast-forward');
-$lang['LINK_BEGIN']         = i('fast-backward');
+$lang['LINK_PLAY']           = i('play');
+$lang['LINK_STOP']           = i('stop');
+$lang['LINK_REMOVE']         = i('remove'); 
+$lang['LINK_NEXT_STEP']      = i('step-forward');
+$lang['LINK_PREV_STEP']      = i('step-backward');
+$lang['LINK_NEXT_FAST']      = i('forward');
+$lang['LINK_PREV_FAST']      = i('backward');
+$lang['LINK_END']            = i('fast-forward');
+$lang['LINK_BEGIN']          = i('fast-backward');
 
 
 /*

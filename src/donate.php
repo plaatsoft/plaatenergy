@@ -49,7 +49,7 @@ function plaatenergy_donate_page() {
   $page .= '<br/>';
 
   $page .= '<div class="nav">';
-  $page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'), 'home');
+  $page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
   $page .=  '</div>';
 
   return $page;
