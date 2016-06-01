@@ -79,6 +79,11 @@ if ($weather_station_present=="true") {
 
 plaatenergy_db_process(EVENT_PROCESS_TODAY);
 
+$webcam_present_1 = plaatenergy_db_get_config_item('webcam_present', WEBCAM_1);
+if ($webcam_present_1=="true") {
+   exec('sudo php '.BASE_DIR.'/sensors/webcam/webcam.php 1 > /dev/null 2>&1 &');
+}
+
 plaatenergy_db_close();
 
 // Calculate to page render time

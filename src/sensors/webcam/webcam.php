@@ -29,7 +29,13 @@ include '/var/www/html/plaatenergy/config.inc';
 include '/var/www/html/plaatenergy/database.inc';
 include '/var/www/html/plaatenergy/general.inc';
 
-$index = $argv[1];
+define( 'LOCK_FILE', "/var/run/".basename( $argv[0], ".php" ).".lock" ); 
+if( isLocked() ) die( "Already running.\n" ); 
+
+@$index = $argv[1];
+if (!isset($index)) {
+	$index=1;
+}
 
 plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
@@ -40,6 +46,19 @@ $offset=$segment/2;
 $detect_level=15;
 $detect_areas=25;
 $im2 = '';
+
+function isLocked() { 
+    if( file_exists( LOCK_FILE ) ) { 
+
+        $lockingPID = trim( file_get_contents( LOCK_FILE ) ); 
+        $pids = explode( "\n", trim( `ps -e | awk '{print $1}'` ) ); 
+        if( in_array( $lockingPID, $pids ) )  return true; 
+        unlink( LOCK_FILE ); 
+    } 
+    
+    file_put_contents( LOCK_FILE, getmypid() . "\n" ); 
+    return false; 
+} 
 
 function getColor($img, $x, $y) {
     $rgb = imagecolorat($img, $x, $y);
@@ -108,7 +127,7 @@ function plaatenergy_motion() {
 		}
 	}
 
-	echo $detection.' ';
+	//echo $detection.' ';
 
         $im2=$im1;
 
@@ -147,7 +166,10 @@ while (true) {
 	$time_end = microtime(true);
 	$time = $time_end - $time_start;
 
-	echo 'Process time '.round($time,2)." seconds\n";
+	//echo 'Process time '.round($time,2)." seconds\n";
 }
+
+unlink( LOCK_FILE ); 
+exit(0); 
 
 ?>
