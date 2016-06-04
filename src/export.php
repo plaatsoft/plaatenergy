@@ -190,7 +190,7 @@ function plaatenergy_export_import_page() {
 	$dh  = opendir(BASE_DIR.'/backup');
 	while (false !== ($filename = readdir($dh))) {
 	
-		if (($filename!='.') && ($filename!='..') && ($filename!='.htaccess')) {
+		if (($filename!='.') && ($filename!='..') && ($filename!='.htaccess') && ($filename!='index.php') && ($filename!='readme.txt')) {
 			$tmp .= '<tr>';
 			$tmp .= '<td><a href="backup/'.$filename.'">'.$filename.'</a></td>';
 			$tmp .= '<td>&nbsp;</td>';
