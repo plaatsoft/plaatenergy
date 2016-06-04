@@ -34,41 +34,37 @@
 function plaatenergy_hue_page() {
 
 	global $pid;
-			
-	$hue_ip_address = plaatenergy_db_get_config_item('hue_ip_address', HUE_1);
-	$hue_key = plaatenergy_db_get_config_item('hue_key', HUE_1);
-			
-	$page  = '<h1>'.t('TITLE_HUE').'</h1>';
+
+        $page ="<style>input[type='checkbox']{width:24px;height:24px}</style>";
+
+
+	$page .= '<h1>'.t('TITLE_HUE').'</h1>';
 	$page .= '<ul id="list"></ul>';
 	$page .= '<br/>';
-	
-	$page .= '<script>
-	"use strict";
 
-	var key = "'.$hue_key.'";
-	
+	$page .= '<script>
 	function setLightState (lightID, state) {
 		var http = new XMLHttpRequest();
-		http.open("PUT", "http://'.$hue_ip_address.'/api/" + key + "/lights/" + lightID + "/state");
-		http.send(\'{"on":\' + state + \'}\');
+		http.open("GET", "realtime.php?light=" + lightID + "&key=on&value=" + state);
+		http.send();
 	}
 	function setLightBrightness (lightID, brightness) {
 		var http = new XMLHttpRequest();
-		http.open("PUT", "http://'.$hue_ip_address.'/api/" + key + "/lights/" + lightID + "/state");
-		http.send(\'{"bri":\' + brightness + \'}\');
+		http.open("GET", "realtime.php?light=" + lightID + "&key=bri&value=" + brightness);
+		http.send();
 	}
-	
+
 	var list = document.querySelector("#list");
-	
+
 	var http = new XMLHttpRequest();
 	http.onload = function () {
 		var data = JSON.parse(http.responseText);
-		for (var id in data) {
-			list.innerHTML += "<li><b>" + data[id].name + "</b>: <input type=\"checkbox\" " + (data[id].state.on ? "checked " : "") + "onchange=\"setLightState(" + id + ", this.checked)\"> " +
-			"<input type=\"range\" min=\"0\" value=\"" + data[id].state.bri + "\" max=\"255\" onchange=\"setLightBrightness(" + id + ", this.value)\">";
+		for (var i = 0; i < data.length; i++) {
+			list.innerHTML += "<li><b>" + data[i].name + "</b>: <input type=\"checkbox\" " + (data[i].on ? "checked " : "") + "onchange=\"setLightState(" + data[i].id + ", this.checked)\"> " +
+			"<input type=\"range\" min=\"0\" value=\"" + data[i].bri + "\" max=\"255\" onchange=\"setLightBrightness(" + data[i].id + ", this.value)\">";
 		}
 	};
-	http.open("GET", "http://'.$hue_ip_address.'/api/" + key + "/lights");
+	http.open("GET", "realtime.php?lights");
 	http.send();
 </script>
 ';
