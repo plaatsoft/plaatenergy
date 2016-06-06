@@ -88,19 +88,23 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
   $json["energy"]["delivered"] = $row->low_delivered + $row->normal_delivered + $local_delivered; // kWh
   $json["energy"]["used"] = $row->low_used + $row->normal_used + $local_delivered; // kWh
-  $json["gas"]["used"] = round($row->gas_used, 1); // m3
+  $json["gas"]["used"] = $row->gas_used; // m3
 
   // Energy co2 emission = 1kWh grey energy is 0.526 kg co2
-  $json["energy"]["co2"] = round(($json["energy"]["used"] - $json["energy"]["delivered"]) * 0.526, 1); // kg
+  $json["energy"]["co2"] = ($json["energy"]["used"] - $json["energy"]["delivered"]) * 0.526; // kg
 
   // Burning 1 m3 gas results in 1.78 kg CO2 emission
-  $json["gas"]["co2"] = round(($json["gas"]["used"] * 1.78), 1); // kg
+  $json["gas"]["co2"] = $json["gas"]["used"] * 1.78; // kg
+
+  // Get CPU temperature
+  $json["cpu_temperature"] = exec("cat /sys/class/thermal/thermal_zone0/temp") / 1000 + 273.15; // K
 
   // Get raw weather data decode to json it will converted realtime by client with js to readable info
   $weather = json_decode(file_get_contents("http://api.openweathermap.org/data/2.5/weather?q=Gouda,NL&appid=4e28f75f5d0eded171ea5eeffb2eb77a"));
-  $json["weather"]["temperature"] = $weather->main->temp;  // Kelvin
-  $json["weather"]["humidity"] = $weather->main->humidity; // procent
+  $json["weather"]["temperature"] = $weather->main->temp;  // K
+  $json["weather"]["humidity"] = $weather->main->humidity; // %
   $json["weather"]["pressure"] = $weather->main->pressure; // hPa
+  $json["weather"]["clouds"] = $weather->clouds->all;      // %
   $json["weather"]["wind_speed"] = $weather->wind->speed;  // m/s
   $json["weather"]["sunrise"] = $weather->sys->sunrise;    // Unix timestamp
   $json["weather"]["sunset"] = $weather->sys->sunset;      // -^
@@ -146,11 +150,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
   .tile label{position:absolute;left:0;bottom:12px;width:100%}
 
   /* Media Querys: makes grid responsive */
-  @media(min-width:976px) and (min-height:480px) and (max-height:572px){.grid{width:calc(100% - 8px);height:calc(100% - 8px)}.tile{margin:4px;width:calc(25% - 8px);height:calc(25% - 8px)}.small{width:calc(12.5% - 8px)}}
+  @media(min-width:976px) and (min-height:480px) and (max-height:556px){.grid{width:calc(100% - 8px);height:calc(100% - 8px)}.tile{margin:4px;width:calc(25% - 8px);height:calc(25% - 8px)}.small{width:calc(12.5% - 8px)}}
   @media(max-width:976px){.grid{margin:8px auto;width:480px}.tile{width:calc(50% - 16px)}.small{width:calc(25% - 16px)}.tile:last-child{margin-bottom:16px}}
   @media(max-width:512px){.grid{margin:4px auto;width:calc(100% - 8px)}.tile{margin:4px;width:calc(50% - 8px);height:calc(25% - 8px)}.small{width:calc(25% - 8px)}.tile:last-child{margin-bottom:8px}}
 
-  /* Tile live animations */
+  /* Tile animations */
   @keyframes top-bottom{0%,25%{bottom:100%}35%,75%{bottom:0%}85%,100%{bottom:-100%}}
   .top-bottom>.one{animation:top-bottom 8s infinite -4s}
   .top-bottom>.two{animation:top-bottom 8s infinite}
@@ -166,8 +170,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
   /* Tile color palette */
   .red{background:#E53935}.pink{background:#E91E63}.purple{background:#9C27B0}.deep-purple{background:#673AB7}
-  .indigo{background:#3F51B5}.blue{background:#2196F3}.teal{background:#009688}.green{background:#43A047}.yellow{background:#FFB300}
-  .orange{background:#FF5722}.brown{background:#795548}.gray{background:#757575}.blue-gray{background:#607D8B}
+  .indigo{background:#3F51B5}.blue{background:#2196F3}.teal{background:#009688}.green{background:#43A047}.lime{background:#689F38}
+  .yellow{background:#FFB300}.orange{background:#FF5722}.brown{background:#795548}.gray{background:#757575}.blue-gray{background:#607D8B}
 </style>
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="loader">
@@ -177,7 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 <div class="grid hidden">
   <div class="tile orange">
     <p>PlaatEnergy</p>
-    <label>Made by <a href="http://plaatsoft.nl/" target="_blank">PlaatSoft</a></label>
+    <label>Made by <a href="http://bastiaan.plaatsoft.nl" target="_blank">Bastiaan</a></label>
   </div>
 
   <div class="tile top-bottom">
@@ -191,7 +195,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     </div>
   </div>
 
-  <div id="energy_today" class="tile" onclick="link('pid=18')">
+  <div id="energy_today" class="tile" onclick="link('pid=61')">
     <p id="energy_today_text"></p>
     <label>Electricity today</label>
   </div>
@@ -201,9 +205,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     <label>Electricity now</label>
   </div>
 
-  <div class="tile deep-purple" onclick="link('pid=71')">
-    <p id="temperature"></p>
-    <label>Air temperature inside</label>
+  <div class="tile left-right">
+    <div class="one blue">
+       <p id="weather_sunrise"></p>
+       <label>Sunrise</label>
+    </div>
+    <div class="two purple">
+       <p id="weather_sunset"></p>
+       <label>Sunset</label>
+    </div>
   </div>
 
   <div class="tile brown small" onclick="link('pid=80')">
@@ -236,24 +246,36 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
   </div>
 
   <div class="tile bottom-top">
-    <div class="one gray" onclick="link('pid=62')">
+    <div class="one gray" onclick="link('pid=62&eid=19')">
       <p id="gas_today"></p>
       <label>Gas used today</label>
     </div>
-    <div class="two deep-purple" onclick="link('pid=42')">
+    <div class="two deep-purple" onclick="link('pid=42&eid=19')">
       <p id="gas_used"></p>
       <label>Gas used annually</label>
     </div>
   </div>
 
-  <div class="tile green" onclick="link('pid=72')">
-    <p id="humidity"></p>
-    <label>Air humidity inside</label>
+  <div class="tile top-bottom">
+    <div class="one deep-purple" onclick="link('pid=71')">
+      <p id="temperature"></p>
+      <label>Air temperature inside</label>
+    </div>
+    <div class="two green">
+      <p id="weather_temperature"></p>
+      <label>Air temperature outside</label>
+    </div>
   </div>
 
-  <div class="tile blue-gray" onclick="link('pid=70')">
-    <p id="pressure"></p>
-    <label>Air pressure inside</label>
+  <div class="tile bottom-top">
+    <div class="one orange" onclick="link('pid=70')">
+      <p id="pressure"></p>
+      <label>Air pressure inside</label>
+    </div>
+    <div class="two gray">
+      <p id="weather_pressure"></p>
+      <label>Air pressure outside</label>
+    </div>
   </div>
 
   <div class="tile brown">
@@ -261,9 +283,15 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     <label>Wind speed outside</label>
   </div>
 
-  <div class="tile purple">
-    <p id="weather_temperature"></p>
-    <label>Air temperature outside</label>
+  <div class="tile left-right">
+    <div class="one blue" onclick="link('pid=72')">
+      <p id="humidity"></p>
+      <label>Air humidity inside</label>
+    </div>
+    <div class="two pink">
+      <p id="weather_humidity"></p>
+      <label>Air humidity outside</label>
+    </div>
   </div>
 
   <div class="tile right-left">
@@ -277,7 +305,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     </div>
   </div>
 
-  <div class="tile left-right">
+  <div class="tile lime">
+    <p id="cpu_temperature"></p>
+    <label>CPU temperature</label>
+  </div>
+
+  <div class="tile top-bottom">
     <div class="one green" onclick="link('pid=41')">
       <p id="energy_delivered"></p>
      <label>Electricity delivered annually</label>
@@ -288,14 +321,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     </div>
   </div>
 
-  <div class="tile orange">
-    <p id="weather_pressure"></p>
-    <label>Air pressure outside</label>
-  </div>
-
   <div class="tile teal">
-    <p id="weather_humidity"></p>
-    <label>Air humidity outside</label>
+    <p id="weather_clouds"></p>
+    <label>Clouds outside</label>
   </div>
 </div>
 
@@ -456,9 +484,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
      document.querySelector("#temperature").innerHTML = format_temperature(data.temperature);
      document.querySelector("#pressure").innerHTML = format_number(data.pressure) + " hPa";
      document.querySelector("#humidity").innerHTML = format_number(data.humidity) + " %";
+     document.querySelector("#cpu_temperature").innerHTML = format_temperature(data.cpu_temperature);
      document.querySelector("#weather_temperature").innerHTML = format_temperature(data.weather.temperature);
      document.querySelector("#weather_pressure").innerHTML = format_number(data.weather.pressure) + " hPa";
      document.querySelector("#weather_humidity").innerHTML = format_number(data.weather.humidity) + " %";
+     document.querySelector("#weather_clouds").innerHTML = format_number(data.weather.clouds) + " %";
+
+     document.querySelector("#weather_sunrise").innerHTML = format_time(data.weather.sunrise * 1e3);
+     document.querySelector("#weather_sunset").innerHTML = format_time(data.weather.sunset * 1e3);
 
      if (localStorage.night_mode == "yes") {
        document.body.classList.add("night");
