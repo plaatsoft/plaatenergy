@@ -266,7 +266,7 @@ function plaatenergy_db_check_version() {
       plaatenergy_db_execute_sql_file("0.9");
    }
 	
-	// Execute SQL path script v1.0 if needed
+   // Execute SQL path script v1.0 if needed
    $sql = 'select value from config where token="database_version"';
    $result = plaatenergy_db_query($sql);
    $row = plaatenergy_db_fetch_object($result);
@@ -274,12 +274,20 @@ function plaatenergy_db_check_version() {
       plaatenergy_db_execute_sql_file("1.0");
    }
 	
-	// Execute SQL path script v1.1 if needed
+   // Execute SQL path script v1.1 if needed
    $sql = 'select value from config where token="database_version"';
    $result = plaatenergy_db_query($sql);
    $row = plaatenergy_db_fetch_object($result);
    if ($row->value=="1.0")  {
       plaatenergy_db_execute_sql_file("1.1");
+   }
+
+   // Execute SQL path script v1.2 if needed
+   $sql = 'select value from config where token="database_version"';
+   $result = plaatenergy_db_query($sql);
+   $row = plaatenergy_db_fetch_object($result);
+   if ($row->value=="1.1")  {
+      plaatenergy_db_execute_sql_file("1.2");
    }
 }
 
