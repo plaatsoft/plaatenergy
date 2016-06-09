@@ -213,11 +213,6 @@ function plaatenergy_month_out_energy_page() {
         };
 
          var data = google.visualization.arrayToDataTable('.$json.');
-		   var formatter = new google.visualization.NumberFormat(
-				{ negativeColor: "red", negativeParens: true, decimalSymbol: ",", groupingSymbol: ".", fractionDigits:0}
-			);
-		   formatter.format(data, 1);
-			
          var chart = new google.charts.Bar(document.getElementById("chart_div"));
          chart.draw(data, google.charts.Bar.convertOptions(options));
 
