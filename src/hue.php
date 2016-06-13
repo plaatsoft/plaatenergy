@@ -36,8 +36,6 @@ function plaatenergy_hue_page() {
 	global $pid;
 
         $page ="<style>input[type='checkbox']{width:24px;height:24px}</style>";
-
-
 	$page .= '<h1>'.t('TITLE_HUE').'</h1>';
 	$page .= '<ul id="list"></ul>';
 	$page .= '<br/>';

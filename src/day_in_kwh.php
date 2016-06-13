@@ -156,7 +156,6 @@ function plaatenergy_day_in_energy_page() {
 		}
 		$data .= "['".date("H:i", $current_date+(900*($i+1)))."',";
 		$data .= round($low_used_value,2).','.round($normal_used_value,2).','.round($solar_value,2).']';
-	
 		$i++;
 	}
 	
