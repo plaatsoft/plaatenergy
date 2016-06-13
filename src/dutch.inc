@@ -349,7 +349,10 @@ $lang['webcam_device'] = 'Webcam device mapping';
 $lang['hue_description'] = 'Philips HUE description';
 $lang['hue_ip_address'] = 'Philips HUE IP address of bridge';
 $lang['hue_key'] = 'Philips HUE access key';
-$lang['webcam_present'] = 'Philips HUE aanwezig';
+$lang['hue_present'] = 'Philips HUE aanwezig';
+
+$lang['notification_present'] = 'Notification aanwezig';
+$lang['notification_nma_key'] = 'Notify My Andriod Key';
 
 $lang['CATEGORY0'] =  'Prognose'; 
 $lang['CATEGORY11'] = 'Gas Meter'; 
@@ -363,6 +366,7 @@ $lang['CATEGORY52'] = 'Layout';
 $lang['CATEGORY61'] = 'Webcam 1'; 
 $lang['CATEGORY62'] = 'Webcam 2'; 
 $lang['CATEGORY71'] = 'Philips HUE'; 
+$lang['CATEGORY81'] = 'Android Notification'; 
 
 /*
 ** ------------------

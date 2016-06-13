@@ -348,6 +348,9 @@ $lang['hue_ip_address'] = 'Philips HUE IP address of bridge';
 $lang['hue_key'] = 'Philips HUE access key';
 $lang['hue_present'] = 'Philips HUE present';
 
+$lang['notification_present'] = 'Notifcation present';
+$lang['notification_nma_key'] = 'Notify My Android key';
+
 $lang['CATEGORY0'] =  'Forecast'; 
 $lang['CATEGORY11'] = 'Gas Meter'; 
 $lang['CATEGORY21'] = 'Energy Meter'; 
@@ -360,6 +363,7 @@ $lang['CATEGORY52'] = 'Look and Feel';
 $lang['CATEGORY61'] = 'Webcam 1'; 
 $lang['CATEGORY62'] = 'Webcam 2'; 
 $lang['CATEGORY71'] = 'Philips HUE'; 
+$lang['CATEGORY81'] = 'Notification Android'; 
 
 /*
 ** ------------------

@@ -26,9 +26,10 @@
 ** NOTES
 ** ---------------------
 */
-$note[12] = '<div class="subparagraph">Version 1.2 (31-05-2016)</div>
+$note[12] = '<div class="subparagraph">Version 1.2 (13-06-2016)</div>
 <div class="large_text">
 <ul>
+<li>General: Add Notify My Android (NMA) webservice integration for push messages to andriod phone.</li>
 <li>General: Add basic support for two webcams.</li>
 <li>General: Add option to make picture from webcam view.</li>
 <li>General: Add motion detection with automatic recording to webcam sensor script.</li>

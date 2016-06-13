@@ -132,6 +132,7 @@ define('LOOK_AND_FEEL',            52);
 define('WEBCAM_1',                 61);
 define('WEBCAM_2',                 62);
 define('HUE_1',                    71);
+define('NOTIFICATION',              81);
 
 /*
 ** -----------
@@ -147,6 +148,34 @@ $out_forecast = array(0,50/2550,100/2550,210/2550,310/2550,360/2550,360/2550,330
 
 // Gas use forecast (per month)
 $gas_forecast = array(0,250/1500,220/1500,180/1500,110/1500,60/1500,40/1500,30/1500,30/1500,50/1500,110/1500,190/1500,230/1500);
+
+/*
+** -----------
+** NOTIFCATION
+** serverity
+** 2 = top
+** 1 = high
+** 0 = normal
+** -1 = low
+** -2 = none
+** -----------
+*/
+
+function plaatenergy_notification($topic, $content, $severity=0) {
+
+  $notification_present = plaatenergy_db_get_config_item('notification_present', NOTIFICATION);
+
+  if ($notification_present=="true" ) {
+  	$notification_nma_key = plaatenergy_db_get_config_item('notification_nma_key', NOTIFICATION);
+
+  	require 'nmaApi.class.php';
+
+  	$nma = new nmaApi(array('apikey' => $notification_nma_key));
+  	if($nma->verify()) {
+         	$nma->notify('PlaatEnergy', $topic, $content, $severity );
+	}
+   }
+}
 
 /*
 ** -----------

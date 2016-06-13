@@ -176,6 +176,8 @@ function plaatenergy_home_login_event() {
 	
 		$session = plaatenergy_db_get_session($ip, true);
 		$pid = PAGE_HOME;
+
+		plaatenergy_notification("Login" , "User login with ".$ip, 0);
 	}
 }
 
