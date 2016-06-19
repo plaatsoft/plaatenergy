@@ -42,6 +42,17 @@ function GenerateChecksum($data, $send=true) {
     return $ret;
 }
 
+function SetLedOn($node) {
+
+  global $fp;
+
+   echo "SetLedOn\r\n"; 
+   $command = hex2bin("010c0013".$node."0570040301ff0503");
+   $command .= GenerateChecksum($command);
+   EchoCommand($command);
+   fwrite($fp, $command, strlen($command));
+}
+
 function GetMemoryId() {
 
   global $fp;
@@ -157,6 +168,7 @@ function GetIdentifyNode($node) {
    * Byte 5 : Last byte is checksum
    */
   
+  echo "GetIndentifyNode  NodeId=".$node."\r\n";
   $command = hex2bin("01040041".$node);
   $command .= GenerateChecksum($command);
   fwrite($fp, $command, strlen($command));
@@ -195,7 +207,7 @@ function SendData($node,$value) {
    * Byte 6 : 0x20 
    * Byte 7 : 0x01 
    * Byte 8 : On/Off (0xff, 0x00) 
-   * Byte 9 : 0x05 
+   * Byte 9 : CallBackId (0x05) 
    * Byte 10: Last byte is checksum
    */
    
@@ -418,6 +430,58 @@ function decodeRouteInfo($data) {
    echo "\n\r";
 }
 
+function decodeIdentifyNode($data) {
+
+  $basicClass = ord(substr($data,7,1));
+  $deviceType = ord(substr($data,8,1));
+
+  echo "IndentifyNode ";
+  switch ($basicClass) {
+ 
+    case 0x01: echo "Controller ";
+	       break;
+
+    case 0x02: echo "StaticController ";
+	       break;
+
+    case 0x03: echo "Slave ";
+	       break;
+
+    case 0x04: echo "Router ";
+	       break;
+
+    default:   echo "Unknown ";
+	       break;
+  }
+
+  switch ($deviceType) {
+
+    case 0x01: echo "Controller ";
+	       break;
+
+    case 0x08: echo "Thermostat ";
+	       break;
+
+    case 0x09: echo "Shutter ";
+	       break;
+
+    case 0x10: echo "Switch ";
+	       break;
+
+    case 0x11: echo "Dimmer ";
+	       break;
+
+    case 0x12: echo "Transmitter ";
+	       break;
+
+    default:   echo "Unknown ";
+	       break;
+
+  }
+  echo "\n\r";
+  echo "\n\r";
+}
+
 function DecodeMessage($data) {
 
     switch (ord($data[3])) {
@@ -433,6 +497,9 @@ function DecodeMessage($data) {
 
       case 0x20: decodeMemoryId($data);
                  break;
+
+      case 0x41: decodeIdentifyNode($data);
+		 break;
 
       case 0x80: decodeRouteInfo($data);
                  break;
@@ -509,17 +576,33 @@ Receive();
 GetRouteInfo("01");
 Receive();
 
+GetIdentifyNode("01");
+Receive();
+
 GetRouteInfo("02");
+Receive();
+
+GetIdentifyNode("02");
 Receive();
 
 GetRouteInfo("03");
 Receive();
 
+GetIdentifyNode("03");
+Receive();
+
 GetRouteInfo("04");
 Receive();
 
-SendData("02","00");  
+GetIdentifyNode("04");
 Receive();
+
+#SendData("02","00");  
+#Receive();
+
+#SetLedOn("02");
+#Receive();
+
 
 # -------------------------------------------------
 
