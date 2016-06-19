@@ -55,6 +55,7 @@ function GetMemoryId() {
    * Byte 4 : Last byte is checksum
    */
  
+   echo "GetMemoryId\r\n"; 
    $command = hex2bin("01030020");
    $command .= GenerateChecksum($command);
    EchoCommand($command);
@@ -75,6 +76,7 @@ function GetVersion() {
    * Byte 4 : Last byte is checksum
    */
  
+   echo "GetVersion\r\n"; 
    $command = hex2bin("01030015");
    $command .= GenerateChecksum($command);
    EchoCommand($command);
@@ -136,7 +138,8 @@ function GetRouteInfo($node) {
    * Byte 7 : Function Id 0x03
    * Byte 8 : Last byte is checksum
    */
- 
+
+   echo "GetRouteInfo NodeId=".$node."\r\n"; 
    $command = hex2bin("01070080".$node."000003");
    $command .= GenerateChecksum($command);
    fwrite($fp, $command, strlen($command));
@@ -369,6 +372,26 @@ function decodeApplicationCommandHandler($data) {
   echo "\n\r";
 }
 
+
+function decodeRouteInfo($data) {
+
+ $count = 0;
+
+ echo "RouteId Neighbors ";
+ for ($i=4; $i<33; $i++ ) {
+
+   $raw_node = ord(substr($data,$i,1));
+  
+   for ($j=0; $j<8; $j++) {
+      if (($raw_node & (0x01 << $j)) != 0x00)
+         echo $j+1+(8*$count).' ';
+      }
+      $count++;
+   }
+   echo "\n\r";
+   echo "\n\r";
+}
+
 function DecodeMessage($data) {
 
     switch (ord($data[3])) {
@@ -380,6 +403,9 @@ function DecodeMessage($data) {
                  break;
 
       case 0x20: decodeMemoryId($data);
+                 break;
+
+      case 0x80: decodeRouteInfo($data);
                  break;
 
       default:   echo "Unknown message\n\r";
@@ -448,6 +474,19 @@ Receive();
 
 GetMemoryId();
 Receive();
+
+GetRouteInfo("01");
+Receive();
+
+GetRouteInfo("02");
+Receive();
+
+GetRouteInfo("03");
+Receive();
+
+GetRouteInfo("04");
+Receive();
+
 
 #RGetControllerCapabilities();
 #RReceive();
