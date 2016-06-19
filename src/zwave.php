@@ -1,15 +1,15 @@
 <?php
 
 // Open Aeotec Zstick (Gen. 5) device 
-
+exec('stty -F /dev/ttyACM0 9600 raw');
 $fp=fopen("/dev/ttyACM0","c+");
-//$fp=fopen("/dev/ttyUSB-ZStick-5G", "c+");
 
+/**
+ * Log sent bytes
+ */
 function EchoCommand($data) {
-
-    echo "sent: ";
+    echo "TX: ";
     for ($i=0; $i<strlen($data); $i++) {
-
         echo '0x'.bin2hex($data[$i]).' ';
     }
 }
@@ -218,6 +218,68 @@ function cleanup() {
   }
 }
 
+function plaatprotect_hex($value) {
+  
+   $tmp="";
+   for ($i=0; $i<strlen($value); $i++) {
+
+      if (strlen($tmp)>0) {
+         $tmp.=' ';
+      }
+      $tmp.='0x'.bin2hex($value[$i]);
+   }  
+   return $tmp;
+}
+
+function decodeGetVersion($data) {
+
+ $zWaveLibraryType = $data[16];
+ $zWaveVersion = substr($data,4,15);
+
+ echo "GetVersion ";
+ echo "WaveVersion=[".$zWaveVersion."] ";
+ echo "LibraryType=[0x".bin2hex($zWaveLibraryType)."]";
+ echo "\n\r";
+}
+
+function decodeMemoryId($data) {
+
+ $homeId = plaatprotect_hex(substr($data,4,4));
+ $nodeId = plaatprotect_hex(substr($data,8,1));
+
+ echo "GetMemoryId ";
+ echo "HomeId=[".$homeId."] ";
+ echo "NodeId=[".$nodeId."] ";
+ echo "\n\r";
+}
+
+function decodeApplicationCommandHandler($data) {
+
+ $nodeId = plaatprotect_hex(substr($data,5,1));
+
+ echo "ApplicationCommandHandler ";
+ echo "NodeId=[".$nodeId."] ";
+ echo "\n\r";
+}
+
+function DecodeMessage($data) {
+
+    switch (ord($data[3])) {
+
+      case 0x04: decodeApplicationCommandHandler($data);
+                 break;
+
+      case 0x15: decodeGetVersion($data);
+                 break;
+
+      case 0x20: decodeMemoryId($data);
+                 break;
+
+      default:   echo "Unknown message\n\r";
+                 break;
+    }
+}
+
 function Receive() {
 
   global $fp;
@@ -240,7 +302,7 @@ function Receive() {
 
     if (($c==chr(0x01)) && ($start==0)) {
        $start = 1;
-       echo "\n\rreceived: ";
+       echo "\n\rRX: ";
 
     } else if ($start == 1) {
       $len = ord($c);
@@ -250,7 +312,7 @@ function Receive() {
     } else if (($start==0) && ($c==chr(0x06))) {
        $start = 0;
        $data="";
-       echo "\n\rreceived: ";
+       echo "\n\rRX: ";
     }
 
     echo "0x".bin2hex($c);
@@ -262,32 +324,51 @@ function Receive() {
       
       $command = chr(0x06);
       fwrite($fp, $command, strlen($command));
-      echo "\n\rsent: 0x".bin2hex($command)."\n\r";
+      echo "\n\rTX: 0x".bin2hex($command)."\n\r";
       $start = 0;
       $count = 0;
       $len = 0;
+
+      DecodeMessage($data);
       $data="";
       break;
    }
   }
 }
 
-//GetVersion();
-//Receive();
-
-GetMemoryId();
-Receive();
-
-GetControllerCapabilities();
+GetVersion();
 Receive();
 
 GetMemoryId();
 Receive();
 
-//GetInitData();
-//GetProtocolStatus();
-//GetIdentifyNode("02");
-//GetRouteInfo("02");
-//SendData("02","00");  
+#RGetControllerCapabilities();
+#RReceive();
+
+#RGetInitData();
+#RReceive();
+
+#RGetProtocolStatus();
+#RReceive();
+
+#RGetIdentifyNode("02");
+#RReceive();
+
+#RGetRouteInfo("02");
+#RReceive();
+
+# Horn on
+#SendData("02","ff");  
+#Receive();
+
+#sleep(2);
+
+# Horn off
+#RSendData("02","00");  
+#Receive();
+
+while (true) {
+ Receive();
+}
 
 ?>
