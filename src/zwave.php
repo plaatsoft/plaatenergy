@@ -60,7 +60,6 @@ function GetMemoryId() {
    $command .= GenerateChecksum($command);
    EchoCommand($command);
    fwrite($fp, $command, strlen($command));
-   fflush($fp);
 }
 
 function GetVersion() {
@@ -119,7 +118,6 @@ function GetControllerCapabilities() {
    $command .= GenerateChecksum($command);
    EchoCommand($command);
    fwrite($fp, $command, strlen($command));
-   fflush($fp);
 }
 
 function GetRouteInfo($node) {
@@ -200,25 +198,12 @@ function SendData($node,$value) {
    * Byte 9 : 0x05 
    * Byte 10: Last byte is checksum
    */
+   
+   echo "SendData NodeId=".$node." value=".$value."\r\n";
    $command = hex2bin("01090013".$node."032001".$value."05");
    $command .= GenerateChecksum($command);
    fwrite($fp, $command, strlen($command));
    EchoCommand($command);
-}
-
-function cleanup() {
-
-  global $fp;
-
-  $data = "";
-  while (true) {
-
-    $c=fgetc($fp);
-
-    if($c == false){
-      break;
-    }  
-  }
 }
 
 function plaatprotect_hex($value) {
@@ -256,6 +241,32 @@ function decodeMemoryId($data) {
  echo "NodeId=[".$nodeId."] ";
  echo "\n\r";
  echo "\n\r";
+}
+
+function decodeSentData($data) {
+
+  $response = ord(substr($data,4,1));
+
+  echo "SentData ";
+  switch ($response) {
+ 
+    case 0x00: echo "Transmission complete and Ack received.";
+	       break;
+
+    case 0x01: echo "Transmission complete and no Ack received.";
+	       break;
+
+    case 0x02: echo "Transmission failed.";
+	       break;
+
+    case 0x03: echo "Transmission failed, network busy.";
+	       break;
+
+    case 0x04: echo "Transmission complete, no return route.";
+	       break;
+  }
+  echo "\n\r";
+  echo "\n\r";
 }
 
 function decodeApplicationCommandHandler($data) {
@@ -335,19 +346,34 @@ function decodeApplicationCommandHandler($data) {
 				 case 0x09: echo 'System ';
 					    break;
 
-				 case 0x10: echo 'Emergency ';
+				 case 0x0a: echo 'Emergency ';
 					    break;
 
-				 case 0x11: echo 'Count ';
+				 case 0x0b: echo 'Clock ';
 					    break;
 
-				 default :  echo 'Unknown ';
+				 case 0x0c: echo 'Appliance ';
+					    break;
+
+				 case 0x0d: echo 'Health ';
+					    break;
+
+				 case 0x0e: echo 'Count ';
+					    break;
+
+				 default:   echo 'Unknown ';
 					    break;
 			      }
 
  	                      $value = ord(substr($data,10,1));
  	                      echo 'AlarmValue='.$value.'';
                               break;
+
+                      case 0x07:  echo "SupportGet ";
+				  break;
+
+                      case 0x08:  echo "SupportReport ";
+				  break;
 		}
 		break;
 
@@ -397,6 +423,9 @@ function DecodeMessage($data) {
     switch (ord($data[3])) {
 
       case 0x04: decodeApplicationCommandHandler($data);
+                 break;
+
+      case 0x13: decodeSentData($data);
                  break;
 
       case 0x15: decodeGetVersion($data);
@@ -469,6 +498,8 @@ function Receive() {
   }
 }
 
+# -------------------------------------------------
+
 GetVersion();
 Receive();
 
@@ -487,6 +518,10 @@ Receive();
 GetRouteInfo("04");
 Receive();
 
+SendData("02","00");  
+Receive();
+
+# -------------------------------------------------
 
 #RGetControllerCapabilities();
 #RReceive();
@@ -497,24 +532,22 @@ Receive();
 #RGetProtocolStatus();
 #RReceive();
 
-#RGetIdentifyNode("02");
-#RReceive();
+#GetIdentifyNode("02");
+#Receive();
 
-#RGetRouteInfo("02");
-#RReceive();
+#GetRouteInfo("02");
+#Receive();
 
 # Horn on
-#SendData("02","ff");  
+#SendData("02","01");  
 #Receive();
-
-#sleep(2);
 
 # Horn off
-#RSendData("02","00");  
-#Receive();
+#SendData("02","00");  
+#eceive();
 
 while (true) {
- Receive();
+  Receive();
 }
 
 ?>
