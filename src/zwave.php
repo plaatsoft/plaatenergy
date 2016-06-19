@@ -240,6 +240,7 @@ function decodeGetVersion($data) {
  echo "WaveVersion=[".$zWaveVersion."] ";
  echo "LibraryType=[0x".bin2hex($zWaveLibraryType)."]";
  echo "\n\r";
+ echo "\n\r";
 }
 
 function decodeMemoryId($data) {
@@ -251,15 +252,121 @@ function decodeMemoryId($data) {
  echo "HomeId=[".$homeId."] ";
  echo "NodeId=[".$nodeId."] ";
  echo "\n\r";
+ echo "\n\r";
 }
 
 function decodeApplicationCommandHandler($data) {
 
  $nodeId = plaatprotect_hex(substr($data,5,1));
+ $len = substr($data,6,1);
+ $commandClass = ord(substr($data,7,1));
 
  echo "ApplicationCommandHandler ";
  echo "NodeId=[".$nodeId."] ";
- echo "\n\r";
+
+ switch( $commandClass ) {
+   
+    case 0x20: Echo 'Basic ';
+ 	       $command= ord(substr($data,8,1));
+	       switch ($command) {
+
+                   case 0x01: echo 'Set ';
+ 	                      $value= ord(substr($data,9,1));
+ 	                      echo 'value='.$value;
+                              break;
+
+                   case 0x02: echo 'Get ';
+                              break;
+
+                   case 0x03: echo 'Report ';
+ 	                      $value= ord(substr($data,9,1));
+ 	                      echo 'value='.$value;
+                              break;
+               }
+               break;
+
+    case 0x31: Echo 'Sensor Multilevel ';
+               break;
+
+    case 0x70: Echo 'Configuration ';
+               break;
+
+    case 0x71: Echo 'Alarm ';
+ 	       $command= ord(substr($data,8,1));
+	       switch ($command) {
+
+                   case 0x04: echo 'Get ';
+                              break;
+
+                   case 0x05: echo 'Report ';
+ 	                      $type = ord(substr($data,9,1));
+	       		      switch ($type) {
+
+				 case 0x00: echo 'General ';
+					    break;
+
+				 case 0x01: echo 'Smoke ';
+					    break;
+
+				 case 0x02: echo 'Carbon Monoxide ';
+					    break;
+
+				 case 0x03: echo 'Carbon Dioxide ';
+					    break;
+
+				 case 0x04: echo 'Heat ';
+					    break;
+
+				 case 0x05: echo 'Flood ';
+					    break;
+
+				 case 0x06: echo 'Access control ';
+					    break;
+
+				 case 0x07: echo 'Burglar ';
+					    break;
+
+				 case 0x08: echo 'Power Management ';
+					    break;
+
+				 case 0x09: echo 'System ';
+					    break;
+
+				 case 0x10: echo 'Emergency ';
+					    break;
+
+				 case 0x11: echo 'Count ';
+					    break;
+
+				 default :  echo 'Unknown ';
+					    break;
+			      }
+
+ 	                      $value = ord(substr($data,10,1));
+ 	                      echo 'AlarmValue='.$value.'';
+                              break;
+		}
+		break;
+
+    case 0x80: Echo 'Battery ';
+ 	       $command= ord(substr($data,8,1));
+	       switch ($command) {
+
+                   case 0x02: echo 'Get ';
+                              break;
+
+                   case 0x03: echo 'Report ';
+ 	                      $value= ord(substr($data,9,1));
+ 	                      echo 'BatteryValue='.$value.'%';
+                              break;
+               }
+               break;
+
+    default:   Echo 'Unknown';
+               break;
+
+  }
+  echo "\n\r";
 }
 
 function DecodeMessage($data) {
