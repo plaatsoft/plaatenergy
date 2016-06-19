@@ -2,16 +2,15 @@
 
 // Open Aeotec Zstick (Gen. 5) device 
 
-//$fp=fopen("/dev/ttyACM0","c+");
-
-$fp=fopen("/dev/ttyUSB-ZStick-5G", "c+");
+$fp=fopen("/dev/ttyACM0","c+");
+//$fp=fopen("/dev/ttyUSB-ZStick-5G", "c+");
 
 function EchoCommand($data) {
 
     echo "sent: ";
     for ($i=0; $i<strlen($data); $i++) {
 
-        echo bin2hex($data[$i]).' ';
+        echo '0x'.bin2hex($data[$i]).' ';
     }
 }
 
@@ -43,6 +42,45 @@ function GenerateChecksum($data, $send=true) {
     return $ret;
 }
 
+function GetMemoryId() {
+
+  global $fp;
+
+  /*
+   * A ZWave serial message frame is made up as follows
+   * Byte 0 : SOF (Start of Frame) 0x01
+   * Byte 1 : Length of frame - number of bytes to follow
+   * Byte 2 : Request (0x00) or Response (0x01)
+   * Byte 3 : Message Class (0x20) GetMemoryId
+   * Byte 4 : Last byte is checksum
+   */
+ 
+   $command = hex2bin("01030020");
+   $command .= GenerateChecksum($command);
+   EchoCommand($command);
+   fwrite($fp, $command, strlen($command));
+   fflush($fp);
+}
+
+function GetVersion() {
+
+  global $fp;
+
+  /*
+   * A ZWave serial message frame is made up as follows
+   * Byte 0 : SOF (Start of Frame) 0x01
+   * Byte 1 : Length of frame - number of bytes to follow
+   * Byte 2 : Request (0x00) or Response (0x01)
+   * Byte 3 : Message Class (0x15) GetVersion
+   * Byte 4 : Last byte is checksum
+   */
+ 
+   $command = hex2bin("01030015");
+   $command .= GenerateChecksum($command);
+   EchoCommand($command);
+   fwrite($fp, $command, strlen($command));
+}
+
 function GetProtocolStatus() {
 
   global $fp;
@@ -60,6 +98,26 @@ function GetProtocolStatus() {
    $command .= GenerateChecksum($command);
    fwrite($fp, $command, strlen($command));
    EchoCommand($command);
+}
+
+function GetControllerCapabilities() {
+
+  global $fp;
+
+  /*
+   * A ZWave serial message frame is made up as follows
+   * Byte 0 : SOF (Start of Frame) 0x01
+   * Byte 1 : Length of frame - number of bytes to follow
+   * Byte 2 : Request (0x00) or Response (0x01)
+   * Byte 3 : Message Class (0x05)
+   * Byte 4 : Last byte is checksum
+   */
+ 
+   $command = hex2bin("01030005");
+   $command .= GenerateChecksum($command);
+   EchoCommand($command);
+   fwrite($fp, $command, strlen($command));
+   fflush($fp);
 }
 
 function GetRouteInfo($node) {
@@ -82,30 +140,7 @@ function GetRouteInfo($node) {
    $command = hex2bin("01070080".$node."000003");
    $command .= GenerateChecksum($command);
    fwrite($fp, $command, strlen($command));
-  EchoCommand($command);
-}
-
-function GetVersion($node) {
-
-  global $fp;
-
-  /*
-   * A ZWave serial message frame is made up as follows
-   * Byte 0 : SOF (Start of Frame) 0x01
-   * Byte 1 : Length of frame - number of bytes to follow
-   * Byte 2 : Request (0x00) or Response (0x01)
-   * Byte 3 : Message Class (0x15) GetVersion
-   * Byte 4 : NodeId
-   * Byte 5 : 0x02,
-   * byte 6 : 0x00 (Key) 
-   * byte 7 : 0x11 (VERSION_GET)
-   * Byte 8 : Last byte is checksum
-   */
- 
-   $command = hex2bin("01070015".$node."020011");
-   $command .= GenerateChecksum($command);
-   fwrite($fp, $command, strlen($command));
-  EchoCommand($command);
+   EchoCommand($command);
 }
 
 function GetIdentifyNode($node) {
@@ -153,7 +188,7 @@ function SendData($node,$value) {
    * Byte 0 : SOF (Start of Frame) 0x01
    * Byte 1 : Length of frame - number of bytes to follow
    * Byte 2 : Request (0x00) or Response (0x01)
-   * Byte 3 : SenData (0x13)
+   * Byte 3 : SendData (0x13)
    * Byte 4 : NodeId
    * Byte 5 : 0x03 
    * Byte 6 : 0x20 
@@ -168,7 +203,22 @@ function SendData($node,$value) {
    EchoCommand($command);
 }
 
-function receive() {
+function cleanup() {
+
+  global $fp;
+
+  $data = "";
+  while (true) {
+
+    $c=fgetc($fp);
+
+    if($c == false){
+      break;
+    }  
+  }
+}
+
+function Receive() {
 
   global $fp;
 
@@ -203,7 +253,7 @@ function receive() {
        echo "\n\rreceived: ";
     }
 
-    echo bin2hex($c);
+    echo "0x".bin2hex($c);
     echo " ";
 
     if (($start==2) && ($len==$count)) {
@@ -212,21 +262,32 @@ function receive() {
       
       $command = chr(0x06);
       fwrite($fp, $command, strlen($command));
-      echo "\n\rsent: ".bin2hex($command)."\n\r";
+      echo "\n\rsent: 0x".bin2hex($command)."\n\r";
       $start = 0;
       $count = 0;
       $len = 0;
       $data="";
-      #break;
+      break;
    }
   }
 }
 
-//GetVersion("02");
+//GetVersion();
+//Receive();
+
+GetMemoryId();
+Receive();
+
+GetControllerCapabilities();
+Receive();
+
+GetMemoryId();
+Receive();
+
 //GetInitData();
 //GetProtocolStatus();
 //GetIdentifyNode("02");
-GetRouteInfo("02");
-//SendData("04","00");  
+//GetRouteInfo("02");
+//SendData("02","00");  
 
-receive();
+?>
