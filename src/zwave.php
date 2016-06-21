@@ -1,9 +1,53 @@
 <?php
 
+include "general.inc";
+include "database.inc";
+include "zwave-config.php";
+
 // Open Aeotec Zstick (Gen. 5) device 
 exec('stty -F /dev/ttyACM0 9600 raw');
 $fp=fopen("/dev/ttyACM0","c+");
 
+/**
+ ********************************
+ * Database
+ ********************************
+ */
+ 
+plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
+ 
+function plaatprotect_event_insert($nodeId, $event, $value) {
+ 
+   $timestamp = date('Y-m-d H:i:s');
+ 
+   $sql  = 'INSERT INTO event (timestamp, nodeid, event, value) ';
+	$sql .= 'VALUES ("'.$timestamp.'",'.$nodeId.','.$event.','.$value.')';
+	
+	echo "\r\n".$sql."\r\n";
+
+	plaatenergy_db_query($sql);
+}
+
+function plaatprotect_control_hue($hue_bulb_nr, $value) {
+	
+	global $hue_ip;
+	global $hue_key;
+
+	LogText("Hue command - start ");
+	
+    $hue_url = "http://".$hue_ip."/api/".$hue_key."/lights/".$hue_bulb_nr."/state";
+
+    echo file_get_contents($hue_url, false, stream_context_create(["http" => [
+      "method" => "PUT", "header" => "Content-type: application/json",
+      "content" => "{\"on\":". $value."}"
+    ]]));
+	 echo "\n\r";
+	 
+	 LogText("Hue command - end ");
+ 
+}
+  
+  
 /**
  ********************************
  * General
@@ -436,7 +480,13 @@ function decodeApplicationCommandHandler($data) {
 
                    case 0x01: echo 'Set ';
                               $value= ord(substr($data,9,1));
-			      echo 'value='.$value;
+										echo 'value='.$value;
+										plaatprotect_event_insert(hexdec($nodeId), $commandClass, $value);										
+										if ($value==0) {
+											plaatprotect_control_hue(7, "false");
+										} else {
+											plaatprotect_control_hue(7, "true");
+										}
                               break;
 										
                    case 0x02: echo 'Get ';
@@ -458,14 +508,14 @@ function decodeApplicationCommandHandler($data) {
     case 0x71: Echo 'Alarm ';
  	       $command= ord(substr($data,8,1));
 	       switch ($command) {
-                   case 0x04: echo 'Get ';
-                              break;
-                   case 0x05: echo 'Report ';
- 	                      $type = ord(substr($data,9,1));
-	       		      switch ($type) {
-				 case 0x00: echo 'General ';
+             case 0x04: echo 'Get ';
+                   break;
+             case 0x05: echo 'Report ';
+                   $type = ord(substr($data,9,1));
+	                switch ($type) {
+				   case 0x00: echo 'General ';
 					    break;
-				 case 0x01: echo 'Smoke ';
+				   case 0x01: echo 'Smoke ';
 					    break;
 				 case 0x02: echo 'Carbon Monoxide ';
 					    break;
@@ -498,7 +548,7 @@ function decodeApplicationCommandHandler($data) {
 			      }
  	                      $value = ord(substr($data,10,1));
  	                      echo 'AlarmValue='.$value.'';
-                              break;
+	                     break;
                       case 0x07:  echo "SupportGet ";
 				  break;
                       case 0x08:  echo "SupportReport ";
@@ -624,26 +674,26 @@ function DecodeMessage($data) {
 	
    switch (ord($data[3])) {
 
-	case 0x04: 	decodeApplicationCommandHandler($data);
-			break;
+		case 0x04: 	decodeApplicationCommandHandler($data);
+						break;
 						
-        case 0x13:	decodeSentData($data);
-			break;
+		case 0x13:	decodeSentData($data);
+						break;
 						
-       case 0x15:	decodeSendGetVersion($data);
-			break;
+		case 0x15:	decodeSendGetVersion($data);
+						break;
 						
-      case 0x20:	decodeMemoryId($data);
-			break;
+		case 0x20:	decodeMemoryId($data);
+						break;
 						
-      case 0x41:	decodeIdentifyNode($data);
-			break;
+		case 0x41:	decodeIdentifyNode($data);
+						break;
 						
-      case 0x80:	decodeRouteInfo($data);
-			break;
+		case 0x80:	decodeRouteInfo($data);
+						break;
 						
       default:		echo "Unknown message\n\r";
-			break;
+						break;
    }
    echo "\n\r";
 }
@@ -718,22 +768,29 @@ Receive();
 SendGetMemoryId();
 Receive();
 
-/* Get all ZWave node information - I have 4 nodes active */
-for ($node=1; $node<=4; $node++) {
+/* Get for all zWave node information */
 
-  SendGetIdentifyNode($node);
+$sql  = 'select nodeid from config';	
+$result = plaatenergy_db_query($sql);
+	
+while ($row = plaatenergy_db_fetch_object($result)) {
+
+  SendGetIdentifyNode($row->nodeid);
   Receive();
   
-  SendGetRouteInfo($node);
-  Receive();
-
-  SendGetCommandClassSupport($node,$node);
-  Receive();
+  SendGetRouteInfo($row->nodeid);
   Receive();
 }
 
-SendDataActiveHorn(3, 1, "fe");
-Receive();
+plaatprotect_control_hue(7, "false");
+
+/* Read Zwave incoming events endless */
+while (true) {
+  Receive();
+}
+
+#SendDataActiveHorn(3, 1, "fe");
+#Receive();
 
 /* Init ZWave Horn (NodeId=2) (Sound=2) (Volume=1) (CallBackId="ff")*/
 #SendDataInitHorn(2, 2, 1, "ff");
@@ -752,11 +809,6 @@ Receive();
 #SendDataActiveHorn(2, 0, "fd" );
 #Receive();
 #Receive();
-
-/* Read Zwave incoming events endless */
-while (true) {
-  Receive();
-}
 
 #SendGetControllerCapabilities();
 #Receive();
