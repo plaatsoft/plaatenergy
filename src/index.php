@@ -71,7 +71,9 @@ $limit = 0;
 $cat=0;
 
 $session = plaatenergy_post('session', '');
+#echo '>session='.$session.'<br/>';
 $token = plaatenergy_post("token", "");
+#echo '>token='.$token.'<br/>';
 
 if (strlen($token)>0) {
 	
@@ -82,7 +84,7 @@ if (strlen($token)>0) {
   foreach ($tokens as $item) {
      $items = preg_split ("/=/", $item);				
      $$items[0] = $items[1];	
-     //echo '>'.$items[0].'='.$items[1].'<br/>';
+     #echo '>'.$items[0].'='.$items[1].'<br/>';
   }
 }
 

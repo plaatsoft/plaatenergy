@@ -326,9 +326,6 @@ $lang['system_name'] = 'Systeem naam';
 $lang['home_password'] = 'Bescherm toegang met een wachtwoord.';
 $lang['settings_password'] = 'Bescherm configuratie met een wachtwoord.';
 
-$lang['notification_present'] = 'Notification aanwezig';
-$lang['notification_nma_key'] = 'Notify My Andriod Key';
-
 $lang['CATEGORY0'] =  'Prognose'; 
 $lang['CATEGORY11'] = 'Gas Meter'; 
 $lang['CATEGORY21'] = 'Energie Meter'; 
@@ -338,7 +335,6 @@ $lang['CATEGORY33'] = 'Solar Converter 3';
 $lang['CATEGORY41'] = 'Weerstation'; 
 $lang['CATEGORY51'] = 'Beveiliging'; 
 $lang['CATEGORY52'] = 'Layout';
-$lang['CATEGORY81'] = 'Android Notification'; 
 
 /*
 ** ------------------

@@ -325,9 +325,6 @@ $lang['system_name'] = 'System name';
 $lang['home_password'] = 'Protect application with a password.';
 $lang['settings_password'] = 'Protect settings with a password.';
 
-$lang['notification_present'] = 'Notifcation present';
-$lang['notification_nma_key'] = 'Notify My Android key';
-
 $lang['CATEGORY0'] =  'Forecast'; 
 $lang['CATEGORY11'] = 'Gas Meter'; 
 $lang['CATEGORY21'] = 'Energy Meter'; 
@@ -337,7 +334,6 @@ $lang['CATEGORY33'] = 'Solar Converter 3';
 $lang['CATEGORY41'] = 'Weather Meter'; 
 $lang['CATEGORY51'] = 'Security'; 
 $lang['CATEGORY52'] = 'Look and Feel'; 
-$lang['CATEGORY81'] = 'Notification Android'; 
 
 /*
 ** ------------------

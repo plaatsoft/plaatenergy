@@ -142,34 +142,6 @@ $gas_forecast = array(0,250/1500,220/1500,180/1500,110/1500,60/1500,40/1500,30/1
 
 /*
 ** -----------
-** NOTIFCATION
-** serverity
-** 2 = top
-** 1 = high
-** 0 = normal
-** -1 = low
-** -2 = none
-** -----------
-*/
-
-function plaatenergy_notification($topic, $content, $severity=0) {
-
-  $notification_present = plaatenergy_db_get_config_item('notification_present', NOTIFICATION);
-
-  if ($notification_present=="true" ) {
-  	$notification_nma_key = plaatenergy_db_get_config_item('notification_nma_key', NOTIFICATION);
-
-  	require 'nmaApi.class.php';
-
-  	$nma = new nmaApi(array('apikey' => $notification_nma_key));
-  	if($nma->verify()) {
-         	$nma->notify('PlaatEnergy', $topic, $content, $severity );
-	}
-   }
-}
-
-/*
-** -----------
 ** PAGE
 ** -----------
 */
