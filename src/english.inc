@@ -16,6 +16,7 @@
 **  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
+
 /**
  * @file
  * @brief contain english translation
@@ -112,19 +113,6 @@ $lang['LINK_GUI']           = i('table') . 'Realtime Dashboard';
 $lang['LINK_SYSTEM'] 	    = i('fort-awesome') .'System Overview';
 $lang['LINK_IMPORT_EXPORT'] = i('download') .'Export Data'; 
 $lang['LINK_DELETE']        = i('remove').'Delete'; 
-$lang['LINK_WEBCAM']        = i('camera') . 'Webcams'; 
-$lang['LINK_HUE']           = i('lightbulb-o') . 'HUE';
-$lang['LINK_PICTURE']       = i('camera') . 'Picture'; 
-$lang['LINK_ARCHIVE']       = i('folder-open') . 'Archive'; 
-$lang['LINK_REMOVE']        = i('remove'); 
-$lang['LINK_PLAY']          = i('play'); 
-$lang['LINK_STOP']          = i('stop'); 
-$lang['LINK_NEXT_STEP']     = i('step-forward'); 
-$lang['LINK_PREV_STEP']     = i('step-backward'); 
-$lang['LINK_NEXT_FAST']     = i('forward'); 
-$lang['LINK_PREV_FAST']     = i('backward'); 
-$lang['LINK_END']           = i('fast-forward'); 
-$lang['LINK_BEGIN']         = i('fast-backward'); 
  
 /*
 ** ------------------
@@ -337,17 +325,6 @@ $lang['system_name'] = 'System name';
 $lang['home_password'] = 'Protect application with a password.';
 $lang['settings_password'] = 'Protect settings with a password.';
 
-$lang['webcam_name'] = 'Webcam name';
-$lang['webcam_description'] = 'Webcam description';
-$lang['webcam_resolution'] = 'Webcam Resolution';
-$lang['webcam_present'] = 'Webcam present';
-$lang['webcam_device'] = 'Webcam device mapping';
-
-$lang['hue_description'] = 'Philips HUE description';
-$lang['hue_ip_address'] = 'Philips HUE IP address of bridge';
-$lang['hue_key'] = 'Philips HUE access key';
-$lang['hue_present'] = 'Philips HUE present';
-
 $lang['notification_present'] = 'Notifcation present';
 $lang['notification_nma_key'] = 'Notify My Android key';
 
@@ -360,9 +337,6 @@ $lang['CATEGORY33'] = 'Solar Converter 3';
 $lang['CATEGORY41'] = 'Weather Meter'; 
 $lang['CATEGORY51'] = 'Security'; 
 $lang['CATEGORY52'] = 'Look and Feel'; 
-$lang['CATEGORY61'] = 'Webcam 1'; 
-$lang['CATEGORY62'] = 'Webcam 2'; 
-$lang['CATEGORY71'] = 'Philips HUE'; 
 $lang['CATEGORY81'] = 'Notification Android'; 
 
 /*
@@ -399,24 +373,6 @@ $lang['SYSTEM_TITLE'] = 'System Overview';
 */
 
 $lang['TITLE_EXPORT_IMPORT'] ='Export Data';
-
-/*
-** ------------------
-** WEBCAM
-** ------------------
-*/
-
-$lang['TITLE_WEBCAM'] ='Webcams';
-$lang['TITLE_ARCHIVE' ] = 'Archive';
-
-
-/*
-** ------------------
-** HUE
-** ------------------
-*/
-
-$lang['TITLE_HUE'] ='Philips HUE System';
 
 /*
 ** ------------------

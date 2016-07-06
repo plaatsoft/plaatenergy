@@ -113,20 +113,6 @@ $lang['LINK_REPORT']         = i('archive') . 'Rapportage';
 $lang['LINK_GUI']            = i('table') . 'Realtime Dashboard';
 $lang['LINK_IMPORT_EXPORT']  = i('download') .'Export Data'; 
 $lang['LINK_DELETE']         = i('remove').'Verwijderen'; 
-$lang['LINK_WEBCAM']         = i('camera') . 'Webcams'; 
-$lang['LINK_HUE']            = i('lightbulb-o') . 'HUE';
-$lang['LINK_PICTURE']        = i('camera') . 'Foto'; 
-$lang['LINK_ARCHIVE']        = i('folder-open') . 'Archief'; 
-$lang['LINK_PLAY']           = i('play');
-$lang['LINK_STOP']           = i('stop');
-$lang['LINK_REMOVE']         = i('remove'); 
-$lang['LINK_NEXT_STEP']      = i('step-forward');
-$lang['LINK_PREV_STEP']      = i('step-backward');
-$lang['LINK_NEXT_FAST']      = i('forward');
-$lang['LINK_PREV_FAST']      = i('backward');
-$lang['LINK_END']            = i('fast-forward');
-$lang['LINK_BEGIN']          = i('fast-backward');
-
 
 /*
 ** ------------------
@@ -340,17 +326,6 @@ $lang['system_name'] = 'Systeem naam';
 $lang['home_password'] = 'Bescherm toegang met een wachtwoord.';
 $lang['settings_password'] = 'Bescherm configuratie met een wachtwoord.';
 
-$lang['webcam_name'] = 'Webcam naam';
-$lang['webcam_description'] = 'Webcam omschrijving';
-$lang['webcam_resolution'] = 'Webcam resolutie';
-$lang['webcam_present'] = 'Webcam aanwezig';
-$lang['webcam_device'] = 'Webcam device mapping';
-
-$lang['hue_description'] = 'Philips HUE description';
-$lang['hue_ip_address'] = 'Philips HUE IP address of bridge';
-$lang['hue_key'] = 'Philips HUE access key';
-$lang['hue_present'] = 'Philips HUE aanwezig';
-
 $lang['notification_present'] = 'Notification aanwezig';
 $lang['notification_nma_key'] = 'Notify My Andriod Key';
 
@@ -363,9 +338,6 @@ $lang['CATEGORY33'] = 'Solar Converter 3';
 $lang['CATEGORY41'] = 'Weerstation'; 
 $lang['CATEGORY51'] = 'Beveiliging'; 
 $lang['CATEGORY52'] = 'Layout';
-$lang['CATEGORY61'] = 'Webcam 1'; 
-$lang['CATEGORY62'] = 'Webcam 2'; 
-$lang['CATEGORY71'] = 'Philips HUE'; 
 $lang['CATEGORY81'] = 'Android Notification'; 
 
 /*
@@ -402,23 +374,6 @@ $lang['SYSTEM_TITLE'] = 'Systeem Overzicht';
 */
 
 $lang['TITLE_EXPORT_IMPORT'] ='Export Data';
-
-/*
-** ------------------
-** WEBCAM
-** ------------------
-*/
-
-$lang['TITLE_WEBCAM'] ='Webcams';
-$lang['TITLE_ARCHIVE' ] = 'Archief';
-
-/*
-** ------------------
-** HUE
-** ------------------
-*/
-
-$lang['TITLE_HUE'] ='Philips HUE System';
 
 /*
 ** ------------------

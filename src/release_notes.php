@@ -26,16 +26,12 @@
 ** NOTES
 ** ---------------------
 */
-$note[12] = '<div class="subparagraph">Version 1.2 (13-06-2016)</div>
+$note[12] = '<div class="subparagraph">Version 1.2 (06-07-2016)</div>
 <div class="large_text">
 <ul>
 <li>General: Add Notify My Android (NMA) webservice integration for push messages to andriod phone.</li>
-<li>General: Add basic support for two webcams.</li>
-<li>General: Add option to make picture from webcam view.</li>
-<li>General: Add motion detection with automatic recording to webcam sensor script.</li>
-<li>General: Add option to navigate through webcam recordings.</li>
-<li>General: Add basic support for Philips HUE lighting system.</li>
 <li>General: Passwords are now encrypted stored in database.</li>
+<li>General: Move webcam, light bulb features to PlaatProtect. New project!</li>
 </ul>
 </div>';
 

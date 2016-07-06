@@ -74,12 +74,6 @@ define('PAGE_DAY_PRESSURE',         70);
 define('PAGE_DAY_TEMPERATURE',      71);
 define('PAGE_DAY_HUMIDITY',         72);
 
-define('PAGE_WEBCAM',               80);
-define('PAGE_ARCHIVE',              81);
-define('PAGE_IMAGE_VIEWER',         82);
-
-define('PAGE_HUE',                  90);
-
 /*
 ** -----------
 ** EVENTS
@@ -129,10 +123,7 @@ define('SOLAR_METER_3',            33);
 define('WEATHER_METER_1',          41);
 define('SECURITY',                 51);
 define('LOOK_AND_FEEL',            52);
-define('WEBCAM_1',                 61);
-define('WEBCAM_2',                 62);
-define('HUE_1',                    71);
-define('NOTIFICATION',              81);
+define('NOTIFICATION',             81);
 
 /*
 ** -----------
