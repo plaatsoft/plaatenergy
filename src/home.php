@@ -36,6 +36,7 @@ $name = plaatenergy_db_get_config_item('system_name', LOOK_AND_FEEL);
 $version = plaatenergy_db_get_config_item('database_version');
 
 $password = plaatenergy_post("password", "");
+$username = plaatenergy_post("username", "");
 
 /*
 ** ---------------------
@@ -166,15 +167,17 @@ function plaatenergy_home_login_event() {
 	global $pid;
 	global $session;
 	global $password;
+	global $username;
 	global $ip;
 		
 	$home_password = plaatenergy_db_get_config_item('home_password',SECURITY);
+	$home_username = plaatenergy_db_get_config_item('home_username',SECURITY);
 	
-	if ($home_password==md5($password)) {
+	if ( ($home_password==md5($password)) && ($home_username==$username) ) {
 	
 		$session = plaatenergy_db_get_session($ip, true);
 		$pid = PAGE_HOME;
-	}
+	} 
 }
 
 /*
@@ -199,6 +202,13 @@ function plaatenergy_home_login_page() {
 		$page .= ' ('.$name.') ';
 	} 	
 	$page .= '</h1>';
+	
+	$page .= '<fieldset>';
+	
+	$page .= '<br/>';
+   $page .= '<label>'.t('LABEL_USERNAME').'</label>';
+   $page .= '<input type="text" name="username" size="20" maxlength="20"/>';
+   $page .= '<br/>';
 
    $page .= '<br/>';
    $page .= '<label>'.t('LABEL_PASSWORD').'</label>';
@@ -209,6 +219,8 @@ function plaatenergy_home_login_page() {
    $page .= '<input type="hidden" name="token" value="pid='.PAGE_HOME_LOGIN.'&eid='.EVENT_LOGIN.'"/>';
    $page .= '<input type="submit" name="Submit" id="normal_link" value="'.t('LINK_LOGIN').'"/>';
    $page .= '</div>';
+	
+	$page .= '</fieldset>';
 	
    $page .= '<script type="text/javascript">var ip="'.$_SERVER['SERVER_ADDR'].'";var name="'.$name.'";var version="'.$version.'";</script>';
    $page .= '<script type="text/javascript" src="js/version.js"></script>';

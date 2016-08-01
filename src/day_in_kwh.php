@@ -41,6 +41,7 @@ function plaatenergy_day_in_energy_page() {
 	$normal_used_prev = plaatenergy_db_get_config_item('meter_reading_used_normal', ENERGY_METER_1);
 	$low_delivered_prev = plaatenergy_db_get_config_item('meter_reading_delivered_low', ENERGY_METER_1);
 	$normal_delivered_prev = plaatenergy_db_get_config_item('meter_reading_delivered_normal', ENERGY_METER_1);
+	$solar_value_prev = 0;
 	
 	$prev_date = plaatenergy_prev_day($date);
 	$next_date = plaatenergy_next_day($date);
@@ -135,6 +136,12 @@ function plaatenergy_day_in_energy_page() {
 			{
 				$solar_value = 0;
 			}
+			
+			if ($solar_value_prev>$solar_value) {
+				// Prevent degrees of energy use!
+				$solar_value = $solar_value_prev;
+			}
+			$solar_value_prev = $solar_value;
 		}
 
 		// Data in the future is always 0!	

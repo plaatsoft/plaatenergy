@@ -120,6 +120,7 @@ $lang['LINK_DELETE']         = i('remove').'Verwijderen';
 ** ------------------
 */
 
+$lang['LABEL_USERNAME'] = 'Gebruikersnaam';
 $lang['LABEL_PASSWORD'] = 'Wachtwoord';
 
 $lang ['CONGIG_BAD' ] = 'Het volgende bestand "config.inc" mist in de installatie directory.<br/><br/>
@@ -324,6 +325,7 @@ $lang['slide_show_page_delay'] = 'Slide show pagina vertraging (seconden)';
 $lang['system_name'] = 'Systeem naam';
 
 $lang['home_password'] = 'Bescherm toegang met een wachtwoord.';
+$lang['home_password'] = 'Bescherm toegang met een gebruikersnaam.';
 $lang['settings_password'] = 'Bescherm configuratie met een wachtwoord.';
 
 $lang['CATEGORY0'] =  'Prognose'; 

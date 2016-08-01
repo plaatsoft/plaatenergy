@@ -120,6 +120,7 @@ $lang['LINK_DELETE']        = i('remove').'Delete';
 ** ------------------
 */
 
+$lang['LABEL_USERNAME'] = 'Username';
 $lang['LABEL_PASSWORD'] = 'Password';
 
 $lang ['CONGIG_BAD' ] = 'The following file "config.inc" is missing in installation directory.<br/><br/>
@@ -323,6 +324,7 @@ $lang['chart_dimensions'] = 'Chart dimensions in pixels';
 $lang['system_name'] = 'System name';
 
 $lang['home_password'] = 'Protect application with a password.';
+$lang['home_username'] = 'Protect application with a username.';
 $lang['settings_password'] = 'Protect settings with a password.';
 
 $lang['CATEGORY0'] =  'Forecast'; 

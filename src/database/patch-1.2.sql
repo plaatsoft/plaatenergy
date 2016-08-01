@@ -24,3 +24,5 @@ ALTER TABLE config ADD encrypt INT NOT NULL AFTER `rebuild`;
 UPDATE config SET encrypt = 1, value="" WHERE token = "home_password";
 UPDATE config SET encrypt = 1, value="" WHERE token = "settings_password";
 
+INSERT INTO config (category, token, value, options, readonly, rebuild, encrypt) VALUES (51, 'home_username', '', '',  '0', '0', '0');
+

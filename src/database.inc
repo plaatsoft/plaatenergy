@@ -575,7 +575,7 @@ function plaatenergy_db_process($type) {
 
 function plaatenergy_db_get_session($ip, $new=false) {
 
-   $sql = 'select sid, session_id, requests from session where ip="'.$ip.'"';
+   $sql = 'select sid, timestamp, session_id, requests from session where ip="'.$ip.'"';
    $result = plaatenergy_db_query($sql);
    $data = plaatenergy_db_fetch_object($result);
 
@@ -585,7 +585,7 @@ function plaatenergy_db_get_session($ip, $new=false) {
 		$session_id = $data->session_id;
 		$requests = $data->requests;
 	
-		if ($new==true) {		
+		if (($new==true) || ((time()-strtotime($data->timestamp))>(60*15))) {		
 			$session_id = md5(date('Y-m-d H:i:s'));
 		}
 			   

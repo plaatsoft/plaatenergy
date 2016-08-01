@@ -16,55 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
   // Array/object where response data stored
   $json = [];
 
-
-  // ============================================
-  // ============== HUE LIGHT SCRIPTS ===========
-  // ============================================
-
-  // Function to get a config item out the database
-  function config ($token) {
-    global $db;
-    return $db->query("SELECT value FROM config WHERE token='" . $token . "'")->fetch_object()->value;
-  }
-
-  // Get hue db config information
-  $hue_ip = config("hue_ip_address");
-  $hue_key = config("hue_key");
-  $hue_url = "http://" . $hue_ip . "/api/" . $hue_key . "/lights";
-
-  // When get lights is true give all lights information
-  if (isset($_GET["lights"])) {
-    foreach (json_decode(file_get_contents($hue_url)) as $id => $light) {
-      if ($light->state->reachable) array_push($json, ["id" => (int)$id, "name" => $light->name, "on" => $light->state->on, "bri" => $light->state->bri]);
-    }
-
-    // Return json and exit
-    echo json_encode($json);
-    exit;
-  }
-
-  // When light, name, and value are set hue light state and exit
-  if (isset($_GET["light"]) && isset($_GET["key"]) && isset($_GET["value"])) {
-    $hue_url .= "/" . $_GET["light"] . "/state";
-    echo file_get_contents($hue_url, false, stream_context_create(["http" => [
-      "method" => "PUT", "header" => "Content-type: application/json",
-      "content" => "{\"" . $_GET["key"] . "\":" . $_GET["value"] . "}"
-    ]]));
-    exit;
-  }
-
-  // ============================================
-  // ========== REALTIME DASHBOARD DATA =========
-  // ============================================
-
   // Query vars
   $where = " WHERE timestamp>='" . date("Y-m-d 00:00:00") . "' and timestamp<='" . date("Y-m-d 23:59:59") . "' ORDER BY id DESC LIMIT 0,1";
-
-  // Get astro pi weather data
-  $row = $db->query("SELECT humidity, pressure, temperature FROM weather" . $where)->fetch_object();
-  $json["temperature"] = (float)$row->temperature + 273.15; // K
-  $json["pressure"] = (float)$row->pressure; // hPa
-  $json["humidity"] = (float)$row->humidity; // %
 
   // Get energy now
   $row = $db->query("SELECT power FROM energy1" . $where)->fetch_object();
