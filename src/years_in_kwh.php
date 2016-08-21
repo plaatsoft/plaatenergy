@@ -89,7 +89,7 @@ function plaatenergy_years_in_energy_page() {
 		$low_delivered_value = 0;
 		$normal_delivered_value = 0;
 		$solar_delivered_value = 0;
-		$verbruikt = 0;
+		$local_used = 0;
 	
 		if (isset($row1->low_used)) {
 			$low_used_value = $row1->low_used;
@@ -98,9 +98,9 @@ function plaatenergy_years_in_energy_page() {
 			$normal_delivered_value = $row1->normal_delivered;
 			$solar_delivered_value= $row1->solar_delivered;
 	
-			$verbruikt = $solar_delivered_value - $low_delivered_value - $normal_delivered_value;
-			if ($verbruikt < 0) {
-				$verbruikt = 0;
+			$local_used = $solar_delivered_value - $low_delivered_value - $normal_delivered_value;
+			if ($local_used < 0) {
+				$local_used = 0;
 			}
 			$count++;
 		}
@@ -109,17 +109,17 @@ function plaatenergy_years_in_energy_page() {
 			$data.=',';
 		}
 		$data .= "['".date("Y", $time)."',";
-		$price2 = ($low_used_value + $normal_used_value + $verbruikt)*$energy_price;
+		$price2 = ($low_used_value + $normal_used_value + $local_used)*$energy_price;
 		if ($eid==EVENT_KWH) {
-			$data .= round($low_used_value,2).','.round($normal_used_value,2).','.round($verbruikt,2).','.round(($forecast_total*$energy_use_forecast),2).']';
+			$data .= round($low_used_value,2).','.round($normal_used_value,2).','.round($local_used,2).','.round(($forecast_total*$energy_use_forecast),2).']';
 		} else if ($eid==EVENT_CO2) {
-			$data .= round(($low_used_value + $normal_used_value)*$kwh_to_co2_factor,2).','.round(($forecast_total*$energy_use_forecast*$kwh_to_co2_factor),2).']';
+			$data .= round(($low_used_value + $normal_used_value + $local_used)*$kwh_to_co2_factor,2).','.round(($forecast_total*$energy_use_forecast*$kwh_to_co2_factor),2).']';
 		} else { 
 			$data .= round($price2,2).']';
 		}
 		
-		$total_kwh += $low_used_value + $normal_used_value + $verbruikt;
-		$total_co2 += ($low_used_value + $normal_used_value) * $kwh_to_co2_factor;
+		$total_kwh += $low_used_value + $normal_used_value + $local_used;
+		$total_co2 += $total_kwh * $kwh_to_co2_factor;
 		$total_price += $price2;
 	}
 
