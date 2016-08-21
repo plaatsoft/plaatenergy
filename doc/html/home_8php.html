@@ -32,6 +32,7 @@
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
+      <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
     </ul>
   </div>
@@ -94,12 +95,10 @@ Variables</h2></td></tr>
 <tr class="separator:ab2fc40d43824ea3e1ce5d86dee0d763b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17c8948c68aa44fa9961ae169b6a8961"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#a17c8948c68aa44fa9961ae169b6a8961">$version</a> = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('database_version')</td></tr>
 <tr class="separator:a17c8948c68aa44fa9961ae169b6a8961"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a72574c562671707916f36dff194f334b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#a72574c562671707916f36dff194f334b">$webcam_present</a> = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('webcam_present', <a class="el" href="general_8inc.html#a0f27977b1aeea7bf93346cf39f1e7c33">WEBCAM_1</a>)</td></tr>
-<tr class="separator:a72574c562671707916f36dff194f334b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a577c2992041e09e488ff05af1d954850"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#a577c2992041e09e488ff05af1d954850">$hue_present</a> = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('hue_present', <a class="el" href="general_8inc.html#a065659f8cb8c0de6849a0065a2bbe369">HUE_1</a>)</td></tr>
-<tr class="separator:a577c2992041e09e488ff05af1d954850"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a607686ef9f99ea7c42f4f3dd3dbb2b0d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#a607686ef9f99ea7c42f4f3dd3dbb2b0d">$password</a> = <a class="el" href="general_8inc.html#a3cf0f4e0e488c26a2bb73651bab4471d">plaatenergy_post</a>(&quot;password&quot;, &quot;&quot;)</td></tr>
 <tr class="separator:a607686ef9f99ea7c42f4f3dd3dbb2b0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0eb82aa5f81cf845de4b36cd653c42cf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="home_8php.html#a0eb82aa5f81cf845de4b36cd653c42cf">$username</a> = <a class="el" href="general_8inc.html#a3cf0f4e0e488c26a2bb73651bab4471d">plaatenergy_post</a>(&quot;username&quot;, &quot;&quot;)</td></tr>
+<tr class="separator:a0eb82aa5f81cf845de4b36cd653c42cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>contain home page </p>
@@ -251,18 +250,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a577c2992041e09e488ff05af1d954850"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">$hue_present = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('hue_present', <a class="el" href="general_8inc.html#a065659f8cb8c0de6849a0065a2bbe369">HUE_1</a>)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a class="anchor" id="ab2fc40d43824ea3e1ce5d86dee0d763b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -299,6 +286,18 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a0eb82aa5f81cf845de4b36cd653c42cf"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">$username = <a class="el" href="general_8inc.html#a3cf0f4e0e488c26a2bb73651bab4471d">plaatenergy_post</a>(&quot;username&quot;, &quot;&quot;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a17c8948c68aa44fa9961ae169b6a8961"></a>
 <div class="memitem">
 <div class="memproto">
@@ -317,18 +316,6 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">$weather_station_present = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('weather_station_present', <a class="el" href="general_8inc.html#a2ea5575383e6ecb9e8ef7ee907228453">WEATHER_METER_1</a>)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a class="anchor" id="a72574c562671707916f36dff194f334b"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">$webcam_present = <a class="el" href="database_8inc.html#a5592b9046f90c8f38100f90d9fc84e11">plaatenergy_db_get_config_item</a>('webcam_present', <a class="el" href="general_8inc.html#a0f27977b1aeea7bf93346cf39f1e7c33">WEBCAM_1</a>)</td>
         </tr>
       </table>
 </div><div class="memdoc">

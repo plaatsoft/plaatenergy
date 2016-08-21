@@ -43,6 +43,7 @@ $lang['KWH']                  = 'kWh';
 $lang['MWH']                  = 'MWh';  
 $lang['M3']                   = 'm&sup3;'; 
 $lang['DATE']                 = 'Date'; 
+$lang['CO2']                  = 'CO<sub>2</sub>';
 
 $lang['USED_LOW_KWH']         = 'Low (kWh)'; 
 $lang['USED_HIGH_KWH']        = 'Normal (kWh)'; 
@@ -58,6 +59,9 @@ $lang['FORECAST_M3']          = 'Forecast (m&sup3;)';
 $lang['PRESSURE']             = 'Pressure (hPa)';
 $lang['TEMPERATURE']          = 'Temperature (&deg;C)';
 $lang['HUMIDITY']             = 'Humidity (%)';
+$lang['EMISSION_CO2']         = 'CO2 Emission (kg)'; 
+$lang['REDUCTION_CO2']        = 'CO2 Reduction (kg)'; 
+$lang['FORECAST_CO2']         = 'CO2 Forecast (kg)'; 
 
 $lang['DAY_0']           = 'Sun';
 $lang['DAY_1']           = 'Mon';
@@ -113,6 +117,7 @@ $lang['LINK_GUI']           = i('table') . 'Realtime Dashboard';
 $lang['LINK_SYSTEM'] 	    = i('fort-awesome') .'System Overview';
 $lang['LINK_IMPORT_EXPORT'] = i('download') .'Export Data'; 
 $lang['LINK_DELETE']        = i('remove').'Delete'; 
+$lang['LINK_CO2'] 			 = i('cloud').'CO<sub>2</sub>'; 
  
 /*
 ** ------------------
@@ -166,6 +171,8 @@ $lang['TITLE_YEARS_OUT_KWH'] = 'Delivered Electricity %s - %s';
 $lang['AVERAGE_PER_YEAR_KWH'] = 'Average per year %s kWh [Total = %s kWh]';
 $lang['AVERAGE_PER_YEAR_M3'] = 'Average per year %s m&sup3; [Total = %s m&sup3;]';
 $lang['AVERAGE_PER_YEAR_EURO'] = 'Average per year %s euro [Total = %s euro]';
+$lang['AVERAGE_PER_YEAR_CO2'] = 'Average per year %s kg CO<sub>2</sub> emission [Total = %s kg CO<sub>2</sub> emssion]';
+$lang['AVERAGE_PER_YEAR_CO2_REDUCTION'] = 'Average per year %s kg CO<sub>2</sub> reduction [Total = %s kg CO<sub>2</sub> reduction]';
 
 /*
 ** ------------------

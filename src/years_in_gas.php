@@ -35,6 +35,7 @@ function plaatenergy_years_in_gas_page() {
 	
 	global $date; 	
 	global $gas_forecast;
+	global $m3_to_co2_factor;
 	
 	$prev_date = plaatenergy_prev_year($date);
 	$next_date = plaatenergy_next_year($date);
@@ -44,15 +45,15 @@ function plaatenergy_years_in_gas_page() {
 	$gas_price = plaatenergy_db_get_config_item('gas_price', GAS_METER_1);
 	$gas_use_forecast = plaatenergy_db_get_config_item('gas_use_forecast');
 
-	$total=0;
-	$total_price=0;
-	$price=0;
-	$count=0;
-	$data="";
+	$total_gas = 0;
+	$total_price = 0;
+	$total_co2 = 0;
+	
+	$count = 0;
+	$data = "";
 	
 	for($y=($year-10); $y<=$year; $y++) {
-		$value=0;
-
+	
 		$time=mktime(0, 0, 0, 1, 1, $y);          
 		$timestamp1=date('Y-1-1 00:00:00', $time);
 		$timestamp2=date('Y-12-t 23:59:59', $time);
@@ -63,47 +64,60 @@ function plaatenergy_years_in_gas_page() {
 		$result1 = plaatenergy_db_query($sql1);
 		$row1 = plaatenergy_db_fetch_object($result1);
 	
+		$gas = 0;
+		$co2 = 0;
+		$price = 0;
+		
 		if ( isset($row1->gas_used)) {
 			$count++;
-			$value=$row1->gas_used;
+			
+			$gas = $row1->gas_used;			
+			$price = $gas * $gas_price;
+			$co2 = $gas * $m3_to_co2_factor;
 		}
 
+		$total_gas += $gas;
+		$total_price += $price;
+		$total_co2 += $co2;
+		
 		$sql2  = 'select month(date) as month from energy_summary ';
 		$sql2 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'" ';
 		$sql2 .= "group by month ";
 		
 		$result2 = plaatenergy_db_query($sql2);
 
-		$forecast_total=0;
+		$forecast_factor=0;
 		while ($row2 = plaatenergy_db_fetch_object($result2)) {
 			if (isset($row2->month)) { 
-				$forecast_total += $gas_forecast[$row2->month];
-					$price = $gas_price * $row1->gas_used;
+				$forecast_factor += $gas_forecast[$row2->month];				
 			}
+		}
+		
+		$m3_forecast = 0;
+		$co2_forecast = 0;
+		if ($gas>0) {
+			$m3_forecast = $forecast_factor * $gas_use_forecast;
+			$co2_forecast = $m3_forecast * $m3_to_co2_factor;
 		} 
 
-                if (strlen($data)>0) {
-                        $data.=',';
-                }
-                $data .= "['".date("Y", $time)."',";
-
+		if (strlen($data)>0) {
+			$data.=',';
+		}
+		$data .= "['".date("Y", $time)."',";
 		
 		if ($eid==EVENT_M3) {
-			if ($value>0) { 
-				$data .= round($value,2).','.round(($forecast_total*$gas_use_forecast),2).']';
-			} else { 
-				$data .= '0,0]';
-			}
+			$data .= round($gas,2).','.round($m3_forecast,2).']';
+		} else if ($eid==EVENT_CO2) {
+			$data .= round($co2,2).','.round($co2_forecast,2).']';			
 		} else { 
 			$data .= round($price,2).']';
 		}
-		
-		$total += $value;
-		$total_price += $price;
 	}
 
 	if ($eid==EVENT_M3) {
 		$json = "[['','".t('USED_M3')."','".t('FORECAST_M3')."'],".$data."]";		
+	} else if ($eid==EVENT_CO2) {
+		$json = "[['','".t('EMISSION_CO2')."','".t('FORECAST_CO2')."'],".$data."]";		
 	} else {
 		$json = "[['','".t('EURO')."'],".$data."]";
 	}
@@ -127,6 +141,8 @@ function plaatenergy_years_in_gas_page() {
 			 ';
 				if ($eid==EVENT_EURO) {			 
 					$page .= 'colors: ["#e0440e"],';
+				} else if ($eid==EVENT_CO2) {			 
+					$page .= 'colors: ["#e0ee20", "#808080"],';				
 				} else {
 					$page .= 'colors: ["#0066cc", "#808080"],';
 				}
@@ -145,19 +161,16 @@ function plaatenergy_years_in_gas_page() {
      }
     </script>';
 
-	if ($eid==EVENT_M3) {			
-		$page .= '<h1>'.t('TITLE_YEARS_IN_GAS', ($year-10), $year).'</h1>';	
-	} else {
-		$page .= '<h1>'.t('TITLE_YEARS_IN_GAS', ($year-10), $year).'</h1>';
-	}
-	
-	
-        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions',LOOK_AND_FEEL).'"></div>';
-        $page .= '<div class="remark">';
+	$page .= '<h1>'.t('TITLE_YEARS_IN_GAS', ($year-10), $year).'</h1>';
+		
+	$page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions',LOOK_AND_FEEL).'"></div>';
+	$page .= '<div class="remark">';
 	
 	if ($count>0) {			 
 		if ($eid==EVENT_M3) {		
-			$page .= t('AVERAGE_PER_YEAR_M3', round(($total/$count),2), round($total,2));
+			$page .= t('AVERAGE_PER_YEAR_M3', round(($total_gas/$count),2), round($total_gas,2));
+		} else if ($eid==EVENT_CO2) {		
+			$page .= t('AVERAGE_PER_YEAR_CO2', round(($total_co2/$count),2), round($total_co2,2));			
 		} else {
 			$page .= t('AVERAGE_PER_YEAR_EURO', round(($total_price/$count),2), round($total_price,2));
 		}
@@ -167,7 +180,7 @@ function plaatenergy_years_in_gas_page() {
 	}
 	$page .= '</div>';	
 	
-	$page .= plaatenergy_navigation_year();
+	$page .= plaatenergy_navigation_years();
 	   
 	return $page;
 }
@@ -188,6 +201,9 @@ function plaatenergy_years_in_gas() {
   switch ($eid) {
   
   		case EVENT_M3:
+				break;
+				
+		case EVENT_CO2:
 				break;
 				
 		case EVENT_EURO:

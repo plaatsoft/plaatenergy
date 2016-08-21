@@ -26,13 +26,15 @@
 ** NOTES
 ** ---------------------
 */
-$note[12] = '<div class="subparagraph">Version 1.2 (01-08-2016)</div>
+$note[12] = '<div class="subparagraph">Version 1.2 (21-08-2016)</div>
 <div class="large_text">
 <ul>
+<li>General: Added CO<sub>2</sub> emission chart to gas and energy years reports.</li>
+<li>General: PHP Data layer is now based mysqli PHP library.</li>
 <li>General: User session timeouts after 15 minutes inactivity.</li>
 <li>General: Application is now protected with username and password combination.</li>
 <li>General: Passwords are now encrypted stored in database.</li>
-<li>General: Move webcam, light bulb features to PlaatProtect. New project!</li>
+<li>General: Move webcam, light bulb features to new PlaatProtect project!</li>
 <li>Bugfix: Fix negative energy us in Used Electricity Day report.!</li>
 </ul>
 </div>';

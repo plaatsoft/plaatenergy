@@ -45,15 +45,13 @@ define('DEBUG', 0);
  */
 function plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname) {
 
-	global $output;
+	global $db;
 
-	$handle = mysql_connect($dbhost, $dbuser, $dbpass);
-	if(!$handle) {
-
+   $db = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);	
+	if (mysqli_connect_errno()) {
 		plaatenergy_db_error();
 		return false;		
 	}
-	mysql_select_db($dbname);
 	return true;
 }
 
@@ -63,8 +61,11 @@ function plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname) {
  */
 function plaatenergy_db_close() {
 
-	$result = mysql_close();
-	return $result;
+	global $db;
+
+	mysqli_close($db);
+
+	return true;
 }
 
 /**
@@ -73,10 +74,8 @@ function plaatenergy_db_close() {
  */
 function plaatenergy_db_error() {
 
-	$error = mysql_error();
-	
 	if (DEBUG == 1) {
-		echo $error.'<br/>';
+		echo mysqli_connect_error(). "<br/>\n\r";
 	}
 }
 
@@ -114,16 +113,16 @@ function plaatenergy_db_multi_query($queries) {
 function plaatenergy_db_query($query) {
 			
 	global $query_count;
-	global $output;
+	global $db;
 	
 	$query_count++;
 
 	if (DEBUG == 1) {
-		echo $query.'<br/>';
+		echo $query."<br/>\r\n";
 	}
-		
-	@$result = mysql_query($query);
-		
+
+	$result = mysqli_query($db, $query);
+
 	if (!$result) {
 		plaatenergy_db_error();		
 	}
@@ -132,33 +131,34 @@ function plaatenergy_db_query($query) {
 }
 
 /**
+ * escap database string
+ * @param $data  input.
+ * @return $data escaped
+ */
+function plaatenergy_db_escape($data) {
+
+	global $db;
+	
+	return mysqli_real_escape_string($db, $data);
+}
+
+/**
  * Fetch query result 
  * @return mysql data set if any
  */
 function plaatenergy_db_fetch_object($result) {
 	
-	$data = @mysql_fetch_object($result);	
-	return $data;
-}
-
-/**
- * Escape SQL value 
- * @return escaped mysql query
- */
-function plaatenergy_db_escape($value) {
-	
-	$value = mysql_real_escape_string($value);	
-	return $value;
+	$row = $result->fetch_object();
+	return $row;
 }
 
 /**
  * Return number of rows
  * @return number of row in dataset
  */
-function plaatenergy_db_num_rows($value) {
+function plaatenergy_db_num_rows($result) {
 	
-	$value = mysql_num_rows($value);
-	return $value;
+	return mysqli_num_rows($result);
 }
 
 /*

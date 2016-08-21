@@ -4,11 +4,18 @@
 
 // When you send a get message to realtime.php you get the db info
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-  header("Content-Type: application/json"); // Set file mimetype to json
-  header("Cache-Control: no-cache");        // Tels browser to don't cache this file
 
   // Load database username and password
   include "config.inc";
+
+  // Load database username and password
+  include "general.inc";
+  
+  global $kwh_to_co2_factor;
+  global $m3_to_co2_factor;
+  
+  header("Content-Type: application/json"); // Set file mimetype to json
+  header("Cache-Control: no-cache");        // Tels browser to don't cache this file
 
   // Connect to the database
   $db = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
@@ -45,10 +52,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
   $json["gas"]["used"] = $row->gas_used; // m3
 
   // Energy co2 emission = 1kWh grey energy is 0.526 kg co2
-  $json["energy"]["co2"] = ($json["energy"]["used"] - $json["energy"]["delivered"]) * 0.526; // kg
+  $json["energy"]["co2"] = ($json["energy"]["used"] - $json["energy"]["delivered"]) * $kwh_to_co2_factor; 
 
   // Burning 1 m3 gas results in 1.78 kg CO2 emission
-  $json["gas"]["co2"] = $json["gas"]["used"] * 1.78; // kg
+  $json["gas"]["co2"] = $json["gas"]["used"] * $m3_to_co2_factor; 
 
   // Get raw weather data decode to json it will converted realtime by client with js to readable info
   $weather = json_decode(file_get_contents("http://api.openweathermap.org/data/2.5/weather?id=" . $_GET["q"] . "&appid=4e28f75f5d0eded171ea5eeffb2eb77a"));

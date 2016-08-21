@@ -171,6 +171,19 @@ fieldset {
 
 h1{margin:15px} 
 
+sub, .mw-body sup, span.reference {
+	font-size: 80%;
+}
+
+sup, sub {
+	line-height: 1;
+}
+
+sub {
+	vertical-align: sub;
+	font-size: smaller;
+}
+
 /* ================ Add to h1 two suns ================ */
 h1::before,
 h1::after {

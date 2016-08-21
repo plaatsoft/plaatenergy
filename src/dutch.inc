@@ -42,6 +42,7 @@ $lang['KWH']                 = 'kWh';
 $lang['MWH']                 = 'MWh'; 
 $lang['M3']                  = 'm&sup3;';
 $lang['DATE']                = 'Datum';
+$lang['CO2']                 = 'CO<sub>2</sub>';
 
 $lang['USED_LOW_KWH']        = 'Dal (kWh)'; 
 $lang['USED_HIGH_KWH']       = 'Normaal (kWh)'; 
@@ -57,6 +58,9 @@ $lang['FORECAST_M3']         = 'Prognose (m&sup3;)';
 $lang['PRESSURE']            = 'Luchtdruk (hPa)';
 $lang['TEMPERATURE']         = 'Temperatuur (&deg;C)';
 $lang['HUMIDITY']            = 'Luchtvochtigheid (%)';
+$lang['EMISSION_CO2']        = 'CO2 Emission (kg)'; 
+$lang['REDUCTION_CO2']       = 'CO2 Reductie (kg)'; 
+$lang['FORECAST_CO2']        = 'CO2 Prognose (kg)'; 
 
 $lang['DAY_0']           = 'Zo';
 $lang['DAY_1']           = 'Ma';
@@ -113,6 +117,7 @@ $lang['LINK_REPORT']         = i('archive') . 'Rapportage';
 $lang['LINK_GUI']            = i('table') . 'Realtime Dashboard';
 $lang['LINK_IMPORT_EXPORT']  = i('download') .'Export Data'; 
 $lang['LINK_DELETE']         = i('remove').'Verwijderen'; 
+$lang['LINK_CO2'] 			 =  i('cloud').'CO<sub>2</sub>'; 
 
 /*
 ** ------------------
@@ -166,6 +171,8 @@ $lang['TITLE_YEARS_OUT_KWH'] = 'Geleverde Elektriciteit %s - %s';
 $lang['AVERAGE_PER_YEAR_KWH'] = 'Gemiddeld per jaar %s kWh [Totaal = %s kWh]';
 $lang['AVERAGE_PER_YEAR_M3'] = 'Gemiddeld per jaar %s m&sup3; [Totaal = %s m&sup3;]';
 $lang['AVERAGE_PER_YEAR_EURO'] = 'Gemiddeld per jaar %s euro [Totaal = %s euro]';
+$lang['AVERAGE_PER_YEAR_CO2'] = 'Gemiddeld per jaar %s kg CO<sub>2</sub> emissie [Totaal = %s kg CO<sub>2</sub> emissie]';
+$lang['AVERAGE_PER_YEAR_CO2_REDUCTION'] = 'Gemiddeld per jaar %s kg CO<sub>2</sub> reductie [Totaal = %s kg CO<sub>2</sub> reductie]';
 
 /*
 ** ------------------

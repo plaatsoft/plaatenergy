@@ -35,6 +35,7 @@ function plaatenergy_years_out_energy_page() {
 
 	global $date; 
 	global $out_forecast;
+	global $kwh_to_co2_factor;
 	
 	$prev_date = plaatenergy_prev_year($date);
 	$next_date = plaatenergy_next_year($date);
@@ -44,11 +45,12 @@ function plaatenergy_years_out_energy_page() {
 	$energy_price = plaatenergy_db_get_config_item('energy_price', ENERGY_METER_1);
 	$energy_delivery_forecast = plaatenergy_db_get_config_item('energy_delivery_forecast');
 
-	$total_sum=0;
-	$total_price=0;
-	$total_max=0;
-	$count=0;
-	$data="";
+	$total_sum = 0;
+	$total_price = 0;
+	$total_co2 = 0;
+	$total_max = 0;
+	$count = 0;
+	$data = "";
 	
 	for($y=($year-10); $y<=$year; $y++) {
 	
@@ -104,10 +106,17 @@ function plaatenergy_years_out_energy_page() {
 			$data .= round($delivered_normal,2).',';
 			$data .= round($delivered_local,2).',';
 			$data .= round($forecast_total,2).']';
+			
+		} else if ($eid==EVENT_CO2) {
+			$data .= round(($delivered_low + $delivered_normal + $delivered_local)*$kwh_to_co2_factor,2).',';
+			$data .= round(($forecast_total*$kwh_to_co2_factor),2).']';
+			
 		} else { 
 			$data .= round($price2,2).']';
 		}
+		
 		$total_sum += $total;
+		$total_co2 += $total * $kwh_to_co2_factor;
 		$total_price += $price2;
 		
 		if ($total>$total_max) {
@@ -121,6 +130,8 @@ function plaatenergy_years_out_energy_page() {
 
 	if ($eid==EVENT_KWH) {
 		$json = "[['','".t('DELIVERED_LOW_KWH')."','".t('DELIVERED_NORMAL_KWH')."','".t('DELIVERED_LOCAL_KWH')."','".t('FORECAST_KWH')."'],".$data."]";
+	} else if ($eid==EVENT_CO2) {
+		$json = "[['','".t('REDUCTION_CO2')."','".t('FORECAST_CO2')."'],".$data."]";		
 	} else { 
 		$json = "[['','".t('EURO')."'],".$data."]";
 	}
@@ -130,9 +141,12 @@ function plaatenergy_years_out_energy_page() {
     <script type="text/javascript">
       google.load("visualization", "1", {packages:["bar"]});
       google.setOnLoadCallback(drawChart);
-      function drawChart() {
+      function drawChart() { ';
 
-      var options = {
+	if ($eid==EVENT_KWH) {
+		$page .= '
+		
+		 var options = {
           bars: "vertical",
           bar: {groupWidth: "90%"},
           legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
@@ -141,17 +155,45 @@ function plaatenergy_years_out_energy_page() {
 			 backgroundColor: "transparent",
 			 chartArea: {
             backgroundColor: "transparent"
-          },';
-			 
-	if ($eid==EVENT_KWH) {
+          },
+		
+			colors: ["#0066cc", "#808080"],
+				vAxis: {   
+					format:"decimal", 
+					viewWindow: { min: 0, max: "'.round($total_max+60).'" },
+				},';
+				
+	} else if ($eid==EVENT_CO2) {			 
 		$page .= '
-                         colors: ["#0066cc", "#808080"],
-		         vAxis: {   
-                                   format:"decimal", 
-                                   viewWindow: { min: 0, max: "'.round($total_max+60).'" },
-                                 },';
+		
+		var options = {
+          bars: "vertical",
+          bar: {groupWidth: "90%"},
+          legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
+          vAxis: {format: "decimal"},
+          isStacked:false,
+			 backgroundColor: "transparent",
+			 chartArea: {
+            backgroundColor: "transparent"
+          },
+			 
+			 colors: ["#e0ee20", "#808080"],';				
+			 
 	} else {
-		$page .= 'colors: ["#e0440e"],';
+	
+		$page .= '
+		
+		var options = {
+          bars: "vertical",
+          bar: {groupWidth: "90%"},
+          legend: { position: "'.plaatenergy_db_get_config_item('chart_legend',LOOK_AND_FEEL).'", textStyle: {fontSize: 10} },
+          vAxis: {format: "decimal"},
+          isStacked:false,
+			 backgroundColor: "transparent",
+			 chartArea: {
+            backgroundColor: "transparent"
+          },
+			 colors: ["#e0440e"],';
 	}
 		
 	$page .= 'series: {
@@ -176,12 +218,14 @@ function plaatenergy_years_out_energy_page() {
     </script>';
     
 	$page .= '<h1>'.t('TITLE_YEARS_OUT_KWH', ($year-10), $year).'</h1>';
-        $page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions',LOOK_AND_FEEL).'"></div>';
+	$page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions',LOOK_AND_FEEL).'"></div>';
 
 	$page .= '<div class="remark">';
 	if ($count>0) {
 		if ($eid==EVENT_KWH) {
 			$page .= t('AVERAGE_PER_YEAR_KWH', round(($total_sum/$count),2), round($total_sum,2));
+		} else if ($eid==EVENT_CO2) {
+			$page .= t('AVERAGE_PER_YEAR_CO2_REDUCTION', round(($total_co2/$count),2), round($total_co2,2));			
 		} else {
 			$page .= t('AVERAGE_PER_YEAR_EURO', round(($total_price/$count),2), round($total_price,2));
 		}
@@ -190,7 +234,7 @@ function plaatenergy_years_out_energy_page() {
 	}
 	$page .= '</div>';		
 
-	$page .= plaatenergy_navigation_year();
+	$page .= plaatenergy_navigation_years();
 
 	return $page;
 }
