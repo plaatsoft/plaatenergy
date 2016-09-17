@@ -38,6 +38,16 @@ $version = plaatenergy_db_get_config_item('database_version');
 $password = plaatenergy_post("password", "");
 $username = plaatenergy_post("username", "");
 
+if (isset($_SERVER['PHP_AUTH_USER'])) {
+	$username = $_SERVER['PHP_AUTH_USER'];
+	$eid = EVENT_LOGIN;
+}
+
+if (isset($_SERVER['PHP_AUTH_PW'])) {
+	$password = $_SERVER['PHP_AUTH_PW'];
+	$eid = EVENT_LOGIN;
+}
+
 /*
 ** ---------------------
 ** UTILS

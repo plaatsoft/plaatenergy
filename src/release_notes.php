@@ -26,6 +26,13 @@
 ** NOTES
 ** ---------------------
 */
+$note[13] = '<div class="subparagraph">Version 1.3 (19-09-2016)</div>
+<div class="large_text">
+<ul>
+<li>General: Added support for Basic HTTP authenication.</li>
+</ul>
+</div>';
+
 $note[12] = '<div class="subparagraph">Version 1.2 (21-08-2016)</div>
 <div class="large_text">
 <ul>
