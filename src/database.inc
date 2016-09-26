@@ -199,9 +199,6 @@ function plaatenergy_db_execute_sql_file($version) {
     $total = $success = 0;
     foreach($commands as $command){
         if(trim($command)){
-	    if (DEBUG == 1) {
-		echo $command.'<br/>';
-	    }
             $success += (@plaatenergy_db_query($command)==false ? 0 : 1);
             $total += 1;
         }
@@ -224,13 +221,6 @@ function plaatenergy_db_check_version() {
    $result = plaatenergy_db_query($sql);
    if (!$result)  {
       plaatenergy_db_execute_sql_file("0.1");
-   }
-
-   // Execute SQL path script v0.5 if needed
-   $sql = 'select value from config where token="database_version"';
-   $result = plaatenergy_db_query($sql);
-   $row = plaatenergy_db_fetch_object($result);
-   if (!isset($row->value))  {
       plaatenergy_db_execute_sql_file("0.5");
    }
 	
