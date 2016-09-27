@@ -39,7 +39,7 @@ function plaatenergy_system_page() {
 	$row = plaatenergy_db_fetch_object($result);
 	$theme = $row->theme;
     
-	$timestamp1 = date("Y-m-d H:i:00", mktime()-60);
+	$timestamp1 = date("Y-m-d H:i:00", time()-60);
 	$timestamp2 = date("Y-m-d H:i:00");
 	    
 	$solar_meter_present_1 = plaatenergy_db_get_config_item('solar_meter_present', SOLAR_METER_1);
@@ -107,6 +107,11 @@ function plaatenergy_system_page() {
 	$result5 = plaatenergy_db_query($sql5);
 	$data5 = plaatenergy_db_fetch_object($result5);
 	
+	$gas_used = 0;
+	if (isset($data5->gas_used)) {
+		$gas_used = $data5->gas_used;
+	}
+	
 	$sql6  = 'select humidity, pressure, temperature from weather where ';
 	$sql6 .= 'timestamp>="'.$timestamp1.'" and timestamp<="'.$timestamp2.'" order by timestamp desc limit 0,1';
 	$result6 = plaatenergy_db_query($sql6);
@@ -165,7 +170,7 @@ function plaatenergy_system_page() {
 		$page .= '<td>';
 		$page .= '<img src="images/gas-'.$theme.'.png" height="80" width="90">';
 		$page .= '<br/>';		
-		$page .= round($data5->gas_used,2).' '.t('M3');
+		$page .= round($gas_used,2).' '.t('M3');
 		$page .= '</td>';
 	}
 	

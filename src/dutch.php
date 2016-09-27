@@ -128,11 +128,11 @@ $lang['LINK_CO2'] 			 =  i('cloud').'CO<sub>2</sub>';
 $lang['LABEL_USERNAME'] = 'Gebruikersnaam';
 $lang['LABEL_PASSWORD'] = 'Wachtwoord';
 
-$lang ['CONGIG_BAD' ] = 'Het volgende bestand "config.inc" mist in de installatie directory.<br/><br/>
+$lang ['CONGIG_BAD' ] = 'Het volgende bestand "config.php" mist in de installatie directory.<br/><br/>
 PlaatEnergy werkt niet zonder dit bestand!<br/><br/>
-Hernoem config.inc.sample naar config.inc, zet de database instellingen goed en druk op F5 in je browser!';
+Hernoem config.php.sample naar config.php, zet de database instellingen goed en druk op F5 in je browser!';
 
-$lang['DATABASE_CONNECTION_FAILED' ] = 'De verbinding naar de database is niet goed. Controleer of het config.inc bestand de goede instellingen bevat!';
+$lang['DATABASE_CONNECTION_FAILED' ] = 'De verbinding naar de database is niet goed. Controleer of het config.php bestand de goede instellingen bevat!';
 
 $lang['YEARS_REPORT'] = 'Jaren Rapportages';
 $lang['YEAR_REPORT'] = 'Jaar Rapportages';

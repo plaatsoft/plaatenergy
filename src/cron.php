@@ -23,9 +23,9 @@
   
 $time_start = microtime(true);
 
-include "config.inc";
-include "general.inc";
-include "database.inc";
+include "config.php";
+include "general.php";
+include "database.php";
 
 /*
 ** ---------------------

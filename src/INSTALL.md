@@ -8,8 +8,6 @@ sudo apt-get install apache2
 sudo apt-get install php5
 sudo apt-get install python
 sudo apt-get install mysql-server
-sudo apt-get install python-mysqldb
-sudo apt-get install fswebcam
 
 ### Step 2 . Create mysql plaatenergy database
 mysql -u root -p
@@ -25,7 +23,6 @@ cd /var/www/html
 sudo cp /tmp/plaatenergy.zip .
 sudo unzip *.zip
 sudo chmod a+wrx /var/www/html/plaatenergy/backup
-sudo chmod a+wrx /var/www/html/plaatenergy/webcam
 
 ### Step 4. Create config.inc with correct database settings
 cp config.inc.sample config.inc

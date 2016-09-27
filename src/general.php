@@ -23,9 +23,11 @@
 
 /*
 ** -----------
-** DIRECTORY
+** GENERAL
 ** -----------
 */
+
+define('DEBUG', 0);
 
 // Installation path
 define('BASE_DIR', '/var/www/html/plaatenergy');
@@ -250,42 +252,47 @@ function loadJS($url) {
  */
 function general_header() {
 
-  // input
-  global $ip;
-  global $pid;
-  global $eid;
-  global $sid;
-  global $date;
-  global $session;
+	// input
+	global $ip;
+	global $pid;
+	global $eid;
+	global $sid;
+	global $date;
+	global $session;
 
-  $sql  = 'select theme,language from session where ip="'.$ip.'"';
-  $result = plaatenergy_db_query($sql);
-  $row = plaatenergy_db_fetch_object($result);
+	$sql  = 'select theme,language from session where ip="'.$ip.'"';
+	$result = plaatenergy_db_query($sql);
+	$row = plaatenergy_db_fetch_object($result);
 
-  $lang = $row->language;
-  $theme = $row->theme;
+	$lang = "en";
+	$theme = "light";
+
+	if (isset($row->language)) {
+		$lang = $row->language;
+		$theme = $row->theme;
+	}
     
-  $page  = '<!DOCTYPE html>';
-  $page .= '<html>';
-  $page .= '<head>'; 
+	$page  = '<!DOCTYPE html>';
+	$page .= '<html>';
+	$page .= '<head>'; 
+	
+	$page .= add_icons();
 
-  $page .= add_icons();
+	$page .= loadJS('js/link.js');
+	
+	if ($pid != PAGE_REALTIME) {
+		$page .= loadCSS('css/general.css');
 
-  $page .= loadJS('js/link.js');
+		// Load the icons from Font Awesome not with loadCSS because this file never will change and it cant load the font
+		$page .= '<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>';
+	
+		// Load the dark css theme if db theme var = dark
+		if ($theme == "dark") {
+		$page .= loadCSS('css/theme-dark.css');
+		}
+	}
   
-  if ($pid != PAGE_REALTIME) {
-    $page .= loadCSS('css/general.css');
-
-    // Load the icons from Font Awesome not with loadCSS because this file never will change and it cant load the font
-    $page .= '<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>';
-
-    // Load the dark css theme if db theme var = dark
-    if ($theme == "dark") {
-	$page .= loadCSS('css/theme-dark.css');
-    }
-  }
-  
-    if ($pid == PAGE_REALTIME) {
+	if ($pid == PAGE_REALTIME) {
 		$page .= '<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">';
 	}
 	
@@ -317,32 +324,32 @@ function general_header() {
                    break;
      }
      $page .= '<script>setTimeout(link,'.$slide_show_page_delay.',\'pid='.$pid.'&eid='.$eid.'&sid='.$sid.'\');</script>';
-  }
+	}
 
-  $page .= '</head>';
-  
-  $page .= '<body>';
-  $page .= '<form id="plaatenergy" method="POST">';  
-  
-  $page .= '<input type="hidden" name="session" value="'.$session.'" />';
-  
-  if ($pid != PAGE_REALTIME) {	    
-	$page .= '<div class="language">';
-	if ($lang=="en") {
-		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_LANGUAGE, t('DUTCH'));
-	} else { 
-		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_LANGUAGE , t('ENGLISH'));
-	}
-	$page .= '</div>';
+	$page .= '</head>';
 	
-	$page .= '<div class="theme">';
-	if ($theme == "light") {
-		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_SCHEME, t('THEME_TO_DARK'));
-	} else {
-		$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_SCHEME, t('THEME_TO_LIGHT'));		
+	$page .= '<body>';
+	$page .= '<form id="plaatenergy" method="POST">';  
+  
+	$page .= '<input type="hidden" name="session" value="'.$session.'" />';
+  
+	if ($pid != PAGE_REALTIME) {	    
+		$page .= '<div class="language">';
+		if ($lang=="en") {
+			$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_LANGUAGE, t('DUTCH'));
+		} else { 
+			$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_LANGUAGE , t('ENGLISH'));
+		}
+		$page .= '</div>';
+		
+		$page .= '<div class="theme">';
+		if ($theme == "light") {
+			$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_SCHEME, t('THEME_TO_DARK'));
+		} else {
+			$page .= plaatenergy_normal_link('pid='.$pid.'&eid='.$eid.'&date='.$date.'&sid='.EVENT_SCHEME, t('THEME_TO_LIGHT'));		
+		}
+		$page .= '</div>';
 	}
-	$page .= '</div>';
-  }
    
 	return $page;
 }

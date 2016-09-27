@@ -187,17 +187,18 @@ function plaatenergy_export_import_page() {
 	$page .= '<div class="nav">';
 	
 	$tmp = '';
-	$dh  = opendir(BASE_DIR.'/backup');
-	while (false !== ($filename = readdir($dh))) {
+	if (@$dh = opendir(BASE_DIR.'/backup')) {
+		while (false !== ($filename = readdir($dh))) {
 	
-		if (($filename!='.') && ($filename!='..') && ($filename!='.htaccess') && ($filename!='index.php') && ($filename!='readme.txt')) {
-			$tmp .= '<tr>';
-			$tmp .= '<td><a href="backup/'.$filename.'">'.$filename.'</a></td>';
-			$tmp .= '<td>&nbsp;</td>';
-			$tmp .= '<td>'.plaatenergy_link('pid='.$pid.'&eid='.EVENT_DELETE.'&filename='.$filename, t('LINK_DELETE')).'</td>';
-			$tmp .= '</tr>';
-		}
-	}	
+			if (($filename!='.') && ($filename!='..') && ($filename!='.htaccess') && ($filename!='index.php') && ($filename!='readme.txt')) {
+				$tmp .= '<tr>';
+				$tmp .= '<td><a href="backup/'.$filename.'">'.$filename.'</a></td>';
+				$tmp .= '<td>&nbsp;</td>';
+				$tmp .= '<td>'.plaatenergy_link('pid='.$pid.'&eid='.EVENT_DELETE.'&filename='.$filename, t('LINK_DELETE')).'</td>';
+				$tmp .= '</tr>';
+			}
+		}	
+	}
 	
 	if (strlen($tmp)>0) {
 		

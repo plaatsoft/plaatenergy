@@ -118,7 +118,7 @@ $lang['LINK_SYSTEM'] 	    = i('fort-awesome') .'System Overview';
 $lang['LINK_IMPORT_EXPORT'] = i('download') .'Export Data'; 
 $lang['LINK_DELETE']        = i('remove').'Delete'; 
 $lang['LINK_CO2'] 			 = i('cloud').'CO<sub>2</sub>'; 
- 
+
 /*
 ** ------------------
 ** HOME
@@ -128,11 +128,11 @@ $lang['LINK_CO2'] 			 = i('cloud').'CO<sub>2</sub>';
 $lang['LABEL_USERNAME'] = 'Username';
 $lang['LABEL_PASSWORD'] = 'Password';
 
-$lang ['CONGIG_BAD' ] = 'The following file "config.inc" is missing in installation directory.<br/><br/>
-PlaatEnergy can not  work without!<br/><br/>
-Rename config.inc.sample to config.inc, update the database settings en press F5 in your browser!';
+$lang ['CONGIG_BAD' ] = 'The following file "config.php" is missing in installation directory.<br/><br/>
+PlaatEnergy can not work without!<br/><br/>
+Rename config.php.sample to config.php, update the database settings en press F5 in your browser!';
 
-$lang['DATABASE_CONNECTION_FAILED' ] = 'The connection to the database failed. Please check if config.inc settings are right!';
+$lang['DATABASE_CONNECTION_FAILED' ] = 'The connection to the database failed. Please check if config.php settings!';
 
 $lang['YEARS_REPORT'] = 'Years Reports';
 $lang['YEAR_REPORT'] = 'Year Reports';

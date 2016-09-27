@@ -23,14 +23,6 @@
  
 /*
 ** ---------------------
-** SETTINGS
-** ---------------------
-*/
-
-define('DEBUG', 0);
-
-/*
-** ---------------------
 ** GENERAL
 ** ---------------------
 */
@@ -121,7 +113,7 @@ function plaatenergy_db_query($query) {
 		echo $query."<br/>\r\n";
 	}
 
-	$result = mysqli_query($db, $query);
+	@$result = mysqli_query($db, $query);
 
 	if (!$result) {
 		plaatenergy_db_error();		
@@ -148,7 +140,12 @@ function plaatenergy_db_escape($data) {
  */
 function plaatenergy_db_fetch_object($result) {
 	
-	$row = $result->fetch_object();
+	$row="";
+	
+	if (isset($result)) {
+		$row = $result->fetch_object();
+	}
+	
 	return $row;
 }
 
@@ -159,6 +156,64 @@ function plaatenergy_db_fetch_object($result) {
 function plaatenergy_db_num_rows($result) {
 	
 	return mysqli_num_rows($result);
+}
+
+/*
+** ---------------------
+** CONFIG
+** ---------------------
+*/
+
+/**
+ * Fetch config item from database
+ * @param $key key name of setting stored in database
+ * @return $value of key
+ */
+function plaatenergy_db_get_config_item($key, $category=0) {
+
+   $sql = 'select value from config where token="'.$key.'" and category='.$category;
+   $result = plaatenergy_db_query($sql);
+   $data = plaatenergy_db_fetch_object($result);
+
+   $value = "";
+   if ( isset($data->value) ) {
+		$value = $data->value;
+   }
+   return $value;
+}
+
+/*
+** ---------------------
+** SESSION
+** ---------------------
+*/
+
+function plaatenergy_db_get_session($ip, $new=false) {
+
+   $sql = 'select sid, timestamp, session_id, requests from session where ip="'.$ip.'"';
+   $result = plaatenergy_db_query($sql);
+   $data = plaatenergy_db_fetch_object($result);
+
+   $session_id = "";
+   if ( isset($data->sid) ) {   
+	
+		$session_id = $data->session_id;
+		$requests = $data->requests;
+	
+		if (($new==true) || ((time()-strtotime($data->timestamp))>(60*15))) {		
+			$session_id = md5(date('Y-m-d H:i:s'));
+		}
+			   
+		$sql = 'update session set timestamp=SYSDATE(), session_id="'.$session_id.'", requests='.++$requests.' where sid="'.$data->sid.'"';
+	   plaatenergy_db_query($sql);
+	  
+   } else {
+
+		$sql = 'insert into session (timestamp, ip, requests, language, theme, session_id) value (SYSDATE(), "'.$ip.'", 1, "en", "light", "'.$session_id.'")';
+		plaatenergy_db_query($sql);
+	}
+
+   return $session_id;
 }
 
 /*
@@ -216,7 +271,7 @@ function plaatenergy_db_execute_sql_file($version) {
  */
 function plaatenergy_db_check_version() {
 
-   // Execute SQL base sql script if needed!
+   // Execute SQL base script if needed!
    $sql = "select 1 FROM config limit 1" ;
    $result = plaatenergy_db_query($sql);
    if (!$result)  {
@@ -224,79 +279,58 @@ function plaatenergy_db_check_version() {
       plaatenergy_db_execute_sql_file("0.5");
    }
 	
-   // Execute SQL path script v0.6 if needed
-   $sql = 'select value from config where token="database_version"';
-   $result = plaatenergy_db_query($sql);
-   $row = plaatenergy_db_fetch_object($result);
-   if ($row->value=="0.5")  {
-      plaatenergy_db_execute_sql_file("0.6");
-   }
-	
-   // Execute SQL path script v0.7 if needed
-   $sql = 'select value from config where token="database_version"';
-   $result = plaatenergy_db_query($sql);
-   $row = plaatenergy_db_fetch_object($result);
-   if ($row->value=="0.6")  {
-      plaatenergy_db_execute_sql_file("0.7");
-   }
-
-   // Execute SQL path script v0.8 if needed
-   $sql = 'select value from config where token="database_version"';
-   $result = plaatenergy_db_query($sql);
-   $row = plaatenergy_db_fetch_object($result);
-   if ($row->value=="0.7")  {
-      plaatenergy_db_execute_sql_file("0.8");
-   }
-	
-	// Execute SQL path script v0.9 if needed
-   $sql = 'select value from config where token="database_version"';
-   $result = plaatenergy_db_query($sql);
-   $row = plaatenergy_db_fetch_object($result);
-   if ($row->value=="0.8")  {
-      plaatenergy_db_execute_sql_file("0.9");
-   }
-	
-   // Execute SQL path script v1.0 if needed
-   $sql = 'select value from config where token="database_version"';
-   $result = plaatenergy_db_query($sql);
-   $row = plaatenergy_db_fetch_object($result);
-   if ($row->value=="0.9")  {
-      plaatenergy_db_execute_sql_file("1.0");
-   }
-	
-   // Execute SQL path script v1.1 if needed
-   $sql = 'select value from config where token="database_version"';
-   $result = plaatenergy_db_query($sql);
-   $row = plaatenergy_db_fetch_object($result);
-   if ($row->value=="1.0")  {
-      plaatenergy_db_execute_sql_file("1.1");
-   }
-
-   // Execute SQL path script v1.2 if needed
-   $sql = 'select value from config where token="database_version"';
-   $result = plaatenergy_db_query($sql);
-   $row = plaatenergy_db_fetch_object($result);
-   if ($row->value=="1.1")  {
-      plaatenergy_db_execute_sql_file("1.2");
-   }
-}
-
-/**
- * Fetch config item from database
- * @param $key key name of setting stored in database
- * @return $value of key
- */
-function plaatenergy_db_get_config_item($key, $category=0) {
-
-   $sql = 'select value from config where token="'.$key.'" and category='.$category;
+	$sql = 'select value from config where token="database_version"';
    $result = plaatenergy_db_query($sql);
    $data = plaatenergy_db_fetch_object($result);
-
-   $value = "";
-   if ( isset($data->value) ) {
-		$value = $data->value;
+	$version = $data->value;
+	
+	// Execute SQL patch script v0.6 if needed
+   if ($version=="0.5")  {
+		$version="0.6";
+      plaatenergy_db_execute_sql_file($version);
    }
-   return $value;
+	
+   // Execute SQL patch script v0.7 if needed
+   if ($version=="0.6")  {
+		$version="0.7";
+      plaatenergy_db_execute_sql_file($version);
+   }
+
+   // Execute SQL patch script v0.8 if needed
+   if ($version=="0.7")  {
+		$version="0.8";
+      plaatenergy_db_execute_sql_file($version);
+   }
+	
+	// Execute SQL patch script v0.9 if needed
+   if ($version=="0.8")  {
+		$version="0.9";
+      plaatenergy_db_execute_sql_file($version);
+   }
+	
+   // Execute SQL patch script v1.0 if needed
+   if ($version=="0.9")  {
+		$version="1.0";
+      plaatenergy_db_execute_sql_file($version);
+   }
+	
+   // Execute SQL patch script v1.1 if needed
+   if ($version=="1.0")  {
+		$version="1.1";
+      plaatenergy_db_execute_sql_file($version);
+   }
+
+   // Execute SQL patch script v1.2 if needed
+   if ($version=="1.1")  {
+		$version="1.2";
+      plaatenergy_db_execute_sql_file($version);
+   }
+	
+	// Execute SQL patch script v1.3 if needed
+   if ($version=="1.2")  {
+		$version="1.3";
+      plaatenergy_db_execute_sql_file($version);
+   }
 }
 
 /**
@@ -561,34 +595,6 @@ function plaatenergy_db_process($type) {
 			$solar_delivered_3 = $data3c->etotal;
 		}
 	}
-}
-
-function plaatenergy_db_get_session($ip, $new=false) {
-
-   $sql = 'select sid, timestamp, session_id, requests from session where ip="'.$ip.'"';
-   $result = plaatenergy_db_query($sql);
-   $data = plaatenergy_db_fetch_object($result);
-
-   $session_id = "";
-   if ( isset($data->sid) ) {   
-	
-		$session_id = $data->session_id;
-		$requests = $data->requests;
-	
-		if (($new==true) || ((time()-strtotime($data->timestamp))>(60*15))) {		
-			$session_id = md5(date('Y-m-d H:i:s'));
-		}
-			   
-		$sql = 'update session set timestamp=SYSDATE(), session_id="'.$session_id.'", requests='.++$requests.' where sid="'.$data->sid.'"';
-	   plaatenergy_db_query($sql);
-	  
-   } else {
-
-		$sql = 'insert into session (timestamp, ip, requests, language, theme) value (SYSDATE(), "'.$ip.'", 1, "en", "light")';
-		plaatenergy_db_query($sql);
-	}
-
-   return $session_id;
 }
 
 /*

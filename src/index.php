@@ -23,17 +23,34 @@
 
 $time_start = microtime(true);
 
-@include "config.inc";
-include "general.inc";
-include "database.inc";
-include "english.inc";
+include "general.php";
+include "database.php";
+include "english.php";
+
+if (!file_exists( "config.php" )) {
+
+	echo general_header();
+
+	echo '<h1>ERROR</h1>';
+	echo '<br/>';
+   echo t('CONGIG_BAD');
+	echo '<br/>';
+	
+	$time_end = microtime(true);
+	$time = $time_end - $time_start;
+	
+	echo general_footer($time);
+	
+   exit;
+}
+
+include "config.php";
 
 /*
 ** --------------------
 ** DATABASE
 ** --------------------
 */
-
 
 if ( @plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname) == false) {
 
@@ -71,21 +88,21 @@ $limit = 0;
 $cat=0;
 
 $session = plaatenergy_post('session', '');
-#echo '>session='.$session.'<br/>';
 $token = plaatenergy_post("token", "");
-#echo '>token='.$token.'<br/>';
 
 if (strlen($token)>0) {
 	
-  /* Decode token to php parameters */
-  $token =  plaatenergy_token_decode($token);	  
-  $tokens = @preg_split("/&/", $token);
+	/* Decode token to php parameters */
+	$token =  plaatenergy_token_decode($token);	  
+	$tokens = @preg_split("/&/", $token);
 	
-  foreach ($tokens as $item) {
-     $items = preg_split ("/=/", $item);				
-     $$items[0] = $items[1];	
-     #echo '>'.$items[0].'='.$items[1].'<br/>';
-  }
+	foreach ($tokens as $item) {
+		$items = preg_split ("/=/", $item);				
+		${$items[0]} = $items[1];	
+		if (DEBUG == 1) {
+			echo '>'.$items[0].'='.$items[1].'<br/>';
+		}
+	}
 }
 
 /*
@@ -176,9 +193,8 @@ $sql  = 'select language from session where ip="'.$ip.'"';
 $result = plaatenergy_db_query($sql);
 $row = plaatenergy_db_fetch_object($result);
 
-if ($row->language=="nl") {
-
-	include("dutch.inc");
+if (isset($row->language) && ($row->language=="nl")) {
+	include("dutch.php");
 }	
 
 /*

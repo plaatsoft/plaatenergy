@@ -26,22 +26,27 @@
 ** NOTES
 ** ---------------------
 */
-$note[13] = '<div class="subparagraph">Version 1.3 (19-09-2016)</div>
+$note[13] = '<div class="subparagraph">Version 1.3 (27-09-2016)</div>
 <div class="large_text">
 <ul>
-<li>General: Added support for Basic HTTP authenication.</li>
+<li>Added support for Basic HTTP authenication.</li>
+<li>Optimize automatic database patching.</li>
+<li>Added warning when config.php is not found!</li>
+<li>Added warning when database connection fails!</li>
+<li>PlaatEnergy is now support MySQL 5.7.x and PHP 7.x</li>
+<li>Protect PHP source code against plain code reading (URL hacking).</li>
 </ul>
 </div>';
 
 $note[12] = '<div class="subparagraph">Version 1.2 (21-08-2016)</div>
 <div class="large_text">
 <ul>
-<li>General: Added CO<sub>2</sub> emission chart to gas and energy years reports.</li>
-<li>General: PHP Data layer is now based mysqli PHP library.</li>
-<li>General: User session timeouts after 15 minutes inactivity.</li>
-<li>General: Application is now protected with username and password combination.</li>
-<li>General: Passwords are now encrypted stored in database.</li>
-<li>General: Move webcam, light bulb features to new PlaatProtect project!</li>
+<li>Added CO<sub>2</sub> emission chart to gas and energy years reports.</li>
+<li>PHP Data layer is now based mysqli PHP library.</li>
+<li>User session timeouts after 15 minutes inactivity.</li>
+<li>Application is now protected with username and password combination.</li>
+<li>Passwords are now encrypted stored in database.</li>
+<li>Move webcam, light bulb features to new PlaatProtect project!</li>
 <li>Bugfix: Fix negative energy us in Used Electricity Day report.!</li>
 </ul>
 </div>';
@@ -49,15 +54,15 @@ $note[12] = '<div class="subparagraph">Version 1.2 (21-08-2016)</div>
 $note[11] = '<div class="subparagraph">Version 1.1 (07-05-2016)</div>
 <div class="large_text">
 <ul>
-<li>General: Added solar converter efficiency value to energy delivered year report</li>
-<li>General: Improve export to SQL feature. Now export file can be downloaded and delete afterwards.</li>
-<li>General: Added weather station script base on onboard pi sensor.</li>
-<li>General: Show status of all enabled solar converters at home page.</li>
-<li>General: Added system name field to configuration.</li>
-<li>General: Added solar description field to configuration.</li>
-<li>General: Solar measument adaption now support 3 solar converters</li>
-<li>General: Maximum value calculation improved for used energy year report.</li>
-<li>General: Added solar converter peak power setting to configuration.</li>
+<li>Added solar converter efficiency value to energy delivered year report</li>
+<li>Improve export to SQL feature. Now export file can be downloaded and delete afterwards.</li>
+<li>Added weather station script base on onboard pi sensor.</li>
+<li>Show status of all enabled solar converters at home page.</li>
+<li>Added system name field to configuration.</li>
+<li>Added solar description field to configuration.</li>
+<li>Solar measument adaption now support 3 solar converters</li>
+<li>Maximum value calculation improved for used energy year report.</li>
+<li>Added solar converter peak power setting to configuration.</li>
 <li>Bugfix: Google Chart background set explicient to transparent.</li>
 <li>Bugfix: Delivered electricity year report scale is now correct calculated.</li>
 <li>Bugfix: Monthly max power chart is now working correct with 3 solar converters active.</li>
@@ -69,30 +74,30 @@ $note[11] = '<div class="subparagraph">Version 1.1 (07-05-2016)</div>
 $note[10] = '<div class="subparagraph">Version 1.0 (24-04-2016)</div>
 <div class="large_text">
 <ul>
-<li>General: Improve main and setting menu layout.</li>
-<li>General: Added support for maximum 3 solar converter meters.</li>
-<li>General: Added support for Hosola Bright solar converter meter.</li>
-<li>General: Added export data page.</li>
-<li>General: Added system overview page.</li>
-<li>General: Added setting categories.</li>
-<li>General: Added setting option to set initial solar converter reading.</li>
-<li>General: Added setting option to disable gas meter.</li>
-<li>General: Solar converter sensor scripts are now PHP based.</li>
-<li>General: Refactor database model - All entity names are now english.</li>
+<li>Improve main and setting menu layout.</li>
+<li>Added support for maximum 3 solar converter meters.</li>
+<li>Added support for Hosola Bright solar converter meter.</li>
+<li>Added export data page.</li>
+<li>Added system overview page.</li>
+<li>Added setting categories.</li>
+<li>Added setting option to set initial solar converter reading.</li>
+<li>Added setting option to disable gas meter.</li>
+<li>Solar converter sensor scripts are now PHP based.</li>
+<li>Refactor database model - All entity names are now english.</li>
 </ul>
 </div>';
 
 $note[9] = '<div class="subparagraph">Version 0.9 (04-03-2016)</div>
 <div class="large_text">
 <ul>
-<li>General: Added security shield arround WebGUI based on sessionId.</li>
-<li>General: Improve customer query report.</li>
-<li>General: Redesign solar deliverable charts (Now they are more flexible).</li>
-<li>General: Added option to select solar meter vendor.</li>
-<li>General: Improve theme and language hyperlink.</li>
-<li>General: Added home password feature.</li>
-<li>General: Added setting password feature.</li>
-<li>General: If database connection fails, user is informed.</li>
+<li>Added security shield arround WebGUI based on sessionId.</li>
+<li>Improve customer query report.</li>
+<li>Redesign solar deliverable charts (Now they are more flexible).</li>
+<li>Added option to select solar meter vendor.</li>
+<li>Improve theme and language hyperlink.</li>
+<li>Added home password feature.</li>
+<li>Added setting password feature.</li>
+<li>If database connection fails, user is informed.</li>
 </ul>
 </div>';
 
@@ -109,16 +114,16 @@ $note[8] = '<div class="subparagraph">Version 0.8 (23-02-2016)</div>
 $note[7] = '<div class="subparagraph">Version 0.7 (20-02-2016)</div>
 <div class="large_text">
 <ul>
-<li>General: Added CSV export feature.</li>
-<li>General: Improve customer query output.</li>
-<li>General: Add day name to day reports.</li>
-<li>General: Improve main menu when solar and/or weather station is disabled.</li>
-<li>General: Added slide show mode. Year reports automatic cycle without human interaction.</li>
-<li>General: Added option to enable chart legend.</li>
-<li>General: Added option to set chart dimenision.</li>
-<li>General: Setting page support now combobox to prevent invalid input.</li>
-<li>General: Add support for Kampstrup energy meters.</li>
-<li>General: Add support for Landis energy meters.</li>
+<li>Added CSV export feature.</li>
+<li>Improve customer query output.</li>
+<li>Added day name to day reports.</li>
+<li>Improve main menu when solar and/or weather station is disabled.</li>
+<li>Added slide show mode. Year reports automatic cycle without human interaction.</li>
+<li>Added option to enable chart legend.</li>
+<li>Added option to set chart dimenision.</li>
+<li>Setting page support now combobox to prevent invalid input.</li>
+<li>Add support for Kampstrup energy meters.</li>
+<li>Add support for Landis energy meters.</li>
 <li>Bugfix: New version check is now working correct.</li>
 <li>Bugfix: Month and Day navigation is now working correct.</li>
 </ul>
@@ -127,11 +132,11 @@ $note[7] = '<div class="subparagraph">Version 0.7 (20-02-2016)</div>
 $note[6] = '<div class="subparagraph">Version 0.6 (28-01-2016)</div>
 <div class="large_text">
 <ul>
-<li>General: Added database backup feature to setting page.</li>
-<li>General: Minimum and maximum day value to weather information pages.</li>
-<li>General: Raspberry Pi Sense Hat led display shows now current power usage every minute.</li>
-<li>General: Added PlaatSoft Logo to about page.</li>
-<li>General: Added source code documentation for better support.</li>
+<li>Added database backup feature to setting page.</li>
+<li>Minimum and maximum day value to weather information pages.</li>
+<li>Raspberry Pi Sense Hat led display shows now current power usage every minute.</li>
+<li>Added PlaatSoft Logo to about page.</li>
+<li>Added source code documentation for better support.</li>
 <li>Bugfix: Used energy years report show now correct Y axes scale.</li>
 <li>Bugfix: Selecting day in the future is now not possible anymore!</li>
 </ul>
