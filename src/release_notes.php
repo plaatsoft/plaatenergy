@@ -26,9 +26,10 @@
 ** NOTES
 ** ---------------------
 */
-$note[13] = '<div class="subparagraph">Version 1.3 (27-09-2016)</div>
+$note[13] = '<div class="subparagraph">Version 1.3 (30-09-2016)</div>
 <div class="large_text">
 <ul>
+<li>Improve cron script. Now no output is returned with course a warning email.<li>
 <li>Added support for Basic HTTP authenication.</li>
 <li>Optimize automatic database patching.</li>
 <li>Added warning when config.php is not found!</li>

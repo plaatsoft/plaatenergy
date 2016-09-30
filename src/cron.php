@@ -85,8 +85,9 @@ plaatenergy_db_close();
 $time_end = microtime(true);
 $time = $time_end - $time_start;
 
-echo "cron took ".round($time,2)." secs";
-
+if (DEBUG==1) {
+	echo "cron took ".round($time,2)." secs";
+}
 
 /*
 ** ---------------------
@@ -94,4 +95,4 @@ echo "cron took ".round($time,2)." secs";
 ** ---------------------
 */
 
-?> 
+?>
