@@ -38,7 +38,7 @@ xmlhttp.onreadystatechange=function() {
 	
 xmlhttp.open('POST',  'https://service.plaatsoft.nl', true);
 xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded' );
-xmlhttp.send('{"PlaatEnergy":"'+parseFloat(document.getElementById("version").innerHTML)+'"}');
+xmlhttp.send('product=PlaatEnergy&version='+parseFloat(document.getElementById("version").innerHTML));
 
 /*
 ** ---------------------
