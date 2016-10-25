@@ -281,7 +281,7 @@ function general_header() {
 	$page .= loadJS('js/link.js');
 	
 	if ($pid != PAGE_REALTIME) {
-		$page .= loadCSS('css/general.css');
+		$page .= loadCSS('css/general1.css');
 
 		// Load the icons from Font Awesome not with loadCSS because this file never will change and it cant load the font
 		$page .= '<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>';

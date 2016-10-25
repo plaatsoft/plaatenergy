@@ -204,10 +204,8 @@ function plaatenergy_home_login_page() {
 	global $version;
 			
 	$page = '<h1>';
-   $page .= t('TITLE');
-	$page .= ' <div id="version" style="display: inline">';
-	$page .= $version;
-	$page .= "</div>";
+   $page .= t('TITLE').' ';
+	$page .= '<span id="version">'.$version."</span>";
 	if (strlen($name)>0) {
 		$page .= ' ('.$name.') ';
 	} 	
@@ -232,8 +230,9 @@ function plaatenergy_home_login_page() {
 	
 	$page .= '</fieldset>';
 	
-   $page .= '<script type="text/javascript">var ip="'.$_SERVER['SERVER_ADDR'].'";var name="'.$name.'";var version="'.$version.'";</script>';
-   $page .= '<script type="text/javascript" src="js/version.js"></script>';
+   $page .= '<br/>';
+	$page .= '<div class="upgrade" id="upgrade"></div>';
+	$page .= '<script type="text/javascript" src="js/version1.js"></script>';
 	
    return $page;
 }
@@ -254,14 +253,14 @@ function plaatenergy_home_page() {
 	global $version;
 	
 	$page = '<h1>';
-   $page .= t('TITLE');
-	$page .= ' <div id="version" style="display: inline">';
-	$page .= $version;
-	$page .= "</div>";
+   $page .= t('TITLE').' ';
+	$page .= '<span id="version">'.$version."</span>";
 	if (strlen($name)>0) {
 		$page .= ' ('.$name.') ';
 	} 	
 	$page .= '</h1>';
+	$page .= '<div class="upgrade" id="upgrade"></div>';
+	$page .= '<script type="text/javascript" src="js/version1.js"></script>';
 
 	$page .= '<div class="home">';
 	$page .= '<table>';
@@ -412,9 +411,6 @@ function plaatenergy_home_page() {
 	$page .= check_weather_station();
 
 	$page .= '<br/><br/>';
-
-	$page .= '<script type="text/javascript">var ip="'.$_SERVER['SERVER_ADDR'].'";var name="'.$name.'";var version="'.$version.'";</script>';
-	$page .= '<script type="text/javascript" src="js/version.js"></script>';
 
 	return $page;
 }

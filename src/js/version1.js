@@ -27,16 +27,18 @@ xmlhttp.onreadystatechange=function() {
    {		
 		var obj = JSON.parse(xmlhttp.responseText);
 		var latest = parseFloat(obj.PlaatEnergy)
+		console.log("latest version = ["+latest+"]");
 		var current = parseFloat(document.getElementById("version").innerHTML);
+		console.log("current version = ["+current+"]");
 		if (current<latest) {
-			document.getElementById("version").innerHTML = current + ' <div id="new" style="display:inline;color:#e0440e">('+obj.PlaatEnergy+' available)</div>'; 
+			document.getElementById("upgrade").innerHTML = 'PlaatEnergy v'+latest+' available!'; 
 		}
    }
 }
 	
-xmlhttp.open('POST',  'http://www.plaatsoft.nl/service/version.php', true);
+xmlhttp.open('POST',  'https://service.plaatsoft.nl', true);
 xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded' );
-xmlhttp.send("ip="+ip+"&name="+name+"&product=plaatenergy&version="+version);
+xmlhttp.send('{"PlaatEnergy":"'+parseFloat(document.getElementById("version").innerHTML)+'"}');
 
 /*
 ** ---------------------
