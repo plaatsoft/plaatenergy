@@ -28,7 +28,7 @@ def getCPUtemperature():
     res = os.popen('vcgencmd measure_temp').readline()
     return(res.replace("temp=","").replace("'C\n",""))
 
-lines = [line.rstrip('\n') for line in open('/var/www/html/plaatenergy/config.inc')]
+lines = [line.rstrip('\n') for line in open('/var/www/html/plaatenergy/config.php')]
 for line in lines:
    if line[:1]=='$':
      line = line.replace(' ','');

@@ -45,7 +45,7 @@ ser.timeout  = 20
 p1_telegram  = False
 p1_log       = True
 
-lines = [line.rstrip('\n') for line in open('/var/www/html/plaatenergy/config.inc')]
+lines = [line.rstrip('\n') for line in open('/var/www/html/plaatenergy/config.php')]
 for line in lines:
    if line[:1]=='$':
      line = line.replace(' ','');

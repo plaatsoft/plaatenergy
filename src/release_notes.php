@@ -26,10 +26,11 @@
 ** NOTES
 ** ---------------------
 */
-$note[14] = '<div class="subparagraph">Version 1.4 (25-10-2016)</div>
+$note[14] = '<div class="subparagraph">Version 1.4 (31-10-2016)</div>
 <div class="large_text">
 <ul>
 <li>Improve new version detection.</li>
+<li>Bugfix: interfaces scripts are now loading correct*.php files</li>
 </ul>
 </div>';
 

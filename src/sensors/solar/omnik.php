@@ -16,9 +16,9 @@
 **  All copyrights reserved (c) 2008-2016 PlaatSoft
 */
 
-include '/var/www/html/plaatenergy/config.inc';
-include '/var/www/html/plaatenergy/database.inc';
-include '/var/www/html/plaatenergy/general.inc';
+include '/var/www/html/plaatenergy/config.php';
+include '/var/www/html/plaatenergy/database.php';
+include '/var/www/html/plaatenergy/general.php';
 include 'inverter_omnik.php';
 
 $index = $argv[1];

@@ -20,9 +20,9 @@
 // instance=32 [Solar Converter 2]
 // instance=33 [Solar Converter 3]
 
-include '/var/www/html/plaatenergy/config.inc';
-include '/var/www/html/plaatenergy/database.inc';
-include '/var/www/html/plaatenergy/general.inc';
+include '/var/www/html/plaatenergy/config.php';
+include '/var/www/html/plaatenergy/database.php';
+include '/var/www/html/plaatenergy/general.php';
 include 'inverter_hosola.php';
 
 plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
