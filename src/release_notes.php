@@ -26,17 +26,11 @@
 ** NOTES
 ** ---------------------
 */
-$note[14] = '<div class="subparagraph">Version 1.4 (31-10-2016)</div>
-<div class="large_text">
-<ul>
-<li>Improve new version detection.</li>
-<li>Bugfix: interfaces scripts are now loading correct*.php files</li>
-</ul>
-</div>';
-
 $note[13] = '<div class="subparagraph">Version 1.3 (30-09-2016)</div>
 <div class="large_text">
 <ul>
+<li>Improve new version detection.</li>
+<li>Bugfix: interfaces scripts are now loading correct *.php files</li>
 <li>Improve cron script. Now no output is returned with course a warning email.</li>
 <li>Added support for Basic HTTP authenication.</li>
 <li>Optimize automatic database patching.</li>
