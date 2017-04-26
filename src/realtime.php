@@ -1,19 +1,17 @@
 <?php
 
-// This whole page is made by Bastiaan van der Plaat
+// This whole file / page is made by Bastiaan van der Plaat (https://bastiaan.plaatsoft.nl)
 
 // When you send a get message to realtime.php you get the db info
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
   // Load database username and password
-  include "config.inc";
+  include "config.php";
+  include "general.php";
 
-  // Load database username and password
-  include "general.inc";
-  
   global $kwh_to_co2_factor;
   global $m3_to_co2_factor;
-  
+
   header("Content-Type: application/json"); // Set file mimetype to json
   header("Cache-Control: no-cache");        // Tels browser to don't cache this file
 
@@ -42,23 +40,24 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
   $json["gas"]["today"] = (float)$row->gas_used; // m3
 
   // Get total energy / gas delivered used
-  $row = $db->query("SELECT SUM(low_used) as low_used, SUM(normal_used) as normal_used, SUM(low_delivered) as low_delivered, SUM(normal_delivered) as normal_delivered, SUM(solar_delivered) as solar_delivered, SUM(gas_used) as gas_used FROM energy_summary WHERE date>='" . date("Y-1-1") . "' and date<='" . date("Y-12-t") . "'")->fetch_object();
+  $row = $db->query("SELECT SUM(low_used) as low_used, SUM(normal_used) as normal_used, SUM(low_delivered) as low_delivered, SUM(normal_delivered) as normal_delivered," .
+  " SUM(solar_delivered) as solar_delivered, SUM(gas_used) as gas_used FROM energy_summary WHERE date>='" . date("Y-1-1") . "' and date<='" . date("Y-12-t") . "'")->fetch_object();
 
   $tmp = $row->solar_delivered - $row->low_delivered - $row->normal_delivered;
   $local_delivered = $tmp > 0 ? $tmp : 0;
 
   $json["energy"]["delivered"] = $row->low_delivered + $row->normal_delivered + $local_delivered; // kWh
   $json["energy"]["used"] = $row->low_used + $row->normal_used + $local_delivered; // kWh
-  $json["gas"]["used"] = $row->gas_used; // m3
+  $json["gas"]["used"] = (int)$row->gas_used; // m3
 
   // Energy co2 emission = 1kWh grey energy is 0.526 kg co2
-  $json["energy"]["co2"] = ($json["energy"]["used"] - $json["energy"]["delivered"]) * $kwh_to_co2_factor; 
+  $json["energy"]["co2"] = ($json["energy"]["used"] - $json["energy"]["delivered"]) * $kwh_to_co2_factor;
 
   // Burning 1 m3 gas results in 1.78 kg CO2 emission
-  $json["gas"]["co2"] = $json["gas"]["used"] * $m3_to_co2_factor; 
+  $json["gas"]["co2"] = $json["gas"]["used"] * $m3_to_co2_factor;
 
-  // Get raw weather data decode to json it will converted realtime by client with js to readable info
-  $weather = json_decode(file_get_contents("http://api.openweathermap.org/data/2.5/weather?id=" . $_GET["q"] . "&appid=4e28f75f5d0eded171ea5eeffb2eb77a"));
+  // Get raw weather data decode to json it will converted realtime by client with js to readable info because otherwise http vs https clash
+  $weather = json_decode(file_get_contents("http://api.openweathermap.org/data/2.5/weather?id=" . $_GET["city"] . "&appid=8cfe5f379c10d3a2d63b3ce8226ce9e3"));
   $json["weather"]["temperature"] = $weather->main->temp;  // K
   $json["weather"]["humidity"] = $weather->main->humidity; // %
   $json["weather"]["pressure"] = $weather->main->pressure; // hPa
@@ -139,7 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 <div class="grid hidden">
   <div class="tile orange">
     <p>PlaatEnergy</p>
-    <label>Made by <a href="http://plaatsoft.nl" target="_blank">plaatsoft.nl</a></label>
+    <label>Made by <a href="http://plaatsoft.nl" target="_blank">PlaatSoft</a></label>
   </div>
 
   <div class="tile top-bottom">
@@ -153,12 +152,12 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     </div>
   </div>
 
-  <div id="energy_today" class="tile" onclick="link('pid=61')">
+  <div id="energy_today" class="tile" onclick="link('pid=<?php echo PAGE_DAY_OUT_ENERGY; ?>')">
     <p id="energy_today_text"></p>
     <label>Electricity today</label>
   </div>
 
-  <div id="energy_now" class="tile" onclick="link('pid=60')">
+  <div id="energy_now" class="tile" onclick="link('pid=<?php echo PAGE_DAY_IN_ENERGY; ?>')">
     <p id="energy_now_text"></p>
     <label>Electricity now</label>
   </div>
@@ -174,7 +173,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     </div>
   </div>
 
-  <div class="tile brown small" onclick="link('pid=80')">
+  <div class="tile brown small" onclick="alert('PlaatProtect')">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <circle cx="12" cy="12" r="3.2"/>
       <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
@@ -189,14 +188,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     <label>Settings</label>
   </div>
 
-  <div class="tile small yellow" onclick="link('pid=90')">
+  <div class="tile small yellow" onclick="alert('PlaatProtect')">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"/>
     </svg>
     <label>Lights</label>
   </div>
 
-  <div class="tile small blue-gray" onclick="link('pid=11')">
+  <div class="tile small blue-gray" onclick="link('pid=<?php echo PAGE_HOME; ?>')">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
     </svg>
@@ -204,18 +203,18 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
   </div>
 
   <div class="tile bottom-top">
-    <div class="one gray" onclick="link('pid=62&eid=19')">
+    <div class="one gray" onclick="link('pid=<?php echo PAGE_DAY_IN_GAS; ?>&eid=<?php echo EVENT_M3; ?>')">
       <p id="gas_today"></p>
       <label>Gas used today</label>
     </div>
-    <div class="two deep-purple" onclick="link('pid=42&eid=19')">
+    <div class="two deep-purple" onclick="link('pid=<?php echo PAGE_YEAR_IN_GAS; ?>&eid=<?php echo EVENT_M3; ?>')">
       <p id="gas_used"></p>
       <label>Gas used annually</label>
     </div>
   </div>
 
   <div class="tile top-bottom">
-    <div class="one deep-purple" onclick="link('pid=71')">
+    <div class="one deep-purple" onclick="alert('PlaatProtect')">
       <p id="temperature"></p>
       <label>Air temperature inside</label>
     </div>
@@ -226,7 +225,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
   </div>
 
   <div class="tile bottom-top">
-    <div class="one orange" onclick="link('pid=70')">
+    <div class="one orange" onclick="alert('PlaatProtect')">
       <p id="pressure"></p>
       <label>Air pressure inside</label>
     </div>
@@ -242,7 +241,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
   </div>
 
   <div class="tile left-right">
-    <div class="one blue" onclick="link('pid=72')">
+    <div class="one blue" onclick="alert('PlaatProtect')">
       <p id="humidity"></p>
       <label>Air humidity inside</label>
     </div>
@@ -263,14 +262,14 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     </div>
   </div>
 
-  <div class="tile pink small" onclick="link('pid=13')">
+  <div class="tile pink small" onclick="link('pid=<?php echo PAGE_DONATE; ?>')">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/>
     </svg>
     <label>Donate</label>
   </div>
 
-  <div class="tile lime small" onclick="link('pid=12')">
+  <div class="tile lime small" onclick="link('pid=<?php echo PAGE_ABOUT; ?>')">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path d="M16.5 12c1.38 0 2.49-1.12 2.49-2.5S17.88 7 16.5 7C15.12 7 14 8.12 14 9.5s1.12 2.5 2.5 2.5zM9 11c1.66 0 2.99-1.34 2.99-3S10.66 5 9 5C7.34 5 6 6.34 6 8s1.34 3 3 3zm7.5 3c-1.83 0-5.5.92-5.5 2.75V19h11v-2.25c0-1.83-3.67-2.75-5.5-2.75zM9 13c-2.33 0-7 1.17-7 3.5V19h7v-2.25c0-.85.33-2.34 2.37-3.47C10.5 13.1 9.66 13 9 13z"/>
     </svg>
@@ -278,11 +277,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
   </div>
 
   <div class="tile top-bottom">
-    <div class="one green" onclick="link('pid=41')">
+    <div class="one green" onclick="link('pid=<?php echo PAGE_YEAR_OUT_ENERGY; ?>')">
       <p id="energy_delivered"></p>
      <label>Electricity delivered annually</label>
     </div>
-    <div class="two red" onclick="link('pid=40')">
+    <div class="two red" onclick="link('pid=<?php echo PAGE_YEAR_IN_ENERGY; ?>')">
       <p id="energy_used"></p>
       <label>Electricity used annually</label>
     </div>
@@ -299,7 +298,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 <div id="settings" class="sidebar">
   <div class="header">
     <label>Settings</label>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" onclick="closeSidebar(this)">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" onclick="closeSidebar('#settings')">
       <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
     </svg>
   </div>
@@ -343,124 +342,127 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
 <script>
   "use strict";
-  var e, i, data, filename = "<?php echo basename(__FILE__); ?>", loaded = false;
+  var data, filename = "<?php echo basename(__FILE__); ?>", loaded = false;
 
   // Format functions
-  function $ (e) {
-    if (e < 10) e = "0" + e;
-    return e
+  function formatNumber (number, precision, positivePlus) {
+    if (number == null) number = 0; if (precision == null) precision = 1; if (positivePlus == null) positivePlus = false;
+    var formatedNumber = number.toFixed(precision).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,").replace("-", "- ");
+    if (localStorage.format == "dutch") formatedNumber = formatedNumber.replace(/\./g, "#").replace(/\,/g, ".").replace(/#/g, ",");
+    if (positivePlus == true && number >= 0) formatedNumber = "+ " + formatedNumber;
+    return formatedNumber;
   }
-  function format_number (e, d) { e = Number(e);
-    if (d) { e = Math.round(e) } else { e = e.toFixed(1) }
-    e = String(e).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
-    if (localStorage.format == "dutch") e = e.replace(/\./g, "#").replace(/\,/g, ".").replace(/#/g, ",");
-    return e.replace("-", "- ");
+  function formatTemperature(kelvin) {
+    if (localStorage.temperature == "celcius") return formatNumber(kelvin - 273.15) + " &deg;C";
+    if (localStorage.temperature == "fahrenheit") return formatNumber(kelvin * 9/5 - 459.67) + " &deg;F";
+    if (localStorage.temperature == "kelvin") return formatNumber(kelvin) + " K";
   }
-  function format_time (d) { d = new Date(d), e = d.getHours();
-    if (localStorage.format == "dutch") return $(e) + ":" + $(d.getMinutes()) + ":" + $(d.getSeconds());
-    if (localStorage.format == "british") return $(e-(e>12?12:0)) + ":" + $(d.getMinutes()) + ":" + $(d.getSeconds()) + " " + ["AM", "PM"][e>12?1:0];
+  function formatGas(m3) {
+    if (localStorage.gas == "m3") return formatNumber(m3) + " m&sup3;";
+    if (localStorage.gas == "dm3") return formatNumber(m3 * 1000, 0) + " dm&sup3;";
   }
-  function format_date (d) { d = new Date(d);
-    return $(d.getDate()) + "-" + $(d.getMonth() + 1) + "-" + d.getFullYear();
+  function formatWindSpeed (mps) {
+     if (localStorage.wind_speed == "m/s") return formatNumber(mps) + " m/s";
+     if (localStorage.wind_speed == "mph") return formatNumber(mps * 2.237) + " mph";
+     if (localStorage.wind_speed == "km/h") return formatNumber(mps * 3.6) + " km/h";
   }
-  function format_temperature (k) {
-    if (localStorage.temperature == "celcius") return format_number(k - 273.15) + " &deg;C";
-    if (localStorage.temperature == "fahrenheit") return format_number(k * 9 / 5 - 459.67) + " &deg;F";
-    if (localStorage.temperature == "kelvin") return format_number(k) + " K";
+  function addNull (number) { return number < 10 ? "0" + number : number }
+  function formatDate (ms) {
+    var date = ms == null ? new Date() : new Date(ms);
+    if (localStorage.format == "dutch") return addNull(date.getDate()) + "-" + addNull(date.getMonth() + 1) + "-" + date.getFullYear();
+    if (localStorage.format == "british") return addNull(date.getDate()) + "/" + addNull(date.getMonth() + 1) + "/" + date.getFullYear();
   }
-  function format_gas (m3) {
-    if (localStorage.gas == "m3") return format_number(m3) + " m&sup3;";
-    if (localStorage.gas == "dm3") return format_number(m3 * 1000, true) + " dm&sup3;";
+  function formatTime (ms) {
+    var date = ms == null ? new Date() : new Date(ms);
+    if (localStorage.format == "dutch") return addNull(date.getHours()) + ":" + addNull(date.getMinutes()) + ":" + addNull(date.getSeconds());
+    if (localStorage.format == "british") return addNull(date.getHours() - (date.getHours() > 12 ? 12 : 0)) + ":" +
+      addNull(date.getMinutes()) + ":" + addNull(date.getSeconds()) + " " + ["AM", "PM"][date.getHours() > 12 ? 1 : 0];
   }
 
   // Settings localStorage update script
-  e = document.querySelectorAll("select, input");
-  for (i = 0; i < e.length; i++) {
-    if (localStorage[e[i].name]) {
-       e[i].value = localStorage[e[i].name];
+  var elements = document.querySelectorAll("#settings select, input");
+  for (var i = 0; i < elements.length; i++) {
+    if (localStorage[elements[i].name]) {
+       elements[i].value = localStorage[elements[i].name];
     } else {
-       localStorage[e[i].name] = e[i].value;
+       localStorage[elements[i].name] = elements[i].value;
     }
-    e[i].onchange = function () {
+    elements[i].onchange = function () {
       localStorage[this.name] = this.value;
+      updateDateTime();
       updateData();
     };
   }
 
   // Sidebar open and close support
   var shadow = document.querySelector(".shadow");
-
-  function openSidebar (e) {
+  function openSidebar (sidebar) {
     shadow.classList.remove("hidden");
-    document.querySelector(e).classList.add("open");
+    document.querySelector(sidebar).classList.add("open");
   }
-
-  function closeSidebar (e) {
+  function closeSidebar (sidebar) {
     shadow.classList.add("hidden");
-    e.parentNode.parentNode.classList.remove("open");
+    document.querySelector(sidebar).classList.remove("open");
   }
 
   // Function to update date and time tile
   function updateDateTime () {
-    e = new Date().getTime();
-    document.querySelector("#date").innerHTML = format_date(e);
-    document.querySelector("#time").innerHTML = format_time(e);
-    setTimeout(updateDateTime, 1000);
+    document.querySelector("#date").innerHTML = formatDate();
+    document.querySelector("#time").innerHTML = formatTime();
   }
-  updateDateTime();
+  function getDateTime () {
+    updateDateTime();
+    setTimeout(getDateTime, 1000);
+  }
+  getDateTime();
 
   // Function to get the data and put it in data var
   function getData () {
-    var e = new XMLHttpRequest();
-    e.onload = function () {
-      data = JSON.parse(e.responseText);
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+      data = JSON.parse(xhr.responseText);
       updateData();
-      if (!loaded) { loaded = true;
+      if (!loaded) {
+        loaded = true;
         document.querySelector(".loader").classList.add("hidden");
         document.querySelector(".grid").classList.remove("hidden");
       }
-      setTimeout(getData, 6e3);
+      setTimeout(getData, 6000);
     };
-    e.open("GET", filename + "?q=" + localStorage.weather_cityID);
-    e.send();
+    xhr.open("GET", filename + "?city=" + localStorage.weather_cityID);
+    xhr.send();
   }
   getData();
 
   // Function to update all data
   function updateData () {
-     e = data.weather.wind_speed;
-     if (localStorage.wind_speed == "m/s") e = format_number(e) + " m/s";
-     if (localStorage.wind_speed == "mph") e = format_number(e * 2.237) + " mph";
-     if (localStorage.wind_speed == "km/h") e = format_number(e * 3.6) + " km/h";
-     document.querySelector("#weather_wind_speed").innerHTML = e;
+     document.querySelector("#gas_today").innerHTML = formatGas(data.gas.today);
+     document.querySelector("#gas_used").innerHTML = formatGas(data.gas.used);
 
-     document.querySelector("#gas_today").innerHTML = format_gas(data.gas.today);
-     document.querySelector("#gas_used").innerHTML = format_gas(data.gas.used);
+     document.querySelector("#energy_co2").innerHTML = formatNumber(data.energy.co2) + " kg";
+     document.querySelector("#gas_co2").innerHTML = formatNumber(data.gas.co2) + " kg";
 
-     document.querySelector("#energy_co2").innerHTML = format_number(data.energy.co2) + " kg";
-     document.querySelector("#gas_co2").innerHTML = format_number(data.gas.co2) + " kg";
+     document.querySelector("#energy_delivered").innerHTML = formatNumber(data.energy.delivered, 0) + " kWh";
+     document.querySelector("#energy_used").innerHTML = formatNumber(data.energy.used, 0) + " kWh";
 
-     document.querySelector("#energy_delivered").innerHTML = format_number(data.energy.delivered, true) + " kWh";
-     document.querySelector("#energy_used").innerHTML = format_number(data.energy.used, true) + " kWh";
+     document.querySelector("#energy_now").classList.add(data.energy.now >= 0 ? "green" : "red");
+     document.querySelector("#energy_now_text").innerHTML = formatNumber(data.energy.now, 0, true) + " Watt";
 
-     e = data.energy.now;
-     document.querySelector("#energy_now").classList.add(e > 0 ? "green" : "red");
-     document.querySelector("#energy_now_text").innerHTML = (e > 0 ? "+ " : "") + format_number(e, true) + " Watt";
+     document.querySelector("#energy_today").classList.add(data.energy.today >= 0 ? "green" : "red");
+     document.querySelector("#energy_today_text").innerHTML = formatNumber(data.energy.today, 1, true) + " kWh";
 
-     e = data.energy.today;
-     document.querySelector("#energy_today").classList.add(e > 0 ? "green" : "red");
-     document.querySelector("#energy_today_text").innerHTML = (e > 0 ? "+ " : "") + format_number(e) + " kWh";
+     // Vars are null because this data is remove from PlaatEnergy and go to PlaatProtect thanks to wplaat
+     document.querySelector("#temperature").innerHTML = "PlaatProtect";
+     document.querySelector("#pressure").innerHTML = "PlaatProtect";
+     document.querySelector("#humidity").innerHTML = "PlaatProtect";
 
-     document.querySelector("#temperature").innerHTML = format_temperature(data.temperature);
-     document.querySelector("#pressure").innerHTML = format_number(data.pressure) + " hPa";
-     document.querySelector("#humidity").innerHTML = format_number(data.humidity) + " %";
-     document.querySelector("#weather_temperature").innerHTML = format_temperature(data.weather.temperature);
-     document.querySelector("#weather_pressure").innerHTML = format_number(data.weather.pressure) + " hPa";
-     document.querySelector("#weather_humidity").innerHTML = format_number(data.weather.humidity) + " %";
-     document.querySelector("#weather_clouds").innerHTML = format_number(data.weather.clouds) + " %";
-
-     document.querySelector("#weather_sunrise").innerHTML = format_time(data.weather.sunrise * 1e3);
-     document.querySelector("#weather_sunset").innerHTML = format_time(data.weather.sunset * 1e3);
+     document.querySelector("#weather_temperature").innerHTML = formatTemperature(data.weather.temperature);
+     document.querySelector("#weather_pressure").innerHTML = formatNumber(data.weather.pressure) + " hPa";
+     document.querySelector("#weather_humidity").innerHTML = formatNumber(data.weather.humidity) + " %";
+     document.querySelector("#weather_clouds").innerHTML = formatNumber(data.weather.clouds) + " %";
+     document.querySelector("#weather_wind_speed").innerHTML = formatWindSpeed(data.weather.wind_speed);
+     document.querySelector("#weather_sunrise").innerHTML = formatTime(data.weather.sunrise * 1000);
+     document.querySelector("#weather_sunset").innerHTML = formatTime(data.weather.sunset * 1000);
 
      if (localStorage.night_mode == "yes") {
        document.body.classList.add("night");
