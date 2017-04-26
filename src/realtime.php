@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
   // Connect to the database
   $db = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
-   // Array/object where response data stored
+  // Array/object where response data stored
   $json = [];
 
   // Get energy now
