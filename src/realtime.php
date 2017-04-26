@@ -18,14 +18,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
   // Connect to the database
   $db = new mysqli($dbhost, $dbuser, $dbpass, $dbname);
 
-  // Array/object where response data stored
+   // Array/object where response data stored
   $json = [];
 
-  // Query vars
-  $where = " WHERE timestamp>='" . date("Y-m-d 00:00:00") . "' and timestamp<='" . date("Y-m-d 23:59:59") . "' ORDER BY id DESC LIMIT 0,1";
-
   // Get energy now
-  $row = $db->query("SELECT power FROM energy1" . $where)->fetch_object();
+  $row = $db->query("SELECT power FROM energy1 WHERE timestamp>='" . date("Y-m-d 00:00:00") . "' and timestamp<='" . date("Y-m-d 23:59:59") . "' ORDER BY id DESC LIMIT 0,1")->fetch_object();
   $json["energy"]["now"] = (int)$row->power * -1; // W
 
   // Get energy / gas today
