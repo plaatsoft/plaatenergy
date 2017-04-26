@@ -215,12 +215,12 @@ function plaatenergy_home_login_page() {
 	
 	$page .= '<br/>';
    $page .= '<label>'.t('LABEL_USERNAME').'</label>';
-   $page .= '<input type="text" name="username" size="20" maxlength="20"/>';
+   $page .= '<input type="text" name="username" size="20" maxlength="20" autofocus/>';
    $page .= '<br/>';
 
    $page .= '<br/>';
    $page .= '<label>'.t('LABEL_PASSWORD').'</label>';
-   $page .= '<input type="password" name="password" size="20" autofocus/>';
+   $page .= '<input type="password" name="password" size="20"/>';
    $page .= '<br/>';
   
    $page .= '<div class="nav">';   
