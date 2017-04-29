@@ -377,7 +377,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
   }
 
   // Settings localStorage update script
-  var elements = document.querySelectorAll("#settings select, input");
+  var elements = document.querySelectorAll("#settings select, #settings input");
   for (var i = 0; i < elements.length; i++) {
     if (localStorage[elements[i].name]) {
        elements[i].value = localStorage[elements[i].name];
