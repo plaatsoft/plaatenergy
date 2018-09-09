@@ -13,7 +13,7 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2016 PlaatSoft
+**  All copyrights reserved (c) 2008-2018 PlaatSoft
 */
 
 /**
@@ -26,6 +26,18 @@
 ** NOTES
 ** ---------------------
 */
+$note[14] = '<div class="subparagraph">Version 1.4 (09-09-2018)</div>
+<div class="large_text">
+<ul>
+<li>Add support for Landis e350 energy meter.</li>
+<li>Add energy1_detail table to measure 3 phases (voltage, current and power) of 380VAC connection.</li>
+<li>Add voltage day chart.</li>
+<li>Add current day chart.</li>
+<li>Add power day chart.</li>
+<li>Add extra energy setting to switch on/off detail information.</li>
+</ul>
+</div>';
+
 $note[13] = '<div class="subparagraph">Version 1.3 (30-09-2016)</div>
 <div class="large_text">
 <ul>

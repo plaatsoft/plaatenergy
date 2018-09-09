@@ -119,6 +119,11 @@ $lang['LINK_IMPORT_EXPORT'] = i('download') .'Export Data';
 $lang['LINK_DELETE']        = i('remove').'Delete'; 
 $lang['LINK_CO2'] 			 = i('cloud').'CO<sub>2</sub>'; 
 
+$lang['LINK_IN_VOLTAGE']     = i('bar-chart').'Voltage';
+$lang['LINK_IN_CURRENT']     = i('bar-chart').'Current';
+$lang['LINK_IN_POWER']     = i('bar-chart').'Power';
+
+
 /*
 ** ------------------
 ** HOME
@@ -139,7 +144,7 @@ $lang['YEAR_REPORT'] = 'Year Reports';
 $lang['MONTH_REPORT'] = 'Month Reports';
 $lang['DAY_REPORT'] = 'Day Reports';
 $lang['WEATHER_REPORT'] = 'Weather Reports';
-$lang['OTHER_REPORT'] = 'Other';
+$lang['OTHER_REPORT'] = 'Other Reports';
 
 $lang['NO_MEASUREMENT_ERROR'] = 'No measurement received lately!';
 
@@ -226,6 +231,14 @@ $lang['MIN_MAX_TEMPERATURE'] = 'Minimum temperature = %s &deg;C | Maximum temper
 $lang['MIN_MAX_HUMIDITY'] = 'Minimum humidity = %s % | Maximum humidity = %s %';
 $lang['MIN_MAX_PRESSURE'] = 'Minimum pressure = %s hPa  | Maximum pressure = %s hPa';
 
+$lang['TITLE_VOLTAGE'] = 'Voltage per phase - %s %s-%s-%s';
+$lang['TITLE_CURRENT'] = 'Current per phase - %s %s-%s-%s';
+$lang['TITLE_POWER'] = 'Power per phase - %s %s-%s-%s';
+
+$lang['PHASE_1'] = 'Phase 1';
+$lang['PHASE_2'] = 'Phase 2';
+$lang['PHASE_3'] = 'Phase 3';
+
 /*
 ** ------------------
 ** OTHERS
@@ -307,6 +320,7 @@ $lang['energy_meter_vendor'] = 'Energy meter vendor';
 $lang['energy_price'] = 'Energy price per kwh';
 $lang['energy_use_forecast'] = 'Energy use annual forecast (kWh)';
 $lang['energy_delivery_forecast'] = 'Energy delivery annual forecast (kWh)';
+$lang['energy_store_details'] = 'Store Voltage, Current and Power per phase in database';
 
 $lang['solar_description'] = 'Solar description (comments field)';
 $lang['solar_meter_present'] = 'Solar converter present';
@@ -316,6 +330,7 @@ $lang['solar_meter_port'] = 'Solar converter TCP port number';
 $lang['solar_meter_serial_number'] = 'Solar converter serial number';
 $lang['solar_initial_meter_reading'] = 'Solar converter initial meter reading (kWh)';
 $lang['solar_peak_power'] = 'Solar converter peak power (Wp)';
+
 
 $lang['gas_meter_present' ] = 'Gas meter present';
 $lang['gas_price' ] = 'Gas price per m&sup3;';

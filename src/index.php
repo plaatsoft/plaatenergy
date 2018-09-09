@@ -356,6 +356,23 @@ switch ($pid) {
 		
 	// ---------------------------------
 
+	case PAGE_DAY_IN_VOLTAGE:
+		include "day_in_voltage.php";
+		$page = plaatenergy_in_voltage();
+		break;
+		
+	case PAGE_DAY_IN_CURRENT:
+		include "day_in_current.php";
+		$page = plaatenergy_in_current();
+		break;
+		
+	case PAGE_DAY_IN_POWER:
+		include "day_in_power.php";
+		$page = plaatenergy_in_power();
+		break;
+		
+	// ---------------------------------
+
 }
 
 

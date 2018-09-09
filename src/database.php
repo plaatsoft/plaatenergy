@@ -326,9 +326,15 @@ function plaatenergy_db_check_version() {
       plaatenergy_db_execute_sql_file($version);
    }
 	
-	// Execute SQL patch script v1.3 if needed
+   // Execute SQL patch script v1.3 if needed
    if ($version=="1.2")  {
 		$version="1.3";
+      plaatenergy_db_execute_sql_file($version);
+   }
+   
+   // Execute SQL patch script v1.4 if needed
+   if ($version=="1.3")  {
+		$version="1.4";
       plaatenergy_db_execute_sql_file($version);
    }
 }

@@ -77,6 +77,10 @@ define('PAGE_DAY_PRESSURE',         70);
 define('PAGE_DAY_TEMPERATURE',      71);
 define('PAGE_DAY_HUMIDITY',         72);
 
+define('PAGE_DAY_IN_VOLTAGE',       80);
+define('PAGE_DAY_IN_CURRENT',       81);
+define('PAGE_DAY_IN_POWER',         82);
+
 /*
 ** -----------
 ** EVENTS

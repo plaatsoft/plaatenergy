@@ -119,6 +119,9 @@ $lang['LINK_IMPORT_EXPORT']  = i('download') .'Export Data';
 $lang['LINK_DELETE']         = i('remove').'Verwijderen'; 
 $lang['LINK_CO2'] 			 =  i('cloud').'CO<sub>2</sub>'; 
 
+$lang['LINK_IN_VOLTAGE']     = i('bar-chart').'Voltage';
+$lang['LINK_IN_CURRENT']     = i('bar-chart').'Ampere';
+$lang['LINK_IN_POWER']     = i('bar-chart').'Vermogen';
 /*
 ** ------------------
 ** HOME
@@ -226,6 +229,14 @@ $lang['MIN_MAX_TEMPERATURE'] = 'Minimale temperatuur = %s &deg;C | Maximale temp
 $lang['MIN_MAX_HUMIDITY'] = 'Minimale vochtigheid = %s % | Maximale vochtigheid = %s %';
 $lang['MIN_MAX_PRESSURE'] = 'Minimale luchtdruk = %s hPa  | Maximale luchtdruk = %s hPa';
 
+$lang['TITLE_VOLTAGE'] = 'Voltage per fase - %s %s-%s-%s';
+$lang['TITLE_CURRENT'] = 'Ampere per fase - %s %s-%s-%s';
+$lang['TITLE_POWER'] = 'Vermogen per fase - %s %s-%s-%s';
+
+$lang['PHASE_1'] = 'Fase 1';
+$lang['PHASE_2'] = 'Fase 2';
+$lang['PHASE_3'] = 'Fase 3';
+
 /*
 ** ------------------
 ** OTHERS
@@ -312,6 +323,7 @@ $lang['meter_reading_used_low'] = 'Start meterstand - afgenomen laag (kwh)';
 $lang['meter_reading_used_normal'] = 'Start meterstand - afgenomen normaal (kwh)';
 $lang['meter_reading_delivered_low'] = 'Start meterstand - geleverd laag (kwh)';
 $lang['meter_reading_delivered_normal'] = 'Start meterstand - geleverd normaal (kwh)';
+$lang['energy_store_details'] = 'Bewaar spanning, ampere en vermogen per fase in database';
 
 $lang['solar_description'] = 'Solar converter beschrijving';
 $lang['solar_meter_present'] = 'Solar converter aanwezig';
