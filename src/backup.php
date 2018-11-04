@@ -39,7 +39,6 @@ function plaatenergy_cleanup_old_data() {
 	for ($y=1; $y<=12; $y++) {		
 		for ($i=1; $i<5; $i++) {
 			$query= 'delete from solar1 where MINUTE(timestamp)='.$count.' and timestamp<DATE_SUB(NOW(),INTERVAL 1 YEAR)';
-			echo $query."\r\n";	
 			plaatenergy_db_query($query);			
 			$count++;
 		}	
@@ -47,7 +46,6 @@ function plaatenergy_cleanup_old_data() {
 	}
 	
 	$query= 'OPTIMIZE TABLE solar1';
-	echo $query."\r\n";	
 	plaatenergy_db_query($query);	
 	
 	// cleanup solar2 table
@@ -55,7 +53,6 @@ function plaatenergy_cleanup_old_data() {
 	for ($y=1; $y<=12; $y++) {		
 		for ($i=1; $i<5; $i++) {
 			$query= 'delete from solar2 where MINUTE(timestamp)='.$count.' and timestamp<DATE_SUB(NOW(),INTERVAL 1 YEAR)';
-			echo $query."\r\n";	
 			plaatenergy_db_query($query);			
 			$count++;
 		}	
@@ -63,7 +60,6 @@ function plaatenergy_cleanup_old_data() {
 	}
 	
 	$query= 'OPTIMIZE TABLE solar2';
-	echo $query."\r\n";	
 	plaatenergy_db_query($query);	
 	
 	// cleanup solar3 table
@@ -71,7 +67,6 @@ function plaatenergy_cleanup_old_data() {
 	for ($y=1; $y<=12; $y++) {		
 		for ($i=1; $i<5; $i++) {
 			$query= 'delete from solar3 where MINUTE(timestamp)='.$count.' and timestamp<DATE_SUB(NOW(),INTERVAL 1 YEAR)';
-			echo $query."\r\n";	
 			plaatenergy_db_query($query);			
 			$count++;
 		}	
@@ -79,7 +74,6 @@ function plaatenergy_cleanup_old_data() {
 	}
 	
 	$query= 'OPTIMIZE TABLE solar3';
-	echo $query."\r\n";	
 	plaatenergy_db_query($query);	
 		
 	// cleanup energy1 table
@@ -87,7 +81,6 @@ function plaatenergy_cleanup_old_data() {
 	for ($y=1; $y<=12; $y++) {		
 		for ($i=1; $i<5; $i++) {
 			$query= 'delete from energy1 where MINUTE(timestamp)='.$count.' and timestamp<DATE_SUB(NOW(),INTERVAL 1 YEAR)';
-			echo $query."\r\n";	
 			plaatenergy_db_query($query);			
 			$count++;
 		}	
@@ -95,7 +88,6 @@ function plaatenergy_cleanup_old_data() {
 	}
 	
 	$query= 'OPTIMIZE TABLE energy1';
-	echo $query."\r\n";	
 	plaatenergy_db_query($query);	
 }
 
@@ -145,14 +137,13 @@ function plaatenergy_backup_event() {
 	system($command);
 }
 
-
 plaatenergy_db_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 plaatenergy_cleanup_old_data();
 
-//plaatenergy_cleanup_old_backups();
+plaatenergy_cleanup_old_backup_files();
 
-//plaatenergy_backup_event();
+plaatenergy_backup_event();
 
 plaatenergy_db_close();
 
