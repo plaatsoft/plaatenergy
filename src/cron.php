@@ -13,7 +13,7 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2016 PlaatSoft
+**  All copyrights reserved (c) 2008-2018 PlaatSoft
 */
 
 /**
@@ -78,6 +78,8 @@ if ($weather_station_present=="true") {
 }
 
 plaatenergy_db_process(EVENT_PROCESS_TODAY);
+
+
 
 plaatenergy_db_close();
 

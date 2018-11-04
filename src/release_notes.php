@@ -30,6 +30,7 @@ $note[15] = '<div class="subparagraph">Version 1.5 (04-11-2018)</div>
 <div class="large_text">
 <ul>
 <li>Add feature to edit manual solar month history.</li>
+<li>Add cron backup script which aggregrate data older then 1 year.</li>
 </ul>
 </div>';
 

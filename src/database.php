@@ -13,7 +13,7 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2016 PlaatSoft
+**  All copyrights reserved (c) 2008-2018 PlaatSoft
 */
 
 /**
@@ -335,6 +335,12 @@ function plaatenergy_db_check_version() {
    // Execute SQL patch script v1.4 if needed
    if ($version=="1.3")  {
 		$version="1.4";
+      plaatenergy_db_execute_sql_file($version);
+   }
+   
+   // Execute SQL patch script v1.5 if needed
+   if ($version=="1.4")  {
+		$version="1.5";
       plaatenergy_db_execute_sql_file($version);
    }
 }
