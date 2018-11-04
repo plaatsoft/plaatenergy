@@ -140,8 +140,8 @@ $out_forecast = array(0,50/2550,100/2550,210/2550,310/2550,360/2550,360/2550,330
 // Gas use forecast (per month)
 $gas_forecast = array(0,250/1500,220/1500,180/1500,110/1500,60/1500,40/1500,30/1500,30/1500,50/1500,110/1500,190/1500,230/1500);
 
-// Energy co2 emission = Generate 1kWh electricity generate 0.526 kg co2
-$kwh_to_co2_factor = 0.526;
+// Energy co2 emission = Generate 1kWh electricity generate 0.997 kg co2
+$kwh_to_co2_factor = 0.997;
 
 // Burning 1m3 gas results in 1.78 kg CO2 emission
 $m3_to_co2_factor = 1.78;

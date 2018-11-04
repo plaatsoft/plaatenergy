@@ -13,7 +13,7 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2016 PlaatSoft
+**  All copyrights reserved (c) 2008-2018 PlaatSoft
 */
 
 /**
@@ -69,6 +69,8 @@ function plaatenergy_year_out_energy_page() {
 		$total = 0;
 	
 		if ( isset($row1->solar_delivered)) {
+		
+			// Use realtime solar information
 			$count++;
 			
 			$delivered_low = $row1->low_delivered;
@@ -78,7 +80,23 @@ function plaatenergy_year_out_energy_page() {
 				$delivered_local=$tmp;
 			}
 			$total = $delivered_low + $delivered_normal + $delivered_local;
+		
+		} else {
+		   
+		    // if realtime information is not there. Check if there is solar history information available
+			$sql2  = 'select energy from solar_history where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+			$result2 = plaatenergy_db_query($sql2);
+			$row2 = plaatenergy_db_fetch_object($result2);
+			
+			if ( isset($row2->energy)) { 
+			
+				$count++;
+				
+				$delivered_local=$row2->energy;
+				$total = $delivered_local;
+			}
 		}
+		
 		$total_forecast = $out_forecast[$m] * $energy_delivery_forecast;
 
 		if (strlen($data)>0) {
@@ -171,16 +189,15 @@ function plaatenergy_year_out_energy_page() {
 	$page .= '<div class="remark">';
 	if ($count>0) {
 		if ($eid==EVENT_KWH) {
-			
-			$sql  = 'select count(date) as days from energy_summary where date>="'.$year.'-1-1" and date<="'.$year.'-12-31"';
-			$result = plaatenergy_db_query($sql);
-			$row = plaatenergy_db_fetch_object($result);
 						
-			$days = 0;
-			if (isset($row->days)) {
-				$days = $row->days;
+			$earlier = new DateTime($year."-01-01");
+			if ($year!=date("Y")) {		
+				$later = new DateTime($year."-12-31");
+			} else {
+			    $later = new DateTime($date);
 			}
-					
+			$days = $later->diff($earlier)->format("%a");
+			
 			$solar_peak_power1 = plaatenergy_db_get_config_item('solar_peak_power', SOLAR_METER_1);
 			$solar_peak_power2 = plaatenergy_db_get_config_item('solar_peak_power', SOLAR_METER_2);
 			$solar_peak_power3 = plaatenergy_db_get_config_item('solar_peak_power', SOLAR_METER_3);
@@ -244,5 +261,3 @@ function plaatenergy_year_out_energy() {
 */
 
 ?>
-
-

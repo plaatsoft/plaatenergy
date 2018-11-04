@@ -49,51 +49,73 @@ function plaatenergy_years_out_energy_page() {
 	$total_price = 0;
 	$total_co2 = 0;
 	$total_max = 0;
-	$count = 0;
+	$year_count = 0;
 	$data = "";
 	
 	for($y=($year-10); $y<=$year; $y++) {
 	
-		$time = mktime(0, 0, 0, 1, 1, $y);
-		$timestamp1 = date('Y-1-1', $time);
-		$timestamp2 = date('Y-12-t', $time);
-	
-		$sql1  = 'select sum(low_delivered) as low_delivered, sum(normal_delivered) as normal_delivered, ';
-		$sql1 .= 'sum(solar_delivered) as solar_delivered from energy_summary ';
-		$sql1 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
-	
-		$result1 = plaatenergy_db_query($sql1);
-		$row1 = plaatenergy_db_fetch_object($result1);
-
-		$delivered_low=0;
-		$delivered_normal=0;
-		$delivered_local=0;
+		$delivered_low_total = 0;
+		$delivered_normal_total = 0;
+		$delivered_local_total = 0;		
 		$total = 0;
+		$forecast_factor = 0;
+		$month_count = 0;
+		
+		for($m=1; $m<=12; $m++) {
+
+			$delivered_low = 0;
+			$delivered_normal = 0;
+			$delivered_local = 0;
+					
+			$time=mktime(0, 0, 0, $m, 1, $y);
+			$timestamp1=date('Y-m-0 00:00:00', $time);
+			$timestamp2=date('Y-m-t 23:59:59', $time);
+		
+			$sql1  = 'select sum(low_delivered) as low_delivered, sum(normal_delivered) as normal_delivered, ';
+			$sql1 .= 'sum(solar_delivered) as solar_delivered from energy_summary ';
+			$sql1 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+		
+			$result1 = plaatenergy_db_query($sql1);
+			$row1 = plaatenergy_db_fetch_object($result1);
 	
-		if ( isset($row1->solar_delivered)) {
-			$count++;
+			if ( isset($row1->solar_delivered)) {		
+				// Use realtime solar information
+				
+				$month_count++;			
+				$delivered_low = $row1->low_delivered;
+				$delivered_normal = $row1->normal_delivered;
+				$tmp = $row1->solar_delivered - $delivered_low -$delivered_normal;
+				if ($tmp >0 ) {
+					$delivered_local=$tmp;
+				}				
+				$forecast_factor += $out_forecast[$m];
+
+			} else {			
+				// if realtime information is not there. Check if there is solar history information available
+				
+				$sql2  = 'select energy from solar_history where date>="'.$timestamp1.'" and date<="'.$timestamp2.'"';
+				$result2 = plaatenergy_db_query($sql2);
+				$row2 = plaatenergy_db_fetch_object($result2);
+				
+				if ( isset($row2->energy)) { 				
+					$month_count++;									
+					$delivered_local=$row2->energy;					
+					$forecast_factor += $out_forecast[$m];
+				}
+			}
 			
-			$delivered_low = $row1->low_delivered;
-			$delivered_normal = $row1->normal_delivered;
-			$tmp = $row1->solar_delivered - $delivered_low -$delivered_normal;
-			if ($tmp >0 ) {
-				$delivered_local=$tmp;
-			}
-			$total = $delivered_low + $delivered_normal + $delivered_local;
+			$delivered_low_total += $delivered_low;
+			$delivered_normal_total += $delivered_normal;
+			$delivered_local_total += $delivered_local;
+				
+			$total += $delivered_low + $delivered_normal + $delivered_local;			
 		}
-	
-		$sql2  = 'select month(date) as month from energy_summary ';
-		$sql2 .= 'where date>="'.$timestamp1.'" and date<="'.$timestamp2.'" ';
-		$sql2 .= 'group by month ';
-		$result2 = plaatenergy_db_query($sql2);
-	
-		$forecast_total=0;
-		while ($row2 = plaatenergy_db_fetch_object($result2)) {
-			if (isset($row2->month)) {
-				$forecast_total += $out_forecast[$row2->month];
-			}
+
+		if ($month_count>0) {
+			$year_count ++;
 		}
-		$forecast_total = $forecast_total*$energy_delivery_forecast;
+		
+		$forecast_total = $forecast_factor * $energy_delivery_forecast;
 	
 		if (strlen($data)>0) {
 			$data.=',';
@@ -102,13 +124,13 @@ function plaatenergy_years_out_energy_page() {
 		$price2 = $total * $energy_price;
 		$data .= "['".date("Y", $time)."',";
 		if ($eid==EVENT_KWH) {	
-			$data .= round($delivered_low,2).',';
-			$data .= round($delivered_normal,2).',';
-			$data .= round($delivered_local,2).',';
+			$data .= round($delivered_low_total,2).',';
+			$data .= round($delivered_normal_total,2).',';
+			$data .= round($delivered_local_total,2).',';
 			$data .= round($forecast_total,2).']';
 			
 		} else if ($eid==EVENT_CO2) {
-			$data .= round(($delivered_low + $delivered_normal + $delivered_local)*$kwh_to_co2_factor,2).',';
+			$data .= round(($delivered_low_total + $delivered_normal_total + $delivered_local_total)*$kwh_to_co2_factor,2).',';
 			$data .= round(($forecast_total*$kwh_to_co2_factor),2).']';
 			
 		} else { 
@@ -221,13 +243,13 @@ function plaatenergy_years_out_energy_page() {
 	$page .= '<div id="chart_div" style="'.plaatenergy_db_get_config_item('chart_dimensions',LOOK_AND_FEEL).'"></div>';
 
 	$page .= '<div class="remark">';
-	if ($count>0) {
+	if ($year_count>0) {
 		if ($eid==EVENT_KWH) {
-			$page .= t('AVERAGE_PER_YEAR_KWH', round(($total_sum/$count),2), round($total_sum,2));
+			$page .= t('AVERAGE_PER_YEAR_KWH', round(($total_sum/$year_count),2), round($total_sum,2));
 		} else if ($eid==EVENT_CO2) {
-			$page .= t('AVERAGE_PER_YEAR_CO2_REDUCTION', round(($total_co2/$count),2), round($total_co2,2));			
+			$page .= t('AVERAGE_PER_YEAR_CO2_REDUCTION', round(($total_co2/$year_count),2), round($total_co2,2));			
 		} else {
-			$page .= t('AVERAGE_PER_YEAR_EURO', round(($total_price/$count),2), round($total_price,2));
+			$page .= t('AVERAGE_PER_YEAR_EURO', round(($total_price/$year_count),2), round($total_price,2));
 		}
 	} else {
 		$page .= '&nbsp;';
@@ -238,7 +260,6 @@ function plaatenergy_years_out_energy_page() {
 
 	return $page;
 }
-
 
 /*
 ** ---------------------
