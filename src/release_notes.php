@@ -26,6 +26,13 @@
 ** NOTES
 ** ---------------------
 */
+$note[15] = '<div class="subparagraph">Version 1.5 (04-11-2018)</div>
+<div class="large_text">
+<ul>
+<li>Add feature to edit manual solar month history.</li>
+</ul>
+</div>';
+
 $note[14] = '<div class="subparagraph">Version 1.4 (09-09-2018)</div>
 <div class="large_text">
 <ul>
