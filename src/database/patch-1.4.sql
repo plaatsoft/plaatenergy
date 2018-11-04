@@ -36,4 +36,4 @@ ALTER TABLE `energy1_details` MODIFY `pid` int(11) NOT NULL AUTO_INCREMENT;
 
 INSERT INTO config (category, token, value, options, date, readonly, rebuild, encrypt) VALUES (21, 'energy_store_details', 'false', 'true,false', SYSDATE(), 0, 0, 0);
 
-UPDATE `config` SET `options` = 'kaifa,landis,kamstrup,landis-e350' WHERE `config`.`id` = 21;
+UPDATE `config` SET `options` = 'kaifa,landis,kamstrup,landis-e350' WHERE token = 'energy_meter_vendor';
