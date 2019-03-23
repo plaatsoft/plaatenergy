@@ -203,13 +203,15 @@ function plaatenergy_db_get_session($ip, $new=false) {
 		if (($new==true) || ((time()-strtotime($data->timestamp))>(60*15))) {		
 			$session_id = md5(date('Y-m-d H:i:s'));
 		}
-			   
-		$sql = 'update session set timestamp=SYSDATE(), session_id="'.$session_id.'", requests='.++$requests.' where sid="'.$data->sid.'"';
-	   plaatenergy_db_query($sql);
+
+		$now = date('Y-m-d H:i:s');
+		$sql = 'update session set timestamp="'.$now.'", session_id="'.$session_id.'", requests='.++$requests.' where sid="'.$data->sid.'"';
+	    plaatenergy_db_query($sql);
 	  
    } else {
 
-		$sql = 'insert into session (timestamp, ip, requests, language, theme, session_id) value (SYSDATE(), "'.$ip.'", 1, "en", "light", "'.$session_id.'")';
+		$now = date('Y-m-d H:i:s');
+		$sql = 'insert into session (timestamp, ip, requests, language, theme, session_id) value ("'.$now.'", "'.$ip.'", 1, "en", "light", "'.$session_id.'")';
 		plaatenergy_db_query($sql);
 	}
 
@@ -341,6 +343,12 @@ function plaatenergy_db_check_version() {
    // Execute SQL patch script v1.5 if needed
    if ($version=="1.4")  {
 		$version="1.5";
+      plaatenergy_db_execute_sql_file($version);
+   }
+   
+   // Execute SQL patch script v1.6 if needed
+   if ($version=="1.5")  {
+		$version="1.6";
       plaatenergy_db_execute_sql_file($version);
    }
 }

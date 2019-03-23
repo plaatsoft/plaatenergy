@@ -26,6 +26,13 @@
 ** NOTES
 ** ---------------------
 */
+$note[16] = '<div class="subparagraph">Version 1.6 (23-03-2019)</div>
+<div class="large_text">
+<ul>
+<li>Bugfix: To support special timezones.</li>
+</ul>
+</div>';
+
 $note[15] = '<div class="subparagraph">Version 1.5 (04-11-2018)</div>
 <div class="large_text">
 <ul>
