@@ -368,7 +368,7 @@ function plaatenergy_db_process($type) {
 	$low_delivered = plaatenergy_db_get_config_item('meter_reading_delivered_low', ENERGY_METER_1);
 	$normal_delivered = plaatenergy_db_get_config_item('meter_reading_delivered_normal', ENERGY_METER_1);
 	$gas_used = plaatenergy_db_get_config_item('meter_reading_used_gas', GAS_METER_1);
-   $solar_delivered_1 = plaatenergy_db_get_config_item('solar_initial_meter_reading', SOLAR_METER_1);
+    $solar_delivered_1 = plaatenergy_db_get_config_item('solar_initial_meter_reading', SOLAR_METER_1);
 	$solar_delivered_2 = plaatenergy_db_get_config_item('solar_initial_meter_reading', SOLAR_METER_2);
 	$solar_delivered_3 = plaatenergy_db_get_config_item('solar_initial_meter_reading', SOLAR_METER_3);
 	
