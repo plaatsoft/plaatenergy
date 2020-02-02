@@ -86,13 +86,13 @@ function check_solar_converter($index) {
 	
 		if ($count>0){
 
-			$page  = '<div class="checker good">';
+			$page  = '<div class="checker good box">';
 			$page .= t('SOLAR_METER_'.$index.'_CONNECTION_UP');
 			$page .='</div>';
 
 		} else {
 
-			$page = '<div class="checker bad" title="'.t('NO_MEASUREMENT_ERROR').'">';
+			$page = '<div class="checker bad box" title="'.t('NO_MEASUREMENT_ERROR').'"';
 			$page .= t('SOLAR_METER_'.$index.'_CONNECTION_DOWN');	
 			$page .='</div>';
 		}
@@ -119,13 +119,13 @@ function check_energy_meter($index) {
 	
 		 if ($count>0){
 		 
-			$page  = '<div class="checker good">';
+			$page  = '<div class="checker good box">';
 			$page .= t('ENERGY_METER_'.$index.'_CONNECTION_UP');
 			$page .= '</div>';
 			
 		} else {
 		
-			$page = '<div class="checker bad" title="'.t('NO_MEASUREMENT_ERROR').'">';
+			$page = '<div class="checker bad box" title="'.t('NO_MEASUREMENT_ERROR').'">';
 			$page .= t('ENERGY_METER_'.$index.'_CONNECTION_DOWN');
 			$page .= '</div>';
 		}
@@ -152,13 +152,13 @@ function check_weather_station() {
 		
 		if ($count>0){
 		 
-			$page  = '<div class="checker good">';
+			$page  = '<div class="checker good box">';
 			$page .= t('WEATHER_METER_CONNECTION_UP');
 			$page .= '</div>';
 			
 		} else {
 		
-			$page = '<div class="checker bad" title="'.t('NO_MEASUREMENT_ERROR').'">';
+			$page = '<div class="checker bad box" title="'.t('NO_MEASUREMENT_ERROR').'">';
 			$page .= t('WEATHER_METER_CONNECTION_DOWN');
 			$page .= '</div>';
 		}
@@ -265,189 +265,91 @@ function plaatenergy_home_page() {
 	$page .= '<script type="text/javascript" src="js/version1.js"></script>';
 
 	$page .= '<div class="home">';
-	$page .= '<table>';
-
-	$page .= '<tr>';
-	$page .= '<th>'.t('YEARS_REPORT').'</th>';
-	$page .= '<th>'.t('YEAR_REPORT').'</th>';
-	$page .= '<th>'.t('MONTH_REPORT').'</th>';
-	$page .= '<th>'.t('DAY_REPORT').'</th>';
-	
-	if ($weather_station_present=="true") { 	
-		$page .= '<th>'.t('OTHER_REPORT').'</th>';   
-	}
-	$page .= '</tr>';
-	
+		
 	if ($energy_meter_present=="true") { 	
-		$page .= '<tr>';
-		$page .= '<td>';
+	
+		$page .= '<div class="menu">';
+	
 		$page .= plaatenergy_link('pid='.PAGE_YEARS_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
-		$page .= '</td>';
-		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_YEAR_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
-		$page .= '</td>';
-		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_MONTH_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
-		$page .= '</td>';
-		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_DAY_IN_ENERGY.'&eid='.EVENT_KWH, t('LINK_IN_ENERGY'));
-		$page .= '</td>';
+
 		if ($weather_station_present=="true") { 
-			$page .= '<td>';
 			$page .= plaatenergy_link('pid='.PAGE_DAY_PRESSURE, t('LINK_PRESSURE'));
-			$page .= '</td>';
 		}
-		$page .= '</tr>';
+		$page .= '</div>';
+	}
+
+	if ($solar_meter_present=="true") { 
+	
+		$page .= '<div class="menu">';
+	
+		$page .= plaatenergy_link('pid='.PAGE_YEARS_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
+		$page .= plaatenergy_link('pid='.PAGE_YEAR_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
+		$page .= plaatenergy_link('pid='.PAGE_MONTH_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
+		$page .= plaatenergy_link('pid='.PAGE_DAY_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
 		
-		if ($energy_store_details=="true") { 	
-		
-			$page .= '<tr>';
-			$page .= '<td>';
-			$page .= '</td>';
-			$page .= '<td>';
-			$page .= '</td>';
-			$page .= '<td>';
-			$page .= '</td>';
-			$page .= '<td>';
-			$page .= plaatenergy_link('pid='.PAGE_DAY_IN_VOLTAGE, t('LINK_IN_VOLTAGE'));
-			$page .= '</td>';
-			$page .= '<td>';
-			$page .= '</td>';
-			$page .= '</tr>';		
-			
-			$page .= '<tr>';
-			$page .= '<td>';
-			$page .= '</td>';
-			$page .= '<td>';
-			$page .= '</td>';
-			$page .= '<td>';
-			$page .= '</td>';
-			$page .= '<td>';
-			$page .= plaatenergy_link('pid='.PAGE_DAY_IN_CURRENT, t('LINK_IN_CURRENT'));
-			$page .= '</td>';
-			$page .= '<td>';
-			$page .= '</td>';
-			$page .= '</tr>';		
-			
-			$page .= '<tr>';
-			$page .= '<td>';
-			$page .= '</td>';
-			$page .= '<td>';
-			$page .= '</td>';
-			$page .= '<td>';
-			$page .= '</td>';
-			$page .= '<td>';
-			$page .= plaatenergy_link('pid='.PAGE_DAY_IN_POWER, t('LINK_IN_POWER'));
-			$page .= '</td>';
-			$page .= '<td>';
-			$page .= '</td>';
-			$page .= '</tr>';		
-		}
+		$page .= '</div>';
 	}
 	
-	if ($solar_meter_present=="true") { 
-		$page .= '<tr>';
-		$page .= '<td>';
-		$page .= plaatenergy_link('pid='.PAGE_YEARS_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
-		$page .= '</td>';
-		$page .= '<td>';
-		$page .= plaatenergy_link('pid='.PAGE_YEAR_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
-		$page .= '</td>';
-		$page .= '<td>';
-		$page .= plaatenergy_link('pid='.PAGE_MONTH_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
-		$page .= '</td>';
-		$page .= '<td>';
-		$page .= plaatenergy_link('pid='.PAGE_DAY_OUT_ENERGY.'&eid='.EVENT_KWH, t('LINK_OUT_ENERGY'));
-		$page .= '</td>';
-		if ($weather_station_present=="true") { 
-			$page .= '<td>';
-			$page .= plaatenergy_link('pid='.PAGE_DAY_TEMPERATURE, t('LINK_TEMPERATURE'));
-			$page .= '</td>';
-		}
-		$page .= '</tr>';
-	}
-
 	if ($gas_meter_present=="true") { 
-		$page .= '<tr>';
-		$page .= '<td>';
+	
+		$page .= '<div class="menu">';
+		
 		$page .= plaatenergy_link('pid='.PAGE_YEARS_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
-		$page .= '</td>';
-		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_YEAR_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
-		$page .= '</td>';
-		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_MONTH_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
-		$page .= '</td>';
-		$page .= '<td>';
 		$page .= plaatenergy_link('pid='.PAGE_DAY_IN_GAS.'&eid='.EVENT_M3, t('LINK_IN_GAS'));
-		$page .= '</td>';
-		if ($weather_station_present=="true") { 
-			$page .= '<td>';
-			$page .= plaatenergy_link('pid='.PAGE_DAY_HUMIDITY, t('LINK_HUMIDITY'));
-	   $page .= '</td>';
-		}
-		$page .= '</tr>';
+		
+		$page .= '</div>';
 	}
-		
-	$page .= '</table>';
+	
+	$page .= '</br>';
+	
+	if ($energy_store_details=="true") { 	
 
-	$page .= '<table>';
-	$page .= '<tr>';
-	$page .= '<th width="25%"></th>';
-	$page .= '<th width="25%"></th>';
-	$page .= '<th width="25%"></th>';
-	$page .= '<th width="25%"></th>';
-	$page .= '</tr>';
+		$page .= '<div class="menu">';
 		
-	$page .= '<tr>';
-	$page .= '<td>';
-	$page .= '&nbsp;';
-	$page .= '</td>';				
-	$page .= '<td>';
+		$page .= plaatenergy_link('pid='.PAGE_DAY_IN_VOLTAGE, t('LINK_IN_VOLTAGE'));
+		$page .= plaatenergy_link('pid='.PAGE_DAY_IN_CURRENT, t('LINK_IN_CURRENT'));
+		$page .= plaatenergy_link('pid='.PAGE_DAY_IN_POWER, t('LINK_IN_POWER'));
+		
+		$page .= '</div>';
+	}
+	
+	
+		
+	if ($weather_station_present=="true") { 
+	
+		$page .= '<div class="menu">';
+		
+		$page .= plaatenergy_link('pid='.PAGE_DAY_TEMPERATURE, t('LINK_TEMPERATURE'));
+		$page .= plaatenergy_link('pid='.PAGE_DAY_HUMIDITY, t('LINK_HUMIDITY'));
+		
+		$page .= '</div>';
+	}
+	
+	$page .= '<div class="menu">';
 	$page .= plaatenergy_link('pid='.PAGE_REPORT, t('LINK_REPORT'));
-	$page .= '</td>';		
-	$page .= '<td>';
 	$settings_password = plaatenergy_db_get_config_item('settings_password',SECURITY);		
 	if (strlen($settings_password)>0) {
 		$page .= plaatenergy_link('pid='.PAGE_SETTING_LOGIN, t('LINK_SETTINGS')); 
 	} else {
 		$page .= plaatenergy_link('pid='.PAGE_SETTING_CATEGORY, t('LINK_SETTINGS')); 
 	}
-	$page .= '</td>';		
-	$page .= '<td>';
-	$page .= '&nbsp;';
-	$page .= '</td>';		
-	$page .= '</tr>';
-
-	$page .= '<tr>';
-	$page .= '<td>';
-	$page .= plaatenergy_link('pid='.PAGE_EXPORT_IMPORT, t('LINK_IMPORT_EXPORT'));
-	$page .= '</td>';
-	$page .= '<td>';
-	$page .= plaatenergy_link('pid='.PAGE_DONATE, t('LINK_DONATE'));
-	$page .= '</td>';
-	$page .= '<td>';
-	$page .= plaatenergy_link('pid='.PAGE_ABOUT, t('LINK_ABOUT'));				
-	$page .= '</td>';
-	$page .= '<td>';
-	$page .= plaatenergy_link('pid='.PAGE_RELEASE_NOTES, t('LINK_RELEASE_NOTES'));		
-	$page .= '</td>';
-	$page .= '</tr>';
+	$page .= '</div>';
 	
-	$page .= '<tr>';
-	$page .= '<td>';
-	$page .= '</td>';
-	$page .= '<td>';
+	$page .= '<div class="menu">';
+	$page .= plaatenergy_link('pid='.PAGE_EXPORT_IMPORT, t('LINK_IMPORT_EXPORT'));
+	$page .= plaatenergy_link('pid='.PAGE_DONATE, t('LINK_DONATE'));
+	$page .= plaatenergy_link('pid='.PAGE_ABOUT, t('LINK_ABOUT'));				
+	$page .= plaatenergy_link('pid='.PAGE_RELEASE_NOTES, t('LINK_RELEASE_NOTES'));		
+	$page .= '</div>';
+	
+	$page .= '<div class="menu">';	
 	$page .= plaatenergy_link('pid='.PAGE_REALTIME, t('LINK_GUI'));
-	$page .= '</td>';
-	$page .= '<td>';
 	$page .= plaatenergy_link('pid='.PAGE_SYSTEM, t('LINK_SYSTEM'));
-	$page .= '</td>';
-	$page .= '<td>';
-	$page .= '</td>';
-	$page .= '</tr>';
-
-	$page .= '</table>';
 	$page .= '</div>';
 
 	$page .= '<br/><br/>';

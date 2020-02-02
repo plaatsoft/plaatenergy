@@ -1,7 +1,7 @@
 /* 
-**  ===========
+**  ============
 **  PlaatEnergy
-**  ===========
+**  ============
 **
 **  Created by wplaat
 **
@@ -11,7 +11,7 @@
 **  Or send an email to the following address.
 **  Email   : info@plaatsoft.nl
 **
-**  All copyrights reserved (c) 2008-2015 PlaatSoft
+**  All copyrights reserved (c) 1996-2020 PlaatSoft
 */
 
 *{margin:0;padding:0}
@@ -27,16 +27,13 @@ body {
   margin: auto;
 }
 
-.upgrade {
-	color:red;
-}
-
 .normal_link {
 	margin: 0px;
 	padding: 0px;
 	background-color: transparent !important;
 	color: #222;
 }
+
 .normal_link:hover {
 	text-decoration: underline;
 }
@@ -53,6 +50,20 @@ body {
 	right: 15px;
 }
 
+.upgrade {
+	color:red;
+}
+
+.online {
+	font-weight: bold;
+	color:green;
+}
+
+.offline {
+   font-weight: bold;
+	color:red;
+}
+	
 label {
 	display: block;
 }
@@ -90,9 +101,8 @@ table {
    margin: auto;
 }
 
-.home tr,
-.home td {
-   vertical-align: top;
+td {
+   padding-left: 20px;
 }
 
 td > a{
@@ -105,12 +115,13 @@ td > a:last-child {
 }
 
 a, input[type=submit] {
+  display: inline-block;
   outline: none;
   background-color: #1E88E5;
   color: #fff;
   text-decoration: none;
   padding: 12px 20px;
-  margin: 0px 10px;
+  margin: 2px;
   cursor: pointer;
 }
 
@@ -128,6 +139,10 @@ a:active, input[type=submit]:active {
 
 .nav {
    margin: 20px;
+}
+
+.menu a {
+	width: 180px;
 }
 
 .copyright {
@@ -175,19 +190,6 @@ fieldset {
 
 h1{margin:15px} 
 
-sub, .mw-body sup, span.reference {
-	font-size: 80%;
-}
-
-sup, sub {
-	line-height: 1;
-}
-
-sub {
-	vertical-align: sub;
-	font-size: smaller;
-}
-
 /* ================ Add to h1 two suns ================ */
 h1::before,
 h1::after {
@@ -206,26 +208,42 @@ h1::after {
 }
 
 /* ================ Checkers (HomePage information labels) ================ */
-.checker {
-	display: inline;
+
+.box {
+	display: inline-block;
+	outline: none;
 	padding: 12px 15px;
-	margin: 10px;
 	border-radius: 8px;
+	margin: 5px;
 	font-size: 15px;
 	color: #fff;
+	width: 160px;
 }
 
-.checker.good {
+.checker .link {
+	display: inline-block;
+	outline: none;
+	padding: 12px 15px;
+	border-radius: 8px;
+	margin: 5px;
+	font-size: 15px;
+	color: #fff;
+	width: 200px;
+}
+
+.checker.good .link {
    background-color: #4CAF50;
 }
-.checker.bad {
+
+.checker.bad .link {
    background-color: #F44336;
 }
+
 .checker.disabled {
    background-color: #FF5722;
 }
 
-.checker .fa,
+.checker .fa, 
 a .fa {
 	margin-right: 10px;
 }
@@ -247,4 +265,3 @@ a .fa.right {
     0% { transform: rotateY(0deg); }
     100% { transform: rotateY(360deg); }
 }
-

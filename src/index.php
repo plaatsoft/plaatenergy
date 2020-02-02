@@ -21,6 +21,8 @@
  * @brief contain general page and event handler
  */
 
+date_default_timezone_set("Europe/Amsterdam");
+
 $time_start = microtime(true);
 
 include "general.php";

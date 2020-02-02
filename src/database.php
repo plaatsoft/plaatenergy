@@ -351,6 +351,12 @@ function plaatenergy_db_check_version() {
 		$version="1.6";
       plaatenergy_db_execute_sql_file($version);
    }
+   
+    // Execute SQL patch script v1.6 if needed
+   if ($version=="1.6")  {
+		$version="1.7";
+      plaatenergy_db_execute_sql_file($version);
+   }
 }
 
 /**

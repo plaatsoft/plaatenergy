@@ -233,29 +233,27 @@ function plaatenergy_setting_category_page() {
 	$page .= '<br/>';
 	
 	$page .= '<div class="setting">';
-	$page .= '<table>';
 	
 	$count = 0;
 	while ($row = plaatenergy_db_fetch_object($result)) {
 	
 		if (($count%3)==0) {
-			$page .= '<tr>';
+			$page .= '<div class="menu">';
 		}
 		$page .= '<td width="200">'.plaatenergy_link('pid='.PAGE_SETTING_LIST.'&cat='.$row->category, i('cog').t('CATEGORY'.$row->category)).'</td>';
 		if (($count%3)==3) {
-			$page .= '</tr>';
+			$page .= '</div>';
 		}
 		
 		$count++;
 		
 	}
-	$page .= '</table>';
+
 	$page .= '</div>';
 	
 	$page .= '<br/>';
 	 
 	$page .= '<div class="nav">';
-
 	$page .= plaatenergy_link('pid='.PAGE_HOME, t('LINK_HOME'));
 	$page .= '</div>';
 	
