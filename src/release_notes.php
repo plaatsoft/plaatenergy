@@ -27,10 +27,11 @@
 ** ---------------------
 */
 
-$note[17] = '<div class="subparagraph">Version 1.7 (02-02-2020)</div>
+$note[17] = '<div class="subparagraph">Version 1.7 (09-03-2020)</div>
 <div class="large_text">
 <ul>
 <li>Improve menu look and feel.</li>
+<li>Improve e350 sensor script. Now gas meter values are correctly processed.</li>
 </ul>
 </div>';
 

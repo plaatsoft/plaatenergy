@@ -114,7 +114,7 @@ if value1[0] == 'true':
     sys.exit ("Error closing serial port %s" % ser.name )      
 
   stack_teller=0
-  gas=0
+
   while stack_teller < len(stack):
    if stack[stack_teller][0:9] == "1-0:1.8.1":
       low_used = float(stack[stack_teller][10:20])
@@ -148,6 +148,8 @@ if value1[0] == 'true':
       power_f2 = float(stack[stack_teller][11:17])
    elif stack[stack_teller][0:10] == "1-0:61.7.0":
       power_f3 = float(stack[stack_teller][11:17]) 
+   elif stack[stack_teller][0:10] == "0-1:24.2.1":
+      gas = float(stack[stack_teller][26:35])
 	  
    stack_teller = stack_teller + 1
 
